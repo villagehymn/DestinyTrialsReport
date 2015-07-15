@@ -3,7 +3,7 @@
 angular.module('trialsReportApp')
   .factory('armorStats', function($http) {
     var getData = function(items) {
-      return $http({method:'GET', url: '/json/armor.json'}).then(function(data){
+      //return $http({method:'GET', url: '/json/armor.json'}).then(function(data){
         var armors = [];
         armors.hazards = [];
         var hazardPerks = ['Light Beyond Nemesis', 'Crest of Alpha Lupi'];
@@ -15,7 +15,8 @@ angular.module('trialsReportApp')
         var strength = 0;
         angular.forEach(items,function(item){
           var itemS = item.items[0];
-          var aItem = data.data.items[itemS.itemHash];
+          //var aItem = data.data.items[itemS.itemHash];
+          var aItem = armorItems[itemS.itemHash];
           if (aItem) {
             if (hazardPerks.indexOf(aItem.name) > -1) {
               armors.hazards.push('Quick Revive');
@@ -41,8 +42,7 @@ angular.module('trialsReportApp')
           }
         });
         return {armors: armors, int: intellect, dis: discipline, str: strength};
-      });
+      //});
     };
-
     return { getData: getData };
   });
