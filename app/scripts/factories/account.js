@@ -4,7 +4,7 @@ angular.module('trialsReportApp')
   .factory('currentAccount', function($http, requestUrl) {
     var path = requestUrl.url;
     var getAccount = function(name, platform) {
-      return $http({method:"GET", url: path + 'Destiny/SearchDestinyPlayer/' + platform + '/' + name}).then(function(resultAcc){
+      return $http({method:"GET", url: path + 'Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/'}).then(function(resultAcc){
         if (resultAcc.data.Response.length < 1){
           return;
         }
