@@ -1,6 +1,6 @@
 <div class="row ml-0 mr-0" style="height: 130px;" ng-repeat="weapon in [player.weapons.BUCKET_PRIMARY_WEAPON,
                   player.weapons.BUCKET_SPECIAL_WEAPON, player.weapons.BUCKET_HEAVY_WEAPON] track by $index">
-  <div class=" col-md-4 col-xs-4 pt-10">
+  <div class="col-md-4 col-xs-4 pt-10">
     <div class="card mb-0">
       <div class="front p-0">
         <img popover="{{weapon.name}}" popover-trigger="mouseenter"
@@ -16,20 +16,14 @@
     </div>
   </div>
   <div class="col-md-8 col-xs-8 pt-10">
-    <div class="row">
-      <div class="col-md-3 col-xs-3 pl-0">
-        <div class="col-md-6 col-xs-6" ng-repeat="node in weapon.nodes" ng-show="node.name">
-          <a href="" class="icon icon-default" style="margin: 0px;width: 22px;height: 22px;"
-             popover="{{node.description}}"
-             popover-trigger="mouseenter">
-            <img class="img-responsive" ng-src="{{node.icon || ''}}">
-          </a>
-        </div>
+    <div class="row" ng-repeat="node in weapon.nodes" ng-show="node.name">
+      <div class="col-xs-2">
+        <a class="icon icon-default" style="margin:0px; width:22px; height:22px" popover="{{node.description}}" popover-trigger="mouseenter">
+          <img class="img-responsive" ng-src="{{node.icon || ''}}">
+        </a>
       </div>
-      <div class="col-md-9 col-xs-9 pl-0">
-        <div class="col-md-12 col-xs-12" ng-repeat="node in weapon.nodes" ng-show="node.name">
-          <p class="text-left text-sm">{{node.name}}</p>
-        </div>
+      <div class="col-xs-10">
+        <span class="text-left text-sm">{{node.name}}</span>
       </div>
     </div>
   </div>
