@@ -3,7 +3,7 @@
 angular.module('trialsReportApp')
   .factory('classStats', function($http) {
     var getData = function(items, talentGrid, definitionItems) {
-      return $http({method:'GET', url: '/json/class.json'}).then(function(data){
+      //return $http({method:'GET', url: '/json/class.json'}).then(function(data){
         var background = [];
         var subClass = [];
         var classNodes = [];
@@ -11,7 +11,8 @@ angular.module('trialsReportApp')
         var blink = false;
         angular.forEach(items,function(item){
           var itemS = item.items[0];
-          var cItem = data.data.items[itemS.itemHash];
+          //var cItem = data.data.items[itemS.itemHash];
+          var cItem = classItems[itemS.itemHash];
           if (cItem) {
             subClass = {'name': cItem.name};
           }else if (itemS.itemLevel === 0 && definitionItems[itemS.itemHash].bucketTypeHash === 4274335291){
@@ -46,7 +47,7 @@ angular.module('trialsReportApp')
           }
         });
         return {classNodes: classNodes, subClass: subClass, bg: background, blink: blink};
-      });
+      //});
     };
     return { getData: getData };
   });

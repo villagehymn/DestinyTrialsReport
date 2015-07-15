@@ -3,7 +3,7 @@
 angular.module('trialsReportApp')
   .factory('weaponStats', function($http) {
     var getData = function(items, talentGrid) {
-      return $http({method: 'GET', url: '/json/weapons.json'}).then(function (data) {
+      //return $http({method: 'GET', url: '/json/weapons.json'}).then(function (data) {
         var avoidNodes = ['Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage',
           'Hive Disruptor', 'Oracle Disruptor', 'Wolfpack Rounds', 'Last Word', 'Fan Fire', 'Mark of the Devourer',
           'Ice Breaker', 'No Backpack', 'Lich Bane', 'Invective', 'Cursebringer', 'Disciplinarian', 'Holding Aces',
@@ -15,7 +15,8 @@ angular.module('trialsReportApp')
         angular.forEach(items, function (item) {
           var nodes = [];
           var itemS = item.items[0];
-          var wItem = data.data.items[itemS.itemHash];
+          //var wItem = data.data.items[itemS.itemHash];
+          var wItem = weaponItems[itemS.itemHash];
           if (wItem) {
             if (wItem.subType === 'Sniper Rifle') {
               angular.forEach(itemS.stats,function(stat){
@@ -63,7 +64,7 @@ angular.module('trialsReportApp')
           }
         });
         return {weapons: weapons, shotgun: shotgun};
-      });
+      //});
     };
     return { getData: getData };
   });
