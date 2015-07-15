@@ -13,8 +13,8 @@ angular
   ]).config( window.$QDecorator )
   .factory('requestUrl', function() {
     return {
-      //url : "http://localhost:63294/Platform/"
-      url: "/bungie/"
+      //url : 'http://localhost:63294/Platform/'
+      url: '/bungie/'
     };
   })
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
@@ -24,7 +24,7 @@ angular
         controller: 'MainCtrl',
         resolve: {
           bungieStatus:function($location, $http, requestUrl){
-            $http({method:"GET", url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
+            $http({method:'GET', url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
               if(result.data.Response.length > 0){
                 return result.data.Response[0].AlertHtml;
               }

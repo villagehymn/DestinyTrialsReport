@@ -3,7 +3,7 @@
 angular.module('trialsReportApp')
   .factory('armorStats', function($http) {
     var getData = function(items) {
-      return $http({method:"GET", url: '/json/armor.json'}).then(function(data){
+      return $http({method:'GET', url: '/json/armor.json'}).then(function(data){
         var armors = [];
         armors.hazards = [];
         var hazardPerks = ['Light Beyond Nemesis', 'Crest of Alpha Lupi'];
@@ -13,7 +13,7 @@ angular.module('trialsReportApp')
         var intellect = 0;
         var discipline = 0;
         var strength = 0;
-        angular.forEach(items,function(item,index){
+        angular.forEach(items,function(item){
           var itemS = item.items[0];
           var aItem = data.data.items[itemS.itemHash];
           if (aItem) {
@@ -24,7 +24,7 @@ angular.module('trialsReportApp')
             }else if (doubleNade.indexOf(aItem.name) > -1){
               armors.hazards.push('Double Grenade');
             }
-            angular.forEach(itemS.stats,function(stat,index){
+            angular.forEach(itemS.stats,function(stat){
               switch(stat.statHash) {
                 case 144602215:
                   intellect += stat.value;

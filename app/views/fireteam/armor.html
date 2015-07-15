@@ -1,0 +1,11 @@
+<div class="row ml-0 mr-0">
+  <div class="col-md-3 col-xs-3" ng-repeat="armor in [player.armors.BUCKET_HEAD, player.armors.BUCKET_ARMS,
+                  player.armors.BUCKET_CHEST, player.armors.BUCKET_LEGS] track by $index">
+    <div class="card">
+      <div class="front p-0">
+        <img popover="{{armor.name}}" popover-trigger="mouseenter"
+          class="img-responsive" ng-src="{{armor.icon}}">
+      </div>
+    </div>
+  </div>
+</div>

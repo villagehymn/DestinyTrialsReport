@@ -3,12 +3,12 @@
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, $cookies, requestUrl, bungieStatus, $q, $log) {
     $scope.status = bungieStatus;
-    if ($cookies.get('platform') !== undefined) {
-      $scope.platform = $cookies.get('platform');
-      $scope.platformValue = ($scope.platform === '2');
-    } else {
+    if (angular.isUndefined($cookies.get('platform'))) {
       $scope.platformValue = true;
       $scope.platform = 2;
+    } else {
+      $scope.platform = $cookies.get('platform');
+      $scope.platformValue = ($scope.platform === '2');
     }
 
     var loadFireteam = function ($scope, teamMember, index, currentAccount, trialsStats, inventoryStats, $q, $log) {
@@ -34,10 +34,10 @@ angular.module('trialsReportApp')
               }
               $scope.fireteam[index].stats = stats;
               $http({
-                method: "GET",
+                method: 'GET',
                 url: requestUrl.url + 'Destiny/Vanguard/Grimoire/' + player.membershipType + '/' + player.membershipId + '/?single=401030'
               }).then(function (result) {
-                $scope.fireteam[index].lighthouse = (result.data.Response.data.cardCollection.length > 0)
+                $scope.fireteam[index].lighthouse = (result.data.Response.data.cardCollection.length > 0);
               });
             }));
         },
@@ -85,10 +85,10 @@ angular.module('trialsReportApp')
 
               $scope.fireteam[index].stats = stats;
               $http({
-                method: "GET", url: requestUrl.url + 'Destiny/Vanguard/Grimoire/' +
+                method: 'GET', url: requestUrl.url + 'Destiny/Vanguard/Grimoire/' +
                 $scope.fireteam[index].membershipType + '/' + $scope.fireteam[index].membershipId + '/?single=401030'
               }).then(function (result) {
-                $scope.fireteam[index].lighthouse = (result.data.Response.data.cardCollection.length > 0)
+                $scope.fireteam[index].lighthouse = (result.data.Response.data.cardCollection.length > 0);
               });
             })
           );
@@ -104,19 +104,21 @@ angular.module('trialsReportApp')
     };
 
     $scope.searchPlayerbyName = function (name, platform) {
-      if (name === undefined) return false;
-      var platformValue = 1;
-      if (platform) {
-        platformValue = 2
-      }
-      $cookies.put('platform', platformValue);
+      if (!angular.isUndefined(name)) {
+        var platformValue = 1;
+        if (platform) {
+          platformValue = 2;
+        }
+        $cookies.put('platform', platformValue);
 
-      searchFireteam($scope, name, 0, currentAccount, trialsStats, inventoryStats, $q, $log, true, platformValue);
+        searchFireteam($scope, name, 0, currentAccount, trialsStats, inventoryStats, $q, $log, true, platformValue);
+      }
     };
 
     $scope.getPlayerbyName = function (name, index) {
-      if (name === undefined) return false;
-      searchFireteam($scope, name, index, currentAccount, trialsStats, inventoryStats, $q, $log, false, $scope.platform);
+      if (!angular.isUndefined(name)) {
+        searchFireteam($scope, name, index, currentAccount, trialsStats, inventoryStats, $q, $log, false, $scope.platform);
+      }
     };
 
     $scope.getRecentPlayer = function (player, index) {
@@ -126,17 +128,17 @@ angular.module('trialsReportApp')
     function getPlayersFromGame($scope, activity) {
       var path = requestUrl.url;
       return $http({
-        method: "GET",
+        method: 'GET',
         url: path + 'Destiny/Stats/PostGameCarnageReport/' + activity.id
       }).then(function (result) {
         var fireteamIndex = [];
         var recents = {};
         if (activity.standing === 0) {
-          fireteamIndex = [0, 1, 2]
+          fireteamIndex = [0, 1, 2];
         } else {
-          fireteamIndex = [3, 4, 5]
+          fireteamIndex = [3, 4, 5];
         }
-        angular.forEach(fireteamIndex, function (idx, index) {
+        angular.forEach(fireteamIndex, function (idx) {
           var member = result.data.Response.data.entries[idx];
           var player = member.player;
           if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase($scope.fireteam[0].name)) {
@@ -155,7 +157,7 @@ angular.module('trialsReportApp')
       });
     }
 
-    var getActivitiesFromChar = function ($scope, account, character, currentAccount, trialsStats, inventoryStats, $q, $log, getRecent) {
+    var getActivitiesFromChar = function ($scope, account, character, currentAccount, trialsStats, inventoryStats, $q, $log) {
 
       var setRecentActivities = function (account, character) {
           return currentAccount.getLastTwentyOne(account, character)
@@ -165,9 +167,9 @@ angular.module('trialsReportApp')
         },
 
         setRecentPlayers = function (activities) {
-          angular.forEach(activities, function (activity, index) {
+          angular.forEach(activities, function (activity) {
             getPlayersFromGame($scope, activity).then(function (result) {
-              $scope.recentPlayers = angular.extend($scope.recentPlayers, result)
+              $scope.recentPlayers = angular.extend($scope.recentPlayers, result);
             });
           });
         },
@@ -183,8 +185,8 @@ angular.module('trialsReportApp')
 
     $scope.suggestRecentPlayers = function () {
       $scope.recentPlayers = {};
-      angular.forEach($scope.fireteam[0].allCharacters, function (character, index) {
-        getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount, trialsStats, inventoryStats, $q, $log)
+      angular.forEach($scope.fireteam[0].allCharacters, function (character) {
+        getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount, trialsStats, inventoryStats, $q, $log);
       });
     };
 
@@ -197,26 +199,26 @@ angular.module('trialsReportApp')
 
     if ($cookies.get('teammate2') !== 'undefined') {
       $scope.fireteam[1] = null;
-      $scope.getPlayerbyName($cookies.get('teammate2'), 1)
+      $scope.getPlayerbyName($cookies.get('teammate2'), 1);
     }
 
     if ($cookies.get('teammate3') !== 'undefined') {
       $scope.fireteam[2] = null;
-      $scope.getPlayerbyName($cookies.get('teammate3'), 2)
+      $scope.getPlayerbyName($cookies.get('teammate3'), 2);
     }
 
-    $scope.$watch('fireteam[0].name', function (newval, oldval) {
+    $scope.$watch('fireteam[0].name', function (newval) {
       if (newval) {
         $cookies.put('teammate1', newval);
       }
     }, true);
 
-    $scope.$watch('fireteam[1].name', function (newval, oldval) {
+    $scope.$watch('fireteam[1].name', function (newval) {
       if (newval) {
         $cookies.put('teammate2', newval);
       }
     }, true);
-    $scope.$watch('fireteam[2].name', function (newval, oldval) {
+    $scope.$watch('fireteam[2].name', function (newval) {
       if (newval) {
         $cookies.put('teammate3', newval);
       }

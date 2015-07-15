@@ -4,7 +4,7 @@ angular.module('trialsReportApp')
   .factory('inventoryStats', function($http, requestUrl, weaponStats, armorStats, classStats) {
     var path = requestUrl.url;
     var getData = function(membershipType, membershipId, characterId) {
-      return $http({method:"GET", url: path + 'Destiny/' + membershipType + '/Account/' + membershipId  + '/Character/' + characterId + '/Inventory/?definitions=true'}).then(function(result){
+      return $http({method:'GET', url: path + 'Destiny/' + membershipType + '/Account/' + membershipId  + '/Character/' + characterId + '/Inventory/?definitions=true'}).then(function(result){
         return result.data.Response;
       });
     };
