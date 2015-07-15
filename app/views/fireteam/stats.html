@@ -18,7 +18,7 @@
         ng-class="str.standing === 0 ? 'win' : 'lose'"
         popover="K/D: {{str.kd}} with {{str.kills}} kills"
         popover-title="{{str.date | date : format : medium}}"
-        popover-trigger="mouseenter" >•</span>
+        popover-trigger="mouseenter">•</span>
   <span class="right" ng-show="player.lighthouse === false && !player.neverTrials">Never Flawless</span>
   <span class="right" ng-show="player.lighthouse === true">Flawless</span>
   <p class="text-center mb-0" ng-show="player.neverTrials">No previous trials games</p>

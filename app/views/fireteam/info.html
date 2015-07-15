@@ -1,7 +1,7 @@
 <div class="card-container emblem">
   <div class="card mb-0" style="background-image: url('{{player.emblem}}'), url('{{player.background[0]}}'); background-repeat: no-repeat, no-repeat; background-position: left, right; background-size: 65px 65px, 100% 65px; height: 65px;">
     <div class="front p-0">
-      <!--<img class="img-responsive" ng-src="{{player.emblem || ''}}" style="height: 65px; position: absolute;">-->
+      <!--<img class="img-responsive" ng-src="{{player.emblem || ''}}" style="height:65px; position:absolute">-->
       <p class="large hidden-xs">
         <span>{{player.name}}</span>
         <span ng-show="player.stats.killsDeathsRatio" class="right">K/D: {{player.stats.killsDeathsRatio.basic.displayValue}}</span>
@@ -22,12 +22,12 @@
     <div class="back">
       <div class="col-md-12 col-xs-12">
         <div class="col-md-6 col-xs-6" ng-repeat="classNode in player.classNodes">
-          <a href="" class="icon icon-white m-0" style="margin-top: 4px!important;margin-right: 5px!important;width: 25px;height:25px;"
+          <a class="icon icon-white m-0" style="margin-top:4px!important; margin-right:5px!important; width:25px; height:25px"
              popover="{{classNode.description}}"
              popover-trigger="mouseenter">
             <img class="img-responsive" ng-src="{{classNode.icon || ''}}">
           </a>
-          <span class="text-left text-sm text-white" style="top: 10px;position: absolute;">{{classNode.name}}</span>
+          <span class="text-left text-sm text-white" style="top:10px; position:absolute">{{classNode.name}}</span>
         </div>
       </div>
     </div>

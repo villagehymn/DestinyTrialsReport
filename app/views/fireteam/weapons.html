@@ -1,11 +1,10 @@
-<div class="row ml-0 mr-0" style="height: 130px;" ng-repeat="weapon in [player.weapons.BUCKET_PRIMARY_WEAPON,
-                  player.weapons.BUCKET_SPECIAL_WEAPON, player.weapons.BUCKET_HEAVY_WEAPON] track by $index">
+<div class="row ml-0 mr-0" style="height: 130px" ng-repeat="weapon in [player.weapons.BUCKET_PRIMARY_WEAPON, player.weapons.BUCKET_SPECIAL_WEAPON, player.weapons.BUCKET_HEAVY_WEAPON] track by $index">
   <div class="col-md-4 col-xs-4 pt-10">
     <div class="card mb-0">
       <div class="front p-0">
         <img popover="{{weapon.name}}" popover-trigger="mouseenter"
-          class="img-responsive weapon-img {{weapon.burnColor || 'kinetic-dmg'}}"
-          ng-src="{{weapon.icon}}" alt="{{weapon.name}}">
+             class="img-responsive weapon-img {{weapon.burnColor || 'kinetic-dmg'}}"
+             ng-src="{{weapon.icon}}" alt="{{weapon.name}}">
       </div>
       <!--<div class="back bg-greensea">-->
         <!--<div class="col-md-12">-->
