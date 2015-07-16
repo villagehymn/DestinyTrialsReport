@@ -1,62 +1,34 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, $cookies, requestUrl, bungieStatus, $q, $log) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService) {
     $scope.status = bungieStatus;
-    if (angular.isUndefined($cookies.get('platform'))) {
+    $scope.medalDefinitions = medalDefinitions;
+    $scope.weaponItems = weaponItems;
+    if (angular.isUndefined(localStorageService.get('platform'))) {
       $scope.platformValue = true;
       $scope.platform = 2;
     } else {
-      $scope.platform = $cookies.get('platform');
-      $scope.platformValue = ($scope.platform === '2');
+      $scope.platform = localStorageService.get('platform');
+      $scope.platformValue = ($scope.platform === 2);
     }
 
-    var loadFireteam = function ($scope, teamMember, index, currentAccount, trialsStats, inventoryStats, $q, $log) {
-      var setMember = function (teamMember, index) {
+    var searchFireteam = function ($scope, name, index, currentAccount, trialsStats, inventoryStats, $q, $log, getRecent, platform) {
+
+      var searchName = function (name, index, platform) {
+          return currentAccount.getAccount(name, platform)
+            .then(function (player) {
+              $scope.fireteam[index] = player;
+              localStorageService.set('teammate'+(index+1), $scope.fireteam[index]);
+              return player;
+            });
+        },
+        useMember = function (teamMember, index) {
           $scope.fireteam[index] = teamMember;
           var dfd = $q.defer();
           dfd.resolve($scope.fireteam[index]);
 
           return dfd.promise;
-        },
-        parallelLoad = function (player) {
-          return $q.all([
-            currentAccount.getActivities(player),
-            inventoryStats.getInventory($scope, player.membershipType, player.membershipId,
-              player.characterId, index, $q, $log),
-            trialsStats.getData(player.membershipType, player.membershipId, player.characterId)
-          ])
-            .then($q.spread(function (activity, inv, stats) {
-              if (angular.isUndefined(activity)) {
-                $scope.fireteam[index] = player;
-              } else {
-                $scope.fireteam[index] = activity;
-              }
-              $scope.fireteam[index].stats = stats;
-              $http({
-                method: 'GET',
-                url: requestUrl.url + 'Destiny/Vanguard/Grimoire/' + player.membershipType + '/' + player.membershipId + '/?single=401030'
-              }).then(function (result) {
-                $scope.fireteam[index].lighthouse = (result.data.Response.data.cardCollection.length > 0);
-              });
-            }));
-        },
-        reportProblems = function (fault) {
-          $log.error(String(fault));
-        };
-      setMember(teamMember, index)
-        .then(parallelLoad)
-        .catch(reportProblems);
-    };
-
-    var searchFireteam = function ($scope, name, index, currentAccount, trialsStats, inventoryStats, $q, $log, getRecent, platform) {
-
-      var setMember = function (name, index, platform) {
-          return currentAccount.getAccount(name, platform)
-            .then(function (player) {
-              $scope.fireteam[index] = player;
-              return player;
-            });
         },
         parallelLoad = function (player) {
           var methods = [
@@ -76,10 +48,21 @@ angular.module('trialsReportApp')
 
               if (getRecent) {
                 currentAccount.getFireteam(player.recentActivity, player.name).then(function (result) {
-                  $scope.fireteam[1] = result[0];
-                  $scope.fireteam[2] = result[1];
-                  loadFireteam($scope, $scope.fireteam[1], 1, currentAccount, trialsStats, inventoryStats, $q, $log, $http);
-                  loadFireteam($scope, $scope.fireteam[2], 2, currentAccount, trialsStats, inventoryStats, $q, $log, $http);
+                  $scope.fireteam[0].medals = result.medals;
+                  $scope.fireteam[0].allStats = result.playerAllStats;
+                  $scope.fireteam[0].playerWeapons = result.playerWeapons;
+                  $scope.fireteam[1] = result.fireTeam[0];
+                  $scope.fireteam[2] = result.fireTeam[1];
+                  localStorageService.set('teammate2', $scope.fireteam[1]);
+                  localStorageService.set('teammate3', $scope.fireteam[2]);
+                  searchFireteam($scope, $scope.fireteam[1], 1, currentAccount, trialsStats, inventoryStats, $q, $log);
+                  searchFireteam($scope, $scope.fireteam[2], 2, currentAccount, trialsStats, inventoryStats, $q, $log);
+                });
+              }else {
+                currentAccount.getMatchSummary(player.recentActivity, player.name, false).then(function (result) {
+                  $scope.fireteam[index].allStats = result[0].allStats;
+                  $scope.fireteam[index].medals = result[0].medals;
+                  $scope.fireteam[index].playerWeapons = result[0].playerWeapons;
                 });
               }
 
@@ -98,9 +81,15 @@ angular.module('trialsReportApp')
           $log.error(String(fault));
         };
 
-      setMember(name, index, platform)
-        .then(parallelLoad)
-        .catch(reportProblems);
+      if (angular.isObject(name)){
+        useMember(name, index)
+          .then(parallelLoad)
+          .catch(reportProblems);
+      }else {
+        searchName(name, index, platform)
+          .then(parallelLoad)
+          .catch(reportProblems);
+      }
     };
 
     $scope.searchPlayerbyName = function (name, platform) {
@@ -109,7 +98,7 @@ angular.module('trialsReportApp')
         if (platform) {
           platformValue = 2;
         }
-        $cookies.put('platform', platformValue);
+        localStorageService.set('platform', platformValue);
 
         searchFireteam($scope, name, 0, currentAccount, trialsStats, inventoryStats, $q, $log, true, platformValue);
       }
@@ -122,7 +111,7 @@ angular.module('trialsReportApp')
     };
 
     $scope.getRecentPlayer = function (player, index) {
-      loadFireteam($scope, player, index, currentAccount, trialsStats, inventoryStats, $q, $log);
+      searchFireteam($scope, player, index, currentAccount, trialsStats, inventoryStats, $q, $log);
     };
 
     function getPlayersFromGame($scope, activity) {
@@ -139,15 +128,28 @@ angular.module('trialsReportApp')
           fireteamIndex = [3, 4, 5];
         }
         angular.forEach(fireteamIndex, function (idx) {
+          var allStats = {};
           var member = result.data.Response.data.entries[idx];
           var player = member.player;
           if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase($scope.fireteam[0].name)) {
+            var medals = [];
+            angular.forEach(member.extended.values,function(value,index){
+              if (index.substring(0, 6) == "medals"){
+                medals.push({id: index,
+                  count: value.basic.value});
+              }else {
+                allStats[index] = value;
+              }
+            });
             recents[member.player.destinyUserInfo.displayName] = {
               name: member.player.destinyUserInfo.displayName,
               membershipId: member.player.destinyUserInfo.membershipId,
               membershipType: member.player.destinyUserInfo.membershipType,
               emblem: 'http://www.bungie.net/' + member.player.destinyUserInfo.iconPath,
               characterId: member.characterId,
+              allStats: allStats,
+              medals: medals,
+              playerWeapons: member.extended.weapons,
               level: member.player.characterLevel,
               class: member.player.characterClass
             };
@@ -191,36 +193,37 @@ angular.module('trialsReportApp')
     };
 
 
-    if ($cookies.get('teammate1') !== 'undefined') {
+    if (!angular.isUndefined(localStorageService.get('teammate1'))) {
       $scope.fireteam = [];
       $scope.fireteam[0] = null;
-      $scope.getPlayerbyName($cookies.get('teammate1'), 0);
+      $scope.getRecentPlayer(localStorageService.get('teammate1'), 0);
+      if (!angular.isUndefined(localStorageService.get('teammate2'))) {
+        $scope.fireteam[1] = null;
+        $scope.getRecentPlayer(localStorageService.get('teammate2'), 1);
+      }
+      if (!angular.isUndefined(localStorageService.get('teammate3'))) {
+        $scope.fireteam[2] = null;
+        $scope.getRecentPlayer(localStorageService.get('teammate3'), 2);
+      }
+    }else{
+      $scope.fireteam = [];
+      $scope.fireteam[0] = null;
     }
 
-    if ($cookies.get('teammate2') !== 'undefined') {
-      $scope.fireteam[1] = null;
-      $scope.getPlayerbyName($cookies.get('teammate2'), 1);
-    }
-
-    if ($cookies.get('teammate3') !== 'undefined') {
-      $scope.fireteam[2] = null;
-      $scope.getPlayerbyName($cookies.get('teammate3'), 2);
-    }
-
-    $scope.$watch('fireteam[0].name', function (newval) {
-      if (newval) {
-        $cookies.put('teammate1', newval);
-      }
-    }, true);
-
-    $scope.$watch('fireteam[1].name', function (newval) {
-      if (newval) {
-        $cookies.put('teammate2', newval);
-      }
-    }, true);
-    $scope.$watch('fireteam[2].name', function (newval) {
-      if (newval) {
-        $cookies.put('teammate3', newval);
-      }
-    }, true);
+    //$scope.$watch('fireteam[0].name', function (newval) {
+    //  if (newval) {
+    //    $cookies.put('teammate1', newval);
+    //  }
+    //}, true);
+    //
+    //$scope.$watch('fireteam[1].name', function (newval) {
+    //  if (newval) {
+    //    $cookies.put('teammate2', newval);
+    //  }
+    //}, true);
+    //$scope.$watch('fireteam[2].name', function (newval) {
+    //  if (newval) {
+    //    $cookies.put('teammate3', newval);
+    //  }
+    //}, true);
   });

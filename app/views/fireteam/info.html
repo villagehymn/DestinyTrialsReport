@@ -2,22 +2,42 @@
   <div class="card mb-0" style="background-image: url('{{player.emblem}}'), url('{{player.background[0]}}'); background-repeat: no-repeat, no-repeat; background-position: left, right; background-size: 65px 65px, 100% 65px; height: 65px;">
     <div class="front p-0">
       <!--<img class="img-responsive" ng-src="{{player.emblem || ''}}" style="height:65px; position:absolute">-->
-      <p class="large hidden-xs">
+      <p class="large hidden-xs mb-0">
         <span>{{player.name}}</span>
         <span ng-show="player.stats.killsDeathsRatio" class="right">K/D: {{player.stats.killsDeathsRatio.basic.displayValue}}</span>
       </p>
-      <p class="large visible-xs">
+      <p class="large visible-xs mb-0">
         <span>{{player.name}}</span>
         <span ng-show="player.stats.killsDeathsRatio" class="right">{{player.stats.killsDeathsRatio.basic.displayValue}}</span>
       </p>
-      <p class="hidden-xs">
+      <p class="hidden-xs mb-0">
         <span ng-show="player.level && player.class.name">Level {{player.level}} {{player.class.name}}</span>
         <span ng-show="player.stats.activitiesEntered" class="right">Win Avg: {{((player.stats.activitiesWon.basic.value/player.stats.activitiesEntered.basic.value)*100).toFixed(0)}}%</span>
       </p>
-      <p class="visible-xs">
+      <p class="visible-xs mb-0">
         <span ng-show="player.level && player.class.name">{{player.level}} {{player.class.name}}</span>
         <span ng-show="player.stats.activitiesEntered" class="right">Win: {{((player.stats.activitiesWon.basic.value/player.stats.activitiesEntered.basic.value)*100).toFixed(0)}}%</span>
       </p>
+      <div class="mb-0 row">
+        <div class="col-md-6 col-xs-6">
+          <i class="fa fa-circle mr-3"
+             ng-repeat="str in player.pastActivities track by $index"
+             ng-class="str.standing === 0 ? 'win' : 'lose'"
+             ng-if="$index > 14"
+            ></i>
+          <!--<span class="streak"-->
+            <!--ng-repeat="str in player.pastActivities track by $index"-->
+            <!--ng-class="str.standing === 0 ? 'win' : 'lose'"-->
+            <!--popover="K/D: {{str.kd}} with {{str.kills}} kills"-->
+            <!--popover-title="{{str.date | date : format : medium}}"-->
+            <!--popover-trigger="mouseenter">•</span>-->
+        </div>
+        <div class="col-md-6 col-xs-6 text-right">
+          <span class="right text-white pr-20" ng-show="player.lighthouse === false && !player.neverTrials">Never Flawless</span>
+          <span class="text-white pr-20" ng-show="player.lighthouse === true">Flawless</span>
+          <p class="text-center mb-0 pr-20" ng-show="player.neverTrials">No previous trials games</p>
+        </div>
+      </div>
     </div>
     <div class="back">
       <div class="col-md-12 col-xs-12">

@@ -11,7 +11,9 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
     'angulartics',
-    'angulartics.google.analytics'
+    'angulartics.google.analytics',
+    'angular-flot',
+    'LocalStorageModule'
   ]).config( window.$QDecorator )
   .factory('requestUrl', function() {
     return {
