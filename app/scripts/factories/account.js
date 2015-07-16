@@ -51,7 +51,7 @@ angular.module('trialsReportApp')
     };
 
     var getActivities = function(account) {
-      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId  + '/?mode=trialsofosiris&count=10&definitions=true'}).then(function(resultAct){
+      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId  + '/?mode=trialsofosiris&count=25&definitions=true'}).then(function(resultAct){
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
           return;
@@ -107,6 +107,7 @@ angular.module('trialsReportApp')
         }
         angular.forEach(fireteamIndex,function(idx) {
           var medals = [];
+          var allStats = {};
           var entry = resultPostAct.data.Response.data.entries[idx];
           if (includeTeam){
             fireTeam.push(entry);
@@ -114,11 +115,13 @@ angular.module('trialsReportApp')
             if (angular.lowercase(entry.player.destinyUserInfo.displayName) == angular.lowercase(name)) {
               angular.forEach(entry.extended.values,function(value,index){
                 if (index.substring(0, 6) == "medals"){
-                  console.log("medal!");
                   medals.push({id: index,
                     count: value.basic.value});
+                }else {
+                  allStats[index] = value;
                 }
               });
+              entry.allStats = allStats;
               entry.medals = medals;
               entry.playerWeapons = entry.extended.weapons;
               fireTeam.push(entry);
@@ -134,16 +137,20 @@ angular.module('trialsReportApp')
       var fireTeam = [];
       var playerMedals = [];
       var playerWeapons = [];
+      var playerAllStats = {};
       return getMatchSummary( recentActivity, name, true )
         .then( function( lastMatch )
         {
           angular.forEach(lastMatch,function(member) {
             var player = member.player;
+            var medals = [];
+            var allStats = {};
             angular.forEach(member.extended.values,function(value,index){
-              var medals = [];
               if (index.substring(0, 6) == "medals"){
                 medals.push({id: index,
                   count: value.basic.value});
+              }else {
+                allStats[index] = value;
               }
             });
             if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase(name)) {
@@ -154,16 +161,18 @@ angular.module('trialsReportApp')
                 emblem: 'http://www.bungie.net/' + player.destinyUserInfo.iconPath,
                 characterId: member.characterId,
                 medals: medals,
+                allStats: allStats,
                 prevousWeapons: member.extended.weapons,
                 level: player.characterLevel,
                 class: player.characterClass
               });
             }else{
+              playerAllStats = allStats;
               playerMedals = medals;
               playerWeapons = member.extended.weapons;
             }
           });
-          return {fireTeam: fireTeam, medals: playerMedals, playerWeapons: playerWeapons};
+          return {fireTeam: fireTeam, medals: playerMedals, playerWeapons: playerWeapons, playerAllStats: playerAllStats};
         });
       };
     return { getAccount: getAccount, getActivities: getActivities, getMatchSummary: getMatchSummary, getFireteam: getFireteam, getLastTwentyOne: getLastTwentyOne };

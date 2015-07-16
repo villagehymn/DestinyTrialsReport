@@ -10,6 +10,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/morrisjs/morris.css" />
     <!-- endbower -->
     <!-- endbuild -->
@@ -34,7 +35,23 @@
 
     <div ng-view=""></div>
 
-    <div class="footer"></div>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <h5 class="custom-font pt-10 text-left">2015 © DestinyTrialsReport</h5>
+          </div>
+          <div class="col-md-6 col-sm-12 mt-10">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" class="text-right" target="_top">
+              <input type="hidden" name="cmd" value="_s-xclick">
+              <input type="hidden" name="hosted_button_id" value="A3T6F2QDXUTCN">
+              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+              <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script>
       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
@@ -58,6 +75,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-fontawesome/dist/angular-fontawesome.js"></script>
     <script src="bower_components/waypoints/lib/noframework.waypoints.min.js"></script>
     <script src="bower_components/SHA-1/sha1.js"></script>
     <script src="bower_components/angulartics/src/angulartics.js"></script>
@@ -83,6 +101,11 @@
     <script src="bower_components/raphael/raphael.js"></script>
     <script src="bower_components/mocha/mocha.js"></script>
     <script src="bower_components/morrisjs/morris.js"></script>
+    <script src="bower_components/flot/jquery.flot.js"></script>
+    <script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.js"></script>
+    <script src="bower_components/angular-flot/angular-flot.js"></script>
+    <script src="bower_components/flot-spline/js/jquery.flot.spline.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

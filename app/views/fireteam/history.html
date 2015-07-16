@@ -1,0 +1,106 @@
+<div class="mb-0 row">
+  <div class="col-md-12 col-xs-12">
+    <i class="fa fa-circle mr-3"
+       ng-repeat="str in player.pastActivities track by $index"
+       ng-class="str.standing === 0 ? 'win' : 'lose'"
+       popover="K/D: {{str.kd}} with {{str.kills}} kills"
+       popover-title="{{str.date | date : format : medium}}"
+       popover-trigger="mouseenter"
+      ></i>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-3 col-md-3 pr-0">
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h5 class="custom-font filled bg-danger">Kills</h5>
+    </div>
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h4 class="mt-0">{{player.allStats.kills.basic.displayValue}}</h4>
+    </div>
+  </div>
+  <div class="col-xs-3 col-md-3 p-0">
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h5 class="custom-font filled bg-danger">Deaths</h5>
+    </div>
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h4 class="mt-0">{{player.allStats.deaths.basic.displayValue}}</h4>
+    </div>
+  </div>
+  <div class="col-xs-3 col-md-3 p-0">
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h5 class="custom-font filled bg-danger">Assists</h5>
+    </div>
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h4 class="mt-0">{{player.allStats.assists.basic.displayValue}}</h4>
+    </div>
+  </div>
+  <div class="col-xs-3 col-md-3 pl-0">
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h5 class="custom-font filled bg-danger">K/D</h5>
+    </div>
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h4 class="mt-0">{{player.allStats.killsDeathsRatio.basic.displayValue}}</h4>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-6 col-md-6 pr-0">
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h5 class="custom-font filled bg-danger">Headshots (Sniper)</h5>
+    </div>
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h4 class="mt-0">{{player.allStats.precisionKills.basic.displayValue}} ({{player.allStats.weaponKillsSniper.basic.displayValue || 0}})</h4>
+    </div>
+  </div>
+  <div class="col-xs-6 col-md-6 pl-0">
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h5 class="custom-font filled bg-danger">Longest Life</h5>
+    </div>
+    <div class="p-0 col-xs-12 col-md-12 text-center">
+      <h4 class="mt-0">{{player.allStats.longestSingleLife.basic.displayValue}}</h4>
+    </div>
+  </div>
+  <!--<div class="col-xs-3 col-md-3 p-0">-->
+    <!--<div class="p-0 col-xs-12 col-md-12 text-center">-->
+      <!--<h4 class="custom-font filled bg-lightred">Assists</h4>-->
+    <!--</div>-->
+    <!--<div class="p-0 col-xs-12 col-md-12 text-center">-->
+      <!--<h3 class="mt-0">{{player.allStats.assists.basic.displayValue}}</h3>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="col-xs-3 col-md-3 pl-0">-->
+    <!--<div class="p-0 col-xs-12 col-md-12 text-center">-->
+      <!--<h4 class="custom-font filled bg-lightred">K/D</h4>-->
+    <!--</div>-->
+    <!--<div class="p-0 col-xs-12 col-md-12 text-center">-->
+      <!--<h3 class="mt-0">{{player.allStats.killsDeathsRatio.basic.displayValue}}</h3>-->
+    <!--</div>-->
+  <!--</div>-->
+</div>
+
+<div class="row">
+  <div class="col-xs-6 col-md-6 {{$even ? '' : 'pl-0'}}" ng-repeat="weapon in player.playerWeapons">
+    <div class="p-0 col-xs-6 col-md-6 text-center">
+      <a class="icon icon-default"
+         popover="{{weaponItems[weapon.referenceId].name}}" popover-trigger="mouseenter">
+        <img class="img-responsive" ng-src="{{weaponItems[weapon.referenceId].icon || ''}}">
+      </a>
+    </div>
+    <div class="p-0 col-xs-6 col-md-6 text-center">
+      <p class="mt-10 mb-0 text-left text-sm"><strong>Kills:</strong> {{weapon.values.uniqueWeaponKills.basic.value}}</p>
+      <p class="m-0 text-left text-sm"><strong>Headshots:</strong> {{weapon.values.uniqueWeaponPrecisionKills.basic.value}}</p>
+      <p class="mt-0 mb-10 text-left text-sm"><strong>HS Acc:</strong> {{weapon.values.uniqueWeaponKillsPrecisionKills.basic.displayValue}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-3 col-md-3 text-center" ng-repeat="medal in player.medals">
+    <a class="icon icon-default"
+       popover="{{medalDefinitions[medal.id].statDescription}}" popover-trigger="mouseenter">
+      <img class="img-responsive" ng-src="{{('http://www.bungie.net' + medalDefinitions[medal.id].iconImage) || ''}}">
+    </a>
+    <p class="text-sm">{{medalDefinitions[medal.id].statName}}</p>
+  </div>
+</div>

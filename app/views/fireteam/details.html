@@ -1,5 +1,4 @@
-<div class="col-md-12 col-xs-12 pt-10">
-  <!--<table class="table">-->
+  <!--<table class="table table-condensed">-->
     <!--<thead>-->
     <!--<tr>-->
       <!--<th>Standing</th>-->
@@ -19,27 +18,27 @@
     <!--</tr>-->
     <!--</tbody>-->
   <!--</table>-->
-  <div  morris-bar-chart
-        bar-data='player.pastActivities'
-        bar-xkey='date'
-        bar-ykeys='["kills", "deaths"]'
-        bar-labels='["Kills", "Deaths"]'
-        bar-colors='["#1693A5","#ff4a43"]' style="height: 250px; width: 360px"></div>
-  <div class="row" ng-repeat="medal in player.medals">
-    <div class="col-xs-2">
-      <a class="icon icon-default" style="margin:0px; width:22px; height:22px" popover="{{medalDefinitions[medal.id].statDescription}}" popover-trigger="mouseenter">
-        <img class="img-responsive" ng-src="{{('http://www.bungie.net' + medalDefinitions[medal.id].iconImage) || ''}}">
-      </a>
-    </div>
-    <div class="col-xs-10">
-      <span class="text-left text-sm">{{medalDefinitions[medal.id].statName}}</span>
-    </div>
-  </div>
+  <!--<div  morris-bar-chart-->
+        <!--bar-data='player.pastActivities'-->
+        <!--bar-xkey='date'-->
+        <!--bar-ykeys='["kills", "deaths"]'-->
+        <!--bar-labels='["Kills", "Deaths"]'-->
+        <!--bar-colors='["#1693A5","#ff4a43"]' style="height: 250px; width: 360px"></div>-->
+  <!--<div class="row" ng-repeat="medal in player.medals">-->
+    <!--<div class="col-xs-2">-->
+      <!--<a class="icon icon-default" style="margin:0px; width:22px; height:22px" popover="{{medalDefinitions[medal.id].statDescription}}" popover-trigger="mouseenter">-->
+        <!--<img class="img-responsive" ng-src="{{('http://www.bungie.net' + medalDefinitions[medal.id].iconImage) || ''}}">-->
+      <!--</a>-->
+    <!--</div>-->
+    <!--<div class="col-xs-10">-->
+      <!--<span class="text-left text-sm">{{medalDefinitions[medal.id].statName}}</span>-->
+    <!--</div>-->
+  <!--</div>-->
 
-  <div class="row" ng-repeat="weapon in player.playerWeapons">
-    <div class="col-xs-10">
-      <span class="text-left text-sm">{{weaponItems[weapon.referenceId].name}}</span>
-      <span class="text-left text-sm">kills: {{weapon.values.uniqueWeaponKills.basic.value}}</span>
-    </div>
+  <!--<div class="row" ng-repeat="weapon in player.playerWeapons">-->
+    <!--<div class="col-xs-10">-->
+      <!--<span class="text-left text-sm">{{weaponItems[weapon.referenceId].name}}</span>-->
+      <!--<span class="text-left text-sm">kills: {{weapon.values.uniqueWeaponKills.basic.value}}</span>-->
+    <!--</div>-->
   </div>
 </div>
