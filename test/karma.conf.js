@@ -55,6 +55,9 @@ module.exports = function(config) {
       'bower_components/angulartics/src/angulartics-intercom.js',
       'bower_components/angulartics/src/angulartics-inspectlet.js',
       'bower_components/angulartics/src/angulartics-newrelic-insights.js',
+      'bower_components/raphael/raphael.js',
+      'bower_components/mocha/mocha.js',
+      'bower_components/morrisjs/morris.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

@@ -3,6 +3,8 @@
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, $cookies, requestUrl, bungieStatus, $q, $log) {
     $scope.status = bungieStatus;
+    $scope.medalDefinitions = medalDefinitions;
+    $scope.weaponItems = weaponItems;
     if (angular.isUndefined($cookies.get('platform'))) {
       $scope.platformValue = true;
       $scope.platform = 2;
@@ -63,7 +65,7 @@ angular.module('trialsReportApp')
             currentAccount.getActivities(player),
             inventoryStats.getInventory($scope, player.membershipType, player.membershipId,
               player.characterId, index, $q, $log),
-            trialsStats.getData(player.membershipType, player.membershipId, player.characterId)
+            trialsStats.getData(player.membershipType, player.membershipId, player.characterId),
           ];
           return $q.all(methods)
             .then($q.spread(function (activity, inv, stats) {
@@ -76,10 +78,17 @@ angular.module('trialsReportApp')
 
               if (getRecent) {
                 currentAccount.getFireteam(player.recentActivity, player.name).then(function (result) {
-                  $scope.fireteam[1] = result[0];
-                  $scope.fireteam[2] = result[1];
+                  $scope.fireteam[0].medals = result.medals;
+                  $scope.fireteam[0].playerWeapons = result.playerWeapons;
+                  $scope.fireteam[1] = result.fireTeam[0];
+                  $scope.fireteam[2] = result.fireTeam[1];
                   loadFireteam($scope, $scope.fireteam[1], 1, currentAccount, trialsStats, inventoryStats, $q, $log, $http);
                   loadFireteam($scope, $scope.fireteam[2], 2, currentAccount, trialsStats, inventoryStats, $q, $log, $http);
+                });
+              }else {
+                currentAccount.getMatchSummary(player.recentActivity, player.name, false).then(function (result) {
+                  $scope.fireteam[index].medals = result[0].medals;
+                  $scope.fireteam[index].playerWeapons = result[0].playerWeapons;
                 });
               }
 

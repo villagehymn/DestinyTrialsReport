@@ -167,3 +167,13 @@ img.kinetic-dmg {
 .bor-sm-b {
   border-bottom: #616f77 1px solid;
 }
+
+.tab-content .tab-pane {
+  padding: 0px;
+}
+
+tr.thin {
+  td {
+    padding: 0!important;
+  }
+}

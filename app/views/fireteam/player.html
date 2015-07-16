@@ -1,7 +1,12 @@
 <ng-include src="'views/fireteam/info.html'"></ng-include>
 
-<ng-include src="'views/fireteam/stats.html'"></ng-include>
-
-<ng-include src="'views/fireteam/weapons.html'"></ng-include>
-
-<ng-include src="'views/fireteam/armor.html'"></ng-include>
+<tabset justified="true">
+  <tab heading="Equipped">
+    <ng-include src="'views/fireteam/stats.html'"></ng-include>
+    <ng-include src="'views/fireteam/weapons.html'"></ng-include>
+    <ng-include src="'views/fireteam/armor.html'"></ng-include>
+  </tab>
+  <tab heading="Detailed Stats">
+    <ng-include src="'views/fireteam/details.html'"></ng-include>
+  </tab>
+</tabset>

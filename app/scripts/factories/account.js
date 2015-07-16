@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('currentAccount', function($http, requestUrl) {
+  .factory('currentAccount', function($http, requestUrl, $filter) {
     var path = requestUrl.url;
     var getAccount = function(name, platform) {
       return $http({method:'GET', url: path + 'Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/'}).then(function(resultAcc){
@@ -64,7 +64,7 @@ angular.module('trialsReportApp')
           totalKills += activity.values.kills.basic.value;
           pastActivities.push({'id': activity.activityDetails.instanceId,
             'standing': activity.values.standing.basic.value,
-            'date': activity.period, 'kills': activity.values.kills.basic.value,
+            'date': $filter('date')(activity.period, 'yyyy-MM-dd h:mm'), 'kills': activity.values.kills.basic.value,
             'kd': activity.values.killsDeathsRatio.basic.displayValue,
             'deaths': activity.values.deaths.basic.value, 'assists': activity.values.assists.basic.value});
         });
@@ -96,33 +96,75 @@ angular.module('trialsReportApp')
     };
 
 
-    var getFireteam = function(recentActivity, name) {
+    var getMatchSummary = function(recentActivity, name, includeTeam) {
       return $http({method:'GET', url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/?definitions=true'}).then(function(resultPostAct){
-        var fireteamIndex = [];
         var fireTeam = [];
+        var fireteamIndex = [];
         if (recentActivity.standing === 0){
           fireteamIndex = [0,1,2];
         }else {
           fireteamIndex = [3,4,5];
         }
         angular.forEach(fireteamIndex,function(idx) {
-          var member = resultPostAct.data.Response.data.entries[idx];
-          var player = member.player;
-          if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase(name)) {
-            fireTeam.push({
-              name: member.player.destinyUserInfo.displayName,
-              membershipId: member.player.destinyUserInfo.membershipId,
-              membershipType: member.player.destinyUserInfo.membershipType,
-              emblem: 'http://www.bungie.net/' + member.player.destinyUserInfo.iconPath,
-              characterId: member.characterId,
-              level: member.player.characterLevel,
-              class: member.player.characterClass
-            });
+          var medals = [];
+          var entry = resultPostAct.data.Response.data.entries[idx];
+          if (includeTeam){
+            fireTeam.push(entry);
+          }else {
+            if (angular.lowercase(entry.player.destinyUserInfo.displayName) == angular.lowercase(name)) {
+              angular.forEach(entry.extended.values,function(value,index){
+                if (index.substring(0, 6) == "medals"){
+                  console.log("medal!");
+                  medals.push({id: index,
+                    count: value.basic.value});
+                }
+              });
+              entry.medals = medals;
+              entry.playerWeapons = entry.extended.weapons;
+              fireTeam.push(entry);
+            }
           }
         });
         return fireTeam;
       }).catch(function(e, r){
       });
     };
-    return { getAccount: getAccount, getActivities: getActivities, getFireteam: getFireteam, getLastTwentyOne: getLastTwentyOne };
+
+    var getFireteam = function(recentActivity, name) {
+      var fireTeam = [];
+      var playerMedals = [];
+      var playerWeapons = [];
+      return getMatchSummary( recentActivity, name, true )
+        .then( function( lastMatch )
+        {
+          angular.forEach(lastMatch,function(member) {
+            var player = member.player;
+            angular.forEach(member.extended.values,function(value,index){
+              var medals = [];
+              if (index.substring(0, 6) == "medals"){
+                medals.push({id: index,
+                  count: value.basic.value});
+              }
+            });
+            if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase(name)) {
+              fireTeam.push({
+                name: player.destinyUserInfo.displayName,
+                membershipId: player.destinyUserInfo.membershipId,
+                membershipType: player.destinyUserInfo.membershipType,
+                emblem: 'http://www.bungie.net/' + player.destinyUserInfo.iconPath,
+                characterId: member.characterId,
+                medals: medals,
+                prevousWeapons: member.extended.weapons,
+                level: player.characterLevel,
+                class: player.characterClass
+              });
+            }else{
+              playerMedals = medals;
+              playerWeapons = member.extended.weapons;
+            }
+          });
+          return {fireTeam: fireTeam, medals: playerMedals, playerWeapons: playerWeapons};
+        });
+      };
+    return { getAccount: getAccount, getActivities: getActivities, getMatchSummary: getMatchSummary, getFireteam: getFireteam, getLastTwentyOne: getLastTwentyOne };
   });
