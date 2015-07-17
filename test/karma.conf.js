@@ -56,13 +56,6 @@ module.exports = function(config) {
       'bower_components/angulartics/src/angulartics-intercom.js',
       'bower_components/angulartics/src/angulartics-inspectlet.js',
       'bower_components/angulartics/src/angulartics-newrelic-insights.js',
-      'bower_components/raphael/raphael.js',
-      'bower_components/mocha/mocha.js',
-      'bower_components/morrisjs/morris.js',
-      'bower_components/flot/jquery.flot.js',
-      'bower_components/flot.tooltip/js/jquery.flot.tooltip.js',
-      'bower_components/angular-flot/angular-flot.js',
-      'bower_components/flot-spline/js/jquery.flot.spline.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower

@@ -12,7 +12,6 @@ angular
     'angular-loading-bar',
     'angulartics',
     'angulartics.google.analytics',
-    'angular-flot',
     'LocalStorageModule'
   ]).config( window.$QDecorator )
   .factory('requestUrl', function() {
