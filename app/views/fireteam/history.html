@@ -84,8 +84,8 @@
   <div class="col-xs-6 col-md-6 {{$even ? '' : 'pl-0'}}" ng-repeat="weapon in player.playerWeapons">
     <div class="p-0 col-xs-6 col-md-6 text-center">
       <a class="icon icon-default"
-         popover="{{weaponItems[weapon.referenceId].name}}" popover-trigger="mouseenter">
-        <img class="img-responsive" ng-src="{{weaponItems[weapon.referenceId].icon || ''}}">
+         popover="{{weaponDefinitions[weapon.referenceId].name}}" popover-trigger="mouseenter">
+        <img class="img-responsive" ng-src="{{weaponDefinitions[weapon.referenceId].icon || ''}}">
       </a>
     </div>
     <div class="p-0 col-xs-6 col-md-6 text-center">

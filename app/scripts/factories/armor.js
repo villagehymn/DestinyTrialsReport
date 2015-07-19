@@ -16,7 +16,7 @@ angular.module('trialsReportApp')
         angular.forEach(items,function(item){
           var itemS = item.items[0];
           //var aItem = data.data.items[itemS.itemHash];
-          var aItem = armorItems[itemS.itemHash];
+          var aItem = armorDefinitions[itemS.itemHash];
           if (aItem) {
             if (hazardPerks.indexOf(aItem.name) > -1) {
               armors.hazards.push('Quick Revive');

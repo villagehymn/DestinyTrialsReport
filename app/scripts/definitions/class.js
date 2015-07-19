@@ -1,4 +1,4 @@
-var classItems = {
+var classDefinitions = {
 	3658182170: {
 		hash: 3658182170,
 		name: "Sunsinger",

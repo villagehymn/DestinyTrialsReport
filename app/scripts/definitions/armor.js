@@ -1,4 +1,4 @@
-var armorItems = {
+var armorDefinitions = {
 	3509787: {
 		hash: 3509787,
 		name: "Kellhunter's Hood",

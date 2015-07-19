@@ -4,7 +4,7 @@ angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService) {
     $scope.status = bungieStatus;
     $scope.medalDefinitions = medalDefinitions;
-    $scope.weaponItems = weaponItems;
+    $scope.weaponDefinitions = weaponDefinitions;
     if (angular.isUndefined(localStorageService.get('platform'))) {
       $scope.platformValue = true;
       $scope.platform = 2;
