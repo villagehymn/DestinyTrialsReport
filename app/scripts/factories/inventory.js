@@ -39,8 +39,11 @@ angular.module('trialsReportApp')
               $scope.fireteam[index].classNodes = classItems.classNodes;
               $scope.fireteam[index].class = classItems.subClass;
               $scope.fireteam[index].int = armors.int;
+              $scope.fireteam[index].cInt = armors.int > 270 ? 270 : (armors.int * 1);
               $scope.fireteam[index].dis = armors.dis;
+              $scope.fireteam[index].cDis = armors.dis > 270 ? 270 : (armors.dis * 1);
               $scope.fireteam[index].str = armors.str;
+              $scope.fireteam[index].cStr = armors.str > 270 ? 270 : (armors.str * 1);
               if (classItems.blink && weapons.shotgun){
                 $scope.fireteam[index].weapons.hazards.push('Blink Shotgun');
               }
