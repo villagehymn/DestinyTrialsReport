@@ -41,12 +41,12 @@ angular.module('trialsReportApp')
               $scope.fireteam[index].int = armors.int;
               $scope.fireteam[index].dis = armors.dis;
               $scope.fireteam[index].str = armors.str;
-              $scope.fireteam[index].intPercent = Math.round((armors.int / 270) * 100);
-              $scope.fireteam[index].disPercent = Math.round((armors.dis / 270) * 100);
-              $scope.fireteam[index].strPercent = Math.round((armors.str / 270) * 100);
               $scope.fireteam[index].cInt = armors.int > 270 ? 270 : armors.int;
               $scope.fireteam[index].cDis = armors.dis > 270 ? 270 : armors.dis;
               $scope.fireteam[index].cStr = armors.str > 270 ? 270 : armors.str;
+              $scope.fireteam[index].intPercent = Math.round(($scope.fireteam[index].cInt / 270) * 100);
+              $scope.fireteam[index].disPercent = Math.round(($scope.fireteam[index].cDis / 270) * 100);
+              $scope.fireteam[index].strPercent = Math.round(($scope.fireteam[index].cStr / 270) * 100);
               $scope.fireteam[index].cTotal = $scope.fireteam[index].cInt + $scope.fireteam[index].cDis + $scope.fireteam[index].cStr;
               $scope.fireteam[index].cIntPercent = ($scope.fireteam[index].cInt / $scope.fireteam[index].cTotal) * 100;
               $scope.fireteam[index].cDisPercent = ($scope.fireteam[index].cDis / $scope.fireteam[index].cTotal) * 100;
