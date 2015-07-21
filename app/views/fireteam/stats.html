@@ -1,9 +1,18 @@
 <div class="row" style="margin-top:-3px">
   <div class="col-md-12 col-sm-12 col-xs-12">
     <progress animate="true" class="progress-striped not-rounded m-0">
-      <bar type="greensea" value="(player.cInt)/(player.cDis + player.cInt + player.cStr) * 100" popover="Intellect: {{player.int}}" popover-trigger="mouseenter"><span>Int</span></bar>
-      <bar value="(player.cDis)/(player.cDis + player.cInt + player.cStr) * 100" popover="Discipline: {{player.dis}}" popover-trigger="mouseenter"><span>Dis</span></bar>
-      <bar type="warning" value="(player.cStr)/(player.cDis + player.cInt + player.cStr) * 100" popover="Strength: {{player.str}}" popover-trigger="mouseenter"><span>Str</span></bar>
+      <bar value="player.cIntPercent" popover="Intellect: {{player.int}} ({{player.intPercent}}%)" popover-trigger="mouseenter" type="greensea">
+        <span ng-show="player.cIntPercent >= 20">Intellect</span>
+        <span ng-show="player.cIntPercent  < 20">Int</span>
+      </bar>
+      <bar value="player.cDisPercent" popover="Discipline: {{player.dis}} ({{player.disPercent}}%)" popover-trigger="mouseenter">
+        <span ng-show="player.cDisPercent >= 20">Discipline</span>
+        <span ng-show="player.cDisPercent  < 20">Dis</span>
+      </bar>
+      <bar value="player.cStrPercent" popover="Strength: {{player.str}} ({{player.strPercent}}%)" popover-trigger="mouseenter" type="warning">
+        <span ng-show="player.cStrPercent >= 20">Strength</span>
+        <span ng-show="player.cStrPercent  < 20">Str</span>
+      </bar>
     </progress>
   </div>
 </div>
