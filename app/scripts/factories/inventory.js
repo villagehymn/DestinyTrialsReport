@@ -54,7 +54,6 @@ angular.module('trialsReportApp')
               if (classItems.blink && weapons.shotgun){
                 $scope.fireteam[index].weapons.hazards.push('Blink Shotgun');
               }
-              console.log($scope);
             })
           );
         },
