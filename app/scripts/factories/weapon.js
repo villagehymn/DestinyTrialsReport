@@ -11,6 +11,9 @@ angular.module('trialsReportApp')
         var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
         var shotgun = false;
         var weapons = [];
+        weapons.primary = [];
+        weapons.special = [];
+        weapons.heavy = [];
         weapons.hazards = [];
         angular.forEach(items, function (item) {
           var nodes = [];
@@ -59,8 +62,17 @@ angular.module('trialsReportApp')
                 }
               }
             });
-            weapons[wItem.bucket] = wItem;
-            weapons[wItem.bucket].nodes = nodes;
+            switch (wItem.bucket) {
+              case 'BUCKET_PRIMARY_WEAPON':
+                weapons.primary = {'weapon': wItem, 'nodes': nodes};
+                break;
+              case 'BUCKET_SPECIAL_WEAPON':
+                weapons.special = {'weapon': wItem, 'nodes': nodes};
+                break;
+              case 'BUCKET_HEAVY_WEAPON':
+                weapons.heavy = {'weapon': wItem, 'nodes': nodes};
+                break;
+            }
           }
         });
         return {weapons: weapons, shotgun: shotgun};
