@@ -12,7 +12,7 @@
   <!--</div>-->
 <!--</div>-->
 
-<div class="row" style="margin-top: -3px;">
+<!--<div class="row" style="margin-top: -3px;">
   <div class="col-md-12 col-sm-12 col-xs-12">
     <progressbar popover="Intellect: {{player.int}}" popover-trigger="mouseenter" class="progress-sm progress-striped not-rounded m-0 " max="270" type="greensea" value="player.int > 270 ? 270 : player.int"></progressbar>
   </div>
@@ -21,6 +21,16 @@
   </div>
   <div class="col-md-12 col-sm-12 col-xs-12">
     <progressbar popover="Strength: {{player.str}}" popover-trigger="mouseenter" class="progress-sm progress-striped not-rounded m-0 " max="270" type="warning" value="player.str > 270 ? 270 : player.str"></progressbar>
+  </div>
+</div>-->
+
+<div class="row" style="margin-top:-3px">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <progress max="(player.int > 270 ? 270 : player.int) + (player.dis > 270 ? 270 : player.dis) + (player.str > 270 ? 270 : player.str)" animate="true" class="progress-striped not-rounded m-0">
+      <bar type="greensea" value="player.int > 270 ? 270 : player.int" popover="Intellect: {{player.int}}" popover-trigger="mouseenter"><span>Intellect</span></bar>
+      <bar value="player.dis > 270 ? 270 : player.dis" popover="Discipline: {{player.dis}}" popover-trigger="mouseenter"><span>Discipline</span></bar>
+      <bar type="warning" value="player.str > 270 ? 270 : player.str" popover="Strength: {{player.str}}" popover-trigger="mouseenter"><span>Strength</span></bar>
+    </progress>
   </div>
 </div>
 
