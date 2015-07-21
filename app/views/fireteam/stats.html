@@ -1,26 +1,19 @@
-<!--<div class="row">-->
-  <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
-    <!--<div class="bor-sm-b bor-sm-r col-md-4 col-sm-4 col-xs-4 pl-0 pr-0">-->
-      <!--<progressbar popover="Intellect: {{player.int}}" popover-trigger="mouseenter" class="progress-sm progress-striped not-rounded m-0 " max="270" type="greensea" value="player.int"></progressbar>-->
-    <!--</div>-->
-    <!--<div class="bor-sm-b bor-sm-r col-md-4 col-sm-4 col-xs-4 pl-0 pr-0">-->
-      <!--<progressbar popover="Discipline: {{player.dis}}" popover-trigger="mouseenter" class="progress-sm progress-striped not-rounded m-0" max="270" value="player.dis"></progressbar>-->
-    <!--</div>-->
-    <!--<div class="bor-sm-b col-md-4 col-sm-4 col-xs-4 pl-0 pr-0">-->
-      <!--<progressbar popover="Strength: {{player.str}}" popover-trigger="mouseenter" class="progress-sm progress-striped not-rounded m-0 " max="270" type="warning" value="player.str"></progressbar>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
-<div class="row" style="margin-top: -3px;">
+<div class="row" style="margin-top:-3px">
   <div class="col-md-12 col-sm-12 col-xs-12">
-    <progressbar popover="Intellect: {{player.int}}" popover-trigger="mouseenter" class="progress-sm progress-striped not-rounded m-0 " max="270" type="greensea" value="player.int > 270 ? 270 : player.int"></progressbar>
-  </div>
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <progressbar popover="Discipline: {{player.dis}}" popover-trigger="mouseenter" class="progress-sm progress-striped not-rounded m-0" max="270" value="player.dis > 270 ? 270 : player.dis"></progressbar>
-  </div>
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <progressbar popover="Strength: {{player.str}}" popover-trigger="mouseenter" class="progress-sm progress-striped not-rounded m-0 " max="270" type="warning" value="player.str > 270 ? 270 : player.str"></progressbar>
+    <progress animate="true" class="progress-striped not-rounded m-0">
+      <bar value="player.cIntPercent" popover="Intellect: {{player.int}} ({{player.intPercent}}%)" popover-trigger="mouseenter" type="greensea">
+        <span ng-show="player.cIntPercent >= 20">Intellect</span>
+        <span ng-show="player.cIntPercent  < 20">Int</span>
+      </bar>
+      <bar value="player.cDisPercent" popover="Discipline: {{player.dis}} ({{player.disPercent}}%)" popover-trigger="mouseenter">
+        <span ng-show="player.cDisPercent >= 20">Discipline</span>
+        <span ng-show="player.cDisPercent  < 20">Dis</span>
+      </bar>
+      <bar value="player.cStrPercent" popover="Strength: {{player.str}} ({{player.strPercent}}%)" popover-trigger="mouseenter" type="warning">
+        <span ng-show="player.cStrPercent >= 20">Strength</span>
+        <span ng-show="player.cStrPercent  < 20">Str</span>
+      </bar>
+    </progress>
   </div>
 </div>
 

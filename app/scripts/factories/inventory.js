@@ -41,6 +41,16 @@ angular.module('trialsReportApp')
               $scope.fireteam[index].int = armors.int;
               $scope.fireteam[index].dis = armors.dis;
               $scope.fireteam[index].str = armors.str;
+              $scope.fireteam[index].intPercent = Math.round((armors.int / 270) * 100);
+              $scope.fireteam[index].disPercent = Math.round((armors.dis / 270) * 100);
+              $scope.fireteam[index].strPercent = Math.round((armors.str / 270) * 100);
+              $scope.fireteam[index].cInt = armors.int > 270 ? 270 : armors.int;
+              $scope.fireteam[index].cDis = armors.dis > 270 ? 270 : armors.dis;
+              $scope.fireteam[index].cStr = armors.str > 270 ? 270 : armors.str;
+              $scope.fireteam[index].cTotal = $scope.fireteam[index].cInt + $scope.fireteam[index].cDis + $scope.fireteam[index].cStr;
+              $scope.fireteam[index].cIntPercent = ($scope.fireteam[index].cInt / $scope.fireteam[index].cTotal) * 100;
+              $scope.fireteam[index].cDisPercent = ($scope.fireteam[index].cDis / $scope.fireteam[index].cTotal) * 100;
+              $scope.fireteam[index].cStrPercent = ($scope.fireteam[index].cStr / $scope.fireteam[index].cTotal) * 100;
               if (classItems.blink && weapons.shotgun){
                 $scope.fireteam[index].weapons.hazards.push('Blink Shotgun');
               }
