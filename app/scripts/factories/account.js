@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('currentAccount', function($http, requestUrl, $filter) {
+  .factory('currentAccount', function($http, requestUrl, $filter, toastr) {
     var path = requestUrl.url;
     var getAccount = function(name, platform) {
       return $http({method:'GET', url: path + 'Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/'}).then(function(resultAcc){
         if (resultAcc.data.Response.length < 1){
+          toastr.error('Player not found', 'Error');
           return;
         }
         var name = resultAcc.data.Response[0].displayName;
@@ -51,9 +52,10 @@ angular.module('trialsReportApp')
     };
 
     var getActivities = function(account) {
-      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId  + '/?mode=trialsofosiris&count=25&definitions=true'}).then(function(resultAct){
+      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId  + '/?mode=14&count=25'}).then(function(resultAct){
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
+          toastr.error('No Trials matches found for player' , 'Error');
           return;
         }
         var pastActivities = [];
@@ -80,7 +82,7 @@ angular.module('trialsReportApp')
 
     var getLastTwentyOne = function(account, character) {
       var allPastActivities = [];
-      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + character.characterBase.characterId  + '/?mode=trialsofosiris&count=21'}).then(function(resultAct){
+      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + character.characterBase.characterId  + '/?mode=14&count=21'}).then(function(resultAct){
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
           return;
@@ -97,7 +99,7 @@ angular.module('trialsReportApp')
 
 
     var getMatchSummary = function(recentActivity, name, includeTeam) {
-      return $http({method:'GET', url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/?definitions=true'}).then(function(resultPostAct){
+      return $http({method:'GET', url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'}).then(function(resultPostAct){
         var fireTeam = [];
         var fireteamIndex = [];
         if (recentActivity.standing === 0){

@@ -12,7 +12,8 @@ angular
     'angular-loading-bar',
     'angulartics',
     'angulartics.google.analytics',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'toastr'
   ]).config( window.$QDecorator )
   .factory('requestUrl', function() {
     return {

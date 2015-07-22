@@ -194,15 +194,15 @@ angular.module('trialsReportApp')
     };
 
 
-    if (!angular.isUndefined(localStorageService.get('teammate1'))) {
+    if (angular.isObject(localStorageService.get('teammate1'))) {
       $scope.fireteam = [];
       $scope.fireteam[0] = null;
       $scope.getRecentPlayer(localStorageService.get('teammate1'), 0);
-      if (!angular.isUndefined(localStorageService.get('teammate2'))) {
+      if (angular.isObject(localStorageService.get('teammate2'))) {
         $scope.fireteam[1] = null;
         $scope.getRecentPlayer(localStorageService.get('teammate2'), 1);
       }
-      if (!angular.isUndefined(localStorageService.get('teammate3'))) {
+      if (angular.isObject(localStorageService.get('teammate3'))) {
         $scope.fireteam[2] = null;
         $scope.getRecentPlayer(localStorageService.get('teammate3'), 2);
       }
@@ -210,21 +210,4 @@ angular.module('trialsReportApp')
       $scope.fireteam = [];
       $scope.fireteam[0] = null;
     }
-
-    //$scope.$watch('fireteam[0].name', function (newval) {
-    //  if (newval) {
-    //    $cookies.put('teammate1', newval);
-    //  }
-    //}, true);
-    //
-    //$scope.$watch('fireteam[1].name', function (newval) {
-    //  if (newval) {
-    //    $cookies.put('teammate2', newval);
-    //  }
-    //}, true);
-    //$scope.$watch('fireteam[2].name', function (newval) {
-    //  if (newval) {
-    //    $cookies.put('teammate3', newval);
-    //  }
-    //}, true);
   });
