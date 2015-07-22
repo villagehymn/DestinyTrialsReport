@@ -25,6 +25,7 @@ angular.module('trialsReportApp')
         },
         useMember = function (teamMember, index) {
           $scope.fireteam[index] = teamMember;
+          localStorageService.set('teammate'+(index+1), $scope.fireteam[index]);
           var dfd = $q.defer();
           dfd.resolve($scope.fireteam[index]);
 
@@ -111,7 +112,7 @@ angular.module('trialsReportApp')
     };
 
     $scope.getRecentPlayer = function (player, index) {
-      searchFireteam($scope, player, index, currentAccount, trialsStats, inventoryStats, $q, $log);
+      searchFireteam($scope, player, index, currentAccount, trialsStats, inventoryStats, $q, $log, false, player.membershipType);
     };
 
     function getPlayersFromGame($scope, activity) {
