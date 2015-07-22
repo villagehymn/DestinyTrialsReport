@@ -22,6 +22,7 @@ angular.module('trialsReportApp')
       var intellect = 0;
       var discipline = 0;
       var strength = 0;
+      var hasStarfireProtocolPerk = false;
 
       angular.forEach (items, function(item) {
         var itemS = item.items[0];
@@ -34,10 +35,13 @@ angular.module('trialsReportApp')
                 armors.hazards.push("Quick Revive");
               }
               if (hazardGrenadeOnSpawn.indexOf(perk.perkHash) > -1) {
-                armors.hazards.push("Grenade On Spawn");
+                armors.hazards.push("Grenade on Spawn");
               }
               if (hazardDoubleGrenade.indexOf(perk.perkHash) > -1) {
                 armors.hazards.push("Double Grenade");
+              }
+              if (perk.perkHash === 3471016318) {
+                hasStarfireProtocolPerk = true;
               }
             }
           });
@@ -70,7 +74,7 @@ angular.module('trialsReportApp')
           }
         }
       });
-      return {armors: armors, int: intellect, dis: discipline, str: strength};
+      return {armors: armors, int: intellect, dis: discipline, str: strength, hasStarfireProtocolPerk: hasStarfireProtocolPerk};
     };
     return {getData: getData};
   });

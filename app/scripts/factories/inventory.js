@@ -51,8 +51,11 @@ angular.module('trialsReportApp')
               $scope.fireteam[index].cIntPercent = ($scope.fireteam[index].cInt / $scope.fireteam[index].cTotal) * 100;
               $scope.fireteam[index].cDisPercent = ($scope.fireteam[index].cDis / $scope.fireteam[index].cTotal) * 100;
               $scope.fireteam[index].cStrPercent = ($scope.fireteam[index].cStr / $scope.fireteam[index].cTotal) * 100;
-              if (classItems.blink && weapons.shotgun){
+              if (classItems.blink && weapons.shotgun) {
                 $scope.fireteam[index].weapons.hazards.push('Blink Shotgun');
+              }
+              if (classItems.hasFusionGrenade && armors.hasStarfireProtocolPerk) {
+                $scope.fireteam[index].armors.hazards.push('Double Grenade');
               }
             })
           );

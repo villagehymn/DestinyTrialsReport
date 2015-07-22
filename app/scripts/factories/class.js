@@ -10,6 +10,7 @@ angular.module('trialsReportApp')
 
       var blink = false;
       var hasFireboltGrenade = false;
+      var hasFusionGrenade = false;
       var hasVikingFuneral = false;
       var hasTouchOfFlame = false;
 
@@ -25,6 +26,9 @@ angular.module('trialsReportApp')
               if (itemS.itemHash === 3658182170) {
                 if (nodeStep.nodeHash === 835330335) {
                   hasFireboltGrenade = true;
+                }
+                if (nodeStep.nodeHash === 834786008) {
+                  hasFusionGrenade = true;
                 }
                 if (nodeStep.nodeHash === 1173110174) {
                   hasVikingFuneral = true;
@@ -59,7 +63,7 @@ angular.module('trialsReportApp')
           background[1] = 'http://www.bungie.net' + definitionItems[itemS.itemHash].icon;
         }
       });
-      return {classNodes: classNodes, subClass: subClass, bg: background, blink: blink};
+      return {classNodes: classNodes, subClass: subClass, bg: background, blink: blink, hasFusionGrenade: hasFusionGrenade};
     };
     return {getData: getData};
   });
