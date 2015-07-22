@@ -97,7 +97,7 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-4 col-md-3 text-center" ng-repeat="medal in player.medals">
+  <div class="col-xs-4 col-md-3 text-center" style="height:120px" ng-repeat="medal in player.medals">
     <a class="icon"
        popover="{{medalDefinitions[medal.id].statDescription}}" popover-trigger="mouseenter">
       <img class="img-responsive" ng-src="{{('http://www.bungie.net' + medalDefinitions[medal.id].iconImage) || ''}}">
