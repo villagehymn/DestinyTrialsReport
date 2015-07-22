@@ -30,7 +30,6 @@
 
       <div class="row" style="height:18px">
         <div class="col-md-12 col-sm-12">
-          <a href="http://destinytracker.com/destiny/trials/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}" class="label bg-info dker" style="margin-right:2px" target="_blank">DTR</a>
           <span class="label bg-danger" style="margin-right:2px" ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index">{{hazard}}</span>
         </div>
       </div>
