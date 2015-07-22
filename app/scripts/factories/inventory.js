@@ -66,5 +66,5 @@ angular.module('trialsReportApp')
         .catch( reportProblems );
     };
 
-    return { getData: getData, getInventory: getInventory };
+    return {getData: getData, getInventory: getInventory};
   });

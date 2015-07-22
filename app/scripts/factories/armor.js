@@ -2,7 +2,7 @@
 
 angular.module('trialsReportApp')
   .factory('armorStats', function($http) {
-    var getData = function(items) {
+    var getData = function (items) {
       var armors = [];
       armors.hazards = [];
 
@@ -22,7 +22,8 @@ angular.module('trialsReportApp')
       var intellect = 0;
       var discipline = 0;
       var strength = 0;
-      angular.forEach(items,function(item){
+
+      angular.forEach (items, function(item) {
         var itemS = item.items[0];
         var aItem = DestinyArmorDefinition[itemS.itemHash];
 
@@ -71,5 +72,5 @@ angular.module('trialsReportApp')
       });
       return {armors: armors, int: intellect, dis: discipline, str: strength};
     };
-    return { getData: getData };
+    return {getData: getData};
   });
