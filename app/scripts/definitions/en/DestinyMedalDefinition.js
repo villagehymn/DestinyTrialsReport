@@ -1,4 +1,4 @@
-var medalDefinitions = {
+var DestinyMedalDefinition = {
   medalsAbilityGhostGunKillMulti: {
     statId: "medalsAbilityGhostGunKillMulti",
     group: 3,

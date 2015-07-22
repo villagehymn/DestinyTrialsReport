@@ -1,4 +1,4 @@
-var weaponDefinitions = {
+var DestinyWeaponDefinition = {
 	23851077: {
 		hash: 23851077,
 		name: "The Infinite Theorem",

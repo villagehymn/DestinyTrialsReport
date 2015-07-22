@@ -13,7 +13,8 @@ angular.module('trialsReportApp')
       var strength = 0;
       angular.forEach(items,function(item){
         var itemS = item.items[0];
-        var aItem = armorDefinitions[itemS.itemHash];
+        var aItem = DestinyArmorDefinition[itemS.itemHash];
+
         if (aItem) {
           if (hazardPerks.indexOf(aItem.name) > -1) {
             armors.hazards.push('Quick Revive');

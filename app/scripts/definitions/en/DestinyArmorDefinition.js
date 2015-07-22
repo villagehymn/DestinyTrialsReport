@@ -1,4 +1,4 @@
-var armorDefinitions = {
+var DestinyArmorDefinition = {
 	3509787: {
 		hash: 3509787,
 		name: "Kellhunter's Hood",

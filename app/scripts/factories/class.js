@@ -10,8 +10,8 @@ angular.module('trialsReportApp')
       var blink = false;
       angular.forEach(items,function(item){
         var itemS = item.items[0];
-        //var cItem = data.data.items[itemS.itemHash];
-        var cItem = classDefinitions[itemS.itemHash];
+        var cItem = DestinyClassDefinition[itemS.itemHash];
+
         if (cItem) {
           subClass = {'name': cItem.name};
         }else if (itemS.itemLevel === 0 && definitionItems[itemS.itemHash].bucketTypeHash === 4274335291){

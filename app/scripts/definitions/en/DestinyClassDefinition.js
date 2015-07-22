@@ -1,4 +1,4 @@
-var classDefinitions = {
+var DestinyClassDefinition = {
 	3658182170: {
 		hash: 3658182170,
 		name: "Sunsinger",

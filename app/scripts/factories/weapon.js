@@ -17,7 +17,8 @@ angular.module('trialsReportApp')
       angular.forEach(items, function (item) {
         var nodes = [];
         var itemS = item.items[0];
-        var wItem = weaponDefinitions[itemS.itemHash];
+        var wItem = DestinyWeaponDefinition[itemS.itemHash];
+
         if (wItem) {
           if (wItem.subType === 'Sniper Rifle') {
             angular.forEach(itemS.stats,function(stat){
