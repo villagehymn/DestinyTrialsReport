@@ -5,9 +5,20 @@ angular.module('trialsReportApp')
     var getData = function(items) {
       var armors = [];
       armors.hazards = [];
-      var hazardPerks = ['Light Beyond Nemesis', 'Crest of Alpha Lupi'];
-      var grenadePerks = ['Lucky Raspberry', 'Voidfang Vestments'];
-      var doubleNade = ['The Armamentarium'];
+
+      var hazardQuickRevive = [
+          40760096, // Light Beyond Nemesis (Warlock)
+        2682002320, // Crest of Alpha Lupi (Titan)
+        3821972036  // Crest of Alpha Lupi (Hunter)
+      ];
+      var hazardGrenadeOnSpawn = [
+        2289894117, // Lucky Raspberry (Hunter)
+        2671461052  // Voidfang Vestments (Warlock)
+      ];
+      var hazardDoubleGrenade = [
+        2978872641  // The Armamentarium (Titan)
+      ];
+
       var intellect = 0;
       var discipline = 0;
       var strength = 0;
@@ -16,13 +27,19 @@ angular.module('trialsReportApp')
         var aItem = DestinyArmorDefinition[itemS.itemHash];
 
         if (aItem) {
-          if (hazardPerks.indexOf(aItem.name) > -1) {
-            armors.hazards.push('Quick Revive');
-          }else if (grenadePerks.indexOf(aItem.name) > -1){
-            armors.hazards.push('Grenade on Spawn');
-          }else if (doubleNade.indexOf(aItem.name) > -1){
-            armors.hazards.push('Double Grenade');
-          }
+          angular.forEach(itemS.perks, function (perk, index) {
+            if (perk.isActive === true) {
+              if (hazardQuickRevive.indexOf(perk.perkHash) > -1) {
+                armors.hazards.push("Quick Revive");
+              }
+              if (hazardGrenadeOnSpawn.indexOf(perk.perkHash) > -1) {
+                armors.hazards.push("Grenade On Spawn");
+              }
+              if (hazardDoubleGrenade.indexOf(perk.perkHash) > -1) {
+                armors.hazards.push("Double Grenade");
+              }
+            }
+          });
           angular.forEach(itemS.stats,function(stat){
             switch(stat.statHash) {
               case 144602215:
