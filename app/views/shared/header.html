@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2 col-xs-12 mt-20 mb-20 pr-0">
           <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(mainPlayer, platformValue)">
             <div class="onoffswitch labeled">
-              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch09" ng-model="platformValue" checked>
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch09" ng-model="platformValue">
               <label class="onoffswitch-label" for="switch09">
                 <span class="onoffswitch-inner"></span>
                 <span class="onoffswitch-switch"></span>
@@ -23,7 +23,7 @@
         <div class="col-md-1 hidden-xs mt-20 mb-20 pl-0">
           <a ng-if="fireteam[0].name" class="btn btn-icon-only">
             <i class="fa fa-link" ui-zeroclip zeroclip-copied="copiedMessage()"
-               zeroclip-text="http://www.DestinyTrialsReport.com/{{platform === 1 ? 'xbox' : 'ps'}}/{{fireteam[0].name}}"></i>
+               zeroclip-text="http://www.DestinyTrialsReport.com/{{platformValue ? 'ps' : 'xbox'}}/{{fireteam[0].name}}"></i>
           </a>
         </div>
       </div>

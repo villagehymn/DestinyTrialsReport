@@ -3,8 +3,10 @@
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService, $analytics, toastr) {
     $scope.status = bungieStatus;
+    $scope.helpOverlay = false;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
+    $scope.dummyFireteam = dummyFireteam;
     if (!angular.isString(localStorageService.get('platform'))) {
       $scope.platformValue = true;
       $scope.platform = 2;
@@ -117,6 +119,9 @@ angular.module('trialsReportApp')
     };
 
     $scope.getRecentPlayer = function (player, index) {
+      $scope.platform = player.membershipType;
+      $scope.platformValue = ($scope.platform === 2);
+      localStorageService.set('platform', $scope.platformValue);
       searchFireteam($scope, player, index, currentAccount, trialsStats, inventoryStats, $q, $log, false, player.membershipType);
     };
 

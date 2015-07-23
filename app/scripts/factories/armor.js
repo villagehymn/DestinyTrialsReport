@@ -3,7 +3,7 @@
 angular.module('trialsReportApp')
   .factory('armorStats', function($http) {
     var getData = function (items) {
-      var armors = [];
+      var armors = {};
       armors.hazards = [];
 
       var hazardQuickRevive = [

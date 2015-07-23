@@ -2,7 +2,7 @@
 
 <div class="container" ng-hide="status">
   <div class="row">
-    <div class="col-md-4 col-xs-12" ng-show="fireteam[0].name" ng-repeat="player in fireteam track by $index">
+    <div class="col-md-4 col-xs-12" ng-if="fireteam[0].name" ng-repeat="player in fireteam track by $index">
       <div class="row">
         <div ng-show="$index === 0" class="col-md-12">
           <button class="btn btn-block btn-default" type="button" ng-click="suggestRecentPlayers()"
@@ -44,7 +44,35 @@
         </div>
       </section>
     </div>
+
+
+
+
+    <div ng-if="!fireteam[0].name" help-overlay="helpOverlay" class="col-md-4 col-xs-12" ng-repeat="player in [dummyFireteam] track by $index">
+      <div class="row">
+        <div ng-show="$index === 0" class="col-md-12">
+          <button class="btn btn-block btn-default" type="button">Suggest Recent Players</button>
+        </div>
+      </div>
+
+      <div class="row" style="height:18px">
+        <div class="col-md-12 col-sm-12">
+          <span class="label bg-danger" style="margin-right:2px" ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index">{{hazard}}</span>
+        </div>
+      </div>
+
+      <button class="btn btn-block btn-default" type="button" ng-click="helpOverlay = !helpOverlay">overlay!</button>
+
+      <section class="tile tile-simple">
+        <div class="tile-body p-0">
+          <ng-include src="'views/fireteam/player.html'"></ng-include>
+        </div>
+      </section>
+    </div>
   </div>
+
+
+
 </div>
 
 <ng-include src="'views/shared/footer.html'"></ng-include>

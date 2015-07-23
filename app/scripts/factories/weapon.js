@@ -9,10 +9,10 @@ angular.module('trialsReportApp')
         'Timeless Mythoclast', 'Thunderer'];
       var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
       var shotgun = false;
-      var weapons = [];
-      weapons.primary = [];
-      weapons.special = [];
-      weapons.heavy = [];
+      var weapons = {};
+      weapons.primary = {};
+      weapons.special = {};
+      weapons.heavy = {};
       weapons.hazards = [];
       angular.forEach(items, function (item) {
         var nodes = [];
