@@ -99,7 +99,7 @@ angular.module('trialsReportApp')
 
 
     var getMatchSummary = function(recentActivity, name, includeTeam) {
-      return $http({method:'GET', url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'}).then(function(resultPostAct){
+      return $http({method:'GET', url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'}).then(function(resultPostAct) {
         var fireTeam = [];
         var fireteamIndex = [];
         if (recentActivity.standing === 0){
