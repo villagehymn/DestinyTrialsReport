@@ -1,22 +1,25 @@
-<div class="row ml-0 mr-0" style="height: 130px" ng-repeat="weapon in [player.weapons.primary, player.weapons.special, player.weapons.heavy] track by $index">
-  <div class="col-md-4 col-xs-4 pt-10">
-    <div class="card mb-0">
-      <div class="front p-0">
-        <img popover="{{weapon.weapon.name}}" popover-trigger="mouseenter"
-             class="img-responsive weapon-img {{weapon.weapon.burnColor || 'kinetic-dmg'}}"
-             ng-src="{{weapon.weapon.icon}}" alt="{{weapon.weapon.name}}">
+<div data-intro="Weapon images and perks, border color displays damage element, grey if kinetic. Hover over image for weapon name" data-position="left">
+  <div class="row ml-0 mr-0" style="height: 130px" ng-repeat="weapon in [player.weapons.primary, player.weapons.special, player.weapons.heavy] track by $index">
+    <div class="col-md-4 col-xs-4 pt-10">
+      <div class="card mb-0">
+        <div class="front p-0">
+          <img popover="{{weapon.weapon.name}}" popover-trigger="mouseenter"
+               class="img-responsive weapon-img {{weapon.weapon.burnColor || 'kinetic-dmg'}}"
+               ng-src="{{weapon.weapon.icon}}" alt="{{weapon.weapon.name}}">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-8 col-xs-8 pt-10">
-    <div class="row" ng-repeat="node in weapon.nodes" ng-show="node.name">
-      <div class="col-xs-2">
-        <a class="icon icon-default" style="margin:0px; width:22px; height:22px" popover="{{node.description}}" popover-trigger="mouseenter">
-          <img class="img-responsive" ng-src="{{node.icon || ''}}">
-        </a>
-      </div>
-      <div class="col-xs-10">
-        <span class="text-left text-sm">{{node.name}}</span>
+    <div class="col-md-8 col-xs-8 pt-10">
+      <div ng-if="$first" style="width: 224px;height: 105px;position: absolute;" data-intro="Unlocked and active weapon perks, hover over the icons for the desciption" data-position="right"></div>
+      <div class="row" ng-repeat="node in weapon.nodes" ng-show="node.name">
+        <div class="col-xs-2">
+          <a class="icon icon-default" style="margin:0px; width:22px; height:22px" popover="{{node.description}}" popover-trigger="mouseenter">
+            <img class="img-responsive" ng-src="{{node.icon || ''}}">
+          </a>
+        </div>
+        <div class="col-xs-10">
+          <span class="text-left text-sm">{{node.name}}</span>
+        </div>
       </div>
     </div>
   </div>

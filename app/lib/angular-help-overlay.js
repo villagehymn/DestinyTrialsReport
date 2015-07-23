@@ -1,6 +1,6 @@
 /*global angular:false */
 
-angular.module('angularHelpOverlay', []).directive('helpOverlay', ['$document', function ($document) {
+angular.module('angularHelpOverlay', []).directive('helpOverlay', ['$document', '$timeout', function ($document, $timeout) {
   var noop = false; // Special flag in case we get an a chardinJs change event outside of our control.
   return {
     restrict: 'A',
@@ -46,6 +46,9 @@ angular.module('angularHelpOverlay', []).directive('helpOverlay', ['$document', 
           } else if (newValue === false) {
             element.chardinJs('stop');
           }
+        }else if (newValue === true) {
+          $timeout(element.chardinJs('start'), 50000);
+          console.log(element);
         }
       });
     }

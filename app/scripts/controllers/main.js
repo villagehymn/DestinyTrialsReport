@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService, $analytics, toastr) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService, $analytics, toastr, $interval) {
     $scope.status = bungieStatus;
     $scope.helpOverlay = false;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
@@ -20,12 +20,18 @@ angular.module('trialsReportApp')
       var searchName = function (name, index, platform) {
           return currentAccount.getAccount(name, platform)
             .then(function (player) {
-              $scope.fireteam[index] = player;
-              localStorageService.set('teammate'+(index+1), $scope.fireteam[index]);
-              sendAnalytic('searchedPlayer', 'name', name);
-              sendAnalytic('searchedPlayer', 'platform', platform);
+              if (angular.isObject(player)){
+                $scope.fireteam[index] = player;
+                localStorageService.set('teammate'+(index+1), $scope.fireteam[index]);
+                sendAnalytic('searchedPlayer', 'name', name);
+                sendAnalytic('searchedPlayer', 'platform', platform);
+              } else {
+                $interval(function() {
+                  $scope.helpOverlay = true;
+                },500);
+              }
               return player;
-            });
+            } );
         },
         useMember = function (teamMember, index) {
           $scope.fireteam[index] = teamMember;
@@ -242,6 +248,9 @@ angular.module('trialsReportApp')
       }else{
         $scope.fireteam = [];
         $scope.fireteam[0] = null;
+        $interval(function() {
+          $scope.helpOverlay = true;
+        },500);
       }
     }
   });

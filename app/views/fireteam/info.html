@@ -1,9 +1,13 @@
-<div class="card-container emblem">
+<div class="card-container emblem" data-intro="Hovering over the playercard will reveal subclass perks" data-position="left">
   <div class="card mb-0" style="background-image: url('{{player.emblem}}'), url('{{player.background[0]}}'); background-repeat: no-repeat, no-repeat; background-position: left, right; background-size: 65px 65px, 100% 65px; height: 65px;">
     <div class="front p-0">
       <p class="large mb-0">
         <span>{{player.name}}</span>
-        <span ng-show="player.stats.killsDeathsRatio" class="right pr-10"><span class="hidden-xs">K/D: </span>{{player.stats.killsDeathsRatio.basic.displayValue}}</span>
+        <span ng-show="player.stats.killsDeathsRatio" class="right pr-10"
+              data-intro="Trials k/d for this character" data-position="right">
+          <span class="hidden-xs">K/D: </span>
+          {{player.stats.killsDeathsRatio.basic.displayValue}}
+        </span>
       </p>
       <p class="mb-0">
         <span ng-show="player.level && player.class.name">
@@ -14,7 +18,7 @@
         </span>
       </p>
       <div class="mb-0 row">
-        <div class="col-md-6 col-md-offset-6 col-xs-6 col-xs-offset-6 text-right">
+        <div class="col-md-6 col-md-offset-6 col-xs-6 col-xs-offset-6 text-right" data-intro="Shows if player has ever(or never) been flawless" data-position="right">
           <span class="right text-white pr-10" ng-show="player.lighthouse === false && !player.neverTrials">Never Flawless</span>
           <span class="text-white pr-10" ng-show="player.lighthouse === true">Flawless</span>
           <p class="text-center mb-0 pr-10" ng-show="player.neverTrials">No previous trials games</p>
