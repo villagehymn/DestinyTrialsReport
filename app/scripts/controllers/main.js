@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService, $analytics) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService, $analytics, toastr) {
     $scope.status = bungieStatus;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
-    if (angular.isUndefined(localStorageService.get('platform'))) {
+    if (!angular.isString(localStorageService.get('platform'))) {
       $scope.platformValue = true;
       $scope.platform = 2;
     } else {
@@ -198,11 +198,28 @@ angular.module('trialsReportApp')
       });
     };
 
+    $scope.copiedMessage = function () {
+      toastr.success("", 'Permalink has been copied to your clipboard');
+    };
+
     var sendAnalytic = function (event, cat, label) {
       $analytics.eventTrack(event, {
         category: cat, label: label
       });
     };
+
+    if (!angular.isUndefined($routeParams.playerName)){
+      if ($routeParams.platform === 'xbox') {
+        $scope.platformValue = false;
+        $scope.platform = 1;
+      }else if ($routeParams.platform ==='ps'){
+        $scope.platformValue = true;
+        $scope.platform = 2;
+      }else {
+        toastr.error("Please use 'xbox' or 'ps'", 'Unrecognised Platform');
+      }
+      $scope.searchPlayerbyName($routeParams.playerName, $scope.platformValue);
+    }
 
     if (angular.isObject(localStorageService.get('teammate1'))) {
       $scope.fireteam = [];

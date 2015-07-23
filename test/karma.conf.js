@@ -58,6 +58,8 @@ module.exports = function(config) {
       'bower_components/angulartics/src/angulartics-newrelic-insights.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
+      'bower_components/zeroclipboard/dist/ZeroClipboard.js',
+      'bower_components/angular-zeroclipboard/src/angular-zeroclipboard.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

@@ -96,8 +96,8 @@ module.exports = function (grunt) {
                         fs.writeSync(fd, 'app.use(express.basicAuth("' + userName + '", "' + password + '"));\n');
                     }
                     fs.writeSync(fd, 'app.use(express.static(__dirname));\n');
-                    fs.writeSync(fd, 'app.get("/", function(req, res){\n');
-                    fs.writeSync(fd, '  res.sendfile("/index.html");\n');
+                    fs.writeSync(fd, 'app.get("/:platform/:playerName", function(req, res){\n');
+                    fs.writeSync(fd, '  res.sendfile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '});\n');
                     fs.writeSync(fd, 'app.get("/bungie/*?", function(req, res){\n');
                     fs.writeSync(fd, '  res.setTimeout(25000);\n');
@@ -573,9 +573,9 @@ module.exports = function (grunt) {
           cwd: '.',
           src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
           dest: '<%= yeoman.dist %>'
-        }, { 
-          expand: true, 
-          cwd: 'bower_components/font-awesome', 
+        }, {
+          expand: true,
+          cwd: 'bower_components/font-awesome',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
         }]

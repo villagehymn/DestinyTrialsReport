@@ -3,7 +3,7 @@
     <div class="container">
       <a href="https://github.com/SteffanLong/DestinyTrialsReport" target="_blank" class="hidden-xs hidden-sm"><img style="position:absolute; top:0; right:0; border:0" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
       <div class="row">
-        <div class="col-md-8 col-md-offset-2 col-xs-12 mt-20 mb-20">
+        <div class="col-md-8 col-md-offset-2 col-xs-12 mt-20 mb-20 pr-0">
           <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(mainPlayer, platformValue)">
             <div class="onoffswitch labeled">
               <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch09" ng-model="platformValue" checked>
@@ -19,6 +19,12 @@
               </span>
             </div>
           </form>
+        </div>
+        <div class="col-md-1 hidden-xs mt-20 mb-20 pl-0">
+          <a ng-if="fireteam[0].name" class="btn btn-icon-only">
+            <i class="fa fa-link" ui-zeroclip zeroclip-copied="copiedMessage()"
+               zeroclip-text="http://www.DestinyTrialsReport.com/{{platform === 1 ? 'xbox' : 'ps'}}/{{fireteam[0].name}}"></i>
+          </a>
         </div>
       </div>
     </div>

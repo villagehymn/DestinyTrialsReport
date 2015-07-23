@@ -13,7 +13,8 @@ angular
     'angulartics',
     'angulartics.google.analytics',
     'LocalStorageModule',
-    'toastr'
+    'toastr',
+    'zeroclipboard'
   ]).config( window.$QDecorator )
   .factory('requestUrl', function() {
     return {
@@ -36,10 +37,30 @@ angular
           }
         }
       })
+      .when('/:platform/:playerName', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        resolve: {
+          bungieStatus:function($location, $http, requestUrl){
+            $http({method:'GET', url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
+              if(result.data.Response.length > 0){
+                return result.data.Response[0].AlertHtml;
+              }
+            });
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
     $locationProvider.html5Mode(true);
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
-  });
+  })
+  .config(['uiZeroclipConfigProvider', function(uiZeroclipConfigProvider) {
+
+    uiZeroclipConfigProvider.setZcConf({
+      swfPath: '/lib/ZeroClipboard.swf'
+    });
+
+  }]);
