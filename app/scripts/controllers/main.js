@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService, $analytics) {
     $scope.status = bungieStatus;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
@@ -20,12 +20,16 @@ angular.module('trialsReportApp')
             .then(function (player) {
               $scope.fireteam[index] = player;
               localStorageService.set('teammate'+(index+1), $scope.fireteam[index]);
+              sendAnalytic('searchedPlayer', 'name', name);
+              sendAnalytic('searchedPlayer', 'platform', platform);
               return player;
             });
         },
         useMember = function (teamMember, index) {
           $scope.fireteam[index] = teamMember;
           localStorageService.set('teammate'+(index+1), $scope.fireteam[index]);
+          sendAnalytic('loadedPlayer', 'name', name.name);
+          sendAnalytic('loadedPlayer', 'platform', $scope.fireteam[index].membershipType);
           var dfd = $q.defer();
           dfd.resolve($scope.fireteam[index]);
 
@@ -107,6 +111,7 @@ angular.module('trialsReportApp')
 
     $scope.getPlayerbyName = function (name, index) {
       if (!angular.isUndefined(name)) {
+        sendAnalytic('searchedIndividual', 'name', name);
         searchFireteam($scope, name, index, currentAccount, trialsStats, inventoryStats, $q, $log, false, $scope.platform);
       }
     };
@@ -193,6 +198,11 @@ angular.module('trialsReportApp')
       });
     };
 
+    var sendAnalytic = function (event, cat, label) {
+      $analytics.eventTrack(event, {
+        category: cat, label: label
+      });
+    };
 
     if (angular.isObject(localStorageService.get('teammate1'))) {
       $scope.fireteam = [];

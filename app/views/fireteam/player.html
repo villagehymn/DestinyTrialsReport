@@ -6,10 +6,7 @@
     <ng-include src="'views/fireteam/weapons.html'"></ng-include>
     <ng-include src="'views/fireteam/armor.html'"></ng-include>
   </tab>
-  <!--<tab heading="Details">-->
-    <!--<ng-include src="'views/fireteam/details.html'"></ng-include>-->
-  <!--</tab>-->
-  <tab heading="Last Match">
+  <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
     <ng-include src="'views/fireteam/history.html'"></ng-include>
   </tab>
 </tabset>
@@ -19,7 +16,8 @@
     <a class="btn btn-block btn-default bg-info dker"
        href="http://destinytracker.com/destiny/trials/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
        target="_blank"
-       type="button">
+       type="button"
+       analytics-on analytics-event="Click" analytics-category="DestinyTracker">
        View DestinyTracker Stats
      </a>
   </div>

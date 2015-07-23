@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('classStats', function($http) {
+  .factory('classStats', function($analytics) {
     var getData = function(items, talentGrid, definitionItems) {
       var background = [];
       var subClass = [];
@@ -63,6 +63,11 @@ angular.module('trialsReportApp')
           background[1] = 'http://www.bungie.net' + definitionItems[itemS.itemHash].icon;
         }
       });
+
+      $analytics.eventTrack('classStats', {
+        category: 'subclass', label: subClass.name
+      });
+
       return {classNodes: classNodes, subClass: subClass, bg: background, blink: blink, hasFusionGrenade: hasFusionGrenade};
     };
     return {getData: getData};
