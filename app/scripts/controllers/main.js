@@ -117,6 +117,9 @@ angular.module('trialsReportApp')
     };
 
     $scope.getRecentPlayer = function (player, index) {
+      $scope.platform = player.membershipType;
+      $scope.platformValue = ($scope.platform === 2);
+      localStorageService.set('platform', $scope.platformValue);
       searchFireteam($scope, player, index, currentAccount, trialsStats, inventoryStats, $q, $log, false, player.membershipType);
     };
 
