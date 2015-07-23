@@ -214,6 +214,8 @@ angular.module('trialsReportApp')
     };
 
     if (!angular.isUndefined($routeParams.playerName)){
+      $scope.fireteam = [];
+      $scope.fireteam[0] = null;
       if ($routeParams.platform === 'xbox') {
         $scope.platformValue = false;
         $scope.platform = 1;
@@ -224,22 +226,22 @@ angular.module('trialsReportApp')
         toastr.error("Please use 'xbox' or 'ps'", 'Unrecognised Platform');
       }
       $scope.searchPlayerbyName($routeParams.playerName, $scope.platformValue);
-    }
-
-    if (angular.isObject(localStorageService.get('teammate1'))) {
-      $scope.fireteam = [];
-      $scope.fireteam[0] = null;
-      $scope.getRecentPlayer(localStorageService.get('teammate1'), 0);
-      if (angular.isObject(localStorageService.get('teammate2'))) {
-        $scope.fireteam[1] = null;
-        $scope.getRecentPlayer(localStorageService.get('teammate2'), 1);
+    } else {
+      if (angular.isObject(localStorageService.get('teammate1'))) {
+        $scope.fireteam = [];
+        $scope.fireteam[0] = null;
+        $scope.getRecentPlayer(localStorageService.get('teammate1'), 0);
+        if (angular.isObject(localStorageService.get('teammate2'))) {
+          $scope.fireteam[1] = null;
+          $scope.getRecentPlayer(localStorageService.get('teammate2'), 1);
+        }
+        if (angular.isObject(localStorageService.get('teammate3'))) {
+          $scope.fireteam[2] = null;
+          $scope.getRecentPlayer(localStorageService.get('teammate3'), 2);
+        }
+      }else{
+        $scope.fireteam = [];
+        $scope.fireteam[0] = null;
       }
-      if (angular.isObject(localStorageService.get('teammate3'))) {
-        $scope.fireteam[2] = null;
-        $scope.getRecentPlayer(localStorageService.get('teammate3'), 2);
-      }
-    }else{
-      $scope.fireteam = [];
-      $scope.fireteam[0] = null;
     }
   });
