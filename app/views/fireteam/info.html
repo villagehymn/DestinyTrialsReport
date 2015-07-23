@@ -3,14 +3,14 @@
     <div class="front p-0">
       <p class="large mb-0">
         <span>{{player.name}}</span>
-        <span ng-show="player.stats.killsDeathsRatio" class="right pr-10"><span class="hidden-xs">K/D:</span> {{player.stats.killsDeathsRatio.basic.displayValue}}</span>
+        <span ng-show="player.stats.killsDeathsRatio" class="right pr-10"><span class="hidden-xs">K/D: </span>{{player.stats.killsDeathsRatio.basic.displayValue}}</span>
       </p>
       <p class="mb-0">
         <span ng-show="player.level && player.class.name">
-          <span class="hidden-xs">Level</span> {{player.level}} {{player.class.name}}
+          <span class="hidden-xs">Level </span>{{player.level}} {{player.class.name}}
         </span>
         <span ng-show="player.stats.activitiesEntered" class="right pr-10">
-          Win <span class="hidden-xs">Avg</span>: {{((player.stats.activitiesWon.basic.value/player.stats.activitiesEntered.basic.value)*100).toFixed(0)}}%
+          Win<span class="hidden-xs"> Avg</span>: {{((player.stats.activitiesWon.basic.value/player.stats.activitiesEntered.basic.value)*100).toFixed(0)}}%
         </span>
       </p>
       <div class="mb-0 row">
