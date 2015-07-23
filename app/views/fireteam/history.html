@@ -11,73 +11,65 @@
 </div>-->
 
 <div class="row">
-  <div class="col-xs-3 col-md-3 pr-0">
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+  <div class="col-xs-3 pr-0">
+    <div class="col-xs-12 p-0 text-center">
       <h5 class="custom-font filled bg-danger">Kills</h5>
     </div>
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+    <div class="col-xs-12 p-0 text-center">
       <h4 class="mt-0">{{player.allStats.kills.basic.displayValue}}</h4>
     </div>
   </div>
-  <div class="col-xs-3 col-md-3 p-0">
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+  <div class="col-xs-3 p-0">
+    <div class="col-xs-12 p-0 text-center">
       <h5 class="custom-font filled bg-danger">Deaths</h5>
     </div>
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+    <div class="col-xs-12 p-0 text-center">
       <h4 class="mt-0">{{player.allStats.deaths.basic.displayValue}}</h4>
     </div>
   </div>
-  <div class="col-xs-3 col-md-3 p-0">
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+  <div class="col-xs-3 p-0">
+    <div class="col-xs-12 p-0 text-center">
       <h5 class="custom-font filled bg-danger">Assists</h5>
     </div>
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+    <div class="col-xs-12 p-0 text-center">
       <h4 class="mt-0">{{player.allStats.assists.basic.displayValue}}</h4>
     </div>
   </div>
-  <div class="col-xs-3 col-md-3 pl-0">
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+  <div class="col-xs-3 pl-0">
+    <div class="col-xs-12 p-0 text-center">
       <h5 class="custom-font filled bg-danger">K/D</h5>
     </div>
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+    <div class="col-xs-12 p-0 text-center">
       <h4 class="mt-0">{{player.allStats.killsDeathsRatio.basic.displayValue}}</h4>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xs-6 col-md-6 pr-0">
-    <div class="p-0 col-xs-12 col-md-12 text-center">
-      <h5 class="custom-font filled bg-danger">Headshots (Sniper)</h5>
+  <div class="col-xs-4 pr-0">
+    <div class="col-xs-12 p-0 text-center">
+      <h5 class="custom-font filled bg-danger">Headshots<!-- (Sniper)--></h5>
     </div>
-    <div class="p-0 col-xs-12 col-md-12 text-center">
-      <h4 class="mt-0">{{player.allStats.precisionKills.basic.displayValue}} ({{player.allStats.weaponKillsSniper.basic.displayValue || 0}})</h4>
+    <div class="col-xs-12 p-0 text-center">
+      <h4 class="mt-0">{{player.allStats.precisionKills.basic.displayValue}}<!-- ({{player.allStats.weaponKillsSniper.basic.displayValue || 0}})--></h4>
     </div>
   </div>
-  <div class="col-xs-6 col-md-6 pl-0">
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+  <div class="col-xs-4 p-0">
+    <div class="col-xs-12 p-0 text-center">
       <h5 class="custom-font filled bg-danger">Longest Life</h5>
     </div>
-    <div class="p-0 col-xs-12 col-md-12 text-center">
+    <div class="col-xs-12 p-0 text-center">
       <h4 class="mt-0">{{player.allStats.longestSingleLife.basic.displayValue}}</h4>
     </div>
   </div>
-  <!--<div class="col-xs-3 col-md-3 p-0">-->
-    <!--<div class="p-0 col-xs-12 col-md-12 text-center">-->
-      <!--<h4 class="custom-font filled bg-lightred">Assists</h4>-->
-    <!--</div>-->
-    <!--<div class="p-0 col-xs-12 col-md-12 text-center">-->
-      <!--<h3 class="mt-0">{{player.allStats.assists.basic.displayValue}}</h3>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="col-xs-3 col-md-3 pl-0">-->
-    <!--<div class="p-0 col-xs-12 col-md-12 text-center">-->
-      <!--<h4 class="custom-font filled bg-lightred">K/D</h4>-->
-    <!--</div>-->
-    <!--<div class="p-0 col-xs-12 col-md-12 text-center">-->
-      <!--<h3 class="mt-0">{{player.allStats.killsDeathsRatio.basic.displayValue}}</h3>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="col-xs-4 pl-0">
+    <div class="col-xs-12 p-0 text-center">
+      <h5 class="custom-font filled bg-danger">Revives</h5>
+    </div>
+    <div class="col-xs-12 p-0 text-center">
+      <h4 class="mt-0">{{player.allStats.resurrectionsPerformed.basic.displayValue}}</h4>
+    </div>
+  </div>
 </div>
 
 <div class="row">
