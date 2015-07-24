@@ -16,15 +16,46 @@
 }
 
 .chardinjs-helper-layer {
+  font-family: Dosis,Arial,sans-serif;;
   position: fixed;
   z-index: -1;
   color: #616f77;
 @include transition(all 0.3s ease-out);
 
-&.chardinjs-left { border-left: solid #616f77 1px; margin-left: -10px; }
-&.chardinjs-right { border-right: solid #616f77 1px; padding-right: 10px; margin-left: 10px;}
-&.chardinjs-bottom { border-bottom: solid #616f77 1px; padding-bottom: 10px; }
-&.chardinjs-top { border-top: solid #616f77 1px; padding-top: 10px; }
+&.chardinjs-left { border-left: solid #616f77 2px; margin-left: -10px;
+  &.red {
+    border-left: solid #d9534f 2px;
+  }
+
+  &.blue-grey {
+    border-left: solid #485382 2px;
+  }
+
+  &.blue{
+    border-left: solid #337ab7 2px;
+  }
+
+  &.green{
+    border-left: solid #16a085 2px;
+  }}
+&.chardinjs-right { border-right: solid #616f77 2px; padding-right: 10px; margin-left: 10px;
+  &.red {
+    border-right: solid #d9534f 2px;
+  }
+
+  &.blue-grey {
+    border-right: solid #485382 2px;
+  }
+
+  &.blue{
+    border-right: solid #337ab7 2px;
+  }
+
+  &.green{
+    border-right: solid #16a085 2px;
+  }}
+&.chardinjs-bottom { border-bottom: solid #616f77 2px; padding-bottom: 10px; margin-top: 10px; }
+&.chardinjs-top { border-top: solid #616f77 2px; padding-top: 10px; }
 }
 
 .chardinjs-tooltip {

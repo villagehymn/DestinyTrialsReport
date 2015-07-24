@@ -47,13 +47,15 @@
 
     <div ng-if="!fireteam[0].name" help-overlay="helpOverlay" class="col-md-4 col-md-offset-4 col-xs-12" ng-repeat="player in [dummyFireteam] track by $index">
       <div class="row">
-        <div ng-show="$index === 0" class="col-md-12">
+        <div ng-show="$index === 0" class="col-md-12"
+             popover="This button populates suggested fireteam members based on past trials history. Best for use in case our generated fireteam doesnt
+             match up with the game,there is no way to look at current fireteams so we are pulling data from the previous played game." popover-placement="bottom">
           <button class="btn btn-block btn-default" type="button">Suggest Recent Players</button>
         </div>
       </div>
 
       <div class="row" style="height:18px">
-        <div class="col-md-12 col-sm-12" data-intro="Useful hazards about the player" data-position="left">
+        <div class="col-md-12 col-sm-12 p-0 ml-15" data-intro="Useful hazards about the player" data-position="left" data-class="red">
           <span class="label bg-danger" style="margin-right:2px" ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index">{{hazard}}</span>
         </div>
       </div>

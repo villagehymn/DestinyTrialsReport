@@ -1,10 +1,9 @@
-<div class="card-container emblem" data-intro="Hovering over the playercard will reveal subclass perks" data-position="left">
+<div class="card-container emblem" data-intro="Hovering over the playercard will reveal subclass perks" data-position="left" data-class="blue-grey">
   <div class="card mb-0" style="background-image: url('{{player.emblem}}'), url('{{player.background[0]}}'); background-repeat: no-repeat, no-repeat; background-position: left, right; background-size: 65px 65px, 100% 65px; height: 65px;">
-    <div class="front p-0">
+    <div class="front p-0" data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat" data-position="right" data-class="green">
       <p class="large mb-0">
         <span>{{player.name}}</span>
-        <span ng-show="player.stats.killsDeathsRatio" class="right pr-10"
-              data-intro="Trials k/d for this character" data-position="right">
+        <span ng-show="player.stats.killsDeathsRatio" class="right pr-10">
           <span class="hidden-xs">K/D: </span>
           {{player.stats.killsDeathsRatio.basic.displayValue}}
         </span>
@@ -17,8 +16,8 @@
           Win<span class="hidden-xs"> Avg</span>: {{((player.stats.activitiesWon.basic.value/player.stats.activitiesEntered.basic.value)*100).toFixed(0)}}%
         </span>
       </p>
-      <div class="mb-0 row">
-        <div class="col-md-6 col-md-offset-6 col-xs-6 col-xs-offset-6 text-right" data-intro="Shows if player has ever(or never) been flawless" data-position="right">
+      <div class="mb-0 mr-0 ml-0 row">
+        <div class="col-md-6 col-md-offset-6 col-xs-6 col-xs-offset-6 text-right pr-0">
           <span class="right text-white pr-10" ng-show="player.lighthouse === false && !player.neverTrials">Never Flawless</span>
           <span class="text-white pr-10" ng-show="player.lighthouse === true">Flawless</span>
           <p class="text-center mb-0 pr-10" ng-show="player.neverTrials">No previous trials games</p>

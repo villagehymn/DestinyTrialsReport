@@ -2428,7 +2428,7 @@ var dummyFireteam = {
   }, {
     name: "Annihilate",
     description: "Increases the size of explosions created by Nova Bomb and grenades.",
-    icon: "http://www.bungie.net/common/destiny_content/icons/7224dbd5ce01a200d46007f72ed326ca.png",
+    icon: "http://www.bungie.net/common/destiny_content/icons/cf01b81da1d4b750f0570e155ecc138a.png",
     $$hashKey: "object:1023"
   }, {
     name: "Vortex Grenade",
@@ -2438,7 +2438,7 @@ var dummyFireteam = {
   }, {
     name: "Lance",
     description: "Nova Bomb travels farther and faster.",
-    icon: "http://www.bungie.net/common/destiny_content/icons/f1eed3d51e0beddc00f928dcf0cc7759.png",
+    icon: "http://www.bungie.net/common/destiny_content/icons/c6cde9e8af961b7828096208cc3ba1b1.png",
     $$hashKey: "object:1025"
   }],
   cInt: 67,
