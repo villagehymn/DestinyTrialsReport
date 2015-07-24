@@ -3,14 +3,16 @@
 <div class="container" ng-hide="status">
   <div class="row">
     <div class="col-md-4 col-xs-12" ng-if="fireteam[0].name" ng-repeat="player in fireteam track by $index">
-      <div class="row ml-0 mr-0" ng-show="$index === 0" >
-        <div class="col-md-6 col-xs-6 pl-0 pr-0">
-          <button class="btn btn-block btn-default bg-success" type="button" ng-click="refreshInventory()"
-                  analytics-on analytics-event="Click" analytics-category="Refresh Inventory">Refresh Inventory</button>
-        </div>
-        <div class="col-md-6 col-xs-6 pl-0 pr-0">
-          <button class="btn btn-block btn-default" type="button" ng-click="suggestRecentPlayers()"
-                  analytics-on analytics-event="Click" analytics-category="Suggest Recent Players">Suggest Recent<span class="hidden-xs"> Players</span></button>
+      <div class="row ml-0 mr-0" ng-show="$index === 0">
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+            <button class="btn btn-success" type="button" ng-click="refreshInventory()"
+                    analytics-on analytics-event="Click" analytics-category="Refresh Inventory">Refresh Inventory</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-default" type="button" ng-click="suggestRecentPlayers()"
+                    analytics-on analytics-event="Click" analytics-category="Suggest Recent Players">Suggest Recent<span class="hidden-xs"> Players</span></button>
+          </div>
         </div>
       </div>
       <div class="row" ng-hide="$index === 0">
@@ -24,8 +26,9 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuMobile{{$index}}">
                   <li ng-repeat="player in recentPlayers track by $index">
-                    <a ng-click="getRecentPlayer(player, ($parent.$index))" analytics-on
-                       analytics-event="Click" analytics-category="Recent From Dropdown">{{player.name}}</a>
+                    <a ng-bind="player.name" ng-click="getRecentPlayer(player, ($parent.$index))"
+                       analytics-on analytics-event="Click" analytics-category="Recent From Dropdown">
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -40,7 +43,11 @@
 
       <div class="row" style="height:18px">
         <div class="col-md-12 col-sm-12">
-          <span class="label bg-danger" style="margin-right:2px" ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index">{{hazard}}</span>
+          <span class="label bg-danger"
+                style="margin-right:2px"
+                ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index"
+                ng-bind="hazard">
+          </span>
         </div>
       </div>
 

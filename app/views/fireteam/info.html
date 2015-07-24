@@ -5,15 +5,18 @@
         <span>{{player.name}}</span>
         <span ng-show="player.stats.killsDeathsRatio" class="right pr-10">
           <span class="hidden-xs">K/D: </span>
-          {{player.stats.killsDeathsRatio.basic.displayValue}}
+          <span ng-bind="player.stats.killsDeathsRatio.basic.displayValue"></span>
         </span>
       </p>
       <p class="mb-0">
         <span ng-show="player.level && player.class.name">
-          <span class="hidden-xs">Level </span>{{player.level}} {{player.class.name}}
+          <span class="hidden-xs">Level </span>
+          <span ng-bind="player.level"></span>
+          <span ng-bind="player.class.name"></span>
         </span>
         <span ng-show="player.stats.activitiesEntered" class="right pr-10">
-          Win<span class="hidden-xs"> Avg</span>: {{((player.stats.activitiesWon.basic.value/player.stats.activitiesEntered.basic.value)*100).toFixed(0)}}%
+          Win<span class="hidden-xs"> Avg</span>:
+          <span ng-bind="((player.stats.activitiesWon.basic.value/player.stats.activitiesEntered.basic.value)*100).toFixed(0)"></span>%
         </span>
       </p>
       <div class="mb-0 mr-0 ml-0 row">
@@ -32,7 +35,7 @@
              popover-trigger="mouseenter">
             <img class="img-responsive" ng-src="{{classNode.icon || ''}}">
           </a>
-          <span class="text-left text-sm text-white" style="top:10px; position:absolute">{{classNode.name}}</span>
+          <span class="text-left text-sm text-white" style="top:10px; position:absolute" ng-bind="classNode.name"></span>
         </div>
       </div>
     </div>
