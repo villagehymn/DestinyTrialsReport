@@ -52,10 +52,8 @@ angular.module('trialsReportApp')
     };
 
     var getActivities = function(account) {
-      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId  + '/?mode=14&count=100&definitions=true'}).then(function(resultAct){
+      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId  + '/?mode=14&count=100'}).then(function(resultAct){
         var activities = resultAct.data.Response.data.activities;
-        var definitions = resultAct.data.Response.definitions;
-        var maps = definitions.activities;
         if (angular.isUndefined(activities)) {
           toastr.error('No Trials matches found for player' , 'Error');
           return;
@@ -71,26 +69,26 @@ angular.module('trialsReportApp')
         totals.losses = 0;
         var mapStats = {};
         angular.forEach(activities.slice().reverse(),function(activity){
-          var mapName = maps[activity.activityDetails.referenceId].activityName;
-          if (!angular.isObject(mapStats[mapName])){
-            mapStats[mapName] = {};
-            mapStats[mapName].kills = 0;
-            mapStats[mapName].deaths = 0;
-            mapStats[mapName].assists = 0;
-            mapStats[mapName].wins = 0;
-            mapStats[mapName].losses = 0;
+          var mapHash = activity.activityDetails.referenceId;
+          if (!angular.isObject(mapStats[mapHash])){
+            mapStats[mapHash] = {};
+            mapStats[mapHash].kills = 0;
+            mapStats[mapHash].deaths = 0;
+            mapStats[mapHash].assists = 0;
+            mapStats[mapHash].wins = 0;
+            mapStats[mapHash].losses = 0;
           }
-          mapStats[mapName].kills += activity.values.kills.basic.value;
-          mapStats[mapName].deaths += activity.values.deaths.basic.value;
-          mapStats[mapName].assists += activity.values.assists.basic.value;
+          mapStats[mapHash].kills += activity.values.kills.basic.value;
+          mapStats[mapHash].deaths += activity.values.deaths.basic.value;
+          mapStats[mapHash].assists += activity.values.assists.basic.value;
           totals.kills += activity.values.kills.basic.value;
           totals.deaths += activity.values.deaths.basic.value;
           totals.assists += activity.values.assists.basic.value;
           if (activity.values.standing.basic.value === 0) {
-            mapStats[mapName].wins += 1;
+            mapStats[mapHash].wins += 1;
             totals.wins += 1;
           } else {
-            mapStats[mapName].losses += 1;
+            mapStats[mapHash].losses += 1;
             totals.losses += 1;
           }
           pastActivities.push({'id': activity.activityDetails.instanceId,
@@ -99,7 +97,6 @@ angular.module('trialsReportApp')
             'kd': activity.values.killsDeathsRatio.basic.displayValue,
             'deaths': activity.values.deaths.basic.value, 'assists': activity.values.assists.basic.value});
         });
-        console.log(mapStats);
         return angular.extend(account, {
           streak: streak,
           recentActivity: recentActivity,

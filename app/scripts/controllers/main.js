@@ -6,6 +6,8 @@ angular.module('trialsReportApp')
     $scope.helpOverlay = false;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
+    $scope.DestinyTrialsDefinitions = DestinyTrialsDefinitions;
+
     $scope.dummyFireteam = dummyFireteam;
     if (!angular.isString(localStorageService.get('platform'))) {
       $scope.platformValue = true;
