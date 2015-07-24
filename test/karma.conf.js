@@ -60,6 +60,7 @@ module.exports = function(config) {
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/zeroclipboard/dist/ZeroClipboard.js',
       'bower_components/angular-zeroclipboard/src/angular-zeroclipboard.js',
+      'bower_components/angular-filter/dist/angular-filter.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

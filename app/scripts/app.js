@@ -2,20 +2,14 @@
 
 angular
   .module('trialsReportApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'ui.bootstrap',
-    'angular-loading-bar',
-    'angulartics',
-    'angulartics.google.analytics',
-    'LocalStorageModule',
-    'toastr',
-    'zeroclipboard',
-    'angularHelpOverlay'
+    'ngAnimate', 'ngCookies',
+    'ngResource', 'ngRoute',
+    'ngSanitize', 'ngTouch',
+    'ui.bootstrap', 'angular-loading-bar',
+    'angulartics', 'angulartics.google.analytics',
+    'LocalStorageModule', 'toastr',
+    'zeroclipboard', 'angularHelpOverlay',
+    'angular.filter'
   ]).config( window.$QDecorator )
   .factory('requestUrl', function() {
     return {
