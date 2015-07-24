@@ -71,14 +71,14 @@ function getFromParams(currentAccount, $route, localStorageService) {
 
 function setUser(currentAccount, name, platform) {
   return currentAccount.getAccount(name, platform)
-    //.then(function (player) {
+    .then(function (player) {
     //  if (!angular.isObject(player)) {
     //    $interval(function () {
     //      $scope.helpOverlay = true;
     //    }, 1000);
     //  }
-    //  return player;
-    //});
+      return player;
+    });
 }
 
 function getFromLocalStorage(localStorageService) {
