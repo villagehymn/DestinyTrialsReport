@@ -1,5 +1,7 @@
 'use strict';
 
+var cacheBustSuffix = Date.now();
+
 angular
   .module('trialsReportApp', [
     'ngAnimate', 'ngCookies',
@@ -10,6 +12,7 @@ angular
     'LocalStorageModule', 'toastr',
     'angularHelpOverlay', 'angular.filter'
   ]).config( window.$QDecorator )
+  .constant("cacheBustSuffix", cacheBustSuffix)
   .factory('requestUrl', function() {
     return {
       //url : 'http://localhost:63294/Platform/'
@@ -32,14 +35,14 @@ angular
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: 'views/main.html?cache-bust=' + cacheBustSuffix,
         controller: 'MainCtrl',
         resolve: {
           fireTeam:getFromLocalStorage
         }
       })
       .when('/:platform/:playerName', {
-        templateUrl: 'views/main.html',
+        templateUrl: 'views/main.html?cache-bust=' + cacheBustSuffix,
         controller: 'MainCtrl',
         resolve: {
           fireTeam:getFromParams
@@ -56,7 +59,7 @@ angular
         redirectTo: '/'
       });
     $locationProvider.html5Mode(true);
-    //$locationProvider.hashPrefix('!');
+    $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
   });

@@ -1,13 +1,17 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, localStorageService, $analytics, toastr, $interval, $location) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, localStorageService, $analytics, toastr, $interval, $location, cacheBustSuffix) {
     $scope.status = null;
     $scope.helpOverlay = false;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
     $scope.DestinyTrialsDefinitions = DestinyTrialsDefinitions;
     $scope.dummyFireteam = dummyFireteam;
+    $scope.headerPartial = "views/shared/header.html?cache-bust=" + cacheBustSuffix;
+    $scope.playerPartial = "views/fireteam/player.html?cache-bust=" + cacheBustSuffix;
+    $scope.statsPartial = "views/fireteam/stats.html?cache-bust=" + cacheBustSuffix;
+    $scope.infoPartial = "views/fireteam/info.html?cache-bust=" + cacheBustSuffix;
 
     function setPlatform($scope, platformValue) {
       $scope.platformValue = platformValue;
