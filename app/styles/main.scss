@@ -216,7 +216,12 @@ tr.thin {
 margin-top: 20px;
 }
 
-
+@media screen and (max-width: 768px) {
+  .nav-justified > li, .nav-tabs.nav-justified > li {
+    float: left;
+    width: 33%;
+  }
+}
 //.footer {
 //  position: absolute;
 //  bottom: 0;
