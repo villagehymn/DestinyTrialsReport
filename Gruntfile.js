@@ -61,7 +61,8 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  "dependencies": {\n');
                     fs.writeSync(fd, '    "express": "3.*",\n');
                     fs.writeSync(fd, '    "request": "^2.40.0",\n');
-                    fs.writeSync(fd, '    "newrelic": "^1.20.2"\n');
+                    fs.writeSync(fd, '    "newrelic": "^1.20.2",\n');
+                    fs.writeSync(fd, '    "gzippo": "^0.2.0"\n');
                     if (min) {
                         fs.writeSync(fd, '\n');
                     } else {
@@ -87,6 +88,7 @@ module.exports = function (grunt) {
                 method: function(fs, fd, done) {
                     var useAuth = false;
                     fs.writeSync(fd, 'require("newrelic");\n');
+                    fs.writeSync(fd, 'var gzippo = require("gzippo");\n');
                     fs.writeSync(fd, 'var express = require("express");\n');
                     fs.writeSync(fd, 'var request = require("request");\n');
                     fs.writeSync(fd, 'var app = express();\n');
@@ -95,7 +97,7 @@ module.exports = function (grunt) {
                         var password = 'password1';
                         fs.writeSync(fd, 'app.use(express.basicAuth("' + userName + '", "' + password + '"));\n');
                     }
-                    fs.writeSync(fd, 'app.use(express.static(__dirname));\n');
+                    fs.writeSync(fd, 'app.use(gzippo.staticGzip(__dirname));\n');
                     fs.writeSync(fd, 'app.get("/:platform/:playerName", function(req, res){\n');
                     fs.writeSync(fd, '  res.sendfile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '});\n');
@@ -498,6 +500,21 @@ module.exports = function (grunt) {
       }
     },
 
+    // gzip assets 1-to-1 for production
+    compress: {
+      main: {
+        options: {
+          mode: 'gzip'
+        },
+        expand: true,
+        cwd: '<%= yeoman.dist %>/scripts/',
+        src: ['**/*'],
+        dest: '<%= yeoman.dist %>/scripts/',
+        rename: function (dest, src) {
+          return 'dist/scripts/' + src + '.gz';
+        }
+      }
+    },
     // ng-annotate tries to make the code safe for minification automatically
     // by using the Angular long form for dependency injection.
     ngAnnotate: {
@@ -656,7 +673,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'compress'
   ]);
 
   grunt.registerTask('default', [

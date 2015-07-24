@@ -8,8 +8,7 @@ angular
     'ui.bootstrap', 'angular-loading-bar',
     'angulartics', 'angulartics.google.analytics',
     'LocalStorageModule', 'toastr',
-    'zeroclipboard', 'angularHelpOverlay',
-    'angular.filter'
+    'angularHelpOverlay', 'angular.filter'
   ]).config( window.$QDecorator )
   .factory('requestUrl', function() {
     return {
@@ -37,11 +36,11 @@ angular
         controller: 'MainCtrl',
         resolve: {
           bungieStatus:function($location, $http, requestUrl){
-            $http({method:'GET', url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
-              if(result.data.Response.length > 0){
-                return result.data.Response[0].AlertHtml;
-              }
-            });
+            //$http({method:'GET', url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
+            //  if(result.data.Response.length > 0){
+            //    return result.data.Response[0].AlertHtml;
+            //  }
+            //});
           }
         }
       })
@@ -50,11 +49,11 @@ angular
         controller: 'MainCtrl',
         resolve: {
           bungieStatus:function($location, $http, requestUrl){
-            $http({method:'GET', url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
-              if(result.data.Response.length > 0){
-                return result.data.Response[0].AlertHtml;
-              }
-            });
+            //$http({method:'GET', url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
+            //  if(result.data.Response.length > 0){
+            //    return result.data.Response[0].AlertHtml;
+            //  }
+            //});
           }
         }
       })
@@ -65,11 +64,4 @@ angular
     $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
-  })
-  .config(['uiZeroclipConfigProvider', function(uiZeroclipConfigProvider) {
-
-    uiZeroclipConfigProvider.setZcConf({
-      swfPath: '/lib/ZeroClipboard.swf'
-    });
-
-  }]);
+  });

@@ -127,6 +127,13 @@ angular.module('trialsReportApp')
       }
     };
 
+    $scope.refreshInventory = function () {
+      angular.forEach($scope.fireteam, function (player, index) {
+        inventoryStats.getInventory($scope, player.membershipType, player.membershipId,
+          player.characterId, index, $q, $log)
+      });
+    };
+
     $scope.getRecentPlayer = function (player, index) {
       $scope.platform = player.membershipType;
       $scope.platformValue = ($scope.platform === 2);

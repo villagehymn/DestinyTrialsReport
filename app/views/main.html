@@ -3,12 +3,18 @@
 <div class="container" ng-hide="status">
   <div class="row">
     <div class="col-md-4 col-xs-12" ng-if="fireteam[0].name" ng-repeat="player in fireteam track by $index">
-      <div class="row">
-        <div ng-show="$index === 0" class="col-md-12">
+      <div class="row ml-0 mr-0" ng-show="$index === 0" >
+        <div class="col-md-6 col-xs-6 pl-0 pr-0">
+          <button class="btn btn-block btn-default bg-success" type="button" ng-click="refreshInventory()"
+                  analytics-on analytics-event="Click" analytics-category="Refresh Inventory">Refresh Inventory</button>
+        </div>
+        <div class="col-md-6 col-xs-6 pl-0 pr-0">
           <button class="btn btn-block btn-default" type="button" ng-click="suggestRecentPlayers()"
                   analytics-on analytics-event="Click" analytics-category="Suggest Recent Players">Suggest Recent Players</button>
         </div>
-        <div class="col-md-12" ng-hide="$index === 0">
+      </div>
+      <div class="row" ng-hide="$index === 0">
+        <div class="col-md-12">
           <form class="form-horizontal" role="form" ng-submit="getPlayerbyName(firstMember, ($index))">
             <div class="input-group">
               <div ng-show="recentPlayers" class="input-group-btn">
