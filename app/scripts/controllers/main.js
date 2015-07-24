@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService, $analytics, toastr, $interval) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService, $analytics, toastr, $interval, $location) {
     $scope.status = bungieStatus;
     $scope.helpOverlay = false;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
@@ -114,6 +114,7 @@ angular.module('trialsReportApp')
           platformValue = 2;
         }
         localStorageService.set('platform', platformValue);
+        $location.path('/' + (platform ? 'ps' : 'xbox') + '/' + name, false);
 
         searchFireteam($scope, name, 0, currentAccount, trialsStats, inventoryStats, $q, $log, true, platformValue);
       }
