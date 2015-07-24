@@ -48,7 +48,7 @@ angular.module('trialsReportApp')
           if (!angular.isObject(player)) {
             $interval(function () {
               $scope.helpOverlay = true;
-            }, 500);
+            }, 1000);
           }
           return player;
         }).then(function (player) {
@@ -116,6 +116,10 @@ angular.module('trialsReportApp')
     if (angular.isObject(fireTeam)){
       $scope.fireteam = [fireTeam];
       searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType);
+    }else {
+      $interval(function () {
+        $scope.helpOverlay = true;
+      }, 1000);
     }
 
     $scope.searchPlayerbyName = function (name, platform, index) {
