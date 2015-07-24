@@ -3,8 +3,8 @@
 angular.module('trialsReportApp')
   .factory('currentAccount', function($http, requestUrl, $filter, toastr) {
     var path = requestUrl.url;
-    var getAccount = function(name, platform) {
-      return $http({method:'GET', url: path + 'Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/'}).then(function(resultAcc){
+    var getAccount = function(sName, platform) {
+      return $http({method:'GET', url: path + 'Destiny/SearchDestinyPlayer/' + platform + '/' + sName + '/'}).then(function(resultAcc){
         if (resultAcc.data.Response.length < 1){
           toastr.error('Player not found', 'Error');
           return;
