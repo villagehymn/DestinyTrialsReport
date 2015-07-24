@@ -1,45 +1,83 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, currentAccount, trialsStats, inventoryStats, requestUrl, bungieStatus, $q, $log, localStorageService, $analytics, toastr, $interval, $location) {
-    $scope.status = bungieStatus;
+  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, localStorageService, $analytics, toastr, $interval, $location) {
+    $scope.status = null;
     $scope.helpOverlay = false;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
     $scope.DestinyTrialsDefinitions = DestinyTrialsDefinitions;
-
     $scope.dummyFireteam = dummyFireteam;
-    if (!angular.isString(localStorageService.get('platform'))) {
-      $scope.platformValue = true;
-      $scope.platform = 2;
-    } else {
-      $scope.platform = localStorageService.get('platform');
-      $scope.platformValue = ($scope.platform === 2);
+
+    function setPlatform($scope, platformValue) {
+      $scope.platformValue = platformValue;
+      $scope.platform = platformValue ? 2 : 1;
+      localStorageService.set('platform', $scope.platform);
     }
 
-    var searchFireteam = function ($scope, name, index, currentAccount, trialsStats, inventoryStats, $q, $log, getRecent, platform) {
+    if (localStorageService.get('platform') === true || localStorageService.get('platform') === false) {
+      setPlatform($scope, localStorageService.get('platform'));
+    } else {
+      setPlatform($scope, true);
+    }
 
-      var searchName = function (name, index, platform) {
-          return currentAccount.getAccount(name, platform)
-            .then(function (player) {
-              if (angular.isObject(player)){
-                $scope.fireteam[index] = player;
-                localStorageService.set('teammate'+(index+1), $scope.fireteam[index]);
-                sendAnalytic('searchedPlayer', 'name', name);
-                sendAnalytic('searchedPlayer', 'platform', platform);
-              } else {
-                $interval(function() {
-                  $scope.helpOverlay = true;
-                },500);
-              }
-              return player;
-            } );
-        },
-        useMember = function (teamMember, index) {
-          $scope.fireteam[index] = teamMember;
+    function getRecentFireteam($scope, result, platform) {
+      $scope.fireteam.push(result.fireTeam[0]);
+      $scope.fireteam.push(result.fireTeam[1]);
+      searchFireteam($scope, $scope.fireteam[1], 1, platform);
+      searchFireteam($scope, $scope.fireteam[2], 2, platform);
+    }
+
+    function setPlayerStats(player, index, stats, $scope) {
+      currentAccount.getFireteam(player.recentActivity, player.name).then(function (result) {
+        $scope.fireteam[index].medals = result.medals;
+        $scope.fireteam[index].allStats = result.playerAllStats;
+        $scope.fireteam[index].playerWeapons = result.playerWeapons;
+        $scope.fireteam[index].stats = stats;
+        checkGrimoire($scope, $scope.fireteam[index], index);
+        if (index === 0){
+          getRecentFireteam($scope, result, player.membershipType);
+        }
+      });
+    }
+
+    function getAccountByName(name, platform, $scope, index) {
+      if (angular.isUndefined(name)){return}
+      return currentAccount.getAccount(name, platform)
+        .then(function (player) {
+          if (!angular.isObject(player)) {
+            $interval(function () {
+              $scope.helpOverlay = true;
+            }, 500);
+          }
+          return player;
+        }).then(function (player) {
+          sendAnalytic('searchedPlayer', 'name', name);
+          sendAnalytic('searchedPlayer', 'platform', platform);
+          searchFireteam($scope, player, index, platform);
+        });
+    }
+
+    function checkGrimoire($scope, player, index) {
+      $http({
+        method: 'GET', url: requestUrl.url + 'Destiny/Vanguard/Grimoire/' +
+        player.membershipType + '/' + player.membershipId + '/?single=401030'
+      }).then(function (result) {
+        $scope.fireteam[index].lighthouse = (result.data.Response.data.cardCollection.length > 0);
+      });
+    }
+
+    var searchFireteam = function ($scope, name, index, platform) {
+
+      var useMember = function (teamMember, index) {
+          if (index === 0) {
+            $scope.fireteam = [teamMember];
+          }else if (angular.isUndefined($scope.fireteam[index])){
+            $scope.fireteam.push(teamMember);
+          }else {
+            $scope.fireteam[index] = teamMember
+          }
           localStorageService.set('teammate'+(index+1), $scope.fireteam[index]);
-          sendAnalytic('loadedPlayer', 'name', name.name);
-          sendAnalytic('loadedPlayer', 'platform', $scope.fireteam[index].membershipType);
           var dfd = $q.defer();
           dfd.resolve($scope.fireteam[index]);
 
@@ -48,9 +86,9 @@ angular.module('trialsReportApp')
         parallelLoad = function (player) {
           var methods = [
             currentAccount.getActivities(player),
-            inventoryStats.getInventory($scope, player.membershipType, player.membershipId,
-              player.characterId, index, $q, $log),
-            trialsStats.getData(player.membershipType, player.membershipId, player.characterId)
+            inventoryStats.getInventory($scope, platform, player.membershipId,
+              player.characterId, index, $q),
+            trialsStats.getData(platform, player.membershipId, player.characterId)
           ];
           return $q.all(methods)
             .then($q.spread(function (activity, inv, stats) {
@@ -61,84 +99,43 @@ angular.module('trialsReportApp')
                 $scope.fireteam[index] = activity;
               }
 
-              if (getRecent) {
-                currentAccount.getFireteam(player.recentActivity, player.name).then(function (result) {
-                  $scope.fireteam[0].medals = result.medals;
-                  $scope.fireteam[0].allStats = result.playerAllStats;
-                  $scope.fireteam[0].playerWeapons = result.playerWeapons;
-                  $scope.fireteam[1] = result.fireTeam[0];
-                  $scope.fireteam[2] = result.fireTeam[1];
-                  localStorageService.set('teammate2', $scope.fireteam[1]);
-                  localStorageService.set('teammate3', $scope.fireteam[2]);
-                  searchFireteam($scope, $scope.fireteam[1], 1, currentAccount, trialsStats, inventoryStats, $q, $log);
-                  searchFireteam($scope, $scope.fireteam[2], 2, currentAccount, trialsStats, inventoryStats, $q, $log);
-                });
-              }else {
-                currentAccount.getMatchSummary(player.recentActivity, player.name, false).then(function (result) {
-                  $scope.fireteam[index].allStats = result[0].allStats;
-                  $scope.fireteam[index].medals = result[0].medals;
-                  $scope.fireteam[index].playerWeapons = result[0].playerWeapons;
-                });
-              }
-
-              $scope.fireteam[index].stats = stats;
-              $http({
-                method: 'GET', url: requestUrl.url + 'Destiny/Vanguard/Grimoire/' +
-                $scope.fireteam[index].membershipType + '/' + $scope.fireteam[index].membershipId + '/?single=401030'
-              }).then(function (result) {
-                $scope.fireteam[index].lighthouse = (result.data.Response.data.cardCollection.length > 0);
-              });
+              setPlayerStats(player, index, stats, $scope);
             })
           );
         },
 
         reportProblems = function (fault) {
-          $log.error(String(fault));
+          //$log.error(String(fault));
         };
 
-      if (angular.isObject(name)){
-        useMember(name, index)
-          .then(parallelLoad)
-          .catch(reportProblems);
-      }else {
-        searchName(name, index, platform)
-          .then(parallelLoad)
-          .catch(reportProblems);
-      }
+      useMember(name, index)
+        .then(parallelLoad)
+        .catch(reportProblems);
     };
 
-    $scope.searchPlayerbyName = function (name, platform) {
-      if (!angular.isUndefined(name)) {
-        var platformValue = 1;
-        if (platform) {
-          platformValue = 2;
-        }
-        localStorageService.set('platform', platformValue);
-        $location.path('/' + (platform ? 'ps' : 'xbox') + '/' + name, false);
+    if (angular.isObject(fireTeam)){
+      $scope.fireteam = [fireTeam];
+      searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType);
+    }
 
-        searchFireteam($scope, name, 0, currentAccount, trialsStats, inventoryStats, $q, $log, true, platformValue);
-      }
-    };
-
-    $scope.getPlayerbyName = function (name, index) {
-      if (!angular.isUndefined(name)) {
-        sendAnalytic('searchedIndividual', 'name', name);
-        searchFireteam($scope, name, index, currentAccount, trialsStats, inventoryStats, $q, $log, false, $scope.platform);
-      }
+    $scope.searchPlayerbyName = function (name, platform, index) {
+      getAccountByName(name, (platform ? 2 : 1), $scope, index);
+      sendAnalytic('loadedPlayer', 'name', name);
+      sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
+      $location.path('/' + (platform ? 'ps' : 'xbox') + '/' + name, false);
+      setPlatform($scope, platform);
     };
 
     $scope.refreshInventory = function () {
       angular.forEach($scope.fireteam, function (player, index) {
         inventoryStats.getInventory($scope, player.membershipType, player.membershipId,
-          player.characterId, index, $q, $log)
+          player.characterId, index, $q)
       });
     };
 
-    $scope.getRecentPlayer = function (player, index) {
-      $scope.platform = player.membershipType;
-      $scope.platformValue = ($scope.platform === 2);
-      localStorageService.set('platform', $scope.platformValue);
-      searchFireteam($scope, player, index, currentAccount, trialsStats, inventoryStats, $q, $log, false, player.membershipType);
+    $scope.setRecentPlayer = function (player, index) {
+      setPlatform($scope, player.membershipType === 2);
+      searchFireteam($scope, player, index, player.membershipType);
     };
 
     function getPlayersFromGame($scope, activity) {
@@ -186,7 +183,7 @@ angular.module('trialsReportApp')
       });
     }
 
-    var getActivitiesFromChar = function ($scope, account, character, currentAccount, trialsStats, inventoryStats, $q, $log) {
+    var getActivitiesFromChar = function ($scope, account, character) {
 
       var setRecentActivities = function (account, character) {
           return currentAccount.getLastTwentyOne(account, character)
@@ -204,7 +201,7 @@ angular.module('trialsReportApp')
         },
 
         reportProblems = function (fault) {
-          $log.error(String(fault));
+          //$log.error(String(fault));
         };
 
       setRecentActivities(account, character)
@@ -215,12 +212,8 @@ angular.module('trialsReportApp')
     $scope.suggestRecentPlayers = function () {
       $scope.recentPlayers = {};
       angular.forEach($scope.fireteam[0].allCharacters, function (character) {
-        getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount, trialsStats, inventoryStats, $q, $log);
+        getActivitiesFromChar($scope, $scope.fireteam[0], character);
       });
-    };
-
-    $scope.copiedMessage = function () {
-      toastr.success("", 'Permalink has been copied to your clipboard');
     };
 
     var sendAnalytic = function (event, cat, label) {
@@ -229,38 +222,36 @@ angular.module('trialsReportApp')
       });
     };
 
-    if (!angular.isUndefined($routeParams.playerName)){
-      $scope.fireteam = [];
-      $scope.fireteam[0] = null;
-      if ($routeParams.platform === 'xbox') {
-        $scope.platformValue = false;
-        $scope.platform = 1;
-      }else if ($routeParams.platform ==='ps'){
-        $scope.platformValue = true;
-        $scope.platform = 2;
-      }else {
-        toastr.error("Please use 'xbox' or 'ps'", 'Unrecognised Platform');
-      }
-      $scope.searchPlayerbyName($routeParams.playerName, $scope.platformValue);
-    } else {
-      if (angular.isObject(localStorageService.get('teammate1'))) {
-        $scope.fireteam = [];
-        $scope.fireteam[0] = null;
-        $scope.getRecentPlayer(localStorageService.get('teammate1'), 0);
-        if (angular.isObject(localStorageService.get('teammate2'))) {
-          $scope.fireteam[1] = null;
-          $scope.getRecentPlayer(localStorageService.get('teammate2'), 1);
-        }
-        if (angular.isObject(localStorageService.get('teammate3'))) {
-          $scope.fireteam[2] = null;
-          $scope.getRecentPlayer(localStorageService.get('teammate3'), 2);
-        }
-      }else{
-        $scope.fireteam = [];
-        $scope.fireteam[0] = null;
-        $interval(function() {
-          $scope.helpOverlay = true;
-        },500);
-      }
-    }
+    //if (!angular.isUndefined($routeParams.playerName)){
+    //  $scope.fireteam = [];
+    //  $scope.fireteam[0] = null;
+    //  if ($routeParams.platform === 'xbox') {
+    //    setPlatform($scope, false);
+    //  }else if ($routeParams.platform ==='ps'){
+    //    setPlatform($scope, true);
+    //  }else {
+    //    toastr.error("Please use 'xbox' or 'ps'", 'Unrecognised Platform');
+    //  }
+    //  $scope.searchPlayerbyName($routeParams.playerName, $scope.platformValue);
+    //} else {
+    //  if (angular.isObject(localStorageService.get('teammate1'))) {
+    //    $scope.fireteam = [];
+    //    $scope.fireteam[0] = null;
+    //    $scope.getRecentPlayer(localStorageService.get('teammate1'), 0);
+    //    if (angular.isObject(localStorageService.get('teammate2'))) {
+    //      $scope.fireteam[1] = null;
+    //      $scope.getRecentPlayer(localStorageService.get('teammate2'), 1);
+    //    }
+    //    if (angular.isObject(localStorageService.get('teammate3'))) {
+    //      $scope.fireteam[2] = null;
+    //      $scope.getRecentPlayer(localStorageService.get('teammate3'), 2);
+    //    }
+    //  }else{
+    //    $scope.fireteam = [];
+    //    $scope.fireteam[0] = null;
+    //    $interval(function() {
+    //      $scope.helpOverlay = true;
+    //    },500);
+    //  }
+    //}
   });

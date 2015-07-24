@@ -15,7 +15,7 @@
       </div>
       <div class="row" ng-hide="$index === 0">
         <div class="col-md-12">
-          <form class="form-horizontal" role="form" ng-submit="getPlayerbyName(firstMember, ($index))">
+          <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index)">
             <div class="input-group">
               <div ng-show="recentPlayers" class="input-group-btn">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuMobile{{($index)}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -24,12 +24,12 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuMobile{{$index}}">
                   <li ng-repeat="player in recentPlayers track by $index">
-                    <a ng-click="getRecentPlayer(player, ($parent.$index))" analytics-on
+                    <a ng-click="setRecentPlayer(player, ($parent.$index))" analytics-on
                        analytics-event="Click" analytics-category="Recent From Dropdown">{{player.name}}</a>
                   </li>
                 </ul>
               </div>
-              <input type="text" class="form-control" placeholder="Search for..." ng-model="firstMember">
+              <input type="text" class="form-control" placeholder="Search for..." ng-model="teammateName">
               <span class="input-group-btn">
                 <button class="btn btn-default" type="submit">Search</button>
               </span>
