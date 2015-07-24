@@ -446,6 +446,7 @@ accordion {
 //popover
 .popover {
   border-radius: 0;
+  z-index: 10000000;
   @include box-shadow(none);
   padding: 0;
   border-color: lighten($font-color, 40%);

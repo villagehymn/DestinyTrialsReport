@@ -1,15 +1,15 @@
-<div class="row" style="margin-top:-3px">
-  <div class="col-md-12 col-sm-12 col-xs-12">
+<div class="row ml-0 mr-0" style="margin-top:-3px">
+  <div class="col-md-12 col-sm-12 col-xs-12 pl-0 pr-0" data-intro="Bar size relative to the percentage of the sum<br/><em>hover over the icons for true percentage</em>" data-position="left" data-class="green">
     <progress animate="true" class="progress-striped not-rounded m-0">
-      <bar value="player.cIntPercent" popover="Intellect: {{player.int}} ({{player.intPercent}}%)" popover-trigger="mouseenter" type="greensea">
+      <bar value="player.cIntPercent | number: 1" popover="Intellect: {{player.int}} ({{player.intPercent}}%)" popover-trigger="mouseenter" type="greensea">
         <span ng-show="player.cIntPercent >= 20">Intellect</span>
         <span ng-show="player.cIntPercent  < 20">Int</span>
       </bar>
-      <bar value="player.cDisPercent" popover="Discipline: {{player.dis}} ({{player.disPercent}}%)" popover-trigger="mouseenter">
+      <bar value="player.cDisPercent | number: 1" popover="Discipline: {{player.dis}} ({{player.disPercent}}%)" popover-trigger="mouseenter">
         <span ng-show="player.cDisPercent >= 20">Discipline</span>
         <span ng-show="player.cDisPercent  < 20">Dis</span>
       </bar>
-      <bar value="player.cStrPercent" popover="Strength: {{player.str}} ({{player.strPercent}}%)" popover-trigger="mouseenter" type="warning">
+      <bar value="player.cStrPercent | number: 1" popover="Strength: {{player.str}} ({{player.strPercent}}%)" popover-trigger="mouseenter" type="warning">
         <span ng-show="player.cStrPercent >= 20">Strength</span>
         <span ng-show="player.cStrPercent  < 20">Str</span>
       </bar>
@@ -17,8 +17,8 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-12 col-xs-12 text-center">
+<div class="row ml-0 mr-0" data-intro="Match win/loss history<br/><em>hover over the icons for details</em>" data-position="right" data-class="red">
+  <div class="col-md-12 col-xs-12 pr-0 pl-0 text-center">
     <i class="fa fa-circle mr-3 {{$index < 7 ? (player.pastActivities.length - $index ) > 18 ? 'hidden-xs' : '' : ''}}"
        ng-repeat="str in player.pastActivities track by $index"
        ng-class="str.standing === 0 ? 'win' : 'lose'"

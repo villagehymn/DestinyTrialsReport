@@ -68,6 +68,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "shared/color-schemes"; // color schemes
 @import "shared/print"; // print css
 @import "shared/animations"; // animations
+@import "chardinjs"; // animations
 
 .browsehappy {
   margin: 0.2em 0;
@@ -79,6 +80,14 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 body {
   font-size: 13px;
   padding: 0;
+}
+
+.ml-15 {
+  margin-left: 15px !important;
+}
+
+.mr-15 {
+  margin-right: 15px !important;
 }
 
 .btn.btn-icon-only {
@@ -207,7 +216,12 @@ tr.thin {
 margin-top: 20px;
 }
 
-
+@media screen and (max-width: 768px) {
+  .nav-justified > li, .nav-tabs.nav-justified > li {
+    float: left;
+    width: 33%;
+  }
+}
 //.footer {
 //  position: absolute;
 //  bottom: 0;

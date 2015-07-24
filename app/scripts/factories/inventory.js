@@ -57,6 +57,7 @@ angular.module('trialsReportApp')
               if (classItems.hasFusionGrenade && armors.hasStarfireProtocolPerk) {
                 $scope.fireteam[index].armors.hazards.push('Double Grenade');
               }
+
             })
           );
         },

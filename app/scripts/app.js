@@ -2,19 +2,14 @@
 
 angular
   .module('trialsReportApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'ui.bootstrap',
-    'angular-loading-bar',
-    'angulartics',
-    'angulartics.google.analytics',
-    'LocalStorageModule',
-    'toastr',
-    'zeroclipboard'
+    'ngAnimate', 'ngCookies',
+    'ngResource', 'ngRoute',
+    'ngSanitize', 'ngTouch',
+    'ui.bootstrap', 'angular-loading-bar',
+    'angulartics', 'angulartics.google.analytics',
+    'LocalStorageModule', 'toastr',
+    'zeroclipboard', 'angularHelpOverlay',
+    'angular.filter'
   ]).config( window.$QDecorator )
   .factory('requestUrl', function() {
     return {
@@ -54,6 +49,7 @@ angular
         redirectTo: '/'
       });
     $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
   })

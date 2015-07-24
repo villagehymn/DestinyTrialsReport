@@ -9,6 +9,9 @@
   <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
     <ng-include src="'views/fireteam/history.html'"></ng-include>
   </tab>
+  <tab heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps">
+    <ng-include src="'views/fireteam/maps.html'"></ng-include>
+  </tab>
 </tabset>
 
 <div class="row">
@@ -17,7 +20,8 @@
        href="http://destinytracker.com/destiny/trials/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
        target="_blank"
        type="button"
-       analytics-on analytics-event="Click" analytics-category="DestinyTracker">
+       analytics-on analytics-event="Click" analytics-category="DestinyTracker"
+       data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps" data-position="bottom">
        View DestinyTracker Stats
      </a>
   </div>
