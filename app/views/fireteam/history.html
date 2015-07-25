@@ -4,7 +4,7 @@
       <h5 class="custom-font filled bg-danger">Kills</h5>
     </div>
     <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0">{{player.allStats.kills.basic.displayValue}}</h4>
+      <h4 class="mt-0" ng-bind="player.allStats.kills.basic.displayValue"></h4>
     </div>
   </div>
   <div class="col-xs-3 p-0">
@@ -12,7 +12,7 @@
       <h5 class="custom-font filled bg-danger">Deaths</h5>
     </div>
     <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0">{{player.allStats.deaths.basic.displayValue}}</h4>
+      <h4 class="mt-0" ng-bind="player.allStats.deaths.basic.displayValue"></h4>
     </div>
   </div>
   <div class="col-xs-3 p-0">
@@ -20,7 +20,7 @@
       <h5 class="custom-font filled bg-danger">Assists</h5>
     </div>
     <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0">{{player.allStats.assists.basic.displayValue}}</h4>
+      <h4 class="mt-0" ng-bind="player.allStats.assists.basic.displayValue"></h4>
     </div>
   </div>
   <div class="col-xs-3 pl-0">
@@ -28,7 +28,7 @@
       <h5 class="custom-font filled bg-danger">K/D</h5>
     </div>
     <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0">{{player.allStats.killsDeathsRatio.basic.displayValue}}</h4>
+      <h4 class="mt-0" ng-bind="player.allStats.killsDeathsRatio.basic.displayValue"></h4>
     </div>
   </div>
 </div>
@@ -39,7 +39,7 @@
       <h5 class="custom-font filled bg-danger">Headshots<!-- (Sniper)--></h5>
     </div>
     <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0">{{player.allStats.precisionKills.basic.displayValue}}<!-- ({{player.allStats.weaponKillsSniper.basic.displayValue || 0}})--></h4>
+      <h4 class="mt-0" ng-bind="player.allStats.precisionKills.basic.displayValue"><!-- ({{player.allStats.weaponKillsSniper.basic.displayValue || 0}})--></h4>
     </div>
   </div>
   <div class="col-xs-4 p-0">
@@ -47,7 +47,7 @@
       <h5 class="custom-font filled bg-danger">Longest Life</h5>
     </div>
     <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0">{{player.allStats.longestSingleLife.basic.displayValue}}</h4>
+      <h4 class="mt-0" ng-bind="player.allStats.longestSingleLife.basic.displayValue"></h4>
     </div>
   </div>
   <div class="col-xs-4 pl-0">
@@ -55,23 +55,33 @@
       <h5 class="custom-font filled bg-danger">Revives</h5>
     </div>
     <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0">{{player.allStats.resurrectionsPerformed.basic.displayValue}}</h4>
+      <h4 class="mt-0" ng-bind="player.allStats.resurrectionsPerformed.basic.displayValue"></h4>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xs-6 col-md-6 {{$even ? '' : 'pl-0'}}" ng-repeat="weapon in player.playerWeapons">
-    <div class="p-0 col-xs-6 col-md-6 text-center">
+  <div class="col-xs-6 {{$even ? '' : 'pl-0'}}" ng-repeat="weapon in player.playerWeapons">
+    <div class="col-xs-6 text-center p-0">
       <a class="icon icon-default"
-         popover="{{DestinyWeaponDefinition[weapon.referenceId].name}}" popover-trigger="mouseenter">
+         popover="{{DestinyWeaponDefinition[weapon.referenceId].name}}"
+         popover-trigger="mouseenter">
         <img class="img-responsive" ng-src="{{DestinyWeaponDefinition[weapon.referenceId].icon || ''}}">
       </a>
     </div>
-    <div class="p-0 col-xs-6 col-md-6 text-center">
-      <p class="mt-10 mb-0 text-left text-sm"><strong>Kills:</strong> {{weapon.values.uniqueWeaponKills.basic.value}}</p>
-      <p class="m-0 text-left text-sm"><strong>Headshots:</strong> {{weapon.values.uniqueWeaponPrecisionKills.basic.value}}</p>
-      <p class="mt-0 mb-10 text-left text-sm"><strong>HS Acc:</strong> {{weapon.values.uniqueWeaponKillsPrecisionKills.basic.displayValue}}</p>
+    <div class="col-xs-6 text-center p-0">
+      <p class="text-left text-sm m-0 mt-10">
+        <strong>Kills:</strong>
+        <span ng-bind="weapon.values.uniqueWeaponKills.basic.value"></span>
+      </p>
+      <p class="text-left text-sm m-0">
+        <strong>Headshots:</strong>
+        <span ng-bind="weapon.values.uniqueWeaponPrecisionKills.basic.value"></span>
+      </p>
+      <p class="text-left text-sm m-0 mb-10">
+        <strong>HS Acc:</strong>
+        <span ng-bind="weapon.values.uniqueWeaponKillsPrecisionKills.basic.displayValue"></span>
+      </p>
     </div>
   </div>
 </div>
