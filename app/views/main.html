@@ -2,21 +2,29 @@
 
 <div class="container" ng-hide="status">
   <div class="row">
-    <div class="col-md-4 col-xs-12" ng-if="fireteam[0].name" ng-repeat="player in fireteam track by $index">
+    <div class="col-xs-12 col-md-4" ng-if="fireteam[0].name" ng-repeat="player in fireteam track by $index">
       <div class="row ml-0 mr-0" ng-show="$index === 0">
         <div class="btn-group btn-group-justified">
           <div class="btn-group">
-            <button class="btn btn-success" type="button" ng-click="refreshInventory()"
-                    analytics-on analytics-event="Click" analytics-category="Refresh Inventory">Refresh Inventory</button>
+            <button class="btn btn-success" type="button"
+                    ng-click="refreshInventory()"
+                    analytics-on analytics-event="Click"
+                    analytics-category="Refresh Inventory">
+                    Refresh Inventory
+            </button>
           </div>
           <div class="btn-group">
-            <button class="btn btn-default" type="button" ng-click="suggestRecentPlayers()"
-                    analytics-on analytics-event="Click" analytics-category="Suggest Recent Players">Suggest Recent<span class="hidden-xs"> Players</span></button>
+            <button class="btn btn-default" type="button"
+                    ng-click="suggestRecentPlayers()"
+                    analytics-on analytics-event="Click"
+                    analytics-category="Suggest Recent Players">
+                    Suggest Recent<span class="hidden-md"> Players</span>
+            </button>
           </div>
         </div>
       </div>
       <div class="row" ng-hide="$index === 0">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index)">
             <div class="input-group">
               <div ng-show="recentPlayers" class="input-group-btn">
@@ -42,11 +50,14 @@
       </div>
 
       <div class="row" style="height:18px">
-        <div class="col-md-12 col-sm-12">
+        <div class="col-xs-12">
           <span class="label bg-danger"
                 style="margin-right:2px"
                 ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index"
-                ng-bind="hazard">
+                ng-bind="hazard"
+                popover="{{DestinyHazardDefinition[hazard]}}"
+                popover-trigger="mouseenter"
+                popover-placement="top">
           </span>
         </div>
       </div>
@@ -58,18 +69,26 @@
       </section>
     </div>
 
-    <div ng-if="!fireteam[0].name" help-overlay="helpOverlay" class="col-md-4 col-md-offset-4 col-xs-12" ng-repeat="player in [dummyFireteam] track by $index">
+    <div ng-if="!fireteam[0].name" help-overlay="helpOverlay" class="col-xs-12 col-md-4 col-md-offset-4 hidden-xs hidden-sm" ng-repeat="player in [dummyFireteam] track by $index">
       <div class="row">
-        <div ng-show="$index === 0" class="col-md-12"
+        <div ng-show="$index === 0" class="col-xs-12"
              popover="This button populates suggested fireteam members based on past trials history. Best for use in case our generated fireteam doesnt
-             match up with the game,there is no way to look at current fireteams so we are pulling data from the previous played game." popover-placement="bottom">
+             match up with the game, there is no way to look at current fireteams so we are pulling data from the previous played game."
+             popover-placement="bottom">
           <button class="btn btn-block btn-default" type="button">Suggest Recent Players</button>
         </div>
       </div>
 
       <div class="row" style="height:18px">
-        <div class="col-md-12 col-sm-12 p-0 ml-15" data-intro="Useful hazards about the player" data-position="left" data-class="red">
-          <span class="label bg-danger" style="margin-right:2px" ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index">{{hazard}}</span>
+        <div class="col-xs-12 p-0 ml-15" data-intro="Useful hazards about the player" data-position="left" data-class="red">
+          <span class="label bg-danger"
+                style="margin-right:2px"
+                ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index"
+                ng-bind="hazard"
+                popover="{{DestinyHazardDefinition[hazard]}}"
+                popover-trigger="mouseenter"
+                popover-placement="top">
+          </span>
         </div>
       </div>
 
