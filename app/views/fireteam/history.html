@@ -89,9 +89,10 @@
 <div class="row">
   <div class="col-xs-4 col-md-3 text-center" style="height:120px" ng-repeat="medal in player.medals">
     <a class="icon"
-       popover="{{DestinyMedalDefinition[medal.id].statDescription}}" popover-trigger="mouseenter">
+       popover="{{DestinyMedalDefinition[medal.id].statDescription}}"
+       popover-trigger="mouseenter">
       <img class="img-responsive" ng-src="{{('http://www.bungie.net' + DestinyMedalDefinition[medal.id].iconImage) || ''}}">
     </a>
-    <p class="text-sm">{{DestinyMedalDefinition[medal.id].statName}}</p>
+    <p class="text-sm" ng-bind="DestinyMedalDefinition[medal.id].statName"></p>
   </div>
 </div>
