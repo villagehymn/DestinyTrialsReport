@@ -13,7 +13,8 @@ angular.module('trialsReportApp')
       "Revive Kill Sniper": "This Guardian can one hit kill a revived Guardian with equipped sniper rifle.",
       "Quick Revive": "This Guardian can revive allies and be revived very quickly.",
       "Grenade on Spawn": "This Guardian will have a grenade every round.",
-      "Final Round Sniper": "This Guardian has a sniper rifle that can one hit kill a Guardian with a body shot."
+      "Final Round Sniper": "This Guardian has a sniper rifle that can one hit kill a Guardian with a body shot.",
+      "Blink Shotgun": "This Guardian is using Blink and has a shotgun equipped. Be careful!"
     };
     $scope.dummyFireteam = dummyFireteam;
     $scope.headerPartial = "views/shared/header.html?cache-bust=" + cacheBustSuffix;
