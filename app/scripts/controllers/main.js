@@ -19,7 +19,7 @@ angular.module('trialsReportApp')
     $scope.dummyFireteam = dummyFireteam;
     $scope.headerPartial = "views/shared/header.html?cache-bust=" + cacheBustSuffix;
     $scope.playerPartial = "views/fireteam/player.html?cache-bust=" + cacheBustSuffix;
-    $scope.statsPartial = "views/fireteam/stats.html?cache-bust=" + cacheBustSuffix;
+    $scope.statPartial = "views/fireteam/stats.html?cache-bust=" + cacheBustSuffix;
     $scope.infoPartial = "views/fireteam/info.html?cache-bust=" + cacheBustSuffix;
 
     function setPlatform($scope, platformValue) {
