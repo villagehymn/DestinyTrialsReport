@@ -191,10 +191,6 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
-      ngtemplates: {
-        files: ['<%= yeoman.app %>/**/*.html'],
-        tasks: ['ngtemplates']
-      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -512,8 +508,9 @@ module.exports = function (grunt) {
       trialsReportApp: {
         cwd: '<%= yeoman.app %>',
         src: 'views/{,*/}*.html',
-        dest: '<%= yeoman.app %>/scripts/templates.js',
+        dest: '.tmp/templates.js',
         options: {
+          usemin: 'scripts/scripts.js',
           htmlmin: '<%= htmlmin.dist %>'
         }
       }
@@ -659,7 +656,6 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
-      'ngtemplates',
       'connect:livereload',
       'watch'
     ]);
