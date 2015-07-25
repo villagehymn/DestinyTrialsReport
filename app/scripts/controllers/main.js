@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, localStorageService, $analytics, toastr, $interval, $location, cacheBustSuffix) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, localStorageService, $analytics, toastr, $interval, $location) {
     $scope.status = null;
     $scope.helpOverlay = false;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
@@ -17,10 +17,10 @@ angular.module('trialsReportApp')
       "Blink Shotgun": "This Guardian is using Blink and has a shotgun equipped. Be careful!"
     };
     $scope.dummyFireteam = dummyFireteam;
-    $scope.headerPartial = "views/shared/header.html?cache-bust=" + cacheBustSuffix;
-    $scope.playerPartial = "views/fireteam/player.html?cache-bust=" + cacheBustSuffix;
-    $scope.statPartial = "views/fireteam/stats.html?cache-bust=" + cacheBustSuffix;
-    $scope.infoPartial = "views/fireteam/info.html?cache-bust=" + cacheBustSuffix;
+    $scope.headerPartial = 'views/shared/header.html';
+    $scope.playerPartial = 'views/fireteam/player.html';
+    $scope.statPartial = 'views/fireteam/stats.html';
+    $scope.infoPartial = 'views/fireteam/info.html';
 
     function setPlatform($scope, platformValue) {
       $scope.platformValue = platformValue;
