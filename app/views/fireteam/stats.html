@@ -2,16 +2,19 @@
   <div class="col-md-12 col-sm-12 col-xs-12 pl-0 pr-0" data-intro="Bar size relative to the percentage of the sum<br/><em>hover over the icons for true percentage</em>" data-position="left" data-class="green">
     <progress animate="true" class="progress-striped not-rounded m-0">
       <bar value="player.cIntPercent | number: 1" popover="Intellect: {{player.int}} ({{player.intPercent}}%)" popover-trigger="mouseenter" type="greensea">
-        <span ng-show="player.cIntPercent >= 20">Intellect</span>
-        <span ng-show="player.cIntPercent  < 20">Int</span>
+        <span ng-show="player.cIntPercent >= 27">Intellect {{player.intPercent}}%</span>
+        <span ng-show="player.cIntPercent <  27 && player.cIntPercent >= 16">Int {{player.intPercent}}%</span>
+        <span ng-show="player.cIntPercent <  16">Int</span>
       </bar>
       <bar value="player.cDisPercent | number: 1" popover="Discipline: {{player.dis}} ({{player.disPercent}}%)" popover-trigger="mouseenter">
-        <span ng-show="player.cDisPercent >= 20">Discipline</span>
-        <span ng-show="player.cDisPercent  < 20">Dis</span>
+        <span ng-show="player.cDisPercent >= 27">Discipline {{player.disPercent}}%</span>
+        <span ng-show="player.cDisPercent <  27 && player.cDisPercent >= 16">Dis {{player.disPercent}}%</span>
+        <span ng-show="player.cDisPercent <  16">Dis</span>
       </bar>
       <bar value="player.cStrPercent | number: 1" popover="Strength: {{player.str}} ({{player.strPercent}}%)" popover-trigger="mouseenter" type="warning">
-        <span ng-show="player.cStrPercent >= 20">Strength</span>
-        <span ng-show="player.cStrPercent  < 20">Str</span>
+        <span ng-show="player.cStrPercent >= 27">Strength {{player.strPercent}}%</span>
+        <span ng-show="player.cStrPercent <  27 && player.cStrPercent >= 16">Str {{player.strPercent}}%</span>
+        <span ng-show="player.cStrPercent <  16">Str</span>
       </bar>
     </progress>
   </div>
