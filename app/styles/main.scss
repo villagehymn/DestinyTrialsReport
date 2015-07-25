@@ -216,6 +216,12 @@ tr.thin {
 margin-top: 20px;
 }
 
+.win-loss {
+  .popover {
+    min-width: 100px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .nav-justified > li, .nav-tabs.nav-justified > li {
     float: left;
