@@ -118,6 +118,8 @@ angular.module('trialsReportApp')
               if (angular.isDefined($scope.fireteam[0].teamFromParams)&&
                   angular.isUndefined($scope.fireteam[1])){
                 getAccountByName($scope.fireteam[0].teamFromParams[0], platform ? 2 : 1, $scope, 1, true);
+              }else if (angular.isDefined($scope.fireteam[0].teamFromParams)&&
+                angular.isUndefined($scope.fireteam[2])) {
                 getAccountByName($scope.fireteam[0].teamFromParams[1], platform ? 2 : 1, $scope, 2, true);
               }
               if (angular.isDefined($scope.fireteam[0]) &&
