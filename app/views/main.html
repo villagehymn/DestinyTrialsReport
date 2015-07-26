@@ -2,6 +2,16 @@
 
 <div class="container" ng-hide="status">
   <div class="row">
+    <div ng-if="fireteam[0].isDeej" id="alertsPlaceholder">
+      <alert type="warning" close="closeAlert($index)" class="closeable text-center">
+        <i class="fa fa-warning"></i><br/>
+        Sorry about any issues in the past hour, we've been trying to push an update with new features and fixes and ran into...complications.
+        <br/>
+        Everything should be good now but if you're still having issues try refreshing the browser with cmd+shift+r or open the site in incognito mode.
+        <br/>
+        If you encounter a bug please let us know on our github or message me on reddit, username: FartSausage
+      </alert>
+    </div>
     <div help-overlay="helpOverlay" class="col-xs-12 col-md-4 {{player.isDeej ? 'col-md-offset-4' : ''}}" ng-if="fireteam[0].name" ng-repeat="player in fireteam track by $index">
       <div class="row ml-0 mr-0" ng-show="$index === 0">
         <div class="btn-group btn-group-justified">
