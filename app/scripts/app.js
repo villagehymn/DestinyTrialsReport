@@ -68,14 +68,14 @@ angular
     $compileProvider.debugInfoEnabled(false);
   });
 
-function getFromParams(currentAccount, $route, localStorageService) {
+function getFromParams(currentAccount, $route) {
   if (angular.isDefined($route.current.params.playerName)){
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
     return setUser(currentAccount, $route.current.params.playerName, platform);
   }
 }
 
-function getAllFromParams(currentAccount, $route, $q) {
+function getAllFromParams(currentAccount, $route) {
   if (angular.isDefined($route.current.params.playerOne)){
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
     return currentAccount.getAccount($route.current.params.playerOne, platform)

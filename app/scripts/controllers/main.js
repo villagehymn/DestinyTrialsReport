@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $interval, $location) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location) {
     $scope.status = null;
     $scope.helpOverlay = false;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
@@ -57,7 +57,7 @@ angular.module('trialsReportApp')
       return currentAccount.getAccount(name, platform)
         .then(function (player) {
           //if (!angular.isObject(player)) {
-          //  $interval(function () {
+          //  $timeout(function () {
           //    $scope.helpOverlay = true;
           //  }, 1000);
           //}
@@ -146,7 +146,7 @@ angular.module('trialsReportApp')
       $scope.fireteam.isDeej = true;
       $scope.platformValue = true;
       searchFireteam($scope, $scope.fireteam[0], 0, 1, false);
-      $interval(function () {
+      $timeout(function () {
         $scope.helpOverlay = true;
       }, 1000);
     }else if (angular.isObject(fireTeam)){
@@ -155,13 +155,16 @@ angular.module('trialsReportApp')
       $scope.platformValue = platform;
       searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
     }else {
-      //$interval(function () {
+      //$timeout(function () {
       //  $scope.helpOverlay = true;
       //}, 1000);
     }
 
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
       $scope.helpOverlay = false;
+      if (angular.isDefined($scope.fireteam[0].isDeej)){
+        $scope.fireteam[0].isDeej = null;
+      }
       getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
       sendAnalytic('loadedPlayer', 'name', name);
       sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));

@@ -46,9 +46,6 @@ angular.module('angularHelpOverlay', []).directive('helpOverlay', ['$document', 
           } else if (newValue === false) {
             element.chardinJs('stop');
           }
-        }else if (newValue === true) {
-          $timeout(element.chardinJs('start'), 50000);
-          console.log(element);
         }
       });
     }
