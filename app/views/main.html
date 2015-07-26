@@ -11,7 +11,7 @@
         <!--If you encounter a bug please let us know on our github or message me on reddit, username: FartSausage-->
       <!--</alert>-->
     <!--</div>-->
-    <div help-overlay="helpOverlay" class="col-xs-12 col-md-4 {{player.isDeej ? 'col-md-offset-4' : ''}}" ng-if="fireteam[0].name" ng-repeat="player in fireteam track by $index">
+    <div help-overlay="helpOverlay" class="col-xs-12 col-md-4 {{player.isDeej ? 'col-md-offset-4' : ''}}" ng-if="fireteam[0].name && $index < 3" ng-repeat="player in fireteam track by $index">
       <div class="row ml-0 mr-0" ng-show="$index === 0">
         <div class="btn-group btn-group-justified">
           <div class="btn-group">
@@ -24,8 +24,8 @@
                     Refresh Inventory
             </button>
           </div>
-          <div class="input-group-btn" style="width: 100%;" ng-show="player.otherCharacters.length > 1">
-            <button class="btn btn-default dropdown-toggle" type="button" id="characterSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <div class="input-group-btn" ng-show="player.otherCharacters.length > 1">
+            <button class="btn btn-default dropdown-toggle" style="width: 100%;" type="button" id="characterSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               {{player.otherCharacters[0].className}}
               <span class="caret"></span>
             </button>
