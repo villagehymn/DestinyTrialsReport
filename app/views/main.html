@@ -11,7 +11,7 @@
         <!--If you encounter a bug please let us know on our github or message me on reddit, username: FartSausage-->
       <!--</alert>-->
     <!--</div>-->
-    <div help-overlay="helpOverlay" class="col-xs-12 col-md-4 {{player.isDeej ? 'col-md-offset-4' : ''}}" ng-if="fireteam[0].name" ng-repeat="player in fireteam track by $index">
+    <div help-overlay="helpOverlay" class="col-xs-12 col-md-4 {{player.isDeej ? 'col-md-offset-4' : ''}}" ng-if="fireteam[0].name && $index < 3" ng-repeat="player in fireteam track by $index">
       <div class="row ml-0 mr-0" ng-show="$index === 0">
         <div class="btn-group btn-group-justified">
           <div class="btn-group">
@@ -24,29 +24,50 @@
                     Refresh Inventory
             </button>
           </div>
-          <div class="btn-group">
-            <button ng-hide="player.isDeej" class="btn btn-default" type="button"
-                    ng-click="suggestRecentPlayers()"
-                    analytics-on analytics-event="Click"
-                    analytics-category="Suggest Recent Players">
-                    Suggest <span class="hidden-xs hidden-md">Recent </span>Players
+          <div class="input-group-btn" ng-show="player.otherCharacters.length > 1">
+            <button class="btn btn-default dropdown-toggle" style="width: 100%;" type="button" id="characterSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              {{player.otherCharacters[0].className}}
+              <span class="caret"></span>
             </button>
-            <button ng-show="player.isDeej" class="btn btn-default" type="button"
-                    popover="This button populates suggested fireteam members based on past trials history. Best for use in case our generated fireteam doesnt
-                             match up with the game, there is no way to look at current fireteams so we are pulling data from the previous played game."
-                    popover-placement="bottom"
-                    analytics-on analytics-event="Click"
-                    analytics-category="(Tutorial) Suggest Recent">
-                    Suggest <span class="hidden-xs hidden-md">Recent </span>Players
-            </button>
-
+            <ul class="dropdown-menu" style="width: 100%;" aria-labelledby="characterSelect">
+              <li ng-repeat="character in player.otherCharacters" ng-if="player.otherCharacters[0].characterId !== character.characterId">
+                <a ng-bind="character.className" ng-click="setRecentPlayer(character, 0, true)"
+                   analytics-on analytics-event="Click" analytics-category="Character Change">
+                </a>
+              </li>
+            </ul>
           </div>
+          <!--<div class="btn-group">-->
+            <!--<button ng-hide="player.isDeej" class="btn btn-default" type="button"-->
+                    <!--ng-click="suggestRecentPlayers()"-->
+                    <!--analytics-on analytics-event="Click"-->
+                    <!--analytics-category="Suggest Recent Players">-->
+                    <!--Suggest <span class="hidden-xs hidden-md">Recent </span>Players-->
+            <!--</button>-->
+            <!--<button ng-show="player.isDeej" class="btn btn-default" type="button"-->
+                    <!--popover="This button populates suggested fireteam members based on past trials history. Best for use in case our generated fireteam doesnt-->
+                             <!--match up with the game, there is no way to look at current fireteams so we are pulling data from the previous played game."-->
+                    <!--popover-placement="bottom"-->
+                    <!--analytics-on analytics-event="Click"-->
+                    <!--analytics-category="(Tutorial) Suggest Recent">-->
+                    <!--Suggest <span class="hidden-xs hidden-md">Recent </span>Players-->
+            <!--</button>-->
+
+          <!--</div>-->
         </div>
       </div>
       <div class="row" ng-hide="$index === 0">
         <div class="col-xs-12">
           <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, true)">
             <div class="input-group">
+              <div ng-hide="recentPlayers" class="input-group-btn">
+                <button ng-hide="recentPlayers" class="btn btn-default" type="button"
+                        ng-click="suggestRecentPlayers()"
+                        analytics-on analytics-event="Click"
+                        analytics-category="Suggest Recent Players">
+                  Suggest Other
+                </button>
+              </div>
               <div ng-show="recentPlayers" class="input-group-btn">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuMobile{{($index)}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   Recent Players

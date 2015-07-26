@@ -181,9 +181,9 @@ angular.module('trialsReportApp')
       });
     };
 
-    $scope.setRecentPlayer = function (player, index) {
+    $scope.setRecentPlayer = function (player, index, includeFireteam) {
       setPlatform($scope, player.membershipType === 2);
-      searchFireteam($scope, player, index, player.membershipType);
+      searchFireteam($scope, player, index, player.membershipType, includeFireteam);
     };
 
     function getPlayersFromGame($scope, activity) {
@@ -259,7 +259,7 @@ angular.module('trialsReportApp')
 
     $scope.suggestRecentPlayers = function () {
       $scope.recentPlayers = {};
-      angular.forEach($scope.fireteam[0].allCharacters, function (character) {
+      angular.forEach($scope.fireteam[0].otherCharacters, function (character) {
         getActivitiesFromChar($scope, $scope.fireteam[0], character);
       });
     };
