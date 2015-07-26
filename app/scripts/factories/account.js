@@ -202,7 +202,7 @@ angular.module('trialsReportApp')
                 characterId: member.characterId,
                 medals: medals,
                 allStats: allStats,
-                prevousWeapons: member.extended.weapons,
+                playerWeapons: member.extended.weapons,
                 level: player.characterLevel,
                 class: player.characterClass
               });

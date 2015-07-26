@@ -2,15 +2,15 @@
 
 <div class="container" ng-hide="status">
   <div class="row">
-    <div ng-if="fireteam[0].isDeej" id="alertsPlaceholder">
-      <alert type="warning" class="notcloseable text-center">
-        Sorry about any issues recently, everything should be in order now.
-        <br/>
-        If you're still having issues try refreshing the browser with cmd+shift+r or open the site in incognito mode
-        <br/>
-        If you encounter a bug please let us know on our github or message me on reddit, username: FartSausage
-      </alert>
-    </div>
+    <!--<div ng-if="fireteam[0].isDeej" id="alertsPlaceholder">-->
+      <!--<alert type="warning" class="notcloseable text-center">-->
+        <!--Sorry about any issues recently, everything should be in order now.-->
+        <!--<br/>-->
+        <!--If you're still having issues try refreshing the browser with cmd+shift+r or open the site in incognito mode-->
+        <!--<br/>-->
+        <!--If you encounter a bug please let us know on our github or message me on reddit, username: FartSausage-->
+      <!--</alert>-->
+    <!--</div>-->
     <div help-overlay="helpOverlay" class="col-xs-12 col-md-4 {{player.isDeej ? 'col-md-offset-4' : ''}}" ng-if="fireteam[0].name" ng-repeat="player in fireteam track by $index">
       <div class="row ml-0 mr-0" ng-show="$index === 0">
         <div class="btn-group btn-group-justified">
