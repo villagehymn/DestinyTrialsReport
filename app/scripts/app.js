@@ -35,7 +35,7 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam:getFromLocalStorage
+          fireTeam:getDeej
         }
       })
       .when('/:platform/:playerName', {
@@ -52,11 +52,18 @@ angular
           //}
         }
       })
+      .when('/:platform/:playerOne/:playerTwo/:playerThree', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        resolve: {
+          fireTeam:getAllFromParams
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
     $locationProvider.html5Mode(true);
-    $locationProvider.hashPrefix('!');
+    //$locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
   });
@@ -64,8 +71,18 @@ angular
 function getFromParams(currentAccount, $route, localStorageService) {
   if (angular.isDefined($route.current.params.playerName)){
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
-    localStorageService.set('platform', platform);
     return setUser(currentAccount, $route.current.params.playerName, platform);
+  }
+}
+
+function getAllFromParams(currentAccount, $route, $q) {
+  if (angular.isDefined($route.current.params.playerOne)){
+    var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
+    return currentAccount.getAccount($route.current.params.playerOne, platform)
+      .then(function (player) {
+        player.teamFromParams = [$route.current.params.playerTwo, $route.current.params.playerThree];
+        return player;
+      });
   }
 }
 
@@ -81,13 +98,11 @@ function setUser(currentAccount, name, platform) {
     });
 }
 
-function getFromLocalStorage(localStorageService) {
-  if (angular.isObject(localStorageService.get('teammate1'))){
-    var player = localStorageService.get('teammate1');
-    var platform = player.membershipType === 2;
-    localStorageService.set('platform', platform);
-    //return setUser(currentAccount, player.name, player.membershipType);
-    return player;
-  }
+function getDeej(currentAccount) {
+  return currentAccount.getAccount("Deej BNG", 1)
+    .then(function (player) {
+      player.isDeej = true;
+      return player;
+    });
 }
 
