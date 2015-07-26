@@ -32,18 +32,43 @@ angular.module('trialsReportApp')
           var dis = stats.STAT_DISCIPLINE.value;
           var str = stats.STAT_STRENGTH.value;
           var allCharacters = resultChar.data.Response.data.characters;
+          var otherCharacters = [];
           var characterId = resultChar.data.Response.data.characters[0].characterBase.characterId;
+          var classType = resultChar.data.Response.data.characters[0].characterBase.classType;
+          var className = classType === 0 ? 'Titan' : (classType === 2 ? 'Warlock' : 'Hunter');
           var level = resultChar.data.Response.data.characters[0].characterLevel;
           var grimoire = resultChar.data.Response.data.characters[0].characterBase.grimoireScore;
           var background = ['http://bungie.net' + resultChar.data.Response.data.characters[0].backgroundPath];
           var emblem = 'http://bungie.net' + resultChar.data.Response.data.characters[0].emblemPath;
+          angular.forEach(allCharacters,function(character){
+            otherCharacters.push({
+              id: membershipId,
+              name: name,
+              classType: character.characterBase.classType,
+              className: character.characterBase.classType === 0 ? 'Titan' : (character.characterBase.classType === 2 ? 'Warlock' : 'Hunter'),
+              membershipId: membershipId,
+              membershipType: membershipType,
+              characterId: character.characterBase.characterId,
+              level: character.characterLevel,
+              int: character.characterBase.stats.STAT_INTELLECT.value,
+              dis: character.characterBase.stats.STAT_DISCIPLINE.value,
+              str: character.characterBase.stats.STAT_STRENGTH.value,
+              grimoire: character.characterBase.grimoireScore,
+              background: ['http://bungie.net' + character.backgroundPath],
+              emblem: 'http://bungie.net' + character.emblemPath})
+          });
+          angular.forEach(otherCharacters,function(character){
+              character.otherCharacters = otherCharacters;
+          });
           return {
             id: membershipId,
             name: name,
             membershipId: membershipId,
             membershipType: membershipType,
             characterId: characterId,
-            allCharacters: allCharacters,
+            className: className,
+            classType: classType,
+            otherCharacters: otherCharacters,
             level: level,
             int: int,
             dis: dis,
@@ -115,7 +140,7 @@ angular.module('trialsReportApp')
 
     var getLastTwentyOne = function(account, character) {
       var allPastActivities = [];
-      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + character.characterBase.characterId  + '/?mode=14&count=21'}).then(function(resultAct){
+      return $http({method:'GET', url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + character.characterId  + '/?mode=14&count=21'}).then(function(resultAct){
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
           return;
