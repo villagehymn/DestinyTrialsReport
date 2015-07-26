@@ -101,6 +101,9 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, 'app.get("/:platform/:playerName", function(req, res){\n');
                     fs.writeSync(fd, '  res.sendfile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '});\n');
+                    fs.writeSync(fd, 'app.get("/:platform/:playerOne/:playerTwo/:playerThree", function(req, res){\n');
+                    fs.writeSync(fd, '  res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '});\n');
                     fs.writeSync(fd, 'app.get("/bungie/*?", function(req, res){\n');
                     fs.writeSync(fd, '  res.setTimeout(25000);\n');
                     fs.writeSync(fd, '  var api_key = process.env.BUNGIE_API;\n');
