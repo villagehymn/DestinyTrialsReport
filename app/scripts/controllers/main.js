@@ -117,10 +117,10 @@ angular.module('trialsReportApp')
 
               if (angular.isDefined($scope.fireteam[0].teamFromParams)&&
                   angular.isUndefined($scope.fireteam[1])){
-                getAccountByName($scope.fireteam[0].teamFromParams[0], platform ? 2 : 1, $scope, 1, true);
+                getAccountByName(decodeURIComponent($scope.fireteam[0].teamFromParams[0]), $scope.fireteam[0].membershipType, $scope, 1, true);
               }else if (angular.isDefined($scope.fireteam[0].teamFromParams)&&
                 angular.isUndefined($scope.fireteam[2])) {
-                getAccountByName($scope.fireteam[0].teamFromParams[1], platform ? 2 : 1, $scope, 2, true);
+                getAccountByName(decodeURIComponent($scope.fireteam[0].teamFromParams[1]), $scope.fireteam[0].membershipType, $scope, 2, true);
               }
               if (angular.isDefined($scope.fireteam[0]) &&
                   angular.isDefined($scope.fireteam[1]) &&
@@ -162,9 +162,11 @@ angular.module('trialsReportApp')
 
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
       $scope.helpOverlay = false;
-      if (angular.isDefined($scope.fireteam[0].isDeej)){
-        $scope.fireteam[0].isDeej = null;
-        $scope.fireteam[0] = null;
+      if (angular.isDefined($scope.fireteam[0])){
+        if (angular.isDefined($scope.fireteam[0].isDeej)){
+          $scope.fireteam[0].isDeej = null;
+          $scope.fireteam[0] = null;
+        }
       }
       getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
       sendAnalytic('loadedPlayer', 'name', name);
