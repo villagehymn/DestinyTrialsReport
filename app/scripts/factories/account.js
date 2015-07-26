@@ -26,22 +26,17 @@ angular.module('trialsReportApp')
         var name = resultAcc.data.Response[0].displayName;
         var membershipType = resultAcc.data.Response[0].membershipType;
         var membershipId = resultAcc.data.Response[0].membershipId;
-        return $http({method:'GET', url: path + 'Destiny/' + membershipType +'/Account/' + membershipId + '/?definitions=true'}).then(function(resultChar){
+        return $http({method:'GET', url: path + 'Destiny/' + membershipType +'/Account/' + membershipId + '/'}).then(function(resultChar){
           var stats = resultChar.data.Response.data.characters[0].characterBase.stats;
           var int = stats.STAT_INTELLECT.value;
           var dis = stats.STAT_DISCIPLINE.value;
           var str = stats.STAT_STRENGTH.value;
-          var allItems = resultChar.data.Response.definitions.items;
-          var allPerks = resultChar.data.Response.definitions.perks;
           var allCharacters = resultChar.data.Response.data.characters;
           var characterId = resultChar.data.Response.data.characters[0].characterBase.characterId;
-          //var equipment = resultChar.data.Response.data.characters[0].characterBase.peerView.equipment;
           var level = resultChar.data.Response.data.characters[0].characterLevel;
           var grimoire = resultChar.data.Response.data.characters[0].characterBase.grimoireScore;
           var background = ['http://bungie.net' + resultChar.data.Response.data.characters[0].backgroundPath];
           var emblem = 'http://bungie.net' + resultChar.data.Response.data.characters[0].emblemPath;
-          var armors = [];
-          var subClass = [];
           return {
             id: membershipId,
             name: name,
@@ -55,9 +50,7 @@ angular.module('trialsReportApp')
             str: str,
             grimoire: grimoire,
             background: background,
-            emblem: emblem,
-            items: allItems,
-            perks: allPerks
+            emblem: emblem
           };
         });
       }).catch(function(e, r){
