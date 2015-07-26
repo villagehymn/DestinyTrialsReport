@@ -139,7 +139,6 @@ angular.module('trialsReportApp')
 
 
     var getMatchSummary = function(recentActivity, name, includeTeam) {
-      console.log(name);
       return $http({method:'GET', url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'}).then(function(resultPostAct) {
         var fireTeam = [];
         var fireteamIndex = [];

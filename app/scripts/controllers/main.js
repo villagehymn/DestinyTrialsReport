@@ -56,11 +56,11 @@ angular.module('trialsReportApp')
       if (angular.isUndefined(name)){return}
       return currentAccount.getAccount(name, platform)
         .then(function (player) {
-          if (!angular.isObject(player)) {
-            $interval(function () {
-              $scope.helpOverlay = true;
-            }, 1000);
-          }
+          //if (!angular.isObject(player)) {
+          //  $interval(function () {
+          //    $scope.helpOverlay = true;
+          //  }, 1000);
+          //}
           return player;
         }).then(function (player) {
           sendAnalytic('searchedPlayer', 'name', name);
@@ -155,12 +155,13 @@ angular.module('trialsReportApp')
       $scope.platformValue = platform;
       searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
     }else {
-      $interval(function () {
-        $scope.helpOverlay = true;
-      }, 1000);
+      //$interval(function () {
+      //  $scope.helpOverlay = true;
+      //}, 1000);
     }
 
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
+      $scope.helpOverlay = false;
       getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
       sendAnalytic('loadedPlayer', 'name', name);
       sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
