@@ -34,27 +34,40 @@ angular.module('trialsReportApp')
       setPlatform($scope, true);
     }
 
-    function getRecentFireteam($scope, result, platform) {
-      $scope.fireteam.push(result.fireTeam[0]);
-      $scope.fireteam.push(result.fireTeam[1]);
-      searchFireteam($scope, $scope.fireteam[1], 1, platform);
-      searchFireteam($scope, $scope.fireteam[2], 2, platform);
+    function setRecentFireteam($scope, result, platform, includeTeam) {
+      if (includeTeam) {
+        $scope.fireteam.push(result.fireTeam[0]);
+        $scope.fireteam.push(result.fireTeam[1]);
+        searchFireteam($scope, $scope.fireteam[1], 1, platform);
+        searchFireteam($scope, $scope.fireteam[2], 2, platform);
+      }else {
+        if (angular.isObject(localStorageService.get('teammate2'))) {
+          $scope.setRecentPlayer(localStorageService.get('teammate2'), 1);
+        }
+        if (angular.isObject(localStorageService.get('teammate3'))) {
+          $scope.setRecentPlayer(localStorageService.get('teammate3'), 2);
+        }
+      }
     }
 
-    function setPlayerStats(player, index, stats, $scope) {
+    function setPostActivityStats($scope, index, result, stats) {
+      $scope.fireteam[index].medals = result.medals;
+      $scope.fireteam[index].allStats = result.playerAllStats;
+      $scope.fireteam[index].playerWeapons = result.playerWeapons;
+      $scope.fireteam[index].stats = stats;
+    }
+
+    function setPlayerStats(player, index, stats, includeTeam, $scope) {
       currentAccount.getFireteam(player.recentActivity, player.name).then(function (result) {
-        $scope.fireteam[index].medals = result.medals;
-        $scope.fireteam[index].allStats = result.playerAllStats;
-        $scope.fireteam[index].playerWeapons = result.playerWeapons;
-        $scope.fireteam[index].stats = stats;
-        checkGrimoire($scope, $scope.fireteam[index], index);
+        $scope.fireteam[index].fireTeam = result.fireTeam;
+        setPostActivityStats($scope, index, result, stats);
         if (index === 0){
-          getRecentFireteam($scope, result, player.membershipType);
+          setRecentFireteam($scope, result, player.membershipType, includeTeam);
         }
       });
     }
 
-    function getAccountByName(name, platform, $scope, index) {
+    function getAccountByName(name, platform, $scope, index, includeFireteam) {
       if (angular.isUndefined(name)){return}
       return currentAccount.getAccount(name, platform)
         .then(function (player) {
@@ -67,7 +80,7 @@ angular.module('trialsReportApp')
         }).then(function (player) {
           sendAnalytic('searchedPlayer', 'name', name);
           sendAnalytic('searchedPlayer', 'platform', platform);
-          searchFireteam($scope, player, index, platform);
+          searchFireteam($scope, player, index, platform, includeFireteam);
         });
     }
 
@@ -80,11 +93,14 @@ angular.module('trialsReportApp')
       });
     }
 
-    var searchFireteam = function ($scope, name, index, platform) {
+    var searchFireteam = function ($scope, name, index, platform, includeFireteam) {
 
       var useMember = function (teamMember, index) {
           if (index === 0) {
             $scope.fireteam = [teamMember];
+            if (angular.isDefined(teamMember.name)){
+              $location.path('/' + (platform === 2 ? 'ps' : 'xbox') + '/' + teamMember.name, false);
+            }
           }else if (angular.isUndefined($scope.fireteam[index])){
             $scope.fireteam.push(teamMember);
           }else {
@@ -111,8 +127,10 @@ angular.module('trialsReportApp')
               } else {
                 $scope.fireteam[index] = activity;
               }
-
-              setPlayerStats(player, index, stats, $scope);
+              if (includeFireteam){
+                setPlayerStats(player, index, stats, includeFireteam, $scope);
+              }
+              checkGrimoire($scope, $scope.fireteam[index], index);
             })
           );
         },
@@ -128,18 +146,18 @@ angular.module('trialsReportApp')
 
     if (angular.isObject(fireTeam)){
       $scope.fireteam = [fireTeam];
-      searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType);
+      var platform = fireTeam.membershipType === 2;
+      searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
     }else {
       $interval(function () {
         $scope.helpOverlay = true;
       }, 1000);
     }
 
-    $scope.searchPlayerbyName = function (name, platform, index) {
-      getAccountByName(name, (platform ? 2 : 1), $scope, index);
+    $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
+      getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
       sendAnalytic('loadedPlayer', 'name', name);
       sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
-      $location.path('/' + (platform ? 'ps' : 'xbox') + '/' + name, false);
       setPlatform($scope, platform);
     };
 
