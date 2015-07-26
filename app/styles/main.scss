@@ -213,7 +213,7 @@ tr.thin {
 
 
 .footer {
-margin-top: 20px;
+  margin-top: 20px;
 }
 
 .win-loss {
@@ -228,6 +228,25 @@ margin-top: 20px;
     width: 33%;
   }
 }
+
+.card .back {
+  opacity: 0;
+}
+.card .back,
+.card .front {
+  transition: opacity 1s !important;
+  -o-transition: opacity 1s !important;
+  -ms-transition: opacity 1s !important;
+  -moz-transition: opacity 1s !important;
+  -webkit-transition: opacity 1s !important;
+}
+.card:hover .front {
+  opacity: 0;
+}
+.card:hover .back {
+  opacity: 1;
+}
+
 //.footer {
 //  position: absolute;
 //  bottom: 0;
