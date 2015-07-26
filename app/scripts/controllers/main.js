@@ -164,6 +164,7 @@ angular.module('trialsReportApp')
       $scope.helpOverlay = false;
       if (angular.isDefined($scope.fireteam[0].isDeej)){
         $scope.fireteam[0].isDeej = null;
+        $scope.fireteam[0] = null;
       }
       getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
       sendAnalytic('loadedPlayer', 'name', name);
