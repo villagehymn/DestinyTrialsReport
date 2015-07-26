@@ -142,14 +142,14 @@ angular.module('trialsReportApp')
       return $http({method:'GET', url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'}).then(function(resultPostAct) {
         var fireTeam = [];
         var fireteamIndex = [];
-        console.log(resultPostAct.data.Response.data.entries);
-        if (recentActivity.standing === 0){
-          fireteamIndex = [0,1,2];
-        }else {
-          fireteamIndex = [3,4,5];
-        }
-        angular.forEach(resultPostAct.data.Response.data.entries[idx],function(entry) {
-          if (entry.sanding === recentActivity.standing){
+        //console.log(resultPostAct.data.Response.data.entries);
+        //if (recentActivity.standing === 0){
+        //  fireteamIndex = [0,1,2];
+        //}else {
+        //  fireteamIndex = [3,4,5];
+        //}
+        angular.forEach(resultPostAct.data.Response.data.entries,function(entry) {
+          if (entry.standing === recentActivity.standing){
             var medals = [];
             var allStats = {};
             if (includeTeam){
