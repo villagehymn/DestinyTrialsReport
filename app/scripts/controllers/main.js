@@ -39,7 +39,6 @@ angular.module('trialsReportApp')
       $scope.fireteam[index].medals = result.medals;
       $scope.fireteam[index].allStats = result.playerAllStats;
       $scope.fireteam[index].playerWeapons = result.playerWeapons;
-      $scope.fireteam[index].stats = stats;
     }
 
     function setPlayerStats(player, index, stats, includeTeam, $scope) {
@@ -110,6 +109,7 @@ angular.module('trialsReportApp')
               } else {
                 $scope.fireteam[index] = activity;
               }
+              $scope.fireteam[index].stats = stats;
               if (includeFireteam || $scope.fireteam[0].isDeej){
                 setPlayerStats(player, index, stats, includeFireteam, $scope);
               }
