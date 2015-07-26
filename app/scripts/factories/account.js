@@ -3,6 +3,20 @@
 angular.module('trialsReportApp')
   .factory('currentAccount', function($http, requestUrl, $filter, toastr) {
     var path = requestUrl.url;
+
+    function getExtendedStats(member, medals, allStats) {
+      angular.forEach(member.extended.values, function (value, index) {
+        if (index.substring(0, 6) == "medals") {
+          medals.push({
+            id: index,
+            count: value.basic.value
+          });
+        } else {
+          allStats[index] = value;
+        }
+      });
+    }
+
     var getAccount = function(sName, platform) {
       return $http({method:'GET', url: path + 'Destiny/SearchDestinyPlayer/' + platform + '/' + sName + '/'}).then(function(resultAcc){
         if (resultAcc.data.Response.length < 1){
@@ -29,6 +43,7 @@ angular.module('trialsReportApp')
           var armors = [];
           var subClass = [];
           return {
+            id: membershipId,
             name: name,
             membershipId: membershipId,
             membershipType: membershipType,
@@ -42,9 +57,7 @@ angular.module('trialsReportApp')
             background: background,
             emblem: emblem,
             items: allItems,
-            perks: allPerks,
-            armors: armors,
-            class: subClass
+            perks: allPerks
           };
         });
       }).catch(function(e, r){
@@ -60,7 +73,6 @@ angular.module('trialsReportApp')
         }
         var pastActivities = [];
         var recentActivity = {'id': activities[0].activityDetails.instanceId, 'standing': activities[0].values.standing.basic.value};
-        var streak = [];
         var totals = {};
         totals.kills = 0;
         totals.deaths = 0;
@@ -98,7 +110,6 @@ angular.module('trialsReportApp')
             'deaths': activity.values.deaths.basic.value, 'assists': activity.values.assists.basic.value});
         });
         return angular.extend(account, {
-          streak: streak,
           recentActivity: recentActivity,
           pastActivities: pastActivities.reverse().slice(0, 24).reverse(),
           allActivities: pastActivities,
@@ -131,34 +142,45 @@ angular.module('trialsReportApp')
       return $http({method:'GET', url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'}).then(function(resultPostAct) {
         var fireTeam = [];
         var fireteamIndex = [];
+        console.log(resultPostAct.data.Response.data.entries);
         if (recentActivity.standing === 0){
           fireteamIndex = [0,1,2];
         }else {
           fireteamIndex = [3,4,5];
         }
-        angular.forEach(fireteamIndex,function(idx) {
-          var medals = [];
-          var allStats = {};
-          var entry = resultPostAct.data.Response.data.entries[idx];
-          if (includeTeam){
-            fireTeam.push(entry);
-          }else {
-            if (angular.lowercase(entry.player.destinyUserInfo.displayName) == angular.lowercase(name)) {
-              angular.forEach(entry.extended.values,function(value,index){
-                if (index.substring(0, 6) == "medals"){
-                  medals.push({id: index,
-                    count: value.basic.value});
-                }else {
-                  allStats[index] = value;
-                }
-              });
-              entry.allStats = allStats;
-              entry.medals = medals;
-              entry.playerWeapons = entry.extended.weapons;
+        angular.forEach(resultPostAct.data.Response.data.entries[idx],function(entry) {
+          if (entry.sanding === recentActivity.standing){
+            var medals = [];
+            var allStats = {};
+            if (includeTeam){
               fireTeam.push(entry);
+            }else {
+              if (angular.lowercase(entry.player.destinyUserInfo.displayName) == angular.lowercase(name)) {
+                getExtendedStats(entry, medals, allStats);
+                entry.allStats = allStats;
+                entry.medals = medals;
+                entry.playerWeapons = entry.extended.weapons;
+                fireTeam.push(entry);
+              }
             }
           }
         });
+        //angular.forEach(fireteamIndex,function(idx) {
+        //  var medals = [];
+        //  var allStats = {};
+        //  var entry = resultPostAct.data.Response.data.entries[idx];
+        //  if (includeTeam){
+        //    fireTeam.push(entry);
+        //  }else {
+        //    if (angular.lowercase(entry.player.destinyUserInfo.displayName) == angular.lowercase(name)) {
+        //      getExtendedStats(entry, medals, allStats);
+        //      entry.allStats = allStats;
+        //      entry.medals = medals;
+        //      entry.playerWeapons = entry.extended.weapons;
+        //      fireTeam.push(entry);
+        //    }
+        //  }
+        //});
         return fireTeam;
       }).catch(function(e, r){
       });
@@ -176,16 +198,10 @@ angular.module('trialsReportApp')
             var player = member.player;
             var medals = [];
             var allStats = {};
-            angular.forEach(member.extended.values,function(value,index){
-              if (index.substring(0, 6) == "medals"){
-                medals.push({id: index,
-                  count: value.basic.value});
-              }else {
-                allStats[index] = value;
-              }
-            });
+            getExtendedStats(member, medals, allStats);
             if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase(name)) {
               fireTeam.push({
+                id: player.destinyUserInfo.membershipId,
                 name: player.destinyUserInfo.displayName,
                 membershipId: player.destinyUserInfo.membershipId,
                 membershipType: player.destinyUserInfo.membershipType,
