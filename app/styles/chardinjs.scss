@@ -7,7 +7,7 @@
 }
 
 .chardinjs-overlay {
-  position: fixed;
+  position: absolute;
   z-index: -1;
 //  z-index: 999999;
 //  background-color: #000;
@@ -17,7 +17,7 @@
 
 .chardinjs-helper-layer {
   font-family: Dosis,Arial,sans-serif;;
-  position: fixed;
+  position: absolute;
   z-index: -1;
   color: #616f77;
 @include transition(all 0.3s ease-out);
@@ -96,7 +96,7 @@
 
 .chardinjs-show-element {
   z-index: 9999999;
-  opacity: 0.8;
+  //opacity: 0.8;
 }
 
 .chardinjs-relative-position {

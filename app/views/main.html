@@ -1,6 +1,6 @@
 <ng-include src="headerPartial"></ng-include>
 
-<div class="container" ng-hide="status">
+<div class="container" help-overlay="helpOverlay" ng-hide="status">
   <div class="row">
     <!--<div ng-if="fireteam[0].isDeej" id="alertsPlaceholder">-->
       <!--<alert type="warning" class="notcloseable text-center">-->
@@ -11,7 +11,7 @@
         <!--If you encounter a bug please let us know on our github or message me on reddit, username: FartSausage-->
       <!--</alert>-->
     <!--</div>-->
-    <div help-overlay="helpOverlay" class="col-xs-12 col-md-4 {{player.isDeej ? 'col-md-offset-4' : ''}}" ng-if="fireteam[0].name && $index < 3" ng-repeat="player in fireteam track by $index">
+    <div class="col-xs-12 col-md-4 {{player.isDeej ? 'col-md-offset-4' : ''}}" ng-if="fireteam[0].name && $index < 3" ng-repeat="player in fireteam track by $index">
       <div class="row ml-0 mr-0" ng-show="$index === 0">
         <div class="btn-group btn-group-justified">
           <div class="btn-group">
