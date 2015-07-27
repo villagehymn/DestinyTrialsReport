@@ -162,6 +162,7 @@ angular.module('trialsReportApp')
 
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
       $scope.helpOverlay = false;
+      $scope.recentPlayers = null;
       if (angular.isDefined($scope.fireteam[0])){
         if (angular.isDefined($scope.fireteam[0].isDeej)){
           $scope.fireteam[0].isDeej = null;

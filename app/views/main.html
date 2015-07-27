@@ -26,11 +26,11 @@
           </div>
           <div class="btn-group" ng-if="player.otherCharacters.length > 1">
             <button class="btn btn-default dropdown-toggle" type="button" id="characterSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <span ng-bind="player.otherCharacters[0].className"></span>
+              <span ng-bind="player.className"></span>
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" style="width:100%" aria-labelledby="characterSelect">
-              <li ng-repeat="character in player.otherCharacters" ng-if="player.otherCharacters[0].characterId !== character.characterId">
+              <li ng-repeat="character in player.otherCharacters" ng-if="player.characterId !== character.characterId">
                 <a ng-bind="character.className" ng-click="setRecentPlayer(character, 0, true)"
                    analytics-on analytics-event="Click" analytics-category="Character Change">
                 </a>
