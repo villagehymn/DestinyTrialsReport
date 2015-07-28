@@ -52,27 +52,6 @@ angular.module('trialsReportApp')
               $scope.fireteam[index].cDisPercent = +(100 * $scope.fireteam[index].cDis / $scope.fireteam[index].cTotal).toFixed(2);
               $scope.fireteam[index].cStrPercent = +(100 * $scope.fireteam[index].cStr / $scope.fireteam[index].cTotal).toFixed(2);
 
-              var combinedPercentage = $scope.fireteam[index].cIntPercent + $scope.fireteam[index].cDisPercent + $scope.fireteam[index].cStrPercent;
-              if (combinedPercentage > 100) {
-                var difference = combinedPercentage - 100;
-                if ($scope.fireteam[index].cIntPercent > 0) {
-                  $scope.fireteam[index].cIntPercent -= difference;
-                } else if ($scope.fireteam[index].cDisPercent > 0) {
-                  $scope.fireteam[index].cDisPercent -= difference;
-                } else {
-                  $scope.fireteam[index].cStrPercent -= difference;
-                }
-              } else if (combinedPercentage < 100) {
-                var difference = 100 - combinedPercentage;
-                if ($scope.fireteam[index].cIntPercent > 0) {
-                  $scope.fireteam[index].cIntPercent += difference;
-                } else if ($scope.fireteam[index].cDisPercent > 0) {
-                  $scope.fireteam[index].cDisPercent += difference;
-                } else {
-                  $scope.fireteam[index].cStrPercent += difference;
-                }
-              }
-
               if (classItems.blink && weapons.shotgun) {
                 $scope.fireteam[index].weapons.hazards.push('Blink Shotgun');
               }
