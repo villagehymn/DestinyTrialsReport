@@ -1,6 +1,6 @@
 <div data-intro="Weapon images and perks, border color displays damage element, grey if kinetic. </br> <em>Hover over image for weapon name</em>" data-position="left" data-class="blue hidden-xs hidden-sm">
   <div class="row ml-0 mr-0" style="height:130px" ng-repeat="weapon in [player.weapons.primary, player.weapons.special, player.weapons.heavy] track by $index">
-    <div class="col-md-4 col-xs-4 pt-10">
+    <div class="col-xs-4 pt-10">
       <div class="card mb-0">
         <div class="front p-0">
           <img popover="{{weapon.weapon.name}}" popover-trigger="mouseenter"
@@ -11,9 +11,10 @@
     </div>
     <div class="col-xs-8 pt-10">
       <div ng-if="!fireteam[0].name && !($first || $last)" class="hidden-xs hidden-sm" style="width:224px; height:105px; position:absolute; z-index:-1" data-intro="Unlocked and active weapon perks <br/><em>hover over the icons for the desciption</em>" data-position="right" data-class="blue hidden-xs hidden-sm"></div>
-      <div class="row" ng-repeat="node in weapon.nodes" ng-show="node.name">
+      <div class="row" ng-repeat="node in weapon.nodes" ng-show="node.name"
+           popover="{{node.description}}" popover-trigger="mouseenter">
         <div class="col-xs-2">
-          <a class="icon icon-default" style="margin:0px; width:22px; height:22px" popover="{{node.description}}" popover-trigger="mouseenter">
+          <a class="icon icon-default m-0" style="width:22px; height:22px">
             <img class="img-responsive" ng-src="{{node.icon || ''}}">
           </a>
         </div>

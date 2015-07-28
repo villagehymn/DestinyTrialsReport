@@ -1,5 +1,6 @@
 <div class="card-container emblem" data-intro="Hovering over the playercard will reveal subclass perks" data-position="left" data-class="blue-grey hidden-xs hidden-sm">
-  <div class="card mb-0" style="background-image: url('{{player.emblem}}'), url('{{player.background[0]}}'); background-repeat: no-repeat, no-repeat; background-position: left, right; background-size: 66px 66px, 100% 66px; height: 66px;">
+  <div class="card mb-0"
+       style="background-image: url('{{player.emblem}}'),url('{{player.background[0]}}'); background-repeat:no-repeat,no-repeat; background-position:left,right; background-size:66px 66px,100% 66px; height:66px">
     <div class="front p-0" data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat" data-position="right" data-class="green hidden-xs hidden-sm">
       <p class="large mb-0">
         <span ng-bind="player.name"></span>
@@ -16,7 +17,7 @@
         </span>
         <span ng-show="player.stats.activitiesEntered" class="right pr-10">
           Win<span class="hidden-xs"> Avg</span>:
-          <span ng-bind="((player.stats.activitiesWon.basic.value/player.stats.activitiesEntered.basic.value)*100).toFixed(0)"></span>%
+          <span ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed()"></span>%
         </span>
       </p>
       <div class="mb-0 mr-0 ml-0 row">
@@ -29,10 +30,9 @@
     </div>
     <div class="back">
       <div class="col-xs-12">
-        <div class="col-xs-6" ng-repeat="classNode in player.classNodes">
-          <a class="icon icon-white m-0" style="margin-top:4px!important; margin-right:5px!important; width:25px; height:25px"
-             popover="{{classNode.description}}"
-             popover-trigger="mouseenter">
+        <div class="col-xs-6" ng-repeat="classNode in player.classNodes"
+             popover="{{classNode.description}}" popover-trigger="mouseenter">
+          <a class="icon icon-white m-0" style="margin-top:4px!important; margin-right:5px!important; width:25px; height:25px">
             <img class="img-responsive" ng-src="{{classNode.icon || ''}}">
           </a>
           <span class="text-left text-sm text-white" style="top:10px; position:absolute" ng-bind="classNode.name"></span>
