@@ -21,7 +21,7 @@ angular.module('trialsReportApp')
         var wItem = DestinyWeaponDefinition[itemS.itemHash];
 
         if (wItem) {
-          if (wItem.subType === 'Sniper Rifle') {
+          if ((wItem.subType === 'Sniper Rifle') && (wItem.name !== 'No Land Beyond')) {
             angular.forEach (itemS.stats, function (stat) {
               if (stat.statHash === 4043523819 && stat.value > 16) {
                 if ((itemS.primaryStat.value * stat.value) > 8577) {
