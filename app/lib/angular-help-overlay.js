@@ -1,6 +1,7 @@
 /*global angular:false */
+'use strict';
 
-angular.module('angularHelpOverlay', []).directive('helpOverlay', ['$document', '$timeout', function ($document, $timeout) {
+angular.module('angularHelpOverlay', []).directive('helpOverlay', ['$document', '$timeout', function ($document) {
   var noop = false; // Special flag in case we get an a chardinJs change event outside of our control.
   return {
     restrict: 'A',
@@ -9,7 +10,7 @@ angular.module('angularHelpOverlay', []).directive('helpOverlay', ['$document', 
       overlayStart: '&overlayStartCallback',
       overlayStop: '&overlayStopCallback'
     },
-    link: function (scope, element, attrs) {
+    link: function (scope, element) {
 
       $document.on('chardinJs:start', function (event) {
         if (angular.isFunction(scope.overlayStart)) {

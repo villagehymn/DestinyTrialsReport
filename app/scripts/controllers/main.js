@@ -8,13 +8,13 @@ angular.module('trialsReportApp')
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
     $scope.DestinyTrialsDefinitions = DestinyTrialsDefinitions;
     $scope.DestinyHazardDefinition = {
-      "Double Grenade": "This Guardian can hold two grenades.",
-      "Superburn Grenade": "This Guardian has grenades that cause very strong burning.",
-      "Revive Kill Sniper": "This Guardian can one hit kill a revived Guardian with equipped sniper rifle.",
-      "Quick Revive": "This Guardian can revive allies and be revived very quickly.",
-      "Grenade on Spawn": "This Guardian will have a grenade every round.",
-      "Final Round Sniper": "This Guardian has a sniper rifle that can one hit kill a Guardian with a body shot.",
-      "Blink Shotgun": "This Guardian is using Blink and has a shotgun equipped. Be careful!"
+      'Double Grenade': 'This Guardian can hold two grenades.',
+      'Superburn Grenade': 'This Guardian has grenades that cause very strong burning.',
+      'Revive Kill Sniper': 'This Guardian can one hit kill a revived Guardian with equipped sniper rifle.',
+      'Quick Revive': 'This Guardian can revive allies and be revived very quickly.',
+      'Grenade on Spawn': 'This Guardian will have a grenade every round.',
+      'Final Round Sniper': 'This Guardian has a sniper rifle that can one hit kill a Guardian with a body shot.',
+      'Blink Shotgun': 'This Guardian is using Blink and has a shotgun equipped. Be careful!'
     };
     $scope.headerPartial = 'views/shared/header.html';
     $scope.playerPartial = 'views/fireteam/player.html';
@@ -35,7 +35,7 @@ angular.module('trialsReportApp')
       }
     }
 
-    function setPostActivityStats($scope, index, result, stats) {
+    function setPostActivityStats($scope, index, result) {
       $scope.fireteam[index].medals = result.medals;
       $scope.fireteam[index].allStats = result.playerAllStats;
       $scope.fireteam[index].playerWeapons = result.playerWeapons;
@@ -52,7 +52,7 @@ angular.module('trialsReportApp')
     }
 
     function getAccountByName(name, platform, $scope, index, includeFireteam) {
-      if (angular.isUndefined(name)){return}
+      if (angular.isUndefined(name)){return;}
       return currentAccount.getAccount(name, platform)
         .then(function (player) {
           //if (!angular.isObject(player)) {
@@ -133,6 +133,7 @@ angular.module('trialsReportApp')
         },
 
         reportProblems = function (fault) {
+          console.log(String(fault));
           //$log.error(String(fault));
         };
 
@@ -207,7 +208,7 @@ angular.module('trialsReportApp')
           if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase($scope.fireteam[0].name)) {
             var medals = [];
             angular.forEach(member.extended.values,function(value,index){
-              if (index.substring(0, 6) == "medals"){
+              if (index.substring(0, 6) === 'medals'){
                 medals.push({id: index,
                   count: value.basic.value});
               }else {

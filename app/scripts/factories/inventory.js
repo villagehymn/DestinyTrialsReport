@@ -64,7 +64,7 @@ angular.module('trialsReportApp')
         },
         reportProblems = function( fault )
         {
-          $log.error( String(fault) );
+          console.log(String(fault));
         };
       setInventory( membershipType, membershipId, characterId)
         .then( parallelLoad )

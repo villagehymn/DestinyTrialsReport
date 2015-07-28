@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('armorStats', function($http) {
+  .factory('armorStats', function() {
     var getData = function (items) {
       var armors = {};
       armors.hazards = [];
@@ -29,16 +29,16 @@ angular.module('trialsReportApp')
         var aItem = DestinyArmorDefinition[itemS.itemHash];
 
         if (aItem) {
-          angular.forEach(itemS.perks, function (perk, index) {
+          angular.forEach(itemS.perks, function (perk) {
             if (perk.isActive === true) {
               if (hazardQuickRevive.indexOf(perk.perkHash) > -1) {
-                armors.hazards.push("Quick Revive");
+                armors.hazards.push('Quick Revive');
               }
               if (hazardGrenadeOnSpawn.indexOf(perk.perkHash) > -1) {
-                armors.hazards.push("Grenade on Spawn");
+                armors.hazards.push('Grenade on Spawn');
               }
               if (hazardDoubleGrenade.indexOf(perk.perkHash) > -1) {
-                armors.hazards.push("Double Grenade");
+                armors.hazards.push('Double Grenade');
               }
               if (perk.perkHash === 3471016318) {
                 hasStarfireProtocolPerk = true;

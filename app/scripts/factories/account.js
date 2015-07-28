@@ -6,7 +6,7 @@ angular.module('trialsReportApp')
 
     function getExtendedStats(member, medals, allStats) {
       angular.forEach(member.extended.values, function (value, index) {
-        if (index.substring(0, 6) == "medals") {
+        if (index.substring(0, 6) === "medals") {
           medals.push({
             id: index,
             count: value.basic.value
@@ -55,7 +55,7 @@ angular.module('trialsReportApp')
               str: character.characterBase.stats.STAT_STRENGTH.value,
               grimoire: character.characterBase.grimoireScore,
               background: ['http://bungie.net' + character.backgroundPath],
-              emblem: 'http://bungie.net' + character.emblemPath})
+              emblem: 'http://bungie.net' + character.emblemPath});
           });
           angular.forEach(otherCharacters,function(character){
               character.otherCharacters = otherCharacters;
@@ -78,7 +78,7 @@ angular.module('trialsReportApp')
             emblem: emblem
           };
         });
-      }).catch(function(e, r){
+      }).catch(function(){
       });
     };
 
@@ -134,7 +134,7 @@ angular.module('trialsReportApp')
           mapStats: mapStats,
           totals: totals
         });
-      }).catch(function(e, r){
+      }).catch(function(){
       });
     };
 
@@ -152,14 +152,14 @@ angular.module('trialsReportApp')
           }
         });
         return allPastActivities;
-      }).catch(function(e, r){ });
+      }).catch(function(){ });
     };
 
 
     var getMatchSummary = function(recentActivity, name, includeTeam) {
       return $http({method:'GET', url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'}).then(function(resultPostAct) {
         var fireTeam = [];
-        var fireteamIndex = [];
+        //var fireteamIndex = [];
         //console.log(resultPostAct.data.Response.data.entries);
         //if (recentActivity.standing === 0){
         //  fireteamIndex = [0,1,2];
@@ -173,7 +173,7 @@ angular.module('trialsReportApp')
             if (includeTeam){
               fireTeam.push(entry);
             }else {
-              if (angular.lowercase(entry.player.destinyUserInfo.displayName) == angular.lowercase(name)) {
+              if (angular.lowercase(entry.player.destinyUserInfo.displayName) === angular.lowercase(name)) {
                 getExtendedStats(entry, medals, allStats);
                 entry.allStats = allStats;
                 entry.medals = medals;
@@ -200,7 +200,7 @@ angular.module('trialsReportApp')
         //  }
         //});
         return fireTeam;
-      }).catch(function(e, r){
+      }).catch(function(){
       });
     };
 
