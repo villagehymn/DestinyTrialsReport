@@ -2233,4 +2233,4 @@ var DestinyMedalDefinition = {
     unitLabel: '',
     weight: 600
   }
-}
+};
