@@ -124,6 +124,7 @@ body {
     font-size: 20px;
   }
 }
+
 span.right {
   float: right;
   padding-right: 15px;
@@ -228,6 +229,18 @@ tr.thin {
     width: 33%;
   }
 }
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .emblem {
+    p.large {
+      font-size: 17px;
+    }
+  }
+  .tabs-dark .nav-tabs > li > a {
+    white-space: nowrap;
+  }
+}
+
 
 .emblem .card .back {
   opacity: 0;
