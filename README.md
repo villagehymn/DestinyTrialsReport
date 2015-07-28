@@ -1,3 +1,5 @@
+[![bitHound Score](https://www.bithound.io/github/SteffanLong/DestinyTrialsReport/badges/score.svg)](https://www.bithound.io/github/SteffanLong/DestinyTrialsReport/master)
+
 Using homebrew, install node + npm
 
 * brew install node
