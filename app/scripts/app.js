@@ -1,5 +1,11 @@
 'use strict';
 
+function setUser(currentAccount, name, platform) {
+  return currentAccount.getAccount(name, platform)
+    .then(function (player) {
+      return player;
+    });
+}
 
 function getFromParams(currentAccount, $route) {
   if (angular.isDefined($route.current.params.playerName)){
@@ -17,13 +23,6 @@ function getAllFromParams(currentAccount, $route) {
         return player;
       });
   }
-}
-
-function setUser(currentAccount, name, platform) {
-  return currentAccount.getAccount(name, platform)
-    .then(function (player) {
-      return player;
-    });
 }
 
 function getDeej() {
@@ -73,7 +72,7 @@ function getDeej() {
     'background': ['http://bungie.net/common/destiny_content/icons/0fc2957b437530a6fec4b241257089bd.jpg'],
     'emblem': 'http://bungie.net/common/destiny_content/icons/ca7a9bb4a45b7d33a4848577a67cfa33.jpg',
     'isDeej': true
-  }
+  };
 }
 
 

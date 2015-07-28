@@ -9,7 +9,7 @@ angular.module('trialsReportApp')
       });
     };
 
-    var getInventory = function($scope, membershipType, membershipId, characterId, index, $q, $log)
+    var getInventory = function($scope, membershipType, membershipId, characterId, index, $q)
     {
       var setInventory = function( membershipType, membershipId, characterId )
         {

@@ -179,7 +179,7 @@ angular.module('trialsReportApp')
     $scope.refreshInventory = function () {
       angular.forEach($scope.fireteam, function (player, index) {
         inventoryStats.getInventory($scope, player.membershipType, player.membershipId,
-          player.characterId, index, $q)
+          player.characterId, index, $q);
       });
     };
 
@@ -251,7 +251,7 @@ angular.module('trialsReportApp')
         },
 
         reportProblems = function (fault) {
-          //$log.error(String(fault));
+          console.log(String(fault));
         };
 
       setRecentActivities(account, character)

@@ -6,7 +6,7 @@ angular.module('trialsReportApp')
 
     function getExtendedStats(member, medals, allStats) {
       angular.forEach(member.extended.values, function (value, index) {
-        if (index.substring(0, 6) === "medals") {
+        if (index.substring(0, 6) === 'medals') {
           medals.push({
             id: index,
             count: value.basic.value
