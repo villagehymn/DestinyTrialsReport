@@ -1,32 +1,45 @@
-<div class="row">
+<div class="row pt-0" style="margin-top: -3px;">
   <div class="col-md-12 col-xs-12">
     <table class="table table-striped">
       <thead>
       <tr>
-        <th></th>
-        <th>K</th>
-        <th>D</th>
-        <th>A</th>
-        <th>W</th>
-        <th>L</th>
+        <th class="p-0">
+          <h5 class="mt-0 custom-font filled bg-danger">Map</h5>
+        </th>
+        <th class="p-0">
+          <h5 class="mt-0 custom-font filled bg-danger">K</h5>
+        </th>
+        <th class="p-0">
+          <h5 class="mt-0 custom-font filled bg-danger">D</h5>
+        </th>
+        <th class="p-0">
+          <h5 class="mt-0 custom-font filled bg-danger">A</h5>
+        </th>
+        <th class="p-0">
+          <h5 class="mt-0 custom-font filled bg-danger">W</h5>
+        </th>
+        <th class="p-0">
+          <h5 class="mt-0 custom-font filled bg-danger">L</h5>
+
+        </th>
       </tr>
       </thead>
       <tbody>
       <tr ng-repeat="(key, value) in player.mapStats">
-        <td>{{DestinyTrialsDefinitions[key].activityName}}</td>
-        <td>{{value.kills}}</td>
-        <td>{{value.deaths}}</td>
-        <td>{{value.assists}}</td>
-        <td>{{value.wins}}</td>
-        <td>{{value.losses}}</td>
+        <td class="p-10">{{DestinyTrialsDefinitions[key].activityName}}</td>
+        <td class="p-10">{{value.kills}}</td>
+        <td class="p-10">{{value.deaths}}</td>
+        <td class="p-10">{{value.assists}}</td>
+        <td class="p-10">{{value.wins}}</td>
+        <td class="p-10">{{value.losses}}</td>
       </tr>
       <tr>
-        <td><strong>Total</strong></td>
-        <td><strong>{{player.totals.kills}}</strong></td>
-        <td><strong>{{player.totals.deaths}}</strong></td>
-        <td><strong>{{player.totals.assists}}</strong></td>
-        <td><strong>{{player.totals.wins}}</strong></td>
-        <td><strong>{{player.totals.losses}}</strong></td>
+        <td class="p-10"><strong>Total</strong></td>
+        <td class="p-10"><strong>{{player.totals.kills}}</strong></td>
+        <td class="p-10"><strong>{{player.totals.deaths}}</strong></td>
+        <td class="p-10"><strong>{{player.totals.assists}}</strong></td>
+        <td class="p-10"><strong>{{player.totals.wins}}</strong></td>
+        <td class="p-10"><strong>{{player.totals.losses}}</strong></td>
       </tr>
       </tbody>
     </table>
