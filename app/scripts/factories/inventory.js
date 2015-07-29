@@ -1,37 +1,40 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('inventoryStats', function($http, requestUrl, weaponStats, armorStats, classStats) {
+  .factory('inventoryStats', function ($http, requestUrl, weaponStats, armorStats, classStats) {
     var path = requestUrl.url;
-    var getData = function(membershipType, membershipId, characterId) {
-      return $http({method:'GET', url: path + 'Destiny/' + membershipType + '/Account/' + membershipId  + '/Character/' + characterId + '/Inventory/?definitions=true'}).then(function(result){
+
+    var getData = function (membershipType, membershipId, characterId) {
+      return $http({
+        method: 'GET',
+        url: path + 'Destiny/' + membershipType + '/Account/' + membershipId + '/Character/' + characterId + '/Inventory/?definitions=true'
+      }).then(function (result) {
         return result.data.Response;
       });
     };
 
-    var getInventory = function($scope, membershipType, membershipId, characterId, index, $q)
-    {
-      var setInventory = function( membershipType, membershipId, characterId )
-        {
-          return getData( membershipType, membershipId, characterId )
-            .then( function( inventory )
-            {
+    var getInventory = function ($scope, membershipType, membershipId, characterId, index, $q) {
+      var setInventory = function (membershipType, membershipId, characterId) {
+          return getData(membershipType, membershipId, characterId)
+            .then(function (inventory) {
               var items = inventory.data.buckets.Equippable;
               var talentGrid = inventory.definitions.talentGrids;
               var definitionItems = inventory.definitions.items;
-              return {items: items, talentGrid: talentGrid, definitionItems: definitionItems};
+              return {
+                items: items,
+                talentGrid: talentGrid,
+                definitionItems: definitionItems
+              };
             });
         },
-        parallelLoad = function ( inventoryItems )
-        {
+        parallelLoad = function (inventoryItems) {
           var methods = [
             weaponStats.getData(inventoryItems.items, inventoryItems.talentGrid),
             armorStats.getData(inventoryItems.items),
             classStats.getData(inventoryItems.items, inventoryItems.talentGrid, inventoryItems.definitionItems)
           ];
           return $q.all(methods)
-            .then( $q.spread( function( weapons, armors, classItems )
-            {
+            .then($q.spread(function (weapons, armors, classItems) {
               $scope.fireteam[index].background = classItems.bg;
               $scope.fireteam[index].emblem = classItems.bg[1];
               $scope.fireteam[index].weapons = weapons.weapons;
@@ -58,18 +61,18 @@ angular.module('trialsReportApp')
               if (classItems.hasFusionGrenade && armors.hasStarfireProtocolPerk) {
                 $scope.fireteam[index].armors.hazards.push('Double Grenade');
               }
-
-            })
-          );
+            }));
         },
-        reportProblems = function( fault )
-        {
+        reportProblems = function (fault) {
           console.log(String(fault));
         };
-      setInventory( membershipType, membershipId, characterId)
-        .then( parallelLoad )
-        .catch( reportProblems );
+      setInventory(membershipType, membershipId, characterId)
+        .then(parallelLoad)
+        .catch(reportProblems);
     };
 
-    return {getData: getData, getInventory: getInventory};
+    return {
+      getData: getData,
+      getInventory: getInventory
+    };
   });
