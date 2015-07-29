@@ -47,14 +47,16 @@ angular.module('trialsReportApp')
       currentAccount.getFireteam(player.recentActivity, player.name).then(function (result) {
         $scope.fireteam[index].fireTeam = result.fireTeam;
         setPostActivityStats($scope, index, result, stats);
-        if (index === 0 && angular.isUndefined($scope.fireteam[0].teamFromParams)){
+        if (index === 0 && angular.isUndefined($scope.fireteam[0].teamFromParams)) {
           setRecentFireteam($scope, result, player.membershipType, includeTeam);
         }
       });
     }
 
     function getAccountByName(name, platform, $scope, index, includeFireteam) {
-      if (angular.isUndefined(name)){return;}
+      if (angular.isUndefined(name)) {
+        return;
+      }
       return currentAccount.getAccount(name, platform)
         .then(function (player) {
           //if (!angular.isObject(player)) {
@@ -72,8 +74,9 @@ angular.module('trialsReportApp')
 
     function checkGrimoire($scope, player, index) {
       $http({
-        method: 'GET', url: requestUrl.url + 'Destiny/Vanguard/Grimoire/' +
-        player.membershipType + '/' + player.membershipId + '/?single=401030'
+        method: 'GET',
+        url: requestUrl.url + 'Destiny/Vanguard/Grimoire/' +
+          player.membershipType + '/' + player.membershipId + '/?single=401030'
       }).then(function (result) {
         $scope.fireteam[index].lighthouse = (result.data.Response.data.cardCollection.length > 0);
       });
@@ -84,10 +87,10 @@ angular.module('trialsReportApp')
       var useMember = function (teamMember, index) {
           if (index === 0) {
             $scope.fireteam = [teamMember];
-          }else {
+          } else {
             if (angular.isUndefined($scope.fireteam[index])) {
               $scope.fireteam.push(teamMember);
-            }else {
+            } else {
               $scope.fireteam[index] = teamMember;
             }
           }
@@ -112,26 +115,25 @@ angular.module('trialsReportApp')
                 $scope.fireteam[index] = activity;
               }
               $scope.fireteam[index].stats = stats;
-              if (includeFireteam || $scope.fireteam[0].isDeej){
+              if (includeFireteam || $scope.fireteam[0].isDeej) {
                 setPlayerStats(player, index, stats, includeFireteam, $scope);
               }
               checkGrimoire($scope, $scope.fireteam[index], index);
 
-              if (angular.isDefined($scope.fireteam[0].teamFromParams)&&
-                  angular.isUndefined($scope.fireteam[1])){
+              if (angular.isDefined($scope.fireteam[0].teamFromParams) &&
+                angular.isUndefined($scope.fireteam[1])) {
                 getAccountByName(decodeURIComponent($scope.fireteam[0].teamFromParams[0]), $scope.fireteam[0].membershipType, $scope, 1, true);
-              }else if (angular.isDefined($scope.fireteam[0].teamFromParams)&&
+              } else if (angular.isDefined($scope.fireteam[0].teamFromParams) &&
                 angular.isUndefined($scope.fireteam[2])) {
                 getAccountByName(decodeURIComponent($scope.fireteam[0].teamFromParams[1]), $scope.fireteam[0].membershipType, $scope, 2, true);
               }
               if (angular.isDefined($scope.fireteam[0]) &&
-                  angular.isDefined($scope.fireteam[1]) &&
-                  angular.isDefined($scope.fireteam[2])){
+                angular.isDefined($scope.fireteam[1]) &&
+                angular.isDefined($scope.fireteam[2])) {
                 var platformUrl = platform === 2 ? '/ps/' : '/xbox/';
                 $location.path(platformUrl + $scope.fireteam[0].name + '/' + $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, false);
               }
-            })
-          );
+            }));
         },
 
         reportProblems = function (fault) {
@@ -144,7 +146,7 @@ angular.module('trialsReportApp')
         .catch(reportProblems);
     };
 
-    if (angular.isDefined(fireTeam.isDeej)){
+    if (angular.isDefined(fireTeam.isDeej)) {
       $scope.fireteam = [fireTeam];
       $scope.fireteam.isDeej = true;
       $scope.platformValue = true;
@@ -152,12 +154,12 @@ angular.module('trialsReportApp')
       $timeout(function () {
         $scope.helpOverlay = true;
       }, 1000);
-    }else if (angular.isObject(fireTeam)){
+    } else if (angular.isObject(fireTeam)) {
       $scope.fireteam = [fireTeam];
       var platform = fireTeam.membershipType === 2;
       $scope.platformValue = platform;
       searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
-    }else {
+    } else {
       //$timeout(function () {
       //  $scope.helpOverlay = true;
       //}, 1000);
@@ -166,8 +168,8 @@ angular.module('trialsReportApp')
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
       $scope.helpOverlay = false;
       $scope.recentPlayers = null;
-      if (angular.isDefined($scope.fireteam[0])){
-        if (angular.isDefined($scope.fireteam[0].isDeej)){
+      if (angular.isDefined($scope.fireteam[0])) {
+        if (angular.isDefined($scope.fireteam[0].isDeej)) {
           $scope.fireteam[0].isDeej = null;
           $scope.fireteam[0] = null;
         }
@@ -179,11 +181,11 @@ angular.module('trialsReportApp')
     };
 
     $scope.getWeaponByHash = function (hash) {
-      if ($scope.DestinyPrimaryWeaponDefinitions[hash]){
+      if ($scope.DestinyPrimaryWeaponDefinitions[hash]) {
         return $scope.DestinyPrimaryWeaponDefinitions[hash];
-      }else if ($scope.DestinySpecialWeaponDefinitions[hash]){
+      } else if ($scope.DestinySpecialWeaponDefinitions[hash]) {
         return $scope.DestinySpecialWeaponDefinitions[hash];
-      }else if ($scope.DestinyHeavyWeaponDefinitions[hash]){
+      } else if ($scope.DestinyHeavyWeaponDefinitions[hash]) {
         return $scope.DestinyHeavyWeaponDefinitions[hash];
       }
     };
@@ -219,11 +221,13 @@ angular.module('trialsReportApp')
           var player = member.player;
           if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase($scope.fireteam[0].name)) {
             var medals = [];
-            angular.forEach(member.extended.values,function(value,index){
-              if (index.substring(0, 6) === 'medals'){
-                medals.push({id: index,
-                  count: value.basic.value});
-              }else {
+            angular.forEach(member.extended.values, function (value, index) {
+              if (index.substring(0, 6) === 'medals') {
+                medals.push({
+                  id: index,
+                  count: value.basic.value
+                });
+              } else {
                 allStats[index] = value;
               }
             });
@@ -280,7 +284,8 @@ angular.module('trialsReportApp')
 
     var sendAnalytic = function (event, cat, label) {
       $analytics.eventTrack(event, {
-        category: cat, label: label
+        category: cat,
+        label: label
       });
     };
   });

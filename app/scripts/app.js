@@ -8,14 +8,14 @@ function setUser(currentAccount, name, platform) {
 }
 
 function getFromParams(currentAccount, $route) {
-  if (angular.isDefined($route.current.params.playerName)){
+  if (angular.isDefined($route.current.params.playerName)) {
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
     return setUser(currentAccount, $route.current.params.playerName, platform);
   }
 }
 
 function getAllFromParams(currentAccount, $route) {
-  if (angular.isDefined($route.current.params.playerOne)){
+  if (angular.isDefined($route.current.params.playerOne)) {
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
     return currentAccount.getAccount($route.current.params.playerOne, platform)
       .then(function (player) {
@@ -86,8 +86,8 @@ angular
     'LocalStorageModule', 'toastr',
     'angularHelpOverlay', 'angular.filter',
     'picardy.fontawesome'
-  ]).config( window.$QDecorator )
-  .factory('requestUrl', function() {
+  ]).config(window.$QDecorator)
+  .factory('requestUrl', function () {
     return {
       //url : 'http://localhost:63294/Platform/'
       url: '/bungie/'
@@ -112,28 +112,28 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam:getDeej
+          fireTeam: getDeej
         }
       })
       .when('/:platform/:playerName', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam:getFromParams
-          //bungieStatus:function($location, $http, requestUrl){
+          fireTeam: getFromParams
+            //bungieStatus:function($location, $http, requestUrl){
             //$http({method:'GET', url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
             //  if(result.data.Response.length > 0){
             //    return result.data.Response[0].AlertHtml;
             //  }
             //});
-          //}
+            //}
         }
       })
       .when('/:platform/:playerOne/:playerTwo/:playerThree', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam:getAllFromParams
+          fireTeam: getAllFromParams
         }
       })
       .otherwise({
