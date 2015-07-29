@@ -1,8 +1,8 @@
-language: node_js
-node_js: stable
+ language: node_js
+ node_js: stable
 
-before_script:
-  - npm install -g grunt-cli
+ before_script:
+  - npm install --quiet -g grunt-cli karma
   - npm install
 
- script: grunt test
+ script: grunt
