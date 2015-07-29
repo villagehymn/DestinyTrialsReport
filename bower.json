@@ -17,7 +17,7 @@
     "angular-sanitize": "^1.4.3",
     "angular-toastr": "^1.4.1",
     "angular-touch": "^1.4.3",
-    "bootstrap-sass-official": "^3.2.0",
+    "bootstrap-sass-official": "^3.3.5",
     "bourbon": "^4.2.3"
   },
   "devDependencies": {
