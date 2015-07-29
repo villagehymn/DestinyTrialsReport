@@ -1,7 +1,8 @@
 {
+  "author": "https://github.com/SteffanLong/DestinyTrialsReport/graphs/contributors",
   "name": "trialsscout",
   "version": "1.0.0",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "homepage": "http://www.destinytrialsreport.com/",
   "dependencies": {
     "express": "^3.21.1",
     "grunt-connect-proxy": "^0.2.0",
@@ -54,5 +55,9 @@
   },
   "engines": {
     "node": "^0.12.7"
-  }
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "license": "SEE LICENSE IN LICENSE.md"
 }
