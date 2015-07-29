@@ -84,7 +84,8 @@ angular
     'ui.bootstrap', 'angular-loading-bar',
     'angulartics', 'angulartics.google.analytics',
     'LocalStorageModule', 'toastr',
-    'angularHelpOverlay', 'angular.filter'
+    'angularHelpOverlay', 'angular.filter',
+    'picardy.fontawesome'
   ]).config( window.$QDecorator )
   .factory('requestUrl', function() {
     return {
