@@ -5,7 +5,9 @@ angular.module('trialsReportApp')
     $scope.status = null;
     $scope.helpOverlay = false;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
-    $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
+    $scope.DestinyPrimaryWeaponDefinitions = DestinyPrimaryWeaponDefinitions;
+    $scope.DestinySpecialWeaponDefinitions = DestinySpecialWeaponDefinitions;
+    $scope.DestinyHeavyWeaponDefinitions = DestinyHeavyWeaponDefinitions;
     $scope.DestinyTrialsDefinitions = DestinyTrialsDefinitions;
     $scope.DestinyHazardDefinition = {
       'Double Grenade': 'This Guardian can hold two grenades.',
@@ -174,6 +176,16 @@ angular.module('trialsReportApp')
       sendAnalytic('loadedPlayer', 'name', name);
       sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
       setPlatform($scope, platform);
+    };
+
+    $scope.getWeaponByHash = function (hash) {
+      if ($scope.DestinyPrimaryWeaponDefinitions[hash]){
+        return $scope.DestinyPrimaryWeaponDefinitions[hash];
+      }else if ($scope.DestinySpecialWeaponDefinitions[hash]){
+        return $scope.DestinySpecialWeaponDefinitions[hash];
+      }else if ($scope.DestinyHeavyWeaponDefinitions[hash]){
+        return $scope.DestinyHeavyWeaponDefinitions[hash];
+      }
     };
 
     $scope.refreshInventory = function () {

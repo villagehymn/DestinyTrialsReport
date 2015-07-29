@@ -1,5 +1,27 @@
 'use strict';
 
+function pushNode(nodeStep, name, nodes) {
+  nodes.push({
+    'name': name,
+    'description': nodeStep.nodeStepDescription,
+    'icon': 'http://www.bungie.net' + nodeStep.icon
+  });
+}
+
+function setDmgElement(nodeStep, weapon) {
+  switch (nodeStep.nodeStepName) {
+    case 'Solar Damage':
+      weapon.burnColor = 'solar-dmg';
+      break;
+    case 'Void Damage':
+      weapon.burnColor = 'void-dmg';
+      break;
+    case 'Arc Damage':
+      weapon.burnColor = 'arc-dmg';
+      break;
+  }
+}
+
 angular.module('trialsReportApp')
   .factory('weaponStats', function() {
     var getData = function (items, talentGrid) {
@@ -15,13 +37,29 @@ angular.module('trialsReportApp')
       weapons.heavy = {};
       weapons.hazards = [];
       angular.forEach(items, function (item) {
+        if (weapons.primary.length && weapons.special.length && weapons.heavy.length){
+          return;
+        }
         var nodes = [];
-
         var itemS = item.items[0];
-        var wItem = DestinyWeaponDefinition[itemS.itemHash];
+        //var wItem = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
 
-        if (wItem) {
-          if ((wItem.subType === 'Sniper Rifle') && (wItem.name !== 'No Land Beyond')) {
+        if (DestinyPrimaryWeaponDefinitions[itemS.itemHash]) {
+          var primaryW = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
+          angular.forEach(itemS.nodes, function (node, index) {
+            if (node.isActivated === true) {
+              var nodeStep = talentGrid[itemS.talentGridHash].nodes[index].steps[node.stepIndex];
+              if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                pushNode(nodeStep, nodeStep.nodeStepName, nodes);
+              } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
+                setDmgElement(nodeStep, primaryW);
+              }
+            }
+          });
+          weapons.primary = {'weapon': primaryW, 'nodes': nodes};
+        }else if (DestinySpecialWeaponDefinitions[itemS.itemHash]){
+          var secondaryW = DestinySpecialWeaponDefinitions[itemS.itemHash];
+          if ((secondaryW.subType === 'Sniper Rifle') && (secondaryW.name !== 'No Land Beyond')) {
             angular.forEach (itemS.stats, function (stat) {
               if (stat.statHash === 4043523819 && stat.value > 16) {
                 if ((itemS.primaryStat.value * stat.value) > 8577) {
@@ -29,51 +67,40 @@ angular.module('trialsReportApp')
                 }
               }
             });
-          } else if (wItem.subType === 'Shotgun') {
+          } else if (secondaryW.subType === 'Shotgun') {
             shotgun = true;
           }
           angular.forEach(itemS.nodes, function (node, index) {
             if (node.isActivated === true) {
               var nodeStep = talentGrid[itemS.talentGridHash].nodes[index].steps[node.stepIndex];
               if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                var longNames = ['Grenades and Horseshoes'];
-                var name = (longNames.indexOf(nodeStep.nodeStepName) > -1) ? 'Nades & Shoes' : nodeStep.nodeStepName;
-                if (wItem.subType === 'Sniper Rifle') {
+                if (secondaryW.subType === 'Sniper Rifle') {
                   if (nodeStep.perkHashes[0] === 3752206822) {
                     weapons.hazards.push('Final Round Sniper');
                   }
                 }
-                nodes.push({
-                  'name': name,
-                  'description': nodeStep.nodeStepDescription,
-                  'icon': 'http://www.bungie.net' + nodeStep.icon
-                });
+                pushNode(nodeStep, nodeStep.nodeStepName, nodes);
               } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                switch (nodeStep.nodeStepName) {
-                  case 'Solar Damage':
-                    wItem.burnColor = 'solar-dmg';
-                    break;
-                  case 'Void Damage':
-                    wItem.burnColor = 'void-dmg';
-                    break;
-                  case 'Arc Damage':
-                    wItem.burnColor = 'arc-dmg';
-                    break;
-                }
+                setDmgElement(nodeStep, secondaryW);
               }
             }
           });
-          switch (wItem.bucket) {
-            case 'BUCKET_PRIMARY_WEAPON':
-              weapons.primary = {'weapon': wItem, 'nodes': nodes};
-              break;
-            case 'BUCKET_SPECIAL_WEAPON':
-              weapons.special = {'weapon': wItem, 'nodes': nodes};
-              break;
-            case 'BUCKET_HEAVY_WEAPON':
-              weapons.heavy = {'weapon': wItem, 'nodes': nodes};
-              break;
-          }
+          weapons.special = {'weapon': secondaryW, 'nodes': nodes};
+        }else if (DestinyHeavyWeaponDefinitions[itemS.itemHash]){
+          var heavyW = DestinyHeavyWeaponDefinitions[itemS.itemHash];
+          angular.forEach(itemS.nodes, function (node, index) {
+            if (node.isActivated === true) {
+              var nodeStep = talentGrid[itemS.talentGridHash].nodes[index].steps[node.stepIndex];
+              if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                var longNames = ['Grenades and Horseshoes'];
+                var name = (longNames.indexOf(nodeStep.nodeStepName) > -1) ? 'Nades & Shoes' : nodeStep.nodeStepName;
+                pushNode(nodeStep, name, nodes);
+              } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
+                setDmgElement(nodeStep, heavyW);
+              }
+            }
+          });
+          weapons.heavy = {'weapon': heavyW, 'nodes': nodes};
         }
       });
       return {weapons: weapons, shotgun: shotgun};
