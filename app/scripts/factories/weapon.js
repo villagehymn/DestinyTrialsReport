@@ -1,30 +1,29 @@
 'use strict';
 
+function pushNode(nodeStep, name, nodes) {
+  nodes.push({
+    'name': name,
+    'description': nodeStep.nodeStepDescription,
+    'icon': 'http://www.bungie.net' + nodeStep.icon
+  });
+}
+
+function setDmgElement(nodeStep, weapon) {
+  switch (nodeStep.nodeStepName) {
+    case 'Solar Damage':
+      weapon.burnColor = 'solar-dmg';
+      break;
+    case 'Void Damage':
+      weapon.burnColor = 'void-dmg';
+      break;
+    case 'Arc Damage':
+      weapon.burnColor = 'arc-dmg';
+      break;
+  }
+}
+
 angular.module('trialsReportApp')
   .factory('weaponStats', function() {
-
-    function pushNode(nodeStep, name, nodes) {
-      nodes.push({
-        'name': name,
-        'description': nodeStep.nodeStepDescription,
-        'icon': 'http://www.bungie.net' + nodeStep.icon
-      });
-    }
-
-    function setDmgElement(nodeStep, weapon) {
-      switch (nodeStep.nodeStepName) {
-        case 'Solar Damage':
-          weapon.burnColor = 'solar-dmg';
-          break;
-        case 'Void Damage':
-          weapon.burnColor = 'void-dmg';
-          break;
-        case 'Arc Damage':
-          weapon.burnColor = 'arc-dmg';
-          break;
-      }
-    }
-
     var getData = function (items, talentGrid) {
       var avoidNodes = ['Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage',
         'Hive Disruptor', 'Oracle Disruptor', 'Wolfpack Rounds', 'Last Word', 'Fan Fire', 'Mark of the Devourer',
@@ -38,7 +37,9 @@ angular.module('trialsReportApp')
       weapons.heavy = {};
       weapons.hazards = [];
       angular.forEach(items, function (item) {
-        if (angular.isObject(weapons.primary) && weapons.special && weapons.heavy)
+        if (weapons.primary.length && weapons.special.length && weapons.heavy.length){
+          return;
+        }
         var nodes = [];
         var itemS = item.items[0];
         //var wItem = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
