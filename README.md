@@ -1,4 +1,21 @@
+### Destiny Trials Report - [www.DestinyTrialsReport.com](http://www.destinytrialsreport.com/)
+
+[![Build Status](https://secure.travis-ci.org/SteffanLong/DestinyTrialsReport.svg)](http://travis-ci.org/SteffanLong/DestinyTrialsReport)
+[![Dependency Status](https://david-dm.org/SteffanLong/DestinyTrialsReport.svg)](https://david-dm.org/SteffanLong/DestinyTrialsReport)
+[![devDependency Status](https://david-dm.org/SteffanLong/DestinyTrialsReport/dev-status.svg)](https://david-dm.org/SteffanLong/DestinyTrialsReport#info=devDependencies)
 [![bitHound Score](https://www.bithound.io/github/SteffanLong/DestinyTrialsReport/badges/score.svg)](https://www.bithound.io/github/SteffanLong/DestinyTrialsReport/master)
+
+### Quick links
+- [Installation](#installation)
+    - [Mac OS X](#installation-on-mac-os-x)
+    - [Debian & Ubuntu](#installation-on-debian--ubuntu)
+- [Support](#support)
+    - [Found a bug?](#found-a-bug)
+- [Contributing to the project](#contributing-to-the-project)
+
+# Installation
+
+#### Installation on Mac OS X
 
 Using homebrew, install node + npm
 
@@ -26,7 +43,7 @@ Run Server
 * grunt serve
 
 
-DEBIAN/UBUNTU
+#### Installation on Debian & Ubuntu
 
 [Install Dependencies]
 ```
@@ -35,8 +52,7 @@ sudo apt-get install git ruby ruby-dev
 
 [Update Gems & Install Compass]
 ```
-sudo gem update
-sudo gem install compass
+sudo gem update --system && gem install compass
 ```
 
 [Install Node Version Manager]
@@ -69,7 +85,26 @@ npm install
 bower install
 ```
 
+[Run Local Proxy]
+```
+node proxy.js 63294
+```
+uncomment `url :  "http://localhost:63294/Platform/" `in app.js (comment out the bungie one)
+
 [Run Server]
 ```
 grunt serve
 ```
+
+# Support
+
+## Found a bug?
+Please take a look at [CONTRIBUTING.md](CONTRIBUTING.md#you-think-youve-found-a-bug) and submit your issue [here](https://github.com/SteffanLong/DestinyTrialsReport/issues/new).
+
+
+----
+
+
+# Contributing to the project
+
+We are always looking for the quality contributions! Please check the [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution guidelines.

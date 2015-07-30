@@ -1,5 +1,12 @@
 'use strict';
 
+var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
+var avoidNodes = ['Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage',
+  'Hive Disruptor', 'Oracle Disruptor', 'Wolfpack Rounds', 'Last Word', 'Fan Fire', 'Mark of the Devourer',
+  'Ice Breaker', 'No Backpack', 'Lich Bane', 'Invective', 'Cursebringer', 'Disciplinarian', 'Holding Aces',
+  'Timeless Mythoclast', 'Thunderer'
+];
+
 function pushNode(nodeStep, name, nodes) {
   nodes.push({
     'name': name,
@@ -10,34 +17,31 @@ function pushNode(nodeStep, name, nodes) {
 
 function setDmgElement(nodeStep, weapon) {
   switch (nodeStep.nodeStepName) {
-    case 'Solar Damage':
-      weapon.burnColor = 'solar-dmg';
-      break;
-    case 'Void Damage':
-      weapon.burnColor = 'void-dmg';
-      break;
-    case 'Arc Damage':
-      weapon.burnColor = 'arc-dmg';
-      break;
+  case 'Solar Damage':
+    weapon.burnColor = 'solar-dmg';
+    break;
+  case 'Void Damage':
+    weapon.burnColor = 'void-dmg';
+    break;
+  case 'Arc Damage':
+    weapon.burnColor = 'arc-dmg';
+    break;
   }
 }
 
 angular.module('trialsReportApp')
-  .factory('weaponStats', function() {
+  .factory('weaponStats', function () {
     var getData = function (items, talentGrid) {
-      var avoidNodes = ['Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage',
-        'Hive Disruptor', 'Oracle Disruptor', 'Wolfpack Rounds', 'Last Word', 'Fan Fire', 'Mark of the Devourer',
-        'Ice Breaker', 'No Backpack', 'Lich Bane', 'Invective', 'Cursebringer', 'Disciplinarian', 'Holding Aces',
-        'Timeless Mythoclast', 'Thunderer'];
-      var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
-      var shotgun = false;
       var weapons = {};
+      var shotgun = false;
+
       weapons.primary = {};
       weapons.special = {};
       weapons.heavy = {};
       weapons.hazards = [];
+
       angular.forEach(items, function (item) {
-        if (weapons.primary.length && weapons.special.length && weapons.heavy.length){
+        if (weapons.primary.length && weapons.special.length && weapons.heavy.length) {
           return;
         }
         var nodes = [];
@@ -56,20 +60,12 @@ angular.module('trialsReportApp')
               }
             }
           });
-          weapons.primary = {'weapon': primaryW, 'nodes': nodes};
-        }else if (DestinySpecialWeaponDefinitions[itemS.itemHash]){
+          weapons.primary = {
+            'weapon': primaryW,
+            'nodes': nodes
+          };
+        } else if (DestinySpecialWeaponDefinitions[itemS.itemHash]) {
           var secondaryW = DestinySpecialWeaponDefinitions[itemS.itemHash];
-          if ((secondaryW.subType === 'Sniper Rifle') && (secondaryW.name !== 'No Land Beyond')) {
-            angular.forEach (itemS.stats, function (stat) {
-              if (stat.statHash === 4043523819 && stat.value > 16) {
-                if ((itemS.primaryStat.value * stat.value) > 8577) {
-                  weapons.hazards.push('Revive Kill Sniper');
-                }
-              }
-            });
-          } else if (secondaryW.subType === 'Shotgun') {
-            shotgun = true;
-          }
           angular.forEach(itemS.nodes, function (node, index) {
             if (node.isActivated === true) {
               var nodeStep = talentGrid[itemS.talentGridHash].nodes[index].steps[node.stepIndex];
@@ -85,8 +81,22 @@ angular.module('trialsReportApp')
               }
             }
           });
-          weapons.special = {'weapon': secondaryW, 'nodes': nodes};
-        }else if (DestinyHeavyWeaponDefinitions[itemS.itemHash]){
+          weapons.special = {
+            'weapon': secondaryW,
+            'nodes': nodes
+          };
+          if ((secondaryW.subType === 'Sniper Rifle') && (secondaryW.name !== 'No Land Beyond')) {
+            angular.forEach(itemS.stats, function (stat) {
+              if (stat.statHash === 4043523819 && stat.value > 16) {
+                if ((itemS.primaryStat.value * stat.value) > 8577) {
+                  weapons.hazards.push('Revive Kill Sniper');
+                }
+              }
+            });
+          } else if (secondaryW.subType === 'Shotgun') {
+            shotgun = true;
+          }
+        } else if (DestinyHeavyWeaponDefinitions[itemS.itemHash]) {
           var heavyW = DestinyHeavyWeaponDefinitions[itemS.itemHash];
           angular.forEach(itemS.nodes, function (node, index) {
             if (node.isActivated === true) {
@@ -100,10 +110,20 @@ angular.module('trialsReportApp')
               }
             }
           });
-          weapons.heavy = {'weapon': heavyW, 'nodes': nodes};
+          weapons.heavy = {
+            'weapon': heavyW,
+            'nodes': nodes
+          };
         }
       });
-      return {weapons: weapons, shotgun: shotgun};
+
+      return {
+        weapons: weapons,
+        shotgun: shotgun
+      };
     };
-    return {getData: getData};
+
+    return {
+      getData: getData
+    };
   });

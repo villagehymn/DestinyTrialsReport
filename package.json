@@ -1,7 +1,9 @@
 {
+  "author": "https://github.com/SteffanLong/DestinyTrialsReport/graphs/contributors"
   "name": "trials-report",
   "version": "1.1.0",
   "license": "Artistic-2.0",
+  "homepage": "http://www.destinytrialsreport.com/",
   "dependencies": {
     "express": "^3.21.1",
     "grunt-connect-proxy": "^0.2.0",
@@ -39,6 +41,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-file-creator": "^0.1.3",
     "grunt-filerev": "^2.3.1",
+    "grunt-karma": "^0.12.0",
     "grunt-mkdir": "^0.1.2",
     "grunt-newer": "^1.1.1",
     "grunt-ng-annotate": "^1.0.1",
@@ -47,11 +50,20 @@
     "grunt-svgmin": "^2.0.1",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
+    "jasmine-core": "^2.3.4",
     "jshint-stylish": "^2.0.1",
+    "karma": "^0.13.3",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.0",
     "load-grunt-tasks": "^3.2.0",
+    "phantomjs": "^1.9.17",
     "time-grunt": "^1.2.1"
   },
   "engines": {
     "node": "^0.12.7"
-  }
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "license": "SEE LICENSE IN LICENSE.md"
 }
