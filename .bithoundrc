@@ -1,0 +1,12 @@
+{
+  "ignore": [
+    "**/app/scripts/definitions/en/DestinyArmorDefinition.js",
+    "**/app/scripts/definitions/en/DestinyPrimaryWeaponDefinitions.js",
+    "**/app/scripts/definitions/en/DestinySpecialWeaponDefinitions.js",
+    "**/app/scripts/definitions/en/DestinyHeavyWeaponDefinitions.js",
+    "**/app/scripts/definitions/en/DestinyEmblemDefinitions.js",
+    "**/app/scripts/definitions/en/DestinyTalentGridDefinition.js",
+    "**/proxy.js",
+    "**/manifest.js"
+  ]
+}
