@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location, $rootScope) {
     $scope.status = null;
     $scope.helpOverlay = false;
+    $scope.timerRunning = true;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyPrimaryWeaponDefinitions = DestinyPrimaryWeaponDefinitions;
     $scope.DestinySpecialWeaponDefinitions = DestinySpecialWeaponDefinitions;
@@ -170,6 +171,10 @@ angular.module('trialsReportApp')
 
     $scope.toggleOverlay = function () {
       $scope.helpOverlay = !$scope.helpOverlay;
+    };
+
+    $scope.changeTheme = function (name) {
+      $rootScope.theme = name;
     };
 
     $scope.getWeaponByHash = function (hash) {
