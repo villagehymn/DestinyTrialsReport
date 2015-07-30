@@ -40,6 +40,7 @@ angular.module('trialsReportApp')
     function setPostActivityStats($scope, index, result) {
       $scope.fireteam[index].medals = result.medals;
       $scope.fireteam[index].allStats = result.playerAllStats;
+      $scope.fireteam[index].wKills = result.wKills;
       $scope.fireteam[index].playerWeapons = result.playerWeapons;
     }
 
@@ -115,7 +116,7 @@ angular.module('trialsReportApp')
                 $scope.fireteam[index] = activity;
               }
               $scope.fireteam[index].stats = stats;
-              if (includeFireteam || $scope.fireteam[0].isDeej) {
+              if (includeFireteam) {
                 setPlayerStats(player, index, stats, includeFireteam, $scope);
               }
               checkGrimoire($scope, $scope.fireteam[index], index);
@@ -146,20 +147,13 @@ angular.module('trialsReportApp')
         .catch(reportProblems);
     };
 
-    if (angular.isDefined(fireTeam.isDeej)) {
-      $scope.fireteam = [fireTeam];
-      $scope.fireteam.isDeej = true;
-      $scope.platformValue = true;
-      searchFireteam($scope, $scope.fireteam[0], 0, 1, false);
-      $timeout(function () {
-        $scope.helpOverlay = true;
-      }, 1000);
-    } else if (angular.isObject(fireTeam)) {
+    if (angular.isObject(fireTeam)) {
       $scope.fireteam = [fireTeam];
       var platform = fireTeam.membershipType === 2;
       $scope.platformValue = platform;
       searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
     } else {
+      $scope.platformValue = true;
       //$timeout(function () {
       //  $scope.helpOverlay = true;
       //}, 1000);
@@ -168,16 +162,14 @@ angular.module('trialsReportApp')
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
       $scope.helpOverlay = false;
       $scope.recentPlayers = null;
-      if (angular.isDefined($scope.fireteam[0])) {
-        if (angular.isDefined($scope.fireteam[0].isDeej)) {
-          $scope.fireteam[0].isDeej = null;
-          $scope.fireteam[0] = null;
-        }
-      }
       getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
       sendAnalytic('loadedPlayer', 'name', name);
       sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
       setPlatform($scope, platform);
+    };
+
+    $scope.toggleOverlay = function () {
+      $scope.helpOverlay = !$scope.helpOverlay;
     };
 
     $scope.getWeaponByHash = function (hash) {

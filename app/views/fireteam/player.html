@@ -16,12 +16,13 @@
 
 <div class="row">
   <div class="col-xs-12 hidden-xs hidden-sm">
-    <a class="btn btn-block btn-default bg-info dker"
+    <a class="btn btn-block btn-trials btn-default bg-info dker"
        href="http://destinytracker.com/destiny/trials/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
        target="_blank"
        type="button"
        analytics-on analytics-event="Click" analytics-category="DestinyTracker"
-       data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps" data-position="right" data-class="hidden-xs hidden-sm">
+       data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
+       data-position="right" ng-attr-data-class="hidden-xs hidden-sm {{$index === 1 ? '' : 'hidden'}}">
        View DestinyTracker Stats
      </a>
   </div>

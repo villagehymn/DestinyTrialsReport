@@ -86,6 +86,60 @@ body {
   padding: 0;
 }
 
+.dark-theme {
+  background-color: $darker-darkgray;
+  color: $transparent-white-8;
+  h1 {
+    color: $lighten-orange;
+  }
+
+  .navbar {
+    background-image: url('https://www.bungie.net/common/destiny_content/icons/6eaa56916d20fe763111facc14dff6e7.jpg'),
+    url('https://www.bungie.net/common/destiny_content/icons/8a55c03e3d2a0b0c4957b9633c797129.jpg');
+    background-repeat: no-repeat;
+    background-position: left, right;
+    background-color: #000;
+    border: none;
+    margin-bottom: 0px;
+  }
+
+  .player-wrapper {
+    background-color: $darken-darkgray;
+    padding-top: 15px;
+  }
+
+  .player {
+    background-color: $lighten-darkgray;
+  }
+
+  .weapon {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .stats {
+    font-weight: 600;
+  }
+
+  .tab-pane {
+    color: #fff;
+  }
+
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: $lighter-darkgray;
+  }
+
+  .black-font {
+    color: #000 !important;
+  }
+
+  .btn-trials {
+    background-color: #D3D023 !important;
+    color: #000 !important;
+    border-color: #D3D023 !important;
+  }
+}
+
 .ml-15 {
   margin-left: 15px !important;
 }

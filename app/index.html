@@ -25,12 +25,12 @@
       ;NREUM.info={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",licenseKey:"6c58d7ee98",applicationID:"9350178",sa:1,agent:"js-agent.newrelic.com/nr-632.min.js"}
     </script>
   </head>
-  <body ng-app="trialsReportApp" class="bg-white">
+  <body ng-app="trialsReportApp" ng-class="$root.theme">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-view=""></div>
+    <div ng-view="" class="" help-overlay="helpOverlay"></div>
 
     <script>
       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
@@ -93,6 +93,7 @@
     <script src="./lib/$QDecorator.js"></script>
     <script src="./lib/chardinjs.min.js"></script>
     <script src="./lib/angular-help-overlay.js"></script>
+    <script src="./lib/fill-height.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/factories/account.js"></script>

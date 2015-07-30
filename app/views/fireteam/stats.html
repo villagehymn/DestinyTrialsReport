@@ -1,6 +1,7 @@
-<div class="row ml-0 mr-0" style="margin-top:-3px">
-  <div class="col-md-12 col-sm-12 col-xs-12 pl-0 pr-0" data-intro="Bar size relative to the percentage of the sum<br/><em>hover over the icons for true percentage</em>" data-position="left" data-class="green hidden-xs hidden-sm">
-    <progress max="player.cTotal" animate="true" class="progress-striped not-rounded m-0">
+<div class="row stats ml-0 mr-0" style="margin-top:-3px">
+  <div class="col-md-12 col-sm-12 col-xs-12 pl-0 pr-0" data-intro="Bar size relative to the percentage of the sum<br/><em>hover over the icons for true percentage</em>"
+       data-position="left" ng-attr-data-class="hidden-xs hidden-sm {{$index === 1 ? '' : 'hidden'}}">
+    <progress max="player.cTotal" animate="true" class="progress not-rounded m-0">
       <bar value="player.cInt" popover="Intellect: {{player.int}} ({{player.intPercent}}%)" popover-trigger="mouseenter" type="greensea">
         <span ng-show="player.cIntPercent >= 27">Intellect {{player.intPercent}}%</span>
         <span ng-show="player.cIntPercent <  27 && player.cIntPercent >= 16">Int {{player.intPercent}}%</span>
@@ -20,7 +21,8 @@
   </div>
 </div>
 
-<div class="row ml-0 mr-0 mb-10" data-intro="Match win/loss history<br/><em>hover over the icons for details</em>" data-position="right" data-class="red hidden-xs hidden-sm">
+<div class="row ml-0 mr-0 mb-10" data-intro="Match win/loss history<br/><em>hover over the icons for details</em>"
+     data-position="right" ng-attr-data-class="hidden-xs hidden-sm {{$index === 1 ? '' : 'hidden'}}">
   <div class="col-xs-12 pr-0 pl-0 text-center win-loss">
     <i class="fa fa-circle mr-3 {{$index < 7 ? (player.pastActivities.length - $index ) > 18 ? 'hidden-xs hidden-md' : '' : ''}}"
        ng-repeat="str in player.pastActivities track by $index"

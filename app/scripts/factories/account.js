@@ -1,13 +1,19 @@
 'use strict';
 
-function getExtendedStats(member, medals, allStats) {
+function getExtendedStats(member, medals, allStats, wKills) {
   angular.forEach(member.extended.values, function (value, index) {
     if (index.substring(0, 6) === 'medals') {
       medals.push({
         id: index,
         count: value.basic.value
       });
-    } else {
+    }else if (index.substring(0, 11) === 'weaponKills') {
+      wKills.push({
+        id: index,
+        count: value.basic.value
+      });
+    }
+    else {
       allStats[index] = value;
     }
   });
@@ -185,14 +191,16 @@ angular.module('trialsReportApp')
         angular.forEach(resultPostAct.data.Response.data.entries, function (entry) {
           if (entry.standing === recentActivity.standing) {
             var medals = [];
+            var wKills = [];
             var allStats = {};
             if (includeTeam) {
               fireTeam.push(entry);
             } else {
               if (angular.lowercase(entry.player.destinyUserInfo.displayName) === angular.lowercase(name)) {
-                getExtendedStats(entry, medals, allStats);
+                getExtendedStats(entry, medals, allStats, wKills);
                 entry.allStats = allStats;
                 entry.medals = medals;
+                entry.wKills = wKills;
                 entry.playerWeapons = entry.extended.weapons;
                 fireTeam.push(entry);
               }
@@ -207,14 +215,16 @@ angular.module('trialsReportApp')
       var fireTeam = [];
       var playerMedals = [];
       var playerWeapons = [];
+      var playerWKills = [];
       var playerAllStats = {};
       return getMatchSummary(recentActivity, name, true)
         .then(function (lastMatch) {
           angular.forEach(lastMatch, function (member) {
             var player = member.player;
             var medals = [];
+            var wKills = [];
             var allStats = {};
-            getExtendedStats(member, medals, allStats);
+            getExtendedStats(member, medals, allStats, wKills);
             if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase(name)) {
               fireTeam.push({
                 id: player.destinyUserInfo.membershipId,
@@ -224,6 +234,7 @@ angular.module('trialsReportApp')
                 emblem: 'http://www.bungie.net/' + player.destinyUserInfo.iconPath,
                 characterId: member.characterId,
                 medals: medals,
+                wKills: wKills,
                 allStats: allStats,
                 playerWeapons: member.extended.weapons,
                 level: player.characterLevel,
@@ -231,6 +242,7 @@ angular.module('trialsReportApp')
               });
             } else {
               playerAllStats = allStats;
+              playerWKills = wKills;
               playerMedals = medals;
               playerWeapons = member.extended.weapons;
             }
@@ -240,7 +252,8 @@ angular.module('trialsReportApp')
             fireTeam: fireTeam,
             medals: playerMedals,
             playerWeapons: playerWeapons,
-            playerAllStats: playerAllStats
+            playerAllStats: playerAllStats,
+            wKills: playerWKills
           };
         });
     };
