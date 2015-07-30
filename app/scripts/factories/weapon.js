@@ -4,7 +4,7 @@ function pushNode(nodeStep, name, nodes) {
   nodes.push({
     'name': name,
     'description': nodeStep.nodeStepDescription,
-    'icon': 'http://www.bungie.net' + nodeStep.icon
+    'icon': '//bungie.net/' + nodeStep.icon
   });
 }
 

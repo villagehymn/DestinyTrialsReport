@@ -2,7 +2,7 @@
 
 angular.module('trialsReportApp')
   .factory('classStats', function($analytics) {
-    var getData = function(items, talentGrid, definitionItems) {
+    var getData = function(items, talentGrid) {
       var background = [];
       var subClass = [];
       var classNodes = [];
@@ -58,9 +58,10 @@ angular.module('trialsReportApp')
           if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
             classNodes.hazards.push('Superburn Grenade');
           }
-        } else if (itemS.itemLevel === 0 && definitionItems[itemS.itemHash].bucketTypeHash === 4274335291){
-          background[0] = 'http://www.bungie.net' + definitionItems[itemS.itemHash].secondaryIcon;
-          background[1] = 'http://www.bungie.net' + definitionItems[itemS.itemHash].icon;
+        }
+        else if (itemS.itemLevel === 0 && DestinyEmblemDefinitions[itemS.itemHash]){
+          background[0] = '//www.bungie.net' + DestinyEmblemDefinitions[itemS.itemHash].secondaryIcon;
+          background[1] = '//www.bungie.net' + DestinyEmblemDefinitions[itemS.itemHash].icon;
         }
       });
 

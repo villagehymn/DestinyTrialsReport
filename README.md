@@ -12,6 +12,10 @@ Install bower packages
 
 * bower install
 
+Update the definition files
+
+* sudo node manifest.js
+
 Run Local Proxy
 
 * node proxy.js 63294
