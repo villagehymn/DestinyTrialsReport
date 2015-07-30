@@ -55,15 +55,18 @@ module.exports = function(config) {
       'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
+      'app/scripts/app.js',
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
+      'app/lib/*.js',
+      //'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
     // list of files / patterns to exclude
     exclude: [
+      "**/*.git",
+      "**/angular-scenario.js"
     ],
-
     // web server port
     port: 8080,
 
