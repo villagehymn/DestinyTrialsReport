@@ -34,8 +34,8 @@ module.exports = function (grunt) {
       heroku: {
         options: {
           create: ['heroku']
-        },
-      },
+        }
+      }
     },
 
     //Heroku Settings
@@ -60,9 +60,13 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  "main": "server.js",\n');
                     fs.writeSync(fd, '  "dependencies": {\n');
                     fs.writeSync(fd, '    "express": "3.*",\n');
-                    fs.writeSync(fd, '    "request": "^2.40.0",\n');
+                    fs.writeSync(fd, '    "request": "^2.57.0",\n');
                     fs.writeSync(fd, '    "newrelic": "^1.20.2",\n');
                     fs.writeSync(fd, '    "gzippo": "^0.2.0"\n');
+                    fs.writeSync(fd, '    "adm-zip": "^0.4.7",\n');
+                    fs.writeSync(fd, '    "request-promise": "^0.4.2",\n');
+                    fs.writeSync(fd, '    "sqlite3": "^3.0.8",\n');
+                    fs.writeSync(fd, '    "unzip": "^0.1.11"\n');
                     if (min) {
                         fs.writeSync(fd, '\n');
                     } else {
@@ -288,6 +292,7 @@ module.exports = function (grunt) {
             '!<%= yeoman.dist %>/.git{,*/}*',
             //Heroku Settings
             '!<%= yeoman.dist %>/Procfile',
+            '!<%= yeoman.dist %>/manifest.js',
             '!<%= yeoman.dist %>/package.json',
             '!<%= yeoman.dist %>/server.js',
             '!<%= yeoman.dist %>/.gitignore'
@@ -431,7 +436,7 @@ module.exports = function (grunt) {
         assetsDirs: [
           '<%= yeoman.dist %>',
           '<%= yeoman.dist %>/images',
-          '<%= yeoman.dist %>/styles',
+          '<%= yeoman.dist %>/styles'
         ]
       }
     },
@@ -463,12 +468,17 @@ module.exports = function (grunt) {
     // },
 
     imagemin: {
+      //jpg: {
+      //  options: {
+      //    progressive: true
+      //  }
+      //},
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= yeoman.app %>/common/destiny_content/icons',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= yeoman.dist %>/common/destiny_content/icons'
         }]
       }
     },
@@ -598,6 +608,11 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
+        }, {
+          expand: true,
+          cwd: '.',
+          dest: '<%= yeoman.dist %>',
+          src: ['manifest.js']
         }, {
           expand: true,
           cwd: '.',

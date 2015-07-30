@@ -3,11 +3,10 @@
 angular.module('trialsReportApp')
   .factory('inventoryStats', function ($http, requestUrl, weaponStats, armorStats, classStats) {
     var path = requestUrl.url;
-
     var getData = function (membershipType, membershipId, characterId) {
       return $http({
         method: 'GET',
-        url: path + 'Destiny/' + membershipType + '/Account/' + membershipId + '/Character/' + characterId + '/Inventory/?definitions=true'
+        url: path + 'Destiny/' + membershipType + '/Account/' + membershipId + '/Character/' + characterId + '/Inventory/'
       }).then(function (result) {
         return result.data.Response;
       });
@@ -18,12 +17,10 @@ angular.module('trialsReportApp')
           return getData(membershipType, membershipId, characterId)
             .then(function (inventory) {
               var items = inventory.data.buckets.Equippable;
-              var talentGrid = inventory.definitions.talentGrids;
-              var definitionItems = inventory.definitions.items;
+              var talentGrid = DestinyTalentGridDefinition;
               return {
                 items: items,
-                talentGrid: talentGrid,
-                definitionItems: definitionItems
+                talentGrid: talentGrid
               };
             });
         },
@@ -31,7 +28,7 @@ angular.module('trialsReportApp')
           var methods = [
             weaponStats.getData(inventoryItems.items, inventoryItems.talentGrid),
             armorStats.getData(inventoryItems.items),
-            classStats.getData(inventoryItems.items, inventoryItems.talentGrid, inventoryItems.definitionItems)
+            classStats.getData(inventoryItems.items, inventoryItems.talentGrid)
           ];
           return $q.all(methods)
             .then($q.spread(function (weapons, armors, classItems) {

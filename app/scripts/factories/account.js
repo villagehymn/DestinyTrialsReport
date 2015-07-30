@@ -44,8 +44,8 @@ angular.module('trialsReportApp')
           var className = classType === 0 ? 'Titan' : (classType === 2 ? 'Warlock' : 'Hunter');
           var level = resultChar.data.Response.data.characters[0].characterLevel;
           var grimoire = resultChar.data.Response.data.characters[0].characterBase.grimoireScore;
-          var background = ['http://bungie.net' + resultChar.data.Response.data.characters[0].backgroundPath];
-          var emblem = 'http://bungie.net' + resultChar.data.Response.data.characters[0].emblemPath;
+          var background = ['//bungie.net' + resultChar.data.Response.data.characters[0].backgroundPath];
+          var emblem = '//bungie.net' + resultChar.data.Response.data.characters[0].emblemPath;
           angular.forEach(allCharacters, function (character) {
             otherCharacters.push({
               id: membershipId,
@@ -60,8 +60,8 @@ angular.module('trialsReportApp')
               dis: character.characterBase.stats.STAT_DISCIPLINE.value,
               str: character.characterBase.stats.STAT_STRENGTH.value,
               grimoire: character.characterBase.grimoireScore,
-              background: ['http://bungie.net' + character.backgroundPath],
-              emblem: 'http://bungie.net' + character.emblemPath
+              background: ['//bungie.net' + character.backgroundPath],
+              emblem: '//bungie.net' + character.emblemPath
             });
           });
           angular.forEach(otherCharacters, function (character) {
@@ -182,13 +182,6 @@ angular.module('trialsReportApp')
         url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'
       }).then(function (resultPostAct) {
         var fireTeam = [];
-        //var fireteamIndex = [];
-        //console.log(resultPostAct.data.Response.data.entries);
-        //if (recentActivity.standing === 0){
-        //  fireteamIndex = [0,1,2];
-        //}else {
-        //  fireteamIndex = [3,4,5];
-        //}
         angular.forEach(resultPostAct.data.Response.data.entries, function (entry) {
           if (entry.standing === recentActivity.standing) {
             var medals = [];
@@ -206,22 +199,6 @@ angular.module('trialsReportApp')
             }
           }
         });
-        //angular.forEach(fireteamIndex,function(idx) {
-        //  var medals = [];
-        //  var allStats = {};
-        //  var entry = resultPostAct.data.Response.data.entries[idx];
-        //  if (includeTeam){
-        //    fireTeam.push(entry);
-        //  }else {
-        //    if (angular.lowercase(entry.player.destinyUserInfo.displayName) == angular.lowercase(name)) {
-        //      getExtendedStats(entry, medals, allStats);
-        //      entry.allStats = allStats;
-        //      entry.medals = medals;
-        //      entry.playerWeapons = entry.extended.weapons;
-        //      fireTeam.push(entry);
-        //    }
-        //  }
-        //});
         return fireTeam;
       }).catch(function () {});
     };

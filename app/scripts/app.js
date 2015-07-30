@@ -61,16 +61,16 @@ function getDeej() {
       'dis': 194,
       'str': 245,
       'grimoire': 2685,
-      'background': ['http://bungie.net/common/destiny_content/icons/0fc2957b437530a6fec4b241257089bd.jpg'],
-      'emblem': 'http://bungie.net/common/destiny_content/icons/ca7a9bb4a45b7d33a4848577a67cfa33.jpg'
+      'background': [''],
+      'emblem': ''
     }],
     'level': 32,
     'int': 67,
     'dis': 194,
     'str': 245,
     'grimoire': 2685,
-    'background': ['http://bungie.net/common/destiny_content/icons/0fc2957b437530a6fec4b241257089bd.jpg'],
-    'emblem': 'http://bungie.net/common/destiny_content/icons/ca7a9bb4a45b7d33a4848577a67cfa33.jpg',
+    'background': ['//www.bungie.net/common/destiny_content/icons/0fc2957b437530a6fec4b241257089bd.jpg'],
+    'emblem': '//www.bungie.net/common/destiny_content/icons/ca7a9bb4a45b7d33a4848577a67cfa33.jpg',
     'isDeej': true
   };
 }

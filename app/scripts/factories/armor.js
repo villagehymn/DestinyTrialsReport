@@ -44,7 +44,6 @@ angular.module('trialsReportApp')
               }
             }
           });
-
           angular.forEach(itemS.stats, function (stat) {
             switch (stat.statHash) {
             case 144602215:
@@ -59,23 +58,23 @@ angular.module('trialsReportApp')
             }
           });
 
-          switch (aItem.bucket) {
-          case 'BUCKET_HEAD':
+          switch (aItem.bucketTypeHash) {
+          case '3448274439':
             armors.head = {
               'armor': aItem
             };
             break;
-          case 'BUCKET_ARMS':
+          case '3551918588':
             armors.arms = {
               'armor': aItem
             };
             break;
-          case 'BUCKET_CHEST':
+          case '14239492':
             armors.chest = {
               'armor': aItem
             };
             break;
-          case 'BUCKET_LEGS':
+          case '20886954':
             armors.legs = {
               'armor': aItem
             };
