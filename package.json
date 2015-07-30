@@ -64,6 +64,5 @@
   },
   "scripts": {
     "test": "grunt test"
-  },
-  "license": "SEE LICENSE IN LICENSE.md"
+  }
 }
