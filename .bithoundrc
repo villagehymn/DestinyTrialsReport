@@ -7,6 +7,7 @@
     "**/app/scripts/definitions/en/DestinyEmblemDefinitions.js",
     "**/app/scripts/definitions/en/DestinyTalentGridDefinition.js",
     "**/proxy.js",
-    "**/manifest.js"
+    "**/manifest.js",
+    "app/lib/chardinjs.min.js"
   ]
 }
