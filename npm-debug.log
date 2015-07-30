@@ -1,0 +1,35 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.11.3
+3 info using node@v0.12.7
+4 verbose node symlink /usr/local/bin/node
+5 verbose readDependencies loading dependencies from /Users/vfedorov/corgibytes/DestinyTrialsReport/package.json
+6 error install Couldn't read dependencies
+7 verbose stack Error: Failed to parse json
+7 verbose stack Unexpected token 'n' at 3:4
+7 verbose stack   "name": "trials-report",
+7 verbose stack    ^
+7 verbose stack     at parseError (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:379:11)
+7 verbose stack     at parseJson (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:68:23)
+7 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:48:5
+7 verbose stack     at evalmachine.<anonymous>:334:14
+7 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:102:5
+7 verbose stack     at FSReqWrap.oncomplete (evalmachine.<anonymous>:95:15)
+8 verbose cwd /Users/vfedorov/corgibytes/DestinyTrialsReport
+9 error Darwin 14.3.0
+10 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+11 error node v0.12.7
+12 error npm  v2.11.3
+13 error file /Users/vfedorov/corgibytes/DestinyTrialsReport/package.json
+14 error code EJSONPARSE
+15 error Failed to parse json
+15 error Unexpected token 'n' at 3:4
+15 error   "name": "trials-report",
+15 error    ^
+16 error File: /Users/vfedorov/corgibytes/DestinyTrialsReport/package.json
+17 error Failed to parse package.json data.
+17 error package.json must be actual JSON, not just JavaScript.
+17 error
+17 error This is not a bug in npm.
+17 error Tell the package author to fix their package.json file. JSON.parse
+18 verbose exit [ 1, true ]
