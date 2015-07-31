@@ -71,8 +71,8 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam: getDeej,
-          themeSetting: setTheme
+          fireTeam: getDeej
+          //themeSetting: setTheme
         }
       })
       .when('/:platform/:playerName', {
@@ -100,7 +100,7 @@ angular
         redirectTo: '/'
       });
     $locationProvider.html5Mode(true);
-    //$locationProvider.hashPrefix('!');
+    $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
   });

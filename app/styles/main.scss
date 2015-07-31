@@ -86,6 +86,15 @@ body {
   padding: 0;
 }
 
+.bg-white {
+  background-color: #3f4e62 !important;
+}
+
+.navbar {
+  background-color: #3f4e62 !important;
+  border: none!important;
+}
+
 .dark-theme {
   background-color: $darkest-darkgray;
   color: $transparent-white-8;
