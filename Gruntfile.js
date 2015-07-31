@@ -62,7 +62,7 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '    "express": "3.*",\n');
                     fs.writeSync(fd, '    "request": "^2.57.0",\n');
                     fs.writeSync(fd, '    "newrelic": "^1.20.2",\n');
-                    fs.writeSync(fd, '    "gzippo": "^0.2.0"\n');
+                    fs.writeSync(fd, '    "gzippo": "^0.2.0",\n');
                     fs.writeSync(fd, '    "adm-zip": "^0.4.7",\n');
                     fs.writeSync(fd, '    "request-promise": "^0.4.2",\n');
                     fs.writeSync(fd, '    "sqlite3": "^3.0.8",\n');
