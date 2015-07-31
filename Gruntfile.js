@@ -476,9 +476,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/common/destiny_content/icons',
+          cwd: '<%= yeoman.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/common/destiny_content/icons'
+          dest: '<%= yeoman.dist %>/images'
         }]
       }
     },
