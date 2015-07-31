@@ -44,7 +44,7 @@ angular
     'angulartics', 'angulartics.google.analytics',
     'LocalStorageModule', 'toastr',
     'angularHelpOverlay', 'angular.filter',
-    'picardy.fontawesome', 'fillHeight', 'timer'
+    'picardy.fontawesome', 'twygmbh.auto-height', 'timer'
   ]).config(window.$QDecorator)
   .factory('requestUrl', function () {
     return {
@@ -52,19 +52,6 @@ angular
       url: '/bungie/'
     };
   })
-  .run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
-    var original = $location.path;
-    $location.path = function (path, reload) {
-      if (reload === false) {
-        var lastRoute = $route.current;
-        var un = $rootScope.$on('$locationChangeSuccess', function () {
-          $route.current = lastRoute;
-          un();
-        });
-      }
-      return original.apply($location, [path]);
-    };
-  }])
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
     $routeProvider
       .when('/', {
@@ -103,4 +90,24 @@ angular
     $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
-  });
+  }).service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
+
+    this.skipReload = function () {
+      var lastRoute = $route.current;
+      $rootScope.$on('$locationChangeSuccess', function () {
+        if (angular.isUndefined($route.current.params.playerName)){
+          $route.current = lastRoute;
+        }
+      });
+      return this;
+    };
+
+    this.withoutRefresh = function (url, doesReplace) {
+      if(doesReplace){
+        $location.path(url).replace();
+      }
+      else {
+        $location.path(url || '/');
+      }
+    };
+  }]);

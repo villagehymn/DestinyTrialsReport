@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location, $rootScope) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger) {
     $scope.status = null;
     $scope.helpOverlay = false;
     $scope.timerRunning = true;
@@ -133,7 +133,7 @@ angular.module('trialsReportApp')
                 angular.isDefined($scope.fireteam[1]) &&
                 angular.isDefined($scope.fireteam[2])) {
                 var platformUrl = platform === 2 ? '/ps/' : '/xbox/';
-                $location.path(platformUrl + $scope.fireteam[0].name + '/' + $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, false);
+                locationChanger.skipReload().withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' + $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
               }
             }));
         },
@@ -161,12 +161,15 @@ angular.module('trialsReportApp')
     }
 
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
-      $scope.helpOverlay = false;
-      $scope.recentPlayers = null;
-      getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
-      sendAnalytic('loadedPlayer', 'name', name);
-      sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
-      setPlatform($scope, platform);
+      if (includeFireteam) {
+        $location.path((platform ? '/ps/' : '/xbox/') + name);
+      }else {
+        $scope.helpOverlay = false;
+        getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
+        sendAnalytic('loadedPlayer', 'name', name);
+        sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
+        setPlatform($scope, platform);
+      }
     };
 
     $scope.toggleOverlay = function () {

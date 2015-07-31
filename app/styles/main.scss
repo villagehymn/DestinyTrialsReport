@@ -86,13 +86,9 @@ body {
   padding: 0;
 }
 
-.bg-white {
-  background-color: #3f4e62 !important;
-}
-
-.navbar {
-  background-color: #3f4e62 !important;
-  border: none!important;
+.bottom-align {
+  position: absolute;
+  bottom: 0;
 }
 
 .dark-theme {
