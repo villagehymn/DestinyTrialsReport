@@ -165,7 +165,7 @@ angular.module('trialsReportApp')
         $location.path((platform ? '/ps/' : '/xbox/') + name);
       }else {
         $scope.helpOverlay = false;
-        getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
+        getAccountByName(name, (platform ? 2 : 1), $scope, index, true);
         sendAnalytic('loadedPlayer', 'name', name);
         sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
         setPlatform($scope, platform);
@@ -235,7 +235,7 @@ angular.module('trialsReportApp')
               name: member.player.destinyUserInfo.displayName,
               membershipId: member.player.destinyUserInfo.membershipId,
               membershipType: member.player.destinyUserInfo.membershipType,
-              emblem: 'http://www.bungie.net/' + member.player.destinyUserInfo.iconPath,
+              emblem: 'http://www.bungie.net' + member.player.destinyUserInfo.iconPath,
               characterId: member.characterId,
               allStats: allStats,
               medals: medals,

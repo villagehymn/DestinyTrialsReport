@@ -1,7 +1,6 @@
 <ng-include src="headerPartial"></ng-include>
-
 <div class="container" ng-hide="status">
-  <div class="row" auto-height>
+  <div class="row">
     <ng-include src="'views/fireteam/index.html'" ng-show="fireteam[0]"></ng-include>
     <ng-include src="'views/blog/index.html'" ng-show="!fireteam[0]"></ng-include>
   </div>

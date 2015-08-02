@@ -61,7 +61,7 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-6 {{$even ? '' : 'pl-0'}}" ng-repeat="weapon in player.playerWeapons">
+  <div class="col-xs-6 {{$even ? '' : 'pl-0'}}" ng-repeat="weapon in player.playerWeapons track by $index">
     <div class="col-xs-6 text-center p-0">
       <a class="icon icon-default"
          popover="{{getWeaponByHash(weapon.referenceId).name}}"
@@ -102,7 +102,7 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-4 col-md-3 text-center" style="height:120px" ng-repeat="medal in player.medals">
+  <div class="col-xs-4 col-md-3 text-center" style="height:120px" ng-repeat="medal in player.medals  track by $index">
     <a class="icon"
        popover="{{DestinyMedalDefinition[medal.id].statDescription}}"
        popover-trigger="mouseenter">

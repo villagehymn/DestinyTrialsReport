@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="(key, value) in player.mapStats">
+        <tr ng-repeat="(key, value) in player.mapStats track by $index">
           <td class="p-10" ng-bind="DestinyTrialsDefinitions[key].activityName"></td>
           <td class="p-10" ng-bind="value.kills"></td>
           <td class="p-10" ng-bind="value.deaths"></td>

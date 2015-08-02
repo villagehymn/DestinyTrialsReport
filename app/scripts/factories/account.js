@@ -231,7 +231,7 @@ angular.module('trialsReportApp')
                 name: player.destinyUserInfo.displayName,
                 membershipId: player.destinyUserInfo.membershipId,
                 membershipType: player.destinyUserInfo.membershipType,
-                emblem: 'http://www.bungie.net/' + player.destinyUserInfo.iconPath,
+                emblem: 'http://www.bungie.net' + player.destinyUserInfo.iconPath,
                 characterId: member.characterId,
                 medals: medals,
                 wKills: wKills,

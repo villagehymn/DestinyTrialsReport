@@ -96,6 +96,12 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, 'var express = require("express");\n');
                     fs.writeSync(fd, 'var request = require("request");\n');
                     fs.writeSync(fd, 'var app = express();\n');
+                    fs.writeSync(fd, 'var domain = require("domain");\n');
+                    fs.writeSync(fd, 'var d = domain.create();\n');
+
+                    fs.writeSync(fd, 'd.on("error", function(err) {\n');
+                    fs.writeSync(fd, 'console.error(err);\n');
+                    fs.writeSync(fd, '});\n');
                     if (useAuth) {
                         var userName = 'test';
                         var password = 'password1';
