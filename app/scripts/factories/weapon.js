@@ -11,21 +11,21 @@ function pushNode(nodeStep, name, nodes) {
   nodes.push({
     'name': name,
     'description': nodeStep.nodeStepDescription,
-    'icon': '//bungie.net/' + nodeStep.icon
+    'icon': 'http://www.bungie.net' + nodeStep.icon
   });
 }
 
 function setDmgElement(nodeStep, weapon) {
   switch (nodeStep.nodeStepName) {
-  case 'Solar Damage':
-    weapon.burnColor = 'solar-dmg';
-    break;
-  case 'Void Damage':
-    weapon.burnColor = 'void-dmg';
-    break;
-  case 'Arc Damage':
-    weapon.burnColor = 'arc-dmg';
-    break;
+    case 'Solar Damage':
+      weapon.burnColor = 'solar-dmg';
+      break;
+    case 'Void Damage':
+      weapon.burnColor = 'void-dmg';
+      break;
+    case 'Arc Damage':
+      weapon.burnColor = 'arc-dmg';
+      break;
   }
 }
 
@@ -70,7 +70,7 @@ angular.module('trialsReportApp')
             if (node.isActivated === true) {
               var nodeStep = talentGrid[itemS.talentGridHash].nodes[index].steps[node.stepIndex];
               if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                if (secondaryW.subType === 'Sniper Rifle') {
+                if (secondaryW.subType === 12) {
                   if (nodeStep.perkHashes[0] === 3752206822) {
                     weapons.hazards.push('Final Round Sniper');
                   }
@@ -85,7 +85,7 @@ angular.module('trialsReportApp')
             'weapon': secondaryW,
             'nodes': nodes
           };
-          if ((secondaryW.subType === 'Sniper Rifle') && (secondaryW.name !== 'No Land Beyond')) {
+          if ((secondaryW.subType === 12) && (secondaryW.name !== 'No Land Beyond')) {
             angular.forEach(itemS.stats, function (stat) {
               if (stat.statHash === 4043523819 && stat.value > 16) {
                 if ((itemS.primaryStat.value * stat.value) > 8577) {
@@ -93,7 +93,7 @@ angular.module('trialsReportApp')
                 }
               }
             });
-          } else if (secondaryW.subType === 'Shotgun') {
+          } else if (secondaryW.subType === 7) {
             shotgun = true;
           }
         } else if (DestinyHeavyWeaponDefinitions[itemS.itemHash]) {

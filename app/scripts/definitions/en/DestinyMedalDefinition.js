@@ -2232,5 +2232,8 @@ var DestinyMedalDefinition = {
     iconImage: '/common/destiny_content/icons/icon_m7f5451453a58793961439b2c2ba9f3a9.png',
     unitLabel: '',
     weight: 600
-  }
+  },
+  "weaponKillsGrenade":{"statId":"weaponKillsGrenade","group":2,"periodTypes":[3,2],"modes":[5,10,13,11,8,12,9,7,6,4,2,3,17,16,14,23,15,18,19,20,22,21],"category":0,"statName":"Grenade","unitType":1,"unitLabel":"","weight":1},
+  "weaponKillsMelee":{"statId":"weaponKillsMelee","group":2,"periodTypes":[3,2],"modes":[5,10,13,11,8,12,9,7,6,4,2,3,17,16,14,23,15,18,19,20,22,21],"category":0,"statName":"Melee","unitType":1,"unitLabel":"","weight":1},
+  "weaponKillsSuper":{"statId":"weaponKillsSuper","group":2,"periodTypes":[3,2],"modes":[5,10,13,11,8,12,9,7,6,4,2,3,17,16,14,23,15,18,19,20,22,21],"category":0,"statName":"Super","unitType":1,"unitLabel":"","weight":1}
 };

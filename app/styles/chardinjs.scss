@@ -6,23 +6,28 @@
   transition: $property;
 }
 
+.z99999999 {
+  z-index: 99999999 !important;
+}
+.z000000 {
+  z-index: 000000 !important;
+}
 .chardinjs-overlay {
   position: absolute;
-  z-index: -1;
-//  z-index: 999999;
-//  background-color: #000;
-//  opacity: 0;
-//@include transition(all 0.3s ease-out);
+  z-index: 999999;
+  background-color: #000;
+  opacity: 0;
+@include transition(all 0.3s ease-out);
 }
 
 .chardinjs-helper-layer {
   font-family: Dosis,Arial,sans-serif;;
   position: absolute;
-  z-index: -1;
-  color: #616f77;
+  z-index: 9999999;
+  color: #fff;
 @include transition(all 0.3s ease-out);
 
-&.chardinjs-left { border-left: solid #616f77 2px; margin-left: -10px;
+&.chardinjs-left { border-left: solid #fff 2px; margin-left: -10px;
   &.red {
     border-left: solid #d9534f 2px;
   }
@@ -38,7 +43,7 @@
   &.green{
     border-left: solid #16a085 2px;
   }}
-&.chardinjs-right { border-right: solid #616f77 2px; padding-right: 10px; margin-left: 10px;
+&.chardinjs-right { border-right: solid #fff 2px; padding-right: 10px; margin-left: 10px;
   &.red {
     border-right: solid #d9534f 2px;
   }
@@ -54,12 +59,13 @@
   &.green{
     border-right: solid #16a085 2px;
   }}
-&.chardinjs-bottom { border-bottom: solid #616f77 2px; padding-bottom: 10px; margin-top: 10px; }
-&.chardinjs-top { border-top: solid #616f77 2px; padding-top: 10px; }
+&.chardinjs-bottom { border-bottom: solid #fff 2px; padding-bottom: 10px; margin-top: 10px; }
+&.chardinjs-top { border-top: solid #fff 2px; padding-top: 10px; }
 }
 
 .chardinjs-tooltip {
   position: absolute;
+  font-weight: 600;
 @include transition(opacity 0.1s ease-out);
   max-width: 200px;
 
@@ -71,7 +77,7 @@
 &.chardinjs-right:before, &.chardinjs-left:after, &.chardinjs-bottom:before, &.chardinjs-top:after {
                                                                                 content: ".";
                                                                                 display: inline-block;
-                                                                                background-color: gray;
+                                                                                background-color: white;
                                                                                 height: 1px;
                                                                                 overflow: hidden;
                                                                                 position: absolute;

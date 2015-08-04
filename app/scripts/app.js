@@ -7,6 +7,11 @@ function setUser(currentAccount, name, platform) {
     });
 }
 
+function setTheme($rootScope) {
+  //dark-theme
+  $rootScope.theme = 'bg-white';
+}
+
 function getFromParams(currentAccount, $route) {
   if (angular.isDefined($route.current.params.playerName)) {
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
@@ -14,7 +19,7 @@ function getFromParams(currentAccount, $route) {
   }
 }
 
-function getAllFromParams(currentAccount, $route) {
+function getAllFromParams(currentAccount, $route, $q) {
   if (angular.isDefined($route.current.params.playerOne)) {
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
     return currentAccount.getAccount($route.current.params.playerOne, platform)
@@ -26,53 +31,7 @@ function getAllFromParams(currentAccount, $route) {
 }
 
 function getDeej() {
-  //    Method for outputting log as stringified json
-  //    var cache = [];
-  //    console.log(JSON.stringify(player, function(key, value) {
-  //      if (typeof value === 'object' && value !== null) {
-  //        if (cache.indexOf(value) !== -1) {
-  //          // Circular reference found, discard key
-  //          return;
-  //        }
-  //        // Store value in our collection
-  //        cache.push(value);
-  //      }
-  //      return value;
-  //    }));
-  //    cache = null;
-  return {
-    'id': '4611686018429501017',
-    'name': 'DeeJ BNG',
-    'membershipId': '4611686018429501017',
-    'membershipType': 1,
-    'characterId': '2305843009292996472',
-    'className': 'Warlock',
-    'classType': 2,
-    'otherCharacters': [{
-      'id': '4611686018429501017',
-      'name': 'DeeJ BNG',
-      'classType': 2,
-      'className': 'Warlock',
-      'membershipId': '4611686018429501017',
-      'membershipType': 1,
-      'characterId': '2305843009292996472',
-      'level': 32,
-      'int': 67,
-      'dis': 194,
-      'str': 245,
-      'grimoire': 2685,
-      'background': [''],
-      'emblem': ''
-    }],
-    'level': 32,
-    'int': 67,
-    'dis': 194,
-    'str': 245,
-    'grimoire': 2685,
-    'background': ['//www.bungie.net/common/destiny_content/icons/0fc2957b437530a6fec4b241257089bd.jpg'],
-    'emblem': '//www.bungie.net/common/destiny_content/icons/ca7a9bb4a45b7d33a4848577a67cfa33.jpg',
-    'isDeej': true
-  };
+
 }
 
 
@@ -85,7 +44,8 @@ angular
     'angulartics', 'angulartics.google.analytics',
     'LocalStorageModule', 'toastr',
     'angularHelpOverlay', 'angular.filter',
-    'picardy.fontawesome'
+    'picardy.fontawesome', 'twygmbh.auto-height',
+    'timer'
   ]).config(window.$QDecorator)
   .factory('requestUrl', function () {
     return {
@@ -93,19 +53,6 @@ angular
       url: '/bungie/'
     };
   })
-  .run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
-    var original = $location.path;
-    $location.path = function (path, reload) {
-      if (reload === false) {
-        var lastRoute = $route.current;
-        var un = $rootScope.$on('$locationChangeSuccess', function () {
-          $route.current = lastRoute;
-          un();
-        });
-      }
-      return original.apply($location, [path]);
-    };
-  }])
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
     $routeProvider
       .when('/', {
@@ -113,6 +60,7 @@ angular
         controller: 'MainCtrl',
         resolve: {
           fireTeam: getDeej
+          //themeSetting: setTheme
         }
       })
       .when('/:platform/:playerName', {
@@ -143,4 +91,24 @@ angular
     $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
-  });
+  }).service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
+
+    this.skipReload = function () {
+      var lastRoute = $route.current;
+      $rootScope.$on('$locationChangeSuccess', function () {
+        if (angular.isUndefined($route.current.params.playerName)){
+          $route.current = lastRoute;
+        }
+      });
+      return this;
+    };
+
+    this.withoutRefresh = function (url, doesReplace) {
+      if(doesReplace){
+        $location.path(url).replace();
+      }
+      else {
+        $location.path(url || '/');
+      }
+    };
+  }]);

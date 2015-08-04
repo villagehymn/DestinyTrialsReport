@@ -1,13 +1,19 @@
 'use strict';
 
-function getExtendedStats(member, medals, allStats) {
+function getExtendedStats(member, medals, allStats, wKills) {
   angular.forEach(member.extended.values, function (value, index) {
     if (index.substring(0, 6) === 'medals') {
       medals.push({
         id: index,
         count: value.basic.value
       });
-    } else {
+    }else if (index.substring(0, 11) === 'weaponKills') {
+      wKills.push({
+        id: index,
+        count: value.basic.value
+      });
+    }
+    else {
       allStats[index] = value;
     }
   });
@@ -91,7 +97,7 @@ angular.module('trialsReportApp')
     var getActivities = function (account) {
       return $http({
         method: 'GET',
-        url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId + '/?mode=14&count=100'
+        url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId + '/?mode=14&count=25'
       }).then(function (resultAct) {
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
@@ -103,36 +109,36 @@ angular.module('trialsReportApp')
           'id': activities[0].activityDetails.instanceId,
           'standing': activities[0].values.standing.basic.value
         };
-        var totals = {};
-        totals.kills = 0;
-        totals.deaths = 0;
-        totals.assists = 0;
-        totals.wins = 0;
-        totals.losses = 0;
-        var mapStats = {};
+        //var totals = {};
+        //totals.kills = 0;
+        //totals.deaths = 0;
+        //totals.assists = 0;
+        //totals.wins = 0;
+        //totals.losses = 0;
+        //var mapStats = {};
         angular.forEach(activities.slice().reverse(), function (activity) {
-          var mapHash = activity.activityDetails.referenceId;
-          if (!angular.isObject(mapStats[mapHash])) {
-            mapStats[mapHash] = {};
-            mapStats[mapHash].kills = 0;
-            mapStats[mapHash].deaths = 0;
-            mapStats[mapHash].assists = 0;
-            mapStats[mapHash].wins = 0;
-            mapStats[mapHash].losses = 0;
-          }
-          mapStats[mapHash].kills += activity.values.kills.basic.value;
-          mapStats[mapHash].deaths += activity.values.deaths.basic.value;
-          mapStats[mapHash].assists += activity.values.assists.basic.value;
-          totals.kills += activity.values.kills.basic.value;
-          totals.deaths += activity.values.deaths.basic.value;
-          totals.assists += activity.values.assists.basic.value;
-          if (activity.values.standing.basic.value === 0) {
-            mapStats[mapHash].wins += 1;
-            totals.wins += 1;
-          } else {
-            mapStats[mapHash].losses += 1;
-            totals.losses += 1;
-          }
+          //var mapHash = activity.activityDetails.referenceId;
+          //if (!angular.isObject(mapStats[mapHash])) {
+          //  mapStats[mapHash] = {};
+          //  mapStats[mapHash].kills = 0;
+          //  mapStats[mapHash].deaths = 0;
+          //  mapStats[mapHash].assists = 0;
+          //  mapStats[mapHash].wins = 0;
+          //  mapStats[mapHash].losses = 0;
+          //}
+          //mapStats[mapHash].kills += activity.values.kills.basic.value;
+          //mapStats[mapHash].deaths += activity.values.deaths.basic.value;
+          //mapStats[mapHash].assists += activity.values.assists.basic.value;
+          //totals.kills += activity.values.kills.basic.value;
+          //totals.deaths += activity.values.deaths.basic.value;
+          //totals.assists += activity.values.assists.basic.value;
+          //if (activity.values.standing.basic.value === 0) {
+          //  mapStats[mapHash].wins += 1;
+          //  totals.wins += 1;
+          //} else {
+          //  mapStats[mapHash].losses += 1;
+          //  totals.losses += 1;
+          //}
           pastActivities.push({
             'id': activity.activityDetails.instanceId,
             'standing': activity.values.standing.basic.value,
@@ -146,9 +152,9 @@ angular.module('trialsReportApp')
         return angular.extend(account, {
           recentActivity: recentActivity,
           pastActivities: pastActivities.reverse().slice(0, 24).reverse(),
-          allActivities: pastActivities,
-          mapStats: mapStats,
-          totals: totals
+          allActivities: pastActivities
+          //mapStats: mapStats,
+          //totals: totals
         });
       }).catch(function () {});
     };
@@ -185,14 +191,16 @@ angular.module('trialsReportApp')
         angular.forEach(resultPostAct.data.Response.data.entries, function (entry) {
           if (entry.standing === recentActivity.standing) {
             var medals = [];
+            var wKills = [];
             var allStats = {};
             if (includeTeam) {
               fireTeam.push(entry);
             } else {
               if (angular.lowercase(entry.player.destinyUserInfo.displayName) === angular.lowercase(name)) {
-                getExtendedStats(entry, medals, allStats);
+                getExtendedStats(entry, medals, allStats, wKills);
                 entry.allStats = allStats;
                 entry.medals = medals;
+                entry.wKills = wKills;
                 entry.playerWeapons = entry.extended.weapons;
                 fireTeam.push(entry);
               }
@@ -207,23 +215,26 @@ angular.module('trialsReportApp')
       var fireTeam = [];
       var playerMedals = [];
       var playerWeapons = [];
+      var playerWKills = [];
       var playerAllStats = {};
       return getMatchSummary(recentActivity, name, true)
         .then(function (lastMatch) {
           angular.forEach(lastMatch, function (member) {
             var player = member.player;
             var medals = [];
+            var wKills = [];
             var allStats = {};
-            getExtendedStats(member, medals, allStats);
+            getExtendedStats(member, medals, allStats, wKills);
             if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase(name)) {
               fireTeam.push({
                 id: player.destinyUserInfo.membershipId,
                 name: player.destinyUserInfo.displayName,
                 membershipId: player.destinyUserInfo.membershipId,
                 membershipType: player.destinyUserInfo.membershipType,
-                emblem: 'http://www.bungie.net/' + player.destinyUserInfo.iconPath,
+                emblem: 'http://www.bungie.net' + player.destinyUserInfo.iconPath,
                 characterId: member.characterId,
                 medals: medals,
+                wKills: wKills,
                 allStats: allStats,
                 playerWeapons: member.extended.weapons,
                 level: player.characterLevel,
@@ -231,6 +242,7 @@ angular.module('trialsReportApp')
               });
             } else {
               playerAllStats = allStats;
+              playerWKills = wKills;
               playerMedals = medals;
               playerWeapons = member.extended.weapons;
             }
@@ -240,7 +252,8 @@ angular.module('trialsReportApp')
             fireTeam: fireTeam,
             medals: playerMedals,
             playerWeapons: playerWeapons,
-            playerAllStats: playerAllStats
+            playerAllStats: playerAllStats,
+            wKills: playerWKills
           };
         });
     };

@@ -86,12 +86,37 @@ body {
   padding: 0;
 }
 
+.bottom-align {
+  position: absolute;
+  bottom: 0;
+}
+
 .ml-15 {
   margin-left: 15px !important;
 }
 
 .mr-15 {
   margin-right: 15px !important;
+}
+
+.pr-5 {
+  padding-right: 5px !important;
+}
+
+.pl-5 {
+  padding-left: 5px !important;
+}
+
+.top-left {
+  top: 20px;
+  left: 20px;
+  position: fixed;
+}
+
+.top-right {
+  top: 21px;
+  right: 0;
+  position: fixed;
 }
 
 .btn.btn-icon-only {
@@ -230,7 +255,7 @@ tr.thin {
 @media screen and (max-width: 768px) {
   .nav-justified > li, .nav-tabs.nav-justified > li {
     float: left;
-    width: 33%;
+    width: 50%;
   }
 }
 
@@ -268,6 +293,11 @@ tr.thin {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
+}
+
+.github-fork-ribbon-wrapper.right-bottom .github-fork-ribbon {
+  top: 81px;
+  right: -42px;
 }
 
 //.footer {

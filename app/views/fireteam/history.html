@@ -61,7 +61,7 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-6 {{$even ? '' : 'pl-0'}}" ng-repeat="weapon in player.playerWeapons">
+  <div class="col-xs-6 {{$even ? '' : 'pl-0'}}" ng-repeat="weapon in player.playerWeapons track by $index">
     <div class="col-xs-6 text-center p-0">
       <a class="icon icon-default"
          popover="{{getWeaponByHash(weapon.referenceId).name}}"
@@ -84,10 +84,25 @@
       </p>
     </div>
   </div>
+  <!--<div class="col-xs-6 {{$even ? '' : 'pl-0'}}" ng-repeat="wKill in player.wKills" ng-show="DestinyMedalDefinition[wKill.id]">-->
+    <!--<div class="col-xs-6 text-center p-0">-->
+      <!--<a class="icon icon-default"-->
+         <!--popover="{{DestinyMedalDefinition[wKill.id].statName}}"-->
+         <!--popover-trigger="mouseenter">-->
+        <!--<img class="img-responsive" ng-src="{{DestinyMedalDefinition[wKill.id].iconImage || ''}}">-->
+      <!--</a>-->
+    <!--</div>-->
+    <!--<div class="col-xs-6 text-center p-0">-->
+      <!--<p class="text-left text-sm m-0 mb-10">-->
+        <!--<strong>HS Acc:</strong>-->
+        <!--<span ng-bind="wKill.values.basic.displayValue"></span>-->
+      <!--</p>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>
 
 <div class="row">
-  <div class="col-xs-4 col-md-3 text-center" style="height:120px" ng-repeat="medal in player.medals">
+  <div class="col-xs-4 col-md-3 text-center" style="height:120px" ng-repeat="medal in player.medals  track by $index">
     <a class="icon"
        popover="{{DestinyMedalDefinition[medal.id].statDescription}}"
        popover-trigger="mouseenter">

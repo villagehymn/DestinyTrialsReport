@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger) {
     $scope.status = null;
     $scope.helpOverlay = false;
+    $scope.timerRunning = true;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyPrimaryWeaponDefinitions = DestinyPrimaryWeaponDefinitions;
     $scope.DestinySpecialWeaponDefinitions = DestinySpecialWeaponDefinitions;
@@ -40,11 +41,13 @@ angular.module('trialsReportApp')
     function setPostActivityStats($scope, index, result) {
       $scope.fireteam[index].medals = result.medals;
       $scope.fireteam[index].allStats = result.playerAllStats;
+      $scope.fireteam[index].wKills = result.wKills;
       $scope.fireteam[index].playerWeapons = result.playerWeapons;
     }
 
     function setPlayerStats(player, index, stats, includeTeam, $scope) {
       currentAccount.getFireteam(player.recentActivity, player.name).then(function (result) {
+        console.log(result);
         $scope.fireteam[index].fireTeam = result.fireTeam;
         setPostActivityStats($scope, index, result, stats);
         if (index === 0 && angular.isUndefined($scope.fireteam[0].teamFromParams)) {
@@ -59,11 +62,6 @@ angular.module('trialsReportApp')
       }
       return currentAccount.getAccount(name, platform)
         .then(function (player) {
-          //if (!angular.isObject(player)) {
-          //  $timeout(function () {
-          //    $scope.helpOverlay = true;
-          //  }, 1000);
-          //}
           return player;
         }).then(function (player) {
           sendAnalytic('searchedPlayer', 'name', name);
@@ -115,23 +113,16 @@ angular.module('trialsReportApp')
                 $scope.fireteam[index] = activity;
               }
               $scope.fireteam[index].stats = stats;
-              if (includeFireteam || $scope.fireteam[0].isDeej) {
+              if (includeFireteam) {
                 setPlayerStats(player, index, stats, includeFireteam, $scope);
               }
               checkGrimoire($scope, $scope.fireteam[index], index);
 
-              if (angular.isDefined($scope.fireteam[0].teamFromParams) &&
-                angular.isUndefined($scope.fireteam[1])) {
-                getAccountByName(decodeURIComponent($scope.fireteam[0].teamFromParams[0]), $scope.fireteam[0].membershipType, $scope, 1, true);
-              } else if (angular.isDefined($scope.fireteam[0].teamFromParams) &&
-                angular.isUndefined($scope.fireteam[2])) {
-                getAccountByName(decodeURIComponent($scope.fireteam[0].teamFromParams[1]), $scope.fireteam[0].membershipType, $scope, 2, true);
-              }
               if (angular.isDefined($scope.fireteam[0]) &&
                 angular.isDefined($scope.fireteam[1]) &&
                 angular.isDefined($scope.fireteam[2])) {
                 var platformUrl = platform === 2 ? '/ps/' : '/xbox/';
-                $location.path(platformUrl + $scope.fireteam[0].name + '/' + $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, false);
+                locationChanger.skipReload().withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' + $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
               }
             }));
         },
@@ -146,38 +137,24 @@ angular.module('trialsReportApp')
         .catch(reportProblems);
     };
 
-    if (angular.isDefined(fireTeam.isDeej)) {
-      $scope.fireteam = [fireTeam];
-      $scope.fireteam.isDeej = true;
-      $scope.platformValue = true;
-      searchFireteam($scope, $scope.fireteam[0], 0, 1, false);
-      $timeout(function () {
-        $scope.helpOverlay = true;
-      }, 1000);
-    } else if (angular.isObject(fireTeam)) {
-      $scope.fireteam = [fireTeam];
-      var platform = fireTeam.membershipType === 2;
-      $scope.platformValue = platform;
-      searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
-    } else {
-      //$timeout(function () {
-      //  $scope.helpOverlay = true;
-      //}, 1000);
-    }
-
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
-      $scope.helpOverlay = false;
-      $scope.recentPlayers = null;
-      if (angular.isDefined($scope.fireteam[0])) {
-        if (angular.isDefined($scope.fireteam[0].isDeej)) {
-          $scope.fireteam[0].isDeej = null;
-          $scope.fireteam[0] = null;
-        }
+      if (includeFireteam) {
+        $location.path((platform ? '/ps/' : '/xbox/') + name);
+      }else {
+        $scope.helpOverlay = false;
+        getAccountByName(name, (platform ? 2 : 1), $scope, index, true);
+        sendAnalytic('loadedPlayer', 'name', name);
+        sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
+        setPlatform($scope, platform);
       }
-      getAccountByName(name, (platform ? 2 : 1), $scope, index, includeFireteam);
-      sendAnalytic('loadedPlayer', 'name', name);
-      sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
-      setPlatform($scope, platform);
+    };
+
+    $scope.toggleOverlay = function () {
+      $scope.helpOverlay = !$scope.helpOverlay;
+    };
+
+    $scope.changeTheme = function (name) {
+      $rootScope.theme = name;
     };
 
     $scope.getWeaponByHash = function (hash) {
@@ -235,7 +212,7 @@ angular.module('trialsReportApp')
               name: member.player.destinyUserInfo.displayName,
               membershipId: member.player.destinyUserInfo.membershipId,
               membershipType: member.player.destinyUserInfo.membershipType,
-              emblem: 'http://www.bungie.net/' + member.player.destinyUserInfo.iconPath,
+              emblem: 'http://www.bungie.net' + member.player.destinyUserInfo.iconPath,
               characterId: member.characterId,
               allStats: allStats,
               medals: medals,
@@ -288,4 +265,25 @@ angular.module('trialsReportApp')
         label: label
       });
     };
+
+    if (angular.isObject(fireTeam)) {
+      $scope.fireteam = [fireTeam];
+      var platform = fireTeam.membershipType === 2;
+      $scope.platformValue = platform;
+
+      searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
+      if (angular.isDefined($scope.fireteam[0].teamFromParams)){
+        var methods = [
+          currentAccount.getAccount(decodeURIComponent($scope.fireteam[0].teamFromParams[0]), platform ? 2 : 1),
+          currentAccount.getAccount(decodeURIComponent($scope.fireteam[0].teamFromParams[1]), platform ? 2 : 1)
+        ];
+        return $q.all(methods)
+          .then($q.spread(function (playerTwo, playerThree) {
+            searchFireteam($scope, playerTwo, 1, playerTwo.membershipType, true);
+            searchFireteam($scope, playerThree, 2, playerThree.membershipType, true);
+          }));
+      }
+    } else {
+      $scope.platformValue = true;
+    }
   });
