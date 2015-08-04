@@ -81,15 +81,23 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
   padding: 0.2em 0;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
   font-size: 13px;
   padding: 0;
-  margin-bottom: 95px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.flex {
+  flex: 1;
+}
+
+.footer {
+  width: 100%;
+  background-color: #f5f5f5;
 }
 
 .bottom-align {
@@ -299,12 +307,4 @@ tr.thin {
 .github-fork-ribbon-wrapper.left .github-fork-ribbon {
   top: 42px;
   left: -43px;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  min-height: 95px;
-  background-color: #f5f5f5;
 }

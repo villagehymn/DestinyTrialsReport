@@ -44,8 +44,7 @@ angular
     'angulartics', 'angulartics.google.analytics',
     'LocalStorageModule', 'toastr',
     'angularHelpOverlay', 'angular.filter',
-    'picardy.fontawesome', 'twygmbh.auto-height',
-    'timer'
+    'picardy.fontawesome', 'timer'
   ]).config(window.$QDecorator)
   .factory('requestUrl', function () {
     return {
