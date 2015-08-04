@@ -50,8 +50,8 @@ angular.module('trialsReportApp')
           var className = classType === 0 ? 'Titan' : (classType === 2 ? 'Warlock' : 'Hunter');
           var level = resultChar.data.Response.data.characters[0].characterLevel;
           var grimoire = resultChar.data.Response.data.characters[0].characterBase.grimoireScore;
-          var background = ['//bungie.net' + resultChar.data.Response.data.characters[0].backgroundPath];
-          var emblem = '//bungie.net' + resultChar.data.Response.data.characters[0].emblemPath;
+          var background = ['https://bungie.net' + resultChar.data.Response.data.characters[0].backgroundPath];
+          var emblem = 'https://bungie.net' + resultChar.data.Response.data.characters[0].emblemPath;
           angular.forEach(allCharacters, function (character) {
             otherCharacters.push({
               id: membershipId,
@@ -66,8 +66,8 @@ angular.module('trialsReportApp')
               dis: character.characterBase.stats.STAT_DISCIPLINE.value,
               str: character.characterBase.stats.STAT_STRENGTH.value,
               grimoire: character.characterBase.grimoireScore,
-              background: ['//bungie.net' + character.backgroundPath],
-              emblem: '//bungie.net' + character.emblemPath
+              background: ['https://bungie.net' + character.backgroundPath],
+              emblem: 'https://bungie.net' + character.emblemPath
             });
           });
           angular.forEach(otherCharacters, function (character) {

@@ -82,25 +82,25 @@ function extractDB(dbFile) {
         primary[item.itemHash] = {};
         primary[item.itemHash].name = item.itemName;
         primary[item.itemHash].description = item.itemDescription;
-        primary[item.itemHash].icon = 'http://www.bungie.net' + item.icon;
+        primary[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
         primary[item.itemHash].subType = item.itemSubType;
       }else if (item.bucketTypeHash === 2465295065) {
         special[item.itemHash] = {};
         special[item.itemHash].name = item.itemName;
         special[item.itemHash].description = item.itemDescription;
-        special[item.itemHash].icon = 'http://www.bungie.net' + item.icon;
+        special[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
         special[item.itemHash].subType = item.itemSubType;
       }else if (item.bucketTypeHash === 953998645) {
         heavy[item.itemHash] = {};
         heavy[item.itemHash].name = item.itemName;
         heavy[item.itemHash].description = item.itemDescription;
-        heavy[item.itemHash].icon = 'http://www.bungie.net' + item.icon;
+        heavy[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
         heavy[item.itemHash].subType = item.itemSubType;
       }else if (item.itemType === 2) {
         armors[item.itemHash] = {};
         armors[item.itemHash].name = item.itemName;
         armors[item.itemHash].description = item.itemDescription;
-        armors[item.itemHash].icon = 'http://www.bungie.net' + item.icon;
+        armors[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
         armors[item.itemHash].subType = item.itemSubType;
         armors[item.itemHash].bucketTypeHash = item.bucketTypeHash
       }else if (item.bucketTypeHash === 4274335291) {

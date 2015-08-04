@@ -46,7 +46,7 @@ angular.module('trialsReportApp')
                   classNodes.push({
                     'name': noderStepper.nodeStepName,
                     'description': noderStepper.nodeStepDescription,
-                    'icon': 'http://www.bungie.net' + noderStepper.icon
+                    'icon': 'https://www.bungie.net' + noderStepper.icon
                   });
                 }
               }
@@ -63,8 +63,8 @@ angular.module('trialsReportApp')
             classNodes.hazards.push('Superburn Grenade');
           }
         } else if (itemS.itemLevel === 0 && DestinyEmblemDefinitions[itemS.itemHash]) {
-          background[0] = '//www.bungie.net' + DestinyEmblemDefinitions[itemS.itemHash].secondaryIcon;
-          background[1] = '//www.bungie.net' + DestinyEmblemDefinitions[itemS.itemHash].icon;
+          background[0] = 'https://www.bungie.net' + DestinyEmblemDefinitions[itemS.itemHash].secondaryIcon;
+          background[1] = 'https://www.bungie.net' + DestinyEmblemDefinitions[itemS.itemHash].icon;
         }
       });
 

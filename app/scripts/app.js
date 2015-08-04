@@ -3,13 +3,8 @@
 function setUser(currentAccount, name, platform) {
   return currentAccount.getAccount(name, platform)
     .then(function (player) {
-      return player;
+      return [player];
     });
-}
-
-function setTheme($rootScope) {
-  //dark-theme
-  $rootScope.theme = 'bg-white';
 }
 
 function getFromParams(currentAccount, $route) {
@@ -19,13 +14,19 @@ function getFromParams(currentAccount, $route) {
   }
 }
 
-function getAllFromParams(currentAccount, $route, $q) {
+function getAllFromParams(currentAccount, $route) {
   if (angular.isDefined($route.current.params.playerOne)) {
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
     return currentAccount.getAccount($route.current.params.playerOne, platform)
       .then(function (player) {
-        player.teamFromParams = [$route.current.params.playerTwo, $route.current.params.playerThree];
-        return player;
+        player.teamFromParams = true;
+        return currentAccount.getAccount($route.current.params.playerTwo, platform)
+        .then(function (playerTwo) {
+            return currentAccount.getAccount($route.current.params.playerThree, platform)
+            .then(function (playerThree) {
+              return [player, playerTwo, playerThree];
+            });
+        });
       });
   }
 }
@@ -59,7 +60,6 @@ angular
         controller: 'MainCtrl',
         resolve: {
           fireTeam: getDeej
-          //themeSetting: setTheme
         }
       })
       .when('/:platform/:playerName', {
@@ -87,7 +87,7 @@ angular
         redirectTo: '/'
       });
     $locationProvider.html5Mode(true);
-    $locationProvider.hashPrefix('!');
+    //$locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
   }).service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {

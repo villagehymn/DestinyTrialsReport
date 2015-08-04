@@ -47,7 +47,6 @@ angular.module('trialsReportApp')
 
     function setPlayerStats(player, index, stats, includeTeam, $scope) {
       currentAccount.getFireteam(player.recentActivity, player.name).then(function (result) {
-        console.log(result);
         $scope.fireteam[index].fireTeam = result.fireTeam;
         setPostActivityStats($scope, index, result, stats);
         if (index === 0 && angular.isUndefined($scope.fireteam[0].teamFromParams)) {
@@ -83,14 +82,10 @@ angular.module('trialsReportApp')
     var searchFireteam = function ($scope, name, index, platform, includeFireteam) {
 
       var useMember = function (teamMember, index) {
-          if (index === 0) {
-            $scope.fireteam = [teamMember];
+          if (angular.isUndefined($scope.fireteam[index])) {
+            $scope.fireteam.push(teamMember);
           } else {
-            if (angular.isUndefined($scope.fireteam[index])) {
-              $scope.fireteam.push(teamMember);
-            } else {
-              $scope.fireteam[index] = teamMember;
-            }
+            $scope.fireteam[index] = teamMember;
           }
           var dfd = $q.defer();
           dfd.resolve($scope.fireteam[index]);
@@ -212,7 +207,7 @@ angular.module('trialsReportApp')
               name: member.player.destinyUserInfo.displayName,
               membershipId: member.player.destinyUserInfo.membershipId,
               membershipType: member.player.destinyUserInfo.membershipType,
-              emblem: 'http://www.bungie.net' + member.player.destinyUserInfo.iconPath,
+              emblem: 'https://www.bungie.net' + member.player.destinyUserInfo.iconPath,
               characterId: member.characterId,
               allStats: allStats,
               medals: medals,
@@ -267,21 +262,16 @@ angular.module('trialsReportApp')
     };
 
     if (angular.isObject(fireTeam)) {
-      $scope.fireteam = [fireTeam];
-      var platform = fireTeam.membershipType === 2;
+      $scope.fireteam = fireTeam;
+      var platform = $scope.fireteam[0].membershipType === 2;
       $scope.platformValue = platform;
 
       searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
       if (angular.isDefined($scope.fireteam[0].teamFromParams)){
-        var methods = [
-          currentAccount.getAccount(decodeURIComponent($scope.fireteam[0].teamFromParams[0]), platform ? 2 : 1),
-          currentAccount.getAccount(decodeURIComponent($scope.fireteam[0].teamFromParams[1]), platform ? 2 : 1)
-        ];
-        return $q.all(methods)
-          .then($q.spread(function (playerTwo, playerThree) {
-            searchFireteam($scope, playerTwo, 1, playerTwo.membershipType, true);
-            searchFireteam($scope, playerThree, 2, playerThree.membershipType, true);
-          }));
+        $scope.fireteam.push(fireTeam[1]);
+        $scope.fireteam.push(fireTeam[2]);
+        searchFireteam($scope, $scope.fireteam[1], 1, $scope.fireteam[1].membershipType, true);
+        searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
       }
     } else {
       $scope.platformValue = true;
