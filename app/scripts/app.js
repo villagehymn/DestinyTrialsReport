@@ -87,7 +87,7 @@ angular
         redirectTo: '/'
       });
     $locationProvider.html5Mode(true);
-    //$locationProvider.hashPrefix('!');
+    $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
   }).service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
