@@ -49,8 +49,8 @@ angular
   ]).config(window.$QDecorator)
   .factory('requestUrl', function () {
     return {
-      url : 'http://localhost:63294/Platform/'
-      //url: '/bungie/'
+      //url : 'http://localhost:63294/Platform/'
+      url: '/bungie/'
     };
   })
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
