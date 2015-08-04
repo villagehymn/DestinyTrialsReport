@@ -19,7 +19,7 @@ function getFromParams(currentAccount, $route) {
   }
 }
 
-function getAllFromParams(currentAccount, $route) {
+function getAllFromParams(currentAccount, $route, $q) {
   if (angular.isDefined($route.current.params.playerOne)) {
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
     return currentAccount.getAccount($route.current.params.playerOne, platform)

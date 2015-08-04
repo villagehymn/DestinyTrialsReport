@@ -11,7 +11,7 @@ function pushNode(nodeStep, name, nodes) {
   nodes.push({
     'name': name,
     'description': nodeStep.nodeStepDescription,
-    'icon': 'https://www.bungie.net' + nodeStep.icon
+    'icon': 'http://www.bungie.net' + nodeStep.icon
   });
 }
 

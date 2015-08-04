@@ -2,7 +2,7 @@
 
 var hazardQuickRevive = [
   40760096, // Light Beyond Nemesis (Warlock)
-  2682002320, // Crest of Alpha Lupi (Titan)
+  2682002320, // Crest of Alpha Lupi (Titan)2272644374
   3821972036 // Crest of Alpha Lupi (Hunter)
 ];
 var hazardGrenadeOnSpawn = [

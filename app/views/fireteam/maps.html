@@ -1,46 +1,46 @@
-<div class="row pt-0" style="margin-top:-3px">
-  <div class="col-xs-12">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger">Map</h5>
-          </th>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger">K</h5>
-          </th>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger">D</h5>
-          </th>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger">A</h5>
-          </th>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger">W</h5>
-          </th>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger">L</h5>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="(key, value) in player.mapStats track by $index">
-          <td class="p-10" ng-bind="DestinyTrialsDefinitions[key].activityName"></td>
-          <td class="p-10" ng-bind="value.kills"></td>
-          <td class="p-10" ng-bind="value.deaths"></td>
-          <td class="p-10" ng-bind="value.assists"></td>
-          <td class="p-10" ng-bind="value.wins"></td>
-          <td class="p-10" ng-bind="value.losses"></td>
-        </tr>
-        <tr>
-          <td class="p-10" style="font-weight:bold">Total</td>
-          <td class="p-10" style="font-weight:bold" ng-bind="player.totals.kills"></td>
-          <td class="p-10" style="font-weight:bold" ng-bind="player.totals.deaths"></td>
-          <td class="p-10" style="font-weight:bold" ng-bind="player.totals.assists"></td>
-          <td class="p-10" style="font-weight:bold" ng-bind="player.totals.wins"></td>
-          <td class="p-10" style="font-weight:bold" ng-bind="player.totals.losses"></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<!--<div class="row pt-0" style="margin-top:-3px">-->
+  <!--<div class="col-xs-12">-->
+    <!--<table class="table table-striped">-->
+      <!--<thead>-->
+        <!--<tr>-->
+          <!--<th class="p-0">-->
+            <!--<h5 class="mt-0 mb-0 custom-font filled bg-danger">Map</h5>-->
+          <!--</th>-->
+          <!--<th class="p-0">-->
+            <!--<h5 class="mt-0 mb-0 custom-font filled bg-danger">K</h5>-->
+          <!--</th>-->
+          <!--<th class="p-0">-->
+            <!--<h5 class="mt-0 mb-0 custom-font filled bg-danger">D</h5>-->
+          <!--</th>-->
+          <!--<th class="p-0">-->
+            <!--<h5 class="mt-0 mb-0 custom-font filled bg-danger">A</h5>-->
+          <!--</th>-->
+          <!--<th class="p-0">-->
+            <!--<h5 class="mt-0 mb-0 custom-font filled bg-danger">W</h5>-->
+          <!--</th>-->
+          <!--<th class="p-0">-->
+            <!--<h5 class="mt-0 mb-0 custom-font filled bg-danger">L</h5>-->
+          <!--</th>-->
+        <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+        <!--<tr ng-repeat="(key, value) in player.mapStats track by $index">-->
+          <!--<td class="p-10" ng-bind="DestinyTrialsDefinitions[key].activityName"></td>-->
+          <!--<td class="p-10" ng-bind="value.kills"></td>-->
+          <!--<td class="p-10" ng-bind="value.deaths"></td>-->
+          <!--<td class="p-10" ng-bind="value.assists"></td>-->
+          <!--<td class="p-10" ng-bind="value.wins"></td>-->
+          <!--<td class="p-10" ng-bind="value.losses"></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td class="p-10" style="font-weight:bold">Total</td>-->
+          <!--<td class="p-10" style="font-weight:bold" ng-bind="player.totals.kills"></td>-->
+          <!--<td class="p-10" style="font-weight:bold" ng-bind="player.totals.deaths"></td>-->
+          <!--<td class="p-10" style="font-weight:bold" ng-bind="player.totals.assists"></td>-->
+          <!--<td class="p-10" style="font-weight:bold" ng-bind="player.totals.wins"></td>-->
+          <!--<td class="p-10" style="font-weight:bold" ng-bind="player.totals.losses"></td>-->
+        <!--</tr>-->
+      <!--</tbody>-->
+    <!--</table>-->
+  <!--</div>-->
+<!--</div>-->

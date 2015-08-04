@@ -66,7 +66,8 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '    "adm-zip": "^0.4.7",\n');
                     fs.writeSync(fd, '    "request-promise": "^0.4.2",\n');
                     fs.writeSync(fd, '    "sqlite3": "^3.0.8",\n');
-                    fs.writeSync(fd, '    "unzip": "^0.1.11"\n');
+                    fs.writeSync(fd, '    "unzip": "^0.1.11",\n');
+                    fs.writeSync(fd, '    "throng": "^1.0.0"\n');
                     if (min) {
                         fs.writeSync(fd, '\n');
                     } else {
@@ -91,51 +92,61 @@ module.exports = function (grunt) {
                 file: 'heroku/server.js',
                 method: function(fs, fd, done) {
                     var useAuth = false;
-                    fs.writeSync(fd, 'require("newrelic");\n');
-                    fs.writeSync(fd, 'var gzippo = require("gzippo");\n');
-                    fs.writeSync(fd, 'var express = require("express");\n');
-                    fs.writeSync(fd, 'var request = require("request");\n');
-                    fs.writeSync(fd, 'var app = express();\n');
-                    fs.writeSync(fd, 'var domain = require("domain");\n');
-                    fs.writeSync(fd, 'var d = domain.create();\n');
+                    fs.writeSync(fd, 'require("newrelic");\n\n');
+                    fs.writeSync(fd, 'var throng = require("throng");\n');
+                    fs.writeSync(fd, 'var WORKERS = process.env.WEB_CONCURRENCY || 1;\n\n');
+                    fs.writeSync(fd, 'throng(start, {\n');
+                    fs.writeSync(fd, '  workers: WORKERS,\n');
+                    fs.writeSync(fd, '  lifetime: Infinity\n');
+                    fs.writeSync(fd, '});\n\n');
 
-                    fs.writeSync(fd, 'd.on("error", function(err) {\n');
-                    fs.writeSync(fd, 'console.error(err);\n');
-                    fs.writeSync(fd, '});\n');
-                    if (useAuth) {
-                        var userName = 'test';
-                        var password = 'password1';
-                        fs.writeSync(fd, 'app.use(express.basicAuth("' + userName + '", "' + password + '"));\n');
-                    }
-                    fs.writeSync(fd, 'app.use(gzippo.staticGzip(__dirname));\n');
-                    fs.writeSync(fd, 'app.get("/:platform/:playerName", function(req, res){\n');
-                    fs.writeSync(fd, '  res.sendfile(__dirname + "/index.html");\n');
-                    fs.writeSync(fd, '});\n');
-                    fs.writeSync(fd, 'app.get("/:platform/:playerOne/:playerTwo/:playerThree", function(req, res){\n');
-                    fs.writeSync(fd, '  res.sendfile(__dirname + "/index.html");\n');
-                    fs.writeSync(fd, '});\n');
-                    fs.writeSync(fd, 'app.get("/bungie/*?", function(req, res){\n');
-                    fs.writeSync(fd, '  res.setTimeout(25000);\n');
-                    fs.writeSync(fd, '  var api_key = process.env.BUNGIE_API;\n');
-                    fs.writeSync(fd, '  var options = {\n');
-                    fs.writeSync(fd, '    url: "https://www.bungie.net/Platform/" + req.originalUrl.replace("/bungie/", ""),\n');
-                    fs.writeSync(fd, '    headers: {\n');
-                    fs.writeSync(fd, '      "X-API-Key": api_key\n');
-                    fs.writeSync(fd, '    }\n');
-                    fs.writeSync(fd, '  };\n');
-                    fs.writeSync(fd, '  try {request(options, function(error, response, body) {\n');
-                    fs.writeSync(fd, '      res.write(body);\n');
+                    fs.writeSync(fd, 'function start() {\n');
+                    fs.writeSync(fd, '  var gzippo = require("gzippo");\n');
+                    fs.writeSync(fd, '  var express = require("express");\n');
+                    fs.writeSync(fd, '  var request = require("request");\n');
+                    fs.writeSync(fd, '  var app = express();\n');
+                    fs.writeSync(fd, '  var domain = require("domain");\n');
+                    fs.writeSync(fd, '  var d = domain.create();\n');
+
+                    fs.writeSync(fd, '  d.on("error", function(err) {\n');
+                    fs.writeSync(fd, '    console.error(err);\n');
+                    fs.writeSync(fd, '  });\n\n');
+
+                    fs.writeSync(fd, '  app.use(gzippo.staticGzip(__dirname));\n');
+                    fs.writeSync(fd, '  app.get("/:platform/:playerName", function(req, res){\n');
+                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '  });\n\n');
+
+                    fs.writeSync(fd, '  app.get("/:platform/:playerOne/:playerTwo/:playerThree", function(req, res){\n');
+                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '  });\n');
+                    fs.writeSync(fd, '  app.get("/bungie/*?", function(req, res){\n');
+                    fs.writeSync(fd, '    res.setTimeout(25000);\n');
+                    fs.writeSync(fd, '    var api_key = process.env.BUNGIE_API;\n');
+                    fs.writeSync(fd, '    var options = {\n');
+                    fs.writeSync(fd, '      url: "https://www.bungie.net/Platform/" + req.originalUrl.replace("/bungie/", ""),\n');
+                    fs.writeSync(fd, '      headers: {\n');
+                    fs.writeSync(fd, '        "X-API-Key": api_key\n');
+                    fs.writeSync(fd, '      }\n');
+                    fs.writeSync(fd, '    };\n');
+                    fs.writeSync(fd, '    try {request(options, function(error, response, body) {\n');
+                    fs.writeSync(fd, '      if (!error) {\n');
+                    fs.writeSync(fd, '        res.write(body);\n');
+                    fs.writeSync(fd, '      } else {\n');
+                    fs.writeSync(fd, '        res.write(error);\n');
+                    fs.writeSync(fd, '      }\n');
                     fs.writeSync(fd, '      res.end()})}\n');
-                    fs.writeSync(fd, '  catch(e) {}\n');
-                    fs.writeSync(fd, '});\n');
-                    fs.writeSync(fd, 'app.all("*", function (req, res, next) {\n');
-                    fs.writeSync(fd, '  res.header("Access-Control-Allow-Origin", "http://www.destinytrialsreport.com");\n');
-                    fs.writeSync(fd, '  return next();\n');
-                    fs.writeSync(fd, '});\n');
-                    fs.writeSync(fd, 'var port = process.env.PORT || 9000;\n');
-                    fs.writeSync(fd, 'app.listen(port, function() {\n');
+                    fs.writeSync(fd, '    catch(e) {}\n');
+                    fs.writeSync(fd, '  });\n');
+                    fs.writeSync(fd, '  app.all("*", function (req, res, next) {\n');
+                    fs.writeSync(fd, '    res.header("Access-Control-Allow-Origin", "http://www.destinytrialsreport.com");\n');
+                    fs.writeSync(fd, '    return next();\n');
+                    fs.writeSync(fd, '  });\n');
+                    fs.writeSync(fd, '  var port = process.env.PORT || 9000;\n');
+                    fs.writeSync(fd, '  app.listen(port, function() {\n');
                     fs.writeSync(fd, '    console.log("Listening on port " + port);\n');
-                    fs.writeSync(fd, '});');
+                    fs.writeSync(fd, '  });\n');
+                    fs.writeSync(fd, '}');
                     done();
                 }
             }, {

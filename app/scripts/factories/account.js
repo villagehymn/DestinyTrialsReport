@@ -97,7 +97,7 @@ angular.module('trialsReportApp')
     var getActivities = function (account) {
       return $http({
         method: 'GET',
-        url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId + '/?mode=14&count=100'
+        url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId + '/?mode=14&count=25'
       }).then(function (resultAct) {
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
@@ -109,36 +109,36 @@ angular.module('trialsReportApp')
           'id': activities[0].activityDetails.instanceId,
           'standing': activities[0].values.standing.basic.value
         };
-        var totals = {};
-        totals.kills = 0;
-        totals.deaths = 0;
-        totals.assists = 0;
-        totals.wins = 0;
-        totals.losses = 0;
-        var mapStats = {};
+        //var totals = {};
+        //totals.kills = 0;
+        //totals.deaths = 0;
+        //totals.assists = 0;
+        //totals.wins = 0;
+        //totals.losses = 0;
+        //var mapStats = {};
         angular.forEach(activities.slice().reverse(), function (activity) {
-          var mapHash = activity.activityDetails.referenceId;
-          if (!angular.isObject(mapStats[mapHash])) {
-            mapStats[mapHash] = {};
-            mapStats[mapHash].kills = 0;
-            mapStats[mapHash].deaths = 0;
-            mapStats[mapHash].assists = 0;
-            mapStats[mapHash].wins = 0;
-            mapStats[mapHash].losses = 0;
-          }
-          mapStats[mapHash].kills += activity.values.kills.basic.value;
-          mapStats[mapHash].deaths += activity.values.deaths.basic.value;
-          mapStats[mapHash].assists += activity.values.assists.basic.value;
-          totals.kills += activity.values.kills.basic.value;
-          totals.deaths += activity.values.deaths.basic.value;
-          totals.assists += activity.values.assists.basic.value;
-          if (activity.values.standing.basic.value === 0) {
-            mapStats[mapHash].wins += 1;
-            totals.wins += 1;
-          } else {
-            mapStats[mapHash].losses += 1;
-            totals.losses += 1;
-          }
+          //var mapHash = activity.activityDetails.referenceId;
+          //if (!angular.isObject(mapStats[mapHash])) {
+          //  mapStats[mapHash] = {};
+          //  mapStats[mapHash].kills = 0;
+          //  mapStats[mapHash].deaths = 0;
+          //  mapStats[mapHash].assists = 0;
+          //  mapStats[mapHash].wins = 0;
+          //  mapStats[mapHash].losses = 0;
+          //}
+          //mapStats[mapHash].kills += activity.values.kills.basic.value;
+          //mapStats[mapHash].deaths += activity.values.deaths.basic.value;
+          //mapStats[mapHash].assists += activity.values.assists.basic.value;
+          //totals.kills += activity.values.kills.basic.value;
+          //totals.deaths += activity.values.deaths.basic.value;
+          //totals.assists += activity.values.assists.basic.value;
+          //if (activity.values.standing.basic.value === 0) {
+          //  mapStats[mapHash].wins += 1;
+          //  totals.wins += 1;
+          //} else {
+          //  mapStats[mapHash].losses += 1;
+          //  totals.losses += 1;
+          //}
           pastActivities.push({
             'id': activity.activityDetails.instanceId,
             'standing': activity.values.standing.basic.value,
@@ -152,9 +152,9 @@ angular.module('trialsReportApp')
         return angular.extend(account, {
           recentActivity: recentActivity,
           pastActivities: pastActivities.reverse().slice(0, 24).reverse(),
-          allActivities: pastActivities,
-          mapStats: mapStats,
-          totals: totals
+          allActivities: pastActivities
+          //mapStats: mapStats,
+          //totals: totals
         });
       }).catch(function () {});
     };
