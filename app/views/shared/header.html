@@ -1,11 +1,21 @@
 <div class="header b-0">
   <div class="navbar navbar-default bg-darkgray lt b-0" role="navigation">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row mt-20 mb-20">
-        <div class="hidden-xs hidden-sm col-md-2">
-          <a href="/" target="_self" class="btn btn-default" style="color:#222">Home</a>
+        <!--<div class="hidden-xs hidden-sm col-md-2 m-0 p-0" style="left: -13% !important;margin-top: 3px !important;">-->
+          <!--<a href="/" target="_self" style="text-decoration: none;"><h3 class="text-light text-white lato m-0 p-0" style="margin-right: 80px !important;">-->
+            <!--<span class="hidden-sm">Destiny</span><span class="text-trialsgold">Trials</span>Report-->
+          <!--</h3></a>-->
+        <!--</div>-->
+        <div class="hidden-xs hidden-sm col-md-2 col-md-offset-1 p-0">
+          <a href="/" target="_self" style="text-decoration: none;"><h3 class="text-light logo text-white lato m-0 p-0">
+            <span class="hidden-sm logo-destiny">Destiny</span><span class="text-trialsgold">Trials</span>Report
+          </h3></a>
         </div>
-        <div class="col-xs-12 col-md-8">
+        <!--<div class="hidden-xs hidden-sm col-md-2">-->
+          <!--&lt;!&ndash;<a href="/" target="_self" class="btn btn-default" style="color:#222">Home</a>&ndash;&gt;-->
+        <!--</div>-->
+        <div class="col-xs-12 col-md-6">
           <form ng-submit="searchPlayerbyName(mainPlayer, platformValue, 0, true)">
             <div class="input-group">
               <span class="input-group-btn"
@@ -22,7 +32,7 @@
             </div>
           </form>
         </div>
-        <div ng-show="fireteam" class="hidden-xs hidden-sm col-md-2 text-right">
+        <div ng-show="fireteam" class="hidden-xs hidden-sm col-md-1 text-right">
           <button type="button" class="btn btn-default" ng-click="toggleOverlay()">Help</button>
         </div>
       </div>
