@@ -7,8 +7,8 @@
             <div class="btn-group ng-scope pull-left"
                  data-intro="Toggle between PS and Xbox platforms"
                  data-position="left" ng-attr-data-opts="hidden-xs hidden-sm">
-              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="platformValue" btn-radio="true">PSN</label>
-              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="platformValue" btn-radio="false">XBOX</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="platformValue" btn-radio="true">PS<span class="hidden-xs">N</span></label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="platformValue" btn-radio="false">XB<span class="hidden-xs">OX</span></label>
             </div>
 
             <div class="input-group">
@@ -20,7 +20,7 @@
           </form>
         </div>
         <div class="hidden-xs hidden-sm col-md-2 text-white text-right">
-          <button type="button" class="btn bg-default lter"
+          <button type="button" class="btn btn-default"
                   ng-click="toggleOverlay()">Help</button>
         </div>
       </div>
