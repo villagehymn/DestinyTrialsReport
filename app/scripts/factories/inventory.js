@@ -6,9 +6,9 @@ angular.module('trialsReportApp')
     var getData = function (membershipType, membershipId, characterId) {
       return $http({
         method: 'GET',
-        url: path + 'Destiny/' + membershipType + '/Account/' + membershipId + '/Character/' + characterId + '/Inventory/'
+        url: 'http://api.destinytrialsreport.com/getInventory/' + membershipType + '/' + membershipId + '/' + characterId
       }).then(function (result) {
-        return result.data.Response;
+        return result.data;
       });
     };
 
@@ -16,19 +16,14 @@ angular.module('trialsReportApp')
       var setInventory = function (membershipType, membershipId, characterId) {
           return getData(membershipType, membershipId, characterId)
             .then(function (inventory) {
-              var items = inventory.data.buckets.Equippable;
-              var talentGrid = DestinyTalentGridDefinition;
-              return {
-                items: items,
-                talentGrid: talentGrid
-              };
+              return inventory;
             });
         },
         parallelLoad = function (inventoryItems) {
           var methods = [
-            weaponStats.getData(inventoryItems.items, inventoryItems.talentGrid),
-            armorStats.getData(inventoryItems.items),
-            classStats.getData(inventoryItems.items, inventoryItems.talentGrid)
+            weaponStats.getData(inventoryItems),
+            armorStats.getData(inventoryItems),
+            classStats.getData(inventoryItems)
           ];
           return $q.all(methods)
             .then($q.spread(function (weapons, armors, classItems) {

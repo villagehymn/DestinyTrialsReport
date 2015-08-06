@@ -31,7 +31,7 @@ function setDmgElement(nodeStep, weapon) {
 
 angular.module('trialsReportApp')
   .factory('weaponStats', function () {
-    var getData = function (items, talentGrid) {
+    var getData = function (items) {
       var weapons = {};
       var shotgun = false;
 
@@ -40,35 +40,35 @@ angular.module('trialsReportApp')
       weapons.heavy = {};
       weapons.hazards = [];
 
-      angular.forEach(items, function (item) {
+      for (var n = 0; n < items.length; n++) {
         if (weapons.primary.length && weapons.special.length && weapons.heavy.length) {
           return;
         }
         var nodes = [];
-        var itemS = item.items[0];
+        var itemS = items[n];
         //var wItem = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
 
         if (DestinyPrimaryWeaponDefinitions[itemS.itemHash]) {
           var primaryW = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
-          angular.forEach(itemS.nodes, function (node, index) {
-            if (node.isActivated === true) {
-              var nodeStep = talentGrid[itemS.talentGridHash].nodes[index].steps[node.stepIndex];
+          for (var i = 0; i < itemS.nodes.length; i++) {
+            if (itemS.nodes[i].isActivated === true) {
+              var nodeStep = itemS.nodes[i].steps;
               if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
                 pushNode(nodeStep, nodeStep.nodeStepName, nodes);
               } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
                 setDmgElement(nodeStep, primaryW);
               }
             }
-          });
+          }
           weapons.primary = {
             'weapon': primaryW,
             'nodes': nodes
           };
         } else if (DestinySpecialWeaponDefinitions[itemS.itemHash]) {
           var secondaryW = DestinySpecialWeaponDefinitions[itemS.itemHash];
-          angular.forEach(itemS.nodes, function (node, index) {
-            if (node.isActivated === true) {
-              var nodeStep = talentGrid[itemS.talentGridHash].nodes[index].steps[node.stepIndex];
+          for (var i = 0; i < itemS.nodes.length; i++) {
+            if (itemS.nodes[i].isActivated === true) {
+              var nodeStep = itemS.nodes[i].steps;
               if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
                 if (secondaryW.subType === 12) {
                   if (nodeStep.perkHashes[0] === 3752206822) {
@@ -80,27 +80,27 @@ angular.module('trialsReportApp')
                 setDmgElement(nodeStep, secondaryW);
               }
             }
-          });
+          }
           weapons.special = {
             'weapon': secondaryW,
             'nodes': nodes
           };
           if ((secondaryW.subType === 12) && (secondaryW.name !== 'No Land Beyond')) {
-            angular.forEach(itemS.stats, function (stat) {
-              if (stat.statHash === 4043523819 && stat.value > 16) {
-                if ((itemS.primaryStat.value * stat.value) > 8577) {
+            for (var i = 0; i < itemS.stats.length; i++) {
+              if (itemS.stats[i].statHash === 4043523819 && itemS.stats[i].value > 16) {
+                if ((itemS.primaryStat.value * itemS.stats[i].value) > 8577) {
                   weapons.hazards.push('Revive Kill Sniper');
                 }
               }
-            });
+            }
           } else if (secondaryW.subType === 7) {
             shotgun = true;
           }
         } else if (DestinyHeavyWeaponDefinitions[itemS.itemHash]) {
           var heavyW = DestinyHeavyWeaponDefinitions[itemS.itemHash];
-          angular.forEach(itemS.nodes, function (node, index) {
-            if (node.isActivated === true) {
-              var nodeStep = talentGrid[itemS.talentGridHash].nodes[index].steps[node.stepIndex];
+          for (var i = 0; i < itemS.nodes.length; i++) {
+            if (itemS.nodes[i].isActivated === true) {
+              var nodeStep = itemS.nodes[i].steps;
               if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
                 var longNames = ['Grenades and Horseshoes'];
                 var name = (longNames.indexOf(nodeStep.nodeStepName) > -1) ? 'Nades & Shoes' : nodeStep.nodeStepName;
@@ -109,13 +109,13 @@ angular.module('trialsReportApp')
                 setDmgElement(nodeStep, heavyW);
               }
             }
-          });
+          }
           weapons.heavy = {
             'weapon': heavyW,
             'nodes': nodes
           };
         }
-      });
+      }
 
       return {
         weapons: weapons,

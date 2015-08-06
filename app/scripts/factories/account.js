@@ -116,7 +116,8 @@ angular.module('trialsReportApp')
         //totals.wins = 0;
         //totals.losses = 0;
         //var mapStats = {};
-        angular.forEach(activities.slice().reverse(), function (activity) {
+        var reversedAct = activities.slice().reverse();
+        for (var n = 0; n < reversedAct.length; n++) {
           //var mapHash = activity.activityDetails.referenceId;
           //if (!angular.isObject(mapStats[mapHash])) {
           //  mapStats[mapHash] = {};
@@ -140,15 +141,15 @@ angular.module('trialsReportApp')
           //  totals.losses += 1;
           //}
           pastActivities.push({
-            'id': activity.activityDetails.instanceId,
-            'standing': activity.values.standing.basic.value,
-            'date': $filter('date')(activity.period, 'yyyy-MM-dd h:mm'),
-            'kills': activity.values.kills.basic.value,
-            'kd': activity.values.killsDeathsRatio.basic.displayValue,
-            'deaths': activity.values.deaths.basic.value,
-            'assists': activity.values.assists.basic.value
+            'id': reversedAct[n].activityDetails.instanceId,
+            'standing': reversedAct[n].values.standing.basic.value,
+            'date': $filter('date')(reversedAct[n].period, 'yyyy-MM-dd h:mm'),
+            'kills': reversedAct[n].values.kills.basic.value,
+            'kd': reversedAct[n].values.killsDeathsRatio.basic.displayValue,
+            'deaths': reversedAct[n].values.deaths.basic.value,
+            'assists': reversedAct[n].values.assists.basic.value
           });
-        });
+        }
         return angular.extend(account, {
           recentActivity: recentActivity,
           pastActivities: pastActivities.reverse().slice(0, 24).reverse(),

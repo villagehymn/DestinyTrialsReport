@@ -39,6 +39,7 @@ http.createServer(function (req, res) {
   console.log('req.headers.cookie:', req.headers.cookie);
 
   outboundData.headers.host = BUNGIE.host;
+  outboundData.headers['X-API-Key'] = 'API KEY GOES HERE';
 
   console.log('outbound request ========================');
   console.log(outboundData);

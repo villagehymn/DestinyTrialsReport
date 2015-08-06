@@ -2,7 +2,7 @@
 
 angular.module('trialsReportApp')
   .factory('classStats', function($analytics) {
-    var getData = function(items, talentGrid) {
+    var getData = function(items) {
       var classNodes = [];
       classNodes.hazards = [];
       var subClass = [];
@@ -13,18 +13,17 @@ angular.module('trialsReportApp')
       var hasVikingFuneral = false;
       var hasTouchOfFlame = false;
 
-      angular.forEach(items, function (item) {
-        var itemS = item.items[0];
+      for (var n = 0; n < items.length; n++) {
+        var itemS = items[n];
         var cItem = DestinyClassDefinition[itemS.itemHash];
-
         if (cItem) {
           subClass = {
             'name': cItem.name
           };
 
-          angular.forEach(itemS.nodes, function (node, index) {
-            if (node.isActivated === true) {
-              var nodeStep = talentGrid[itemS.talentGridHash].nodes[index];
+          for (var i = 0; i < itemS.nodes.length; i++) {
+            if (itemS.nodes[i].isActivated === true) {
+              var nodeStep = itemS.nodes[i];
               if (itemS.itemHash === 3658182170) {
                 if (nodeStep.nodeHash === 835330335) {
                   hasFireboltGrenade = true;
@@ -42,7 +41,7 @@ angular.module('trialsReportApp')
 
               if ([1, 3, 6, 8].indexOf(nodeStep.column) > -1) {
                 if (!(nodeStep.row === 0 && nodeStep.column === 3)) {
-                  var noderStepper = nodeStep.steps[node.stepIndex];
+                  var noderStepper = nodeStep.steps;
                   classNodes.push({
                     'name': noderStepper.nodeStepName,
                     'description': noderStepper.nodeStepDescription,
@@ -57,7 +56,7 @@ angular.module('trialsReportApp')
                 }
               }
             }
-          });
+          }
 
           if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
             classNodes.hazards.push('Superburn Grenade');
@@ -66,7 +65,7 @@ angular.module('trialsReportApp')
           background[0] = 'https://www.bungie.net' + DestinyEmblemDefinitions[itemS.itemHash].secondaryIcon;
           background[1] = 'https://www.bungie.net' + DestinyEmblemDefinitions[itemS.itemHash].icon;
         }
-      });
+      }
 
       $analytics.eventTrack('classStats', {
         category: 'subclass',

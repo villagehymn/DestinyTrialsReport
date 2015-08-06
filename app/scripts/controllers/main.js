@@ -31,8 +31,16 @@ angular.module('trialsReportApp')
 
     function setRecentFireteam($scope, result, platform, includeTeam) {
       if (includeTeam) {
-        $scope.fireteam.push(result.fireTeam[0]);
-        $scope.fireteam.push(result.fireTeam[1]);
+        if ($scope.fireteam[1]){
+          $scope.fireteam[1] = result.fireTeam[0];
+        }else {
+          $scope.fireteam.push(result.fireTeam[0]);
+        }
+        if ($scope.fireteam[2]){
+          $scope.fireteam[2] = result.fireTeam[1];
+        }else {
+          $scope.fireteam.push(result.fireTeam[1]);
+        }
         searchFireteam($scope, $scope.fireteam[1], 1, platform);
         searchFireteam($scope, $scope.fireteam[2], 2, platform);
       }
@@ -133,14 +141,16 @@ angular.module('trialsReportApp')
     };
 
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
-      if (includeFireteam) {
-        $location.path((platform ? '/ps/' : '/xbox/') + name);
-      }else {
-        $scope.helpOverlay = false;
-        getAccountByName(name, (platform ? 2 : 1), $scope, index, true);
-        sendAnalytic('loadedPlayer', 'name', name);
-        sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
-        setPlatform($scope, platform);
+      if (angular.isDefined(name)){
+        if (includeFireteam) {
+          $location.path((platform ? '/ps/' : '/xbox/') + name);
+        }else {
+          $scope.helpOverlay = false;
+          getAccountByName(name, (platform ? 2 : 1), $scope, index, true);
+          sendAnalytic('loadedPlayer', 'name', name);
+          sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
+          setPlatform($scope, platform);
+        }
       }
     };
 
@@ -171,6 +181,7 @@ angular.module('trialsReportApp')
 
     $scope.setRecentPlayer = function (player, index, includeFireteam) {
       setPlatform($scope, player.membershipType === 2);
+      player.otherCharacters = $scope.fireteam[0].otherCharacters;
       searchFireteam($scope, player, index, player.membershipType, includeFireteam);
     };
 
@@ -268,8 +279,8 @@ angular.module('trialsReportApp')
 
       searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
       if (angular.isDefined($scope.fireteam[0].teamFromParams)){
-        $scope.fireteam.push(fireTeam[1]);
-        $scope.fireteam.push(fireTeam[2]);
+        $scope.fireteam.push($scope.fireteam[0].teamFromParams[0]);
+        $scope.fireteam.push($scope.fireteam[0].teamFromParams[1]);
         searchFireteam($scope, $scope.fireteam[1], 1, $scope.fireteam[1].membershipType, true);
         searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
       }

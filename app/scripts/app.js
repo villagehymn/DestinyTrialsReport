@@ -14,20 +14,16 @@ function getFromParams(currentAccount, $route) {
   }
 }
 
-function getAllFromParams(currentAccount, $route) {
+function getAllFromParams($http, $route) {
   if (angular.isDefined($route.current.params.playerOne)) {
     var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
-    return currentAccount.getAccount($route.current.params.playerOne, platform)
-      .then(function (player) {
-        player.teamFromParams = true;
-        return currentAccount.getAccount($route.current.params.playerTwo, platform)
-        .then(function (playerTwo) {
-            return currentAccount.getAccount($route.current.params.playerThree, platform)
-            .then(function (playerThree) {
-              return [player, playerTwo, playerThree];
-            });
-        });
-      });
+    var params = $route.current.params;
+    return $http({
+      method: 'GET',
+      url: 'http://api.destinytrialsreport.com/getAccounts/' + platform + '/' + params.playerOne + '/' + params.playerTwo + '/' + params.playerThree
+    }).then(function (players) {
+      return [players.data];
+    });
   }
 }
 

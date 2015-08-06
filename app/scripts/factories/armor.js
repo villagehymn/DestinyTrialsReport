@@ -3,6 +3,7 @@
 var hazardQuickRevive = [
   40760096, // Light Beyond Nemesis (Warlock)
   2682002320, // Crest of Alpha Lupi (Titan)2272644374
+  2272644374,
   3821972036 // Crest of Alpha Lupi (Hunter)
 ];
 var hazardGrenadeOnSpawn = [
@@ -23,65 +24,65 @@ angular.module('trialsReportApp')
       var strength = 0;
       var hasStarfireProtocolPerk = false;
 
-      angular.forEach(items, function (item) {
-        var itemS = item.items[0];
+      for (var n = 0; n < items.length; n++) {
+        var itemS = items[n];
         var aItem = DestinyArmorDefinition[itemS.itemHash];
 
         if (aItem) {
-          angular.forEach(itemS.perks, function (perk) {
-            if (perk.isActive === true) {
-              if (hazardQuickRevive.indexOf(perk.perkHash) > -1) {
+          for (var i = 0; i < itemS.perks.length; i++) {
+            if (itemS.perks[i].isActive === true) {
+              if (hazardQuickRevive.indexOf(itemS.perks[i].perkHash) > -1) {
                 armors.hazards.push('Quick Revive');
               }
-              if (hazardGrenadeOnSpawn.indexOf(perk.perkHash) > -1) {
+              if (hazardGrenadeOnSpawn.indexOf(itemS.perks[i].perkHash) > -1) {
                 armors.hazards.push('Grenade on Spawn');
               }
-              if (hazardDoubleGrenade.indexOf(perk.perkHash) > -1) {
+              if (hazardDoubleGrenade.indexOf(itemS.perks[i].perkHash) > -1) {
                 armors.hazards.push('Double Grenade');
               }
-              if (perk.perkHash === 3471016318) {
+              if (itemS.perks[i].perkHash === 3471016318) {
                 hasStarfireProtocolPerk = true;
               }
             }
-          });
-          angular.forEach(itemS.stats, function (stat) {
-            switch (stat.statHash) {
-            case 144602215:
-              intellect += stat.value;
-              break;
-            case 1735777505:
-              discipline += stat.value;
-              break;
-            case 4244567218:
-              strength += stat.value;
-              break;
+          }
+          for (var i = 0; i < itemS.stats.length; i++) {
+            switch (itemS.stats[i].statHash) {
+              case 144602215:
+                intellect += itemS.stats[i].value;
+                break;
+              case 1735777505:
+                discipline += itemS.stats[i].value;
+                break;
+              case 4244567218:
+                strength += itemS.stats[i].value;
+                break;
             }
-          });
+          }
 
           switch (aItem.bucketTypeHash) {
-          case 3448274439:
-            armors.head = {
-              'armor': aItem
-            };
-            break;
-          case 3551918588:
-            armors.arms = {
-              'armor': aItem
-            };
-            break;
-          case 14239492:
-            armors.chest = {
-              'armor': aItem
-            };
-            break;
-          case 20886954:
-            armors.legs = {
-              'armor': aItem
-            };
-            break;
+            case 3448274439:
+              armors.head = {
+                'armor': aItem
+              };
+              break;
+            case 3551918588:
+              armors.arms = {
+                'armor': aItem
+              };
+              break;
+            case 14239492:
+              armors.chest = {
+                'armor': aItem
+              };
+              break;
+            case 20886954:
+              armors.legs = {
+                'armor': aItem
+              };
+              break;
           }
         }
-      });
+      }
 
       return {
         armors: armors,
