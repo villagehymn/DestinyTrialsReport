@@ -62,7 +62,6 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '    "express": "3.*",\n');
                     fs.writeSync(fd, '    "request": "^2.57.0",\n');
                     fs.writeSync(fd, '    "newrelic": "^1.20.2",\n');
-                    fs.writeSync(fd, '    "gzippo": "^0.2.0",\n');
                     fs.writeSync(fd, '    "adm-zip": "^0.4.7",\n');
                     fs.writeSync(fd, '    "request-promise": "^0.4.2",\n');
                     fs.writeSync(fd, '    "sqlite3": "^3.0.8",\n');
@@ -101,7 +100,6 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '});\n\n');
 
                     fs.writeSync(fd, 'function start() {\n');
-                    fs.writeSync(fd, '  var gzippo = require("gzippo");\n');
                     fs.writeSync(fd, '  var express = require("express");\n');
                     fs.writeSync(fd, '  var request = require("request");\n');
                     fs.writeSync(fd, '  var app = express();\n');
@@ -112,7 +110,10 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '    console.error(err);\n');
                     fs.writeSync(fd, '  });\n\n');
 
-                    fs.writeSync(fd, '  app.use(gzippo.staticGzip(__dirname));\n');
+                    fs.writeSync(fd, '  app.use(express.static(__dirname));\n');
+                    fs.writeSync(fd, '  app.use(express.json());\n');
+                    fs.writeSync(fd, '  app.use(express.urlencoded());\n');
+                    fs.writeSync(fd, '  app.use(express.compress());\n');
                     fs.writeSync(fd, '  app.get("/:platform/:playerName", function(req, res){\n');
                     fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n\n');

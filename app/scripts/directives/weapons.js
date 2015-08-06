@@ -25,7 +25,7 @@ angular.module('trialsReportApp')
             '<div ng-if="isMiddle" class="hidden-xs hidden-sm"' +
             'style="width:224px; height:105px; position:absolute; z-index:-1"' +
             'data-intro="Unlocked and active weapon perks <br/><em>hover over the icons for the desciption</em>"' +
-            'data-position="right" ng-attr-data-opts="hidden-xs hidden-sm {{$middle ? \'\' : \'hidden\'}}"></div>',
+            'data-position="right" ng-attr-chardin-show="{{$middle}}"></div>',
             '<div class="row" ng-repeat="node in weapon.nodes track by $index" ng-show="node.name" popover="{{node.description}}" popover-trigger="mouseenter">',
               '<div class="col-xs-2">',
                 '<a class="icon icon-darkgray lt m-0" style="width:22px; height:22px">',

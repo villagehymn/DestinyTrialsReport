@@ -6,7 +6,7 @@
           <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(mainPlayer, platformValue, 0, true)">
             <div class="btn-group ng-scope pull-left"
                  data-intro="Toggle between PS and Xbox platforms"
-                 data-position="left" ng-attr-data-opts="hidden-xs hidden-sm">
+                 data-position="left" chardin-show="true">
               <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="platformValue" btn-radio="true">PS<span class="hidden-xs">N</span></label>
               <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="platformValue" btn-radio="false">XB<span class="hidden-xs">OX</span></label>
             </div>
@@ -14,7 +14,7 @@
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Enter a Guardian's name" ng-model="mainPlayer">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="submit">Search</button>
+                <button class="btn btn-default" type="submit" ng-disabled="status">Search</button>
               </span>
             </div>
           </form>

@@ -76,16 +76,6 @@ angular.module('trialsReportApp')
         });
     }
 
-    function checkGrimoire($scope, player, index) {
-      $http({
-        method: 'GET',
-        url: requestUrl.url + 'Destiny/Vanguard/Grimoire/' +
-          player.membershipType + '/' + player.membershipId + '/?single=401030'
-      }).then(function (result) {
-        $scope.fireteam[index].lighthouse = (result.data.Response.data.cardCollection.length > 0);
-      });
-    }
-
     var searchFireteam = function ($scope, name, index, platform, includeFireteam) {
 
       var useMember = function (teamMember, index) {
@@ -114,11 +104,11 @@ angular.module('trialsReportApp')
               } else {
                 $scope.fireteam[index] = activity;
               }
-              $scope.fireteam[index].stats = stats;
+              $scope.fireteam[index].stats = stats.stats;
+              $scope.fireteam[index].lighthouse = stats.lighthouse;
               if (includeFireteam) {
                 setPlayerStats(player, index, stats, includeFireteam, $scope);
               }
-              checkGrimoire($scope, $scope.fireteam[index], index);
 
               if (angular.isDefined($scope.fireteam[0]) &&
                 angular.isDefined($scope.fireteam[1]) &&
@@ -155,10 +145,6 @@ angular.module('trialsReportApp')
 
     $scope.toggleOverlay = function () {
       $scope.helpOverlay = !$scope.helpOverlay;
-    };
-
-    $scope.changeTheme = function (name) {
-      $rootScope.theme = name;
     };
 
     $scope.getWeaponByHash = function (hash) {
@@ -283,8 +269,8 @@ angular.module('trialsReportApp')
         searchFireteam($scope, $scope.fireteam[1], 1, $scope.fireteam[1].membershipType, true);
         searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
       }
-    }else if (fireTeam && fireTeam.AlertHtml){
-      $scope.status = fireTeam.AlertHtml;
+    }else if (angular.isString(fireTeam)){
+      $scope.status = fireTeam;
     } else {
       $scope.platformValue = true;
     }

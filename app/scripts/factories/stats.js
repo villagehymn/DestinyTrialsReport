@@ -7,9 +7,9 @@ angular.module('trialsReportApp')
     var getData = function (membershipType, membershipId, characterId) {
       return $http({
         method: 'GET',
-        url: path + 'Destiny/Stats/' + membershipType + '/' + membershipId + '/' + characterId + '/?modes=14'
+        url: 'http://api.destinytrialsreport.com/trialsStats/' + membershipType + '/' + membershipId + '/' + characterId
       }).then(function (result) {
-        return result.data.Response.trialsOfOsiris.allTime;
+        return result.data;
       });
     };
 
