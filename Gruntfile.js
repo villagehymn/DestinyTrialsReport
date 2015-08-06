@@ -246,12 +246,24 @@ module.exports = function (grunt) {
           }
         },
         proxies: [{
+          context: ['/ps', '/xbox'],
+          host: 'localhost',
+          port: 9000,
+          https: false,
+          xforward: false,
+          rewrite: {
+            '^/ps': '/#!ps',
+            '^/xbox': '/#!xbox'
+          }
+        }, {
           context: '/bungie',
           host: 'www.bungie.net',
           port: 80,
           https: false,
           xforward: false,
-          rewrite: {'^/bungie': '/Platform'},
+          rewrite: {
+            '^/bungie': '/Platform'
+          },
           headers: {
             'host': 'www.bungie.net',
             'X-API-Key': 'API KEY GOES HERE'
