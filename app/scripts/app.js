@@ -55,11 +55,10 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam: getDeej,
-          bungieStatus: function($location, $http, requestUrl){
+          fireTeam: function($location, $http, requestUrl){
             $http({method:'GET', url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
               if(result.data.Response.length > 0){
-                return result.data.Response[0].AlertHtml;
+                return result.data.Response[0];
               }
             });
           }

@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger, bungieStatus) {
-    $scope.status = bungieStatus;
+  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger) {
     $scope.helpOverlay = false;
     $scope.timerRunning = true;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
@@ -284,6 +283,8 @@ angular.module('trialsReportApp')
         searchFireteam($scope, $scope.fireteam[1], 1, $scope.fireteam[1].membershipType, true);
         searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
       }
+    }else if (fireTeam.AlertHtml){
+      $scope.status = fireTeam.AlertHtml;
     } else {
       $scope.platformValue = true;
     }
