@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger) {
-    $scope.status = null;
+  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger, bungieStatus) {
+    $scope.status = bungieStatus;
     $scope.helpOverlay = false;
     $scope.timerRunning = true;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;

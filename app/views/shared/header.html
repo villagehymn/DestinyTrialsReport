@@ -1,18 +1,16 @@
-<div class="header">
-  <div class="navbar navbar-default" role="navigation">
+<div class="header b-0">
+  <div class="navbar navbar-default bg-darkgray lt b-0" role="navigation">
     <div class="container">
       <div class="row mt-20 mb-20">
         <div class="col-xs-12 col-md-8 col-md-offset-2">
           <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(mainPlayer, platformValue, 0, true)">
-            <div class="onoffswitch labeled">
-              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="platformSwitch" ng-model="platformValue">
-              <label class="onoffswitch-label z99999999" for="platformSwitch"
-                     data-intro="Toggle between PS and Xbox platforms"
-                     data-position="left" ng-attr-data-opts="hidden-xs hidden-sm">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-              </label>
+            <div class="btn-group ng-scope pull-left"
+                 data-intro="Toggle between PS and Xbox platforms"
+                 data-position="left" ng-attr-data-opts="hidden-xs hidden-sm">
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="platformValue" btn-radio="true">PSN</label>
+              <label class="btn btn-default ng-untouched ng-valid ng-dirty" ng-model="platformValue" btn-radio="false">XBOX</label>
             </div>
+
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Enter a Guardian's name" ng-model="mainPlayer">
               <span class="input-group-btn">
@@ -22,20 +20,10 @@
           </form>
         </div>
         <div class="hidden-xs hidden-sm col-md-2 text-white text-right">
-          <!--<button type="button" class="btn btn-darkgray"-->
-                  <!--ng-click="changeTheme($root.theme === 'bg-white' ? 'dark-theme' : 'bg-white')">-->
-                  <!--{{$root.theme === 'bg-white' ? 'Dark' : 'Light'}} Theme-->
-          <!--</button>-->
-          <button type="button" class="btn btn-darkgray"
+          <button type="button" class="btn bg-default lter"
                   ng-click="toggleOverlay()">Help</button>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="container" ng-show="status">
-  <div class="text-center alert alert-warning">
-    <strong>{{status}}</strong>
   </div>
 </div>
