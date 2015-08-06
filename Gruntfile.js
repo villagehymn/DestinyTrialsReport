@@ -238,8 +238,24 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
-          base: ['.tmp', '.', appConfig.app]
-        }
+          base: ['.tmp', '.', appConfig.app],
+          middleware: function (connect, options, middlewares) {
+            middlewares.unshift(require('grunt-connect-proxy/lib/utils').proxyRequest);
+            return middlewares;
+          }
+        },
+        proxies: [{
+          context: '/bungie',
+          host: 'www.bungie.net',
+          port: 80,
+          https: false,
+          xforward: false,
+          rewrite: {'^/bungie': '/Platform'},
+          headers: {
+            'host': 'www.bungie.net',
+            'X-API-Key': 'API KEY GOES HERE'
+          }
+        }]
       },
       test: {
         options: {
@@ -662,6 +678,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'postcss:server',
+      'configureProxies:livereload',
       'connect:livereload',
       'watch'
     ]);
