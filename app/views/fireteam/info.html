@@ -18,14 +18,19 @@
           <span ng-bind="player.class.name"></span>
         </span>
         <span ng-show="player.stats.activitiesEntered" class="right">
-          Win<span class="hidden-xs"> Avg</span>:
+          Win<span class="hidden-xs"> Rate</span>:
           <span ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed()"></span>%
         </span>
       </p>
       <p class="mb-0">
-        <span class="right" ng-show="player.lighthouse === false && !player.neverTrials">Never Flawless</span>
-        <span class="right" ng-show="player.lighthouse === true">Flawless</span>
-        <span class="right" ng-show="player.neverTrials">No previous trials games</span>
+        <span ng-show="player.lighthouse === false && !player.neverTrials">Never Flawless</span>
+        <span ng-show="player.lighthouse === true">Flawless</span>
+        <span ng-show="player.neverTrials">No previous trials games</span>
+        <span ng-show="player.stats.combatRating" class="right">
+          <span class="visible-xs-inline">CR:</span>
+          <span class="hidden-xs">Rating:</span>
+          <span ng-bind="player.stats.combatRating.basic.displayValue"></span>
+        </span>
       </p>
     </div>
     <div class="back">
