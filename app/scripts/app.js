@@ -27,6 +27,17 @@ function getAllFromParams($http, $route) {
   }
 }
 
+function checkStatus($http) {
+  return $http({
+    method: 'GET',
+    url: 'http://api.destinytrialsreport.com/GlobalAlerts'
+  }).then(function (result) {
+    if(result.data.length > 0){
+      return result.data[0].AlertHtml;
+    }
+  });
+}
+
 angular
   .module('trialsReportApp', [
     'ngAnimate', 'ngCookies',
@@ -49,13 +60,7 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam: function($location, $http, requestUrl){
-            $http({method:'GET', url: requestUrl.url + 'GlobalAlerts/'}).then(function(result) {
-              if(result.data.Response.length > 0){
-                return result.data.Response[0];
-              }
-            });
-          }
+          fireTeam: checkStatus
         }
       })
       .when('/:platform/:playerName', {

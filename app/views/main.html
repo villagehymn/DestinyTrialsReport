@@ -1,11 +1,11 @@
 <div class="flex-container">
   <ng-include src="headerPartial"></ng-include>
-  <div class="container flex" ng-show="status">
+  <div class="container flex" ng-if="status">
     <div class="text-center alert alert-warning">
       <strong>{{status}}</strong>
     </div>
   </div>
-  <div class="container flex" ng-hide="status">
+  <div class="container flex" ng-if="!status">
     <div class="row">
       <ng-include src="'views/fireteam/index.html'" ng-show="fireteam[0]"></ng-include>
       <ng-include src="'views/blog/index.html'" ng-show="!fireteam[0]"></ng-include>

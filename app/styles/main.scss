@@ -20,6 +20,7 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
 //@import "pages/chat"; // chat page settings
 @import "pages/mail"; // mail page settings
 @import "pages/search_results"; // search results page settings
+@import "pages/blog";
 
 //Layouts
 @import "layouts/boxed"; // boxed layout
@@ -174,7 +175,7 @@ body {
 
 span.right {
   float: right;
-  padding-right: 15px;
+  padding-right: 5px;
 }
 .card-container {
   .card {
@@ -196,40 +197,6 @@ img.void-dmg {
 }
 img.kinetic-dmg {
   border-color: #969597;
-}
-
-.onoffswitch-label {
-  border-radius: 0;
-}
-.onoffswitch.labeled {
-  width: 66px;
-  float: left;
-  height: 33px;
-  .onoffswitch-inner:after {
-    content: "XBL";
-    padding-right: 7px;
-    background-color: rgb(0, 116, 5);
-    color: #FFFFFF;
-    border-radius: 0;
-    height: 33px;
-    line-height: 33px;
-    font-size: 11px;
-  }
-  .onoffswitch-inner:before {
-    line-height: 33px;
-    font-size: 11px;
-    content: "PSN";
-    padding-left: 7px;
-    background-color: rgb(44, 56, 193);
-    color: #FFFFFF;
-    border-radius: 0;
-    height: 33px;
-  }
-  .onoffswitch-switch {
-    right: 41px;
-    border-radius: 0;
-  }
-
 }
 
 .bor-sm-r {

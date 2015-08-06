@@ -9,7 +9,7 @@ angular.module('trialsReportApp')
       },
       template: [
         '<div class="row ml-0 mr-0 mb-10" data-intro="Match win/loss history<br/><em>hover over the icons for details</em>"' +
-        'data-position="right" ng-attr-data-opts="hidden-xs hidden-sm {{$middle ? \'\' : \'hidden\'}}">',
+        'data-position="right" ng-attr-chardin-show="{{$middle}}">',
           '<div class="col-xs-12 pr-0 pl-0 text-center win-loss">',
             '<i class="fa fa-circle mr-3 {{$index < 7 ? (activities.length - $index ) > 18 ? \'hidden-xs hidden-md\' : \'\' : \'\'}}"' +
               'ng-repeat="str in activities track by $index"' +

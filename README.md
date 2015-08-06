@@ -18,7 +18,6 @@
 #### Installation on Mac OS X
 
 Using homebrew, install node + npm
-
 * brew install node
 
 Install modules
@@ -26,45 +25,45 @@ Install modules
 * sudo npm install
 
 Install bower packages
-
 * bower install
 
-Update the definition files
+Insert API Key
+* Get an API key from [Bungie.net](https://www.bungie.net/en/User/API)
+* Insert your API key in Gruntfile.js here:
+```
+proxies: [{
+          context: '/bungie',
+          host: 'www.bungie.net',
+          port: 80,
+          https: false,
+          xforward: false,
+          rewrite: {'^/bungie': '/Platform'},
+          headers: {
+            'host': 'www.bungie.net',
+            'X-API-Key': 'API KEY GOES HERE'
+          }
+        }]
+```
 
+Update the definition files
 * sudo node manifest.js
 
-Run Local Proxy
-
-* node proxy.js 63294
-* uncomment `url :  "http://localhost:63294/Platform/" `in app.js (comment out the bungie one)
-
 Run Server
-
 * grunt serve
 
 
 #### Installation on Debian & Ubuntu
 
 [Install Dependencies]
-```
-sudo apt-get install git ruby ruby-dev
-```
+`sudo apt-get install git ruby ruby-dev`
 
 [Update Gems & Install Compass]
-```
-sudo gem update --system && gem install compass
-```
+`sudo gem update --system && gem install compass`
 
 [Install Node Version Manager]
-```
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
-```
-
+`curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash`
 OR
-
-```
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
-```
+`wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash`
 
 [Install NPM & node.js]
 ```
@@ -78,23 +77,34 @@ n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,
 ```
 sudo npm install grunt-cli bower -g
 npm install
-```
+````
 
 [Install Bower Components]
+`bower install`
+
+[Insert API Key]
+* Get an API key from [Bungie.net](https://www.bungie.net/en/User/API)
+* Insert your API key in Gruntfile.js here:
 ```
-bower install
+proxies: [{
+          context: '/bungie',
+          host: 'www.bungie.net',
+          port: 80,
+          https: false,
+          xforward: false,
+          rewrite: {'^/bungie': '/Platform'},
+          headers: {
+            'host': 'www.bungie.net',
+            'X-API-Key': 'API KEY GOES HERE'
+          }
+        }]
 ```
 
-[Run Local Proxy]
-```
-node proxy.js 63294
-```
-uncomment `url :  "http://localhost:63294/Platform/" `in app.js (comment out the bungie one)
+[Update the definition files]
+`sudo node manifest.js`
 
 [Run Server]
-```
-grunt serve
-```
+`grunt serve`
 
 # Support
 
