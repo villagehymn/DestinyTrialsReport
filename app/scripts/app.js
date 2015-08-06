@@ -27,11 +27,6 @@ function getAllFromParams($http, $route) {
   }
 }
 
-function getDeej() {
-
-}
-
-
 angular
   .module('trialsReportApp', [
     'ngAnimate', 'ngCookies',
