@@ -105,7 +105,6 @@ angular.module('trialsReportApp')
                 $scope.fireteam[index] = activity;
               }
               $scope.fireteam[index].stats = stats.stats;
-              console.log(stats.stats);
               $scope.fireteam[index].lighthouse = stats.lighthouse;
               if (includeFireteam) {
                 setPlayerStats(player, index, stats, includeFireteam, $scope);

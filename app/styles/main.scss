@@ -16,16 +16,8 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
 
 //Pages
 @import "pages/global"; // global page settings
-@import "pages/tree"; // file tree settings
-//@import "pages/chat"; // chat page settings
-@import "pages/mail"; // mail page settings
-@import "pages/search_results"; // search results page settings
 @import "pages/blog";
 
-//Layouts
-@import "layouts/boxed"; // boxed layout
-@import "layouts/hz-menu"; // horizontal menu
-@import "layouts/rtl"; // rtl layout
 
 // Sections
 @import "sections/content"; // content section
@@ -33,16 +25,13 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
 @import "sections/nav"; // navigation section
 @import "sections/nav-min"; // navigation sm/xs
 @import "sections/page-header"; // page header section
-@import "sections/rightbar"; // rightbar section
 @import "sections/page-loader"; // page loader
-@import "sections/add-nav"; // additional navbar under breadcrumbs
 
 // Components
 @import "components/tiles"; // tiles
 @import "components/form-elements"; // form elements
 @import "components/ui-elements"; // ui elements
 @import "components/dropdowns"; // dropdowns
-@import "components/charts"; // charts
 @import "components/buttons"; // buttons
 @import "components/icons";  // icons
 @import "components/lists"; // lists
@@ -50,30 +39,21 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
 @import "components/thumbnails"; // thumbnails
 @import "components/typography"; // typography
 @import "components/loading-bar"; // loading bar
-@import "components/daterangepicker"; // daterangepicker
 @import "components/alerts-notifications"; // alerts and notifications
 @import "components/tabs-pills"; // tabs and pills
 @import "components/modals"; // modals
-@import "components/portlets"; // portlets
 @import "components/progress"; // progress bars
 @import "components/tbox"; // table layout
-@import "components/tree"; // file tree
-@import "components/chosen"; // chosen plugin
 @import "components/tables"; // tables
 @import "components/cards"; // two sided cards
-@import "components/carousel"; // carousel
 @import "components/widgets"; // widgets
-@import "components/streamline"; // streamline
-@import "components/maps"; // maps
-@import "components/calendar"; // calendar
-@import "components/gallery"; // gallery
 
 // Shared
 @import "shared/global"; // global shared settings
 @import "shared/color-schemes"; // color schemes
 @import "shared/print"; // print css
 @import "shared/animations"; // animations
-@import "chardinjs"; // animations
+@import "chardinjs";
 
 .browsehappy {
   margin: 0.2em 0;
