@@ -5,7 +5,7 @@
     <div class="front p-0" data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat"
          data-position="right" ng-attr-chardin-show="{{$middle}}">
       <p class="large mb-0">
-        <span ng-bind="player.name"></span>
+        <span ng-bind="player.name.substr(0, 15)"></span>
         <span ng-show="player.stats.killsDeathsRatio" class="right">
           <span class="hidden-xs hidden-md">K/D:</span>
           <span ng-bind="player.stats.killsDeathsRatio.basic.displayValue"></span>
