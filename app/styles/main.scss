@@ -126,6 +126,10 @@ body {
   padding-left: 5px !important;
 }
 
+.p-5 {
+  padding: 5px !important;
+}
+
 .top-left {
   top: 20px;
   left: 20px;
@@ -235,7 +239,7 @@ tr.thin {
 @media screen and (max-width: 768px) {
   .nav-justified > li, .nav-tabs.nav-justified > li {
     float: left;
-    width: 50%;
+    width: 33%;
   }
 }
 
