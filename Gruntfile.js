@@ -61,7 +61,6 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  "dependencies": {\n');
                     fs.writeSync(fd, '    "express": "3.*",\n');
                     fs.writeSync(fd, '    "request": "^2.57.0",\n');
-                    fs.writeSync(fd, '    "newrelic": "^1.20.2",\n');
                     fs.writeSync(fd, '    "adm-zip": "^0.4.7",\n');
                     fs.writeSync(fd, '    "request-promise": "^0.4.2",\n');
                     fs.writeSync(fd, '    "sqlite3": "^3.0.8",\n');
@@ -90,8 +89,6 @@ module.exports = function (grunt) {
                 //Create server.js used by ExpressJS within Heroku
                 file: 'heroku/server.js',
                 method: function(fs, fd, done) {
-                    var useAuth = false;
-                    fs.writeSync(fd, 'require("newrelic");\n\n');
                     fs.writeSync(fd, 'var throng = require("throng");\n');
                     fs.writeSync(fd, 'var WORKERS = process.env.WEB_CONCURRENCY || 1;\n\n');
                     fs.writeSync(fd, 'throng(start, {\n');
