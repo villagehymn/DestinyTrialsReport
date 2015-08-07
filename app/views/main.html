@@ -1,4 +1,20 @@
 <div class="flex-container">
+  <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="mapModalLabel">Thieves' Den Heatmap</h4>
+        </div>
+        <div class="modal-body">
+          <img src="/images/ToO_ThievesDen_Heatmap.jpg" class="img-responsive" alt="Heatmap" />
+        </div>
+        <div class="modal-footer">
+          <p>The blue areas of the heatmap show where Guardian's go. The darker the area, the higher traffic that area gets. The red areas show where Guardian's die. The darker the area, the more deaths in that area. Stay away from those kill zones, Guardians!</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <ng-include src="headerPartial"></ng-include>
   <div class="container flex" ng-if="status">
     <div class="text-center alert alert-warning">
