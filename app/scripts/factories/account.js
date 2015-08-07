@@ -171,7 +171,7 @@ angular.module('trialsReportApp')
           return;
         }
         angular.forEach(activities.slice().reverse(), function (activity, index) {
-          if (index % 3 === 0) {
+          if (index % 5 === 0) {
             allPastActivities.push({
               'id': activity.activityDetails.instanceId,
               'standing': activity.values.standing.basic.value
