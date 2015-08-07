@@ -241,6 +241,10 @@ tr.thin {
     float: left;
     width: 33%;
   }
+  .container-fluid {
+    padding-left: 13px;
+    padding-right: 17px;
+  }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
