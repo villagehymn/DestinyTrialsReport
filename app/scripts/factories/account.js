@@ -94,10 +94,12 @@ angular.module('trialsReportApp')
       }).catch(function () {});
     };
 
-    var getActivities = function (account) {
+    var getActivities = function (account, count) {
+      var aCount = count > 0 ? '&count='+ count : '&count=25';
+      console.log(aCount);
       return $http({
         method: 'GET',
-        url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId + '/?mode=14&count=25'
+        url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId + '/?mode=14' + aCount
       }).then(function (resultAct) {
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
@@ -109,37 +111,37 @@ angular.module('trialsReportApp')
           'id': activities[0].activityDetails.instanceId,
           'standing': activities[0].values.standing.basic.value
         };
-        //var totals = {};
-        //totals.kills = 0;
-        //totals.deaths = 0;
-        //totals.assists = 0;
-        //totals.wins = 0;
-        //totals.losses = 0;
-        //var mapStats = {};
+        var totals = {};
+        totals.kills = 0;
+        totals.deaths = 0;
+        totals.assists = 0;
+        totals.wins = 0;
+        totals.losses = 0;
+        var mapStats = {};
         var reversedAct = activities.slice().reverse();
         for (var n = 0; n < reversedAct.length; n++) {
-          //var mapHash = activity.activityDetails.referenceId;
-          //if (!angular.isObject(mapStats[mapHash])) {
-          //  mapStats[mapHash] = {};
-          //  mapStats[mapHash].kills = 0;
-          //  mapStats[mapHash].deaths = 0;
-          //  mapStats[mapHash].assists = 0;
-          //  mapStats[mapHash].wins = 0;
-          //  mapStats[mapHash].losses = 0;
-          //}
-          //mapStats[mapHash].kills += activity.values.kills.basic.value;
-          //mapStats[mapHash].deaths += activity.values.deaths.basic.value;
-          //mapStats[mapHash].assists += activity.values.assists.basic.value;
-          //totals.kills += activity.values.kills.basic.value;
-          //totals.deaths += activity.values.deaths.basic.value;
-          //totals.assists += activity.values.assists.basic.value;
-          //if (activity.values.standing.basic.value === 0) {
-          //  mapStats[mapHash].wins += 1;
-          //  totals.wins += 1;
-          //} else {
-          //  mapStats[mapHash].losses += 1;
-          //  totals.losses += 1;
-          //}
+          var mapHash = reversedAct[n].activityDetails.referenceId;
+          if (!angular.isObject(mapStats[mapHash])) {
+            mapStats[mapHash] = {};
+            mapStats[mapHash].kills = 0;
+            mapStats[mapHash].deaths = 0;
+            mapStats[mapHash].assists = 0;
+            mapStats[mapHash].wins = 0;
+            mapStats[mapHash].losses = 0;
+          }
+          mapStats[mapHash].kills += reversedAct[n].values.kills.basic.value;
+          mapStats[mapHash].deaths += reversedAct[n].values.deaths.basic.value;
+          mapStats[mapHash].assists += reversedAct[n].values.assists.basic.value;
+          totals.kills += reversedAct[n].values.kills.basic.value;
+          totals.deaths += reversedAct[n].values.deaths.basic.value;
+          totals.assists += reversedAct[n].values.assists.basic.value;
+          if (reversedAct[n].values.standing.basic.value === 0) {
+            mapStats[mapHash].wins += 1;
+            totals.wins += 1;
+          } else {
+            mapStats[mapHash].losses += 1;
+            totals.losses += 1;
+          }
           pastActivities.push({
             'id': reversedAct[n].activityDetails.instanceId,
             'standing': reversedAct[n].values.standing.basic.value,
@@ -153,9 +155,9 @@ angular.module('trialsReportApp')
         return angular.extend(account, {
           recentActivity: recentActivity,
           pastActivities: pastActivities.reverse().slice(0, 24).reverse(),
-          allActivities: pastActivities
-          //mapStats: mapStats,
-          //totals: totals
+          allActivities: pastActivities,
+          mapStats: mapStats,
+          totals: totals
         });
       }).catch(function () {});
     };

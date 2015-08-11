@@ -1,0 +1,33 @@
+<ng-include src="infoPartial"></ng-include>
+
+<tabset class="tabs-dark col-xs-12 p-0" justified="true">
+  <tab heading="Equipped">
+    <ng-include src="statPartial"></ng-include>
+    <ng-include src="'views/fireteam/weapons.html'"></ng-include>
+    <ng-include src="'views/fireteam/armor.html'"></ng-include>
+  </tab>
+  <tab heading="Maps">
+    <ng-include src="'views/fireteam/maps.html'"></ng-include>
+  </tab>
+  <!--<tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">-->
+    <!--<ng-include src="'views/fireteam/history.html'"></ng-include>-->
+  <!--</tab>-->
+  <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+    <ng-include src="'views/fireteam/addStats.html'"></ng-include>
+  </tab>
+</tabset>
+
+<div class="row">
+  <div class="col-xs-12 hidden-xs hidden-sm">
+    <a class="btn btn-block btn-trials btn-default bg-info dker"
+       href="http://destinytracker.com/destiny/trials/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
+       target="_blank"
+       type="button"
+       style="border: none;"
+       analytics-on analytics-event="Click" analytics-category="DestinyTracker"
+       data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
+       data-position="right" ng-attr-chardin-show="{{$middle}}">
+       View DestinyTracker Stats
+     </a>
+  </div>
+</div>

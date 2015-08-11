@@ -59,13 +59,14 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  "description": ' + (pkg.description ? '"' + pkg.description + '"' : '""') + ',\n');
                     fs.writeSync(fd, '  "main": "server.js",\n');
                     fs.writeSync(fd, '  "dependencies": {\n');
-                    fs.writeSync(fd, '    "express": "3.*",\n');
+                    fs.writeSync(fd, '    "express": "4.*",\n');
                     fs.writeSync(fd, '    "request": "^2.57.0",\n');
                     fs.writeSync(fd, '    "adm-zip": "^0.4.7",\n');
                     fs.writeSync(fd, '    "request-promise": "^0.4.2",\n');
                     fs.writeSync(fd, '    "sqlite3": "^3.0.8",\n');
                     fs.writeSync(fd, '    "unzip": "^0.1.11",\n');
-                    fs.writeSync(fd, '    "throng": "^1.0.0"\n');
+                    fs.writeSync(fd, '    "throng": "^1.0.0",\n');
+                    fs.writeSync(fd, '    "compression": "^1.5.2"\n');
                     if (min) {
                         fs.writeSync(fd, '\n');
                     } else {
@@ -97,6 +98,7 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '});\n\n');
 
                     fs.writeSync(fd, 'function start() {\n');
+                    fs.writeSync(fd, '  var compression = require("compression");\n');
                     fs.writeSync(fd, '  var express = require("express");\n');
                     fs.writeSync(fd, '  var request = require("request");\n');
                     fs.writeSync(fd, '  var app = express();\n');
@@ -108,9 +110,13 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  });\n\n');
 
                     fs.writeSync(fd, '  app.use(express.static(__dirname));\n');
-                    fs.writeSync(fd, '  app.use(express.json());\n');
-                    fs.writeSync(fd, '  app.use(express.urlencoded());\n');
-                    fs.writeSync(fd, '  app.use(express.compress());\n');
+                    fs.writeSync(fd, '  app.use(compression());\n');
+                    fs.writeSync(fd, '  app.get("/my/:platform/:playerName", function(req, res){\n');
+                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '  });\n\n');
+                    fs.writeSync(fd, '  app.get("/my", function(req, res){\n');
+                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '  });\n\n');
                     fs.writeSync(fd, '  app.get("/:platform/:playerName", function(req, res){\n');
                     fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n\n');
@@ -243,14 +249,15 @@ module.exports = function (grunt) {
           }
         },
         proxies: [{
-          context: ['/ps', '/xbox'],
+          context: ['/ps', '/xbox', '/my'],
           host: 'localhost',
           port: 9000,
           https: false,
           xforward: false,
           rewrite: {
             '^/ps': '/#!ps',
-            '^/xbox': '/#!xbox'
+            '^/xbox': '/#!xbox',
+            '^/my': '/#!my'
           }
         }, {
           context: '/bungie',

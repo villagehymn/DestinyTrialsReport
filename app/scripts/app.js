@@ -28,14 +28,14 @@ function getAllFromParams($http, $route) {
 }
 
 function checkStatus($http) {
-  return $http({
-    method: 'GET',
-    url: 'http://api.destinytrialsreport.com/GlobalAlerts'
-  }).then(function (result) {
-    if(result.data.length > 0){
-      return result.data[0].AlertHtml;
-    }
-  });
+  //return $http({
+  //  method: 'GET',
+  //  url: 'http://api.destinytrialsreport.com/GlobalAlerts'
+  //}).then(function (result) {
+  //  if(result.data.length > 0){
+  //    return result.data[0].AlertHtml;
+  //  }
+  //});
 }
 
 angular
@@ -75,6 +75,20 @@ angular
         controller: 'MainCtrl',
         resolve: {
           fireTeam: getAllFromParams
+        }
+      })
+      .when('/my', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        resolve: {
+          fireTeam: checkStatus
+        }
+      })
+      .when('/my/:platform/:playerName', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        resolve: {
+          fireTeam: getFromParams
         }
       })
       .otherwise({

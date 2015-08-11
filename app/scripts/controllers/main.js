@@ -91,7 +91,7 @@ angular.module('trialsReportApp')
         },
         parallelLoad = function (player) {
           var methods = [
-            currentAccount.getActivities(player),
+            currentAccount.getActivities(player, 25),
             inventoryStats.getInventory($scope, platform, player.membershipId,
               player.characterId, index, $q),
             trialsStats.getData(platform, player.membershipId, player.characterId)
