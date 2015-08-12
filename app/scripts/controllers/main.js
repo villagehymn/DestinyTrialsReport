@@ -92,8 +92,7 @@ angular.module('trialsReportApp')
         parallelLoad = function (player) {
           var methods = [
             currentAccount.getActivities(player, 25),
-            inventoryStats.getInventory($scope, platform, player.membershipId,
-              player.characterId, index, $q),
+            inventoryStats.getInventory($scope, platform, player, index, $q),
             trialsStats.getData(platform, player.membershipId, player.characterId)
           ];
           return $q.all(methods)
@@ -170,53 +169,6 @@ angular.module('trialsReportApp')
       searchFireteam($scope, player, index, player.membershipType, includeFireteam);
     };
 
-    function getPlayersFromGame($scope, activity) {
-      var path = requestUrl.url;
-      return $http({
-        method: 'GET',
-        url: path + 'Destiny/Stats/PostGameCarnageReport/' + activity.id
-      }).then(function (result) {
-        var fireteamIndex = [];
-        var recents = {};
-        if (activity.standing === 0) {
-          fireteamIndex = [0, 1, 2];
-        } else {
-          fireteamIndex = [3, 4, 5];
-        }
-        angular.forEach(fireteamIndex, function (idx) {
-          var allStats = {};
-          var member = result.data.Response.data.entries[idx];
-          var player = member.player;
-          if (angular.lowercase(player.destinyUserInfo.displayName) !== angular.lowercase($scope.fireteam[0].name)) {
-            var medals = [];
-            angular.forEach(member.extended.values, function (value, index) {
-              if (index.substring(0, 6) === 'medals') {
-                medals.push({
-                  id: index,
-                  count: value.basic.value
-                });
-              } else {
-                allStats[index] = value;
-              }
-            });
-            recents[member.player.destinyUserInfo.displayName] = {
-              name: member.player.destinyUserInfo.displayName,
-              membershipId: member.player.destinyUserInfo.membershipId,
-              membershipType: member.player.destinyUserInfo.membershipType,
-              emblem: 'https://www.bungie.net' + member.player.destinyUserInfo.iconPath,
-              characterId: member.characterId,
-              allStats: allStats,
-              medals: medals,
-              playerWeapons: member.extended.weapons,
-              level: member.player.characterLevel,
-              class: member.player.characterClass
-            };
-          }
-        });
-        return recents;
-      });
-    }
-
     var getActivitiesFromChar = function ($scope, account, character) {
 
       var setRecentActivities = function (account, character) {
@@ -228,8 +180,22 @@ angular.module('trialsReportApp')
 
         setRecentPlayers = function (activities) {
           angular.forEach(activities, function (activity) {
-            getPlayersFromGame($scope, activity).then(function (result) {
-              $scope.recentPlayers = angular.extend($scope.recentPlayers, result);
+            currentAccount.getMatchSummary(activity, account.name, false, true).then(function (resMember) {
+              var member = resMember[0];
+              var recents = {};
+              recents[member.player.destinyUserInfo.displayName] = {
+                name: member.player.destinyUserInfo.displayName,
+                membershipId: member.player.destinyUserInfo.membershipId,
+                membershipType: member.player.destinyUserInfo.membershipType,
+                emblem: 'https://www.bungie.net' + member.player.destinyUserInfo.iconPath,
+                characterId: member.characterId,
+                allStats: member.allStats,
+                medals: member.medals,
+                playerWeapons: member.extended.weapons,
+                level: member.player.characterLevel,
+                class: member.player.characterClass
+              };
+              $scope.recentPlayers = angular.extend($scope.recentPlayers, recents);
             });
           });
         },
@@ -259,8 +225,7 @@ angular.module('trialsReportApp')
 
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
-      var platform = $scope.fireteam[0].membershipType === 2;
-      $scope.platformValue = platform;
+      $scope.platformValue = $scope.fireteam[0].membershipType === 2;
 
       searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
       if (angular.isDefined($scope.fireteam[0].teamFromParams)){
