@@ -60,6 +60,7 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  "main": "server.js",\n');
                     fs.writeSync(fd, '  "dependencies": {\n');
                     fs.writeSync(fd, '    "express": "4.*",\n');
+                    fs.writeSync(fd, '    "express-subdomain": "^1.0.3",\n');
                     fs.writeSync(fd, '    "request": "^2.57.0",\n');
                     fs.writeSync(fd, '    "adm-zip": "^0.4.7",\n');
                     fs.writeSync(fd, '    "request-promise": "^0.4.2",\n');
@@ -99,9 +100,11 @@ module.exports = function (grunt) {
 
                     fs.writeSync(fd, 'function start() {\n');
                     fs.writeSync(fd, '  var compression = require("compression");\n');
+                    fs.writeSync(fd, '  var subdomain = require("express-subdomain");\n');
                     fs.writeSync(fd, '  var express = require("express");\n');
                     fs.writeSync(fd, '  var request = require("request");\n');
                     fs.writeSync(fd, '  var app = express();\n');
+
                     fs.writeSync(fd, '  var domain = require("domain");\n');
                     fs.writeSync(fd, '  var d = domain.create();\n');
 
@@ -111,19 +114,23 @@ module.exports = function (grunt) {
 
                     fs.writeSync(fd, '  app.use(express.static(__dirname));\n');
                     fs.writeSync(fd, '  app.use(compression());\n');
-                    fs.writeSync(fd, '  app.get("/my/:platform/:playerName", function(req, res){\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
-                    fs.writeSync(fd, '  });\n\n');
-                    fs.writeSync(fd, '  app.get("/my", function(req, res){\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
-                    fs.writeSync(fd, '  });\n\n');
+
                     fs.writeSync(fd, '  app.get("/:platform/:playerName", function(req, res){\n');
                     fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n\n');
-
                     fs.writeSync(fd, '  app.get("/:platform/:playerOne/:playerTwo/:playerThree", function(req, res){\n');
                     fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n');
+
+                    fs.writeSync(fd, '  var router = express.Router();\n');
+                    fs.writeSync(fd, '  router.get("/", function(req, res) {\n');
+                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '  });\n');
+                    fs.writeSync(fd, '  router.get("/:platform/:playerName", function(req, res) {\n');
+                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '  });\n');
+                    fs.writeSync(fd, '  app.use(subdomain("my", router));\n');
+
                     fs.writeSync(fd, '  app.get("/bungie/*?", function(req, res){\n');
                     fs.writeSync(fd, '    res.setTimeout(25000);\n');
                     fs.writeSync(fd, '    var api_key = process.env.BUNGIE_API;\n');
@@ -142,15 +149,18 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '      res.end()})}\n');
                     fs.writeSync(fd, '    catch(e) {}\n');
                     fs.writeSync(fd, '  });\n');
+
                     fs.writeSync(fd, '  app.all("*", function (req, res, next) {\n');
                     fs.writeSync(fd, '    res.header("Access-Control-Allow-Origin", "http://www.destinytrialsreport.com");\n');
                     fs.writeSync(fd, '    return next();\n');
                     fs.writeSync(fd, '  });\n');
+
                     fs.writeSync(fd, '  var port = process.env.PORT || 9000;\n');
                     fs.writeSync(fd, '  app.listen(port, function() {\n');
                     fs.writeSync(fd, '    console.log("Listening on port " + port);\n');
                     fs.writeSync(fd, '  });\n');
                     fs.writeSync(fd, '}');
+
                     done();
                 }
             }, {
@@ -182,7 +192,8 @@ module.exports = function (grunt) {
             command: [
                 'cd heroku',
                 'git init',
-                'git remote add heroku https://git.heroku.com/trials-report.git'
+                'git remote add heroku https://git.heroku.com/trials-report.git',
+                'git remote add staging https://git.heroku.com/trialsscout.git'
             ].join('&&')
         },
         'heroku-git-push': {
@@ -191,6 +202,14 @@ module.exports = function (grunt) {
                 'git add -A',
                 'git commit -m "' + (grunt.option('gitm') ? grunt.option('gitm') : 'updated') + '"',
                 'git push --force heroku master'
+            ].join('&&')
+        },
+        'heroku-git-push-staging': {
+            command: [
+                'cd heroku',
+                'git add -A',
+                'git commit -m "' + (grunt.option('gitm') ? grunt.option('gitm') : 'updated') + '"',
+                'git push --force staging master'
             ].join('&&')
         }
     },
@@ -771,13 +790,17 @@ module.exports = function (grunt) {
           case 'init':
               grunt.task.run([
                   'shell:heroku-git-init',
-                  'shell:heroku-git-push',
                   'shell:heroku-dyno'
               ]);
               break;
           case 'push':
               grunt.task.run([
                   'shell:heroku-git-push'
+              ]);
+              break;
+          case 'staging':
+              grunt.task.run([
+                  'shell:heroku-git-push-staging'
               ]);
               break;
           default:

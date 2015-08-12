@@ -55,45 +55,58 @@ angular
     };
   })
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        resolve: {
-          fireTeam: checkStatus
-        }
-      })
-      .when('/:platform/:playerName', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        resolve: {
-          fireTeam: getFromParams
-        }
-      })
-      .when('/:platform/:playerOne/:playerTwo/:playerThree', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        resolve: {
-          fireTeam: getAllFromParams
-        }
-      })
-      .when('/my', {
-        templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl',
-        resolve: {
-          fireTeam: checkStatus
-        }
-      })
-      .when('/my/:platform/:playerName', {
-        templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl',
-        resolve: {
-          fireTeam: getFromParams
-        }
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+
+    var segments = location.hostname.split('.');
+    var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
+
+    if(subdomain === "my")
+    {
+      $routeProvider
+        .when('/', {
+          templateUrl: 'views/profile.html',
+          controller: 'ProfileCtrl',
+          resolve: {
+            fireTeam: checkStatus
+          }
+        })
+        .when('/:platform/:playerName', {
+          templateUrl: 'views/profile.html',
+          controller: 'ProfileCtrl',
+          resolve: {
+            fireTeam: getFromParams
+          }
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    } else {
+      $routeProvider
+        .when('/', {
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl',
+          resolve: {
+            fireTeam: checkStatus
+          }
+        })
+        .when('/:platform/:playerName', {
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl',
+          resolve: {
+            fireTeam: getFromParams
+          }
+        })
+        .when('/:platform/:playerOne/:playerTwo/:playerThree', {
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl',
+          resolve: {
+            fireTeam: getAllFromParams
+          }
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    }
+
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
