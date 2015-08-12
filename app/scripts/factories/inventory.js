@@ -2,7 +2,6 @@
 
 angular.module('trialsReportApp')
   .factory('inventoryStats', function ($http, requestUrl, weaponStats, armorStats, classStats) {
-    var path = requestUrl.url;
     var getData = function (membershipType, membershipId, characterId) {
       return $http({
         method: 'GET',
@@ -12,9 +11,9 @@ angular.module('trialsReportApp')
       });
     };
 
-    var getInventory = function ($scope, membershipType, membershipId, characterId, index, $q) {
-      var setInventory = function (membershipType, membershipId, characterId) {
-          return getData(membershipType, membershipId, characterId)
+    var getInventory = function ($scope, membershipType, player, index, $q) {
+      var setInventory = function (player) {
+          return getData(membershipType, player.membershipId, player.characterId)
             .then(function (inventory) {
               return inventory;
             });
@@ -58,7 +57,7 @@ angular.module('trialsReportApp')
         reportProblems = function (fault) {
           console.log(String(fault));
         };
-      setInventory(membershipType, membershipId, characterId)
+      setInventory(player)
         .then(parallelLoad)
         .catch(reportProblems);
     };

@@ -22,36 +22,8 @@ angular.module('trialsReportApp')
     $scope.playerPartial = 'views/fireteam/player.html';
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
-
-    function setPostActivityStats($scope, index, result) {
-      $scope.fireteam[index].medals = result.medals;
-      $scope.fireteam[index].allStats = result.playerAllStats;
-      $scope.fireteam[index].wKills = result.wKills;
-      $scope.fireteam[index].playerWeapons = result.playerWeapons;
-    }
-
-    function setPlayerStats(player, index, stats, includeTeam, $scope) {
-      currentAccount.getFireteam(player.recentActivity, player.name).then(function (result) {
-        $scope.fireteam[index].fireTeam = result.fireTeam;
-        setPostActivityStats($scope, index, result, stats);
-      });
-    }
-
-    function getAccountByName(name, platform, $scope, index, includeFireteam) {
-      if (angular.isUndefined(name)) {
-        return;
-      }
-      return currentAccount.getAccount(name, platform)
-        .then(function (player) {
-          return player;
-        }).then(function (player) {
-          sendAnalytic('searchedPlayer', 'name', name);
-          sendAnalytic('searchedPlayer', 'platform', platform);
-          searchFireteam($scope, player, index, platform, includeFireteam);
-        });
-    }
-
-    var searchFireteam = function ($scope, name, index, platform, includeFireteam) {
+    
+    var searchFireteam = function ($scope, name, index, platform) {
 
       var useMember = function (teamMember, index) {
           if (angular.isUndefined($scope.fireteam[index])) {
@@ -67,8 +39,7 @@ angular.module('trialsReportApp')
         parallelLoad = function (player) {
           var methods = [
             currentAccount.getActivities(player, 250),
-            inventoryStats.getInventory($scope, platform, player.membershipId,
-              player.characterId, index, $q),
+            inventoryStats.getInventory($scope, platform, player, index, $q),
             trialsStats.getData(platform, player.membershipId, player.characterId)
           ];
           return $q.all(methods)
@@ -84,13 +55,11 @@ angular.module('trialsReportApp')
               }
               $scope.fireteam[index].stats = stats.stats;
               $scope.fireteam[index].lighthouse = stats.lighthouse;
-              setPlayerStats(player, index, stats, includeFireteam, $scope);
             }));
         },
 
         reportProblems = function (fault) {
           console.log(String(fault));
-          //$log.error(String(fault));
         };
 
       useMember(name, index)
@@ -120,7 +89,7 @@ angular.module('trialsReportApp')
       });
     };
 
-    $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
+    $scope.searchPlayerbyName = function (name, platform) {
       if (angular.isDefined(name)){
           $location.path((platform ? '/ps/' : '/xbox/') + name);
       }
@@ -128,8 +97,7 @@ angular.module('trialsReportApp')
 
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
-      var platform = $scope.fireteam[0].membershipType === 2;
-      $scope.platformValue = platform;
+      $scope.platformValue = $scope.fireteam[0].membershipType === 2;
 
       searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
       if ($scope.fireteam[0].otherCharacters.length > 1){
