@@ -122,7 +122,7 @@ angular.module('trialsReportApp')
 
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
       if (angular.isDefined(name)){
-          $location.path('/my' + (platform ? '/ps/' : '/xbox/') + name);
+          $location.path((platform ? '/ps/' : '/xbox/') + name);
       }
     };
 
