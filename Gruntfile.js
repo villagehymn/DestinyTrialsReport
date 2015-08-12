@@ -200,7 +200,7 @@ module.exports = function (grunt) {
             command: [
                 'cd heroku',
                 'git add -A',
-                'git commit -m "' + (grunt.option('gitm') ? grunt.option('gitm') : 'updated') + '"',
+                'git commit -m "' + (grunt.option('gitm') ? grunt.option('gitm') : 'updated') + '" --allow-empty',
                 'git push --force heroku master'
             ].join('&&')
         },
@@ -208,7 +208,7 @@ module.exports = function (grunt) {
             command: [
                 'cd heroku',
                 'git add -A',
-                'git commit -m "' + (grunt.option('gitm') ? grunt.option('gitm') : 'updated') + '"',
+                'git commit -m "' + (grunt.option('gitm') ? grunt.option('gitm') : 'updated') + '" --allow-empty',
                 'git push --force staging master'
             ].join('&&')
         }
