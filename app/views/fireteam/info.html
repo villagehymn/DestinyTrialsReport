@@ -1,11 +1,15 @@
-<div class="card-container emblem" data-intro="Hovering over the playercard will reveal subclass perks"
-     data-position="top" ng-attr-chardin-show="{{$middle}}">
+<div class="card-container emblem"
+     data-intro="Hovering over the playercard will reveal subclass perks"
+     data-position="top"
+     chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
   <div class="card mb-0"
        style="background-image:url('{{player.emblem}}'),url('{{player.background[0]}}'); background-repeat:no-repeat,no-repeat; background-position:left,right; background-size:66px 66px,100% 66px; height:66px">
-    <div class="front p-0" data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat"
-         data-position="right" ng-attr-chardin-show="{{$middle}}">
+    <div class="front p-0"
+         data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat"
+         data-position="right"
+         chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
       <p class="large mb-0">
-        <span ng-bind="player.name.substr(0, 15)"></span>
+        <span ng-bind="player.name"></span>
         <span ng-show="player.stats.killsDeathsRatio" class="right">
           <span class="hidden-xs hidden-md">K/D:</span>
           <span ng-bind="player.stats.killsDeathsRatio.basic.displayValue"></span>

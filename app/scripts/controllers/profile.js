@@ -19,10 +19,15 @@ angular.module('trialsReportApp')
       'Blink Shotgun': 'This Guardian is using Blink and has a shotgun equipped. Be careful!'
     };
     $scope.headerPartial = 'views/shared/profile_header.html';
+    $scope.footerPartial = 'views/shared/footer.html';
     $scope.playerPartial = 'views/fireteam/player.html';
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
-    
+
+    $scope.isHelpOverlayElement = function (length, index) {
+      return ((length == 3 && index == 1) || (length == 2 && index == 0) || (length == 1))
+    }
+
     var searchFireteam = function ($scope, name, index, platform) {
 
       var useMember = function (teamMember, index) {
@@ -108,9 +113,10 @@ angular.module('trialsReportApp')
             searchFireteam($scope, $scope.fireteam[index], index, $scope.fireteam[index].membershipType, true);
           }
         }
-      }else {
+      } else {
         $scope.singleResult = true;
       }
+      //console.log($scope.fireteam);
     }else if (angular.isString(fireTeam)){
       $scope.status = fireTeam;
     } else {

@@ -1,5 +1,6 @@
 <div data-intro="Weapon images and perks, border color displays damage element, grey if kinetic. </br> <em>Hover over image for weapon name</em>"
-     data-position="left" ng-attr-chardin-show="{{$middle}}">
+     data-position="left"
+     chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
   <!--<div class="row ml-0 mr-0 weapon" style="height:130px" ng-repeat="weapon in [player.weapons.primary, player.weapons.special, player.weapons.heavy] track by $index">-->
     <!--<div class="col-xs-4 pt-10">-->
       <!--<div class="card mb-0">-->
@@ -14,8 +15,8 @@
       <!--<div ng-if="!fireteam[0].name && !($first || $last)" class="hidden-xs hidden-sm"-->
            <!--style="width:224px; height:105px; position:absolute; z-index:-1"-->
            <!--data-intro="Unlocked and active weapon perks <br/><em>hover over the icons for the desciption</em>"-->
-           <!--data-position="right" ng-attr-chardin-show="hidden-xs hidden-sm {{$middle ? '' : 'hidden'}}"></div>-->
-      <div weapon-nodes="[player.weapons.primary, player.weapons.special, player.weapons.heavy]" isMiddle="$middle"></div>
+           <!--data-position="right" chardin-show="hidden-xs hidden-sm {{$middle ? '' : 'hidden'}}"></div>-->
+      <div weapon-nodes="[player.weapons.primary, player.weapons.special, player.weapons.heavy]" show-help-overlay="isHelpOverlayElement(fireteam.length, $index)"></div>
       <!--<div class="row" ng-repeat="node in weapon.nodes" ng-show="node.name"-->
            <!--popover="{{node.description}}" popover-trigger="mouseenter">-->
         <!--<div class="col-xs-2">-->

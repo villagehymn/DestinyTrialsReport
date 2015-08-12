@@ -1,6 +1,8 @@
 <div class="row stats ml-0 mr-0" style="margin-top:-3px">
-  <div class="col-md-12 col-sm-12 col-xs-12 pl-0 pr-0" data-intro="Bar size relative to the percentage of the sum<br/><em>hover over the icons for true percentage</em>"
-       data-position="left" ng-attr-chardin-show="{{$middle}}">
+  <div class="col-md-12 col-sm-12 col-xs-12 pl-0 pr-0"
+       data-intro="Bar size relative to the percentage of the sum<br/><em>hover over the icons for true percentage</em>"
+       data-position="left"
+       chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
     <progress max="player.cTotal" animate="true" class="progress not-rounded m-0">
       <bar value="player.cInt" popover="Intellect: {{player.int}} ({{player.intPercent}}%)" popover-trigger="mouseenter" type="greensea">
         <span ng-show="player.cIntPercent >= 27">Intellect {{player.intPercent}}%</span>
@@ -20,4 +22,5 @@
     </progress>
   </div>
 </div>
-<div trials-history="player.pastActivities" isMiddle="$middle"></div>
+
+<div trials-history="player.pastActivities" show-help-overlay="isHelpOverlayElement(fireteam.length, $index)"></div>

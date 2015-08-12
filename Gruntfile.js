@@ -268,17 +268,17 @@ module.exports = function (grunt) {
           }
         },
         proxies: [{
-          context: ['/ps', '/xbox', '/my'],
+          context: ['/ps', '/xbox'],
           host: 'localhost',
           port: 9000,
           https: false,
           xforward: false,
           rewrite: {
             '^/ps': '/#!ps',
-            '^/xbox': '/#!xbox',
-            '^/my': '/#!my'
+            '^/xbox': '/#!xbox'
           }
-        }, {
+        },
+        {
           context: '/bungie',
           host: 'www.bungie.net',
           port: 80,

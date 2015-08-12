@@ -1,5 +1,7 @@
-<div class="row ml-0 mr-0 mb-10" data-intro="Current equipped armor <br/><em>hover over image for the name</em>"
-     data-position="left" ng-attr-chardin-show="{{$middle}}">
+<div class="row ml-0 mr-0 mb-10"
+     data-intro="Current equipped armor <br/><em>hover over image for the name</em>"
+     data-position="left"
+     chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
   <div armor-list="[player.armors.head, player.armors.arms, player.armors.chest, player.armors.legs]"></div>
   <!--<div class="col-md-3 col-xs-3" ng-repeat="armor in [player.armors.head, player.armors.arms, player.armors.chest, player.armors.legs] track by $index">-->
     <!--<div class="card">-->

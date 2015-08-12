@@ -19,9 +19,14 @@ angular.module('trialsReportApp')
       'Blink Shotgun': 'This Guardian is using Blink and has a shotgun equipped. Be careful!'
     };
     $scope.headerPartial = 'views/shared/header.html';
+    $scope.footerPartial = 'views/shared/footer.html';
     $scope.playerPartial = 'views/fireteam/player.html';
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
+
+    $scope.isHelpOverlayElement = function (length, index) {
+      return ((length == 3 && index == 1) || (length == 2 && index == 0) || (length == 1))
+    }
 
     function setPlatform($scope, platformValue) {
       $scope.platformValue = platformValue;
