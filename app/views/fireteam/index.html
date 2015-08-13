@@ -32,18 +32,13 @@
     <div class="col-xs-12">
       <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
         <div class="input-group mt-10 mb-10 shadow-z-1" ng-class="helpOverlay && ($index === 2) ? 'z99999999' : ''">
-          <span ng-hide="recentPlayers" class="input-group-btn">
-            <button class="btn btn-trials btn-white" type="button"
+          <div class="input-group-btn">
+            <button class="btn btn-trials dropdown-toggle btn-white" type="button"
+                    id="dropdownMenuMobile{{($index)}}" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true"
                     ng-click="suggestRecentPlayers()"
                     analytics-on analytics-event="Click"
-                    analytics-category="Suggest Recent Players">
-              Suggest Other
-            </button>
-          </span>
-          <div ng-show="recentPlayers" class="input-group-btn">
-            <button class="btn btn-trials dropdown-toggle btn-white" style="margin-right:-2px" type="button"
-                    id="dropdownMenuMobile{{($index)}}" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="true">
+                    analytics-category="Recent Players">
               Recent Players
               <span class="caret"></span>
             </button>
