@@ -43,7 +43,7 @@ module.exports = function(config) {
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-cookies/angular-cookies.js',
-      'bower_components/angular-filter/dist/angular-filter.min.js',
+      'bower_components/angular-filter/dist/angular-filter.js',
       'bower_components/angular-fontawesome/dist/angular-fontawesome.js',
       'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',

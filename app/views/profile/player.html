@@ -1,15 +1,15 @@
 <ng-include src="infoPartial"></ng-include>
 
-<tabset class="tabs-dark col-xs-12 p-0" justified="true">
-  <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
+<tabset class="col-xs-12 p-0" justified="true">
+  <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped" class="btn-material-brown">
     <ng-include src="statPartial"></ng-include>
     <ng-include src="'views/fireteam/weapons.html'"></ng-include>
     <ng-include src="'views/fireteam/armor.html'"></ng-include>
   </tab>
-  <tab heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps">
+  <tab heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps" class="btn-material-brown">
     <ng-include src="'views/fireteam/maps.html'"></ng-include>
   </tab>
-  <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+  <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats" class="btn-material-brown">
     <ng-include src="'views/fireteam/addStats.html'"></ng-include>
   </tab>
 </tabset>

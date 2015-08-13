@@ -4,21 +4,23 @@
      class="col-xs-12 col-md-4 player-wrapper">
   <div class="row" style="height:18px">
     <div class="col-xs-12">
-      <span class="label bg-trialsgold"
-            style="margin-right:-2px"
-            ng-repeat="hazard in player.nonHazard track by $index"
-            ng-bind="hazard"
-            popover="{{DestinyHazardDefinition[hazard]}}"
-            popover-trigger="mouseenter">
-      </span>
-      <span class="label bg-danger" style="margin-right:2px"
-            ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index"
-            ng-bind="hazard"
-            popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter">
-      </span>
+          <span class="label bg-trialsgold shadow-z-3"
+                style="margin-right:-2px"
+                ng-repeat="hazard in player.nonHazard track by $index"
+                ng-bind="hazard"
+                popover="{{DestinyHazardDefinition[hazard]}}"
+                popover-trigger="mouseenter">
+          </span>
+          <span class="label bg-danger shadow-z-3"
+                style="margin-right:2px"
+                ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index"
+                ng-bind="hazard"
+                popover="{{DestinyHazardDefinition[hazard]}}"
+                popover-trigger="mouseenter">
+          </span>
     </div>
   </div>
-  <section class="tile tile-simple player"
+  <section class="tile tile-simple player shadow-z-2"
            ng-class="helpOverlay && isHelpOverlayElement(fireteam.length, $index) ? 'z99999999' : 'z000000'">
     <div class="tile-body p-0">
       <ng-include src="'views/profile/player.html'"></ng-include>
