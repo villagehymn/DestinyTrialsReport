@@ -4,12 +4,9 @@
       <div class="btn-group">
         <button class="btn btn-trials btn-material-blue-grey" type="button" ng-class="helpOverlay ? 'z99999999' : 'z000000'"
                 ng-click="refreshInventory()"
-                analytics-on analytics-event="Click"
-                analytics-category="Refresh Inventory"
+                analytics-on analytics-event="Click" analytics-category="Refresh Inventory"
                 data-intro="Refreshes inventory for all players<br/><em>(weapons, armor, class)</em>"
-                data-position="right"
-                chardin-show="true"
-                data-class="hidden-xs hidden-sm">
+                data-position="right" chardin-show="true" data-class="hidden-xs hidden-sm">
           Refresh Inventory
         </button>
       </div>
@@ -18,7 +15,7 @@
           <span ng-bind="player.className"></span>
           <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu btn-white" style="width:100%" aria-labelledby="characterSelect">
+        <ul class="dropdown-menu" style="width:100%" aria-labelledby="characterSelect">
           <li ng-repeat="character in player.otherCharacters" ng-if="player.characterId !== character.characterId">
             <a ng-bind="character.className" ng-click="setRecentPlayer(character, 0, true)"
                analytics-on analytics-event="Click" analytics-category="Character Change">
@@ -33,16 +30,15 @@
       <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
         <div class="input-group mt-10 mb-10 shadow-z-1" ng-class="helpOverlay && ($index === 2) ? 'z99999999' : ''">
           <div class="input-group-btn">
-            <button class="btn btn-trials dropdown-toggle btn-white" type="button"
-                    id="dropdownMenuMobile{{($index)}}" data-toggle="dropdown"
+            <button class="btn btn-white dropdown-toggle" type="button"
+                    id="playerSelect{{($index)}}" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="true"
                     ng-click="suggestRecentPlayers()"
-                    analytics-on analytics-event="Click"
-                    analytics-category="Recent Players">
+                    analytics-on analytics-event="Click" analytics-category="Recent Players">
               Recent Players
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu btn-trials" aria-labelledby="dropdownMenuMobile{{$index}}">
+            <ul class="dropdown-menu" aria-labelledby="playerSelect{{$index}}">
               <li ng-repeat="player in recentPlayers track by $index">
                 <a class="black-font" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
                    analytics-on analytics-event="Click" analytics-category="Recent From Dropdown">
@@ -52,15 +48,15 @@
           </div>
           <input type="text" class="form-control pl-10" placeholder="Search for..." ng-model="teammateName"
                  ng-class="helpOverlay && ($index === 2) ? 'z99999999' : 'z000000'"
-                 style="height:34px">
-          <span class="input-group-btn">
+                 style="height:36px">
+          <div class="input-group-btn">
             <button class="btn btn-material-blue-grey" type="submit"
                     ng-class="helpOverlay && ($index === 2) ? 'z99999999' : 'z000000'"
                     data-intro="Clicking 'Suggest Other' will provide a list of players recently played with. If all else fails, you can type a player's name in the text box"
-                    data-position="right" chardin-show="{{$index === 2}}">
+                    data-position="right" chardin-show="{{$index === 2}}" style="height:36px; margin-right:-1px">
               Search
             </button>
-          </span>
+          </div>
         </div>
       </form>
     </div>

@@ -8,7 +8,7 @@ angular.module('trialsReportApp')
         showHelpOverlay: '=showHelpOverlay'
       },
       template: [
-        '<div class="row ml-0 mr-0 weapon" style="height:130px" ng-repeat="weapon in weapons track by $index">',
+        '<div class="row ml-0 mr-0 mt-10 weapon" style="height:130px" ng-repeat="weapon in weapons track by $index">',
           '<div class="col-xs-4 pt-10">',
             '<div class="mb-0">',
               '<div class="front p-0">',
