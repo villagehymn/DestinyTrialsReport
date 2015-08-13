@@ -15,14 +15,13 @@
 </tabset>
 
 <div class="row">
-  <div class="col-xs-12 hidden-xs hidden-sm">
+  <div class="col-xs-12">
     <a href="http://destinytracker.com/destiny/trials/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
        type="button" target="_blank"
-       class="btn btn-block btn-trials btn-default bg-info dker" style="border:none"
+       class="btn btn-default btn-block btn-trials bg-info dker m-0 b-0"
        analytics-on analytics-event="Click" analytics-category="DestinyTracker"
        data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
-       data-position="right"
-       chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+       data-position="right" chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
        DestinyTracker
      </a>
   </div>
