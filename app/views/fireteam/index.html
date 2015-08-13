@@ -68,6 +68,13 @@
 
   <div class="row" style="height:18px">
     <div class="col-xs-12">
+          <span class="label bg-trialsgold"
+                style="margin-right:-2px"
+                ng-repeat="hazard in player.nonHazard track by $index"
+                ng-bind="hazard"
+                popover="{{DestinyHazardDefinition[hazard]}}"
+                popover-trigger="mouseenter">
+          </span>
           <span class="label bg-danger"
                 style="margin-right:2px"
                 ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index"

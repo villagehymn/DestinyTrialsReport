@@ -16,7 +16,8 @@ angular.module('trialsReportApp')
       'Quick Revive': 'This Guardian can revive allies and be revived very quickly.',
       'Grenade on Spawn': 'This Guardian will have a grenade every round.',
       'Final Round Sniper': 'This Guardian has a sniper rifle that can one hit kill a Guardian with a body shot.',
-      'Blink Shotgun': 'This Guardian is using Blink and has a shotgun equipped. Be careful!'
+      'Blink Shotgun': 'This Guardian is using Blink and has a shotgun equipped. Be careful!',
+      'Site Developer': 'Hey! we made this site, so more than likely we are looking you up too...'
     };
     $scope.headerPartial = 'views/shared/header.html';
     $scope.footerPartial = 'views/shared/footer.html';
@@ -109,6 +110,7 @@ angular.module('trialsReportApp')
                 $scope.fireteam[index] = activity;
               }
               $scope.fireteam[index].stats = stats.stats;
+              $scope.fireteam[index].nonHazard = stats.nonHazard;
               $scope.fireteam[index].lighthouse = stats.lighthouse;
               if (includeFireteam) {
                 setPlayerStats(player, index, stats, includeFireteam, $scope);
