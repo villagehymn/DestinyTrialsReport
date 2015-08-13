@@ -27,8 +27,8 @@ angular.module('trialsReportApp')
     $scope.infoPartial = 'views/fireteam/info.html';
 
     $scope.isHelpOverlayElement = function (length, index) {
-      return ((length == 3 && index == 1) || (length == 2 && index == 0) || (length == 1))
-    }
+      return ((length == 3 && index == 1) || (length == 2 && index == 1) || (length == 1))
+    };
 
     var searchFireteam = function ($scope, name, index, platform) {
 
