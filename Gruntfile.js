@@ -59,28 +59,24 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  "description": ' + (pkg.description ? '"' + pkg.description + '"' : '""') + ',\n');
                     fs.writeSync(fd, '  "main": "server.js",\n');
                     fs.writeSync(fd, '  "dependencies": {\n');
-                    fs.writeSync(fd, '    "express": "4.*",\n');
-                    fs.writeSync(fd, '    "express-subdomain": "^1.0.3",\n');
-                    fs.writeSync(fd, '    "request": "^2.57.0",\n');
                     fs.writeSync(fd, '    "adm-zip": "^0.4.7",\n');
-                    fs.writeSync(fd, '    "request-promise": "^0.4.2",\n');
-                    fs.writeSync(fd, '    "sqlite3": "^3.0.8",\n');
-                    fs.writeSync(fd, '    "unzip": "^0.1.11",\n');
-                    fs.writeSync(fd, '    "throng": "^1.0.0",\n');
-                    fs.writeSync(fd, '    "compression": "^1.5.2"\n');
-                    if (min) {
-                        fs.writeSync(fd, '\n');
-                    } else {
-                        fs.writeSync(fd, ',\n    "bower": "^1.3"\n');
+                    if (!min) {
+                        fs.writeSync(fd, '    "bower": "^1.4.1",\n');
                     }
+                    fs.writeSync(fd, '    "compression": "^1.5.2",\n');
+                    fs.writeSync(fd, '    "express": "^4.13.3",\n');
+                    fs.writeSync(fd, '    "express-subdomain": "^1.0.3",\n');
+                    fs.writeSync(fd, '    "request": "^2.60.0",\n');
+                    fs.writeSync(fd, '    "request-promise": "^0.4.3",\n');
+                    fs.writeSync(fd, '    "sqlite3": "^3.0.10",\n');
+                    fs.writeSync(fd, '    "throng": "^1.0.0",\n');
+                    fs.writeSync(fd, '    "unzip": "^0.1.11"\n');
                     fs.writeSync(fd, '  },\n');
                     fs.writeSync(fd, '  "scripts": {\n');
-                    fs.writeSync(fd, '    "start": "node server.js"');
-                    if (min) {
-                        fs.writeSync(fd, '\n');
-                    } else {
-                        fs.writeSync(fd, ',\n    "postinstall": "bower install"\n');
+                    if (!min) {
+                        fs.writeSync(fd, '    "postinstall": "bower install",\n');
                     }
+                    fs.writeSync(fd, '    "start": "node server.js"\n');
                     fs.writeSync(fd, '  },\n');
                     fs.writeSync(fd, '  "author": ' + (pkg.author ? '"' + pkg.author + '"' : '""') + ',\n');
                     fs.writeSync(fd, '  "license": ' + (pkg.license ? '"' + pkg.license + '"' : '""') + '\n');
