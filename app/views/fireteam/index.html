@@ -32,14 +32,14 @@
     <div class="col-xs-12">
       <form class="form-horizontal" role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
         <div class="input-group mt-10 mb-10 shadow-z-1" ng-class="helpOverlay && ($index === 2) ? 'z99999999' : ''">
-              <span ng-hide="recentPlayers" class="input-group-btn">
-                <button class="btn btn-trials btn-white" type="button"
-                        ng-click="suggestRecentPlayers()"
-                        analytics-on analytics-event="Click"
-                        analytics-category="Suggest Recent Players">
-                  Suggest Other
-                </button>
-              </span>
+          <span ng-hide="recentPlayers" class="input-group-btn">
+            <button class="btn btn-trials btn-white" type="button"
+                    ng-click="suggestRecentPlayers()"
+                    analytics-on analytics-event="Click"
+                    analytics-category="Suggest Recent Players">
+              Suggest Other
+            </button>
+          </span>
           <div ng-show="recentPlayers" class="input-group-btn">
             <button class="btn btn-trials dropdown-toggle btn-white" style="margin-right:-2px" type="button"
                     id="dropdownMenuMobile{{($index)}}" data-toggle="dropdown"
@@ -57,11 +57,15 @@
           </div>
           <input type="text" class="form-control pl-10" placeholder="Search for..." ng-model="teammateName"
                  ng-class="helpOverlay && ($index === 2) ? 'z99999999' : 'z000000'"
-                 style="height: 34px;">
-              <span class="input-group-btn">
-                <button class="btn btn-material-blue-grey" type="submit"
-                        ng-class="helpOverlay && ($index === 2) ? 'z99999999' : 'z000000'">Search</button>
-              </span>
+                 style="height:34px">
+          <span class="input-group-btn">
+            <button class="btn btn-material-blue-grey" type="submit"
+                    ng-class="helpOverlay && ($index === 2) ? 'z99999999' : 'z000000'"
+                    data-intro="Clicking 'Suggest Other' will provide a list of players recently played with. If all else fails, you can type a player's name in the text box"
+                    data-position="right" chardin-show="{{$index === 2}}">
+              Search
+            </button>
+          </span>
         </div>
       </form>
     </div>
