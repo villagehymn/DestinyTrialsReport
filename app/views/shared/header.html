@@ -1,5 +1,5 @@
-<div class="header b-0">
-  <div class="navbar navbar-default bg-darkgray lt b-0" role="navigation">
+<div class="header b-0 shadow-z-1">
+  <div class="navbar navbar-default bg-darkgray lt b-0 br-0 mb-5" role="navigation">
     <div class="container-fluid">
       <div class="row mt-20 mb-20">
         <!--<div class="hidden-xs hidden-sm col-md-2 m-0 p-0" style="left: -13% !important;margin-top: 3px !important;">-->
@@ -21,19 +21,22 @@
                     data-intro="Toggle between PSN and XBL platforms"
                     data-position="left"
                     chardin-show="true">
-                <label class="btn btn-default" ng-model="platformValue" btn-radio="true">PS<span class="hidden-xs">N</span></label>
-                <label class="btn btn-default" ng-model="platformValue" btn-radio="false">XB<span class="hidden-xs">L</span></label>
+                <label class="btn btn-material-grey" ng-model="platformValue" btn-radio="true">PS<span class="hidden-xs">N</span></label>
+                <label class="btn btn-material-grey" ng-model="platformValue" btn-radio="false">XB<span class="hidden-xs">L</span></label>
               </span>
-              <input type="text" class="form-control" placeholder="Enter profile name" ng-model="mainPlayer">
+              <div class="form-control-wrapper ml-0 mr-0">
+                <input type="text" class="form-control pl-10 pr-10" placeholder="Enter profile name" ng-model="mainPlayer" style="height: 34px; z-index: 0;">
+              </div>
+              <!--<input type="text" class="form-control floating-label" placeholder="Enter a Guardian's name" ng-model="mainPlayer">-->
               <span class="input-group-btn">
-                <button type="submit" class="btn btn-default" ng-disabled="status">Search</button>
+                <button type="submit" class="btn btn-material-grey" ng-disabled="status">Search</button>
               </span>
             </div>
           </form>
         </div>
         <div class="hidden-xs hidden-sm col-md-3 text-right">
-          <button type="button" class="btn btn-default" ng-click="toggleOverlay()" ng-show="fireteam">Help</button>
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mapModal">Map</button>
+          <button type="button" class="btn btn-material-grey mt-0" ng-click="toggleOverlay()" ng-show="fireteam">Help</button>
+          <button type="button" class="btn btn-material-grey mt-0" data-toggle="modal" data-target="#mapModal">Map</button>
         </div>
       </div>
     </div>
