@@ -218,10 +218,12 @@ angular.module('trialsReportApp')
     };
 
     $scope.suggestRecentPlayers = function () {
-      $scope.recentPlayers = {};
-      angular.forEach($scope.fireteam[0].otherCharacters, function (character) {
-        getActivitiesFromChar($scope, $scope.fireteam[0], character);
-      });
+      if (angular.isUndefined($scope.recentPlayers)) {
+        $scope.recentPlayers = {};
+        angular.forEach($scope.fireteam[0].otherCharacters, function (character) {
+          getActivitiesFromChar($scope, $scope.fireteam[0], character);
+        });
+      }
     };
 
     var sendAnalytic = function (event, cat, label) {
