@@ -219,7 +219,7 @@ tr.thin {
 @media screen and (max-width: 768px) {
   .nav-justified > li, .nav-tabs.nav-justified > li {
     float: left;
-    width: 33%;
+    width: 33.3%;
   }
 }
 
@@ -276,13 +276,10 @@ tr.thin {
   margin-top: 3px !important;
 }
 
-/*
-@media screen and (max-width: 1280px) {
-  .logo  {
-    margin-left: 40px !important;
-  }
-  .logo-destiny {
-    display: none;
-  }
+.nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+  font-weight: 400!important;
 }
-*/
+
+.btn {
+  text-transform: none;
+}

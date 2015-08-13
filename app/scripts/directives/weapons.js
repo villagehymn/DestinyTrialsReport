@@ -10,7 +10,7 @@ angular.module('trialsReportApp')
       template: [
         '<div class="row ml-0 mr-0 weapon" style="height:130px" ng-repeat="weapon in weapons track by $index">',
           '<div class="col-xs-4 pt-10">',
-            '<div class="card mb-0">',
+            '<div class="mb-0">',
               '<div class="front p-0">',
               '<img popover="{{weapon.weapon.name}}" popover-trigger="mouseenter"' +
                 'class="img-responsive weapon-img {{weapon.weapon.burnColor || \'kinetic-dmg\'}}"' +

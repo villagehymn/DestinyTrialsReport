@@ -1,15 +1,15 @@
 <ng-include src="infoPartial"></ng-include>
 
-<tabset class="tabs-dark col-xs-12 p-0" justified="true">
-  <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
+<tabset class="col-xs-12 p-0" justified="true">
+  <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped" class="btn-material-brown">
     <ng-include src="statPartial"></ng-include>
     <ng-include src="'views/fireteam/weapons.html'"></ng-include>
     <ng-include src="'views/fireteam/armor.html'"></ng-include>
   </tab>
-  <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
-    <ng-include src="'views/fireteam/history.html'"></ng-include>
+  <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match" class="btn-material-brown">
+    <ng-include class="mb-10" src="'views/fireteam/history.html'"></ng-include>
   </tab>
-  <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+  <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats" class="btn-material-brown">
     <ng-include src="'views/fireteam/maps.html'"></ng-include>
   </tab>
 </tabset>
@@ -18,7 +18,7 @@
   <div class="col-xs-12 hidden-xs hidden-sm">
     <a href="http://destinytracker.com/destiny/trials/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
        type="button" target="_blank"
-       class="btn btn-block btn-trials btn-default bg-info dker" style="border:none"
+       class="btn btn-block btn-trials btn-default bg-info dker m-0" style="border:none"
        analytics-on analytics-event="Click" analytics-category="DestinyTracker"
        data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
        data-position="right"
