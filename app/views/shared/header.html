@@ -2,11 +2,19 @@
   <div class="navbar navbar-default bg-darkgray lt b-0 br-0 mb-5" role="navigation">
     <div class="container-fluid">
       <div class="row mt-20 mb-20">
-        <!--<div class="hidden-xs hidden-sm col-md-2 m-0 p-0" style="left: -13% !important;margin-top: 3px !important;">-->
-          <!--<a href="/" target="_self" style="text-decoration: none;"><h3 class="text-light text-white lato m-0 p-0" style="margin-right: 80px !important;">-->
-            <!--<span class="hidden-sm">Destiny</span><span class="text-trialsgold">Trials</span>Report-->
-          <!--</h3></a>-->
-        <!--</div>-->
+        <div class="visible-xs visible-sm col-xs-6">
+          <a href="/" target="_self" style="text-decoration:none">
+            <h4 class="text-light logo text-white lato m-0 p-0">
+              <span class="logo-destiny">Destiny</span><span class="text-trialsgold">Trials</span>Report
+            </h4>
+          </a>
+        </div>
+        <div class="visible-xs visible-sm col-xs-6 text-right">
+          <!--<a type="button" class="btn btn-darkgray mt-0 b-0" data-toggle="modal" data-target="#mapModal" style="padding-top: 3px;">Map</a>-->
+          <a type="button" class="btn btn-darkgray mt-0 b-0" href="http://my.destinytrialsreport.com" target="_self" style="padding-top: 3px;">
+            <span class="text-trialsgold">my</span>Report
+          </a>
+        </div>
         <div class="hidden-xs hidden-sm col-md-3 col-md-offset-1">
           <a href="/" target="_self" style="text-decoration:none">
             <h3 class="text-light logo text-white lato m-0 p-0">
@@ -37,6 +45,7 @@
         <div class="hidden-xs hidden-sm col-md-3 text-right">
           <button type="button" class="btn btn-material-grey mt-0" ng-click="toggleOverlay()" ng-show="fireteam">Help</button>
           <button type="button" class="btn btn-material-grey mt-0" data-toggle="modal" data-target="#mapModal">Map</button>
+          <a type="button" class="btn btn-darkgray mt-0 b-0" href="http://my.destinytrialsreport.com" target="_self"><span class="text-trialsgold">my</span>Report</a>
         </div>
       </div>
     </div>

@@ -132,10 +132,6 @@ body {
    }
 }
 
-.tabs-dark {
-  background-color: rgba(0, 0, 0, 0.05) !important;
-}
-
 .streak {
   font-size: 50px;
   line-height: 20px;
@@ -229,9 +225,6 @@ tr.thin {
       font-size: 17px;
     }
   }
-  .tabs-dark .nav-tabs > li > a {
-    white-space: nowrap;
-  }
 }
 
 // Change emblems to fade instead of flip
@@ -278,8 +271,53 @@ tr.thin {
 
 .nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
   font-weight: 400!important;
+  white-space: nowrap;
 }
 
 .btn {
   text-transform: none;
+}
+
+.btn-material-grey.active:not(.btn-link):not(.btn-flat) {
+  background-color: #BDBDBD;
+  color: #4C4C4C;
+}
+
+.btn:active, .btn.active {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.225);
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-color: #C1C1C1;
+}
+
+.popover .popover-content {
+  font-size: 12px;
+  color: #E8E4E4;
+  font-weight: 500;
+  background-color: #7D7D7D;
+}
+.popover.top > .arrow:after {
+  border-top-color: #7D7D7D;
+}
+
+.entry-image > header > h2 {
+  margin: 0;
+  color: #DEDDDD;
+  position: absolute;
+  z-index: 1;
+  top: 7px;
+  left: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .entry-image > header > h2 {
+    font-size: 21px;
+    top: 3px;
+  }
+}
+
+
+* {
+  box-sizing: border-box;
 }

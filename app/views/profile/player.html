@@ -1,6 +1,6 @@
 <ng-include src="infoPartial"></ng-include>
 
-<tabset class="col-xs-12 p-0" justified="true">
+<tabset class="col-xs-12 p-0" justified="true" style="min-height:549px">
   <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped" class="btn-material-brown">
     <ng-include src="statPartial"></ng-include>
     <ng-include src="'views/fireteam/weapons.html'"></ng-include>
@@ -16,13 +16,25 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <a href="http://destinytracker.com/destiny/trials/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
-       type="button" target="_blank"
-       class="btn btn-default btn-block btn-trials bg-info dker m-0 b-0"
-       analytics-on analytics-event="Click" analytics-category="DestinyTracker"
-       data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
-       data-position="right" chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
-       DestinyTracker
-     </a>
+    <div class="btn-group btn-group-justified m-0" role="group">
+      <a href="http://www.destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
+         type="button" target="_blank"
+         class="btn btn-default btn-trials bg-info dk m-0 b-0"
+         analytics-on analytics-event="Click" analytics-category="DestinyTrialsReport"
+         data-intro="Links to <strong>DestinyTrialsReport</strong> for summary of player's passage"
+         data-position="left"
+         chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+        DestinyTrialsReport
+      </a>
+      <a href="http://destinytracker.com/destiny/playlists/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}/trialsOfOsiris"
+         type="button" target="_blank"
+         class="btn btn-default btn-trials bg-info dker m-0 b-0"
+         analytics-on analytics-event="Click" analytics-category="DestinyTracker"
+         data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
+         data-position="right"
+         chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+        DestinyTracker
+      </a>
+    </div>
   </div>
 </div>

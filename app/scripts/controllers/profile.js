@@ -105,21 +105,24 @@ angular.module('trialsReportApp')
 
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
-      $scope.platformValue = $scope.fireteam[0].membershipType === 2;
+      if (angular.isDefined($scope.fireteam[0])) {
+        $scope.platformValue = $scope.fireteam[0].membershipType === 2;
 
-      searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
-      if ($scope.fireteam[0].otherCharacters.length > 1){
-        for (var n = 0; n < $scope.fireteam[0].otherCharacters.length; n++) {
-          if ($scope.fireteam[0].otherCharacters[n].characterId !== $scope.fireteam[0].characterId) {
-            $scope.fireteam.push($scope.fireteam[0].otherCharacters[n]);
-            var index = $scope.fireteam.length - 1;
-            searchFireteam($scope, $scope.fireteam[index], index, $scope.fireteam[index].membershipType, true);
+        searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
+        if ($scope.fireteam[0].otherCharacters.length > 1){
+          for (var n = 0; n < $scope.fireteam[0].otherCharacters.length; n++) {
+            if ($scope.fireteam[0].otherCharacters[n].characterId !== $scope.fireteam[0].characterId) {
+              $scope.fireteam.push($scope.fireteam[0].otherCharacters[n]);
+              var index = $scope.fireteam.length - 1;
+              searchFireteam($scope, $scope.fireteam[index], index, $scope.fireteam[index].membershipType, true);
+            }
           }
+        } else {
+          $scope.singleResult = true;
         }
-      } else {
-        $scope.singleResult = true;
+      }else {
+        $location.path('/');
       }
-      //console.log($scope.fireteam);
     }else if (angular.isString(fireTeam)){
       $scope.status = fireTeam;
     } else {

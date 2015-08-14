@@ -166,8 +166,7 @@ angular.module('trialsReportApp')
 
     $scope.refreshInventory = function () {
       angular.forEach($scope.fireteam, function (player, index) {
-        inventoryStats.getInventory($scope, player.membershipType, player.membershipId,
-          player.characterId, index, $q);
+        inventoryStats.getInventory($scope, player.membershipType, player, index, $q);
       });
     };
 
@@ -235,14 +234,18 @@ angular.module('trialsReportApp')
 
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
-      $scope.platformValue = $scope.fireteam[0].membershipType === 2;
+      if (angular.isDefined($scope.fireteam[0])) {
+        $scope.platformValue = $scope.fireteam[0].membershipType === 2;
 
-      searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
-      if (angular.isDefined($scope.fireteam[0].teamFromParams)){
-        $scope.fireteam.push($scope.fireteam[0].teamFromParams[0]);
-        $scope.fireteam.push($scope.fireteam[0].teamFromParams[1]);
-        searchFireteam($scope, $scope.fireteam[1], 1, $scope.fireteam[1].membershipType, true);
-        searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
+        searchFireteam($scope, $scope.fireteam[0], 0, $scope.fireteam[0].membershipType, true);
+        if (angular.isDefined($scope.fireteam[0].teamFromParams)){
+          $scope.fireteam.push($scope.fireteam[0].teamFromParams[0]);
+          $scope.fireteam.push($scope.fireteam[0].teamFromParams[1]);
+          searchFireteam($scope, $scope.fireteam[1], 1, $scope.fireteam[1].membershipType, true);
+          searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
+        }
+      }else {
+        $location.path('/');
       }
     }else if (angular.isString(fireTeam)){
       $scope.status = fireTeam;

@@ -1,6 +1,6 @@
 <ng-include src="infoPartial"></ng-include>
 
-<tabset class="col-xs-12 p-0" justified="true">
+<tabset class="col-xs-12 p-0" justified="true" style="min-height:549px">
   <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped" class="btn-material-brown">
     <ng-include src="statPartial"></ng-include>
     <ng-include src="'views/fireteam/weapons.html'"></ng-include>
@@ -26,7 +26,7 @@
          chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
         myTrialsReport
       </a>
-      <a href="http://destinytracker.com/destiny/trials/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
+      <a href="http://destinytracker.com/destiny/playlists/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}/trialsOfOsiris"
          type="button" target="_blank"
          class="btn btn-default btn-trials bg-info dker m-0 b-0"
          analytics-on analytics-event="Click" analytics-category="DestinyTracker"

@@ -5,7 +5,7 @@
   <div class="card mb-0"
        style="background-image:url('{{player.emblem}}'),url('{{player.background[0]}}');
        background-repeat:no-repeat,no-repeat; background-position:left,right;
-       background-size:66px 66px,100% 66px; height:66px; box-shadow: none;">
+       background-size:66px 66px,100% 66px; height:66px; box-shadow:none; border-radius:0px">
     <div class="front p-0"
          data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat"
          data-position="right"
@@ -46,7 +46,7 @@
           <a class="icon icon-white m-0" style="margin-top:4px!important; margin-right:5px!important; width:25px; height:25px">
             <img class="img-responsive" ng-src="{{classNode.icon || ''}}">
           </a>
-          <span class="text-left text-sm text-white" style="top:10px; position:absolute" ng-bind="classNode.name"></span>
+          <span class="text-left text-sm text-white" style="top:10px; position:absolute; white-space: nowrap;" ng-bind="classNode.name"></span>
         </div>
       </div>
     </div>

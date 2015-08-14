@@ -4,7 +4,7 @@ var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
 var avoidNodes = ['Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage',
   'Hive Disruptor', 'Oracle Disruptor', 'Wolfpack Rounds', 'Last Word', 'Fan Fire', 'Mark of the Devourer',
   'Ice Breaker', 'No Backpack', 'Lich Bane', 'Invective', 'Cursebringer', 'Disciplinarian', 'Holding Aces',
-  'Timeless Mythoclast', 'Thunderer'
+  'Timeless Mythoclast', 'Thunderer', 'String of Curses'
 ];
 
 function pushNode(nodeStep, name, nodes) {
