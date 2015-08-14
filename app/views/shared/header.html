@@ -2,16 +2,16 @@
   <div class="navbar navbar-default bg-darkgray lt b-0 br-0 mb-5" role="navigation">
     <div class="container-fluid">
       <div class="row mt-20 mb-20">
-        <div class="visible-xs visible-sm col-xs-6">
+        <div class="visible-xs-block visible-sm-block col-xs-6">
           <a href="/" target="_self" style="text-decoration:none">
             <h4 class="text-light logo text-white lato m-0 p-0">
               <span class="logo-destiny">Destiny</span><span class="text-trialsgold">Trials</span>Report
             </h4>
           </a>
         </div>
-        <div class="visible-xs visible-sm col-xs-6 text-right">
-          <!--<a type="button" class="btn btn-darkgray mt-0 b-0" data-toggle="modal" data-target="#mapModal" style="padding-top: 3px;">Map</a>-->
-          <a type="button" class="btn btn-darkgray mt-0 b-0" href="http://my.destinytrialsreport.com" target="_self" style="padding-top: 3px;">
+        <div class="visible-xs-block visible-sm-block col-xs-6 text-right">
+          <!--<a type="button" class="btn btn-darkgray mt-0 b-0" data-toggle="modal" data-target="#mapModal" style="padding-top:3px">Map</a>-->
+          <a type="button" class="btn btn-darkgray mt-0 b-0" href="http://my.destinytrialsreport.com" target="_self" style="padding-top:3px">
             <span class="text-trialsgold">my</span>Report
           </a>
         </div>
@@ -33,9 +33,8 @@
                 <label class="btn btn-material-grey" ng-model="platformValue" btn-radio="false">XB<span class="hidden-xs">L</span></label>
               </span>
               <div class="form-control-wrapper ml-0 mr-0">
-                <input type="text" class="form-control pl-10 pr-10" placeholder="Enter profile name" ng-model="mainPlayer" style="height: 34px; z-index: 0;">
+                <input type="text" class="form-control pl-10 pr-10" placeholder="Enter profile name" ng-model="mainPlayer" style="height:34px; z-index:0">
               </div>
-              <!--<input type="text" class="form-control floating-label" placeholder="Enter a Guardian's name" ng-model="mainPlayer">-->
               <span class="input-group-btn">
                 <button type="submit" class="btn btn-material-grey" ng-disabled="status">Search</button>
               </span>

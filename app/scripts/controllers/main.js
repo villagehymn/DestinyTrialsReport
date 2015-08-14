@@ -39,12 +39,12 @@ angular.module('trialsReportApp')
       if (includeTeam) {
         if ($scope.fireteam[1]){
           $scope.fireteam[1] = result.fireTeam[0];
-        }else {
+        } else {
           $scope.fireteam.push(result.fireTeam[0]);
         }
         if ($scope.fireteam[2]){
           $scope.fireteam[2] = result.fireTeam[1];
-        }else {
+        } else {
           $scope.fireteam.push(result.fireTeam[1]);
         }
         searchFireteam($scope, $scope.fireteam[1], 1, platform);
@@ -118,8 +118,8 @@ angular.module('trialsReportApp')
               }
 
               if (angular.isDefined($scope.fireteam[0]) &&
-                angular.isDefined($scope.fireteam[1]) &&
-                angular.isDefined($scope.fireteam[2])) {
+                  angular.isDefined($scope.fireteam[1]) &&
+                  angular.isDefined($scope.fireteam[2])) {
                 var platformUrl = platform === 2 ? '/ps/' : '/xbox/';
                 locationChanger.skipReload().withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' + $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
               }
@@ -137,10 +137,10 @@ angular.module('trialsReportApp')
     };
 
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
-      if (angular.isDefined(name)){
+      if (angular.isDefined(name)) {
         if (includeFireteam) {
           $location.path((platform ? '/ps/' : '/xbox/') + name);
-        }else {
+        } else {
           $scope.helpOverlay = false;
           getAccountByName(name, (platform ? 2 : 1), $scope, index, true);
           sendAnalytic('loadedPlayer', 'name', name);
@@ -244,10 +244,10 @@ angular.module('trialsReportApp')
           searchFireteam($scope, $scope.fireteam[1], 1, $scope.fireteam[1].membershipType, true);
           searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
         }
-      }else {
+      } else {
         $location.path('/');
       }
-    }else if (angular.isString(fireTeam)){
+    } else if (angular.isString(fireTeam)) {
       $scope.status = fireTeam;
     } else {
       $scope.platformValue = true;
