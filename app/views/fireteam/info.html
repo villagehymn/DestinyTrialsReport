@@ -77,6 +77,19 @@
     <label>Last matches</label>
     <div class="player-history__matches" trials-history="player.pastActivities" show-help-overlay="isHelpOverlayElement(fireteam.length, $index)"></div>
   </div>
+  <div class="player__hazards">
+    <div class="player-hazard"
+      ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"
+      popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
+    </div>
+    <div class="player-hazard"
+      ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index" ng-bind="hazard"
+      popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
+    </div>
+    <div class="player-hazard player-hazard--none">
+      This Guardian doesn't need cheap tricks
+    </div>
+  </div>
   <!--<div>
     <div class="front p-0"
          data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat"

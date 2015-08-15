@@ -166,7 +166,8 @@
   }
 }
 
-.player__history {
+.player__history,
+.player__hazards {
   padding: 1em 1em .8em 1em;
   border-top: 1px solid #eee;
 
@@ -228,4 +229,24 @@
     margin: 0;
     padding: 1em 1em;
   }
+}
+
+.player-hazard {
+  border: 1px solid $hazard-background;
+  color: $hazard-background;
+  font-size: .8em;
+  display: inline-block;
+  padding: 3px 5px;
+  border-radius: 3px;
+  margin-right: 3px;
+
+  & + .player-hazard--none {
+    display: none;
+  }
+}
+
+.player-hazard--none {
+  border-color: #CFd8DC;
+  background: #CFD8DC;
+  color: white;
 }
