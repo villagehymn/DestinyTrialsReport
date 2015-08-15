@@ -9,7 +9,7 @@ angular.module('trialsReportApp')
       },
       template: [
         '<div class="row">',
-          '<div class="weapon-wrapper col-xs-12 col-sm-4 col-md-12" ng-repeat="weapon in weapons track by $index">',
+          '<div class="weapon-wrapper col-xs-12" ng-repeat="weapon in weapons track by $index">',
             '<div class="weapon__header">',
               '<span ng-if="$index === 0">Primary</span>',
               '<span ng-if="$index === 1">Special</span>',

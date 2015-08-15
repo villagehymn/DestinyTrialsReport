@@ -1,6 +1,7 @@
 .player {
   background: #fff;
   border-radius: 1em;
+  margin-bottom: 30px;
 }
 
 .player__intro {
@@ -33,6 +34,7 @@
 }
 
 .player__kd {
+  font-weight: normal;
   float: right;
   color: darken($player-card, 15%);
   text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
@@ -64,6 +66,7 @@
 
 .player__gamertag {
   margin: 0;
+  font-weight: normal;
   font-size: 1.3em;
   white-space: nowrap;
   overflow: hidden;
