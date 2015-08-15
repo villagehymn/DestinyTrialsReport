@@ -121,6 +121,7 @@ angular.module('trialsReportApp')
           $scope.singleResult = true;
         }
       } else {
+        $scope.platformValue = true;
         $location.path('/');
       }
     } else if (angular.isString(fireTeam)){

@@ -245,6 +245,7 @@ angular.module('trialsReportApp')
           searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
         }
       } else {
+        $scope.platformValue = true;
         $location.path('/');
       }
     } else if (angular.isString(fireTeam)) {
