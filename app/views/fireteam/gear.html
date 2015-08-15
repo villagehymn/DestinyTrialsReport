@@ -40,5 +40,14 @@
        </div>
     </div>
   </div>
-  <ng-include src="'views/fireteam/armor.html'"></ng-include>
+  <div class="gear__perks row">
+    <div class="gear-perk col-xs-6" ng-repeat="classNode in player.classNodes track by $index"
+         popover="{{classNode.description}}" popover-trigger="mouseenter" popover-append-to-body="true">
+      <img class="gear-perk__icon img-responsive" ng-src="{{classNode.icon || ''}}">
+      <span class="gear-perk__title" ng-bind="classNode.name"></span>
+    </div>
+  </div>
+  <div class="gear__armor">
+    <ng-include src="'views/fireteam/armor.html'"></ng-include>
+  </div>
 </div>
