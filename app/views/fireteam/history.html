@@ -67,7 +67,7 @@
     <div class="col-xs-6 text-center p-0">
       <a class="icon icon-default"
          popover="{{getWeaponByHash(weapon.referenceId).name}}"
-         popover-trigger="mouseenter">
+         popover-trigger="mouseenter" popover-append-to-body="true">
         <img class="img-responsive" ng-src="{{getWeaponByHash(weapon.referenceId).icon || ''}}">
       </a>
     </div>
@@ -90,7 +90,7 @@
     <!--<div class="col-xs-6 text-center p-0">-->
       <!--<a class="icon icon-default"-->
          <!--popover="{{DestinyMedalDefinition[wKill.id].statName}}"-->
-         <!--popover-trigger="mouseenter">-->
+         <!--popover-trigger="mouseenter" popover-append-to-body="true">-->
         <!--<img class="img-responsive" ng-src="{{DestinyMedalDefinition[wKill.id].iconImage || ''}}">-->
       <!--</a>-->
     <!--</div>-->
@@ -107,7 +107,7 @@
   <div class="col-xs-4 col-md-3 text-center" style="height:120px" ng-repeat="medal in player.medals  track by $index">
     <a class="icon"
        popover="{{DestinyMedalDefinition[medal.id].statDescription}}"
-       popover-trigger="mouseenter">
+       popover-trigger="mouseenter" popover-append-to-body="true">
       <img class="img-responsive" ng-src="{{('https://www.bungie.net' + DestinyMedalDefinition[medal.id].iconImage) || ''}}">
     </a>
     <p class="text-sm" ng-bind="DestinyMedalDefinition[medal.id].statName"></p>

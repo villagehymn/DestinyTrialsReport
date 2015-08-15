@@ -6,11 +6,11 @@
     <div class="col-xs-12">
       <span class="label bg-trialsgold shadow-z-3" style="margin-right:2px" ng-style="$last ? {'margin-right':'-1px'} : {}"
             ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"
-            popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter">
+            popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
       </span>
       <span class="label bg-danger shadow-z-3" style="margin-right:2px"
             ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index" ng-bind="hazard"
-            popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter">
+            popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
       </span>
     </div>
   </div>

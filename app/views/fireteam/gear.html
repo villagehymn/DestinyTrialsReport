@@ -3,7 +3,7 @@
        data-intro="Bar size relative to the percentage of the sum<br/><em>hover over the icons for true percentage</em>"
        data-position="left"
        chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
-    <div class="gear__stat" popover="{{player.intPercent}}%" popover-trigger="mouseenter">
+    <div class="gear__stat" popover="{{player.intPercent}}%" popover-trigger="mouseenter" popover-append-to-body="true">
       <div class="gear-stat__label">
         Intellect
       </div>
@@ -15,7 +15,7 @@
         </progress>
       </div>
     </div>
-    <div class="gear__stat" popover="{{player.disPercent}}%" popover-trigger="mouseenter">
+    <div class="gear__stat" popover="{{player.disPercent}}%" popover-trigger="mouseenter" popover-append-to-body="true">
       <div class="gear-stat__label">
         Discipline
       </div>
@@ -27,7 +27,7 @@
        </progress>
      </div>
     </div>
-    <div class="gear__stat" popover="{{player.strPercent}}%" popover-trigger="mouseenter">
+    <div class="gear__stat" popover="{{player.strPercent}}%" popover-trigger="mouseenter" popover-append-to-body="true">
       <div class="gear-stat__label">
         Strength
       </div>

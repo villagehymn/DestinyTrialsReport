@@ -5,7 +5,7 @@
   <div class="player__intro"
        style="background-image:url('{{player.background[0]}}');">
     <div class="player__title">
-      <div popover="This player has been flawless" popover-trigger="mouseenter" class="player__flawless" ng-show="player.lighthouse === true">
+      <div popover="This player has been flawless" popover-trigger="mouseenter" class="player__flawless" ng-show="player.lighthouse === true" popover-append-to-body="true">
         <img src="https://www.bungie.net/common/destiny_content/icons/6eaa56916d20fe763111facc14dff6e7.jpg" />
       </div>
       <img class="player__emblem" src="{{player.emblem}}" />
@@ -110,7 +110,7 @@
     <div class="back">
       <div class="col-xs-12">
         <div class="col-xs-6" ng-repeat="classNode in player.classNodes track by $index"
-             popover="{{classNode.description}}" popover-trigger="mouseenter">
+             popover="{{classNode.description}}" popover-trigger="mouseenter" popover-append-to-body="true">
           <a class="icon icon-white m-0" style="margin-top:4px!important; margin-right:5px!important; width:25px; height:25px">
             <img class="img-responsive" ng-src="{{classNode.icon || ''}}">
           </a>
