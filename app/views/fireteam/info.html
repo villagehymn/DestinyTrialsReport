@@ -1,66 +1,135 @@
-<div class="card-container emblem"
+<div class="player__info"
      data-intro="Hovering over the playercard will reveal subclass perks"
      data-position="top"
      chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
-  <div class="card mb-0 text-white"
-       style="background-image:url('{{player.emblem}}'),url('{{player.background[0]}}');
-       background-repeat:no-repeat,no-repeat; background-position:left,right;
-       background-size:66px 66px,100% 66px; height:66px; box-shadow:none; border-radius:0px">
-    <div class="front p-0"
-         data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat"
-         data-position="right" chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
-      <div class="row" style="margin-left:70px; margin-right:0px; font-size:20px">
-        <div class="col-xs-8 p-0">
-          <span ng-bind="player.name" style="width:100%; float:left; overflow:hidden; text-overflow:ellipsis"></span>
-        </div>
-        <div class="col-xs-4 p-0 pr-5 text-right">
-          <span ng-show="player.stats.killsDeathsRatio">
-            <span class="hidden-xs hidden-md">K/D:</span>
-            <span ng-bind="player.stats.killsDeathsRatio.basic.displayValue"></span>
-          </span>
-        </div>
+  <div class="player__intro"
+       style="background-image:url('{{player.background[0]}}');">
+    <div class="player__title">
+      <div popover="This player has been flawless" popover-trigger="mouseenter" class="player__flawless" ng-show="player.lighthouse === true" popover-append-to-body="true">
+        <img src="https://www.bungie.net/common/destiny_content/icons/6eaa56916d20fe763111facc14dff6e7.jpg" />
       </div>
-      <div class="row" style="margin-left:70px; margin-right:0px">
-        <div class="col-xs-7 p-0">
-          <span ng-show="player.level && player.class.name">
-            <span class="hidden-xs hidden-md">Level</span>
-            <span ng-bind="player.level"></span>
-            <span ng-bind="player.class.name"></span>
-          </span>
-        </div>
-        <div class="col-xs-5 p-0 pr-5 text-right">
-          <span ng-show="player.stats.activitiesEntered">
-            <span class="visible-xs-inline">Win:</span>
-            <span class="hidden-xs">Win Rate:</span>
-            <span ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed() + '%'"></span>
-          </span>
-        </div>
+      <img class="player__emblem" src="{{player.emblem}}" />
+      <div class="player__kd">
+        <span ng-bind="player.stats.killsDeathsRatio.basic.displayValue"></span>
+        <label>K/D</label>
       </div>
-      <div class="row" style="margin-left:70px; margin-right:0px">
-        <div class="col-xs-6 p-0">
-          <span ng-show="player.lighthouse === false && !player.neverTrials">Never Flawless</span>
-          <span ng-show="player.lighthouse === true">Flawless</span>
-          <span ng-show="player.neverTrials">No Trials Games</span>
-        </div>
-        <div class="col-xs-6 p-0 pr-5 text-right">
-          <span ng-show="player.stats.combatRating">
-            <span class="visible-xs-inline">CR:</span>
-            <span class="hidden-xs">Rating:</span>
-            <span ng-bind="player.stats.combatRating.basic.displayValue"></span>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="back">
-      <div class="col-xs-12">
-        <div class="col-xs-6" ng-repeat="classNode in player.classNodes track by $index"
-             popover="{{classNode.description}}" popover-trigger="mouseenter">
-          <a class="icon icon-white m-0" style="margin-top:4px!important; margin-right:5px!important; width:25px; height:25px">
-            <img class="img-responsive" ng-src="{{classNode.icon || ''}}">
-          </a>
-          <span class="text-left text-sm" style="top:10px; position:absolute; white-space:nowrap;" ng-bind="classNode.name"></span>
+      <div class="player__char">
+        <h2 class="player__gamertag" ng-bind="player.name"></h2>
+        <div class="player__race">
+          <span class="hidden-xs">Level</span>
+          <span ng-bind="player.level"></span>
+          <span ng-bind="player.class.name"></span>
         </div>
       </div>
     </div>
   </div>
+  <div class="player__summary">
+     <div class="ng-class: {'highly-skilled' : player.stats.killsDeathsRatio.basic.value >= 2.0,
+                            'skilled' : player.stats.killsDeathsRatio.basic.value < 2.0 && player.stats.killsDeathsRatio.basic.value >= 1.5,
+                            'above-average' : player.stats.killsDeathsRatio.basic.value < 1.5 && player.stats.killsDeathsRatio.basic.value >= 1.1,
+                            'average' : player.stats.killsDeathsRatio.basic.value < 1.1 && player.stats.killsDeathsRatio.basic.value >= 0.9,
+                            'below-average' : player.stats.killsDeathsRatio.basic.value < 0.9 && player.stats.killsDeathsRatio.basic.value >= 0.7,
+                            'has-other-qualities' : player.stats.killsDeathsRatio.basic.value < 0.7 }">
+       <div ng-show="player.stats.killsDeathsRatio.basic.value >= 2.0">
+         Highly skilled player
+       </div>
+       <div ng-show="player.stats.killsDeathsRatio.basic.value < 2.0 && player.stats.killsDeathsRatio.basic.value >= 1.5">
+         Skilled player
+       </div>
+       <div ng-show="player.stats.killsDeathsRatio.basic.value < 1.5 && player.stats.killsDeathsRatio.basic.value >= 1.1">
+         Above average player
+       </div>
+       <div ng-show="player.stats.killsDeathsRatio.basic.value < 1.1 && player.stats.killsDeathsRatio.basic.value >= 0.9">
+         Average player
+       </div>
+       <div ng-show="player.stats.killsDeathsRatio.basic.value < 0.9 && player.stats.killsDeathsRatio.basic.value >= 0.7">
+         Below average player
+       </div>
+       <div ng-show="player.stats.killsDeathsRatio.basic.value < 0.7">
+         Has other qualities
+       </div>
+     </div>
+  </div>
+  <div class="player__main-stats">
+    <div class="row">
+      <div class="col-xs-3">
+        <span ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed()"></span>%
+        <label>Wins</label>
+      </div>
+      <div class="col-xs-3">
+        <span ng-bind="player.winStreak.length"></span>
+        <span class="player__streak player__streak--wins" ng-if="player.winStreak.type === 0"></span>
+        <span class="player__streak player__streak--losses" ng-if="player.winStreak.type === 1"></span>
+        <label>Streak</label>
+      </div>
+      <div class="col-xs-3">
+        <span ng-bind="player.stats.combatRating.basic.displayValue"></span>
+        <label>Rating</label>
+      </div>
+      <div class="col-xs-3">
+        <span class="player__lighthouse player__lighthouse--no" ng-if="player.lighthouse === false"><i class="mdi-content-clear"></i></span>
+        <span class="player__lighthouse player__lighthouse--yes" ng-if="player.lighthouse === true"><i class="mdi-action-done"></i></span>
+        <label>Flawless</label>
+      </div>
+    </div>
+  </div>
+  <div class="player__history">
+    <label>Last matches</label>
+    <div class="player-history__matches" trials-history="player.pastActivities" show-help-overlay="isHelpOverlayElement(fireteam.length, $index)"></div>
+  </div>
+  <div class="player__hazards">
+    <div class="player-hazard"
+      ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"
+      popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
+    </div>
+    <div class="player-hazard"
+      ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index" ng-bind="hazard"
+      popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
+    </div>
+    <div class="player-hazard player-hazard--none">
+      This Guardian doesn't need cheap tricks
+    </div>
+  </div>
+  <!--<div>
+    <div class="front p-0"
+         data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat"
+         data-position="right"
+         chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+      <p class="mb-0">
+        <span ng-show="player.level && player.class.name">
+          <span class="hidden-xs">Level</span>
+          <span ng-bind="player.level"></span>
+          <span ng-bind="player.class.name"></span>
+          <span ng-show="player.stats.killsDeathsRatio" class="right">
+            <span class="hidden-xs hidden-md">K/D:</span>
+            <span ng-bind="player.stats.killsDeathsRatio.basic.displayValue"></span>
+          </span>
+        </span>
+        <span ng-show="player.stats.activitiesEntered" class="right">
+          Win<span class="hidden-xs"> Rate</span>:
+          <span ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed()"></span>%
+        </span>
+      </p>
+      <p class="mb-0">
+        <span ng-show="player.lighthouse === false && !player.neverTrials">Never Flawless</span>
+        <span ng-show="player.neverTrials">No Trials Games</span>
+        <span ng-show="player.stats.combatRating" class="right">
+          <span class="visible-xs-inline">CR:</span>
+          <span class="hidden-xs">Rating:</span>
+          <span ng-bind="player.stats.combatRating.basic.displayValue"></span>
+        </span>
+      </p>
+    </div>
+    <div class="back">
+      <div class="col-xs-12">
+        <div class="col-xs-6" ng-repeat="classNode in player.classNodes track by $index"
+             popover="{{classNode.description}}" popover-trigger="mouseenter" popover-append-to-body="true">
+          <a class="icon icon-white m-0" style="margin-top:4px!important; margin-right:5px!important; width:25px; height:25px">
+            <img class="img-responsive" ng-src="{{classNode.icon || ''}}">
+          </a>
+          <span class="text-left text-sm text-white" style="top:10px; position:absolute; white-space: nowrap;" ng-bind="classNode.name"></span>
+        </div>
+      </div>
+    </div>
+  </div>-->
 </div>

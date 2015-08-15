@@ -172,14 +172,27 @@ angular.module('trialsReportApp')
           var mapHash = reversedAct[n].activityDetails.referenceId;
           setActivityData(mapStats, mapHash, reversedAct, n, totals, pastActivities, $filter);
         }
+
         return angular.extend(account, {
           recentActivity: recentActivity,
           pastActivities: pastActivities.reverse().slice(0, 24).reverse(),
           allActivities: pastActivities,
+          winStreak: calcWinStreak(pastActivities),
           mapStats: mapStats,
           totals: totals
         });
       }).catch(function () {});
+    };
+
+    var calcWinStreak = function (activities) {
+      var i = 1,
+          lastMatch = activities[0].standing;
+
+      while (i < activities.length && activities[i].standing === lastMatch) {
+        i++;
+      }
+
+      return { "length": i, "type" : lastMatch }
     };
 
     var getLastTwentyOne = function (account, character) {

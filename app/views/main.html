@@ -1,20 +1,29 @@
-<div class="flex-container">
-  <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel">
-    <div class="modal-dialog br-10" role="document">
-      <img src="/images/ToO_BurningShrine_Heatmap.jpg" class="img-responsive" alt="Heatmap" />
+<div class="wrapper">
+  <header>
+    <ng-include src="headerPartial"></ng-include>
+  </header>
+  <div class="content">
+    <div class="container-fluid" ng-if="status">
+      <div class="row">
+        <div class="text-center alert alert-warning">
+          <strong>{{status}}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" ng-if="!status">
+      <div class="row">
+        <ng-include src="'views/fireteam/index.html'" ng-show="fireteam[0]"></ng-include>
+        <ng-include src="'views/blog/index.html'" ng-show="!fireteam[0]"></ng-include>
+      </div>
     </div>
   </div>
-  <ng-include src="headerPartial"></ng-include>
-  <div class="container flex" ng-if="status">
-    <div class="text-center alert alert-warning">
-      <strong>{{status}}</strong>
-    </div>
+  <footer>
+    <ng-include src="footerPartial"></ng-include>
+  </footer>
+</div>
+
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel">
+  <div class="modal-dialog br-10" role="document">
+    <img src="/images/ToO_BurningShrine_Heatmap.jpg" class="img-responsive" alt="Heatmap" />
   </div>
-  <div class="container flex" ng-if="!status">
-    <div class="row">
-      <ng-include src="'views/fireteam/index.html'" ng-show="fireteam[0]"></ng-include>
-      <ng-include src="'views/blog/index.html'" ng-show="!fireteam[0]"></ng-include>
-    </div>
-  </div>
-  <ng-include src="footerPartial"></ng-include>
 </div>
