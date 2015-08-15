@@ -6,10 +6,16 @@
 }
 
 .content {
-  padding: 3em 0;
+  padding: 3em 0 1em 0;
   flex: 1 1 auto;
 }
 
 .container-fluid {
   max-width: 960px;
+}
+
+@media all and (max-width: 992px) {
+  .content {
+    padding-top: 30px;
+  }
 }
