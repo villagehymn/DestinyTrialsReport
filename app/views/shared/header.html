@@ -7,10 +7,10 @@
             Destiny <span class="highlight">Trials</span> Report
           </a>
         </h1>
-        <div class="header__actions">
+        <div class="header__actions hidden-xs">
           <button type="button" class="btn" ng-click="toggleOverlay()" ng-show="fireteam">Help</button>
           <button type="button" class="btn" data-toggle="modal" data-target="#mapModal">Map</button>
-          <button type="button" class="btn my-report" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a>
+          <a type="button" class="btn my-report" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
                   <input type="text" class="form-control" placeholder="Enter profile name" ng-model="mainPlayer" ng-value="fireteam[0].name">
                 </div>
                 <div class="main-search__controls">
-                  <div class="main-search__refresh" ng-show="fireteam[0].name != null">
+                  <div class="main-search__refresh hidden-xs" ng-show="fireteam[0].name != null">
                     <div class="btn-group">
                       <button class="btn btn-default btn-icon" type="button" ng-class="helpOverlay ? 'z99999999' : 'z000000'"
                               ng-click="refreshInventory()"
@@ -52,7 +52,7 @@
                       </button>
                     </div>
                   </div>
-                  <div class="btn-group" ng-show="fireteam[0].otherCharacters.length > 1">
+                  <div class="btn-group hidden-xs" ng-show="fireteam[0].otherCharacters.length > 1">
                     <button class="btn btn-white dropdown-toggle" type="button" id="characterSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                       <span ng-bind="fireteam[0].className"></span>
                       <span class="caret"></span>

@@ -16,6 +16,13 @@
   }
 }
 
+@media all and (max-width: 767px) {
+  .main-title {
+    text-align: center;
+    margin: auto;
+  }
+}
+
 .highlight {
   color: $trials-gold;
 }
