@@ -7,11 +7,9 @@ angular.module('trialsReportApp')
         armors: '=armorList'
       },
       template: [
-        '<div class="col-md-3 col-xs-3" ng-repeat="armor in armors track by $index">',
-          '<div>',
-            '<div class="front p-0">',
-              '<img popover="{{armor.armor.name}}" popover-trigger="mouseenter" class="img-responsive" ng-src="{{armor.armor.icon}}">',
-            '</div>',
+        '<div class="col-xs-3" ng-repeat="armor in armors track by $index">',
+          '<div class="gear-armor">',
+            '<img popover="{{armor.armor.name}}" popover-append-to-body="true" popover-trigger="mouseenter" class="img-responsive" ng-src="{{armor.armor.icon}}">',
           '</div>',
         '</div>'
       ].join('')

@@ -1,0 +1,252 @@
+.player {
+  background: #fff;
+  border-radius: 1em;
+  margin-bottom: 30px;
+}
+
+.player__intro {
+  background-size: auto 114%;
+  background-position: 5em top;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  position: relative;
+}
+
+.player__flawless {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  img {
+    width: 2em;
+    height: 2em;
+    border-top-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+  }
+}
+
+.player__emblem {
+  width: 5em;
+  height: 5em;
+  margin-right: .5em;
+  border-top-left-radius: 1em;
+}
+
+.player__kd {
+  font-weight: normal;
+  float: right;
+  color: darken($player-card, 15%);
+  text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+  text-align: right;
+  top: 50%;
+  position: absolute;
+  right: 1em;
+  transform: translateY(-40%);
+
+  span {
+    font-size: 1.3em;
+    line-height: 1;
+  }
+
+  label {
+    font-family: 'Roboto Condensed';
+    display: block;
+    font-weight: 300;
+    font-size: .9em;
+    text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+  }
+}
+
+.player__char {
+  display: inline-block;
+  color: $player-card;
+  vertical-align: middle;
+}
+
+.player__gamertag {
+  margin: 0;
+  font-weight: normal;
+  font-size: 1.3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+}
+
+.player__race {
+  font-size: .9em;
+  text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+}
+
+.player__summary {
+  > div {
+    padding: .75em 1em;
+    text-align: center;
+    box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
+  }
+
+  .highly-skilled {
+    background: #D50000;
+    color: white;
+  }
+
+  .skilled {
+    background: #F44336;
+    color: white;
+  }
+
+  .above-average {
+    background: #FF9800;
+    color: white;
+  }
+
+  .average {
+    background: #00B0FF;
+    color: white;
+  }
+
+  .below-average {
+    background: #8BC34A;
+    color: white;
+  }
+
+  .has-other-qualities {
+    background: #00C853;
+    color: white;
+  }
+}
+
+.player__main-stats {
+  padding: 1em;
+
+  span {
+    font-size: 1.2em;
+    line-height: 1;
+  }
+
+  label {
+    font-family: 'Roboto Condensed';
+    display: block;
+    font-weight: 300;
+    color: #999;
+    text-transform: uppercase;
+    font-size: .8em;
+    margin-bottom: 0;
+  }
+}
+
+.player__streak {
+  display: inline-block;
+  border-radius: 50%;
+  width: .5em;
+  height: .5em;
+  vertical-align: .1em;
+  margin-left: .2em;
+}
+
+.player__streak--wins {
+  background: $success;
+}
+
+.player__streak--losses {
+  background: $fail;
+}
+
+.player__lighthouse {
+  i {
+    font-size: .9em;
+  }
+
+  &.player__lighthouse--yes {
+    color: $success;
+  }
+
+  &.player__lighthouse--no {
+    color: $fail;
+  }
+}
+
+.player__history,
+.player__hazards {
+  padding: 1em 1em .8em 1em;
+  border-top: 1px solid #eee;
+
+  label {
+    font-family: 'Roboto Condensed';
+    display: block;
+    font-weight: 300;
+    color: #999;
+    text-transform: uppercase;
+    font-size: .8em;
+    margin-bottom: 0;
+    margin-right: .6em;
+    float: left;
+  }
+}
+
+.player-history__matches {
+  white-space: nowrap;
+  overflow: hidden;
+  height: 1.3em;
+}
+
+.player-history__match {
+  display: inline-block;
+  border-radius: 50%;
+  width: .8em;
+  height: .8em;
+  opacity: 0.5;
+  vertical-align: .1em;
+  margin-left: .2em;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.player-history__match--win {
+    background-color: $success;
+  }
+
+  &.player-history__match--loss {
+    background-color: $fail;
+  }
+}
+
+.player__links {
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.25);
+  background: transparentize(#eee, .3);
+}
+
+.player__links__btns.player__links__btns.player__links__btns {
+  display: flex;
+
+  a {
+    font-size: .9em;
+    color: #999;
+    display: block;
+    flex-grow: 1;
+    text-transform: none;
+    margin: 0;
+    padding: 1em 1em;
+  }
+}
+
+.player-hazard {
+  border: 1px solid $hazard-background;
+  color: $hazard-background;
+  font-size: .8em;
+  display: inline-block;
+  padding: 3px 5px;
+  border-radius: 3px;
+  margin-right: 3px;
+
+  & + .player-hazard--none {
+    display: none;
+  }
+}
+
+.player-hazard--none {
+  border-color: #CFd8DC;
+  background: #CFD8DC;
+  color: white;
+}

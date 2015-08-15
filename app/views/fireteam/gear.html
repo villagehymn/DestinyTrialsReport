@@ -1,0 +1,53 @@
+<div class="gear">
+  <div class="gear__stats"
+       data-intro="Bar size relative to the percentage of the sum<br/><em>hover over the icons for true percentage</em>"
+       data-position="left"
+       chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+    <div class="gear__stat" popover="{{player.intPercent}}%" popover-trigger="mouseenter" popover-append-to-body="true">
+      <div class="gear-stat__label">
+        Intellect
+      </div>
+      <div class="gear-stat__nr">
+        <progress max="100" animate="true" class="progress not-rounded">
+          <bar value="player.intPercent" class="progress-bar-primary">
+            <!--<span class="gear-stat__perc">{{player.intPercent}}%</span>-->
+          </bar>
+        </progress>
+      </div>
+    </div>
+    <div class="gear__stat" popover="{{player.disPercent}}%" popover-trigger="mouseenter" popover-append-to-body="true">
+      <div class="gear-stat__label">
+        Discipline
+      </div>
+    <div class="gear-stat__nr">
+       <progress max="100" animate="true" class="progress not-rounded">
+         <bar value="player.disPercent" class="progress-bar-primary">
+           <!--<span class="gear-stat__perc">{{player.disPercent}}%</span>-->
+         </bar>
+       </progress>
+     </div>
+    </div>
+    <div class="gear__stat" popover="{{player.strPercent}}%" popover-trigger="mouseenter" popover-append-to-body="true">
+      <div class="gear-stat__label">
+        Strength
+      </div>
+      <div class="gear-stat__nr">
+         <progress max="100" animate="true" class="progress not-rounded">
+           <bar value="player.strPercent" class="progress-bar-primary">
+             <!--<span class="gear-stat__perc">{{player.strPercent}}%</span>-->
+           </bar>
+         </progress>
+       </div>
+    </div>
+  </div>
+  <div class="gear__perks row">
+    <div class="gear-perk col-xs-6" ng-repeat="classNode in player.classNodes track by $index"
+         popover="{{classNode.description}}" popover-trigger="mouseenter" popover-append-to-body="true">
+      <img class="gear-perk__icon img-responsive" ng-src="{{classNode.icon || ''}}">
+      <span class="gear-perk__title" ng-bind="classNode.name"></span>
+    </div>
+  </div>
+  <div class="gear__armor">
+    <ng-include src="'views/fireteam/armor.html'"></ng-include>
+  </div>
+</div>
