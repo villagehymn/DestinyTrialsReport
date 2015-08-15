@@ -166,7 +166,8 @@ angular.module('trialsReportApp')
 
     $scope.refreshInventory = function () {
       angular.forEach($scope.fireteam, function (player, index) {
-        inventoryStats.getInventory($scope, player.membershipType, player, index, $q);
+        searchFireteam($scope, player, index, player.membershipType, false);
+        //inventoryStats.getInventory($scope, player.membershipType, player, index, $q);
       });
     };
 
