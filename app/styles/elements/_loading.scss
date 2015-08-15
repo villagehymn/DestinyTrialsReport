@@ -1,0 +1,12 @@
+#loading-bar .bar {
+  background: $trials-gold;
+}
+
+#loading-bar .peg {
+  box-shadow: $trials-gold 1px 0 6px 1px;
+}
+
+#loading-bar-spinner .spinner-icon {
+  border-top-color: $trials-gold;
+  border-left-color: $trials-gold;
+}

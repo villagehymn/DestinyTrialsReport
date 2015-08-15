@@ -1,0 +1,50 @@
+.gear {
+  padding: 1em;
+  background: linear-gradient( 180deg, darken($weapons-background, 5%), white);
+  border-top: 1px solid lighten($weapons-background, 10%);
+}
+
+.gear__stats {
+  margin-bottom: 1.2em;
+}
+
+.gear__stat {
+  height: 1.5em;
+  position: relative;
+
+  &:not(:first-child) {
+    margin-top: .75em;
+  }
+}
+
+.gear-stat__label {
+  text-transform: uppercase;
+  font-family: 'Roboto Condensed';
+  color: #666;
+  line-height: 1.5em;
+  width: 6em;
+  float: left;
+}
+
+.gear-stat__nr {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  padding-left: 6em;
+  transform: translateY(-50%);
+}
+
+.gear-stat__nr .progress {
+  border-radius: 3px;
+  overflow: hidden;
+  height: 5px;
+  margin: 0;
+}
+
+.gear-stat__nr .progress-bar {
+  text-align: left;
+}
+
+.gear-stat__perc {
+  padding-left: .5em;
+}

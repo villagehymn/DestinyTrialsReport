@@ -1,0 +1,21 @@
+.main-title {
+  font-weight: 100;
+  margin: 0;
+  font-size: 2em;
+  line-height: 2em;
+  display: inline-block;
+
+  a {
+    color: white;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: none;
+  }
+}
+
+.highlight {
+  color: $trials-gold;
+}
