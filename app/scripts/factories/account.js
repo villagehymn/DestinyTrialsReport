@@ -215,7 +215,6 @@ angular.module('trialsReportApp')
       }).catch(function () {});
     };
 
-
     var getMatchSummary = function (recentActivity, name, includeTeam, notCurrent) {
       return $http({
         method: 'GET',
