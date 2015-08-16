@@ -10,7 +10,7 @@ angular.module('trialsReportApp')
       template: [
         '<div data-intro="Match win/loss history<br/><em>hover over the icons for details</em>"' +
           'data-position="right" chardin-show="{{showHelpOverlay}}">',
-          '<i class="player-history__match {{$index < 7 ? (activities.length - $index ) > 18 ? \'hidden-xs hidden-md\' : \'\' : \'\'}}"' +
+          '<i class="player-history__match"' +
             'ng-repeat="str in activities.slice().reverse() track by $index"' +
             'ng-class="str.standing === 0 ? \'player-history__match--win\' : \'player-history__match--loss\'"' +
             'popover="K/D: {{str.kd}} with {{str.kills}} kills"' +

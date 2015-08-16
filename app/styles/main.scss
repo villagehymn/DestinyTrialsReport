@@ -1,7 +1,8 @@
-@import 'vendor/chardin';
-
 @import 'inc/fonts';
 @import 'inc/colors';
+
+@import 'vendor/theme-override';
+@import 'vendor/chardin';
 
 @import 'main/layout';
 @import 'main/typography';
