@@ -44,8 +44,8 @@
 .last-match__stats {
   padding: 1em;
 
-  .row:first-child {
-    margin-bottom: 1em;
+  .row:not(:first-child) {
+    margin-top: 1em;
   }
 }
 
@@ -70,6 +70,18 @@
   width: 2em;
   height: 2em;
   align-self: center;
+
+  .last-match-weapon--weaponKillsGrenade & {
+    background: #006064;
+  }
+
+  .last-match-weapon--weaponKillsMelee & {
+    background: #6200EA;
+  }
+
+  .last-match-weapon--weaponKillsSuper & {
+    background: #E65100;
+  }
 }
 
 .last-match-weapon__title {
