@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-6 stat">
+        <div class="col-xs-3 stat">
           <span ng-bind="player.allStats.longestSingleLife.basic.displayValue"></span>
           <label>Longest Life</label>
         </div>
@@ -87,17 +87,15 @@
             </div>
           </div>
         </div>
-        <div class="last-match-weapon last-match-weapon--{{specialWeapon['id']}} col-xs-12" ng-repeat="specialWeapon in player.wKills track by $index"
-              ng-show="specialWeapon['id'] === 'weaponKillsGrenade' || specialWeapon['id'] === 'weaponKillsMelee' || specialWeapon['id'] === 'weaponKillsSuper'">
+        <div class="last-match-weapon last-match-weapon--{{specialWeapon.id}} col-xs-12" ng-repeat="specialWeapon in player.wKills track by $index"
+              ng-if="getWeaponTitle(specialWeapon.id)">
           <div class="row">
             <div class="col-xs-6 last-weapon-weapon__descr">
               <img class="last-match-weapon__img img-responsive">
-              <span class="last-match-weapon__title" ng-show="specialWeapon['id'] === 'weaponKillsGrenade'">Grenade</span>
-              <span class="last-match-weapon__title" ng-show="specialWeapon['id'] === 'weaponKillsMelee'">Melee</span>
-              <span class="last-match-weapon__title" ng-show="specialWeapon['id'] === 'weaponKillsSuper'">Super</span>
+              <span class="last-match-weapon__title" ng-bind="getWeaponTitle(specialWeapon.id)"></span>
             </div>
             <div class="col-xs-2 stat">
-              <span ng-bind="specialWeapon['count']"></span>
+              <span ng-bind="specialWeapon.count"></span>
               <label>Kills</label>
             </div>
           </div>
