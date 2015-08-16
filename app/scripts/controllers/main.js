@@ -233,6 +233,20 @@ angular.module('trialsReportApp')
       });
     };
 
+    $scope.getWeaponTitle = function (title) {
+      switch (title) {
+        case 'weaponKillsGrenade':
+          return 'Grenade';
+          break;
+        case 'weaponKillsMelee':
+          return 'Melee';
+          break;
+        case 'weaponKillsSuper':
+          return 'Super';
+          break;
+      }
+    };
+
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
       if (angular.isDefined($scope.fireteam[0])) {
