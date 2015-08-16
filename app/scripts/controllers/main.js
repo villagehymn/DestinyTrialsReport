@@ -247,6 +247,16 @@ angular.module('trialsReportApp')
       }
     };
 
+    $scope.toggleEdit = function (player) {
+      player.isEditing = !player.isEditing;
+      //if (player.isEditing){
+      //  player.isEditing = false;
+      //}
+      //else {
+      //  player.isEditing = true;
+      //}
+    };
+
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
       if (angular.isDefined($scope.fireteam[0])) {
