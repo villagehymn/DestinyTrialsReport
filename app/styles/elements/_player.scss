@@ -10,6 +10,9 @@
   border-top-left-radius: 1em;
   border-top-right-radius: 1em;
   position: relative;
+
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .player__flawless {
@@ -62,6 +65,7 @@
   display: inline-block;
   color: $player-card;
   vertical-align: middle;
+  max-width: calc(100% - 6em);
 }
 
 .player__gamertag {
@@ -70,6 +74,8 @@
   font-size: 1.3em;
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 3em;
   text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
 }
 
@@ -166,8 +172,7 @@
   }
 }
 
-.player__history,
-.player__hazards {
+.player__history {
   padding: 1em 1em .8em 1em;
   border-top: 1px solid #eee;
 
@@ -182,50 +187,6 @@
     margin-right: .6em;
     float: left;
   }
-}
-
-.nav-tabs {
-  background: #fff;
-  border-radius: 1em;
-  margin: 0;
-  padding: 0;
-  border-bottom: none;
-  border-top: 1px solid #eee;
-  .active {
-    background: #ECEFF1;
-    box-shadow: inset -10px 10px 8px -10px rgba(0, 0, 0, 0.5);
-  }
-  .active:after {
-    position: absolute;
-    content: '';
-    width: 96%;
-    height: 20%;
-    background: #ECEFF1;
-    top: 100%;
-    left: 0;
-  }
-  li {
-    padding-bottom: 0;
-    width: 33.33%;
-  }
-  li > a {
-    padding: 5px 15px;
-    font-family: 'Roboto Condensed';
-    display: block;
-    font-weight: 300;
-    color: #999 !important;
-    text-transform: uppercase;
-    font-size: .8em;
-    margin-bottom: 0;
-    margin-right: .6em;
-    float: left;
-    width: 100%;
-    text-align: center;
-  }
-}
-.nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
-  color: #999 !important;
-  font-weight: 300;
 }
 
 .player-history__matches {
@@ -275,22 +236,35 @@
   }
 }
 
+.player__hazards {
+  padding: 1em;
+  white-space: nowrap;
+  overflow-x: scroll;
+  border-top: 1px solid #eee;
+}
+
 .player-hazard {
   border: 1px solid $hazard-background;
   color: $hazard-background;
-  font-size: .8em;
+  font-size: .7em;
   display: inline-block;
-  padding: 3px 5px;
+  padding: 1px 3px;
   border-radius: 3px;
   margin-right: 3px;
+  line-height: 1.3;
 
   & + .player-hazard--none {
     display: none;
   }
 }
 
+.player-hazard--friendly {
+  color: #2196F3;
+  border-color: #2196F3;
+  margin-right: 0;
+}
+
 .player-hazard--none {
-  border-color: #CFd8DC;
-  background: #CFD8DC;
-  color: white;
+  border-color: #B0BEC5;
+  color: #B0BEC5;
 }
