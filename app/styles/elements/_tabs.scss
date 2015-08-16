@@ -1,43 +1,75 @@
-.nav-tabs {
-  background: #fff;
-  border-radius: 1em;
-  margin: 0;
-  padding: 0;
-  border-bottom: none;
-  border-top: 1px solid #eee;
-  .active {
-    background: #ECEFF1;
-    box-shadow: inset -10px 10px 8px -10px rgba(0, 0, 0, 0.5);
+.player-tabs {
+  overflow: hidden;
+
+  ul {
+    overflow: hidden;
+    margin-bottom: -1px;
   }
-  .active:after {
-    position: absolute;
-    content: '';
-    width: 96%;
-    height: 20%;
-    background: #ECEFF1;
-    top: 100%;
-    left: 0;
-  }
+
   li {
-    padding-bottom: 0;
-    width: 33.33%;
-  }
-  li > a {
-    padding: 5px 15px;
-    font-family: 'Roboto Condensed';
-    display: block;
-    font-weight: 300;
-    color: #999 !important;
-    text-transform: uppercase;
-    font-size: .8em;
-    margin-bottom: 0;
-    margin-right: .6em;
-    float: left;
-    width: 100%;
+    box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
     text-align: center;
+    background: #90A4AE;
+
+    a,
+    a:hover,
+    a:focus {
+      border-radius: 0;
+      font-size: .9em;
+      color: #fff !important;
+      font-weight: 300;
+      text-transform: uppercase;
+      font-family: 'Roboto Condensed';
+      transition: box-shadow linear .1s;
+    }
   }
-}
-.nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
-  color: #999 !important;
-  font-weight: 300;
+
+  li.active {
+    z-index: 1;
+    position: relative;
+  }
+
+  li.active a,
+  li.active a:hover,
+  li.active a:focus {
+    color: #666 !important;
+    box-shadow: 0px 0px 8px 0 rgba(0,0,0,0.5);
+  }
+
+  li:nth-child(1).active {
+    background: $weapons-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($weapons-background, 50%);
+    }
+  }
+
+  li:nth-child(2).active {
+    background: $last-match-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($last-match-background, 50%);
+    }
+  }
+
+  li:nth-child(3).active {
+    background: $stats-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($stats-background, 50%);
+    }
+  }
+
+  .tab-content {
+    height: auto;
+  }
 }

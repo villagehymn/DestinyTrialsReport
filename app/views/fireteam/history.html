@@ -1,115 +1,97 @@
-<div class="row" style="margin-top:-3px">
-  <div class="col-xs-3 pr-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">Kills</h5>
+<div class="last-match">
+  <div class="last-match__overview">
+    <div class="last-match__standing">
+      <span class="last-match__result last-match__result--win" ng-if="player.allStats.standing.basic.value === 0"></span>
+      <span class="last-match__result last-match__result--loss" ng-if="player.allStats.standing.basic.value === 1"></span>
+      <span class="last-match__score">
+        <span class="last-match__score--team">
+          {{player.allStats.score.basic.value}}
+        </span>
+        -
+        <span class="last-match__score--opponents">
+          {{player.allStats.allParticipantsScore.basic.value - player.allStats.score.basic.value}}
+        </span>
+      </span>
     </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.allStats.kills.basic.displayValue"></h4>
-    </div>
-  </div>
-  <div class="col-xs-3 p-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">Deaths</h5>
-    </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.allStats.deaths.basic.displayValue"></h4>
-    </div>
-  </div>
-  <div class="col-xs-3 p-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">Assists</h5>
-    </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.allStats.assists.basic.displayValue"></h4>
-    </div>
-  </div>
-  <div class="col-xs-3 pl-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">K/D</h5>
-    </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.allStats.killsDeathsRatio.basic.displayValue"></h4>
+    <div class="row">
+      <div class="col-xs-6 stat">
+        <span ng-bind="player.pastActivities[0].date"></span>
+        <label>Date</label>
+      </div>
+      <div class="col-xs-6 stat">
+        <span ng-bind="player.allStats.totalActivityDurationSeconds.basic.displayValue"></span>
+        <label>Duration</label>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-4 pr-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="custom-font filled bg-danger">Headshots<!-- (Sniper)--></h5>
+  <div class="last-match__details">
+    <div class="last-match__stats">
+      <div class="row">
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.kills.basic.displayValue"></span>
+          <label>Kills</label>
+        </div>
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.deaths.basic.displayValue"></span>
+          <label>Deaths</label>
+        </div>
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.assists.basic.displayValue"></span>
+          <label>Assists</label>
+        </div>
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.killsDeathsRatio.basic.displayValue"></span>
+          <label>K/D</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.precisionKills.basic.displayValue"></span>
+          <label>Headshots</label>
+        </div>
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.resurrectionsPerformed.basic.displayValue"></span>
+          <label>Revives</label>
+        </div>
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.longestSingleLife.basic.displayValue"></span>
+          <label>Longest Life</label>
+        </div>
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.averageLifespan.basic.displayValue"></span>
+          <label>Avg Life</label>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.allStats.precisionKills.basic.displayValue"><!-- ({{player.allStats.weaponKillsSniper.basic.displayValue || 0}})--></h4>
+    <div class="last-match__weapons">
+      <div class="row">
+        <div class="last-match-weapon col-xs-12" ng-repeat="weapon in player.playerWeapons track by $index">
+          <div class="row">
+            <div class="col-xs-6 last-weapon-weapon__descr">
+              <img class="last-match-weapon__img img-responsive" ng-src="{{getWeaponByHash(weapon.referenceId).icon || ''}}">
+              <span class="last-match-weapon__title" ng-bind="getWeaponByHash(weapon.referenceId).name"></span>
+            </div>
+            <div class="col-xs-2 stat">
+              <span ng-bind="weapon.values.uniqueWeaponKills.basic.value"></span>
+              <label>Kills</label>
+            </div>
+            <div class="col-xs-4 stat">
+              <span ng-bind="weapon.values.uniqueWeaponPrecisionKills.basic.value"></span>
+              <label>Headshots</label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="col-xs-4 p-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="custom-font filled bg-danger">Longest Life</h5>
+  <div class="last-match__medals">
+    <div class="row">
+      <div class="col-xs-3" ng-repeat="medal in player.medals track by $index"
+            popover="{{DestinyMedalDefinition[medal.id].statDescription}}"
+            popover-title="{{DestinyMedalDefinition[medal.id].statName}}"
+            popover-trigger="mouseenter" popover-append-to-body="true">
+        <img class="img-responsive" ng-src="{{('https://www.bungie.net' + DestinyMedalDefinition[medal.id].iconImage) || ''}}">
+      </div>
     </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.allStats.longestSingleLife.basic.displayValue"></h4>
-    </div>
-  </div>
-  <div class="col-xs-4 pl-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="custom-font filled bg-danger">Revives</h5>
-    </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.allStats.resurrectionsPerformed.basic.displayValue"></h4>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-6"
-       ng-class="{'pl-0':$odd}"
-       ng-repeat="weapon in player.playerWeapons track by $index">
-    <div class="col-xs-6 text-center p-0">
-      <a class="icon icon-default"
-         popover="{{getWeaponByHash(weapon.referenceId).name}}"
-         popover-trigger="mouseenter" popover-append-to-body="true">
-        <img class="img-responsive" ng-src="{{getWeaponByHash(weapon.referenceId).icon || ''}}">
-      </a>
-    </div>
-    <div class="col-xs-6 text-center p-0">
-      <p class="text-left text-sm m-0 mt-10">
-        <strong>Kills:</strong>
-        <span ng-bind="weapon.values.uniqueWeaponKills.basic.value"></span>
-      </p>
-      <p class="text-left text-sm m-0">
-        <strong>HS:</strong>
-        <span ng-bind="weapon.values.uniqueWeaponPrecisionKills.basic.value"></span>
-      </p>
-      <p class="text-left text-sm m-0 mb-10">
-        <strong>Acc:</strong>
-        <span ng-bind="weapon.values.uniqueWeaponKillsPrecisionKills.basic.displayValue"></span>
-      </p>
-    </div>
-  </div>
-  <!--<div class="col-xs-6" ng-class="{'pl-0':$odd}" ng-repeat="wKill in player.wKills" ng-show="DestinyMedalDefinition[wKill.id]">-->
-    <!--<div class="col-xs-6 text-center p-0">-->
-      <!--<a class="icon icon-default"-->
-         <!--popover="{{DestinyMedalDefinition[wKill.id].statName}}"-->
-         <!--popover-trigger="mouseenter" popover-append-to-body="true">-->
-        <!--<img class="img-responsive" ng-src="{{DestinyMedalDefinition[wKill.id].iconImage || ''}}">-->
-      <!--</a>-->
-    <!--</div>-->
-    <!--<div class="col-xs-6 text-center p-0">-->
-      <!--<p class="text-left text-sm m-0 mb-10">-->
-        <!--<strong>HS Acc:</strong>-->
-        <!--<span ng-bind="wKill.values.basic.displayValue"></span>-->
-      <!--</p>-->
-    <!--</div>-->
-  <!--</div>-->
-</div>
-
-<div class="row">
-  <div class="col-xs-4 col-md-3 text-center" style="height:120px" ng-repeat="medal in player.medals  track by $index">
-    <a class="icon"
-       popover="{{DestinyMedalDefinition[medal.id].statDescription}}"
-       popover-trigger="mouseenter" popover-append-to-body="true">
-      <img class="img-responsive" ng-src="{{('https://www.bungie.net' + DestinyMedalDefinition[medal.id].iconImage) || ''}}">
-    </a>
-    <p class="text-sm" ng-bind="DestinyMedalDefinition[medal.id].statName"></p>
   </div>
 </div>

@@ -1,18 +1,16 @@
 <div class="player shadow-z-1">
   <ng-include src="infoPartial"></ng-include>
 
-  <tabset class="">
+  <tabset justified="true" class="player-tabs">
     <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped" class="">
       <ng-include src="'views/fireteam/weapons.html'"></ng-include>
       <ng-include src="'views/fireteam/gear.html'"></ng-include>
     </tab>
     <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match" class="">
-      <ng-include src="'views/fireteam/weapons.html'"></ng-include>
-      <ng-include src="'views/fireteam/gear.html'"></ng-include>
+      <ng-include src="'views/fireteam/history.html'"></ng-include>
     </tab>
     <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats" class="">
-      <ng-include src="'views/fireteam/weapons.html'"></ng-include>
-      <ng-include src="'views/fireteam/gear.html'"></ng-include>
+      <ng-include src="'views/fireteam/addStats.html'"></ng-include>
     </tab>
   </tabset>
 

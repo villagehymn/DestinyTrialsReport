@@ -52,21 +52,21 @@
   </div>
   <div class="player__main-stats">
     <div class="row">
-      <div class="col-xs-3">
+      <div class="col-xs-3 stat">
         <span ng-show="player.stats.activitiesEntered.basic.value" ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed() + '%'"></span>
         <label>Wins</label>
       </div>
-      <div class="col-xs-3">
+      <div class="col-xs-3 stat">
         <span ng-bind="player.winStreak.length"></span>
         <span class="player__streak player__streak--wins" ng-if="player.winStreak.type === 0"></span>
         <span class="player__streak player__streak--losses" ng-if="player.winStreak.type === 1"></span>
         <label>Streak</label>
       </div>
-      <div class="col-xs-3">
+      <div class="col-xs-3 stat">
         <span ng-bind="player.stats.combatRating.basic.displayValue"></span>
         <label>Rating</label>
       </div>
-      <div class="col-xs-3">
+      <div class="col-xs-3 stat">
         <span class="player__lighthouse player__lighthouse--no" ng-if="player.lighthouse === false"><i class="material-icons">clear</i></span>
         <span class="player__lighthouse player__lighthouse--yes" ng-if="player.lighthouse === true"><i class="material-icons">done</i></span>
         <label>Flawless</label>

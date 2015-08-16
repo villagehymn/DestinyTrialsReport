@@ -1,18 +1,9 @@
 .weapons {
   padding: 1em;
   background: linear-gradient( 180deg, $weapons-background, darken($weapons-background, 5%));
-  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.5);
   border-bottom: 1px solid darken($weapons-background, 20%);
 }
-//.weapons:after {
-//  position: absolute;
-//  content: '';
-//  width: 63%;
-//  height: 26%;
-//  box-shadow: inset 0px 10px 8px -10px rgba(0, 0, 0, 0.5);
-//  top: 25.5%;
-//  left: 32.4%;
-//}
+
 .weapon__header {
   display: none;
   text-align: center;
