@@ -4,6 +4,7 @@ angular.module('trialsReportApp')
   .factory('classStats', function($analytics) {
     var getData = function(items) {
       var classNodes = [];
+      classNodes.abilities = {};
       classNodes.hazards = [];
       var subClass = [];
       var background = [];
@@ -36,6 +37,39 @@ angular.module('trialsReportApp')
                 }
                 if (nodeStep.nodeHash === 527202181) {
                   hasTouchOfFlame = true;
+                }
+              }
+
+              if ([1].indexOf(nodeStep.column) > -1) {
+                if (!(nodeStep.row === 0 && nodeStep.column === 3)) {
+                  var noderStepper = nodeStep.steps;
+                  classNodes.abilities['weaponKillsGrenade'] = {
+                    'name': noderStepper.nodeStepName,
+                    'description': noderStepper.nodeStepDescription,
+                    'icon': 'https://www.bungie.net' + noderStepper.icon
+                  };
+                }
+              }
+
+              if ([3].indexOf(nodeStep.column) > -1) {
+                if (nodeStep.row === 0) {
+                  var noderStepper = nodeStep.steps;
+                  classNodes.abilities['weaponKillsSuper'] = {
+                    'name': noderStepper.nodeStepName,
+                    'description': noderStepper.nodeStepDescription,
+                    'icon': 'https://www.bungie.net' + noderStepper.icon
+                  };
+                }
+              }
+
+              if ([4].indexOf(nodeStep.column) > -1) {
+                if (nodeStep.row === 0) {
+                  var noderStepper = nodeStep.steps;
+                  classNodes.abilities['weaponKillsMelee'] = {
+                    'name': noderStepper.nodeStepName,
+                    'description': noderStepper.nodeStepDescription,
+                    'icon': 'https://www.bungie.net' + noderStepper.icon
+                  };
                 }
               }
 
