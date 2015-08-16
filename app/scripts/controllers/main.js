@@ -248,13 +248,8 @@ angular.module('trialsReportApp')
     };
 
     $scope.toggleEdit = function (player) {
+      $scope.suggestRecentPlayers();
       player.isEditing = !player.isEditing;
-      //if (player.isEditing){
-      //  player.isEditing = false;
-      //}
-      //else {
-      //  player.isEditing = true;
-      //}
     };
 
     if (angular.isObject(fireTeam)) {
