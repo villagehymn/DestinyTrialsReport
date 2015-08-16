@@ -1,4 +1,4 @@
-<div class="player shadow-z-1">
+<div class="player shadow-z-1 is-editing">
   <ng-include src="infoPartial"></ng-include>
 
   <tabset class="player-tabs">
@@ -36,6 +36,52 @@
           DestinyTracker
         </a>
       </div>
+    </div>
+  </div>
+
+  <div class="edit-player">
+    <div ng-if="fireteam[0].name && $index < 3 && $index > -1">
+      <div class="edit-player__input">
+        <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
+          <button class="btn btn-icon" type="submit"
+                  ng-class="helpOverlay && ($index === 2) ? 'z99999999' : 'z000000'"
+                  data-intro="Clicking 'Suggest Other' will provide a list of players recently played with. If all else fails, you can type a player's name in the text box"
+                  data-position="right" chardin-show="{{$index === 2}}">
+            <i class="material-icons">send</i>
+          </button>
+          <input type="text" placeholder="{{fireteam[$index].name}}" class="form-control" ng-model="teammateName"
+               ng-class="helpOverlay && ($index === 2) ? 'z99999999' : 'z000000'" />
+        </form>
+      </div>
+      <div class="edit-player__actions">
+        <div class="recent-players">
+          <span ng-hide="recentPlayers" class="input-group-btn">
+            <button class="btn btn-white btn-raised" type="button"
+                   ng-click="suggestRecentPlayers()"
+                   analytics-on analytics-event="Click"
+                   analytics-category="Suggest Recent Players">
+                   Suggest Recent Players
+            </button>
+          </span>
+         <div ng-show="recentPlayers" class="input-group-btn">
+           <button class="btn btn-white dropdown-toggle btn-raised" style="margin-right:-2px" type="button"
+                   id="dropdownMenuMobile{{($index)}}" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="true">
+             Recent Players
+             <span class="caret"></span>
+           </button>
+           <ul class="dropdown-menu" aria-labelledby="dropdownMenuMobile{{$index}}">
+             <li ng-repeat="player in recentPlayers track by $index">
+               <a class="black-font" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
+                  analytics-on analytics-event="Click" analytics-category="Recent From Dropdown">
+               </a>
+             </li>
+           </ul>
+         </div>
+       </div>
+       <div class="close-overlay">
+          <button class="btn btn-raised btn-white btn-xs">Close</button>
+       </div>
     </div>
   </div>
 </div>
