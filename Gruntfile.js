@@ -74,7 +74,7 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  },\n');
                     fs.writeSync(fd, '  "scripts": {\n');
                     if (!min) {
-                        fs.writeSync(fd, '    "postinstall": "bower install",\n');
+                        fs.writeSync(fd, '    "postinstall": "bower install -p",\n');
                     }
                     fs.writeSync(fd, '    "start": "node server.js"\n');
                     fs.writeSync(fd, '  },\n');
