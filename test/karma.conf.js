@@ -45,6 +45,7 @@ module.exports = function(config) {
       'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
+      'bower_components/angular-touch/angular-touch.js',
       'bower_components/arrive/src/arrive.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/bootstrap-material-design/dist/js/material.js',
