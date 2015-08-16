@@ -8,32 +8,14 @@
   margin-bottom: 1.2em;
 }
 
-.gear__stat {
-  height: 1.5em;
-  position: relative;
-
-  &:not(:first-child) {
-    margin-top: .75em;
-  }
-}
-
 .gear-stat__label {
   text-transform: uppercase;
   font-family: 'Roboto Condensed';
   color: #666;
-  line-height: 1.5em;
-  width: 33.3%;
-  float: left;
+  margin-bottom: .3em;
 }
 
 .gear-stat__nr {
-  position: relative;
-  top: 50%;
-  float: left;
-  width: 31.3%;
-  margin-right: 2%;
-  //padding-left: 6em;
-  transform: translateY(-50%);
 }
 
 .gear-stat__nr .progress {
@@ -45,6 +27,10 @@
 
 .gear-stat__nr .progress-bar {
   text-align: left;
+}
+
+.gear-stat__nr .progress .progress-bar-primary {
+  background: #607D8B;
 }
 
 .gear-stat__perc {
