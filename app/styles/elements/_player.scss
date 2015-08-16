@@ -118,7 +118,7 @@
 
 .player__main-stats {
   padding: 1em;
-
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
   span {
     font-size: 1.2em;
     line-height: 1;
@@ -182,6 +182,50 @@
     margin-right: .6em;
     float: left;
   }
+}
+
+.nav-tabs {
+  background: #fff;
+  border-radius: 1em;
+  margin: 0;
+  padding: 0;
+  border-bottom: none;
+  border-top: 1px solid #eee;
+  .active {
+    background: #ECEFF1;
+    box-shadow: inset -10px 10px 8px -10px rgba(0, 0, 0, 0.5);
+  }
+  .active:after {
+    position: absolute;
+    content: '';
+    width: 96%;
+    height: 20%;
+    background: #ECEFF1;
+    top: 100%;
+    left: 0;
+  }
+  li {
+    padding-bottom: 0;
+    width: 33.33%;
+  }
+  li > a {
+    padding: 5px 15px;
+    font-family: 'Roboto Condensed';
+    display: block;
+    font-weight: 300;
+    color: #999 !important;
+    text-transform: uppercase;
+    font-size: .8em;
+    margin-bottom: 0;
+    margin-right: .6em;
+    float: left;
+    width: 100%;
+    text-align: center;
+  }
+}
+.nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+  color: #999 !important;
+  font-weight: 300;
 }
 
 .player-history__matches {

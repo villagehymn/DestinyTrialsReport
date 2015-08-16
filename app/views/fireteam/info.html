@@ -23,32 +23,32 @@
       </div>
     </div>
   </div>
-  <div class="player__summary">
-     <div class="ng-class: {'highly-skilled' : player.stats.killsDeathsRatio.basic.value >= 2.0,
-                            'skilled' : player.stats.killsDeathsRatio.basic.value < 2.0 && player.stats.killsDeathsRatio.basic.value >= 1.5,
-                            'above-average' : player.stats.killsDeathsRatio.basic.value < 1.5 && player.stats.killsDeathsRatio.basic.value >= 1.1,
-                            'average' : player.stats.killsDeathsRatio.basic.value < 1.1 && player.stats.killsDeathsRatio.basic.value >= 0.9,
-                            'below-average' : player.stats.killsDeathsRatio.basic.value < 0.9 && player.stats.killsDeathsRatio.basic.value >= 0.7,
-                            'has-other-qualities' : player.stats.killsDeathsRatio.basic.value < 0.7 }">
-       <div ng-show="player.stats.killsDeathsRatio.basic.value >= 2.0">
-         Highly skilled player
-       </div>
-       <div ng-show="player.stats.killsDeathsRatio.basic.value < 2.0 && player.stats.killsDeathsRatio.basic.value >= 1.5">
-         Skilled player
-       </div>
-       <div ng-show="player.stats.killsDeathsRatio.basic.value < 1.5 && player.stats.killsDeathsRatio.basic.value >= 1.1">
-         Above average player
-       </div>
-       <div ng-show="player.stats.killsDeathsRatio.basic.value < 1.1 && player.stats.killsDeathsRatio.basic.value >= 0.9">
-         Average player
-       </div>
-       <div ng-show="player.stats.killsDeathsRatio.basic.value < 0.9 && player.stats.killsDeathsRatio.basic.value >= 0.7">
-         Below average player
-       </div>
-       <div ng-show="player.stats.killsDeathsRatio.basic.value < 0.7">
-         Has other qualities
-       </div>
-     </div>
+  <!--<div class="player__summary">-->
+     <!--<div class="ng-class: {'highly-skilled' : player.stats.killsDeathsRatio.basic.value >= 2.0,-->
+                            <!--'skilled' : player.stats.killsDeathsRatio.basic.value < 2.0 && player.stats.killsDeathsRatio.basic.value >= 1.5,-->
+                            <!--'above-average' : player.stats.killsDeathsRatio.basic.value < 1.5 && player.stats.killsDeathsRatio.basic.value >= 1.1,-->
+                            <!--'average' : player.stats.killsDeathsRatio.basic.value < 1.1 && player.stats.killsDeathsRatio.basic.value >= 0.9,-->
+                            <!--'below-average' : player.stats.killsDeathsRatio.basic.value < 0.9 && player.stats.killsDeathsRatio.basic.value >= 0.7,-->
+                            <!--'has-other-qualities' : player.stats.killsDeathsRatio.basic.value < 0.7 }">-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value >= 2.0">-->
+         <!--Highly skilled player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 2.0 && player.stats.killsDeathsRatio.basic.value >= 1.5">-->
+         <!--Skilled player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 1.5 && player.stats.killsDeathsRatio.basic.value >= 1.1">-->
+         <!--Above average player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 1.1 && player.stats.killsDeathsRatio.basic.value >= 0.9">-->
+         <!--Average player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 0.9 && player.stats.killsDeathsRatio.basic.value >= 0.7">-->
+         <!--Below average player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 0.7">-->
+         <!--Has other qualities-->
+       <!--</div>-->
+     <!--</div>-->
   </div>
   <div class="player__main-stats">
     <div class="row">
@@ -77,19 +77,19 @@
     <label>Last matches</label>
     <div class="player-history__matches" trials-history="player.pastActivities" show-help-overlay="isHelpOverlayElement(fireteam.length, $index)"></div>
   </div>
-  <div class="player__hazards">
-    <div class="player-hazard"
-      ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"
-      popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
-    </div>
-    <div class="player-hazard"
-      ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index" ng-bind="hazard"
-      popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
-    </div>
-    <div class="player-hazard player-hazard--none">
-      This Guardian doesn't need cheap tricks
-    </div>
-  </div>
+  <!--<div class="player__hazards">-->
+    <!--<div class="player-hazard"-->
+      <!--ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"-->
+      <!--popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">-->
+    <!--</div>-->
+    <!--<div class="player-hazard"-->
+      <!--ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index" ng-bind="hazard"-->
+      <!--popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">-->
+    <!--</div>-->
+    <!--<div class="player-hazard player-hazard&#45;&#45;none">-->
+      <!--This Guardian doesn't need cheap tricks-->
+    <!--</div>-->
+  <!--</div>-->
   <!--<div>
     <div class="front p-0"
          data-intro="Trials <strong>k/d</strong> and <strong>win %</strong> for this <strong>character</strong><br/>Flawless based on account lifetime, <strong>not</strong> weekly stat"

@@ -22,15 +22,17 @@
   font-family: 'Roboto Condensed';
   color: #666;
   line-height: 1.5em;
-  width: 6em;
+  width: 33.3%;
   float: left;
 }
 
 .gear-stat__nr {
-  position: absolute;
+  position: relative;
   top: 50%;
-  width: 100%;
-  padding-left: 6em;
+  float: left;
+  width: 31.3%;
+  margin-right: 2%;
+  //padding-left: 6em;
   transform: translateY(-50%);
 }
 
