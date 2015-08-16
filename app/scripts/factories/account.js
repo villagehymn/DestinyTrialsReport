@@ -98,13 +98,11 @@ function setActivityData(mapStats, mapHash, reversedAct, n, totals, pastActiviti
 }
 
 angular.module('trialsReportApp')
-  .factory('currentAccount', function ($http, requestUrl, $filter, toastr) {
-    var path = requestUrl.url;
-
+  .factory('currentAccount', function ($http, $filter, toastr) {
     var getAccount = function (sName, platform) {
       return $http({
         method: 'GET',
-        url: path + 'Destiny/SearchDestinyPlayer/' + platform + '/' + sName + '/'
+        url: '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/' + sName + '/'
       }).then(function (resultAcc) {
         if (resultAcc.data.Response.length < 1) {
           toastr.error('Player not found', 'Error');
@@ -120,7 +118,7 @@ angular.module('trialsReportApp')
     var getCharacters = function (membershipType, membershipId, name) {
       return $http({
         method: 'GET',
-        url: path + 'Destiny/' + membershipType + '/Account/' + membershipId + '/'
+        url: '/Platform/Destiny/' + membershipType + '/Account/' + membershipId + '/'
       }).then(function (resultChar) {
         var allCharacters = setCharacter(resultChar.data.Response.data.characters, membershipId, membershipType, name);
         var player = allCharacters[0];
@@ -132,7 +130,7 @@ angular.module('trialsReportApp')
     var getAccountSummary = function (platform, membershipId, name) {
       return $http({
         method: 'GET',
-        url: path + 'Destiny/' + platform + '/Account/' + membershipId + '/Summary/'
+        url: '/Platform/Destiny/' + platform + '/Account/' + membershipId + '/Summary/'
       }).then(function (summaryResult) {
         var allItems = itemFilter(summaryResult.data.Response.data.items,function(currentItem){
           return ((currentItem.characterIndex > 0 ));
@@ -148,7 +146,7 @@ angular.module('trialsReportApp')
       var aCount = count > 0 ? '&count='+ count : '&count=25';
       return $http({
         method: 'GET',
-        url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId + '/?mode=14' + aCount
+        url: '/Platform/Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId + '/?mode=14' + aCount
       }).then(function (resultAct) {
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
@@ -199,7 +197,7 @@ angular.module('trialsReportApp')
       var allPastActivities = [];
       return $http({
         method: 'GET',
-        url: path + 'Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + character.characterId + '/?mode=14&count=21'
+        url: '/Platform/Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + character.characterId + '/?mode=14&count=21'
       }).then(function (resultAct) {
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
@@ -221,7 +219,7 @@ angular.module('trialsReportApp')
     var getMatchSummary = function (recentActivity, name, includeTeam, notCurrent) {
       return $http({
         method: 'GET',
-        url: path + 'Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'
+        url: '/Platform/Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'
       }).then(function (resultPostAct) {
         var fireTeam = [];
         angular.forEach(resultPostAct.data.Response.data.entries, function (entry) {

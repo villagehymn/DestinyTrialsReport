@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('inventoryStats', function ($http, requestUrl, weaponStats, armorStats, classStats) {
+  .factory('inventoryStats', function ($http, weaponStats, armorStats, classStats) {
     var getData = function (membershipType, membershipId, characterId) {
       return $http({
         method: 'GET',

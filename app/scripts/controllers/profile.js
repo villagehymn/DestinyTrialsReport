@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('ProfileCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, requestUrl, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger) {
+  .controller('ProfileCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger) {
     $scope.helpOverlay = false;
     $scope.timerRunning = true;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;

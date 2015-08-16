@@ -42,6 +42,8 @@ module.exports = function(config) {
       'bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/angular-touch/angular-touch.js',
+      'bower_components/angular-carousel/dist/angular-carousel.js',
       'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
