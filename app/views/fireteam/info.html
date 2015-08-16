@@ -53,7 +53,7 @@
   <div class="player__main-stats">
     <div class="row">
       <div class="col-xs-3">
-        <span ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed()"></span>%
+        <span ng-show="player.stats.activitiesEntered.basic.value" ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed() + '%'"></span>
         <label>Wins</label>
       </div>
       <div class="col-xs-3">

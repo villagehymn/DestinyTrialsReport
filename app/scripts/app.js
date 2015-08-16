@@ -56,6 +56,8 @@ angular
   })
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
 
+    $.material.init();
+
     var segments = location.hostname.split('.');
     var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
 
