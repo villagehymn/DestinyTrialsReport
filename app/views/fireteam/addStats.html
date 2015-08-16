@@ -37,6 +37,10 @@
         <span ng-bind="player.stats.allParticipantsScore.basic.displayValue - player.stats.score.basic.displayValue"></span>
         <label>Rounds lost</label>
       </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.averageKillDistance.basic.displayValue"></span>
+        <label>Kill distance</label>
+      </div>
     </div>
   </div>
   <div class="player-stats__detail">
@@ -111,36 +115,36 @@
         </div>
       </div>
     </div>
-    <div class="player-stats__other">
-      <div class="row stat-row">
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.resurrectionsPerformed.basic.displayValue"></span>
-          <label>Revives</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.resurrectionsReceived.basic.displayValue"></span>
-          <label>Been revived</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.suicides.basic.displayValue"></span>
-          <label>Suicides</label>
-        </div>
-      </div>
-      <div class="row stat-row">
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.averageKillDistance.basic.displayValue"></span>
-          <label>Avg kill distance</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.zonesCaptured.basic.displayValue"></span>
-          <label>Zones captured</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.orbsDropped.basic.displayValue"></span>
-          <label>Orbs<br/>created</label>
-        </div>
-      </div>
-    </div>
+    <!--<div class="player-stats__other">-->
+      <!--<div class="row stat-row">-->
+        <!--<div class="col-xs-4 stat">-->
+          <!--<span ng-bind="player.stats.resurrectionsPerformed.basic.displayValue"></span>-->
+          <!--<label>Revives</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 stat">-->
+          <!--<span ng-bind="player.stats.resurrectionsReceived.basic.displayValue"></span>-->
+          <!--<label>Been revived</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 stat">-->
+          <!--<span ng-bind="player.stats.suicides.basic.displayValue"></span>-->
+          <!--<label>Suicides</label>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="row stat-row">-->
+        <!--<div class="col-xs-4 stat">-->
+          <!--<span ng-bind="player.stats.averageKillDistance.basic.displayValue"></span>-->
+          <!--<label>Avg kill distance</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 stat">-->
+          <!--<span ng-bind="player.stats.zonesCaptured.basic.displayValue"></span>-->
+          <!--<label>Zones captured</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 stat">-->
+          <!--<span ng-bind="player.stats.orbsDropped.basic.displayValue"></span>-->
+          <!--<label>Orbs<br/>created</label>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
     <div class="player-stats__bests">
       <div class="stat-row__header">
         Personal records
