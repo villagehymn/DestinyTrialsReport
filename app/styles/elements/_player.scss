@@ -175,24 +175,27 @@
 .player__history {
   padding: 1em 1em .8em 1em;
   border-top: 1px solid #eee;
+  display: flex;
 
   label {
     font-family: 'Roboto Condensed';
-    display: block;
+    flex-shrink: 1;
     font-weight: 300;
     color: #999;
     text-transform: uppercase;
     font-size: .8em;
     margin-bottom: 0;
     margin-right: .6em;
-    float: left;
+    float: none;
+    white-space: nowrap;
   }
 }
 
 .player-history__matches {
-  white-space: nowrap;
+  flex-grow: 1;
   overflow: hidden;
   height: 1.3em;
+  direction: rtl;
 }
 
 .player-history__match {
