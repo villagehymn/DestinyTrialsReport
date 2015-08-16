@@ -4,8 +4,8 @@
      chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
   <div class="player__intro" style="background-image:url('{{player.background[0]}}')">
     <div class="player__title">
-      <img class="player__emblem" src="{{player.emblem}}" />
-      <span class="player__edit" ng-show="$index !== 0" ng-click="toggleEdit(player)">
+      <img class="player__emblem" ng-src="{{player.emblem || ''}}" />
+      <span class="player__edit" ng-if="(subdomain != 'my') && ($index !== 0)" ng-click="toggleEdit(player)">
         <i class="material-icons">edit mode</i>
       </span>
       <div class="player__kd">

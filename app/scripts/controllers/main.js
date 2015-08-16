@@ -26,6 +26,9 @@ angular.module('trialsReportApp')
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
 
+    var segments = location.hostname.split('.');
+    $scope.subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
+
     $scope.isHelpOverlayElement = function (length, index) {
       return ((length == 3 && index == 1) || (length == 2 && index == 1) || (length == 1))
     };
