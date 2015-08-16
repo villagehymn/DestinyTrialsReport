@@ -1,138 +1,170 @@
-<div class="row" style="margin-top:-3px">
-  <div class="col-xs-3 pr-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">Kill Distance</h5>
+<div class="player-stats">
+  <div class="player-stats__main">
+    <div class="row stat-row">
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.kills.basic.displayValue"></span>
+        <label>Kills</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.deaths.basic.displayValue"></span>
+        <label>Deaths</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.assists.basic.displayValue"></span>
+        <label>Assists</label>
+      </div>
     </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.stats.averageKillDistance.basic.displayValue"></h4>
+    <div class="row stat-row">
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.activitiesEntered.basic.displayValue"></span>
+        <label>Games</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.activitiesWon.basic.displayValue"></span>
+        <label>Wins</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.totalActivityDurationSeconds.basic.displayValue"></span>
+        <label>Time played</label>
+      </div>
     </div>
-  </div>
-  <div class="col-xs-3 p-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">AVG Lifespan</h5>
-    </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.stats.averageLifespan.basic.displayValue"></h4>
-    </div>
-  </div>
-  <div class="col-xs-3 p-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">Games Played</h5>
-    </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.stats.activitiesEntered.basic.displayValue"></h4>
-    </div>
-  </div>
-  <div class="col-xs-3 pl-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">Games Won</h5>
-    </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.stats.activitiesWon.basic.displayValue"></h4>
-    </div>
-  </div>
-</div>
-<div class="row" style="margin-top:-3px">
-  <div class="col-xs-4 pr-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">Longest Single Life</h5>
-    </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.stats.longestSingleLife.basic.displayValue"></h4>
+    <div class="row stat-row">
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.score.basic.displayValue"></span>
+        <label>Rounds won</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.allParticipantsScore.basic.displayValue - player.stats.score.basic.displayValue"></span>
+        <label>Rounds lost</label>
+      </div>
     </div>
   </div>
-  <div class="col-xs-4 p-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger">Best Weapon Type</h5>
+  <div class="player-stats__detail">
+    <div class="player-stats__weapons">
+      <div class="row stat-row">
+        <div class="col-xs-6 stat">
+          <span ng-bind="player.stats.weaponBestType.basic.displayValue"></span>
+          <label>Best weapon</label>
+        </div>
+        <div class="col-xs-6 stat">
+          <span ng-bind="player.stats.precisionKills.basic.displayValue"></span>
+          <label>Headshots</label>
+        </div>
+      </div>
+      <div class="stat-row__header">
+        Total kills with
+      </div>
+      <div class="row stat-row">
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsHandCannon.basic.displayValue"></span>
+          <label>Handcannon</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsPulseRifle.basic.displayValue"></span>
+          <label>Pulse Rifle</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsScoutRifle.basic.displayValue"></span>
+          <label>Scout Rifle</label>
+        </div>
+      </div>
+      <div class="row stat-row">
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsAutoRifle.basic.displayValue"></span>
+          <label>Auto Rifle</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsSniper.basic.displayValue"></span>
+          <label>Sniper Rifle</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsShotgun.basic.displayValue"></span>
+          <label>Shotgun</label>
+        </div>
+      </div>
+      <div class="row stat-row">
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsFusionRifle.basic.displayValue"></span>
+          <label>Fusion Rifle</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsRocketLauncher.basic.displayValue"></span>
+          <label>Launcher</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsMachinegun.basic.displayValue"></span>
+          <label>Machine Gun</label>
+        </div>
+      </div>
+      <div class="row stat-row">
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsGrenade.basic.displayValue"></span>
+          <label>Grenade</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsMelee.basic.displayValue"></span>
+          <label>Melee</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.weaponKillsSuper.basic.displayValue"></span>
+          <label>Super</label>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0 text-medium" ng-bind="player.stats.weaponBestType.basic.displayValue"></h4>
+    <div class="player-stats__other">
+      <div class="row stat-row">
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.resurrectionsPerformed.basic.displayValue"></span>
+          <label>Revives</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.resurrectionsReceived.basic.displayValue"></span>
+          <label>Been revived</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.suicides.basic.displayValue"></span>
+          <label>Suicides</label>
+        </div>
+      </div>
+      <div class="row stat-row">
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.averageKillDistance.basic.displayValue"></span>
+          <label>Avg kill distance</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.zonesCaptured.basic.displayValue"></span>
+          <label>Zones captured</label>
+        </div>
+        <div class="col-xs-4 stat">
+          <span ng-bind="player.stats.orbsDropped.basic.displayValue"></span>
+          <label>Orbs<br/>created</label>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col-xs-4 pl-0">
-    <div class="col-xs-12 p-0 text-center">
-      <h5 class="mt-0 custom-font filled bg-danger pr-0 pl-0">Most Single Game Kills</h5>
+    <div class="player-stats__bests">
+      <div class="stat-row__header">
+        Personal records
+      </div>
+      <div class="row stat-row">
+        <div class="col-xs-6 stat">
+          <span ng-bind="player.stats.bestSingleGameKills.basic.displayValue"></span>
+          <label>Kills in one game</label>
+        </div>
+        <div class="col-xs-6 stat">
+          <span ng-bind="player.stats.mostPrecisionKills.basic.displayValue"></span>
+          <label>Headshots in one game</label>
+        </div>
+      </div>
+      <div class="row stat-row">
+        <div class="col-xs-6 stat">
+          <span ng-bind="player.stats.longestSingleLife.basic.displayValue"></span>
+          <label>Longest life</label>
+        </div>
+        <div class="col-xs-6 stat">
+          <span ng-bind="player.stats.longestKillSpree.basic.displayValue"></span>
+          <label>Longest kill spree</label>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-12 p-0 text-center">
-      <h4 class="mt-0" ng-bind="player.stats.bestSingleGameKills.basic.displayValue"></h4>
-    </div>
-  </div>
-</div>
-<div class="row pt-0" style="margin-top:-3px">
-  <div class="col-xs-12">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger">Weapon</h5>
-          </th>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger text-center">PGA</h5>
-          </th>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger">Misc</h5>
-          </th>
-          <th class="p-0">
-            <h5 class="mt-0 mb-0 custom-font filled bg-danger text-center">PGA</h5>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="p-5">Grenade Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.weaponKillsGrenade.pga.displayValue"></td>
-          <td class="p-5">Kills (All)</td>
-          <td class="p-5 text-center" ng-bind="player.stats.kills.pga.displayValue"></td>
-        </tr>
-        <tr>
-          <td class="p-5">Super Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.weaponKillsSuper.pga.displayValue"></td>
-          <td class="p-5">Deaths</td>
-          <td class="p-5 text-center" ng-bind="player.stats.deaths.pga.displayValue"></td>
-        </tr>
-        <tr>
-          <td class="p-5">Shotgun Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.weaponKillsShotgun.pga.displayValue"></td>
-          <td class="p-5">Precision Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.precisionKills.pga.displayValue"></td>
-        </tr>
-        <tr>
-          <td class="p-5">Sniper Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.weaponKillsSniper.pga.displayValue"></td>
-          <td class="p-5">Res Performed</td>
-          <td class="p-5 text-center" ng-bind="player.stats.resurrectionsPerformed.pga.displayValue"></td>
-        </tr>
-        <tr>
-          <td class="p-5">Melee Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.weaponKillsMelee.pga.displayValue"></td>
-          <td class="p-5">Res Received</td>
-          <td class="p-5 text-center" ng-bind="player.stats.resurrectionsReceived.pga.displayValue"></td>
-        </tr>
-        <tr>
-          <td class="p-5">Scout Rifle Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.weaponKillsScoutRifle.pga.displayValue"></td>
-          <td class="p-5">Assists</td>
-          <td class="p-5 text-center" ng-bind="player.stats.assists.pga.displayValue"></td>
-        </tr>
-        <tr>
-          <td class="p-5">Pulse Rifle Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.weaponKillsPulseRifle.pga.displayValue"></td>
-          <td class="p-5">Ability Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.abilityKills.pga.displayValue"></td>
-        </tr>
-        <tr>
-          <td class="p-5">Hand Cannon Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.weaponKillsHandCannon.pga.displayValue"></td>
-          <td class="p-5">Activity Duration</td>
-          <td class="p-5 text-center" ng-bind="player.stats.totalActivityDurationSeconds.pga.displayValue"></td>
-        </tr>
-        <tr>
-          <td class="p-5">Launcher Kills</td>
-          <td class="p-5 text-center" ng-bind="player.stats.weaponKillsRocketLauncher.pga.displayValue"></td>
-          <td class="p-5">Score</td>
-          <td class="p-5 text-center" ng-bind="player.stats.score.pga.displayValue"></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
