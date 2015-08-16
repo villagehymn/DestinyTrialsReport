@@ -40,13 +40,14 @@ function checkStatus($http) {
 
 angular
   .module('trialsReportApp', [
-    'ngAnimate', 'ngCookies',
-    'ngResource', 'ngRoute',
-    'ngSanitize', 'ngTouch',
-    'ui.bootstrap', 'angular-loading-bar',
-    'angulartics', 'angulartics.google.analytics',
-    'toastr', 'angularHelpOverlay',
-    'angular.filter', 'timer'
+    'angularHelpOverlay',
+    'angulartics',
+    'angulartics.google.analytics',
+    'angular-loading-bar',
+    'ngAnimate',
+    'ngRoute',
+    'toastr',
+    'ui.bootstrap'
   ]).config(window.$QDecorator)
   .factory('requestUrl', function () {
     return {
