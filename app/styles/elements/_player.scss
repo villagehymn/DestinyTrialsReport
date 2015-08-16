@@ -238,6 +238,14 @@
     text-transform: none;
     margin: 0;
     padding: 1em 1em;
+
+     &:first-child {
+      border-bottom-left-radius: 1em;
+    }
+
+    &:nth-child(2) {
+      border-bottom-right-radius: 1em;
+    }
   }
 }
 

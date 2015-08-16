@@ -70,18 +70,8 @@
   width: 2em;
   height: 2em;
   align-self: center;
-
-  .last-match-weapon--weaponKillsGrenade & {
-    background: #006064;
-  }
-
-  .last-match-weapon--weaponKillsMelee & {
-    background: #6200EA;
-  }
-
-  .last-match-weapon--weaponKillsSuper & {
-    background: #E65100;
-  }
+  background-color: #532D66;
+  background-size: auto 90%;
 }
 
 .last-match-weapon__title {

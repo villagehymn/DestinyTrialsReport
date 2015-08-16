@@ -90,6 +90,7 @@ function setActivityData(mapStats, mapHash, reversedAct, n, totals, pastActiviti
     'id': reversedAct[n].activityDetails.instanceId,
     'standing': reversedAct[n].values.standing.basic.value,
     'date': $filter('date')(reversedAct[n].period, 'yyyy-MM-dd h:mm'),
+    'dateAgo': moment(reversedAct[n].period).fromNow(),
     'kills': reversedAct[n].values.kills.basic.value,
     'kd': reversedAct[n].values.killsDeathsRatio.basic.displayValue,
     'deaths': reversedAct[n].values.deaths.basic.value,
