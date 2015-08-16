@@ -13,7 +13,7 @@
     "angular-loading-bar": "^0.8.0",
     "angular-route": "^1.4.3",
     "angular-toastr": "^1.4.1",
-    "angular-touch": "~1.4.4",
+    "angular-touch": "^1.4.4",
     "arrive": "^2.2.0",
     "bootstrap": "^3.3.5",
     "bootstrap-material-design": "^0.3.0"
