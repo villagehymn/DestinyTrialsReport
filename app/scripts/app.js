@@ -47,7 +47,7 @@ angular
     'angulartics', 'angulartics.google.analytics',
     'LocalStorageModule', 'toastr',
     'angularHelpOverlay', 'angular.filter',
-    'picardy.fontawesome', 'timer'
+    'picardy.fontawesome', 'timer','angular-carousel'
   ]).config(window.$QDecorator)
   .factory('requestUrl', function () {
     return {
