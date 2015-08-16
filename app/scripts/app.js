@@ -43,28 +43,22 @@ angular
     'angularHelpOverlay',
     'angulartics',
     'angulartics.google.analytics',
+    'angular-carousel',
     'angular-loading-bar',
     'ngAnimate',
     'ngRoute',
-    'toastr',
-    'ui.bootstrap',
     'ngTouch',
-    'angular-carousel'
-  ]).config(window.$QDecorator)
-  .factory('requestUrl', function () {
-    return {
-      url: '/bungie/'
-    };
-  })
+    'toastr',
+    'ui.bootstrap'
+  ])
+  .config(window.$QDecorator)
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
-
     $.material.init();
 
     var segments = location.hostname.split('.');
     var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
 
-    if(subdomain === "my")
-    {
+    if(subdomain === "my") {
       $routeProvider
         .when('/', {
           templateUrl: 'views/profile.html',
@@ -115,8 +109,8 @@ angular
     $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
-  }).service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
-
+  })
+  .service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
     this.skipReload = function () {
       var lastRoute = $route.current;
       $rootScope.$on('$locationChangeSuccess', function () {
@@ -128,10 +122,9 @@ angular
     };
 
     this.withoutRefresh = function (url, doesReplace) {
-      if(doesReplace){
+      if (doesReplace) {
         $location.path(url).replace();
-      }
-      else {
+      } else {
         $location.path(url || '/');
       }
     };

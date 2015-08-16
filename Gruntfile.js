@@ -127,11 +127,11 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  });\n');
                     fs.writeSync(fd, '  app.use(subdomain("my", router));\n');
 
-                    fs.writeSync(fd, '  app.get("/bungie/*?", function(req, res){\n');
+                    fs.writeSync(fd, '  app.get("/Platform/*?", function(req, res){\n');
                     fs.writeSync(fd, '    res.setTimeout(25000);\n');
                     fs.writeSync(fd, '    var api_key = process.env.BUNGIE_API;\n');
                     fs.writeSync(fd, '    var options = {\n');
-                    fs.writeSync(fd, '      url: "https://www.bungie.net/Platform/" + req.originalUrl.replace("/bungie/", ""),\n');
+                    fs.writeSync(fd, '      url: "https://www.bungie.net/" + req.originalUrl,\n');
                     fs.writeSync(fd, '      headers: {\n');
                     fs.writeSync(fd, '        "X-API-Key": api_key\n');
                     fs.writeSync(fd, '      }\n');
@@ -275,14 +275,11 @@ module.exports = function (grunt) {
           }
         },
         {
-          context: '/bungie',
+          context: '/Platform',
           host: 'www.bungie.net',
           port: 80,
           https: false,
           xforward: false,
-          rewrite: {
-            '^/bungie': '/Platform'
-          },
           headers: {
             'host': 'www.bungie.net',
             'X-API-Key': 'API KEY GOES HERE'

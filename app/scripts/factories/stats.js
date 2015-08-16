@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('trialsStats', function ($http, requestUrl) {
-    var path = requestUrl.url;
-
+  .factory('trialsStats', function ($http) {
     var getData = function (membershipType, membershipId, characterId) {
       return $http({
         method: 'GET',
