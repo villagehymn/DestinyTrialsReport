@@ -1,3 +1,8 @@
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel">
+  <div class="modal-dialog br-10" role="document">
+    <img src="/images/ToO_BurningShrine_Heatmap.jpg" class="img-responsive" alt="Heatmap" />
+  </div>
+</div>
 <div class="wrapper">
   <header>
     <ng-include src="headerPartial"></ng-include>
@@ -12,18 +17,12 @@
     </div>
     <div class="container-fluid" ng-if="!status">
       <div class="row">
-        <ng-include src="'views/fireteam/index.html'" ng-show="fireteam[0]"></ng-include>
         <ng-include src="'views/blog/index.html'" ng-show="!fireteam[0]"></ng-include>
+        <ng-include src="'views/fireteam/index.html'" ng-show="fireteam[0]"></ng-include>
       </div>
     </div>
   </div>
   <footer>
     <ng-include src="footerPartial"></ng-include>
   </footer>
-</div>
-
-<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel">
-  <div class="modal-dialog br-10" role="document">
-    <img src="/images/ToO_BurningShrine_Heatmap.jpg" class="img-responsive" alt="Heatmap" />
-  </div>
 </div>

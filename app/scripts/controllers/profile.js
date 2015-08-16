@@ -20,7 +20,7 @@ angular.module('trialsReportApp')
       'Site Developer': 'Hey! we made this site, so more than likely we are looking you up too...',
       'Site Donator': 'Part of an amazing few who\'ve help keep this site running'
     };
-    $scope.headerPartial = 'views/shared/profile_header.html';
+    $scope.headerPartial = 'views/shared/header.html';
     $scope.footerPartial = 'views/shared/footer.html';
     $scope.playerPartial = 'views/fireteam/player.html';
     $scope.statPartial = 'views/fireteam/stats.html';
