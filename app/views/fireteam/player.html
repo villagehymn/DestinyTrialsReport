@@ -1,4 +1,6 @@
-<div class="player shadow-z-1 is-editing">
+<div class="player shadow-z-1"
+     ng-class="player.isEditing ? 'is-editing' : 'not-editing'"
+     ng-if="fireteam[0].name && $index < 3">
   <ng-include src="infoPartial"></ng-include>
 
   <tabset class="player-tabs">
@@ -80,7 +82,7 @@
          </div>
        </div>
        <div class="close-overlay">
-          <button class="btn btn-raised btn-white btn-xs">Close</button>
+          <button class="btn btn-raised btn-white btn-xs" ng-click="toggleEdit(player)">Close</button>
        </div>
     </div>
   </div>

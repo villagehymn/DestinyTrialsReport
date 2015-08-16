@@ -9,6 +9,17 @@
   position: relative;
 }
 
+.player__edit {
+  color: white;
+  transition: opacity ease .2s;
+  cursor: pointer;
+  position: absolute;
+  top: 1.5em;
+  right: 2em;
+  width: 4em;
+  text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+}
+
 .player__intro {
   background-size: auto 114%;
   background-position: 5em top;
@@ -80,7 +91,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-right: 3em;
+  padding-right: 4em;
   text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
 }
 

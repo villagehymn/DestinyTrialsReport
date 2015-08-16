@@ -6,6 +6,9 @@
   bottom: 0;
   width: 100%;
   border-radius: 1em;
+  transition: opacity ease .2s, transform ease .2s;
+  transform: scale(1.05);
+
   opacity: 0;
   pointer-events: none;
 }
@@ -15,7 +18,7 @@
   margin-left: 5.5em;
   height: 5em;
   vertical-align: middle;
-  margin-top: .5em;
+  margin-top: .9em;
 
   button[type="submit"] {
     float: right;
@@ -55,7 +58,8 @@
 
   .player__info {
     .player__gamertag,
-    .player__kd {
+    .player__kd,
+    .player__edit {
       opacity: 0;
     }
   }
@@ -63,7 +67,7 @@
   .edit-player {
     opacity: 1;
     pointer-events: auto;
-    display: block;
+    transform: scale(1);
   }
 }
 
