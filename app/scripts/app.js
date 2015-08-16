@@ -45,9 +45,8 @@ angular
     'ngSanitize', 'ngTouch',
     'ui.bootstrap', 'angular-loading-bar',
     'angulartics', 'angulartics.google.analytics',
-    'LocalStorageModule', 'toastr',
-    'angularHelpOverlay', 'angular.filter',
-    'picardy.fontawesome', 'timer'
+    'toastr', 'angularHelpOverlay',
+    'angular.filter', 'timer'
   ]).config(window.$QDecorator)
   .factory('requestUrl', function () {
     return {
