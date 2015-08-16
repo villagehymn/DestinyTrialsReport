@@ -1,40 +1,41 @@
-<ng-include src="infoPartial"></ng-include>
+<div class="player shadow-z-1">
+  <ng-include src="infoPartial"></ng-include>
 
-<tabset class="col-xs-12 p-0" justified="true">
-  <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped" class="btn-material-brown">
-    <ng-include src="statPartial"></ng-include>
-    <ng-include src="'views/fireteam/weapons.html'"></ng-include>
-    <ng-include src="'views/fireteam/armor.html'"></ng-include>
-  </tab>
-  <tab heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps" class="btn-material-brown">
-    <ng-include src="'views/fireteam/maps.html'"></ng-include>
-  </tab>
-  <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats" class="btn-material-brown">
-    <ng-include src="'views/fireteam/addStats.html'"></ng-include>
-  </tab>
-</tabset>
+  <tabset justified="true" class="player-tabs">
+    <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
+      <ng-include src="'views/fireteam/weapons.html'"></ng-include>
+      <ng-include src="'views/fireteam/gear.html'"></ng-include>
+    </tab>
+    <tab heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps">
+      <ng-include src="'views/fireteam/maps.html'"></ng-include>
+    </tab>
+    <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+      <ng-include src="'views/fireteam/addStats.html'"></ng-include>
+    </tab>
+  </tabset>
 
-<div class="row">
-  <div class="col-xs-12">
-    <div class="btn-group btn-group-justified m-0" role="group">
-      <a href="http://www.destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
-         type="button" target="_blank"
-         class="btn btn-default btn-trials bg-info dk m-0 b-0"
-         analytics-on analytics-event="Click" analytics-category="DestinyTrialsReport"
-         data-intro="Links to <strong>DestinyTrialsReport</strong> for summary of player's passage"
-         data-position="left"
-         chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
-        DestinyTrialsReport
-      </a>
-      <a href="http://destinytracker.com/destiny/playlists/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}/trialsOfOsiris"
-         type="button" target="_blank"
-         class="btn btn-default btn-trials bg-info dker m-0 b-0"
-         analytics-on analytics-event="Click" analytics-category="DestinyTracker"
-         data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
-         data-position="right"
-         chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
-        DestinyTracker
-      </a>
+  <div class="player__links">
+    <div class="row">
+      <div class="col-xs-12 player__links__btns">
+        <a href="http://www..destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
+           type="button" target="_blank"
+           class="btn btn-default btn-trials bg-info dk m-0 b-0"
+           analytics-on analytics-event="Click" analytics-category="myDestinyTrialsReport"
+           data-intro="Links to <strong>DestinyTrialsReport</strong> for summary of player's passage"
+           data-position="left"
+           chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+          myTrialsReport
+        </a>
+        <a href="http://destinytracker.com/destiny/playlists/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}/trialsOfOsiris"
+           type="button" target="_blank"
+           class="btn btn-default btn-trials bg-info dker m-0 b-0"
+           analytics-on analytics-event="Click" analytics-category="DestinyTracker"
+           data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
+           data-position="right"
+           chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+          DestinyTracker
+        </a>
+      </div>
     </div>
   </div>
 </div>

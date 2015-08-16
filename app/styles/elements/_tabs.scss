@@ -73,3 +73,12 @@
     height: auto;
   }
 }
+
+.nav-tabs.nav-justified > li {
+  width: 33.33%;
+  float: left;
+}
+
+.player-tabs li.active a, .player-tabs li.active a:hover, .player-tabs li.active a:focus {
+  box-shadow: none;
+}

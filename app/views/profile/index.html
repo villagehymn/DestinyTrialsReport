@@ -1,23 +1,12 @@
-<div ng-repeat="player in fireteam track by $index"
+<ul rn-carousel class="image hidden-lg hidden-md hidden-sm col-xs-12">
+  <li class="col-xs-12 col-sm-6 col-md-4" ng-if="fireteam[0].name && $index < 3" ng-repeat="player in fireteam track by $index">
+    <ng-include src="'views/profile/player.html'"></ng-include>
+  </li>
+</ul>
+<div class="col-xs-12 col-sm-6 col-md-4 hidden-xs"
      ng-if="fireteam[0].name && $index < 3"
      ng-class="{'col-md-offset-2': $first && fireteam.length==2, 'col-md-offset-4': $first && fireteam.length==1}"
-     class="col-xs-12 col-md-4 player-wrapper">
-  <div class="row" style="height:18px">
-    <div class="col-xs-12">
-      <span class="label bg-trialsgold shadow-z-3" style="margin-right:2px" ng-style="$last ? {'margin-right':'-1px'} : {}"
-            ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"
-            popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
-      </span>
-      <span class="label bg-danger shadow-z-3" style="margin-right:2px"
-            ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index" ng-bind="hazard"
-            popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
-      </span>
-    </div>
-  </div>
-  <section class="tile tile-simple player shadow-z-2"
-           ng-class="helpOverlay && isHelpOverlayElement(fireteam.length, $index) ? 'z99999999' : 'z000000'">
-    <div class="tile-body p-0">
-      <ng-include src="'views/profile/player.html'"></ng-include>
-    </div>
-  </section>
+     ng-repeat="player in fireteam track by $index">
+
+  <ng-include src="'views/profile/player.html'"></ng-include>
 </div>
