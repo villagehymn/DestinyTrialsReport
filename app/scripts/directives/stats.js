@@ -8,6 +8,7 @@ angular.module('trialsReportApp')
         showHelpOverlay: '=showHelpOverlay'
       },
       template: [
+        '<!--<div ng-if="!activities">N/A</div>-->',
         '<div data-intro="Match win/loss history<br/><em>hover over the icons for details</em>"' +
           'data-position="right" chardin-show="{{showHelpOverlay}}">',
           '<i class="player-history__match"' +

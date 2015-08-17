@@ -9,15 +9,16 @@
         <i class="material-icons">edit mode</i>
       </span>
       <div class="player__kd">
-        <span ng-bind="player.stats.killsDeathsRatio.basic.displayValue"></span>
+        <span ng-if="!player.stats.killsDeathsRatio.basic.displayValue">N/A</span>
+        <span ng-if="player.stats.killsDeathsRatio.basic.displayValue"
+              ng-bind="player.stats.killsDeathsRatio.basic.displayValue">
+        </span>
         <label>K/D</label>
       </div>
       <div class="player__char">
         <h2 class="player__gamertag" ng-bind="player.name"></h2>
         <div class="player__race">
-          <span>Level</span>
-          <span ng-bind="player.level"></span>
-          <span ng-bind="player.class.name"></span>
+          <span ng-bind="'Level ' + player.level + ' ' + player.class.name"></span>
         </div>
       </div>
     </div>
@@ -52,17 +53,26 @@
   <div class="player__main-stats">
     <div class="row">
       <div class="col-xs-3 stat">
-        <span ng-show="player.stats.activitiesEntered.basic.value" ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed() + '%'"></span>
+        <span ng-if="!player.stats.activitiesEntered.basic.value">0%</span>
+        <span ng-if="player.stats.activitiesEntered.basic.value"
+              ng-bind="(100 * player.stats.activitiesWon.basic.value / player.stats.activitiesEntered.basic.value).toFixed() + '%'">
+        </span>
         <label>Wins</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.winStreak.length"></span>
+        <span ng-if="!player.winStreak.length">N/A</span>
+        <span ng-if="player.winStreak.length"
+              ng-bind="player.winStreak.length">
+        </span>
         <span class="player__streak player__streak--wins" ng-if="player.winStreak.type === 0"></span>
         <span class="player__streak player__streak--losses" ng-if="player.winStreak.type === 1"></span>
         <label>Streak</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.stats.combatRating.basic.displayValue"></span>
+        <span ng-if="!player.stats.combatRating.basic.displayValue">N/A</span>
+        <span ng-if="player.stats.combatRating.basic.displayValue"
+              ng-bind="player.stats.combatRating.basic.displayValue">
+        </span>
         <label>Rating</label>
       </div>
       <div class="col-xs-3 stat">
