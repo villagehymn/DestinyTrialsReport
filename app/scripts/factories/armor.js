@@ -63,22 +63,22 @@ angular.module('trialsReportApp')
             case 3448274439:
               armors.head = {
                 'definition': aItem
-              }
+              };
               break;
             case 3551918588:
               armors.arms = {
                 'definition': aItem
-              }
+              };
               break;
             case 14239492:
               armors.chest = {
                 'definition': aItem
-              }
+              };
               break;
             case 20886954:
               armors.legs = {
                 'definition': aItem
-              }
+              };
               break;
           }
         }
