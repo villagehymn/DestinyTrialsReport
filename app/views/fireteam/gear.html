@@ -1,6 +1,6 @@
 <div class="gear">
   <div class="gear__stats row">
-    <div class="gear__stat col-xs-4" popover="{{player.intPercent}}%" popover-trigger="mouseenter" popover-append-to-body="true">
+    <div class="gear__stat col-xs-4" data-content="{{player.intPercent}}%" bs-popover>
       <div class="gear-stat__label">
         Intellect
       </div>
@@ -12,7 +12,7 @@
         </progress>
       </div>
     </div>
-    <div class="gear__stat col-xs-4" popover="{{player.disPercent}}%" popover-trigger="mouseenter" popover-append-to-body="true">
+    <div class="gear__stat col-xs-4" data-content="{{player.disPercent}}%" bs-popover>
       <div class="gear-stat__label">
         Discipline
       </div>
@@ -24,7 +24,7 @@
         </progress>
       </div>
     </div>
-    <div class="gear__stat col-xs-4" popover="{{player.strPercent}}%" popover-trigger="mouseenter" popover-append-to-body="true">
+    <div class="gear__stat col-xs-4" data-content="{{player.strPercent}}%" bs-popover>
       <div class="gear-stat__label">
         Strength
       </div>
@@ -39,8 +39,8 @@
   </div>
   <div class="gear__perks row">
     <div class="gear-perk col-xs-6" ng-repeat="classNode in player.classNodes track by $index"
-         popover="{{classNode.description}}" popover-trigger="mouseenter" popover-append-to-body="true">
-      <img class="gear-perk__icon img-responsive" ng-src="{{classNode.icon || ''}}">
+         data-content="{{classNode.description}}" bs-popover>
+      <img class="gear-perk__icon img-responsive" ng-src="{{classNode.icon}}">
       <span class="gear-perk__title" ng-bind="classNode.name"></span>
     </div>
   </div>

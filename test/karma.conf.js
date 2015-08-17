@@ -48,6 +48,8 @@ module.exports = function(config) {
       'bower_components/moment/moment.js',
       'bower_components/angular-moment/angular-moment.js',
       'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-strap/dist/angular-strap.js',
+      'bower_components/angular-strap/dist/angular-strap.tpl.js',
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/arrive/src/arrive.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',

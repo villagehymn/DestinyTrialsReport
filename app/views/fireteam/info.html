@@ -1,7 +1,7 @@
 <div class="player__info">
   <div class="player__intro" style="background-image:url('{{player.background[0]}}')">
     <div class="player__title">
-      <img class="player__emblem" ng-src="{{player.emblem || ''}}" />
+      <img class="player__emblem" ng-src="{{player.emblem}}" />
       <span class="player__edit" ng-if="(subdomain != 'my') && ($index !== 0)" ng-click="toggleEdit(player)">
         <i class="material-icons">edit mode</i>
       </span>
@@ -14,7 +14,7 @@
       </div>
       <div class="player__char">
         <h2 class="player__gamertag" ng-bind="player.name"></h2>
-        <div class="player__race">
+        <div class="player__race" ng-show="player.level && player.class.name">
           <span ng-bind="'Level ' + player.level + ' ' + player.class.name"></span>
         </div>
       </div>
@@ -85,12 +85,12 @@
   </div>
   <div class="player__hazards">
     <div class="player-hazard player-hazard--friendly"
-      ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"
-      popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
+         ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"
+         data-content="{{DestinyHazardDefinition[hazard]}}" bs-popover>
     </div>
     <div class="player-hazard"
-      ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index" ng-bind="hazard"
-      popover="{{DestinyHazardDefinition[hazard]}}" popover-trigger="mouseenter" popover-append-to-body="true">
+         ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index" ng-bind="hazard"
+         data-content="{{DestinyHazardDefinition[hazard]}}" bs-popover>
     </div>
     <div class="player-hazard player-hazard--none">
       This Guardian doesn't need cheap tricks

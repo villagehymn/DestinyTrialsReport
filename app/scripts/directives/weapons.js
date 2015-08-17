@@ -1,4 +1,5 @@
 'use strict';
+
 angular.module('trialsReportApp')
   .directive('weaponNodes', function() {
     return {
@@ -16,19 +17,18 @@ angular.module('trialsReportApp')
             '</div>',
             '<div class="weapon">',
               '<div class="weapon__img">',
-                '<img class="img-responsive {{weapon.weapon.burnColor || \'kinetic-dmg\'}}"' +
-                    'ng-src="{{weapon.weapon.icon}}" alt="{{weapon.weapon.name}}">',
+                '<img class="img-responsive {{weapon.definition.burnColor || \'kinetic-dmg\'}}"' +
+                     'ng-src="{{weapon.definition.icon}}" alt="{{weapon.definition.name}}">',
               '</div>',
               '<div class="weapon__info">',
                 '<div class="weapon__title">',
-                  '<span ng-bind="weapon.weapon.name"></span>',
+                  '<span ng-bind="weapon.definition.name"></span>',
                 '</div>',
                 '<div class="weapon__perks">',
-                  '<div class="weapon-perk" ng-repeat="node in weapon.nodes track by $index" ng-show="node.name" popover-title="{{node.name}}" popover="{{node.description}}" popover-append-to-body="true" popover-trigger="mouseenter">',
+                  '<div class="weapon-perk" ng-repeat="node in weapon.nodes track by $index" data-title="{{node.name}}" data-content="{{node.description}}" bs-popover>',
                     '<i class="weapon-perk__icon">',
-                      '<img class="img-responsive" ng-src="{{node.icon || \'\'}}">',
+                      '<img class="img-responsive" ng-src="{{node.icon}}">',
                     '</i>',
-                    //'<span class="text-left text-sm" ng-bind="node.name"></span>',
                   '</div>',
                 '</div>',
               '</div>',

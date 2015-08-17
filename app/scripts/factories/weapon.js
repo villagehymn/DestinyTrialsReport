@@ -7,9 +7,9 @@ var avoidNodes = [
   'Cannibalism', 'Dark Breaker', 'Upgrade Damage'
 ];
 
-function pushNode(nodeStep, name, nodes) {
+function pushNode(nodeStep, nodes) {
   nodes.push({
-    'name': name,
+    'name': nodeStep.nodeStepName,
     'description': nodeStep.nodeStepDescription,
     'icon': 'https://www.bungie.net' + nodeStep.icon
   });
@@ -46,22 +46,21 @@ angular.module('trialsReportApp')
         }
         var nodes = [];
         var itemS = items[n];
-        //var wItem = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
 
         if (DestinyPrimaryWeaponDefinitions[itemS.itemHash]) {
           var primaryW = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
-              if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                pushNode(nodeStep, nodeStep.nodeStepName, nodes);
+              if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                pushNode(nodeStep, nodes);
               } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
                 setDmgElement(nodeStep, primaryW);
               }
             }
           }
           weapons.primary = {
-            'weapon': primaryW,
+            'definition': primaryW,
             'nodes': nodes
           };
         } else if (DestinySpecialWeaponDefinitions[itemS.itemHash]) {
@@ -69,20 +68,20 @@ angular.module('trialsReportApp')
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
-              if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+              if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
                 if (secondaryW.subType === 12) {
                   if (nodeStep.perkHashes[0] === 3752206822) {
                     weapons.hazards.push('Final Round Sniper');
                   }
                 }
-                pushNode(nodeStep, nodeStep.nodeStepName, nodes);
+                pushNode(nodeStep, nodes);
               } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
                 setDmgElement(nodeStep, secondaryW);
               }
             }
           }
           weapons.special = {
-            'weapon': secondaryW,
+            'definition': secondaryW,
             'nodes': nodes
           };
           if ((secondaryW.subType === 12) && (secondaryW.name !== 'No Land Beyond')) {
@@ -101,15 +100,15 @@ angular.module('trialsReportApp')
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
-              if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                pushNode(nodeStep, nodeStep.nodeStepName, nodes);
+              if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                pushNode(nodeStep, nodes);
               } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
                 setDmgElement(nodeStep, heavyW);
               }
             }
           }
           weapons.heavy = {
-            'weapon': heavyW,
+            'definition': heavyW,
             'nodes': nodes
           };
         }

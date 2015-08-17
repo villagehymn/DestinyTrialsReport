@@ -44,20 +44,31 @@ angular
     'angulartics.google.analytics',
     'angular-carousel',
     'angular-loading-bar',
+    'mgcrea.ngStrap.tooltip',
+    'mgcrea.ngStrap.popover',
     'ngAnimate',
     'ngRoute',
     'ngTouch',
     'toastr',
-    'ui.bootstrap'
+    'ui.bootstrap.tpls',
+    'ui.bootstrap.progressbar',
+    'ui.bootstrap.tabs'
   ])
   .config(window.$QDecorator)
+  .config(function ($popoverProvider) {
+    angular.extend($popoverProvider.defaults, {
+      container: 'body',
+      placement: 'top',
+      trigger: 'hover'
+    });
+  })
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
     $.material.init();
 
     var segments = location.hostname.split('.');
     var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
 
-    if(subdomain === "my") {
+    if (subdomain === "my") {
       $routeProvider
         .when('/', {
           templateUrl: 'views/profile.html',

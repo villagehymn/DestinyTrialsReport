@@ -1,4 +1,5 @@
 'use strict';
+
 angular.module('trialsReportApp')
   .directive('armorList', function() {
     return {
@@ -9,7 +10,8 @@ angular.module('trialsReportApp')
       template: [
         '<div class="col-xs-3" ng-repeat="armor in armors track by $index">',
           '<div class="gear-armor">',
-            '<img popover="{{armor.armor.name}}" popover-append-to-body="true" popover-trigger="mouseenter" class="img-responsive" ng-src="{{armor.armor.icon}}">',
+            '<img class="img-responsive" ng-src="{{armor.definition.icon}}" alt="{{armor.definition.name}}"' +
+                 'data-title="{{armor.definition.name}}" data-content="{{armor.definition.description}}" bs-popover>',
           '</div>',
         '</div>'
       ].join('')
