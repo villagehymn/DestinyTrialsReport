@@ -40,22 +40,26 @@
           <label>Assists</label>
         </div>
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.killsDeathsRatio.basic.displayValue"></span>
-          <label>K/D</label>
+          <span ng-bind="player.allStats.precisionKills.basic.displayValue"></span>
+          <label>Headshots</label>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.precisionKills.basic.displayValue"></span>
-          <label>Headshots</label>
+          <span ng-bind="player.allStats.killsDeathsAssists.basic.displayValue"></span>
+          <label>KA/D</label>
+        </div>
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.killsDeathsRatio.basic.displayValue"></span>
+          <label>K/D</label>
         </div>
         <div class="col-xs-3 stat">
           <span ng-bind="player.allStats.resurrectionsPerformed.basic.displayValue"></span>
           <label>Revives</label>
         </div>
-        <div class="col-xs-6 stat">
-          <span ng-bind="player.allStats.longestSingleLife.basic.displayValue"></span>
-          <label>Longest Life</label>
+        <div class="col-xs-3 stat">
+          <span ng-bind="player.allStats.averageLifespan.basic.displayValue"></span>
+          <label>Lifespan</label>
         </div>
       </div>
     </div>
