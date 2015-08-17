@@ -4,8 +4,7 @@ angular.module('trialsReportApp')
     return {
       restrict: 'A',
       scope: {
-        weapons: '=weaponNodes',
-        showHelpOverlay: '=showHelpOverlay'
+        weapons: '=weaponNodes'
       },
       template: [
         '<div class="row">',
@@ -25,15 +24,11 @@ angular.module('trialsReportApp')
                   '<span ng-bind="weapon.weapon.name"></span>',
                 '</div>',
                 '<div class="weapon__perks">',
-                  '<div ng-if="showHelpOverlay" class="hidden-xs hidden-sm"' +
-                    'data-intro="Unlocked and active weapon perks <br/><em>hover over the icons for the desciption</em>"' +
-                    'data-position="right" chardin-show="{{$middle}}"></div>',
-                    '<div class="weapon-perk" ng-repeat="node in weapon.nodes track by $index" ng-show="node.name" popover-title="{{node.name}}" popover="{{node.description}}" popover-append-to-body="true" popover-trigger="mouseenter">',
-                      '<i class="weapon-perk__icon">',
-                        '<img class="img-responsive" ng-src="{{node.icon || \'\'}}">',
-                      '</i>',
-                      //'<span class="text-left text-sm" ng-bind="node.name"></span>',
-                    '</div>',
+                  '<div class="weapon-perk" ng-repeat="node in weapon.nodes track by $index" ng-show="node.name" popover-title="{{node.name}}" popover="{{node.description}}" popover-append-to-body="true" popover-trigger="mouseenter">',
+                    '<i class="weapon-perk__icon">',
+                      '<img class="img-responsive" ng-src="{{node.icon || \'\'}}">',
+                    '</i>',
+                    //'<span class="text-left text-sm" ng-bind="node.name"></span>',
                   '</div>',
                 '</div>',
               '</div>',

@@ -20,21 +20,13 @@
     <div class="row">
       <div class="col-xs-12 player__links__btns">
         <a href="http://my.destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
-           type="button" target="_blank"
-           class="btn btn-default"
-           analytics-on analytics-event="Click" analytics-category="myDestinyTrialsReport"
-           data-intro="Links to <strong>myDestinyTrialsReport</strong> for summary of player's guardians"
-           data-position="left"
-           chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+           type="button" target="_blank" class="btn btn-default"
+           analytics-on analytics-event="Click" analytics-category="myDestinyTrialsReport">
           myTrialsReport
         </a>
         <a href="http://destinytracker.com/destiny/playlists/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}/trialsOfOsiris"
-           type="button" target="_blank"
-           class="btn btn-default"
-           analytics-on analytics-event="Click" analytics-category="DestinyTracker"
-           data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
-           data-position="right"
-           chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+           type="button" target="_blank" class="btn btn-default"
+           analytics-on analytics-event="Click" analytics-category="DestinyTracker">
           DestinyTracker
         </a>
       </div>
@@ -45,14 +37,10 @@
     <div ng-if="fireteam[0].name && $index < 3 && $index > -1">
       <div class="edit-player__input">
         <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
-          <button class="btn btn-icon" type="submit"
-                  ng-class="helpOverlay && ($index === 2) ? 'z99999999' : 'z000000'"
-                  data-intro="Clicking 'Suggest Other' will provide a list of players recently played with. If all else fails, you can type a player's name in the text box"
-                  data-position="right" chardin-show="{{$index === 2}}">
+          <button class="btn btn-icon" type="submit">
             <i class="material-icons">send</i>
           </button>
-          <input type="text" placeholder="{{fireteam[$index].name}}" class="form-control" ng-model="teammateName"
-                 ng-class="helpOverlay && ($index === 2) ? 'z99999999' : 'z000000'" />
+          <input type="text" placeholder="{{fireteam[$index].name}}" class="form-control" ng-model="teammateName" />
         </form>
       </div>
       <div class="edit-player__actions">

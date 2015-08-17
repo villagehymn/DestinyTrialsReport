@@ -9,7 +9,6 @@
         </h1>
         <div class="header__actions hidden-xs">
           <button type="button" class="btn" data-toggle="modal" data-target="#mapModal">Map</button>
-          <button type="button" class="btn" ng-click="toggleOverlay()" ng-show="fireteam">Help</button>
           <a type="button" class="btn my-report" ng-if="subdomain != 'my'"
              href="http://my.destinytrialsreport.com" target="_self">
             <span class="highlight">my</span>Report
@@ -29,9 +28,7 @@
       <div class="col-xs-12">
         <div class="main-search__content">
           <div class="main-search__toggle">
-            <span data-intro="Toggle between PSN and XBL platforms"
-                  data-position="left"
-                  chardin-show="true">
+            <span>
               <div class="togglebutton">
                 <label>
                   <label ng-model="platformValue" btn-radio="true">PS<span class="hidden-xs">N</span></label>
@@ -50,11 +47,8 @@
                 <div class="main-search__controls">
                   <div class="main-search__refresh hidden-xs" ng-if="subdomain != 'my'" ng-show="fireteam[0].name != null">
                     <div class="btn-group">
-                      <button class="btn btn-default btn-icon" type="button" ng-class="helpOverlay ? 'z99999999' : 'z000000'"
-                              ng-click="refreshInventory()"
-                              analytics-on analytics-event="Click" analytics-category="Refresh Inventory"
-                              data-intro="Refreshes inventory for all players<br/><em>(weapons, armor, class)</em>"
-                              data-position="right" chardin-show="true" data-class="hidden-xs hidden-sm">
+                      <button class="btn btn-default btn-icon" type="button" ng-click="refreshInventory()"
+                              analytics-on analytics-event="Click" analytics-category="Refresh Inventory">
                         <i class="material-icons">cached</i>
                       </button>
                     </div>

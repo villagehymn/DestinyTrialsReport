@@ -2,7 +2,6 @@
 
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger) {
-    $scope.helpOverlay = false;
     $scope.timerRunning = true;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyPrimaryWeaponDefinitions = DestinyPrimaryWeaponDefinitions;
@@ -28,10 +27,6 @@ angular.module('trialsReportApp')
 
     var segments = location.hostname.split('.');
     $scope.subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
-
-    $scope.isHelpOverlayElement = function (length, index) {
-      return ((length == 3 && index == 1) || (length == 2 && index == 1) || (length == 1))
-    };
 
     function setPlatform($scope, platformValue) {
       $scope.platformValue = platformValue;
@@ -144,17 +139,12 @@ angular.module('trialsReportApp')
         if (includeFireteam) {
           $location.path((platform ? '/ps/' : '/xbox/') + name);
         } else {
-          $scope.helpOverlay = false;
           getAccountByName(name, (platform ? 2 : 1), $scope, index, true);
           sendAnalytic('loadedPlayer', 'name', name);
           sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
           setPlatform($scope, platform);
         }
       }
-    };
-
-    $scope.toggleOverlay = function () {
-      $scope.helpOverlay = !$scope.helpOverlay;
     };
 
     $scope.getWeaponByHash = function (hash) {

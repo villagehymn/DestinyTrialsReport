@@ -18,21 +18,13 @@
     <div class="row">
       <div class="col-xs-12 player__links__btns">
         <a href="http://www..destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
-           type="button" target="_blank"
-           class="btn btn-default btn-trials bg-info dk m-0 b-0"
-           analytics-on analytics-event="Click" analytics-category="myDestinyTrialsReport"
-           data-intro="Links to <strong>DestinyTrialsReport</strong> for summary of player's passage"
-           data-position="left"
-           chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+           type="button" target="_blank" class="btn btn-default"
+           analytics-on analytics-event="Click" analytics-category="myDestinyTrialsReport">
           myTrialsReport
         </a>
         <a href="http://destinytracker.com/destiny/playlists/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}/trialsOfOsiris"
-           type="button" target="_blank"
-           class="btn btn-default btn-trials bg-info dker m-0 b-0"
-           analytics-on analytics-event="Click" analytics-category="DestinyTracker"
-           data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
-           data-position="right"
-           chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
+           type="button" target="_blank" class="btn btn-default"
+           analytics-on analytics-event="Click" analytics-category="DestinyTracker">
           DestinyTracker
         </a>
       </div>

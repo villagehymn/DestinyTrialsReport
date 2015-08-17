@@ -4,13 +4,11 @@ angular.module('trialsReportApp')
     return {
       restrict: 'A',
       scope: {
-        activities: '=trialsHistory',
-        showHelpOverlay: '=showHelpOverlay'
+        activities: '=trialsHistory'
       },
       template: [
         '<!--<div ng-if="!activities">N/A</div>-->',
-        '<div data-intro="Match win/loss history<br/><em>hover over the icons for details</em>"' +
-          'data-position="right" chardin-show="{{showHelpOverlay}}">',
+        '<div>' +
           '<i class="player-history__match"' +
             'ng-repeat="str in activities.slice().reverse() track by $index"' +
             'ng-class="str.standing === 0 ? \'player-history__match--win\' : \'player-history__match--loss\'"' +

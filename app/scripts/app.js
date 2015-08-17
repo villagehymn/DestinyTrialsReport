@@ -40,7 +40,6 @@ function checkStatus($http) {
 
 angular
   .module('trialsReportApp', [
-    'angularHelpOverlay',
     'angulartics',
     'angulartics.google.analytics',
     'angular-carousel',
