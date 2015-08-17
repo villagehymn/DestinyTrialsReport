@@ -44,7 +44,6 @@ angular
     'angulartics.google.analytics',
     'angular-carousel',
     'angular-loading-bar',
-    'mgcrea.ngStrap.tooltip',
     'mgcrea.ngStrap.popover',
     'ngAnimate',
     'ngRoute',
@@ -58,7 +57,7 @@ angular
   .config(function ($popoverProvider) {
     angular.extend($popoverProvider.defaults, {
       container: 'body',
-      placement: 'top',
+      placement: 'auto',
       trigger: 'hover'
     });
   })

@@ -28,15 +28,13 @@
       <div class="col-xs-12">
         <div class="main-search__content">
           <div class="main-search__toggle">
-            <span>
-              <div class="togglebutton">
-                <label>
-                  <label ng-model="platformValue" btn-radio="true">PS<span class="hidden-xs">N</span></label>
-                  <input type="checkbox" ng-model="platformValue" ng-true-value="false" ng-false-value="true">
-                  <label ng-model="platformValue" btn-radio="false">XB<span class="hidden-xs">L</span></label>
-                </label>
-              </div>
-            </span>
+            <div class="togglebutton">
+              <label>
+                <label ng-click="platformValue = true">PS<span class="hidden-xs">N</span></label>
+                <input type="checkbox" ng-model="platformValue" ng-true-value="false" ng-false-value="true">
+                <label ng-click="platformValue = false">XB<span class="hidden-xs">L</span></label>
+              </label>
+            </div>
           </div>
           <div class="main-search__fireteam">
             <form ng-submit="searchPlayerbyName(mainPlayer, platformValue, 0, true)">
