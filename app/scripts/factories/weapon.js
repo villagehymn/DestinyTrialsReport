@@ -1,10 +1,9 @@
 'use strict';
 
 var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
-var avoidNodes = ['Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage',
-  'Hive Disruptor', 'Oracle Disruptor', 'Wolfpack Rounds', 'Last Word', 'Fan Fire', 'Mark of the Devourer',
-  'Ice Breaker', 'No Backpack', 'Lich Bane', 'Invective', 'Cursebringer', 'Disciplinarian', 'Holding Aces',
-  'Timeless Mythoclast', 'Thunderer', 'String of Curses'
+var avoidNodes = [
+  'Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage',
+  'Hive Disruptor', 'Oracle Disruptor', 'Lich Bane', 'Disciplinarian'
 ];
 
 function pushNode(nodeStep, name, nodes) {
@@ -102,9 +101,7 @@ angular.module('trialsReportApp')
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
               if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                var longNames = ['Grenades and Horseshoes'];
-                var name = (longNames.indexOf(nodeStep.nodeStepName) > -1) ? 'Nades & Shoes' : nodeStep.nodeStepName;
-                pushNode(nodeStep, name, nodes);
+                pushNode(nodeStep, nodeStep.nodeStepName, nodes);
               } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
                 setDmgElement(nodeStep, heavyW);
               }
