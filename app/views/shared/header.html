@@ -1,4 +1,4 @@
-<div class="header-bar shadow-z-1">
+<!--<div class="header-bar shadow-z-1">
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12 header-bar__content">
@@ -21,7 +21,33 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
+
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" target="_self" class="navbar-brand">
+        <span ng-if="subdomain == 'my'" class="highlight">my</span>Destiny<span class="highlight">Trials</span>Report
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li><button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#mapModal">Map</button></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a type="button" class="btn btn-default" ng-if="subdomain != 'my'" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a></li>
+        <li><a type="button" class="btn btn-default" ng-if="subdomain == 'my'" href="http://www.destinytrialsreport.com" target="_self"><span class="highlight">trials</span>Report</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <div class="main-search shadow-z-1">
   <div class="container-fluid">
     <div class="row">
