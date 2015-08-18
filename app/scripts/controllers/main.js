@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $http, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, $q, $log, $analytics, toastr, $timeout, $location, $rootScope, locationChanger) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, currentAccount, trialsStats, inventoryStats, $q, $log, $analytics, $location, locationChanger, $cookieStore) {
     $scope.timerRunning = true;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyPrimaryWeaponDefinitions = DestinyPrimaryWeaponDefinitions;
@@ -24,6 +24,20 @@ angular.module('trialsReportApp')
     $scope.playerPartial = 'views/fireteam/player.html';
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
+
+    if ($routeParams.playerName) {
+      $scope.searchedPlayer = $routeParams.playerName;
+    }
+
+    if ($routeParams.platformName) {
+      $scope.platformValue = $routeParams.platformName === 'ps';
+    } else {
+      if (angular.isDefined($cookieStore.get('savedPlatform'))) {
+        $scope.platformValue = $cookieStore.get('savedPlatform');
+      } else {
+        $scope.platformValue = true;
+      }
+    }
 
     var segments = location.hostname.split('.');
     $scope.subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
@@ -247,6 +261,7 @@ angular.module('trialsReportApp')
 
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
+      $cookieStore.put('savedPlatform', ($routeParams.platformName === 'ps'));
       if (angular.isDefined($scope.fireteam[0])) {
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
 
@@ -257,13 +272,8 @@ angular.module('trialsReportApp')
           searchFireteam($scope, $scope.fireteam[1], 1, $scope.fireteam[1].membershipType, true);
           searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
         }
-      } else {
-        $scope.platformValue = true;
-        $location.path('/');
       }
     } else if (angular.isString(fireTeam)) {
       $scope.status = fireTeam;
-    } else {
-      $scope.platformValue = true;
     }
   });

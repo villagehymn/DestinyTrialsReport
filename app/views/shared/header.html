@@ -66,7 +66,7 @@
             <form ng-submit="searchPlayerbyName(mainPlayer, platformValue, 0, true)">
               <div class="main-search__row">
                 <div class="main-search__input">
-                  <input type="text" class="form-control" placeholder="Enter profile name" ng-model="mainPlayer" ng-value="fireteam[0].name">
+                  <input type="text" class="form-control" placeholder="Enter profile name" ng-model="mainPlayer" ng-value="searchedPlayer">
                 </div>
                 <div class="main-search__controls">
                   <div class="main-search__refresh hidden-xs" ng-if="subdomain != 'my'" ng-show="fireteam[0].name != null">

@@ -9,18 +9,18 @@ function setUser(currentAccount, name, platform) {
 
 function getFromParams(currentAccount, $route) {
   if (angular.isDefined($route.current.params.playerName)) {
-    var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
+    var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
     return setUser(currentAccount, $route.current.params.playerName, platform);
   }
 }
 
 function getAllFromParams($http, $route) {
-  if (angular.isDefined($route.current.params.playerOne)) {
-    var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
+  if (angular.isDefined($route.current.params.playerName)) {
+    var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
     var params = $route.current.params;
     return $http({
       method: 'GET',
-      url: 'http://api.destinytrialsreport.com/getAccounts/' + platform + '/' + params.playerOne + '/' + params.playerTwo + '/' + params.playerThree
+      url: 'http://api.destinytrialsreport.com/getAccounts/' + platform + '/' + params.playerName + '/' + params.playerTwo + '/' + params.playerThree
     }).then(function (players) {
       return [players.data];
     });
@@ -48,6 +48,7 @@ angular
     'ngAnimate',
     'ngRoute',
     'ngTouch',
+    'ngCookies',
     'toastr',
     'ui.bootstrap.tpls',
     'ui.bootstrap.progressbar',
@@ -76,7 +77,7 @@ angular
             fireTeam: checkStatus
           }
         })
-        .when('/:platform/:playerName', {
+        .when('/:platformName/:playerName', {
           templateUrl: 'views/profile.html',
           controller: 'ProfileCtrl',
           resolve: {
@@ -95,14 +96,14 @@ angular
             fireTeam: checkStatus
           }
         })
-        .when('/:platform/:playerName', {
+        .when('/:platformName/:playerName', {
           templateUrl: 'views/main.html',
           controller: 'MainCtrl',
           resolve: {
             fireTeam: getFromParams
           }
         })
-        .when('/:platform/:playerOne/:playerTwo/:playerThree', {
+        .when('/:platformName/:playerName/:playerTwo/:playerThree', {
           templateUrl: 'views/main.html',
           controller: 'MainCtrl',
           resolve: {
