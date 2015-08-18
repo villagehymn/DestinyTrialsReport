@@ -15,12 +15,12 @@ function getFromParams(currentAccount, $route) {
 }
 
 function getAllFromParams($http, $route) {
-  if (angular.isDefined($route.current.params.playerName)) {
-    var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
+  if (angular.isDefined($route.current.params.playerOne)) {
+    var platform = $route.current.params.playerOne === 'xbox' ? 1 : 2;
     var params = $route.current.params;
     return $http({
       method: 'GET',
-      url: 'http://api.destinytrialsreport.com/getAccounts/' + platform + '/' + params.playerName + '/' + params.playerTwo + '/' + params.playerThree
+      url: 'http://api.destinytrialsreport.com/getAccounts/' + platform + '/' + params.playerOne + '/' + params.playerTwo + '/' + params.playerThree
     }).then(function (players) {
       return [players.data];
     });
@@ -103,7 +103,7 @@ angular
             fireTeam: getFromParams
           }
         })
-        .when('/:platformName/:playerName/:playerTwo/:playerThree', {
+        .when('/:platformName/:playerOne/:playerTwo/:playerThree', {
           templateUrl: 'views/main.html',
           controller: 'MainCtrl',
           resolve: {

@@ -118,15 +118,16 @@ angular.module('trialsReportApp')
             .then($q.spread(function (activity, inv, stats) {
 
               $scope.fireteam[index] = activity;
-
-              if (angular.isUndefined(activity.recentActivity)) {
-                $scope.fireteam.push({name: 'Enter Player Name', invalidResult: true},{name: 'Enter Player Name', invalidResult: true})
-              }
               $scope.fireteam[index].stats = stats.stats;
               $scope.fireteam[index].nonHazard = stats.nonHazard;
               $scope.fireteam[index].lighthouse = stats.lighthouse;
-              if (includeFireteam) {
-                setPlayerStats(player, index, stats, includeFireteam, $scope);
+
+              if (angular.isUndefined(activity.recentActivity)) {
+                $scope.fireteam.push({name: 'Enter Player Name', invalidResult: true},{name: 'Enter Player Name', invalidResult: true})
+              } else {
+                if (includeFireteam) {
+                  setPlayerStats(player, index, stats, includeFireteam, $scope);
+                }
               }
 
               if (angular.isDefined($scope.fireteam[0]) &&
@@ -272,6 +273,9 @@ angular.module('trialsReportApp')
           searchFireteam($scope, $scope.fireteam[1], 1, $scope.fireteam[1].membershipType, true);
           searchFireteam($scope, $scope.fireteam[2], 2, $scope.fireteam[2].membershipType, true);
         }
+      } else {
+        $scope.fireteam = null;
+        locationChanger.skipReload().withoutRefresh('/')
       }
     } else if (angular.isString(fireTeam)) {
       $scope.status = fireTeam;
