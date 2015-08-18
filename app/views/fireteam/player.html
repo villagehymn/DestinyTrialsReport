@@ -1,5 +1,5 @@
 <div class="player shadow-z-1"
-     ng-class="player.isEditing ? 'is-editing' : 'not-editing'"
+     ng-class="(player.isEditing || player.invalidResult) ? 'is-editing' : 'not-editing'"
      ng-if="fireteam[0].name && $index < 3">
   <ng-include src="infoPartial"></ng-include>
 
@@ -43,7 +43,7 @@
           <input type="text" placeholder="{{fireteam[$index].name}}" class="form-control" ng-model="teammateName" />
         </form>
       </div>
-      <div class="edit-player__actions">
+      <div class="edit-player__actions" ng-if="!player.invalidResult">
         <div class="recent-players">
           <div class="input-group-btn"><!-- class should be "btn-group" but: display issues -->
             <button class="btn btn-white dropdown-toggle btn-raised" type="button"

@@ -152,7 +152,7 @@ angular.module('trialsReportApp')
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
           toastr.error('No Trials matches found for player', 'Error');
-          return;
+          return account;
         }
         var pastActivities = [];
         var recentActivity = {

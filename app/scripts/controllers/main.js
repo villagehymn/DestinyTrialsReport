@@ -117,10 +117,10 @@ angular.module('trialsReportApp')
           return $q.all(methods)
             .then($q.spread(function (activity, inv, stats) {
 
-              if (angular.isUndefined(activity)) {
-                $scope.fireteam[index] = player;
-              } else {
-                $scope.fireteam[index] = activity;
+              $scope.fireteam[index] = activity;
+
+              if (angular.isUndefined(activity.recentActivity)) {
+                $scope.fireteam.push({name: 'Enter Player Name', invalidResult: true},{name: 'Enter Player Name', invalidResult: true})
               }
               $scope.fireteam[index].stats = stats.stats;
               $scope.fireteam[index].nonHazard = stats.nonHazard;

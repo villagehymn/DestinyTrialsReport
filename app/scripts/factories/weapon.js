@@ -52,10 +52,12 @@ angular.module('trialsReportApp')
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
-              if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                pushNode(nodeStep, nodes);
-              } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                setDmgElement(nodeStep, primaryW);
+              if (nodeStep) {
+                if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                  pushNode(nodeStep, nodes);
+                } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
+                  setDmgElement(nodeStep, primaryW);
+                }
               }
             }
           }
@@ -68,15 +70,17 @@ angular.module('trialsReportApp')
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
-              if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                if (secondaryW.subType === 12) {
-                  if (nodeStep.perkHashes[0] === 3752206822) {
-                    weapons.hazards.push('Final Round Sniper');
+              if (nodeStep) {
+                if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                  if (secondaryW.subType === 12) {
+                    if (nodeStep.perkHashes[0] === 3752206822) {
+                      weapons.hazards.push('Final Round Sniper');
+                    }
                   }
+                  pushNode(nodeStep, nodes);
+                } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
+                  setDmgElement(nodeStep, secondaryW);
                 }
-                pushNode(nodeStep, nodes);
-              } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                setDmgElement(nodeStep, secondaryW);
               }
             }
           }
@@ -100,10 +104,12 @@ angular.module('trialsReportApp')
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
-              if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                pushNode(nodeStep, nodes);
-              } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                setDmgElement(nodeStep, heavyW);
+              if (nodeStep) {
+                if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                  pushNode(nodeStep, nodes);
+                } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
+                  setDmgElement(nodeStep, heavyW);
+                }
               }
             }
           }
