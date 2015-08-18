@@ -130,9 +130,9 @@ angular.module('trialsReportApp')
                 }
               }
 
-              if (angular.isDefined($scope.fireteam[0]) &&
-                  angular.isDefined($scope.fireteam[1]) &&
-                  angular.isDefined($scope.fireteam[2])) {
+              if (angular.isDefined($scope.fireteam[0].membershipId) &&
+                  angular.isDefined($scope.fireteam[1].membershipId) &&
+                  angular.isDefined($scope.fireteam[2].membershipId)) {
                 var platformUrl = platform === 2 ? '/ps/' : '/xbox/';
                 locationChanger.skipReload().withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' + $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
               }
