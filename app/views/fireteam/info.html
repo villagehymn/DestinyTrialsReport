@@ -73,8 +73,8 @@
         <label>Rating</label>
       </div>
       <div class="col-xs-3 stat">
-        <span class="player__lighthouse player__lighthouse--no" ng-if="!player.lighthouse"><i class="material-icons">clear</i></span>
-        <span class="player__lighthouse player__lighthouse--yes" ng-if="player.lighthouse"><i class="material-icons">done</i></span>
+        <span class="player__lighthouse player__lighthouse--no" ng-if="player.lighthouse !== true"><i class="material-icons">clear</i></span>
+        <span class="player__lighthouse player__lighthouse--yes" ng-if="player.lighthouse === true"><i class="material-icons">done</i></span>
         <label>Flawless</label>
       </div>
     </div>
@@ -86,11 +86,11 @@
   <div class="player__hazards">
     <div class="player-hazard player-hazard--friendly"
          ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"
-         data-content="{{DestinyHazardDefinition[hazard]}}" bs-popover>
+         bs-popover="{content:DestinyHazardDefinition[hazard]}">
     </div>
     <div class="player-hazard"
          ng-repeat="hazard in player.weapons.hazards.concat(player.armors.hazards, player.classNodes.hazards) track by $index" ng-bind="hazard"
-         data-content="{{DestinyHazardDefinition[hazard]}}" bs-popover>
+         bs-popover="{content:DestinyHazardDefinition[hazard]}">
     </div>
     <div class="player-hazard player-hazard--none">
       This Guardian doesn't need cheap tricks

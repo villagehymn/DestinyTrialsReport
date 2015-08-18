@@ -25,7 +25,7 @@ angular.module('trialsReportApp')
                   '<span ng-bind="weapon.definition.name"></span>',
                 '</div>',
                 '<div class="weapon__perks">',
-                  '<div class="weapon-perk" ng-repeat="node in weapon.nodes track by $index" data-title="{{node.name}}" data-content="{{node.description}}" bs-popover>',
+                  '<div class="weapon-perk" ng-repeat="node in weapon.nodes track by $index" bs-popover="{title:node.name,content:node.description}">',
                     '<i class="weapon-perk__icon">',
                       '<img class="img-responsive" ng-src="{{node.icon}}">',
                     '</i>',
