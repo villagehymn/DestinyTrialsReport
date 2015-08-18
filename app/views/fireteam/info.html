@@ -73,8 +73,8 @@
         <label>Rating</label>
       </div>
       <div class="col-xs-3 stat">
-        <span class="player__lighthouse player__lighthouse--no" ng-if="player.lighthouse === false"><i class="material-icons">clear</i></span>
-        <span class="player__lighthouse player__lighthouse--yes" ng-if="player.lighthouse === true"><i class="material-icons">done</i></span>
+        <span class="player__lighthouse player__lighthouse--no" ng-if="!player.lighthouse"><i class="material-icons">clear</i></span>
+        <span class="player__lighthouse player__lighthouse--yes" ng-if="player.lighthouse"><i class="material-icons">done</i></span>
         <label>Flawless</label>
       </div>
     </div>
