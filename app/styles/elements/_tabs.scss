@@ -54,6 +54,17 @@
     a:hover {
       color: darken($weapons-background, 50%);
     }
+
+    .my-dtr & {
+      background: $stats-background;
+
+      a,
+      a:focus,
+      a:active,
+      a:hover {
+        color: darken($stats-background, 50%);
+      }
+    }
   }
 
   li:nth-child(2).active {
@@ -65,6 +76,17 @@
     a:hover {
       color: darken($last-match-background, 50%);
     }
+
+    .my-dtr & {
+      background: $maps-background;
+
+      a,
+      a:focus,
+      a:active,
+      a:hover {
+        color: darken($maps-background, 50%);
+      }
+    }
   }
 
   li:nth-child(3).active {
@@ -75,6 +97,17 @@
     a:active,
     a:hover {
       color: darken($stats-background, 50%);
+    }
+
+    .my-dtr & {
+      background: $last-match-background;
+
+      a,
+      a:focus,
+      a:active,
+      a:hover {
+        color: darken($last-match-background, 50%);
+      }
     }
   }
 

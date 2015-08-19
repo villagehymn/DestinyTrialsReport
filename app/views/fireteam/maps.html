@@ -1,17 +1,17 @@
-<div class="last-match">
-  <div class="last-match__overview">
+<div class="maps">
+  <div class="maps__specific">
     <div class="row">
-      <div class="last-match-weapon col-xs-12" ng-repeat="(key, value) in player.mapStats track by $index">
-        <div class="maps-row__header">
-          <span class="last-match-weapon__title" ng-bind="DestinyTrialsDefinitions[key].activityName"></span>
+      <div class="col-xs-12" ng-repeat="(key, value) in player.mapStats track by $index">
+        <div class="stat-row__header">
+          <span ng-bind="DestinyTrialsDefinitions[key].activityName"></span>
         </div>
-        <div class="row">
+        <div class="row stat-row">
           <div class="col-xs-2 col-xs-offset-2 stat">
             <span ng-bind="value.kills"></span>
             <label>Kills</label>
           </div>
           <div class="col-xs-2 stat">
-            <span ng-bind="value.kills"></span>
+            <span ng-bind="value.deaths"></span>
             <label>Deaths</label>
           </div>
           <div class="col-xs-2 stat">
@@ -29,34 +29,31 @@
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="last-match-weapon col-xs-12">
-        <div class="maps-row__header">
-          <span class="last-match-weapon__title">Totals</span>
-        </div>
-        <div class="row">
-          <div class="col-xs-2 col-xs-offset-2 stat">
-            <span ng-bind="player.totals.kills"></span>
-            <label>Kills</label>
-          </div>
-          <div class="col-xs-2 stat">
-            <span ng-bind="player.totals.kills"></span>
-            <label>Deaths</label>
-          </div>
-          <div class="col-xs-2 stat">
-            <span ng-bind="player.totals.assists"></span>
-            <label>Assists</label>
-          </div>
-          <div class="col-xs-2 stat">
-            <span ng-bind="player.totals.wins"></span>
-            <label>Wins</label>
-          </div>
-          <div class="col-xs-2 stat">
-            <span ng-bind="player.totals.losses"></span>
-            <label>Loss</label>
-          </div>
-        </div>
+  </div>
+  <div class="maps__totals">
+    <div class="stat-row__header">
+      <span>Totals</span>
+    </div>
+    <div class="row stat-row">
+      <div class="col-xs-2 col-xs-offset-2 stat">
+        <span ng-bind="player.totals.kills"></span>
+        <label>Kills</label>
+      </div>
+      <div class="col-xs-2 stat">
+        <span ng-bind="player.totals.deaths"></span>
+        <label>Deaths</label>
+      </div>
+      <div class="col-xs-2 stat">
+        <span ng-bind="player.totals.assists"></span>
+        <label>Assists</label>
+      </div>
+      <div class="col-xs-2 stat">
+        <span ng-bind="player.totals.wins"></span>
+        <label>Wins</label>
+      </div>
+      <div class="col-xs-2 stat">
+        <span ng-bind="player.totals.losses"></span>
+        <label>Loss</label>
       </div>
     </div>
   </div>
