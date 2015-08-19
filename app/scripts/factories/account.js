@@ -51,7 +51,7 @@ function setCharacter(characters, membershipId, membershipType, name){
   return cResult;
 }
 
-function setActivityData(mapStats, mapHash, reversedAct, n, totals, pastActivities, $filter, moment) {
+function setActivityData(mapStats, mapHash, reversedAct, n, totals, pastActivities, $filter) {
   if (!angular.isObject(mapStats[mapHash])) {
     mapStats[mapHash] = {};
     mapStats[mapHash].kills = 0;
