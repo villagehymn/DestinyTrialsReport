@@ -3,17 +3,28 @@
      ng-if="fireteam[0].name && $index < 3">
   <ng-include src="infoPartial"></ng-include>
 
-  <tabset class="player-tabs">
+  <tabset class="player-tabs" ng-if="!subdomain">
     <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
-      <ng-include src="'views/fireteam/weapons.html'" ng-if="!subdomain"></ng-include>
-      <ng-include src="'views/fireteam/gear.html'" ng-if="!subdomain"></ng-include>
-      <ng-include src="'views/fireteam/maps.html'" ng-if="subdomain"></ng-include>
+      <ng-include src="'views/fireteam/weapons.html'"></ng-include>
+      <ng-include src="'views/fireteam/gear.html'"></ng-include>
     </tab>
     <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
       <ng-include src="'views/fireteam/history.html'"></ng-include>
     </tab>
     <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
       <ng-include src="'views/fireteam/addStats.html'"></ng-include>
+    </tab>
+  </tabset>
+
+  <tabset class="player-tabs" ng-if="subdomain">
+    <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+      <ng-include src="'views/fireteam/addStats.html'"></ng-include>
+    </tab>
+    <tab heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps">
+      <ng-include src="'views/fireteam/maps.html'"></ng-include>
+    </tab>
+    <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
+      <ng-include src="'views/fireteam/history.html'"></ng-include>
     </tab>
   </tabset>
 
@@ -75,7 +86,7 @@
           </div>
           <div class="recent-player" ng-repeat="player in recentPlayers track by $index">
             <a class="btn btn-white btn-raised" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
-              analytics-on analytics-event="Click" analytics-category="Recent From Dropdown">
+              analytics-on analytics-event="Click" analytics-category="Recent Player">
             </a>
           </div>
         </div>
