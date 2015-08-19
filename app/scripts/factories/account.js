@@ -86,7 +86,7 @@ function setActivityData(mapStats, mapHash, reversedAct, n, totals, pastActiviti
 }
 
 angular.module('trialsReportApp')
-  .factory('currentAccount', function ($http, $filter, toastr, moment) {
+  .factory('currentAccount', function ($http, $filter, toastr) {
     var getAccount = function (sName, platform) {
       return $http({
         method: 'GET',
@@ -142,7 +142,7 @@ angular.module('trialsReportApp')
         var reversedAct = activities.slice().reverse();
         for (var n = 0; n < reversedAct.length; n++) {
           var mapHash = reversedAct[n].activityDetails.referenceId;
-          setActivityData(mapStats, mapHash, reversedAct, n, totals, pastActivities, $filter, moment);
+          setActivityData(mapStats, mapHash, reversedAct, n, totals, pastActivities, $filter);
           reversedAct[n].values.standing.basic.value === recentActivity.standing ? streak++ : streak = 0;
         }
 
