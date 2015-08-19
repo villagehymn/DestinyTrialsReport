@@ -69,7 +69,7 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $cookieStore, playerCard) {
     $scope.timerRunning = true;
-    $scope.subdomain = subDomain.name;
+    $scope.subdomain = subDomain.name === 'my';
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyPrimaryWeaponDefinitions = DestinyPrimaryWeaponDefinitions;
     $scope.DestinySpecialWeaponDefinitions = DestinySpecialWeaponDefinitions;

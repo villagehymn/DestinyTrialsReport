@@ -6,7 +6,7 @@ function setUser(currentAccount, name, platform, playerCard) {
       player.searched = true;
       var segments = location.hostname.split('.');
       var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
-      player.myProfile = subdomain;
+      player.myProfile = subdomain === 'my';
       return playerCard.getPlayerCard(player)
         .then(function (player) {
           return [player];
