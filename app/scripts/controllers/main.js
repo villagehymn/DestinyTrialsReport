@@ -208,12 +208,9 @@ angular.module('trialsReportApp')
 
     $scope.getWeaponTitle = function (title) {
       switch (title) {
-        case 'weaponKillsGrenade':
-          return 'Grenade';
-        case 'weaponKillsMelee':
-          return 'Melee';
-        case 'weaponKillsSuper':
-          return 'Super';
+        case 'weaponKillsGrenade': return 'Grenade';
+        case 'weaponKillsMelee':   return 'Melee';
+        case 'weaponKillsSuper':   return 'Super';
       }
     };
 

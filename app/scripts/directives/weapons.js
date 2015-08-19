@@ -15,7 +15,7 @@ angular.module('trialsReportApp')
               '<span ng-if="$middle">Special</span>',
               '<span ng-if="$last">Heavy</span>',
             '</div>',
-            '<div class="weapon" sx-change-highlight ng-model="weapon.definition.name">',
+            '<div class="weapon">',
               '<div class="weapon__img">',
                 '<img class="img-responsive {{weapon.definition.burnColor || \'kinetic-dmg\'}}"' +
                      'ng-src="{{weapon.definition.icon}}" alt="{{weapon.definition.name}}">',
