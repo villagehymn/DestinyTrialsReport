@@ -33,7 +33,7 @@
         <span class="icon-bar"></span>
       </button>
       <a href="/" target="_self" class="navbar-brand">
-        <span ng-if="subdomain == 'my'" class="highlight">my</span>Destiny<span class="highlight">Trials</span>Report
+        <span ng-if="subdomain" class="highlight">my</span>Destiny<span class="highlight">Trials</span>Report
       </a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
@@ -41,8 +41,8 @@
         <li><button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#mapModal">Map</button></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a type="button" class="btn btn-default" ng-if="subdomain != 'my'" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a></li>
-        <li><a type="button" class="btn btn-default" ng-if="subdomain == 'my'" href="http://www.destinytrialsreport.com" target="_self"><span class="highlight">trials</span>Report</a></li>
+        <li><a type="button" class="btn btn-default" ng-if="!subdomain" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a></li>
+        <li><a type="button" class="btn btn-default" ng-if="subdomain" href="http://www.destinytrialsreport.com" target="_self"><span class="highlight">trials</span>Report</a></li>
       </ul>
     </div>
   </div>
@@ -69,7 +69,7 @@
                   <input type="text" class="form-control" placeholder="Enter profile name" ng-model="mainPlayer" ng-value="searchedPlayer">
                 </div>
                 <div class="main-search__controls">
-                  <div class="main-search__refresh hidden-xs" ng-if="subdomain != 'my'" ng-show="fireteam[0].name != null">
+                  <div class="main-search__refresh hidden-xs" ng-if="!subdomain" ng-show="fireteam[0].name != null">
                     <div class="btn-group">
                       <button class="btn btn-default btn-icon" type="button" ng-click="refreshInventory(fireteam)"
                               analytics-on analytics-event="Click" analytics-category="Refresh Inventory">
