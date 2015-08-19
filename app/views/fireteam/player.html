@@ -40,6 +40,9 @@
   </div>
 
   <div class="edit-player">
+    <div class="edit-player__close" ng-click="toggleEdit(player)">
+      <i class="material-icons">&#xE5CD;</i>
+    </div>
     <div ng-if="fireteam[0].name && $index < 3 && $index > -1">
       <div class="edit-player__input">
         <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
@@ -50,26 +53,32 @@
         </form>
       </div>
       <div class="edit-player__actions" ng-if="!player.invalidResult">
-        <div class="recent-players">
-          <div class="input-group-btn"><!-- class should be "btn-group" but: display issues -->
-            <button class="btn btn-white dropdown-toggle btn-raised" type="button"
-                    id="playerSelect{{$index}}" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-             Recent Players
-             <span class="caret"></span>
-           </button>
-            <ul class="dropdown-menu" aria-labelledby="playerSelect{{$index}}">
-              <li ng-repeat="player in recentPlayers track by $index">
-                <a class="black-font" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
-                  analytics-on analytics-event="Click" analytics-category="Recent From Dropdown">
-                </a>
-              </li>
-            </ul>
+        <!--<div class="edit-player-action__header">
+          <span ng-bind="fireteam[$index].name"></span>'s characters
+        </div>
+        <div class="btn-group" ng-if="subdomain != 'my'" ng-show="fireteam[$index].otherCharacters.length > 1">
+          <button class="btn btn-white dropdown-toggle" type="button" id="characterSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span ng-bind="fireteam[$index].className"></span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="characterSelect">
+            <li ng-repeat="character in fireteam[$parent.$index].otherCharacters" ng-if="fireteam[$parent.$index].characterId !== character.characterId">
+              <a ng-bind="character.className" ng-click="setRecentPlayer(character, ($parent.$parent.$index))"
+                 analytics-on analytics-event="Click" analytics-category="Character Change">
+              </a>
+            </li>
+          </ul>
+        </div>-->
+        <div class="recent-players" ng-show="$index >= 1">
+          <div class="edit-player-action__header">
+            <span ng-bind="fireteam[0].name"></span>'s recent teammates
+          </div>
+          <div class="recent-player" ng-repeat="player in recentPlayers track by $index">
+            <a class="btn btn-white btn-raised" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
+              analytics-on analytics-event="Click" analytics-category="Recent From Dropdown">
+            </a>
           </div>
         </div>
-      </div>
-      <div class="close-overlay">
-        <button class="btn btn-raised btn-white btn-xs" ng-click="toggleEdit(player)">Close</button>
       </div>
     </div>
   </div>

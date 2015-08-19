@@ -77,19 +77,6 @@
                       </button>
                     </div>
                   </div>
-                  <div class="btn-group hidden-xs" ng-if="subdomain != 'my'" ng-show="fireteam[0].otherCharacters.length > 1">
-                    <button class="btn btn-white dropdown-toggle" type="button" id="characterSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      <span ng-bind="fireteam[0].className"></span>
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="characterSelect">
-                      <li ng-repeat="character in fireteam[0].otherCharacters" ng-if="fireteam[0].characterId !== character.characterId">
-                        <a ng-bind="character.className" ng-click="setRecentPlayer(character, 0, true)"
-                           analytics-on analytics-event="Click" analytics-category="Character Change">
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
                   <div class="main-search__submit">
                     <button type="submit" class="hidden-sm hidden-md hidden-lg btn btn-default btn-icon" ng-disabled="status"><i class="material-icons">send</i></button>
                     <button type="submit" class="hidden-xs btn btn-default btn-raised" ng-disabled="status">Search</button>

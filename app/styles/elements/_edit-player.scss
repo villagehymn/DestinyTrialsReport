@@ -13,10 +13,34 @@
   pointer-events: none;
 }
 
+.edit-player__close {
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  transition: opacity ease .2s;
+  cursor: pointer;
+  position: absolute;
+  margin-top: 1em;
+  margin-left: 1em;
+  left: 0;
+  top: 0;
+  height: 3em;
+  width: 3em;
+  text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+
+  i {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+  }
+}
+
 .edit-player__input {
-  font-size: 1.05em;
+  font-size: 1em;
   margin-left: 5.5em;
-  height: 5em;
+  height: 4.1em;
   vertical-align: middle;
   margin-top: .9em;
 
@@ -59,7 +83,8 @@
   .player__info {
     .player__gamertag,
     .player__kd,
-    .player__edit {
+    .player__edit,
+    .player__race {
       opacity: 0;
     }
   }
@@ -73,10 +98,27 @@
 
 .edit-player__actions {
   text-align: center;
+}
 
-  .dropdown-menu {
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: -.5em;
-  }
+.edit-player-action__header {
+  text-transform: uppercase;
+  color: #999;
+  margin: 1em 0;
+}
+
+.recent-players {
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.5);
+  padding: 1em;
+}
+
+.recent-player {
+  display: inline-block;
+  margin: .2em;
+}
+
+.recent-player .btn {
+  margin: 0;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  text-transform: none;
 }
