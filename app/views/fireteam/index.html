@@ -1,5 +1,8 @@
-<slick class="player-carousel" settings="slickConfig" ng-if="fireteam[0].name && fireteam[1].name && fireteam[2].name" >
-  <div class="player-carousel__item" ng-repeat="player in fireteam track by $index">
+<ul rn-carousel class="image hidden-lg hidden-md hidden-sm col-xs-12">
+  <li class="col-xs-12 col-sm-6 col-md-4" ng-if="fireteam[0].name && $index < 3" ng-repeat="player in fireteam track by $index">
     <ng-include src="'views/fireteam/player.html'"></ng-include>
-  </div>
-</slick>
+  </li>
+</ul>
+<div class="col-xs-12 col-sm-6 col-md-4 hidden-xs" ng-repeat="player in fireteam track by $index">
+  <ng-include src="'views/fireteam/player.html'"></ng-include>
+</div>

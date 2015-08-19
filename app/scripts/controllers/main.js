@@ -91,28 +91,6 @@ angular.module('trialsReportApp')
     $scope.playerPartial = 'views/fireteam/player.html';
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
-    $scope.slickConfig = {
-      dots: false,
-      infinite: false,
-      autoplay: false,
-      draggable: true,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      responsive: [
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 2
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1
-          }
-        }
-      ]
-    };
 
     var sendAnalytic = function (event, cat, label) {
       $analytics.eventTrack(event, {

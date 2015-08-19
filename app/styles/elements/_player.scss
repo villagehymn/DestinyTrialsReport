@@ -325,3 +325,26 @@
   background: white;
   color: #B0BEC5;
 }
+
+ul[rn-carousel] {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+ul[rn-carousel] > li {
+  position: relative;
+  margin-left: -100%;
+}
+
+ul[rn-carousel] > li:first-child {
+  margin-left: 0;
+}
+
+ul[rn-carousel] img {
+  max-width: 100%;
+}
+
+ul[rn-carousel] > li {
+  padding-left: 5px;
+  padding-right: 5px;
+}

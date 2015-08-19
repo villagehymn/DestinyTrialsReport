@@ -59,8 +59,7 @@ angular
     'toastr',
     'ui.bootstrap.tpls',
     'ui.bootstrap.progressbar',
-    'ui.bootstrap.tabs',
-    'slickCarousel'
+    'ui.bootstrap.tabs'
   ])
   .config(window.$QDecorator)
   .config(function ($popoverProvider) {
