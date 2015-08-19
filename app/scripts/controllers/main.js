@@ -99,7 +99,7 @@ angular.module('trialsReportApp')
       });
     };
 
-    function getAccountByName(name, platform) {
+    function getAccountByName(name, platform, index) {
       if (angular.isUndefined(name)) {
         return;
       }
@@ -107,7 +107,10 @@ angular.module('trialsReportApp')
         .then(function (player) {
           sendAnalytic('searchedPlayer', 'name', name);
           sendAnalytic('searchedPlayer', 'platform', platform);
-          playerCard.getPlayerCard(player);
+          player.searched = true;
+          playerCard.getPlayerCard(player).then(function (teammate) {
+            $scope.$evalAsync( $scope.fireteam[index] = teammate );
+          });
         });
     }
 
@@ -130,7 +133,7 @@ angular.module('trialsReportApp')
         if (includeFireteam) {
           $location.path((platform ? '/ps/' : '/xbox/') + name);
         } else {
-          getAccountByName(name, (platform ? 2 : 1), $scope, index, true);
+          getAccountByName(name, (platform ? 2 : 1), index);
           sendAnalytic('loadedPlayer', 'name', name);
           sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
         }
