@@ -18,6 +18,7 @@
 
 .weapon {
   display: flex;
+  margin: .25em 0;
 }
 
 .weapon__img {
@@ -25,6 +26,10 @@
   flex-shrink: 0;
   width: 5em;
   height: 5em;
+
+  img {
+    border-radius: 5px;
+  }
 
   &:before {
     content: "";

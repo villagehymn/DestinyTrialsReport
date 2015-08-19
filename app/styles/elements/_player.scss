@@ -7,6 +7,9 @@
 
 .player__info {
   position: relative;
+  background-color: #333;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
 }
 
 .player__edit {
@@ -218,8 +221,9 @@
   display: flex;
 
   label {
+    display: block;
     font-family: 'Roboto Condensed';
-    flex-shrink: 1;
+    flex-shrink: 0;
     font-weight: 300;
     color: #999;
     text-transform: uppercase;
@@ -241,8 +245,8 @@
 .player-history__match {
   display: inline-block;
   border-radius: 50%;
-  width: .8em;
-  height: .8em;
+  width: 11px;
+  height: 11px;
   opacity: 0.5;
   vertical-align: .1em;
   margin-left: .2em;
@@ -296,15 +300,16 @@
 }
 
 .player-hazard {
-  border: 1px solid $hazard-background;
-  color: $hazard-background;
-  font-size: .7em;
+  background: $hazard-background;
+  color: white;
+  font-size: .8em;
   display: inline-block;
   padding: 1px 3px;
   border-radius: 3px;
   margin-right: 3px;
   line-height: 1.3;
   line-spacing: 1;
+  font-weight: normal;
 
   & + .player-hazard--none {
     display: none;
@@ -312,12 +317,12 @@
 }
 
 .player-hazard--friendly {
-  color: #2196F3;
-  border-color: #2196F3;
+  background: #2196F3;
 }
 
 .player-hazard--none {
-  border-color: #B0BEC5;
+  border: 1px solid #B0BEC5;
+  background: white;
   color: #B0BEC5;
 }
 
