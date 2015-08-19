@@ -23,7 +23,7 @@ function getFromParams(currentAccount, $route, playerCard) {
 
 function getAllFromParams($http, $route) {
   if (angular.isDefined($route.current.params.playerOne)) {
-    var platform = $route.current.params.playerOne === 'xbox' ? 1 : 2;
+    var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
     var params = $route.current.params;
     return $http({
       method: 'GET',
