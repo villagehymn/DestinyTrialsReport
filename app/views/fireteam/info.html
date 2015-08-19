@@ -2,9 +2,6 @@
   <div class="player__intro" style="background-image:url('{{player.background[0]}}')">
     <div class="player__title">
       <img class="player__emblem" ng-src="{{player.emblem}}" />
-      <span class="player__edit" ng-if="(subdomain != 'my') && ($index !== 0)" ng-click="toggleEdit(player)">
-        <i class="material-icons">edit mode</i>
-      </span>
       <div class="player__kd">
         <span ng-if="!player.stats.killsDeathsRatio.basic.displayValue">N/A</span>
         <span ng-if="player.stats.killsDeathsRatio.basic.displayValue"
@@ -15,9 +12,16 @@
       <div class="player__char">
         <h2 class="player__gamertag" ng-bind="player.name"></h2>
         <div class="player__race" ng-show="player.level && player.class.name">
-          <span ng-bind="'Level ' + player.level + ' ' + player.class.name"></span>
+          <span class="player__type" ng-bind="player.class.name"></span>
+          <span class="player__level highlight">&#10022; <span ng-bind="player.level"></span></span>
+          <span class="player__grimoire">
+            <img src="/images/grimoire.png"/><span ng-bind="player.grimoire"></span>
+          </span>
         </div>
       </div>
+      <span class="player__edit shadow-z-1" ng-if="(subdomain != 'my')" ng-click="toggleEdit(player)">
+        <i class="material-icons">&#xE254;</i>
+      </span>
     </div>
   </div>
   <!--<div class="player__summary">-->
