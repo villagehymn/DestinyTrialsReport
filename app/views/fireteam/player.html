@@ -5,8 +5,9 @@
 
   <tabset class="player-tabs">
     <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
-      <ng-include src="'views/fireteam/weapons.html'"></ng-include>
-      <ng-include src="'views/fireteam/gear.html'"></ng-include>
+      <ng-include src="'views/fireteam/weapons.html'" ng-if="!subdomain"></ng-include>
+      <ng-include src="'views/fireteam/gear.html'" ng-if="!subdomain"></ng-include>
+      <ng-include src="'views/fireteam/maps.html'" ng-if="subdomain"></ng-include>
     </tab>
     <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
       <ng-include src="'views/fireteam/history.html'"></ng-include>
@@ -20,9 +21,14 @@
     <div class="row">
       <div class="col-xs-12 player__links__btns">
         <a href="http://my.destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
-           type="button" target="_blank" class="btn btn-default"
+           type="button" target="_blank" class="btn btn-default" ng-if="!subdomain"
            analytics-on analytics-event="Click" analytics-category="myDestinyTrialsReport">
           myTrialsReport
+        </a>
+        <a href="http://www.destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
+           type="button" target="_blank" class="btn btn-default" ng-if="subdomain"
+           analytics-on analytics-event="Click" analytics-category="DestinyTrialsReport">
+          DestinyTrialsReport
         </a>
         <a href="http://destinytracker.com/destiny/playlists/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}/trialsOfOsiris"
            type="button" target="_blank" class="btn btn-default"
@@ -52,18 +58,19 @@
              Recent Players
              <span class="caret"></span>
            </button>
-           <ul class="dropdown-menu" aria-labelledby="playerSelect{{$index}}">
-             <li ng-repeat="player in recentPlayers track by $index">
-               <a class="black-font" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
+            <ul class="dropdown-menu" aria-labelledby="playerSelect{{$index}}">
+              <li ng-repeat="player in recentPlayers track by $index">
+                <a class="black-font" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
                   analytics-on analytics-event="Click" analytics-category="Recent From Dropdown">
-               </a>
-             </li>
-           </ul>
-         </div>
-       </div>
-       <div class="close-overlay">
-         <button class="btn btn-raised btn-white btn-xs" ng-click="toggleEdit(player)">Close</button>
-       </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="close-overlay">
+        <button class="btn btn-raised btn-white btn-xs" ng-click="toggleEdit(player)">Close</button>
+      </div>
     </div>
   </div>
 </div>

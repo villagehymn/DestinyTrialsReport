@@ -43,7 +43,7 @@ angular.module('trialsReportApp')
               if ([1].indexOf(nodeStep.column) > -1) {
                 if (!(nodeStep.row === 0 && nodeStep.column === 3)) {
                   var noderStepper = nodeStep.steps;
-                  classNodes.abilities['weaponKillsGrenade'] = {
+                  classNodes.abilities.weaponKillsGrenade = {
                     'name': noderStepper.nodeStepName,
                     'description': noderStepper.nodeStepDescription,
                     'icon': 'https://www.bungie.net' + noderStepper.icon
@@ -54,7 +54,7 @@ angular.module('trialsReportApp')
               if ([3].indexOf(nodeStep.column) > -1) {
                 if (nodeStep.row === 0) {
                   var noderStepper = nodeStep.steps;
-                  classNodes.abilities['weaponKillsSuper'] = {
+                  classNodes.abilities.weaponKillsSuper = {
                     'name': noderStepper.nodeStepName,
                     'description': noderStepper.nodeStepDescription,
                     'icon': 'https://www.bungie.net' + noderStepper.icon
@@ -65,7 +65,7 @@ angular.module('trialsReportApp')
               if ([4].indexOf(nodeStep.column) > -1) {
                 if (nodeStep.row === 0) {
                   var noderStepper = nodeStep.steps;
-                  classNodes.abilities['weaponKillsMelee'] = {
+                  classNodes.abilities.weaponKillsMelee = {
                     'name': noderStepper.nodeStepName,
                     'description': noderStepper.nodeStepDescription,
                     'icon': 'https://www.bungie.net' + noderStepper.icon

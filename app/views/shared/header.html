@@ -71,7 +71,7 @@
                 <div class="main-search__controls">
                   <div class="main-search__refresh hidden-xs" ng-if="subdomain != 'my'" ng-show="fireteam[0].name != null">
                     <div class="btn-group">
-                      <button class="btn btn-default btn-icon" type="button" ng-click="refreshInventory()"
+                      <button class="btn btn-default btn-icon" type="button" ng-click="refreshInventory(fireteam)"
                               analytics-on analytics-event="Click" analytics-category="Refresh Inventory">
                         <i class="material-icons">cached</i>
                       </button>

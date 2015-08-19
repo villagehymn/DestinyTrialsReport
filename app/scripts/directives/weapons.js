@@ -11,11 +11,11 @@ angular.module('trialsReportApp')
         '<div class="row">',
           '<div class="weapon-wrapper col-xs-12" ng-repeat="weapon in weapons track by $index">',
             '<div class="weapon__header">',
-              '<span ng-if="$index === 0">Primary</span>',
-              '<span ng-if="$index === 1">Special</span>',
-              '<span ng-if="$index === 2">Heavy</span>',
+              '<span ng-if="$first">Primary</span>',
+              '<span ng-if="$middle">Special</span>',
+              '<span ng-if="$last">Heavy</span>',
             '</div>',
-            '<div class="weapon">',
+            '<div class="weapon" sx-change-highlight ng-model="weapon.definition.name">',
               '<div class="weapon__img">',
                 '<img class="img-responsive {{weapon.definition.burnColor || \'kinetic-dmg\'}}"' +
                      'ng-src="{{weapon.definition.icon}}" alt="{{weapon.definition.name}}">',
@@ -37,4 +37,4 @@ angular.module('trialsReportApp')
         '</div>'
       ].join('')
     };
-});
+  });

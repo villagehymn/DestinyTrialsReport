@@ -12,6 +12,7 @@
     "grunt-connect-proxy": "^0.2.0",
     "http-proxy": "1.11.1",
     "moment": "^2.10.6",
+    "q": "^1.4.1",
     "request": "^2.60.0",
     "request-promise": "^0.4.3",
     "sqlite3": "^3.0.10",

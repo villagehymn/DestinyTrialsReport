@@ -1,16 +1,23 @@
 'use strict';
 
-function setUser(currentAccount, name, platform) {
+function setUser(currentAccount, name, platform, playerCard) {
   return currentAccount.getAccount(name, platform)
     .then(function (player) {
-      return [player];
+      player.searched = true;
+      var segments = location.hostname.split('.');
+      var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
+      player.myProfile = subdomain;
+      return playerCard.getPlayerCard(player)
+        .then(function (player) {
+          return [player];
+        });
     });
 }
 
-function getFromParams(currentAccount, $route) {
+function getFromParams(currentAccount, $route, playerCard) {
   if (angular.isDefined($route.current.params.playerName)) {
     var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
-    return setUser(currentAccount, $route.current.params.playerName, platform);
+    return setUser(currentAccount, $route.current.params.playerName, platform, playerCard);
   }
 }
 
@@ -27,7 +34,7 @@ function getAllFromParams($http, $route) {
   }
 }
 
-function checkStatus($http) {
+function checkStatus() {
   //return $http({
   //  method: 'GET',
   //  url: 'http://api.destinytrialsreport.com/GlobalAlerts'
@@ -68,52 +75,40 @@ angular
     var segments = location.hostname.split('.');
     var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
 
-    if (subdomain === "my") {
-      $routeProvider
-        .when('/', {
-          templateUrl: 'views/profile.html',
-          controller: 'ProfileCtrl',
-          resolve: {
-            fireTeam: checkStatus
+    $routeProvider
+      .when('/', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        resolve: {
+          fireTeam: checkStatus,
+          subDomain: function(){
+            return {name: subdomain};
           }
-        })
-        .when('/:platformName/:playerName', {
-          templateUrl: 'views/profile.html',
-          controller: 'ProfileCtrl',
-          resolve: {
-            fireTeam: getFromParams
+        }
+      })
+      .when('/:platformName/:playerName', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        resolve: {
+          subDomain: function(){
+            return {name: subdomain};
+          },
+          fireTeam: getFromParams
+        }
+      })
+      .when('/:platformName/:playerOne/:playerTwo/:playerThree', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        resolve: {
+          fireTeam: getAllFromParams,
+          subDomain: function(){
+            return {name: subdomain};
           }
-        })
-        .otherwise({
-          redirectTo: '/'
-        });
-    } else {
-      $routeProvider
-        .when('/', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl',
-          resolve: {
-            fireTeam: checkStatus
-          }
-        })
-        .when('/:platformName/:playerName', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl',
-          resolve: {
-            fireTeam: getFromParams
-          }
-        })
-        .when('/:platformName/:playerOne/:playerTwo/:playerThree', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl',
-          resolve: {
-            fireTeam: getAllFromParams
-          }
-        })
-        .otherwise({
-          redirectTo: '/'
-        });
-    }
+        }
+      })
+      .otherwise({
+        redirectTo: '/'
+      });
 
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
