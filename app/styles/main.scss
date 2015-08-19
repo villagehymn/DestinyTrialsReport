@@ -9,6 +9,7 @@
 @import 'main/buttons';
 
 @import 'elements/header';
+@import 'elements/navbar';
 @import 'elements/main-search';
 @import 'elements/footer';
 @import 'elements/loading';
@@ -23,52 +24,3 @@
 @import 'elements/player-maps';
 @import 'elements/stats';
 @import 'elements/edit-player';
-
-
-// organize how you wish Mark
-
-.navbar {
-  padding: .75em 0;
-  margin-bottom: 0;
-}
-
-.navbar.navbar, .navbar-default.navbar {
-  background: $header-bg;
-}
-
-.navbar .navbar-brand {
-  font-weight: 300;
-  margin: 0;
-  font-size: 2em;
-  line-height: 2em;
-  display: inline-block;
-  padding: 0 0 0 15px;
-  color: white;
-}
-
-.navbar-nav {
-  margin-left: 2em;
-}
-
-.navbar-nav > li > a {
-  line-height: 0px;
-}
-
-.navbar-right > li {
-  .btn {
-    margin-right: 15px;
-  }
-}
-
-.navbar-nav > li {
-  .btn {
-    color: #999 !important;
-  }
-}
-
-@media (max-width: 767px){
-  .navbar .navbar-brand {
-    padding: 0 0 0 10px;
-    line-height: 1.8em;
-  }
-}
