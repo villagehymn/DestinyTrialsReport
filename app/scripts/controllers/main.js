@@ -107,6 +107,7 @@ angular.module('trialsReportApp')
         .then(function (player) {
           sendAnalytic('searchedPlayer', 'name', name);
           sendAnalytic('searchedPlayer', 'platform', platform);
+          player.searched = true;
           playerCard.getPlayerCard(player).then(function (teammate) {
             $scope.$evalAsync( $scope.fireteam[index] = teammate );
           });
