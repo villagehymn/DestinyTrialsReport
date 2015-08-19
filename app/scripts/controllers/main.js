@@ -203,7 +203,6 @@ angular.module('trialsReportApp')
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
       $cookieStore.put('savedPlatform', ($routeParams.platformName === 'ps'));
-      console.log(($routeParams.platformName === 'ps'))
       if (angular.isDefined($scope.fireteam[0])) {
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
         if ($scope.subdomain) {
