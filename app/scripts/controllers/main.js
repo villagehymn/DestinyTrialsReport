@@ -67,9 +67,12 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 };
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $cookieStore, playerCard) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard) {
     $scope.timerRunning = true;
     $scope.subdomain = subDomain.name === 'my';
+    $scope.$storage = $localStorage.$default({
+      platform: true
+    });
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyPrimaryWeaponDefinitions = DestinyPrimaryWeaponDefinitions;
     $scope.DestinySpecialWeaponDefinitions = DestinySpecialWeaponDefinitions;
@@ -133,11 +136,7 @@ angular.module('trialsReportApp')
     if ($routeParams.platformName) {
       $scope.platformValue = $routeParams.platformName === 'ps';
     } else {
-      if (angular.isDefined($cookieStore.get('savedPlatform'))) {
-        $scope.platformValue = $cookieStore.get('savedPlatform');
-      } else {
-        $scope.platformValue = true;
-      }
+      $scope.platformValue = $scope.$storage.platform;
     }
 
     $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
@@ -211,7 +210,7 @@ angular.module('trialsReportApp')
 
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
-      $cookieStore.put('savedPlatform', ($routeParams.platformName === 'ps'));
+      $scope.$storage.platform = ($routeParams.platformName === 'ps');
       if (angular.isDefined($scope.fireteam[0])) {
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
         if ($scope.subdomain) {

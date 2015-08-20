@@ -112,18 +112,18 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  app.use(express.static(__dirname));\n');
 
                     fs.writeSync(fd, '  app.get("/:platform/:playerName", function(req, res){\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n\n');
                     fs.writeSync(fd, '  app.get("/:platform/:playerOne/:playerTwo/:playerThree", function(req, res){\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n');
 
                     fs.writeSync(fd, '  var router = express.Router();\n');
                     fs.writeSync(fd, '  router.get("/", function(req, res) {\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n');
                     fs.writeSync(fd, '  router.get("/:platform/:playerName", function(req, res) {\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n');
                     fs.writeSync(fd, '  app.use(subdomain("my", router));\n');
 
