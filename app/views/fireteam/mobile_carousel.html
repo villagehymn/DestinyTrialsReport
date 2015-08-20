@@ -1,9 +1,9 @@
 <ul rn-carousel class="hidden-xs">
-  <li><div class="col-xs-12 col-sm-12 col-md-4" ng-class="'slide-' + $index" ng-repeat="player in [fireteam[0], fireteam[1], fireteam[2]] track by $index"><ng-include src="'views/fireteam/player.html'"></ng-include></div></li><li>
+  <li><div class="col-xs-12 col-md-4" ng-class="'slide-' + $index" ng-repeat="player in [fireteam[0], fireteam[1], fireteam[2]] track by $index"><ng-include src="'views/fireteam/player.html'"></ng-include></div></li><li>
   <div class="col-xs-12 col-sm-6 col-md-4"></div></li>
 </ul>
-<ul rn-carousel class="hidden-sm col-xs-12">
-  <li class="col-xs-12 col-sm-12 col-md-4" ng-if="fireteam[0].name && $index < 3" ng-repeat="player in fireteam track by $index">
+<ul rn-carousel class="hidden-sm">
+  <li class="col-xs-12 col-md-4" ng-if="fireteam[0].name && $index < 3" ng-repeat="player in fireteam track by $index">
     <ng-include src="'views/fireteam/player.html'"></ng-include>
   </li>
 </ul>

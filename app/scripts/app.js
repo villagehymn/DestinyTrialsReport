@@ -73,6 +73,7 @@ angular
   })
   .config(function ($popoverProvider) {
     angular.extend($popoverProvider.defaults, {
+      animation: false,
       container: 'body',
       placement: 'auto top',
       trigger: 'hover'
