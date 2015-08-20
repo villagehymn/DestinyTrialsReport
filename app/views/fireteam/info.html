@@ -13,7 +13,7 @@
         <h2 class="player__gamertag" ng-bind="player.name"></h2>
         <div class="player__race" ng-show="player.level && player.class.name">
           <span class="player__type" ng-bind="player.class.name"></span>
-          <span class="player__level highlight">&#10022; <span ng-bind="player.level"></span></span>
+          <span class="player__level highlight"><span ng-bind="'&#10022;' + player.level"></span></span>
           <span class="player__grimoire">
             <img src="/images/grimoire.png"/><span ng-bind="player.grimoire"></span>
           </span>

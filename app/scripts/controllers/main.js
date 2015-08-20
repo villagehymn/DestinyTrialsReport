@@ -92,6 +92,11 @@ angular.module('trialsReportApp')
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
 
+    $scope.mapModal = {
+      title: 'Map',
+      content: '<img src="/images/ToO_BurningShrine_Heatmap.jpg" class="img-responsive" alt="Heatmap" />'
+    };
+
     var sendAnalytic = function (event, cat, label) {
       $analytics.eventTrack(event, {
         category: cat,

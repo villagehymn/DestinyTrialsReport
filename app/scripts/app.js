@@ -51,11 +51,12 @@ angular
     'angulartics.google.analytics',
     'angular-carousel',
     'angular-loading-bar',
-    'mgcrea.ngStrap.popover',
     'mgcrea.ngStrap.modal',
+    'mgcrea.ngStrap.popover',
     'ngAnimate',
     'ngCookies',
     'ngRoute',
+    'ngSanitize',
     'ngTouch',
     'toastr',
     'ui.bootstrap.tpls',
@@ -63,10 +64,17 @@ angular
     'ui.bootstrap.tabs'
   ])
   .config(window.$QDecorator)
+  .config(function ($modalProvider) {
+    angular.extend($modalProvider.defaults, {
+      container: 'body',
+      html: 'true',
+      placement: 'center'
+    });
+  })
   .config(function ($popoverProvider) {
     angular.extend($popoverProvider.defaults, {
       container: 'body',
-      placement: 'auto',
+      placement: 'auto top',
       trigger: 'hover'
     });
   })

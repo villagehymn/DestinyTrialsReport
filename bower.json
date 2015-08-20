@@ -13,12 +13,15 @@
     "angular-cookies": "^1.4.4",
     "angular-loading-bar": "^0.8.0",
     "angular-moment": "^0.10.2",
+    "angular-motion": "^0.4.2",
     "angular-route": "^1.4.4",
+    "angular-sanitize": "^1.4.4",
     "angular-strap": "^2.3.1",
     "angular-toastr": "^1.4.1",
     "angular-touch": "^1.4.4",
     "arrive": "^2.2.0",
     "bootstrap": "^3.3.5",
+    "bootstrap-additions": "^0.3.1",
     "bootstrap-material-design": "^0.3.0"
   },
   "devDependencies": {
