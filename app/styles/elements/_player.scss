@@ -358,8 +358,12 @@
   }
 }
 
-.player-hazard--friendly {
+.player-hazard--developer {
   background: #2196F3;
+}
+
+.player-hazard--donator {
+  background: $success;
 }
 
 .player-hazard--none {

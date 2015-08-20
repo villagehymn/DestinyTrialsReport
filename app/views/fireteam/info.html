@@ -88,7 +88,7 @@
     <div class="player-history__matches" trials-history="player.pastActivities"></div>
   </div>
   <div class="player__hazards">
-    <div class="player-hazard player-hazard--friendly"
+    <div class="player-hazard" ng-class="{'player-hazard--developer' : hazard === 'Site Developer', 'player-hazard--donator' : hazard === 'Site Donator'}"
          ng-repeat="hazard in player.nonHazard track by $index" ng-bind="hazard"
          bs-popover="{content:DestinyHazardDefinition[hazard]}">
     </div><!--
