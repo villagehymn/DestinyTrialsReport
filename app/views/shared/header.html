@@ -1,28 +1,3 @@
-<!--<div class="header-bar shadow-z-1">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 header-bar__content">
-        <h1 class="main-title">
-          <a href="/" target="_self">
-            <span ng-if="subdomain == 'my'" class="highlight">my</span>Destiny<span class="highlight">Trials</span>Report
-          </a>
-        </h1>
-        <div class="header__actions hidden-xs">
-          <button type="button" class="btn" data-toggle="modal" data-target="#mapModal">Map</button>
-          <a type="button" class="btn my-report" ng-if="subdomain != 'my'"
-             href="http://my.destinytrialsreport.com" target="_self">
-            <span class="highlight">my</span>Report
-          </a>
-          <a type="button" class="btn my-report" ng-if="subdomain == 'my'"
-             href="http://www.destinytrialsreport.com" target="_self">
-            <span class="highlight">trials</span>Report
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>-->
-
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -38,7 +13,7 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
-        <li><button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#mapModal">Map</button></li>
+        <li><button type="button" class="btn btn-default navbar-btn" data-animation="am-fade-and-scale" data-placement="center" data-template-url="views/modal/map.html" bs-modal="modal">Map</button></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a type="button" class="btn btn-default" ng-if="!subdomain" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a></li>

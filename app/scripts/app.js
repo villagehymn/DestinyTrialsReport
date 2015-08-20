@@ -52,6 +52,7 @@ angular
     'angular-carousel',
     'angular-loading-bar',
     'mgcrea.ngStrap.popover',
+    'mgcrea.ngStrap.modal',
     'ngAnimate',
     'ngCookies',
     'ngRoute',
