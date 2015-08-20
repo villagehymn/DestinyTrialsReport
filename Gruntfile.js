@@ -108,8 +108,8 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '    console.error(err);\n');
                     fs.writeSync(fd, '  });\n\n');
 
-                    fs.writeSync(fd, '  app.use(express.static(__dirname));\n');
                     fs.writeSync(fd, '  app.use(compression());\n');
+                    fs.writeSync(fd, '  app.use(express.static(__dirname));\n');
 
                     fs.writeSync(fd, '  app.get("/:platform/:playerName", function(req, res){\n');
                     fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
