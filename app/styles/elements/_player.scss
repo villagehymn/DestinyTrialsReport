@@ -47,6 +47,23 @@
     100% {opacity: 0;}
 }
 
+@media all and (max-width: 992px) {
+  .player__edit {
+    opacity: 0.6;
+    animation: hintTouch 4s;
+
+    .player__info:hover & {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes hintTouch {
+    0% {opacity: 1;}
+    50% {opacity: 1;}
+    100% {opacity: 0.6;}
+}
+
 .player__intro {
   background-size: auto 114%;
   background-position: 5em top;
