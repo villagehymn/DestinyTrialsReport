@@ -41,6 +41,17 @@
 }
 
 .footer__colofon__contribute {
+
+  svg {
+    height: 1em;
+    vertical-align: -.2em;
+    margin-left: .1em;
+
+    .st0 {
+      fill: $text-on-dark;
+    }
+  }
+
   a {
     color: $text-on-dark;
 
@@ -49,13 +60,11 @@
     &:focus {
       text-decoration: none;
       color: white;
-    }
-  }
 
-  img {
-    height: 1em;
-    vertical-align: middle;
-    margin-left: .1em;
+      svg .st0 {
+        fill: white;
+      }
+    }
   }
 }
 
