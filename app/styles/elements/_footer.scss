@@ -44,7 +44,9 @@
   a {
     color: $text-on-dark;
 
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
       text-decoration: none;
       color: white;
     }
