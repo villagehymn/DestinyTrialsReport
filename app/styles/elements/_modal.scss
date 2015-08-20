@@ -88,30 +88,6 @@
   font-size: 2em;
   color: white;
   text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
-
-  .burning_shrine &:before {
-    content: "Burning Shrine";
-  }
-
-  .thieves_den &:before {
-    content: "Thieves Den";
-  }
-
-  .widows_court &:before {
-    content: "Widow's Court";
-  }
-
-  .cauldron &:before {
-    content: "The Cauldron";
-  }
-
-  .black_shield &:before {
-    content: "Black Shield";
-  }
-
-  .pantheon &:before {
-    content: "Pantheon";
-  }
 }
 
 @media all and (max-width: 800px) {

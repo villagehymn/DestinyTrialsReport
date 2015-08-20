@@ -37,6 +37,17 @@
 
   a {
     color: $text-on-dark;
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+      color: white;
+
+      svg .st0 {
+        fill: white;
+      }
+    }
   }
 }
 
