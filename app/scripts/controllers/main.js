@@ -91,17 +91,10 @@ angular.module('trialsReportApp')
     $scope.playerPartial = 'views/fireteam/player.html';
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
-    $scope.mapName = 'burning_shrine'; // burning_shrine, pantheon, thieves_den, widows_court, black_shield, cauldron
 
     $scope.mapModal = {
-      content:  '<div class="map-modal ' + $scope.mapName + '">' +
-                  '<div class="map-modal__intro">' +
-                    '<div class="map-modal__title"></div>' +
-                  '</div>' +
-                  '<div class="map-modal__heatmap">' +
-                    '<img src="/images/' + $scope.mapName + '_heatmap.jpg" class="img-responsive" alt="Heatmap" />' +
-                  '</div>' +
-                '</div>'
+      title: 'Map',
+      content: '<img src="/images/ToO_BurningShrine_Heatmap.jpg" class="img-responsive" alt="Heatmap" />'
     };
 
     var sendAnalytic = function (event, cat, label) {
