@@ -96,7 +96,7 @@ angular.module('trialsReportApp')
     $scope.mapModal = {
       content:  '<div class="map-modal ' + $scope.mapName + '">' +
                   '<div class="map-modal__intro">' +
-                    '<div class="map-modal__title">' + $scope.currentMap.activityName + '</div>' +
+                    '<div class="map-modal__title">' + ($scope.currentMap != null ? $scope.currentMap.activityName : 'Not quite sure') + '</div>' +
                   '</div>' +
                   '<div class="map-modal__heatmap">' +
                     '<img src="/images/' + $scope.mapName + '_heatmap.jpg" class="img-responsive" alt="Heatmap" />' +
