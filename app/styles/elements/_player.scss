@@ -1,7 +1,6 @@
 .player {
   background: #fff;
   border-radius: 1em;
-  margin-bottom: 30px;
   position: relative;
 }
 
@@ -201,7 +200,27 @@
 }
 
 .player__streak--losses {
-  background: $fail;
+  border: 1px solid $fail;
+  position: relative;
+
+  &:after {
+    position: absolute;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 9px;
+    line-height: 1em;
+    letter-spacing: normal;
+    text-transform: none;
+    word-wrap: normal;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    content: "\e14c";
+    color: $fail;
+    top: 0px;
+    left: .5px;
+    text-align: center;
+  }
 }
 
 .player__lighthouse {
@@ -252,7 +271,7 @@
   height: 11px;
   opacity: 0.5;
   vertical-align: .1em;
-  margin-left: .2em;
+  margin-left: 3px;
 
   &:hover {
     opacity: 1;
@@ -264,6 +283,7 @@
 
   &.player-history__match--loss {
     background-color: white;
+    border: 1px solid $fail;
     position: relative;
 
     &:after {
@@ -271,8 +291,8 @@
       font-family: 'Material Icons';
       font-weight: normal;
       font-style: normal;
-      font-size: 15px;
-      line-height: 11px;
+      font-size: 9px;
+      line-height: 1em;
       letter-spacing: normal;
       text-transform: none;
       word-wrap: normal;
@@ -280,8 +300,9 @@
       -webkit-font-smoothing: antialiased;
       content: "\e14c";
       color: $fail;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 0;
+      left: .5px;
+      text-align: center;
     }
   }
 }
