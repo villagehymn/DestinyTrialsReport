@@ -25,3 +25,28 @@
 @import 'elements/stats';
 @import 'elements/edit-player';
 @import 'elements/maps';
+
+@media (min-width: 768px){
+  ul[rn-carousel] > li:first-child {
+    width: 50%;
+  }
+
+  ul[rn-carousel] > li:last-child {
+    margin-left: 0%;
+  }
+
+  ul[rn-carousel] > li {
+    position: relative;
+    margin-left: -50%;
+  }
+
+  .slide-1 {
+    margin-left: 100%;
+    position: absolute;
+  }
+
+  .slide-2 {
+    margin-left: 200%;
+    position: absolute;
+  }
+}
