@@ -55,14 +55,9 @@ function collectMatchData(extendedWeapons, weaponsUsed, allStats, values) {
 function sumValuesByAttribute(collection, attribute) {
   angular.forEach(collection, function (value, key) {
     if (key === 'kills'){
-      console.log("before")
-      console.log(attribute[key])
-      console.log(value)
     }
     attribute[key] += value;
     if (key === 'kills'){
-      console.log("after")
-      console.log(attribute[key])
     }
   });
 }
@@ -167,7 +162,7 @@ angular.module('trialsReportApp')
             }
           }
         }
-        var teamIndex = data.teams[0].score.basic.value === standing ? 0 : 1;
+        var teamIndex = data.teams[0].standing.basic.value === standing ? 0 : 1;
         recentMatches.push({
           standing: standing,
           team_score: data.teams[teamIndex].score.basic.value,
@@ -185,7 +180,21 @@ angular.module('trialsReportApp')
     var getLastFive = function (player) {
       var collectMatches = function (player) {
           var dfd = $q.defer();
-          dfd.resolve(player.pastActivities.slice(0, 3));
+          var lastThree = [
+            {
+              'id': player.lastThree[0].activityDetails.instanceId,
+              'standing': player.lastThree[0].values.standing.basic.value
+            },
+            {
+              'id': player.lastThree[1].activityDetails.instanceId,
+              'standing': player.lastThree[1].values.standing.basic.value
+            },
+            {
+              'id': player.lastThree[2].activityDetails.instanceId,
+              'standing': player.lastThree[2].values.standing.basic.value
+            }
+          ];
+          dfd.resolve(lastThree);
 
           return dfd.promise;
         },

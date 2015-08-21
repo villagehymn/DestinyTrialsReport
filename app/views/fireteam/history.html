@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-xs-4" ng-repeat="match in player.recentMatches">
         <div class="last-match__standing">
-          <span class="last-match__result last-match__result&#45;&#45;win" ng-if="match.standing === 1"></span>
-          <span class="last-match__result last-match__result&#45;&#45;loss" ng-if="match.standing === 0"></span>
+          <span class="last-match__result last-match__result&#45;&#45;loss" ng-if="match.standing === 1"></span>
+          <span class="last-match__result last-match__result&#45;&#45;win" ng-if="match.standing === 0"></span>
           <span class="last-match__score">
             <span class="last-match__score--team" ng-bind="match.team_score"></span>
             -

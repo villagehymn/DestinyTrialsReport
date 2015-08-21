@@ -150,6 +150,7 @@ angular.module('trialsReportApp')
           recentActivity: recentActivity,
           pastActivities: pastActivities.reverse().slice(0, 24).reverse(),
           allActivities: pastActivities,
+          lastThree: [activities[0], activities[1], activities[2]],
           winStreak: { 'length': streak, 'type' : recentActivity.standing  },
           mapStats: mapStats,
           totals: totals
