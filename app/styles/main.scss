@@ -51,3 +51,12 @@
     position: absolute;
   }
 }
+
+.entry-meta > li {
+  p, span {
+    vertical-align: bottom;
+  }
+  span {
+    font-size: 20px;
+  }
+}
