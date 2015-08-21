@@ -84,8 +84,9 @@
     </div>
   </div>
   <div class="player__history">
-    <label>Last matches</label>
+    <label class="player-history__label">Last matches</label>
     <div class="player-history__matches" trials-history="player.pastActivities"></div>
+    <label class="player-history__kd-label">1.0 <span>K/D</span></label>
   </div>
   <div class="player__hazards">
     <div class="player-hazard" ng-class="{'player-hazard--developer' : hazard === 'Site Developer', 'player-hazard--donator' : hazard === 'Site Donator'}"

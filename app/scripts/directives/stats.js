@@ -9,12 +9,11 @@ angular.module('trialsReportApp')
       },
       template: [
         '<!--<div ng-if="!activities">N/A</div>-->',
-        '<div>' +
-          '<i class="player-history__match"' +
-            'ng-repeat="str in activities.slice().reverse() track by $index"' +
-            'ng-class="str.standing === 0 ? \'player-history__match--win\' : \'player-history__match--loss\'"' +
-            'bs-popover="{title:str.dateAgo,content:\'K/D: {{str.kd}} with {{str.kills}} kills\'}"></i>',
-        '</div>'
+        '<i class="player-history__match"' +
+          'style="transform: translateY({{str.kd < 1.0 ? 50 * (1 - str.kd) : str.kd > 2.0 ? -55 : -50 * (str.kd - 1)}}%);"' +
+          'ng-repeat="str in activities.slice().reverse() track by $index"' +
+          'ng-class="str.standing === 0 ? \'player-history__match--win\' : \'player-history__match--loss\'"' +
+          'bs-popover="{title:str.dateAgo,content:\'K/D: {{str.kd}} with {{str.kills}} kills\'}"></i>'
       ].join('')
     };
 });
