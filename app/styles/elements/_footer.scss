@@ -44,7 +44,7 @@
       text-decoration: none;
       color: white;
 
-      svg .st0 {
+      svg {
         fill: white;
       }
     }
@@ -57,10 +57,7 @@
     height: 1em;
     vertical-align: -.2em;
     margin-left: .1em;
-
-    .st0 {
-      fill: $text-on-dark;
-    }
+    fill: $text-on-dark;
   }
 
   a {
@@ -72,7 +69,7 @@
       text-decoration: none;
       color: white;
 
-      svg .st0 {
+      svg {
         fill: white;
       }
     }
