@@ -458,7 +458,7 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              js: ['concat', 'uglifyjs'],
+              js: ['concat', 'uglify'],
               css: ['cssmin']
             },
             post: {}
@@ -496,8 +496,8 @@ module.exports = function (grunt) {
     // uglify: {
     //   dist: {
     //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
+    //       '<%= yeoman.dist %>/scripts/app.js': [
+    //         '<%= yeoman.dist %>/scripts/app.js'
     //       ]
     //     }
     //   }
@@ -563,27 +563,12 @@ module.exports = function (grunt) {
         src: 'views/{,*/}*.html',
         dest: '.tmp/templates.js',
         options: {
-          usemin: 'scripts/scripts.js',
+          usemin: 'scripts/app.js',
           htmlmin: '<%= htmlmin.dist %>'
         }
       }
     },
 
-    // gzip assets 1-to-1 for production
-    compress: {
-      main: {
-        options: {
-          mode: 'gzip'
-        },
-        expand: true,
-        cwd: '<%= yeoman.dist %>/scripts/',
-        src: ['**/*'],
-        dest: '<%= yeoman.dist %>/scripts/',
-        rename: function (dest, src) {
-          return 'dist/scripts/' + src + '.gz';
-        }
-      }
-    },
     // ng-annotate tries to make the code safe for minification automatically
     // by using the Angular long form for dependency injection.
     ngAnnotate: {
@@ -731,8 +716,7 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin',
-    'compress'
+    'htmlmin'
   ]);
 
   grunt.registerTask('default', [

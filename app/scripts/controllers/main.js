@@ -69,7 +69,7 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard, $sce) {
     $scope.subdomain = subDomain.name === 'my';
-    $scope.currentMap = DestinyTrialsDefinitions[270739640];
+    $scope.currentMap = DestinyTrialsDefinitions[145503874];
     $scope.$storage = $localStorage.$default({
       platform: true
     });
