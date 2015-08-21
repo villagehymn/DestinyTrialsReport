@@ -51,6 +51,12 @@
   }
 }
 
+@media (max-width: 768px){
+  .table {
+    table-layout: fixed;
+  }
+}
+
 .entry-meta > li {
   p, span {
     vertical-align: bottom;
