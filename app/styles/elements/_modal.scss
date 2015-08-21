@@ -46,30 +46,6 @@
 .map-modal__intro {
   background-size: cover;
   padding-top: 12em;
-
-  .burning_shrine & {
-    background-image: url('../images/burning_shrine.jpg');
-  }
-
-  .cauldron & {
-    background-image: url('../images/cauldron.jpg');
-  }
-
-  .thieves_den & {
-    background-image: url('../images/thieves_den.jpg');
-  }
-
-  .widows_court & {
-    background-image: url('../images/widows_court.jpg');
-  }
-
-  .black_shield & {
-    background-image: url('../images/black_shield.jpg');
-  }
-
-  .pantheon & {
-    background-image: url('../images/pantheon.jpg');
-  }
 }
 
 .map-modal__heatmap {

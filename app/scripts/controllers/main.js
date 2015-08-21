@@ -67,12 +67,14 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 };
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard) {
-    $scope.timerRunning = true;
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard, $sce) {
     $scope.subdomain = subDomain.name === 'my';
+    $scope.currentMap = DestinyTrialsDefinitions[145503874];
+    $scope.timerRunning = true;
     $scope.$storage = $localStorage.$default({
       platform: true
     });
+
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyPrimaryWeaponDefinitions = DestinyPrimaryWeaponDefinitions;
     $scope.DestinySpecialWeaponDefinitions = DestinySpecialWeaponDefinitions;
@@ -89,22 +91,24 @@ angular.module('trialsReportApp')
       'Site Developer': 'Hey! We made this site, so more than likely we are looking you up too...',
       'Site Donator': 'Part of an amazing few who\'ve help keep this site running'
     };
+
     $scope.headerPartial = 'views/shared/header.html';
     $scope.footerPartial = 'views/shared/footer.html';
     $scope.playerPartial = 'views/fireteam/player.html';
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
-    $scope.mapName = 'burning_shrine'; // burning_shrine, pantheon, thieves_den, widows_court, black_shield, cauldron
 
     $scope.mapModal = {
-      content:  '<div class="map-modal ' + $scope.mapName + '">' +
-                  '<div class="map-modal__intro">' +
-                    '<div class="map-modal__title">' + ($scope.currentMap != null ? $scope.currentMap.activityName : 'Not quite sure') + '</div>' +
-                  '</div>' +
-                  '<div class="map-modal__heatmap">' +
-                    '<img src="/images/' + $scope.mapName + '_heatmap.jpg" class="img-responsive" alt="Heatmap" />' +
-                  '</div>' +
-                '</div>'
+      content: $sce.trustAsHtml(
+        '<div class="map-modal">' +
+          '<div class="map-modal__intro" style="background-image: url(\'' + $scope.currentMap.headerImage + '\')">' +
+            '<div class="map-modal__title">' + $scope.currentMap.activityName + '</div>' +
+          '</div>' +
+          '<div class="map-modal__heatmap">' +
+            '<img src="' + $scope.currentMap.heatmapImage + '" class="img-responsive" alt="Heatmap" />' +
+          '</div>' +
+        '</div>'
+      )
     };
 
     var sendAnalytic = function (event, cat, label) {
