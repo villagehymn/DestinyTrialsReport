@@ -138,12 +138,11 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '    };\n');
                     fs.writeSync(fd, '    try {request(options, function(error, response, body) {\n');
                     fs.writeSync(fd, '      if (!error) {\n');
-                    fs.writeSync(fd, '        res.write(body);\n');
+                    fs.writeSync(fd, '        res.send(body);\n');
                     fs.writeSync(fd, '      } else {\n');
-                    fs.writeSync(fd, '        res.write(error);\n');
+                    fs.writeSync(fd, '        res.send(error);\n');
                     fs.writeSync(fd, '      }\n');
-                    fs.writeSync(fd, '      res.end()})}\n');
-                    fs.writeSync(fd, '    catch(e) {}\n');
+                    fs.writeSync(fd, '    })} catch(e) {}\n');
                     fs.writeSync(fd, '  });\n');
 
                     fs.writeSync(fd, '  app.all("*", function (req, res, next) {\n');
