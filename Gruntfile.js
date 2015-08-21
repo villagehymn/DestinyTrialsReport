@@ -42,123 +42,6 @@ module.exports = function (grunt) {
     'file-creator': {
         heroku: {
             files: [{
-                //Create Procfile required by Heroku
-                file: 'heroku/Procfile',
-                method: function(fs, fd, done) {
-                    fs.writeSync(fd, 'web: node server.js');
-                    done();
-                }
-            }, {
-                //Create package.json for Heroku for adding dependencies (ExpressJS)
-                file: 'heroku/package.json',
-                method: function(fs, fd, done) {
-                    var min = grunt.option('min');
-                    fs.writeSync(fd, '{\n');
-                    fs.writeSync(fd, '  "name": ' + (pkg.name ? '"' + pkg.name + '"' : '""') + ',\n');
-                    fs.writeSync(fd, '  "version": ' + (pkg.version ? '"' + pkg.version + '"' : '""') + ',\n');
-                    fs.writeSync(fd, '  "description": ' + (pkg.description ? '"' + pkg.description + '"' : '""') + ',\n');
-                    fs.writeSync(fd, '  "main": "server.js",\n');
-                    fs.writeSync(fd, '  "dependencies": {\n');
-                    fs.writeSync(fd, '    "adm-zip": "^0.4.7",\n');
-                    if (!min) {
-                        fs.writeSync(fd, '    "bower": "^1.4.1",\n');
-                    }
-                    fs.writeSync(fd, '    "compression": "^1.5.2",\n');
-                    fs.writeSync(fd, '    "express": "^4.13.3",\n');
-                    fs.writeSync(fd, '    "express-subdomain": "^1.0.3",\n');
-                    fs.writeSync(fd, '    "request": "^2.60.0",\n');
-                    fs.writeSync(fd, '    "request-promise": "^0.4.3",\n');
-                    fs.writeSync(fd, '    "sqlite3": "^3.0.10",\n');
-                    fs.writeSync(fd, '    "throng": "^1.0.0",\n');
-                    fs.writeSync(fd, '    "unzip": "^0.1.11"\n');
-                    fs.writeSync(fd, '  },\n');
-                    fs.writeSync(fd, '  "scripts": {\n');
-                    if (!min) {
-                        fs.writeSync(fd, '    "postinstall": "bower install -p",\n');
-                    }
-                    fs.writeSync(fd, '    "start": "node server.js"\n');
-                    fs.writeSync(fd, '  },\n');
-                    fs.writeSync(fd, '  "author": ' + (pkg.author ? '"' + pkg.author + '"' : '""') + ',\n');
-                    fs.writeSync(fd, '  "license": ' + (pkg.license ? '"' + pkg.license + '"' : '""') + '\n');
-                    fs.writeSync(fd, '}');
-                    done();
-                }
-            }, {
-                //Create server.js used by ExpressJS within Heroku
-                file: 'heroku/server.js',
-                method: function(fs, fd, done) {
-                    fs.writeSync(fd, 'var throng = require("throng");\n');
-                    fs.writeSync(fd, 'var WORKERS = process.env.WEB_CONCURRENCY || 1;\n\n');
-                    fs.writeSync(fd, 'throng(start, {\n');
-                    fs.writeSync(fd, '  workers: WORKERS,\n');
-                    fs.writeSync(fd, '  lifetime: Infinity\n');
-                    fs.writeSync(fd, '});\n\n');
-
-                    fs.writeSync(fd, 'function start() {\n');
-                    fs.writeSync(fd, '  var compression = require("compression");\n');
-                    fs.writeSync(fd, '  var subdomain = require("express-subdomain");\n');
-                    fs.writeSync(fd, '  var express = require("express");\n');
-                    fs.writeSync(fd, '  var request = require("request");\n');
-                    fs.writeSync(fd, '  var app = express();\n');
-
-                    fs.writeSync(fd, '  var domain = require("domain");\n');
-                    fs.writeSync(fd, '  var d = domain.create();\n');
-
-                    fs.writeSync(fd, '  d.on("error", function(err) {\n');
-                    fs.writeSync(fd, '    console.error(err);\n');
-                    fs.writeSync(fd, '  });\n\n');
-
-                    fs.writeSync(fd, '  app.use(compression());\n');
-                    fs.writeSync(fd, '  app.use(express.static(__dirname));\n');
-
-                    fs.writeSync(fd, '  app.get("/:platform/:playerName", function(req, res){\n');
-                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
-                    fs.writeSync(fd, '  });\n\n');
-                    fs.writeSync(fd, '  app.get("/:platform/:playerOne/:playerTwo/:playerThree", function(req, res){\n');
-                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
-                    fs.writeSync(fd, '  });\n');
-
-                    fs.writeSync(fd, '  var router = express.Router();\n');
-                    fs.writeSync(fd, '  router.get("/", function(req, res) {\n');
-                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
-                    fs.writeSync(fd, '  });\n');
-                    fs.writeSync(fd, '  router.get("/:platform/:playerName", function(req, res) {\n');
-                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
-                    fs.writeSync(fd, '  });\n');
-                    fs.writeSync(fd, '  app.use(subdomain("my", router));\n');
-
-                    fs.writeSync(fd, '  app.get("/Platform/*?", function(req, res){\n');
-                    fs.writeSync(fd, '    res.setTimeout(25000);\n');
-                    fs.writeSync(fd, '    var api_key = process.env.BUNGIE_API;\n');
-                    fs.writeSync(fd, '    var options = {\n');
-                    fs.writeSync(fd, '      url: "https://www.bungie.net/" + req.originalUrl,\n');
-                    fs.writeSync(fd, '      headers: {\n');
-                    fs.writeSync(fd, '        "X-API-Key": api_key\n');
-                    fs.writeSync(fd, '      }\n');
-                    fs.writeSync(fd, '    };\n');
-                    fs.writeSync(fd, '    try {request(options, function(error, response, body) {\n');
-                    fs.writeSync(fd, '      if (!error) {\n');
-                    fs.writeSync(fd, '        res.send(body);\n');
-                    fs.writeSync(fd, '      } else {\n');
-                    fs.writeSync(fd, '        res.send(error);\n');
-                    fs.writeSync(fd, '      }\n');
-                    fs.writeSync(fd, '    })} catch(e) {}\n');
-                    fs.writeSync(fd, '  });\n');
-
-                    fs.writeSync(fd, '  app.all("*", function (req, res, next) {\n');
-                    fs.writeSync(fd, '    res.header("Access-Control-Allow-Origin", "http://www.destinytrialsreport.com");\n');
-                    fs.writeSync(fd, '    return next();\n');
-                    fs.writeSync(fd, '  });\n');
-
-                    fs.writeSync(fd, '  var port = process.env.PORT || 9000;\n');
-                    fs.writeSync(fd, '  app.listen(port, function() {\n');
-                    fs.writeSync(fd, '    console.log("Listening on port " + port);\n');
-                    fs.writeSync(fd, '  });\n');
-                    fs.writeSync(fd, '}');
-
-                    done();
-                }
-            }, {
                 //Add .gitignore to ensure node_modules folder doesn't get uploaded
                 file: 'heroku/.gitignore',
                 method: function(fs, fd, done) {
@@ -586,8 +469,9 @@ module.exports = function (grunt) {
       //Heroku Settings
       heroku: {
           files: [{
-              dest: 'heroku/bower.json',
-              src: 'bower.json'
+              expand: true,
+              dest: 'heroku/',
+              src: ['package.json', 'bower.json', 'Procfile', 'server.js']
           }, {
               expand: true,
               dot: true,
@@ -600,6 +484,10 @@ module.exports = function (grunt) {
       },
       herokumin: {
           files: [{
+              expand: true,
+              dest: 'heroku/',
+              src: ['package.json', 'bower.json', 'Procfile', 'server.js']
+          }, {
               expand: true,
               dot: true,
               cwd: '<%= yeoman.dist %>',
@@ -617,11 +505,8 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             '*.{ico,png,txt}',
-            '.htaccess',
             '*.html',
-            'newrelic.js',
             'views/{,*/}*.html',
-            'json/{,*/}*.json',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*',
             'lib/{,*/}*.*'

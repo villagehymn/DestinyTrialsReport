@@ -1,20 +1,21 @@
 {
   "author": "https://github.com/SteffanLong/DestinyTrialsReport/graphs/contributors",
   "name": "trials-report",
+  "description": "Destiny Trials Report",
   "version": "1.1.0",
   "license": "Artistic-2.0",
   "homepage": "http://www.destinytrialsreport.com/",
+  "main": "server.js",
   "dependencies": {
     "adm-zip": "^0.4.7",
+    "bower": "^1.4.1",
     "compression": "^1.5.2",
     "express": "^4.13.3",
     "express-subdomain": "^1.0.3",
-    "grunt-connect-proxy": "^0.2.0",
-    "http-proxy": "1.11.1",
-    "moment": "^2.10.6",
     "request": "^2.60.0",
     "request-promise": "^0.4.3",
     "sqlite3": "^3.0.10",
+    "throng": "^1.0.0",
     "unzip": "^0.1.11"
   },
   "repository": {
@@ -27,6 +28,7 @@
     "grunt-angular-templates": "^0.5.7",
     "grunt-build-control": "^0.5.0",
     "grunt-concurrent": "^2.0.1",
+    "grunt-connect-proxy": "^0.2.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-compass": "^1.0.3",
     "grunt-contrib-compress": "^0.13.0",
@@ -63,7 +65,8 @@
     "node": "^0.12.7"
   },
   "scripts": {
-    "start": "grunt serve",
-    "test": "grunt test"
+    "start": "node server.js",
+    "test": "grunt test",
+    "postinstall": "bower install -p"
   }
 }
