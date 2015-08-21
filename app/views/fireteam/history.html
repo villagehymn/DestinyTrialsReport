@@ -1,22 +1,17 @@
 <div class="last-match">
-  <div class="last-match__overview col-xs-4" ng-repeat="match in player.recentMatches">
-    <div class="last-match__standing">
-      <!--<span class="last-match__result last-match__result&#45;&#45;win" ng-if="match.standing === 0"></span>-->
-      <!--<span class="last-match__result last-match__result&#45;&#45;loss" ng-if="match.standing === 1"></span>-->
-      <span class="last-match__score">
-        <span class="last-match__score--team" ng-bind="match.team_score"></span>
-        -
-        <span class="last-match__score--opponents" ng-bind="match.enemy_score"></span>
-      </span>
-    </div>
+  <div class="last-match__overview">
     <div class="row">
-      <div class="col-xs-12 stat text-center">
-        <span ng-bind="match.dateAgo"></span>
-        <!--<label>Date</label>-->
-      </div>
-      <div class="col-xs-12 stat text-center">
-        <span ng-bind="match.duration"></span>
-        <!--<label>Duration</label>-->
+      <div class="col-xs-4" ng-repeat="match in player.recentMatches">
+        <div class="last-match__standing">
+          <span class="last-match__result last-match__result&#45;&#45;win" ng-if="match.standing === 1"></span>
+          <span class="last-match__result last-match__result&#45;&#45;loss" ng-if="match.standing === 0"></span>
+          <span class="last-match__score">
+            <span class="last-match__score--team" ng-bind="match.team_score"></span>
+            -
+            <span class="last-match__score--opponents" ng-bind="match.enemy_score"></span>
+          </span>
+          <span class="last-match__date" ng-bind="match.dateAgo"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -93,12 +88,12 @@
       </div>
     </div>
   </div>
-  <div class="last-match__medals">
+  <!--<div class="last-match__medals">
     <div class="row">
       <div class="col-xs-2" ng-repeat="medal in player.medals track by $index"
            bs-popover="{title:DestinyMedalDefinition[medal.id].statName,content:DestinyMedalDefinition[medal.id].statDescription}">
         <img class="img-responsive" ng-src="{{'https://www.bungie.net' + DestinyMedalDefinition[medal.id].iconImage}}">
       </div>
     </div>
-  </div>
+  </div>-->
 </div>
