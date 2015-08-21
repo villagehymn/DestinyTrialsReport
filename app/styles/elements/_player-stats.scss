@@ -1,0 +1,37 @@
+.player-stats__main {
+  padding: 1em;
+  background: linear-gradient( 180deg, $stats-background, darken($stats-background, 5%));
+  border-bottom: 1px solid darken($stats-background, 20%);
+
+  .stat {
+    text-align: center;
+    span {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.player-stats__detail {
+  background: linear-gradient( 180deg, darken($stats-background, 5%), white);
+  border-top: 1px solid lighten($stats-background, 10%);
+}
+
+.player-stats__weapons {
+  padding: 1em;
+  border-bottom: 1px solid darken($stats-background, 5%);
+}
+
+.player-stats__other {
+  padding: 1em;
+  border-top: 1px solid lighten($stats-background, 10%);
+  border-bottom: 1px solid $stats-background;
+}
+
+.player-stats__bests {
+  padding: 1em;
+  border-top: 1px solid lighten($stats-background, 10%);
+
+  .stat-row__header {
+    margin-top: 0;
+  }
+}

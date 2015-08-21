@@ -1,46 +1,60 @@
-<div class="row pt-0" style="margin-top:-3px">
-  <div class="col-xs-12">
-    <table class="table table-striped table-hover">
-      <thead>
-      <tr>
-        <th class="p-0">
-          <h5 class="mt-0 mb-0 custom-font filled bg-danger">Map</h5>
-        </th>
-        <th class="p-0">
-          <h5 class="mt-0 mb-0 custom-font filled bg-danger">K</h5>
-        </th>
-        <th class="p-0">
-          <h5 class="mt-0 mb-0 custom-font filled bg-danger">D</h5>
-        </th>
-        <th class="p-0">
-          <h5 class="mt-0 mb-0 custom-font filled bg-danger">A</h5>
-        </th>
-        <th class="p-0">
-          <h5 class="mt-0 mb-0 custom-font filled bg-danger">W</h5>
-        </th>
-        <th class="p-0">
-          <h5 class="mt-0 mb-0 custom-font filled bg-danger">L</h5>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="(key, value) in player.mapStats track by $index">
-        <td class="p-10" ng-bind="DestinyTrialsDefinitions[key].activityName"></td>
-        <td class="p-10" ng-bind="value.kills"></td>
-        <td class="p-10" ng-bind="value.deaths"></td>
-        <td class="p-10" ng-bind="value.assists"></td>
-        <td class="p-10" ng-bind="value.wins"></td>
-        <td class="p-10" ng-bind="value.losses"></td>
-      </tr>
-      <tr>
-        <td class="p-10" style="font-weight:bold">Total</td>
-        <td class="p-10" style="font-weight:bold" ng-bind="player.totals.kills"></td>
-        <td class="p-10" style="font-weight:bold" ng-bind="player.totals.deaths"></td>
-        <td class="p-10" style="font-weight:bold" ng-bind="player.totals.assists"></td>
-        <td class="p-10" style="font-weight:bold" ng-bind="player.totals.wins"></td>
-        <td class="p-10" style="font-weight:bold" ng-bind="player.totals.losses"></td>
-      </tr>
-      </tbody>
-    </table>
+<div class="maps">
+  <div class="maps__specific">
+    <div class="row">
+      <div class="col-xs-12" ng-repeat="(key, value) in player.mapStats track by $index">
+        <div class="stat-row__header">
+          <span ng-bind="DestinyTrialsDefinitions[key].activityName"></span>
+        </div>
+        <div class="row stat-row">
+          <div class="col-xs-2 col-xs-offset-2 stat">
+            <span ng-bind="value.kills"></span>
+            <label>Kills</label>
+          </div>
+          <div class="col-xs-2 stat">
+            <span ng-bind="value.deaths"></span>
+            <label>Deaths</label>
+          </div>
+          <div class="col-xs-2 stat">
+            <span ng-bind="value.assists"></span>
+            <label>Assists</label>
+          </div>
+          <div class="col-xs-2 stat">
+            <span ng-bind="value.wins"></span>
+            <label>Wins</label>
+          </div>
+          <div class="col-xs-2 stat">
+            <span ng-bind="value.losses"></span>
+            <label>Loss</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="maps__totals">
+    <div class="stat-row__header">
+      <span>Totals</span>
+    </div>
+    <div class="row stat-row">
+      <div class="col-xs-2 col-xs-offset-2 stat">
+        <span ng-bind="player.totals.kills"></span>
+        <label>Kills</label>
+      </div>
+      <div class="col-xs-2 stat">
+        <span ng-bind="player.totals.deaths"></span>
+        <label>Deaths</label>
+      </div>
+      <div class="col-xs-2 stat">
+        <span ng-bind="player.totals.assists"></span>
+        <label>Assists</label>
+      </div>
+      <div class="col-xs-2 stat">
+        <span ng-bind="player.totals.wins"></span>
+        <label>Wins</label>
+      </div>
+      <div class="col-xs-2 stat">
+        <span ng-bind="player.totals.losses"></span>
+        <label>Loss</label>
+      </div>
+    </div>
   </div>
 </div>

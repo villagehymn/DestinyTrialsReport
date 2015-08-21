@@ -1,0 +1,117 @@
+.player-tabs {
+  overflow: hidden;
+
+  ul {
+    overflow: hidden;
+    margin-bottom: -1px;
+    background: #90A4AE;
+  }
+
+  li {
+    width: 33.33%;
+    box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
+    text-align: center;
+    background: #90A4AE;
+
+    a,
+    a:hover,
+    a:focus {
+      border-radius: 0;
+      font-size: .9em;
+      color: #fff !important;
+      font-weight: 300;
+      text-transform: uppercase;
+      font-family: 'Roboto Condensed';
+      transition: box-shadow linear .1s;
+      white-space: nowrap;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    &:first-child {
+      width: 33.34%;
+    }
+  }
+
+  li.active {
+    z-index: 1;
+    position: relative;
+  }
+
+  li.active a,
+  li.active a:hover,
+  li.active a:focus {
+    color: #666 !important;
+    box-shadow: 0px 0px 8px 0 rgba(0,0,0,0.5);
+  }
+
+  li:nth-child(1).active {
+    background: $weapons-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($weapons-background, 50%);
+    }
+
+    .my-dtr & {
+      background: $stats-background;
+
+      a,
+      a:focus,
+      a:active,
+      a:hover {
+        color: darken($stats-background, 50%);
+      }
+    }
+  }
+
+  li:nth-child(2).active {
+    background: $last-match-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($last-match-background, 50%);
+    }
+
+    .my-dtr & {
+      background: $maps-background;
+
+      a,
+      a:focus,
+      a:active,
+      a:hover {
+        color: darken($maps-background, 50%);
+      }
+    }
+  }
+
+  li:nth-child(3).active {
+    background: $stats-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($stats-background, 50%);
+    }
+
+    .my-dtr & {
+      background: $last-match-background;
+
+      a,
+      a:focus,
+      a:active,
+      a:hover {
+        color: darken($last-match-background, 50%);
+      }
+    }
+  }
+
+  .tab-content {
+    height: auto;
+  }
+}

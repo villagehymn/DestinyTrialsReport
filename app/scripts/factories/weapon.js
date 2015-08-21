@@ -1,15 +1,15 @@
 'use strict';
 
 var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
-var avoidNodes = ['Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage',
-  'Hive Disruptor', 'Oracle Disruptor', 'Wolfpack Rounds', 'Last Word', 'Fan Fire', 'Mark of the Devourer',
-  'Ice Breaker', 'No Backpack', 'Lich Bane', 'Invective', 'Cursebringer', 'Disciplinarian', 'Holding Aces',
-  'Timeless Mythoclast', 'Thunderer', 'String of Curses'
+var avoidNodes = [
+  'Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage', 'Hive Disruptor', 'Oracle Disruptor',
+  'Lich Bane', 'Disciplinarian', 'Demotion', 'Mutineer', 'Dreg Burn', 'Shank Burn', 'Vandal Burn', 'Aspect Swap', 'Burgeoning Hunger',
+  'Cannibalism', 'Dark Breaker', 'Upgrade Damage'
 ];
 
-function pushNode(nodeStep, name, nodes) {
+function pushNode(nodeStep, nodes) {
   nodes.push({
-    'name': name,
+    'name': nodeStep.nodeStepName,
     'description': nodeStep.nodeStepDescription,
     'icon': 'https://www.bungie.net' + nodeStep.icon
   });
@@ -46,22 +46,23 @@ angular.module('trialsReportApp')
         }
         var nodes = [];
         var itemS = items[n];
-        //var wItem = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
 
         if (DestinyPrimaryWeaponDefinitions[itemS.itemHash]) {
           var primaryW = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
-              if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                pushNode(nodeStep, nodeStep.nodeStepName, nodes);
-              } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                setDmgElement(nodeStep, primaryW);
+              if (nodeStep) {
+                if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                  pushNode(nodeStep, nodes);
+                } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
+                  setDmgElement(nodeStep, primaryW);
+                }
               }
             }
           }
           weapons.primary = {
-            'weapon': primaryW,
+            'definition': primaryW,
             'nodes': nodes
           };
         } else if (DestinySpecialWeaponDefinitions[itemS.itemHash]) {
@@ -69,20 +70,22 @@ angular.module('trialsReportApp')
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
-              if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                if (secondaryW.subType === 12) {
-                  if (nodeStep.perkHashes[0] === 3752206822) {
-                    weapons.hazards.push('Final Round Sniper');
+              if (nodeStep) {
+                if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                  if (secondaryW.subType === 12) {
+                    if (nodeStep.perkHashes[0] === 3752206822) {
+                      weapons.hazards.push('Final Round Sniper');
+                    }
                   }
+                  pushNode(nodeStep, nodes);
+                } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
+                  setDmgElement(nodeStep, secondaryW);
                 }
-                pushNode(nodeStep, nodeStep.nodeStepName, nodes);
-              } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                setDmgElement(nodeStep, secondaryW);
               }
             }
           }
           weapons.special = {
-            'weapon': secondaryW,
+            'definition': secondaryW,
             'nodes': nodes
           };
           if ((secondaryW.subType === 12) && (secondaryW.name !== 'No Land Beyond')) {
@@ -101,17 +104,17 @@ angular.module('trialsReportApp')
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i].steps;
-              if (!nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                var longNames = ['Grenades and Horseshoes'];
-                var name = (longNames.indexOf(nodeStep.nodeStepName) > -1) ? 'Nades & Shoes' : nodeStep.nodeStepName;
-                pushNode(nodeStep, name, nodes);
-              } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                setDmgElement(nodeStep, heavyW);
+              if (nodeStep) {
+                if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+                  pushNode(nodeStep, nodes);
+                } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
+                  setDmgElement(nodeStep, heavyW);
+                }
               }
             }
           }
           weapons.heavy = {
-            'weapon': heavyW,
+            'definition': heavyW,
             'nodes': nodes
           };
         }

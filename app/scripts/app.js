@@ -1,22 +1,29 @@
 'use strict';
 
-function setUser(currentAccount, name, platform) {
+function setUser(currentAccount, name, platform, playerCard) {
   return currentAccount.getAccount(name, platform)
     .then(function (player) {
-      return [player];
+      player.searched = true;
+      var segments = location.hostname.split('.');
+      var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
+      player.myProfile = subdomain === 'my';
+      return playerCard.getPlayerCard(player)
+        .then(function (player) {
+          return [player];
+        });
     });
 }
 
-function getFromParams(currentAccount, $route) {
+function getFromParams(currentAccount, $route, playerCard) {
   if (angular.isDefined($route.current.params.playerName)) {
-    var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
-    return setUser(currentAccount, $route.current.params.playerName, platform);
+    var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
+    return setUser(currentAccount, $route.current.params.playerName, platform, playerCard);
   }
 }
 
 function getAllFromParams($http, $route) {
   if (angular.isDefined($route.current.params.playerOne)) {
-    var platform = $route.current.params.platform === 'xbox' ? 1 : 2;
+    var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
     var params = $route.current.params;
     return $http({
       method: 'GET',
@@ -27,7 +34,7 @@ function getAllFromParams($http, $route) {
   }
 }
 
-function checkStatus($http) {
+function checkStatus() {
   //return $http({
   //  method: 'GET',
   //  url: 'http://api.destinytrialsreport.com/GlobalAlerts'
@@ -40,79 +47,85 @@ function checkStatus($http) {
 
 angular
   .module('trialsReportApp', [
-    'ngAnimate', 'ngCookies',
-    'ngResource', 'ngRoute',
-    'ngSanitize', 'ngTouch',
-    'ui.bootstrap', 'angular-loading-bar',
-    'angulartics', 'angulartics.google.analytics',
-    'LocalStorageModule', 'toastr',
-    'angularHelpOverlay', 'angular.filter',
-    'picardy.fontawesome', 'timer'
-  ]).config(window.$QDecorator)
-  .factory('requestUrl', function () {
-    return {
-      url: '/bungie/'
-    };
+    'angulartics',
+    'angulartics.google.analytics',
+    'angular-carousel',
+    'angular-loading-bar',
+    'mgcrea.ngStrap.modal',
+    'mgcrea.ngStrap.popover',
+    'ngAnimate',
+    'ngRoute',
+    'ngSanitize',
+    'ngStorage',
+    'ngTouch',
+    'toastr',
+    'ui.bootstrap.tpls',
+    'ui.bootstrap.progressbar',
+    'ui.bootstrap.tabs'
+  ])
+  .config(window.$QDecorator)
+  .config(function ($modalProvider) {
+    angular.extend($modalProvider.defaults, {
+      container: 'body',
+      html: 'true',
+      placement: 'center'
+    });
+  })
+  .config(function ($popoverProvider) {
+    angular.extend($popoverProvider.defaults, {
+      animation: false,
+      container: 'body',
+      placement: 'auto top',
+      trigger: 'hover'
+    });
   })
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
+    $.material.init();
 
     var segments = location.hostname.split('.');
     var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
 
-    if(subdomain === "my")
-    {
-      $routeProvider
-        .when('/', {
-          templateUrl: 'views/profile.html',
-          controller: 'ProfileCtrl',
-          resolve: {
-            fireTeam: checkStatus
+    $routeProvider
+      .when('/', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        resolve: {
+          fireTeam: checkStatus,
+          subDomain: function(){
+            return {name: subdomain};
           }
-        })
-        .when('/:platform/:playerName', {
-          templateUrl: 'views/profile.html',
-          controller: 'ProfileCtrl',
-          resolve: {
-            fireTeam: getFromParams
+        }
+      })
+      .when('/:platformName/:playerName', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        resolve: {
+          subDomain: function(){
+            return {name: subdomain};
+          },
+          fireTeam: getFromParams
+        }
+      })
+      .when('/:platformName/:playerOne/:playerTwo/:playerThree', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        resolve: {
+          fireTeam: getAllFromParams,
+          subDomain: function(){
+            return {name: subdomain};
           }
-        })
-        .otherwise({
-          redirectTo: '/'
-        });
-    } else {
-      $routeProvider
-        .when('/', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl',
-          resolve: {
-            fireTeam: checkStatus
-          }
-        })
-        .when('/:platform/:playerName', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl',
-          resolve: {
-            fireTeam: getFromParams
-          }
-        })
-        .when('/:platform/:playerOne/:playerTwo/:playerThree', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl',
-          resolve: {
-            fireTeam: getAllFromParams
-          }
-        })
-        .otherwise({
-          redirectTo: '/'
-        });
-    }
+        }
+      })
+      .otherwise({
+        redirectTo: '/'
+      });
 
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
-  }).service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
-
+  })
+  .service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
     this.skipReload = function () {
       var lastRoute = $route.current;
       $rootScope.$on('$locationChangeSuccess', function () {
@@ -124,10 +137,9 @@ angular
     };
 
     this.withoutRefresh = function (url, doesReplace) {
-      if(doesReplace){
+      if (doesReplace) {
         $location.path(url).replace();
-      }
-      else {
+      } else {
         $location.path(url || '/');
       }
     };

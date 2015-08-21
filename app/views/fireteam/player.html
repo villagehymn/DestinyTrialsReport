@@ -1,40 +1,96 @@
-<ng-include src="infoPartial"></ng-include>
+<div class="player shadow-z-1"
+     ng-class="(player.isEditing || player.invalidResult) ? 'is-editing' : 'not-editing'"
+     ng-if="fireteam[0].name && $index < 3">
+  <ng-include src="infoPartial"></ng-include>
 
-<tabset class="col-xs-12 p-0" justified="true">
-  <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped" class="btn-material-brown">
-    <ng-include src="statPartial"></ng-include>
-    <ng-include src="'views/fireteam/weapons.html'"></ng-include>
-    <ng-include src="'views/fireteam/armor.html'"></ng-include>
-  </tab>
-  <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match" class="btn-material-brown">
-    <ng-include src="'views/fireteam/history.html'"></ng-include>
-  </tab>
-  <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats" class="btn-material-brown">
-    <ng-include src="'views/fireteam/addStats.html'"></ng-include>
-  </tab>
-</tabset>
+  <tabset class="player-tabs" ng-if="!subdomain">
+    <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
+      <ng-include src="'views/fireteam/weapons.html'"></ng-include>
+      <ng-include src="'views/fireteam/gear.html'"></ng-include>
+    </tab>
+    <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
+      <ng-include src="'views/fireteam/history.html'"></ng-include>
+    </tab>
+    <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+      <ng-include src="'views/fireteam/addStats.html'"></ng-include>
+    </tab>
+  </tabset>
 
-<div class="row">
-  <div class="col-xs-12">
-    <div class="btn-group btn-group-justified m-0" role="group">
-      <a href="http://my.destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
-         type="button" target="_blank"
-         class="btn btn-default btn-trials bg-info dk m-0 b-0"
-         analytics-on analytics-event="Click" analytics-category="myDestinyTrialsReport"
-         data-intro="Links to <strong>myDestinyTrialsReport</strong> for summary of player's guardians"
-         data-position="left"
-         chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
-        myTrialsReport
-      </a>
-      <a href="http://destinytracker.com/destiny/playlists/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}/trialsOfOsiris"
-         type="button" target="_blank"
-         class="btn btn-default btn-trials bg-info dker m-0 b-0"
-         analytics-on analytics-event="Click" analytics-category="DestinyTracker"
-         data-intro="Links to <strong>DestinyTracker</strong> for more detailed statistics based on all characters and maps"
-         data-position="right"
-         chardin-show="{{isHelpOverlayElement(fireteam.length, $index)}}">
-        DestinyTracker
-      </a>
+  <tabset class="player-tabs" ng-if="subdomain">
+    <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+      <ng-include src="'views/fireteam/addStats.html'"></ng-include>
+    </tab>
+    <tab heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps">
+      <ng-include src="'views/fireteam/maps.html'"></ng-include>
+    </tab>
+    <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
+      <ng-include src="'views/fireteam/history.html'"></ng-include>
+    </tab>
+  </tabset>
+
+  <div class="player__links">
+    <div class="row">
+      <div class="col-xs-12 player__links__btns">
+        <a href="http://my.destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
+           type="button" target="_blank" class="btn btn-default" ng-if="!subdomain"
+           analytics-on analytics-event="Click" analytics-category="myDestinyTrialsReport">
+          myTrialsReport
+        </a>
+        <a href="http://www.destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
+           type="button" target="_blank" class="btn btn-default" ng-if="subdomain"
+           analytics-on analytics-event="Click" analytics-category="DestinyTrialsReport">
+          DestinyTrialsReport
+        </a>
+        <a href="http://destinytracker.com/destiny/playlists/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}/trialsOfOsiris"
+           type="button" target="_blank" class="btn btn-default"
+           analytics-on analytics-event="Click" analytics-category="DestinyTracker">
+          DestinyTracker
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-player">
+    <div class="edit-player__close" ng-click="toggleEdit(player)">
+      <i class="material-icons">&#xE5CD;</i>
+    </div>
+    <div ng-if="fireteam[0].name && $index < 3 && $index > -1">
+      <div class="edit-player__input">
+        <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
+          <button class="btn btn-icon" type="submit">
+            <i class="material-icons">send</i>
+          </button>
+          <input type="text" placeholder="{{fireteam[$index].name}}" class="form-control" ng-model="teammateName" />
+        </form>
+      </div>
+      <div class="edit-player__actions" ng-if="!player.invalidResult">
+        <!--<div class="edit-player-action__header">
+          <span ng-bind="fireteam[$index].name"></span>'s characters
+        </div>
+        <div class="btn-group" ng-if="subdomain != 'my'" ng-show="fireteam[$index].otherCharacters.length > 1">
+          <button class="btn btn-white dropdown-toggle" type="button" id="characterSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span ng-bind="fireteam[$index].className"></span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="characterSelect">
+            <li ng-repeat="character in fireteam[$parent.$index].otherCharacters" ng-if="fireteam[$parent.$index].characterId !== character.characterId">
+              <a ng-bind="character.className" ng-click="setRecentPlayer(character, ($parent.$parent.$index))"
+                 analytics-on analytics-event="Click" analytics-category="Character Change">
+              </a>
+            </li>
+          </ul>
+        </div>-->
+        <div class="recent-players" ng-show="$index >= 1">
+          <div class="edit-player-action__header">
+            <span ng-bind="fireteam[0].name + '\'s recent teammates'"></span>
+          </div>
+          <div class="recent-player" ng-repeat="player in recentPlayers track by $index">
+            <a class="btn btn-white btn-raised" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
+              analytics-on analytics-event="Click" analytics-category="Recent Player">
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

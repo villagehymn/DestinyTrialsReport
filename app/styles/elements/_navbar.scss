@@ -1,0 +1,50 @@
+
+// organize how you wish Mark
+
+.navbar {
+  padding: .75em 0;
+  margin-bottom: 0;
+}
+
+.navbar.navbar, .navbar-default.navbar {
+  background: $header-bg;
+}
+
+.navbar .navbar-brand {
+  font-weight: 300;
+  margin: 0;
+  font-size: 2em;
+  line-height: 2em;
+  display: inline-block;
+  padding: 0 15px;
+  color: white;
+}
+
+.navbar-nav {
+  margin-left: 2em;
+}
+
+.navbar-nav > li > a {
+  line-height: 0px;
+}
+
+.navbar-nav > li {
+  .btn {
+    color: #999 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar .navbar-brand {
+    font-size: 1.8em;
+  }
+
+  .nav.navbar-nav {
+    margin: 0;
+
+    li > * {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,77 @@
+.modal-dialog{
+  margin: 0;
+  padding: 10px;
+}
+
+.modal.center .modal-dialog {
+  top: 50%;
+}
+
+.modal-content {
+  border-radius: 2em;
+  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content .modal-footer {
+  text-align: center;
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.5);
+  padding: 0;
+
+  button {
+    color: white;
+    text-indent: -9999px;
+    line-height: 0;
+    display: block;
+    width: 100%;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+    padding: 1em 0;
+
+    &:after {
+      line-height: initial;
+      display: block;
+      text-indent: 0;
+      color: #333;
+      content: "I'm ready";
+    }
+  }
+}
+
+.modal-content .modal-body {
+  padding: 0;
+}
+
+.map-modal__intro {
+  background-size: cover;
+  padding-top: 12em;
+}
+
+.map-modal__heatmap {
+  padding: 2em;
+  max-width: 30em;
+  max-height: 30em;
+  border-radius: 2em;
+  overflow: hidden;
+  margin: auto;
+}
+
+.map-modal__title {
+  background: rgba(0, 0, 0, 0.5);
+  padding: .5em;
+  text-align: center;
+  font-size: 2em;
+  color: white;
+  text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+}
+
+@media all and (max-width: 800px) {
+  .map-modal__intro {
+    padding-top: 6em;
+  }
+
+  .map-modal__title {
+    font-size: 1.5em;
+  }
+}

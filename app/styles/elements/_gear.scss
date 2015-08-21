@@ -1,0 +1,80 @@
+.gear {
+  padding: 1em;
+  background: linear-gradient( 180deg, darken($weapons-background, 5%), white);
+  border-top: 1px solid lighten($weapons-background, 10%);
+}
+
+.gear__stats {
+  margin-bottom: 1.2em;
+}
+
+.gear-stat__label {
+  text-transform: uppercase;
+  font-family: 'Roboto Condensed';
+  color: #666;
+  margin-bottom: .3em;
+}
+
+.gear-stat__nr {
+}
+
+.gear-stat__nr .progress {
+  border-radius: 3px;
+  overflow: hidden;
+  height: 5px;
+  margin: 0;
+}
+
+.gear-stat__nr .progress-bar {
+  text-align: left;
+}
+
+.gear-stat__nr .progress .progress-bar-primary {
+  background: #607D8B;
+}
+
+.gear-stat__perc {
+  padding-left: .5em;
+}
+
+.gear__perks {
+  padding: 1em 0;
+  box-shadow: 0 -1px 0 darken($weapons-background, 10%);
+  border-top: 1px solid lighten($weapons-background, 10%);
+  border-bottom: 1px solid darken($weapons-background, 5%);
+}
+
+.gear__armor {
+  border-top: 1px solid lighten($weapons-background, 10%);
+  padding-top: 1em;
+}
+
+.gear-armor img {
+  border-radius: 5px;
+}
+
+.gear-perk {
+  white-space: nowrap;
+  margin: .25em 0;
+  display: flex;
+}
+
+.gear-perk__icon {
+  width: 1.5em;
+  height: 1.5em;
+  background: $perk-background;
+  margin-right: .5em;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.gear-perk__title {
+  align-self: center;
+  font-family: 'Roboto Condensed';
+  font-weight: normal;
+  font-size: .9em;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $perk-background;
+}

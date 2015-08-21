@@ -1,0 +1,27 @@
+.header-bar {
+  background: $header-bg;
+  padding: .75em 0;
+
+  .header-bar__content {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.header__actions {
+  margin-left: 2em;
+  align-self: center;
+  display: inline-block;
+  flex-grow: 1;
+
+  .btn:not(.btn-link):not(.btn-flat) {
+    color: #777;
+    margin: 0;
+    vertical-align: middle;
+  }
+
+  .my-report.my-report.my-report {
+    float: right;
+    color: #999;
+  }
+}

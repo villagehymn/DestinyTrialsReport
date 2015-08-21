@@ -1,40 +1,40 @@
 'use strict';
+
 angular.module('trialsReportApp')
   .directive('weaponNodes', function() {
     return {
       restrict: 'A',
       scope: {
-        weapons: '=weaponNodes',
-        showHelpOverlay: '=showHelpOverlay'
+        weapons: '=weaponNodes'
       },
       template: [
-        '<div class="row ml-0 mr-0 mt-10 weapon" style="height:130px" ng-repeat="weapon in weapons track by $index">',
-          '<div class="col-xs-4 pt-10">',
-            '<div class="mb-0">',
-              '<div class="front p-0">',
-              '<img popover="{{weapon.weapon.name}}" popover-trigger="mouseenter"' +
-                'class="img-responsive weapon-img {{weapon.weapon.burnColor || \'kinetic-dmg\'}}"' +
-                'ng-src="{{weapon.weapon.icon}}" alt="{{weapon.weapon.name}}">',
-              '</div>',
+        '<div class="row">',
+          '<div class="weapon-wrapper col-xs-12" ng-repeat="weapon in weapons track by $index">',
+            '<div class="weapon__header">',
+              '<span ng-if="$first">Primary</span>',
+              '<span ng-if="$middle">Special</span>',
+              '<span ng-if="$last">Heavy</span>',
             '</div>',
-          '</div>',
-          '<div class="col-xs-8 pt-10">',
-            '<div ng-if="showHelpOverlay" class="hidden-xs hidden-sm"' +
-            'style="width:224px; height:105px; position:absolute; z-index:-1"' +
-            'data-intro="Unlocked and active weapon perks <br/><em>hover over the icons for the desciption</em>"' +
-            'data-position="right" chardin-show="{{$middle}}"></div>',
-            '<div class="row" ng-repeat="node in weapon.nodes track by $index" ng-show="node.name" popover="{{node.description}}" popover-trigger="mouseenter">',
-              '<div class="col-xs-2">',
-                '<a class="icon icon-darkgray lt m-0" style="width:22px; height:22px">',
-                 '<img class="img-responsive" ng-src="{{node.icon || \'\'}}">',
-                '</a>',
+            '<div class="weapon">',
+              '<div class="weapon__img">',
+                '<img class="img-responsive {{weapon.definition.burnColor || \'kinetic-dmg\'}}"' +
+                     'ng-src="{{weapon.definition.icon}}" alt="{{weapon.definition.name}}">',
               '</div>',
-              '<div class="col-xs-10">',
-                '<span class="text-left text-sm" ng-bind="node.name"></span>',
+              '<div class="weapon__info">',
+                '<div class="weapon__title">',
+                  '<span ng-bind="weapon.definition.name"></span>',
+                '</div>',
+                '<div class="weapon__perks">',
+                  '<div class="weapon-perk" ng-repeat="node in weapon.nodes track by $index" bs-popover="{title:node.name,content:node.description}">',
+                    '<i class="weapon-perk__icon">',
+                      '<img class="img-responsive" ng-src="{{node.icon}}">',
+                    '</i>',
+                  '</div>',
+                '</div>',
               '</div>',
             '</div>',
           '</div>',
         '</div>'
       ].join('')
     };
-});
+  });

@@ -62,22 +62,22 @@ angular.module('trialsReportApp')
           switch (aItem.bucketTypeHash) {
             case 3448274439:
               armors.head = {
-                'armor': aItem
+                'definition': aItem
               };
               break;
             case 3551918588:
               armors.arms = {
-                'armor': aItem
+                'definition': aItem
               };
               break;
             case 14239492:
               armors.chest = {
-                'armor': aItem
+                'definition': aItem
               };
               break;
             case 20886954:
               armors.legs = {
-                'armor': aItem
+                'definition': aItem
               };
               break;
           }

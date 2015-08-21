@@ -1,0 +1,11 @@
+.form-control,
+.form-control:focus,
+.form-control.focus {
+  background-image: linear-gradient($primary, $primary), linear-gradient(#d2d2d2, #d2d2d2)
+}
+
+a,
+a:hover,
+a:focus {
+  color: $primary;
+}

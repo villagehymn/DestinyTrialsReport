@@ -74,7 +74,7 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '  },\n');
                     fs.writeSync(fd, '  "scripts": {\n');
                     if (!min) {
-                        fs.writeSync(fd, '    "postinstall": "bower install",\n');
+                        fs.writeSync(fd, '    "postinstall": "bower install -p",\n');
                     }
                     fs.writeSync(fd, '    "start": "node server.js"\n');
                     fs.writeSync(fd, '  },\n');
@@ -108,30 +108,30 @@ module.exports = function (grunt) {
                     fs.writeSync(fd, '    console.error(err);\n');
                     fs.writeSync(fd, '  });\n\n');
 
-                    fs.writeSync(fd, '  app.use(express.static(__dirname));\n');
                     fs.writeSync(fd, '  app.use(compression());\n');
+                    fs.writeSync(fd, '  app.use(express.static(__dirname));\n');
 
                     fs.writeSync(fd, '  app.get("/:platform/:playerName", function(req, res){\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n\n');
                     fs.writeSync(fd, '  app.get("/:platform/:playerOne/:playerTwo/:playerThree", function(req, res){\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n');
 
                     fs.writeSync(fd, '  var router = express.Router();\n');
                     fs.writeSync(fd, '  router.get("/", function(req, res) {\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n');
                     fs.writeSync(fd, '  router.get("/:platform/:playerName", function(req, res) {\n');
-                    fs.writeSync(fd, '    res.sendfile(__dirname + "/index.html");\n');
+                    fs.writeSync(fd, '    res.sendFile(__dirname + "/index.html");\n');
                     fs.writeSync(fd, '  });\n');
                     fs.writeSync(fd, '  app.use(subdomain("my", router));\n');
 
-                    fs.writeSync(fd, '  app.get("/bungie/*?", function(req, res){\n');
+                    fs.writeSync(fd, '  app.get("/Platform/*?", function(req, res){\n');
                     fs.writeSync(fd, '    res.setTimeout(25000);\n');
                     fs.writeSync(fd, '    var api_key = process.env.BUNGIE_API;\n');
                     fs.writeSync(fd, '    var options = {\n');
-                    fs.writeSync(fd, '      url: "https://www.bungie.net/Platform/" + req.originalUrl.replace("/bungie/", ""),\n');
+                    fs.writeSync(fd, '      url: "https://www.bungie.net/" + req.originalUrl,\n');
                     fs.writeSync(fd, '      headers: {\n');
                     fs.writeSync(fd, '        "X-API-Key": api_key\n');
                     fs.writeSync(fd, '      }\n');
@@ -275,14 +275,11 @@ module.exports = function (grunt) {
           }
         },
         {
-          context: '/bungie',
+          context: '/Platform',
           host: 'www.bungie.net',
           port: 80,
           https: false,
           xforward: false,
-          rewrite: {
-            '^/bungie': '/Platform'
-          },
           headers: {
             'host': 'www.bungie.net',
             'X-API-Key': 'API KEY GOES HERE'
@@ -655,16 +652,6 @@ module.exports = function (grunt) {
           cwd: '.',
           dest: '<%= yeoman.dist %>',
           src: ['manifest.js']
-        }, {
-          expand: true,
-          cwd: '.',
-          src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
-          dest: '<%= yeoman.dist %>'
-        }, {
-          expand: true,
-          cwd: '.',
-          src: 'bower_components/font-awesome/fonts/*',
-          dest: '<%= yeoman.dist %>'
         }]
       },
       styles: {
