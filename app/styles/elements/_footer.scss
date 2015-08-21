@@ -50,21 +50,17 @@
     &:focus {
       text-decoration: none;
       color: white;
-
-      svg {
-        fill: white;
-      }
+      filter: brightness(2);
     }
   }
 }
 
 .footer__colofon__contribute {
 
-  svg {
+  img {
     height: 1.2em;
     vertical-align: -.2em;
     margin-left: .1em;
-    fill: $text-on-dark;
   }
 
   a {
@@ -75,10 +71,7 @@
     &:focus {
       text-decoration: none;
       color: white;
-
-      svg {
-        fill: white;
-      }
+      filter: brightness(2);
     }
   }
 }
