@@ -12,6 +12,8 @@
 .footer__ad {
   flex-grow: 1;
   padding: 0 3em;
+  text-align: center;
+  overflow: hidden;
 }
 
 .footer__donate {
@@ -24,7 +26,7 @@
   }
 
   .player-hazard {
-    vertical-align: .15em;
+    vertical-align: .1em;
   }
 }
 
@@ -58,7 +60,7 @@
 
   img {
     height: 1.2em;
-    vertical-align: -.2em;
+    vertical-align: -.25em;
     margin-left: .1em;
   }
 
@@ -92,7 +94,6 @@
     order: -1;
     width: 100%;
     margin-bottom: 1em;
-    overflow: hidden;
   }
 
   .footer__colofon {
