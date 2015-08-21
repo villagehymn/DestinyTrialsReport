@@ -53,7 +53,7 @@ angular.module('trialsReportApp')
              (player.mainPlayerActivity.id === player.recentActivity.id)){
             player.fireTeam = player.mainPlayerFireteam;
           } else {
-            methods.push(currentAccount.getMatchSummary(player.recentActivity, player.id));
+            methods.push(trialsStats.getLastFive(player));
           }
         }
 
@@ -67,10 +67,11 @@ angular.module('trialsReportApp')
             }
             if (postGame && postGame[player.id]) {
               var lastGame = postGame[player.id];
-              player.medals = lastGame.medals;
               player.allStats = lastGame.allStats;
-              player.wKills = lastGame.wKills;
-              player.playerWeapons = lastGame.playerWeapons;
+              player.recentMatches = lastGame.recentMatches;
+              player.abilityKills = lastGame.abilityKills;
+              player.medals = lastGame.medals;
+              player.weaponsUsed = lastGame.weaponsUsed;
               delete postGame[player.id];
               player.fireTeam = postGame;
             }
