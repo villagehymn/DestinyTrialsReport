@@ -8,7 +8,6 @@ angular.module('trialsReportApp')
         activities: '=trialsHistory'
       },
       template: [
-        '<!--<div ng-if="!activities">N/A</div>-->',
         '<div>' +
           '<i class="player-history__match"' +
             'ng-repeat="str in activities.slice().reverse() track by $index"' +

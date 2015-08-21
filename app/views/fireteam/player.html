@@ -58,9 +58,9 @@
       <div class="edit-player__input">
         <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
           <button class="btn btn-icon" type="submit">
-            <i class="material-icons">send</i>
+            <i class="material-icons">&#xE163;</i>
           </button>
-          <input type="text" placeholder="{{fireteam[$index].name}}" class="form-control" ng-model="teammateName" />
+          <input type="text" placeholder="{{fireteam[$index].name}}" class="form-control" ng-model="teammateName">
         </form>
       </div>
       <div class="edit-player__actions" ng-if="!player.invalidResult">

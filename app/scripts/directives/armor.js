@@ -10,7 +10,7 @@ angular.module('trialsReportApp')
       template: [
         '<div class="col-xs-3" ng-repeat="armor in armors track by $index">',
           '<div class="gear-armor" bs-popover="{title:armor.definition.name,content:armor.definition.description}">',
-            '<img class="img-responsive" ng-src="{{armor.definition.icon}}">',
+            '<img class="img-responsive" ng-src="{{armor.definition.icon}}" alt="{{armor.definition.name}}">',
           '</div>',
         '</div>'
       ].join('')

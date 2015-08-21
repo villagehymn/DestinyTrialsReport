@@ -104,7 +104,7 @@ angular.module('trialsReportApp')
             '<div class="map-modal__title">' + $scope.currentMap.activityName + '</div>' +
           '</div>' +
           '<div class="map-modal__heatmap">' +
-            '<img src="' + $scope.currentMap.heatmapImage + '" class="img-responsive" alt="Heatmap" />' +
+            '<img class="img-responsive" src="' + $scope.currentMap.heatmapImage + '" alt="Heatmap">' +
           '</div>' +
         '</div>'
       )

@@ -17,8 +17,7 @@ angular.module('trialsReportApp')
             '</div>',
             '<div class="weapon">',
               '<div class="weapon__img">',
-                '<img class="img-responsive {{weapon.definition.burnColor || \'kinetic-dmg\'}}"' +
-                     'ng-src="{{weapon.definition.icon}}" alt="{{weapon.definition.name}}">',
+                '<img class="img-responsive" ng-src="{{weapon.definition.icon}}" alt="{{weapon.definition.name}}">',
               '</div>',
               '<div class="weapon__info">',
                 '<div class="weapon__title">',
@@ -27,7 +26,7 @@ angular.module('trialsReportApp')
                 '<div class="weapon__perks">',
                   '<div class="weapon-perk" ng-repeat="node in weapon.nodes track by $index" bs-popover="{title:node.name,content:node.description}">',
                     '<i class="weapon-perk__icon">',
-                      '<img class="img-responsive" ng-src="{{node.icon}}">',
+                      '<img class="img-responsive" ng-src="{{node.icon}}" alt="{{node.name}}">',
                     '</i>',
                   '</div>',
                 '</div>',

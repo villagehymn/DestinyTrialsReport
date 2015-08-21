@@ -1,7 +1,7 @@
 <div class="player__info">
   <div class="player__intro" style="background-image:url('{{player.background[0]}}')">
     <div class="player__title">
-      <img class="player__emblem" ng-src="{{player.emblem}}" />
+      <img class="player__emblem" ng-src="{{player.emblem}}" alt="Emblem">
       <div class="player__kd">
         <span ng-if="!player.stats.killsDeathsRatio.basic.displayValue">N/A</span>
         <span ng-if="player.stats.killsDeathsRatio.basic.displayValue"
@@ -15,7 +15,7 @@
           <span class="player__type" ng-bind="player.class.name"></span>
           <span class="player__level highlight"><span ng-bind-html="'<span>&#10022;</span>' + player.level"></span></span>
           <span class="player__grimoire">
-            <img src="/images/grimoire.png"/><span ng-bind="player.grimoire"></span>
+            <img src="/images/grimoire.png" alt="Grimoire"><span ng-bind="player.grimoire"></span>
           </span>
         </div>
       </div>
@@ -77,8 +77,8 @@
         <label>Rating</label>
       </div>
       <div class="col-xs-3 stat">
-        <span class="player__lighthouse player__lighthouse--no" ng-if="player.lighthouse !== true"><i class="material-icons">clear</i></span>
-        <span class="player__lighthouse player__lighthouse--yes" ng-if="player.lighthouse === true"><i class="material-icons">done</i></span>
+        <span class="player__lighthouse player__lighthouse--no" ng-if="player.lighthouse !== true"><i class="material-icons">&#xE14C;</i></span>
+        <span class="player__lighthouse player__lighthouse--yes" ng-if="player.lighthouse === true"><i class="material-icons">&#xE876;</i></span>
         <label>Flawless</label>
       </div>
     </div>
