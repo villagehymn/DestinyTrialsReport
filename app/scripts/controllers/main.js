@@ -70,7 +70,6 @@ angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard, $sce) {
     $scope.subdomain = subDomain.name === 'my';
     $scope.currentMap = DestinyTrialsDefinitions[270739640];
-    $scope.timerRunning = true;
     $scope.$storage = $localStorage.$default({
       platform: true
     });
