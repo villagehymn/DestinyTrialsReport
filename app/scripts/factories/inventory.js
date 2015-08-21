@@ -41,10 +41,6 @@ angular.module('trialsReportApp')
               player.intPercent = +(100 * player.cInt / 270).toFixed();
               player.disPercent = +(100 * player.cDis / 270).toFixed();
               player.strPercent = +(100 * player.cStr / 270).toFixed();
-              player.cTotal = player.cInt + player.cDis + player.cStr;
-              player.cIntPercent = +(100 * player.cInt / player.cTotal).toFixed(2);
-              player.cDisPercent = +(100 * player.cDis / player.cTotal).toFixed(2);
-              player.cStrPercent = +(100 * player.cStr / player.cTotal).toFixed(2);
 
               if (classItems.blink && weapons.shotgun) {
                 player.weapons.hazards.push('Blink Shotgun');
