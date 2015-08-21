@@ -7,7 +7,7 @@
       <div class="gear-stat__nr">
         <progress max="100" animate="true" class="progress not-rounded">
           <bar value="player.intPercent" class="progress-bar-primary">
-            <!--<span class="gear-stat__perc">{{player.disPercent}}%</span>-->
+            <!--<span class="gear-stat__perc" ng-bind="player.intPercent + '%'"></span>-->
           </bar>
         </progress>
       </div>
@@ -19,7 +19,7 @@
       <div class="gear-stat__nr">
         <progress max="100" animate="true" class="progress not-rounded">
           <bar value="player.disPercent" class="progress-bar-primary">
-            <!--<span class="gear-stat__perc">{{player.disPercent}}%</span>-->
+            <!--<span class="gear-stat__perc" ng-bind="player.disPercent + '%'"></span>-->
           </bar>
         </progress>
       </div>
@@ -31,20 +31,18 @@
       <div class="gear-stat__nr">
         <progress max="100" animate="true" class="progress not-rounded">
           <bar value="player.strPercent" class="progress-bar-primary">
-            <!--<span class="gear-stat__perc">{{player.disPercent}}%</span>-->
+            <!--<span class="gear-stat__perc" ng-bind="player.strPercent + '%'"></span>-->
           </bar>
         </progress>
       </div>
     </div>
   </div>
   <div class="gear__perks row">
-    <div class="gear-perk col-xs-6" ng-repeat="classNode in player.classNodes track by $index"
-         bs-popover="{content:classNode.description}">
-      <img class="gear-perk__icon img-responsive" ng-src="{{classNode.icon}}">
+    <div class="gear-perk col-xs-6" ng-repeat="classNode in player.classNodes track by $index" bs-popover="{content:classNode.description}">
+      <img class="gear-perk__icon img-responsive" ng-src="{{classNode.icon}}" alt="{{classNode.name}}">
       <span class="gear-perk__title" ng-bind="classNode.name"></span>
     </div>
   </div>
-  <div class="gear__armor">
-    <ng-include src="'views/fireteam/armor.html'"></ng-include>
+  <div class="gear__armor" ng-include="'views/fireteam/armor.html'">
   </div>
 </div>
