@@ -16,6 +16,8 @@
 
 .footer__donate {
   align-self: center;
+  flex-shrink: 0;
+  white-space: nowrap;
 
   form {
     text-align: center;
@@ -24,6 +26,11 @@
   .player-hazard--friendly {
     background: #666;
   }
+}
+
+.footer__colofon {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .footer__colofon__copyright {
