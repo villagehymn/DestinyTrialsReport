@@ -458,7 +458,7 @@ module.exports = function (grunt) {
           files: [{
               expand: true,
               dest: 'heroku',
-              src: ['package.json', 'bower.json', 'server.js', '.gitignore']
+              src: ['package.json', 'server.js']
           }, {
               expand: true,
               dot: true,
@@ -473,7 +473,7 @@ module.exports = function (grunt) {
           files: [{
               expand: true,
               dest: 'heroku',
-              src: ['package.json', 'bower.json', 'server.js', '.gitignore']
+              src: ['package.json', 'server.js']
           }, {
               expand: true,
               dot: true,
