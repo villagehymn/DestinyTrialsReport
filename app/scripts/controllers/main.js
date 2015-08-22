@@ -179,20 +179,23 @@ angular.module('trialsReportApp')
     };
 
     $scope.setRecentPlayer = function (player, index, getFireteam) {
-      player.otherCharacters = $scope.fireteam[index].otherCharacters;
-      player.searched = getFireteam;
-      playerCard.getPlayerCard(player).then(function (teammate) {
-        $scope.$evalAsync( $scope.fireteam[index] = teammate );
-        if (getFireteam) {
-          var charCount = 1;
-          angular.forEach($scope.fireteam[0].fireTeam, function (member) {
-            playerCard.getPlayerCard(member).then(function (teammate) {
-              $scope.$evalAsync( $scope.fireteam[charCount] = teammate );
-              charCount++;
-            });
+      return currentAccount.getAccount(player.name, player.membershipType)
+        .then(function (player) {
+          player.otherCharacters = $scope.fireteam[index].otherCharacters;
+          player.searched = getFireteam;
+          playerCard.getPlayerCard(player).then(function (teammate) {
+            $scope.$evalAsync( $scope.fireteam[index] = teammate );
+            if (getFireteam) {
+              var charCount = 1;
+              angular.forEach($scope.fireteam[0].fireTeam, function (member) {
+                playerCard.getPlayerCard(member).then(function (teammate) {
+                  $scope.$evalAsync( $scope.fireteam[charCount] = teammate );
+                  charCount++;
+                });
+              });
+            }
           });
-        }
-      });
+        });
     };
 
     $scope.suggestRecentPlayers = function () {
