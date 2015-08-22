@@ -1,7 +1,16 @@
-<div class="hidden-lg hidden-md">
-  <div ng-include="'views/fireteam/mobile_carousel.html'"></div>
+<div ng-if="screenSize.xs">
+  <ul rn-carousel>
+    <li ng-repeat="player in fireteam track by $index" ng-include="'views/fireteam/player.html'"></li>
+  </ul>
 </div>
 
-<div class="col-xs-12 col-sm-6 col-md-4 hidden-sm hidden-xs" ng-repeat="player in fireteam track by $index">
-  <div ng-include="'views/fireteam/player.html'"></div>
+<div ng-if="screenSize.sm">
+  <ul rn-carousel>
+    <li><div class="col-xs-12" ng-repeat="player in fireteam track by $index" ng-include="'views/fireteam/player.html'"></div></li>
+    <li><div class="col-xs-12"></div></li>
+  </ul>
+</div>
+
+<div ng-if="screenSize.md || screenSize.lg">
+  <div class="col-md-4" ng-repeat="player in fireteam track by $index" ng-include="'views/fireteam/player.html'"></div>
 </div>
