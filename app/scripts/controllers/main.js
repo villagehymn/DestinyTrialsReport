@@ -67,9 +67,9 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 };
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard, $sce) {
-    $scope.subdomain = subDomain.name === 'my';
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard, $sce, screenSize) {
     $scope.currentMap = DestinyTrialsDefinitions[257451727];
+    $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
     });
@@ -96,6 +96,12 @@ angular.module('trialsReportApp')
     $scope.playerPartial = 'views/fireteam/player.html';
     $scope.statPartial = 'views/fireteam/stats.html';
     $scope.infoPartial = 'views/fireteam/info.html';
+
+    $scope.screenSize = {};
+    $scope.screenSize.xs = screenSize.on('xs', function (match) { $scope.screenSize.xs = match; });
+    $scope.screenSize.sm = screenSize.on('sm', function (match) { $scope.screenSize.sm = match; });
+    $scope.screenSize.md = screenSize.on('md', function (match) { $scope.screenSize.md = match; });
+    $scope.screenSize.lg = screenSize.on('lg', function (match) { $scope.screenSize.lg = match; });
 
     $scope.mapModal = {
       content: $sce.trustAsHtml(

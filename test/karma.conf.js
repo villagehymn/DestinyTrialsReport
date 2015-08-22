@@ -45,6 +45,7 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-carousel/dist/angular-carousel.js',
       'bower_components/angular-loading-bar/build/loading-bar.js',
+      'bower_components/angular-media-queries/match-media.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-moment/angular-moment.js',
       'bower_components/angular-route/angular-route.js',

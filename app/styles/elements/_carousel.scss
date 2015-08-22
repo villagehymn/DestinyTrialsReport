@@ -1,24 +1,23 @@
-@media (min-width: 768px){
-  ul[rn-carousel] > li:first-child {
-    width: 50%;
-  }
-
-  ul[rn-carousel] > li:last-child {
-    margin-left: 0%;
-  }
-
+@media (min-width: 768px) {
   ul[rn-carousel] > li {
-    position: relative;
+    width: 50%;
     margin-left: -50%;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
-  .slide-1 {
+  ul[rn-carousel] > li:first-child > div {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  ul[rn-carousel] > li:first-child > div:nth-child(2) {
+    position: absolute;
     margin-left: 100%;
-    position: absolute;
   }
 
-  .slide-2 {
-    margin-left: 200%;
+  ul[rn-carousel] > li:first-child > div:nth-child(3) {
     position: absolute;
+    margin-left: 200%;
   }
 }
