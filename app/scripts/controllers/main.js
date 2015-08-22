@@ -88,7 +88,7 @@ angular.module('trialsReportApp')
       'Final Round Sniper': 'This Guardian has a sniper rifle that can one hit kill a Guardian with a body shot.',
       'Blink Shotgun': 'This Guardian is using Blink and has a shotgun equipped. Be careful!',
       'Site Developer': 'Hey! We made this site, so more than likely we are looking you up too...',
-      'Site Donator': 'Part of an amazing few who\'ve help keep this site running'
+      'Site Donator': 'Part of an amazing few who\'ve helped keep this site running'
     };
 
     $scope.headerPartial = 'views/shared/header.html';
