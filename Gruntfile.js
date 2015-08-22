@@ -39,19 +39,6 @@ module.exports = function (grunt) {
     },
 
     //Heroku Settings
-    'file-creator': {
-        heroku: {
-            files: [{
-                //Add .gitignore to ensure node_modules folder doesn't get uploaded
-                file: 'heroku/.gitignore',
-                method: function(fs, fd, done) {
-                    fs.writeSync(fd, 'node_modules');
-                    done();
-                }
-            }]
-        }
-    },
-    //Heroku Settings
     shell: {
         'heroku-create': {
             command: [
@@ -470,8 +457,8 @@ module.exports = function (grunt) {
       heroku: {
           files: [{
               expand: true,
-              dest: 'heroku/',
-              src: ['package.json', 'bower.json', 'Procfile', 'server.js']
+              dest: 'heroku',
+              src: ['package.json', 'bower.json', 'server.js', '.gitignore']
           }, {
               expand: true,
               dot: true,
@@ -485,8 +472,8 @@ module.exports = function (grunt) {
       herokumin: {
           files: [{
               expand: true,
-              dest: 'heroku/',
-              src: ['package.json', 'bower.json', 'Procfile', 'server.js']
+              dest: 'heroku',
+              src: ['package.json', 'bower.json', 'server.js', '.gitignore']
           }, {
               expand: true,
               dot: true,
@@ -555,7 +542,6 @@ module.exports = function (grunt) {
     }
   });
 
-
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -570,11 +556,6 @@ module.exports = function (grunt) {
       'connect:livereload',
       'watch'
     ]);
-  });
-
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
   });
 
   grunt.registerTask('test', [
@@ -626,7 +607,6 @@ module.exports = function (grunt) {
       }
       grunt.task.run([
           'clean:heroku',
-          'file-creator:heroku'
       ]);
       if (grunt.option('min')) {
           grunt.task.run([

@@ -1,14 +1,17 @@
 {
-  "author": "https://github.com/SteffanLong/DestinyTrialsReport/graphs/contributors",
   "name": "trials-report",
   "description": "Destiny Trials Report",
   "version": "1.1.0",
   "license": "Artistic-2.0",
   "homepage": "http://www.destinytrialsreport.com/",
+  "author": "https://github.com/SteffanLong/DestinyTrialsReport/graphs/contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SteffanLong/DestinyTrialsReport.git"
+  },
   "main": "server.js",
   "dependencies": {
     "adm-zip": "^0.4.7",
-    "bower": "^1.4.1",
     "compression": "^1.5.2",
     "express": "^4.13.3",
     "express-subdomain": "^1.0.3",
@@ -17,10 +20,6 @@
     "sqlite3": "^3.0.10",
     "throng": "^1.0.0",
     "unzip": "^0.1.11"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/SteffanLong/DestinyTrialsReport.git"
   },
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
@@ -65,8 +64,6 @@
     "node": "^0.12.7"
   },
   "scripts": {
-    "start": "node server.js",
-    "test": "grunt test",
-    "postinstall": "bower install -p"
+    "start": "node server.js"
   }
 }
