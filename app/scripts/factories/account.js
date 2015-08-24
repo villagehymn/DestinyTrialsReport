@@ -145,12 +145,19 @@ angular.module('trialsReportApp')
           setActivityData(mapStats, mapHash, reversedAct, n, totals, pastActivities, $filter);
           reversedAct[n].values.standing.basic.value === recentActivity.standing ? streak++ : streak = 0;
         }
+        var lastThree = {};
+        for (var l = 0; l < 3; l++) {
+          lastThree[activities[l].activityDetails.instanceId] = {
+            'id': activities[l].activityDetails.instanceId,
+            'standing': activities[l].values.standing.basic.value
+          }
+        }
 
         return angular.extend(account, {
           recentActivity: recentActivity,
           pastActivities: pastActivities.reverse().slice(0, 24).reverse(),
           allActivities: pastActivities,
-          lastThree: [activities[0], activities[1], activities[2]],
+          lastThree: lastThree,
           winStreak: { 'length': streak, 'type' : recentActivity.standing  },
           mapStats: mapStats,
           totals: totals
