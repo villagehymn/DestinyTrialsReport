@@ -9,7 +9,7 @@
 
   li {
     width: 33.33%;
-    box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
+    @include inset-shadow();
     text-align: center;
     background: #90A4AE;
 
@@ -43,28 +43,6 @@
   li.active a:focus {
     color: #666 !important;
     box-shadow: 0px 0px 8px 0 rgba(0,0,0,0.5);
-  }
-
-  li:nth-child(1).active {
-    background: $weapons-background;
-
-    a,
-    a:focus,
-    a:active,
-    a:hover {
-      color: darken($weapons-background, 50%);
-    }
-
-    .my-dtr & {
-      background: $stats-background;
-
-      a,
-      a:focus,
-      a:active,
-      a:hover {
-        color: darken($stats-background, 50%);
-      }
-    }
   }
 
   li:nth-child(2).active {
@@ -114,4 +92,24 @@
   .tab-content {
     height: auto;
   }
+}
+
+.player-tab--equipped {
+  @include tab-background($equipped-background);
+
+  ul &.active {
+    background: $equipped-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($equipped-background, 50%);
+    }
+  }
+}
+
+.player-tab__section {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, .5);
 }

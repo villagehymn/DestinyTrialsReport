@@ -15,13 +15,13 @@
   transition: opacity ease .2s;
   cursor: pointer;
   position: absolute;
-  margin-top: 1em;
-  margin-right: 1em;
+  margin-top: $player-content-padding;
+  margin-right: $player-content-padding;
   right: 0;
   top: 0;
-  height: 3em;
-  width: 3em;
-  text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+  height: #{$player-emblem-size - 2 * $player-content-padding};
+  width: #{$player-emblem-size - 2 * $player-content-padding};
+  text-shadow: $text-shadow;
   opacity: 0;
   animation: hint 4s;
 
@@ -72,29 +72,4 @@
       border-bottom-right-radius: 1em;
     }
   }
-}
-
-ul[rn-carousel] {
-  padding-left: 5%;
-  padding-right: 5%;
-  margin-bottom: -3px;
-  padding-bottom: 3px;
-}
-
-ul[rn-carousel] > li {
-  position: relative;
-  margin-left: -100%;
-}
-
-ul[rn-carousel] > li:first-child {
-  margin-left: 0;
-}
-
-ul[rn-carousel] img {
-  max-width: 100%;
-}
-
-ul[rn-carousel] > li {
-  padding-left: 5px;
-  padding-right: 5px;
 }

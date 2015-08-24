@@ -1,8 +1,10 @@
+/* This is not being included in main.scss yet, as it's commented out */
+
 .player__summary {
   > div {
     padding: .75em $player-content-padding;
     text-align: center;
-    box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
+    @include inset-shadow();
   }
 
   .highly-skilled {

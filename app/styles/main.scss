@@ -20,19 +20,25 @@
 @import 'elements/modal';
 @import 'elements/carousel';
 
+// Main parts
 @import 'parts/header';
 @import 'parts/main-search';
 @import 'parts/footer';
 @import 'parts/blog-post';
 
+// Player card
 @import 'parts/player';
 @import 'parts/player-overview';
 @import 'parts/player-quick-look';
 @import 'parts/player-main-stats';
 @import 'parts/player-hazards';
 
-@import 'parts/weapons';
-@import 'parts/gear';
+// Equipped tab
+@import 'parts/player-weapons';
+@import 'parts/player-cooldowns';
+@import 'parts/player-perks';
+@import 'parts/player-armor';
+
 @import 'parts/last-match';
 @import 'parts/player-stats';
 @import 'parts/player-maps';

@@ -5,7 +5,7 @@
   <div ng-include="'views/player/overview.html'"></div>
 
   <tabset class="player-tabs" ng-if="!subdomain">
-    <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
+    <tab class="player-tab player-tab--equipped" heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
       <div ng-include="'views/player/equipped.html'"></div>
     </tab>
     <tab heading="Last Matches" analytics-on analytics-event="Click" analytics-category="Last Matches">

@@ -1,2 +1,55 @@
-<div ng-include="'views/player/equipped/weapons.html'"></div>
-<div ng-include="'views/player/equipped/gear.html'"></div>
+<div class="player-tab__content player-tab--equipped">
+  <div class="player__content player-tab__section">
+    <div weapon-nodes="[player.weapons.primary, player.weapons.special, player.weapons.heavy]"></div>
+  </div>
+  <div class="player__content player-tab__section">
+    <div class="row">
+      <div class="player-cooldown col-xs-4" bs-popover="{content:'Intellect: ' + player.int + ' (' + player.intPercent + '%)'}">
+        <div class="player-cooldown__label">
+          Intellect
+        </div>
+        <div class="player-cooldown__nr">
+          <progress max="100" animate="true" class="progress not-rounded">
+            <bar value="player.intPercent" class="progress-bar-primary">
+            </bar>
+          </progress>
+        </div>
+      </div>
+      <div class="player-cooldown col-xs-4" bs-popover="{content:'Discipline: ' + player.dis + ' (' + player.disPercent + '%)'}">
+        <div class="player-cooldown__label">
+          Discipline
+        </div>
+        <div class="player-cooldown__nr">
+          <progress max="100" animate="true" class="progress not-rounded">
+            <bar value="player.disPercent" class="progress-bar-primary">
+            </bar>
+          </progress>
+        </div>
+      </div>
+      <div class="player-cooldown col-xs-4" bs-popover="{content:'Strength: ' + player.str + ' (' + player.strPercent + '%)'}">
+        <div class="player-cooldown__label">
+          Strength
+        </div>
+        <div class="player-cooldown__nr">
+          <progress max="100" animate="true" class="progress not-rounded">
+            <bar value="player.strPercent" class="progress-bar-primary">
+            </bar>
+          </progress>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="player__content player-tab__section">
+    <div class="row">
+      <div class="player-perk col-xs-6" ng-repeat="classNode in player.classNodes track by $index" bs-popover="{content:classNode.description}">
+        <img class="player-perk__icon img-responsive" ng-src="{{classNode.icon}}" alt="{{classNode.name}}">
+        <span class="player-perk__title" ng-bind="classNode.name"></span>
+      </div>
+    </div>
+  </div>
+  <div class="player__content player-tab__section">
+    <div class="row">
+      <div armor-list="[player.armors.head, player.armors.arms, player.armors.chest, player.armors.legs]"></div>
+    </div>
+  </div>
+</div>
