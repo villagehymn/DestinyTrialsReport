@@ -1,19 +1,5 @@
 'use strict';
 
-var hazardQuickRevive = [
-  40760096, // Light Beyond Nemesis (Warlock)
-  2682002320, // Crest of Alpha Lupi (Titan)2272644374
-  2272644374,
-  3821972036 // Crest of Alpha Lupi (Hunter)
-];
-var hazardGrenadeOnSpawn = [
-  2289894117, // Lucky Raspberry (Hunter)
-  2671461052 // Voidfang Vestments (Warlock)
-];
-var hazardDoubleGrenade = [
-  2978872641 // The Armamentarium (Titan)
-];
-
 function setHazard(perkHash, items, hazardArray, name) {
   if (hazardArray.indexOf(perkHash) > -1) {
     items.hazards.push(name);
@@ -28,16 +14,16 @@ function setDefinition(object, index, armor) {
 
 function setByBucketType(armor, armors) {
   switch (armor.bucketTypeHash) {
-    case 3448274439:
+    case BUCKET_HEAD:
       setDefinition(armors, 'head', armor);
       break;
-    case 3551918588:
+    case BUCKET_CHEST:
       setDefinition(armors, 'arms', armor);
       break;
-    case 14239492:
+    case BUCKET_ARMS:
       setDefinition(armors, 'chest', armor);
       break;
-    case 20886954:
+    case BUCKET_LEGS:
       setDefinition(armors, 'legs', armor);
       break;
   }
@@ -65,13 +51,13 @@ angular.module('trialsReportApp')
           }
           for (var s = 0; s < itemS.stats.length; s++) {
             switch (itemS.stats[s].statHash) {
-              case 144602215:
+              case STAT_INTELLECT:
                 intellect += itemS.stats[s].value;
                 break;
-              case 1735777505:
+              case STAT_DISCIPLINE:
                 discipline += itemS.stats[s].value;
                 break;
-              case 4244567218:
+              case STAT_STRENGTH:
                 strength += itemS.stats[s].value;
                 break;
             }

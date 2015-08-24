@@ -51,16 +51,12 @@ function collectMatchData(extendedWeapons, weaponsUsed, allStats, values) {
 
 function sumValuesByAttribute(collection, attribute) {
   angular.forEach(collection, function (value, key) {
-    if (key === 'kills'){
-    }
     attribute[key] += value;
-    if (key === 'kills'){
-    }
   });
 }
 
-function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, medals, abilityKills, entries, i) {
-  sumValuesByAttribute(allStats, fireTeam[player_id].allStats, player_id);
+function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i) {
+  sumValuesByAttribute(allStats, fireTeam[player_id].allStats);
   angular.forEach(weaponsUsed, function (value, key) {
       if (fireTeam[player_id].weaponsUsed[key]) {
         for (var v = 0; v < weaponAtts.length; v++) {
@@ -86,6 +82,7 @@ function setPlayerStats(data, player) {
     player.fireTeam = data;
   }
 }
+
 angular.module('trialsReportApp')
   .factory('trialsStats', function ($http, $q) {
 
@@ -132,7 +129,7 @@ angular.module('trialsReportApp')
                 collectMatchData(extendedWeapons, weaponsUsed, allStats, values);
                 if (fireTeam[player_id]) {
                   getExtendedStats(entries[i], fireTeam[player_id].medals, fireTeam[player_id].abilityKills, fireTeam[player_id].extendedStats);
-                  sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, medals, abilityKills, entries, i);
+                  sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i);
                 } else {
                   getExtendedStats(entries[i], medals, abilityKills, extendedStats);
                   fireTeam[player_id] = {
@@ -167,7 +164,7 @@ angular.module('trialsReportApp')
           dateAgo: moment(data.period).fromNow(),
           duration: data.entries[0].values.activityDurationSeconds.basic.displayValue
         });
-        angular.forEach(fireTeam, function (value, key) {
+        angular.forEach(fireTeam, function (value) {
           value.recentMatches = recentMatches;
         });
       }

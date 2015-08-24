@@ -1,12 +1,5 @@
 'use strict';
 
-var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
-var avoidNodes = [
-  'Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage', 'Hive Disruptor', 'Oracle Disruptor',
-  'Lich Bane', 'Disciplinarian', 'Demotion', 'Mutineer', 'Dreg Burn', 'Shank Burn', 'Vandal Burn', 'Aspect Swap', 'Burgeoning Hunger',
-  'Cannibalism', 'Dark Breaker', 'Upgrade Damage'
-];
-
 function pushNode(nodeStep, nodes) {
   nodes.push({
     'name': nodeStep.nodeStepName,
@@ -26,6 +19,17 @@ function setDmgElement(nodeStep, weapon) {
     case 'Arc Damage':
       weapon.burnColor = 'arc-dmg';
       break;
+  }
+}
+
+function getDefinitionsByBucket(bucketHash) {
+  switch (bucketHash) {
+    case BUCKET_PRIMARY_WEAPON:
+      return {file: DestinyPrimaryWeaponDefinitions, name: 'primary'};
+    case BUCKET_SPECIAL_WEAPON:
+      return {file: DestinySpecialWeaponDefinitions, name: 'special'};
+    case BUCKET_HEAVY_WEAPON:
+      return {file: DestinyHeavyWeaponDefinitions, name: 'heavy'};
   }
 }
 
@@ -71,27 +75,23 @@ angular.module('trialsReportApp')
           return;
         }
         var nodes = [], itemS = items[n];
+        var definitions = getDefinitionsByBucket(itemS.bucketHash);
 
-        if (DestinyPrimaryWeaponDefinitions[itemS.itemHash]) {
-          var primaryW = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
-          setNodes(itemS, nodes, primaryW, weapons, 'primary');
-        } else if (DestinySpecialWeaponDefinitions[itemS.itemHash]) {
-          var secondaryW = DestinySpecialWeaponDefinitions[itemS.itemHash];
-          setNodes(itemS, nodes, secondaryW, weapons, 'special');
-          if ((secondaryW.subType === 12) && (secondaryW.name !== 'No Land Beyond')) {
+        if (definitions) {
+          var weapon = definitions.file[itemS.itemHash];
+          setNodes(itemS, nodes, weapon, weapons, definitions.name);
+
+          if ((weapon.subType === 12) && (weapon.name !== 'No Land Beyond')) {
             for (var i = 0; i < itemS.stats.length; i++) {
-              if (itemS.stats[i].statHash === 4043523819 && itemS.stats[i].value > 16) {
+              if (itemS.stats[i].statHash === STAT_BASE_DAMAGE && itemS.stats[i].value > 16) {
                 if ((itemS.primaryStat.value * itemS.stats[i].value) > 8577) {
                   weapons.hazards.push('Revive Kill Sniper');
                 }
               }
             }
-          } else if (secondaryW.subType === 7) {
+          } else if (weapon.subType === 7) {
             shotgun = true;
           }
-        } else if (DestinyHeavyWeaponDefinitions[itemS.itemHash]) {
-          var heavyW = DestinyHeavyWeaponDefinitions[itemS.itemHash];
-          setNodes(itemS, nodes, heavyW, weapons, 'heavy');
         }
       }
 
