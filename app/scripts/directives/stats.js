@@ -25,10 +25,10 @@ angular.module('trialsReportApp')
       },
       template: [
         '<!--<div ng-if="!activities">N/A</div>-->',
-        '<i class="player-form__match"' +
+        '<i class="player-quick-look__form__match match"' +
           'style="transform: translateY({{calcGraphPoint(str.kd)}});"' +
           'ng-repeat="str in activities.slice().reverse() track by $index"' +
-          'ng-class="str.standing === 0 ? \'player-form__match--win\' : \'player-form__match--loss\'"' +
+          'ng-class="str.standing === 0 ? \'match--win\' : \'match--loss\'"' +
           'bs-popover="{title:str.dateAgo,content:\'K/D: {{str.kd}} with {{str.kills}} kills\'}"></i>'
       ].join('')
     };

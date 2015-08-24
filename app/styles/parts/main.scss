@@ -1,7 +1,6 @@
 @import 'inc/vars';
 @import 'inc/fonts';
 @import 'inc/colors';
-@import 'inc/icons';
 @import 'inc/mixins';
 @import 'inc/animations';
 
@@ -16,7 +15,6 @@
 @import 'elements/popover';
 @import 'elements/tabs';
 @import 'elements/stats';
-@import 'elements/match';
 @import 'elements/modal';
 @import 'elements/carousel';
 
@@ -27,10 +25,6 @@
 
 @import 'parts/player';
 @import 'parts/player-overview';
-@import 'parts/player-quick-look';
-@import 'parts/player-main-stats';
-@import 'parts/player-hazards';
-
 @import 'parts/weapons';
 @import 'parts/gear';
 @import 'parts/last-match';

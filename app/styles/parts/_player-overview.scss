@@ -1,0 +1,65 @@
+.player-overview {
+  position: relative;
+  background-color: #333;
+  border-top-left-radius: $player-card-border-radius;
+  border-top-right-radius: $player-card-border-radius;
+}
+
+.player-header {
+  background-size: auto 114%;
+  background-position: $player-emblem-size top;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  position: relative;
+
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.player-header__emblem {
+  width: $player-emblem-size;
+  height: $player-emblem-size;
+  margin-right: .5em;
+  border-top-left-radius: $player-card-border-radius;
+}
+
+.player-header__char {
+  display: inline-block;
+  color: $player-card;
+  vertical-align: middle;
+  max-width: calc(100% - #{$player-emblem-size + 1em});
+}
+
+.player-header__gamertag {
+  margin: 0;
+  font-weight: normal;
+  font-size: 1.3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 4em;
+  text-shadow: $text-shadow;
+}
+
+.player-info {
+  font-size: .9em;
+  text-shadow: $text-shadow;
+}
+
+.player-info__light {
+  font-size: .9em;
+  margin: 0 .5em 0 .3em;
+
+  span {
+    margin-right: .1em;
+  }
+}
+
+.player-info__grimoire {
+  font-size: .9em;
+  
+  img {
+    height: 1em;
+    margin-right: .3em;
+  }
+}

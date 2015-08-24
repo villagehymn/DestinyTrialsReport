@@ -1,0 +1,14 @@
+@mixin align-both() {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin align-vertically() {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin inset-shadow() {
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
+}
