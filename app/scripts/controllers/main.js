@@ -212,12 +212,6 @@ angular.module('trialsReportApp')
     };
 
     if (angular.isObject(fireTeam)) {
-      //for (var i in  $scope.fireteam) {
-      //  if ($scope.fireteam.hasOwnProperty(i) && typeof(i) !== 'function') {
-      //    firstIndex = i;
-      //    break;
-      //  }
-      //}
       $scope.fireteam = fireTeam;
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
       if (angular.isDefined($scope.fireteam[0])) {
