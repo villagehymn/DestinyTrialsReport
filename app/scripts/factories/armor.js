@@ -20,25 +20,25 @@ function setHazard(perkHash, items, hazardArray, name) {
   }
 }
 
-function setDefinition(object, index, aItem) {
+function setDefinition(object, index, armor) {
   object[index] = {
-    'definition': aItem
+    'definition': armor
   };
 }
 
-function setByBucketType(aItem, armors) {
-  switch (aItem.bucketTypeHash) {
+function setByBucketType(armor, armors) {
+  switch (armor.bucketTypeHash) {
     case 3448274439:
-      setDefinition(armors, 'head', aItem);
+      setDefinition(armors, 'head', armor);
       break;
     case 3551918588:
-      setDefinition(armors, 'arms', aItem);
+      setDefinition(armors, 'arms', armor);
       break;
     case 14239492:
-      setDefinition(armors, 'chest', aItem);
+      setDefinition(armors, 'chest', armor);
       break;
     case 20886954:
-      setDefinition(armors, 'legs', aItem);
+      setDefinition(armors, 'legs', armor);
       break;
   }
 }
@@ -52,9 +52,9 @@ angular.module('trialsReportApp')
         strength = 0, hasStarfireProtocolPerk = false;
 
       for (var n = 0; n < items.length; n++) {
-        var itemS = items[n], aItem = DestinyArmorDefinition[itemS.itemHash];
+        var itemS = items[n], armor = DestinyArmorDefinition[itemS.itemHash];
 
-        if (aItem) {
+        if (armor) {
           for (var i = 0; i < itemS.perks.length; i++) {
             if (itemS.perks[i].isActive === true) {
               setHazard(itemS.perks[i].perkHash, armors, hazardQuickRevive, 'Quick Revive');
@@ -76,7 +76,7 @@ angular.module('trialsReportApp')
                 break;
             }
           }
-          setByBucketType(aItem, armors);
+          setByBucketType(armor, armors);
         }
       }
 

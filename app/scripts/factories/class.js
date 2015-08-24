@@ -1,6 +1,6 @@
 'use strict';
 
-function setNodeDescription(noderStepper) {
+function populateClassNode(noderStepper) {
   return {
     'name': noderStepper.nodeStepName,
     'description': noderStepper.nodeStepDescription,
@@ -8,15 +8,15 @@ function setNodeDescription(noderStepper) {
   };
 }
 
-function setClassNode(nodeStep, classNodes, nodeArray, type) {
+function setClassNode(nodeStep, classNodes, nodeArray, type, skipFirstAndLast) {
   if (nodeArray.indexOf(nodeStep.column) > -1) {
-    var condition = type === 'weaponKillsGrenade' || 'all' ? !(nodeStep.row === 0 && nodeStep.column === 3) : (nodeStep.row === 0);
+    var condition = skipFirstAndLast ? !(nodeStep.row === 0 && nodeStep.column === 3) : (nodeStep.row === 0);
     if (condition) {
       var noderStepper = nodeStep.steps;
       if (type === 'all') {
-        classNodes.push(setNodeDescription(noderStepper));
+        classNodes.push(populateClassNode(noderStepper));
       } else {
-        classNodes.abilities[type] = setNodeDescription(noderStepper);
+        classNodes.abilities[type] = populateClassNode(noderStepper);
       }
     }
   }
@@ -49,10 +49,10 @@ angular.module('trialsReportApp')
                 hasVikingFuneral = nodeStep.nodeHash === 1173110174;
                 hasTouchOfFlame = nodeStep.nodeHash === 527202181;
               }
-              setClassNode(nodeStep, classNodes, [1], 'weaponKillsGrenade');
-              setClassNode(nodeStep, classNodes, [3], 'weaponKillsSuper');
-              setClassNode(nodeStep, classNodes, [4], 'weaponKillsMelee');
-              setClassNode(nodeStep, classNodes, [1, 3, 6, 8], 'all');
+              setClassNode(nodeStep, classNodes, [1], 'weaponKillsGrenade', true);
+              setClassNode(nodeStep, classNodes, [3], 'weaponKillsSuper', false);
+              setClassNode(nodeStep, classNodes, [4], 'weaponKillsMelee', false);
+              setClassNode(nodeStep, classNodes, [1, 3, 6, 8], 'all', true);
 
               if (itemS.itemHash === 2962927168 || itemS.itemHash === 3828867689) {
                 blink = (nodeStep.row === 3 && nodeStep.column === 2);

@@ -1,5 +1,15 @@
 'use strict';
 
+function setStatPercentage(player, armors) {
+  var stat = ['int', 'dis', 'str'];
+  for (var s = 0; s < stat.length; s++) {
+    player[stat[s]] = armors[stat[s]];
+    var cName = stat[s].substring(0,1).toUpperCase() +stat[s].substring(1);
+    player[cName] = player[stat[s]] > 270 ? 270 : armors[stat[s]];
+    player[stat[s] + 'Percent'] = +(100 * player[cName] / 270).toFixed();
+  }
+}
+
 angular.module('trialsReportApp')
   .factory('inventoryStats', function ($http, weaponStats, armorStats, classStats, $q) {
     var getData = function (membershipType, membershipId, characterId) {
@@ -32,16 +42,7 @@ angular.module('trialsReportApp')
               player.armors = armors.armors;
               player.classNodes = classItems.classNodes;
               player.class = classItems.subClass;
-              player.int = armors.int;
-              player.dis = armors.dis;
-              player.str = armors.str;
-              player.cInt = armors.int > 270 ? 270 : armors.int;
-              player.cDis = armors.dis > 270 ? 270 : armors.dis;
-              player.cStr = armors.str > 270 ? 270 : armors.str;
-              player.intPercent = +(100 * player.cInt / 270).toFixed();
-              player.disPercent = +(100 * player.cDis / 270).toFixed();
-              player.strPercent = +(100 * player.cStr / 270).toFixed();
-
+              setStatPercentage(player, armors);
               if (classItems.blink && weapons.shotgun) {
                 player.weapons.hazards.push('Blink Shotgun');
               }

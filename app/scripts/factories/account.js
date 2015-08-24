@@ -41,12 +41,11 @@ function setPastActivities(mapStats, mapHash, reversedAct, n, totals, pastActivi
     mapStats[mapHash].wins = 0;
     mapStats[mapHash].losses = 0;
   }
-  mapStats[mapHash].kills += reversedAct[n].values.kills.basic.value;
-  mapStats[mapHash].deaths += reversedAct[n].values.deaths.basic.value;
-  mapStats[mapHash].assists += reversedAct[n].values.assists.basic.value;
-  totals.kills += reversedAct[n].values.kills.basic.value;
-  totals.deaths += reversedAct[n].values.deaths.basic.value;
-  totals.assists += reversedAct[n].values.assists.basic.value;
+  var statAttributes = ['kills', 'deaths', 'assists'];
+  for (var m = 0; m < statAttributes.length; m++) {
+    mapStats[mapHash][statAttributes[m]] += reversedAct[n].values[statAttributes[m]].basic.value;
+    totals[statAttributes[m]] += reversedAct[n].values[statAttributes[m]].basic.value;
+  }
   if (reversedAct[n].values.standing.basic.value === 0) {
     mapStats[mapHash].wins += 1;
     totals.wins += 1;

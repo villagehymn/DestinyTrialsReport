@@ -117,43 +117,45 @@ angular.module('trialsReportApp')
       var fireTeam = {};
       var recentMatches = [];
       for (var m = 0; m < lastMatches.length; m++) {
-        var data = lastMatches[m].result.data.Response.data;
-        var entries = data.entries;
-        var standing = lastMatches[m].standing;
-        for (var i = 0; i < entries.length; i++) {
-          if (entries[i].standing === standing) {
-            var values = entries[i].extended.values;
-            var medals = {}, abilityKills = {}, allStats = {}, extendedStats = {};
-            var extendedWeapons = entries[i].extended.weapons;
-            var weaponsUsed = {};
-            var player_id = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-            if (player_id === angular.lowercase(id)) {
-              collectMatchData(extendedWeapons, weaponsUsed, allStats, values);
-              if (fireTeam[player_id]) {
-                getExtendedStats(entries[i], fireTeam[player_id].medals, fireTeam[player_id].abilityKills, fireTeam[player_id].extendedStats);
-                sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, medals, abilityKills, entries, i);
+        if (lastMatches[m]) {
+          var data = lastMatches[m].result.data.Response.data;
+          var entries = data.entries;
+          var standing = lastMatches[m].standing;
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].standing === standing) {
+              var values = entries[i].extended.values, medals = {},
+                abilityKills = {}, allStats = {}, extendedStats = {},
+                extendedWeapons = entries[i].extended.weapons, weaponsUsed = {};
+              var player_id = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
+
+              if (player_id === angular.lowercase(id)) {
+                collectMatchData(extendedWeapons, weaponsUsed, allStats, values);
+                if (fireTeam[player_id]) {
+                  getExtendedStats(entries[i], fireTeam[player_id].medals, fireTeam[player_id].abilityKills, fireTeam[player_id].extendedStats);
+                  sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, medals, abilityKills, entries, i);
+                } else {
+                  getExtendedStats(entries[i], medals, abilityKills, extendedStats);
+                  fireTeam[player_id] = {
+                    allStats: allStats,
+                    medals: medals,
+                    abilityKills: abilityKills,
+                    weaponsUsed: weaponsUsed,
+                    extendedStats: extendedStats
+                  };
+                }
               } else {
-                getExtendedStats(entries[i], medals, abilityKills, extendedStats);
-                fireTeam[player_id] = {
-                  allStats: allStats,
-                  medals: medals,
-                  abilityKills: abilityKills,
-                  weaponsUsed: weaponsUsed,
-                  extendedStats: extendedStats
+                var teammateId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
+                fireTeam[teammateId] = {
+                  id: entries[i].player.destinyUserInfo.membershipId,
+                  name: entries[i].player.destinyUserInfo.displayName,
+                  membershipId: entries[i].player.destinyUserInfo.membershipId,
+                  membershipType: entries[i].player.destinyUserInfo.membershipType,
+                  emblem: 'http://www.bungie.net' + entries[i].player.destinyUserInfo.iconPath,
+                  characterId: entries[i].characterId,
+                  level: entries[i].player.characterLevel,
+                  class: entries[i].player.characterClass
                 };
               }
-            } else {
-              var teammateId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-              fireTeam[teammateId] = {
-                id: entries[i].player.destinyUserInfo.membershipId,
-                name: entries[i].player.destinyUserInfo.displayName,
-                membershipId: entries[i].player.destinyUserInfo.membershipId,
-                membershipType: entries[i].player.destinyUserInfo.membershipType,
-                emblem: 'http://www.bungie.net' + entries[i].player.destinyUserInfo.iconPath,
-                characterId: entries[i].characterId,
-                level: entries[i].player.characterLevel,
-                class: entries[i].player.characterClass
-              };
             }
           }
         }
