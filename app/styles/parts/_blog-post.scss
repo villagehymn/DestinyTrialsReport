@@ -40,12 +40,12 @@
     }
 
     span {
-      font-size: 20px;
+      font-size: 1.5em;
     }
 
     &:after {
       content: "/";
-      margin: 0 5px 0 6px;
+      margin: 0 .5em;
     }
 
     &:last-child:after {
