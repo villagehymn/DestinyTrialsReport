@@ -16,7 +16,7 @@ angular.module('trialsReportApp')
         var methods = [];
         angular.forEach(teammates, function (player) {
           player.inUrl = true;
-          player.mainPlayerActivity = mainPlayer.recentActivity;
+          player.mainPlayerLastThree = mainPlayer.lastThree;
           player.mainPlayerFireteam = mainPlayer.fireTeam;
           methods.push(getPlayerCard(player));
         });
@@ -48,13 +48,20 @@ angular.module('trialsReportApp')
           trialsStats.getData(player)
         ];
 
-        if (player.recentActivity && (player.searched || player.inUrl || player.myProfile)){
-          if (player.mainPlayerActivity &&
-             (player.mainPlayerActivity.id === player.recentActivity.id)){
-            player.fireTeam = player.mainPlayerFireteam;
-          } else {
-            methods.push(currentAccount.getMatchSummary(player.recentActivity, player.id));
-          }
+        if (player.mainPlayerLastThree){
+          angular.forEach(player.lastThree, function (match, key) {
+            if (player.mainPlayerLastThree[key]) {
+              player.lastThree[key] = player.mainPlayerLastThree[key];
+            } else {
+              return trialsStats.getPostGame(player.lastThree[key])
+                .then(function (match) {
+                  player.lastThree[key] = match;
+                });
+            }
+            trialsStats.getTeamSummary(player.lastThree, player);
+          });
+        } else {
+          methods.push(trialsStats.getLastFive(player));
         }
 
         return $q.all(methods)
@@ -62,18 +69,6 @@ angular.module('trialsReportApp')
             player.stats = stats.stats;
             player.nonHazard = stats.nonHazard;
             player.lighthouse = stats.lighthouse;
-            if (player.fireTeam){
-              postGame = player.fireTeam;
-            }
-            if (postGame && postGame[player.id]) {
-              var lastGame = postGame[player.id];
-              player.medals = lastGame.medals;
-              player.allStats = lastGame.allStats;
-              player.wKills = lastGame.wKills;
-              player.playerWeapons = lastGame.playerWeapons;
-              delete postGame[player.id];
-              player.fireTeam = postGame;
-            }
           }));
       },
       reportProblems = function (fault) {

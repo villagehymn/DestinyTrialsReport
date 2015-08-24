@@ -1,22 +1,17 @@
 <div class="last-match">
   <div class="last-match__overview">
-    <div class="last-match__standing">
-      <span class="last-match__result last-match__result--win" ng-if="player.allStats.standing.basic.value === 0"></span>
-      <span class="last-match__result last-match__result--loss" ng-if="player.allStats.standing.basic.value === 1"></span>
-      <span class="last-match__score">
-        <span class="last-match__score--team" ng-bind="player.allStats.score.basic.value"></span>
-        -
-        <span class="last-match__score--opponents" ng-bind="player.allStats.allParticipantsScore.basic.value - player.allStats.score.basic.value"></span>
-      </span>
-    </div>
     <div class="row">
-      <div class="col-xs-6 stat">
-        <span ng-bind="player.pastActivities[player.pastActivities.length - 1].dateAgo"></span>
-        <label>Date</label>
-      </div>
-      <div class="col-xs-6 stat">
-        <span ng-bind="player.allStats.totalActivityDurationSeconds.basic.displayValue"></span>
-        <label>Duration</label>
+      <div class="col-xs-4" ng-repeat="match in player.recentMatches">
+        <div class="last-match__standing">
+          <span class="last-match__result last-match__result&#45;&#45;loss" ng-if="match.standing === 1"></span>
+          <span class="last-match__result last-match__result&#45;&#45;win" ng-if="match.standing === 0"></span>
+          <span class="last-match__score">
+            <span class="last-match__score--team" ng-bind="match.team_score"></span>
+            -
+            <span class="last-match__score--opponents" ng-bind="match.enemy_score"></span>
+          </span>
+          <span class="last-match__date" ng-bind="match.dateAgo"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -24,60 +19,60 @@
     <div class="last-match__stats">
       <div class="row">
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.kills.basic.displayValue"></span>
+          <span ng-bind="player.allStats.kills"></span>
           <label>Kills</label>
         </div>
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.deaths.basic.displayValue"></span>
+          <span ng-bind="player.allStats.deaths"></span>
           <label>Deaths</label>
         </div>
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.assists.basic.displayValue"></span>
+          <span ng-bind="player.allStats.assists"></span>
           <label>Assists</label>
         </div>
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.precisionKills.basic.displayValue"></span>
+          <span ng-bind="player.allStats.precisionKills"></span>
           <label>Headshots</label>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.killsDeathsAssists.basic.displayValue"></span>
+          <span ng-bind="player.allStats.killsDeathsAssists | number : 2"></span>
           <label>KA/D</label>
         </div>
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.killsDeathsRatio.basic.displayValue"></span>
+          <span ng-bind="player.allStats.killsDeathsRatio | number : 2"></span>
           <label>K/D</label>
         </div>
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.resurrectionsPerformed.basic.displayValue"></span>
+          <span ng-bind="player.allStats.resurrectionsPerformed"></span>
           <label>Revives</label>
         </div>
         <div class="col-xs-3 stat">
-          <span ng-bind="player.allStats.averageLifespan.basic.displayValue"></span>
+          <span ng-bind="player.allStats.averageLifespan | number : 0"></span>
           <label>Lifespan</label>
         </div>
       </div>
     </div>
     <div class="last-match__weapons">
       <div class="row">
-        <div class="last-match-weapon col-xs-12" ng-repeat="weapon in player.playerWeapons track by $index">
+        <div class="last-match-weapon col-xs-12" ng-repeat="weapon in player.weaponsUsed track by $index">
           <div class="row">
             <div class="col-xs-6 last-weapon-weapon__descr">
               <img class="last-match-weapon__img img-responsive" ng-src="{{getWeaponByHash(weapon.referenceId).icon}}" alt="{{getWeaponByHash(weapon.referenceId).name}}">
               <span class="last-match-weapon__title" ng-bind="getWeaponByHash(weapon.referenceId).name"></span>
             </div>
             <div class="col-xs-2 stat">
-              <span ng-bind="weapon.values.uniqueWeaponKills.basic.value"></span>
+              <span ng-bind="weapon.uniqueWeaponKills"></span>
               <label>Kills</label>
             </div>
             <div class="col-xs-4 stat">
-              <span ng-bind="weapon.values.uniqueWeaponPrecisionKills.basic.value"></span>
+              <span ng-bind="weapon.uniqueWeaponPrecisionKills"></span>
               <label>Headshots</label>
             </div>
           </div>
         </div>
-        <div class="last-match-weapon last-match-weapon--{{specialWeapon.id}} col-xs-12" ng-repeat="specialWeapon in player.wKills track by $index"
+        <div class="last-match-weapon last-match-weapon--{{specialWeapon.id}} col-xs-12" ng-repeat="specialWeapon in player.abilityKills track by $index"
              ng-if="getWeaponTitle(specialWeapon.id)">
           <div class="row">
             <div class="col-xs-6 last-weapon-weapon__descr">
