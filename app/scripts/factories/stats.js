@@ -23,8 +23,6 @@ function getExtendedStats(member, medals, abilityKills) {
       setOrIncrement(medals, value, index);
     } else if (index.substring(0, 11) === 'weaponKills') {
       setOrIncrement(abilityKills, value, index);
-    } else {
-      //setOrIncrement(extendedStats, value, index);
     }
   });
 }

@@ -1,18 +1,36 @@
 'use strict';
 
+function setNodeDescription(noderStepper) {
+  return {
+    'name': noderStepper.nodeStepName,
+    'description': noderStepper.nodeStepDescription,
+    'icon': 'https://www.bungie.net' + noderStepper.icon
+  };
+}
+
+function setClassNode(nodeStep, classNodes, nodeArray, type) {
+  if (nodeArray.indexOf(nodeStep.column) > -1) {
+    var condition = type === 'weaponKillsGrenade' || 'all' ? !(nodeStep.row === 0 && nodeStep.column === 3) : (nodeStep.row === 0);
+    if (condition) {
+      var noderStepper = nodeStep.steps;
+      if (type === 'all') {
+        classNodes.push(setNodeDescription(noderStepper));
+      } else {
+        classNodes.abilities[type] = setNodeDescription(noderStepper);
+      }
+    }
+  }
+}
+
 angular.module('trialsReportApp')
   .factory('classStats', function($analytics) {
     var getData = function(items) {
       var classNodes = [];
       classNodes.abilities = {};
       classNodes.hazards = [];
-      var subClass = [];
-      var background = [];
-      var blink = false;
-      var hasFireboltGrenade = false;
-      var hasFusionGrenade = false;
-      var hasVikingFuneral = false;
-      var hasTouchOfFlame = false;
+      var subClass = [], background = [], blink = false,
+        hasFireboltGrenade = false, hasFusionGrenade = false,
+        hasVikingFuneral = false, hasTouchOfFlame = false;
 
       for (var n = 0; n < items.length; n++) {
         var itemS = items[n];
@@ -26,68 +44,18 @@ angular.module('trialsReportApp')
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i];
               if (itemS.itemHash === 3658182170) {
-                if (nodeStep.nodeHash === 835330335) {
-                  hasFireboltGrenade = true;
-                }
-                if (nodeStep.nodeHash === 834786008) {
-                  hasFusionGrenade = true;
-                }
-                if (nodeStep.nodeHash === 1173110174) {
-                  hasVikingFuneral = true;
-                }
-                if (nodeStep.nodeHash === 527202181) {
-                  hasTouchOfFlame = true;
-                }
+                hasFireboltGrenade = nodeStep.nodeHash === 835330335;
+                hasFusionGrenade = nodeStep.nodeHash === 834786008;
+                hasVikingFuneral = nodeStep.nodeHash === 1173110174;
+                hasTouchOfFlame = nodeStep.nodeHash === 527202181;
               }
-
-              if ([1].indexOf(nodeStep.column) > -1) {
-                if (!(nodeStep.row === 0 && nodeStep.column === 3)) {
-                  var noderStepper = nodeStep.steps;
-                  classNodes.abilities.weaponKillsGrenade = {
-                    'name': noderStepper.nodeStepName,
-                    'description': noderStepper.nodeStepDescription,
-                    'icon': 'https://www.bungie.net' + noderStepper.icon
-                  };
-                }
-              }
-
-              if ([3].indexOf(nodeStep.column) > -1) {
-                if (nodeStep.row === 0) {
-                  var noderStepper = nodeStep.steps;
-                  classNodes.abilities.weaponKillsSuper = {
-                    'name': noderStepper.nodeStepName,
-                    'description': noderStepper.nodeStepDescription,
-                    'icon': 'https://www.bungie.net' + noderStepper.icon
-                  };
-                }
-              }
-
-              if ([4].indexOf(nodeStep.column) > -1) {
-                if (nodeStep.row === 0) {
-                  var noderStepper = nodeStep.steps;
-                  classNodes.abilities.weaponKillsMelee = {
-                    'name': noderStepper.nodeStepName,
-                    'description': noderStepper.nodeStepDescription,
-                    'icon': 'https://www.bungie.net' + noderStepper.icon
-                  };
-                }
-              }
-
-              if ([1, 3, 6, 8].indexOf(nodeStep.column) > -1) {
-                if (!(nodeStep.row === 0 && nodeStep.column === 3)) {
-                  var noderStepper = nodeStep.steps;
-                  classNodes.push({
-                    'name': noderStepper.nodeStepName,
-                    'description': noderStepper.nodeStepDescription,
-                    'icon': 'https://www.bungie.net' + noderStepper.icon
-                  });
-                }
-              }
+              setClassNode(nodeStep, classNodes, [1], 'weaponKillsGrenade');
+              setClassNode(nodeStep, classNodes, [3], 'weaponKillsSuper');
+              setClassNode(nodeStep, classNodes, [4], 'weaponKillsMelee');
+              setClassNode(nodeStep, classNodes, [1, 3, 6, 8], 'all');
 
               if (itemS.itemHash === 2962927168 || itemS.itemHash === 3828867689) {
-                if ((nodeStep.row === 3 && nodeStep.column === 2)) {
-                  blink = true;
-                }
+                blink = (nodeStep.row === 3 && nodeStep.column === 2);
               }
             }
           }
