@@ -201,7 +201,7 @@
 
 .player__main-stats {
   padding: 1em;
-  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
+  border-top: 1px solid #eee;
 }
 
 .player__streak {
@@ -255,10 +255,78 @@
 }
 
 .player__history {
-  padding: 1em 1em .8em 1em;
-  border-top: 1px solid #eee;
-  display: flex;
+  padding: 1em;
   align-items: center;
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
+}
+
+.player-kd {
+  padding-left: 10px;
+  width: calc(25% - 5px);
+}
+
+.player-kd__kd {
+  font-weight: normal;
+  font-size: 1.5em;
+  line-height: 40px;
+  position: relative;
+
+  &:before,
+  &:after {
+    position: absolute;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 1em;
+    letter-spacing: normal;
+    text-transform: none;
+    word-wrap: normal;
+    color: #bbb;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    left: -8px;
+    top: 50%;
+    text-align: center;
+  }
+
+  &:before {
+    transform: translate(-100%, -10px);
+    content: "\e5c7";
+  }
+
+  &:after {
+    transform: translate(-100%, -3px);
+    content: "\e5c5";
+  }
+}
+
+.player-form {
+  overflow: hidden;
+  padding-right: 0;
+  width: calc(75% + 5px);
+}
+
+.player-form__matches {
+  line-height: 43px;
+  height: 40px;
+  direction: rtl;
+  text-align: left;
+  overflow: hidden;
+  position: relative;
+  padding-right: 10px;
+
+  &:after {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: -10px;
+    transform: translateY(-50%);
+    height: 1px;
+    background: #bbb;
+    pointer-events: none;
+    content: "";
+  }
 }
 
 .player-history__label,
@@ -284,18 +352,6 @@
   overflow: hidden;
   direction: rtl;
   position: relative;
-
-  &:after {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    height: 1px;
-    background: #999;
-    pointer-events: none;
-    content: "";
-  }
 }
 
 .player-history__kd-label {
@@ -308,36 +364,9 @@
   span {
     color: #999;
   }
-
-  &:before,
-  &:after {
-    position: absolute;
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 11px;
-    line-height: 1em;
-    letter-spacing: normal;
-    text-transform: none;
-    word-wrap: normal;
-    -webkit-font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
-    left: 50%;
-    text-align: center;
-  }
-
-  &:before {
-    transform: translate(-50%, -.7em);
-    content: "\e5c7";
-  }
-
-  &:after {
-    transform: translate(-50%, .9em);
-    content: "\e5c5";
-  }
 }
 
-.player-history__match {
+.player-form__match {
   display: inline-block;
   border-radius: 50%;
   width: 11px;
@@ -346,16 +375,17 @@
   vertical-align: .1em;
   margin-left: 3px;
   position: relative;
+  transform-origin: center center;
 
   &:hover {
     opacity: 1;
   }
 
-  &.player-history__match--win {
+  &.player-form__match--win {
     background-color: $success;
   }
 
-  &.player-history__match--loss {
+  &.player-form__match--loss {
     background-color: white;
     border: 1px solid $fail;
 

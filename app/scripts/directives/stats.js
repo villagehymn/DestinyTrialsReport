@@ -5,14 +5,30 @@ angular.module('trialsReportApp')
     return {
       restrict: 'A',
       scope: {
-        activities: '=trialsHistory'
+        activities: '=trialsHistory',
+        kd: '=playerKd'
+      },
+      link: function ($scope, element, attrs) {
+        var factor = -60,
+            range = 1.5,
+            unit = '%';
+
+        $scope.calcGraphPoint = function (matchKd) {
+          var x = 0;
+          if (matchKd < $scope.kd) {
+            x = Math.max(-range, matchKd - $scope.kd);
+          } else {
+            x = Math.min(range, matchKd - $scope.kd);
+          }
+          return x * factor + unit;
+        }
       },
       template: [
         '<!--<div ng-if="!activities">N/A</div>-->',
-        '<i class="player-history__match"' +
-          'style="transform: translateY({{str.kd < 1.0 ? 50 * (1 - str.kd) : str.kd > 2.0 ? -55 : -50 * (str.kd - 1)}}%);"' +
+        '<i class="player-form__match"' +
+          'style="transform: translateY({{calcGraphPoint(str.kd)}});"' +
           'ng-repeat="str in activities.slice().reverse() track by $index"' +
-          'ng-class="str.standing === 0 ? \'player-history__match--win\' : \'player-history__match--loss\'"' +
+          'ng-class="str.standing === 0 ? \'player-form__match--win\' : \'player-form__match--loss\'"' +
           'bs-popover="{title:str.dateAgo,content:\'K/D: {{str.kd}} with {{str.kills}} kills\'}"></i>'
       ].join('')
     };

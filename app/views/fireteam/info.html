@@ -2,13 +2,13 @@
   <div class="player__intro" style="background-image:url('{{player.background[0]}}')">
     <div class="player__title">
       <img class="player__emblem" ng-src="{{player.emblem}}" />
-      <div class="player__kd">
+      <!--<div class="player__kd">
         <span ng-if="!player.stats.killsDeathsRatio.basic.displayValue">N/A</span>
         <span ng-if="player.stats.killsDeathsRatio.basic.displayValue"
               ng-bind="player.stats.killsDeathsRatio.basic.displayValue">
         </span>
         <label>K/D</label>
-      </div>
+      </div>-->
       <div class="player__char">
         <h2 class="player__gamertag" ng-bind="player.name"></h2>
         <div class="player__race" ng-show="player.level && player.class.name">
@@ -51,6 +51,23 @@
        <!--</div>-->
      <!--</div>-->
   </div>
+  <div class="player__history">
+    <div class="row">
+      <div class="player-form col-xs-9">
+        <div class="player-form__matches" trials-history="player.pastActivities" player-kd="player.stats.killsDeathsRatio.basic.value"></div>
+        <label class="player-history__label">Recent Form</label>
+      </div>
+      <div class="player-kd col-xs-3">
+        <div class="player-kd__kd">
+          <span ng-if="!player.stats.killsDeathsRatio.basic.displayValue">N/A</span>
+          <span ng-if="player.stats.killsDeathsRatio.basic.displayValue"
+                ng-bind="player.stats.killsDeathsRatio.basic.displayValue">
+          </span>
+        </div>
+        <label class="player-history__label">K/D</label>
+      </div>
+    </div>
+  </div>
   <div class="player__main-stats">
     <div class="row">
       <div class="col-xs-3 stat">
@@ -82,11 +99,6 @@
         <label>Flawless</label>
       </div>
     </div>
-  </div>
-  <div class="player__history">
-    <label class="player-history__label">Last matches</label>
-    <div class="player-history__matches" trials-history="player.pastActivities"></div>
-    <label class="player-history__kd-label">1.0 <span>K/D</span></label>
   </div>
   <div class="player__hazards">
     <div class="player-hazard" ng-class="{'player-hazard--developer' : hazard === 'Site Developer', 'player-hazard--donator' : hazard === 'Site Donator'}"
