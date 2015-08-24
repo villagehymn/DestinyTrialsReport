@@ -7,23 +7,23 @@
 @import 'main/typography';
 @import 'main/buttons';
 
-@import 'elements/header';
 @import 'elements/navbar';
-@import 'elements/main-search';
-@import 'elements/footer';
 @import 'elements/loading';
-@import 'elements/player';
-@import 'elements/weapons';
-@import 'elements/gear';
 @import 'elements/popover';
-@import 'elements/post';
 @import 'elements/tabs';
-@import 'elements/last-match';
-@import 'elements/player-stats';
-@import 'elements/player-maps';
 @import 'elements/stats';
-@import 'elements/edit-player';
-@import 'elements/maps';
 @import 'elements/modal';
-@import 'elements/blog';
 @import 'elements/carousel';
+
+@import 'parts/header';
+@import 'parts/main-search';
+@import 'parts/footer';
+@import 'parts/blog-post';
+@import 'parts/player';
+@import 'parts/weapons';
+@import 'parts/gear';
+@import 'parts/last-match';
+@import 'parts/player-stats';
+@import 'parts/player-maps';
+@import 'parts/edit-player';
+@import 'parts/maps';
