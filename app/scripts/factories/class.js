@@ -43,18 +43,18 @@ angular.module('trialsReportApp')
           for (var i = 0; i < itemS.nodes.length; i++) {
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i];
-              if (itemS.itemHash === 3658182170) {
-                hasFireboltGrenade = nodeStep.nodeHash === 835330335;
-                hasFusionGrenade = nodeStep.nodeHash === 834786008;
-                hasVikingFuneral = nodeStep.nodeHash === 1173110174;
-                hasTouchOfFlame = nodeStep.nodeHash === 527202181;
+              if (itemS.itemHash === SUNSINGER_CLASS) {
+                hasFireboltGrenade = nodeStep.nodeHash === FIREBOLT_GRENADE;
+                hasFusionGrenade = nodeStep.nodeHash === FUSION_GRENADE;
+                hasVikingFuneral = nodeStep.nodeHash === VIKING_FUNERAL;
+                hasTouchOfFlame = nodeStep.nodeHash === TOUCH_OF_FLAME;
               }
               setClassNode(nodeStep, classNodes, [1], 'weaponKillsGrenade', true);
               setClassNode(nodeStep, classNodes, [3], 'weaponKillsSuper', false);
               setClassNode(nodeStep, classNodes, [4], 'weaponKillsMelee', false);
               setClassNode(nodeStep, classNodes, [1, 3, 6, 8], 'all', true);
 
-              if (itemS.itemHash === 2962927168 || itemS.itemHash === 3828867689) {
+              if (itemS.itemHash === VOIDWALKER_CLASS || itemS.itemHash === BLADEDANCER_CLASS) {
                 blink = (nodeStep.row === 3 && nodeStep.column === 2);
               }
             }

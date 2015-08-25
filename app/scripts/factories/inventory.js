@@ -4,7 +4,7 @@ function setStatPercentage(player, armors) {
   var stat = ['int', 'dis', 'str'];
   for (var s = 0; s < stat.length; s++) {
     player[stat[s]] = armors[stat[s]];
-    var cName = stat[s].substring(0,1).toUpperCase() +stat[s].substring(1);
+    var cName = stat[s].substring(0,1).toUpperCase() + stat[s].substring(1);
     player[cName] = player[stat[s]] > 270 ? 270 : armors[stat[s]];
     player[stat[s] + 'Percent'] = +(100 * player[cName] / 270).toFixed();
   }
@@ -12,10 +12,10 @@ function setStatPercentage(player, armors) {
 
 angular.module('trialsReportApp')
   .factory('inventoryStats', function ($http, weaponStats, armorStats, classStats, $q) {
-    var getData = function (membershipType, membershipId, characterId) {
+    var getData = function (player) {
       return $http({
         method: 'GET',
-        url: 'http://api.destinytrialsreport.com/getInventory/' + membershipType + '/' + membershipId + '/' + characterId
+        url: 'http://api.destinytrialsreport.com/getInventory/' + player.membershipType + '/' + player.membershipId + '/' + player.characterId
       }).then(function (result) {
         return result.data;
       });
@@ -23,7 +23,7 @@ angular.module('trialsReportApp')
 
     var getInventory = function (membershipType, player) {
       var setInventory = function (membershipType, player) {
-          return getData(membershipType, player.membershipId, player.characterId)
+          return getData(player)
             .then(function (inventory) {
               return inventory;
             });
