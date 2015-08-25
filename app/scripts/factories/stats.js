@@ -179,25 +179,25 @@ angular.module('trialsReportApp')
 
           return dfd.promise;
         },
-        parallelLoad = function (previousMatches) {
+        pLoadPostGame = function (previousMatches) {
           var methods = [];
           angular.forEach(previousMatches, function (value, key) {
             methods.push(getPostGame(previousMatches[key], player))
           });
           return $q.all(methods)
-            .then($q.spread(function (match1, match2, match3) {
-              getTeamSummary([match1, match2, match3], player);
-            })
-          );
+        },
+        calculateMatchStats = function (postGames) {
+          var dfd = $q.defer();
+          dfd.resolve(getMatchSummary(postGames, player.id));
+
+          return dfd.promise;
         },
         reportProblems = function (fault) {
           console.log(String(fault));
         };
       return collectMatches(player)
-        .then(function(inventory) {
-          parallelLoad(inventory);
-          return player;
-        })
+        .then(pLoadPostGame)
+        .then(calculateMatchStats)
         .catch(reportProblems);
     };
 
