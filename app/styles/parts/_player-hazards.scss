@@ -4,6 +4,10 @@
   overflow-x: auto;
   border-top: 1px solid #eee;
   line-height: 1;
+
+  .player.with-overlay & {
+    @include overlay-modifiers();
+  }
 }
 
 .player-hazard {

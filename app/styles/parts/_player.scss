@@ -8,45 +8,6 @@
   padding: $player-content-padding;
 }
 
-.player__edit {
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  transition: opacity ease .2s;
-  cursor: pointer;
-  position: absolute;
-  margin-top: $player-content-padding;
-  margin-right: $player-content-padding;
-  right: 0;
-  top: 0;
-  height: #{$player-emblem-size - 2 * $player-content-padding};
-  width: #{$player-emblem-size - 2 * $player-content-padding};
-  text-shadow: $text-shadow;
-  opacity: 0;
-  animation: hint 4s;
-
-  .player-header:hover & {
-    opacity: 1;
-  }
-
-  i {
-    position: relative;
-    @include align-both;
-    overflow: hidden;
-  }
-}
-
-@media all and (max-width: 992px) {
-  .player__edit {
-    opacity: 0.6;
-    animation: hintTouch 4s;
-
-    .player__info:hover & {
-      opacity: 1;
-    }
-  }
-}
-
 .player__links {
   box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.25);
   background: transparentize(#eee, .3);

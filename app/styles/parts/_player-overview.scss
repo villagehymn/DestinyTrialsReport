@@ -14,6 +14,10 @@
 
   white-space: nowrap;
   overflow: hidden;
+
+  .player.with-overlay & {
+    @include overlay-modifiers();
+  }
 }
 
 .player-header__emblem {
@@ -48,7 +52,7 @@
 
 .player-info__light {
   font-size: .9em;
-  margin: 0 .5em 0 .3em;
+  margin: 0 .5em;
 
   span {
     margin-right: .1em;
@@ -57,7 +61,7 @@
 
 .player-info__grimoire {
   font-size: .9em;
-  
+
   img {
     height: 1em;
     margin-right: .3em;

@@ -1,6 +1,10 @@
 .player-tabs {
   overflow: hidden;
 
+  .player.with-overlay & {
+    @include overlay-modifiers();
+  }
+
   ul {
     overflow: hidden;
     margin-bottom: -1px;
