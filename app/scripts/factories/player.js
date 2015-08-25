@@ -66,6 +66,7 @@ angular.module('trialsReportApp')
 
         return $q.all(methods)
           .then($q.spread(function (player, stats, postGame) {
+            player.fireTeam = postGame.fireTeam;
             player.stats = stats.stats;
             player.nonHazard = stats.nonHazard;
             player.lighthouse = stats.lighthouse;
