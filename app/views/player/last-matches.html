@@ -1,5 +1,5 @@
 <div class="player-tab--last-matches">
-  <div class="player__content player-tab__section">
+  <div class="player-tab__section">
     <div class="row">
       <div class="last-match__result col-xs-4" ng-repeat="match in player.recentMatches">
         <span class="match match--loss" ng-if="match.standing === 1"></span>
@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div class="player__content player-tab__section">
+  <div class="player-tab__section">
     <div class="row stat-row">
       <div class="col-xs-3 stat">
         <span ng-bind="player.allStats.kills"></span>
@@ -51,7 +51,7 @@
       </div>
     </div>
   </div>
-  <div class="player__content player-tab__section">
+  <div class="player-tab__section">
     <div class="row">
       <div class="last-match-weapon col-xs-12" ng-repeat="weapon in player.weaponsUsed track by $index">
         <div class="row">
@@ -84,7 +84,7 @@
       </div>
     </div>
   </div>
-  <div class="player__content player-tab__section">
+  <div class="player-tab__section">
     <div class="row">
       <div class="col-xs-2 last-match__medal" ng-repeat="medal in player.medals track by $index"
            bs-popover="{title:DestinyMedalDefinition[medal.id].statName,content:DestinyMedalDefinition[medal.id].statDescription}">

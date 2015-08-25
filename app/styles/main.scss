@@ -28,6 +28,7 @@
 
 // Player card
 @import 'parts/player';
+@import 'parts/edit-player';
 @import 'parts/player-overview';
 @import 'parts/player-quick-look';
 @import 'parts/player-main-stats';
@@ -41,7 +42,9 @@
 
 // Last matches tab
 @import 'parts/player-last-matches';
+
+// Stats tab
 @import 'parts/player-stats';
+
+// Maps tab
 @import 'parts/player-maps';
-@import 'parts/edit-player';
-@import 'parts/maps';

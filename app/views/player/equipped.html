@@ -1,8 +1,8 @@
 <div class="player-tab--equipped">
-  <div class="player__content player-tab__section">
+  <div class="player-tab__section">
     <div weapon-nodes="[player.weapons.primary, player.weapons.special, player.weapons.heavy]"></div>
   </div>
-  <div class="player__content player-tab__section">
+  <div class="player-tab__section">
     <div class="row">
       <div class="player-cooldown col-xs-4" bs-popover="{content:'Intellect: ' + player.int + ' (' + player.intPercent + '%)'}">
         <div class="player-cooldown__label">
@@ -39,7 +39,7 @@
       </div>
     </div>
   </div>
-  <div class="player__content player-tab__section">
+  <div class="player-tab__section">
     <div class="row">
       <div class="player-perk col-xs-6" ng-repeat="classNode in player.classNodes track by $index" bs-popover="{content:classNode.description}">
         <img class="player-perk__icon img-responsive" ng-src="{{classNode.icon}}" alt="{{classNode.name}}">
@@ -47,7 +47,7 @@
       </div>
     </div>
   </div>
-  <div class="player__content player-tab__section">
+  <div class="player-tab__section">
     <div class="row">
       <div armor-list="[player.armors.head, player.armors.arms, player.armors.chest, player.armors.legs]"></div>
     </div>
