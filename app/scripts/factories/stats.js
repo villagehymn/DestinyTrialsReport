@@ -73,13 +73,13 @@ function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i
 }
 
 function setPlayerStats(data, player) {
-  if (data[player.id]) {
-    player.allStats = data[player.id].allStats;
-    player.recentMatches = data[player.id].recentMatches;
-    player.abilityKills = data[player.id].abilityKills;
-    player.medals = data[player.id].medals;
-    player.weaponsUsed = data[player.id].weaponsUsed;
-    player.fireTeam = data;
+  if (data.matchStats[player.id]) {
+    player.allStats = data.matchStats[player.id].allStats;
+    player.recentMatches = data.matchStats[player.id].recentMatches;
+    player.abilityKills = data.matchStats[player.id].abilityKills;
+    player.medals = data.matchStats[player.id].medals;
+    player.weaponsUsed = data.matchStats[player.id].weaponsUsed;
+    player.fireTeam = data.fireTeam;
   }
 }
 
@@ -112,6 +112,7 @@ angular.module('trialsReportApp')
 
     var getMatchSummary = function (lastMatches, id) {
       var fireTeam = {};
+      var matchStats = {};
       var recentMatches = [];
       for (var m = 0; m < lastMatches.length; m++) {
         if (lastMatches[m]) {
@@ -127,12 +128,12 @@ angular.module('trialsReportApp')
 
               if (player_id === angular.lowercase(id)) {
                 collectMatchData(extendedWeapons, weaponsUsed, allStats, values);
-                if (fireTeam[player_id]) {
-                  getExtendedStats(entries[i], fireTeam[player_id].medals, fireTeam[player_id].abilityKills, fireTeam[player_id].extendedStats);
-                  sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i);
+                if (matchStats[player_id]) {
+                  getExtendedStats(entries[i], matchStats[player_id].medals, matchStats[player_id].abilityKills, matchStats[player_id].extendedStats);
+                  sumExistingStats(allStats, matchStats, player_id, weaponsUsed, entries, i);
                 } else {
                   getExtendedStats(entries[i], medals, abilityKills, extendedStats);
-                  fireTeam[player_id] = {
+                  matchStats[player_id] = {
                     allStats: allStats,
                     medals: medals,
                     abilityKills: abilityKills,
@@ -155,20 +156,20 @@ angular.module('trialsReportApp')
               }
             }
           }
+          var teamIndex = data.teams[0].standing.basic.value === standing ? 0 : 1;
+          recentMatches.push({
+            standing: standing,
+            team_score: data.teams[teamIndex].score.basic.value,
+            enemy_score: data.teams[teamIndex == 0 ? 1 : 0].score.basic.value,
+            dateAgo: moment(data.period).fromNow(),
+            duration: data.entries[0].values.activityDurationSeconds.basic.displayValue
+          });
+          angular.forEach(matchStats, function (value) {
+            value.recentMatches = recentMatches;
+          });
         }
-        var teamIndex = data.teams[0].standing.basic.value === standing ? 0 : 1;
-        recentMatches.push({
-          standing: standing,
-          team_score: data.teams[teamIndex].score.basic.value,
-          enemy_score: data.teams[teamIndex == 0 ? 1 : 0].score.basic.value,
-          dateAgo: moment(data.period).fromNow(),
-          duration: data.entries[0].values.activityDurationSeconds.basic.displayValue
-        });
-        angular.forEach(fireTeam, function (value) {
-          value.recentMatches = recentMatches;
-        });
       }
-      return fireTeam;
+      return {fireTeam: fireTeam, matchStats: matchStats};
     };
 
     var getLastFive = function (player) {

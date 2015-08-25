@@ -1,70 +1,74 @@
 'use strict';
 
-function getTeammates($scope, playerCard, locationChanger, fireTeam) {
-  if (fireTeam) {
-    if ($scope.subdomain) {
-      var charCount = 1;
-      angular.forEach(fireTeam, function (player) {
-        if (player.characterId !== $scope.fireteam[0].characterId) {
-          player.myProfile = true;
-          playerCard.getPlayerCard(player).then(function (teammate) {
-            $scope.$evalAsync( $scope.fireteam[charCount] = teammate );
-            charCount++;
-          });
-        }
-      });
-    } else {
-      angular.forEach(fireTeam, function (player) {
-        player.fireTeam = fireTeam;
-        playerCard.getTeammate(player).then(function (teammate) {
-          $scope.fireteam.push(teammate);
-          if ($scope.fireteam[0] && $scope.fireteam[1] && $scope.fireteam[2]) {
-            if ($scope.fireteam[2].membershipId) {
-              var platformUrl = $scope.platformValue ? '/ps/' : '/xbox/';
-              locationChanger.skipReload()
-                .withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' +
-                $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
-            }
-          }
-        });
-      });
+function getTeammates($scope, playerCard, locationChanger, mainPlayer) {
+  if ($scope.subdomain) {
+    getTeammatesFromCharacters($scope, playerCard, mainPlayer.otherCharacters);
+  }
+  else {
+    if (mainPlayer.searched){
+      getTeammatesFromHistory($scope, playerCard, locationChanger, mainPlayer.fireTeam);
     }
-  } else {
-    $scope.fireteam.push({name: 'Enter Player Name', invalidResult: true}, {name: 'Enter Player Name', invalidResult: true});
+    else if (mainPlayer.teamFromParams) {
+      getTeammatesFromParams($scope, playerCard);
+    }
+    else {
+      $scope.fireteam.push(
+        {name: 'Enter Player Name', invalidResult: true},
+        {name: 'Enter Player Name', invalidResult: true}
+      );
+    }
   }
 }
 
-var getActivitiesFromChar = function ($scope, account, character, currentAccount) {
-
-  var setRecentActivities = function (account, character) {
-      return currentAccount.getLastTwentyOne(account, character)
-        .then(function (activities) {
-          return activities;
-        });
-    },
-
-    setRecentPlayers = function (activities) {
-      angular.forEach(activities, function (activity) {
-        currentAccount.getMatchSummary(activity, account.id).then(function (resMembers) {
-          var recents = {};
-          angular.forEach(resMembers, function (member, key) {
-            if (key !== account.id) {
-              recents[member.name] = member;
-            }
-          });
-          $scope.recentPlayers = angular.extend($scope.recentPlayers, recents);
-        });
+function getTeammatesFromCharacters($scope, playerCard, fireTeam) {
+  var charCount = 1;
+  angular.forEach(fireTeam, function (player) {
+    if (player.characterId !== $scope.fireteam[0].characterId) {
+      player.myProfile = true;
+      playerCard.getPlayerCard(player).then(function (teammate) {
+        $scope.$evalAsync( $scope.fireteam[charCount] = teammate );
+        charCount++;
       });
-    },
+    }
+  });
+}
 
-    reportProblems = function (fault) {
-      console.log(String(fault));
-    };
+function getTeammatesFromHistory($scope, playerCard, locationChanger, fireTeam) {
+  angular.forEach(fireTeam, function (player) {
+    player.fireTeam = fireTeam;
+    playerCard.getTeammate(player).then(function (teammate) {
+      $scope.fireteam.push(teammate);
+      updateUrl($scope, locationChanger);
+    });
+  });
+}
 
-  setRecentActivities(account, character)
-    .then(setRecentPlayers)
-    .catch(reportProblems);
-};
+function getTeammatesFromParams($scope, playerCard) {
+  $scope.fireteam[0].inUrl = true;
+  playerCard.getPlayerCard($scope.fireteam[0]).then(function (player) {
+    $scope.fireteam[0] = player;
+    angular.forEach($scope.fireteam[0].teamFromParams, function (player, index) {
+      player.inUrl = true;
+      player.mainPlayerActivity = $scope.fireteam[0].recentActivity;
+      player.mainPlayerFireteam = $scope.fireteam[0].fireTeam;
+      $scope.fireteam.push(player);
+      playerCard.getPlayerCard(player).then(function (teammate) {
+        $scope.fireteam[index + 1] = teammate;
+      });
+    });
+  });
+}
+
+function updateUrl($scope, locationChanger) {
+  if ($scope.fireteam[0] && $scope.fireteam[1] && $scope.fireteam[2]) {
+    if ($scope.fireteam[2].membershipId) {
+      var platformUrl = $scope.platformValue ? '/ps/' : '/xbox/';
+      locationChanger.skipReload()
+        .withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' +
+        $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
+    }
+  }
+}
 
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard, $sce, screenSize) {
@@ -91,52 +95,11 @@ angular.module('trialsReportApp')
       'Site Donator': 'Part of an amazing few who\'ve helped keep this site running'
     };
 
-    $scope.headerPartial = 'views/shared/header.html';
-    $scope.footerPartial = 'views/shared/footer.html';
-    $scope.playerPartial = 'views/fireteam/player.html';
-    $scope.statPartial = 'views/fireteam/stats.html';
-    $scope.infoPartial = 'views/fireteam/info.html';
-
     $scope.screenSize = {};
     $scope.screenSize.xs = screenSize.on('xs', function (match) { $scope.screenSize.xs = match; });
     $scope.screenSize.sm = screenSize.on('sm', function (match) { $scope.screenSize.sm = match; });
     $scope.screenSize.md = screenSize.on('md', function (match) { $scope.screenSize.md = match; });
     $scope.screenSize.lg = screenSize.on('lg', function (match) { $scope.screenSize.lg = match; });
-
-    $scope.mapModal = {
-      content: $sce.trustAsHtml(
-        '<div class="map-modal">' +
-          '<div class="map-modal__intro" style="background-image: url(\'' + $scope.currentMap.headerImage + '\')">' +
-            '<div class="map-modal__title">' + $scope.currentMap.activityName + '</div>' +
-          '</div>' +
-          '<div class="map-modal__heatmap">' +
-            '<img class="img-responsive" src="' + $scope.currentMap.heatmapImage + '" alt="Heatmap">' +
-          '</div>' +
-        '</div>'
-      )
-    };
-
-    var sendAnalytic = function (event, cat, label) {
-      $analytics.eventTrack(event, {
-        category: cat,
-        label: label
-      });
-    };
-
-    function getAccountByName(name, platform, index) {
-      if (angular.isUndefined(name)) {
-        return;
-      }
-      return currentAccount.getAccount(name, platform)
-        .then(function (player) {
-          sendAnalytic('searchedPlayer', 'name', name);
-          sendAnalytic('searchedPlayer', 'platform', platform);
-          player.searched = true;
-          playerCard.getPlayerCard(player).then(function (teammate) {
-            $scope.$evalAsync( $scope.fireteam[index] = teammate );
-          });
-        });
-    }
 
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
@@ -148,104 +111,12 @@ angular.module('trialsReportApp')
       $scope.platformValue = $scope.$storage.platform;
     }
 
-    $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
-      if (angular.isDefined(name)) {
-        if (includeFireteam) {
-          $location.path((platform ? '/ps/' : '/xbox/') + name);
-        } else {
-          getAccountByName(name, (platform ? 2 : 1), index);
-          sendAnalytic('loadedPlayer', 'name', name);
-          sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
-        }
-      }
-    };
-
-    $scope.getWeaponByHash = function (hash) {
-      if ($scope.DestinyPrimaryWeaponDefinitions[hash]) {
-        return $scope.DestinyPrimaryWeaponDefinitions[hash];
-      } else if ($scope.DestinySpecialWeaponDefinitions[hash]) {
-        return $scope.DestinySpecialWeaponDefinitions[hash];
-      } else if ($scope.DestinyHeavyWeaponDefinitions[hash]) {
-        return $scope.DestinyHeavyWeaponDefinitions[hash];
-      }
-    };
-
-    $scope.refreshInventory = function (fireteam) {
-      angular.forEach(fireteam, function (player, index) {
-        playerCard.refreshInventory($scope.fireteam[index]).then(function (teammate) {
-          $scope.$evalAsync( $scope.fireteam[index] = teammate );
-        });
-      });
-    };
-
-    $scope.setRecentPlayer = function (player, index, getFireteam) {
-      return currentAccount.getAccount(player.name, player.membershipType)
-        .then(function (player) {
-          player.otherCharacters = $scope.fireteam[index].otherCharacters;
-          player.searched = getFireteam;
-          playerCard.getPlayerCard(player).then(function (teammate) {
-            $scope.$evalAsync( $scope.fireteam[index] = teammate );
-            if (getFireteam) {
-              var charCount = 1;
-              angular.forEach($scope.fireteam[0].fireTeam, function (member) {
-                playerCard.getPlayerCard(member).then(function (teammate) {
-                  $scope.$evalAsync( $scope.fireteam[charCount] = teammate );
-                  charCount++;
-                });
-              });
-            }
-          });
-        });
-    };
-
-    $scope.suggestRecentPlayers = function () {
-      if (angular.isUndefined($scope.recentPlayers)) {
-        $scope.recentPlayers = {};
-        angular.forEach($scope.fireteam[0].otherCharacters, function (character) {
-          getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount);
-        });
-      }
-    };
-
-    $scope.getWeaponTitle = function (title) {
-      switch (title) {
-        case 'weaponKillsGrenade': return 'Grenade';
-        case 'weaponKillsMelee':   return 'Melee';
-        case 'weaponKillsSuper':   return 'Super';
-      }
-    };
-
-    $scope.toggleEdit = function (player) {
-      $scope.suggestRecentPlayers();
-      player.isEditing = !player.isEditing;
-    };
-
     if (angular.isObject(fireTeam)) {
       $scope.fireteam = fireTeam;
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
       if (angular.isDefined($scope.fireteam[0])) {
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
-        if ($scope.subdomain) {
-          getTeammates($scope, playerCard, locationChanger, $scope.fireteam[0].otherCharacters);
-        } else {
-          if ($scope.fireteam[0].searched){
-            getTeammates($scope, playerCard, locationChanger, $scope.fireteam[0].fireTeam);
-          } else if ($scope.fireteam[0].teamFromParams) {
-            $scope.fireteam[0].inUrl = true;
-            playerCard.getPlayerCard($scope.fireteam[0]).then(function (player) {
-              $scope.fireteam[0] = player;
-              angular.forEach($scope.fireteam[0].teamFromParams, function (player, index) {
-                player.inUrl = true;
-                player.mainPlayerActivity = $scope.fireteam[0].recentActivity;
-                player.mainPlayerFireteam = $scope.fireteam[0].fireTeam;
-                $scope.fireteam.push(player);
-                playerCard.getPlayerCard(player).then(function (teammate) {
-                  $scope.fireteam[index + 1] = teammate;
-                });
-              });
-            });
-          }
-        }
+        getTeammates($scope, playerCard, locationChanger, $scope.fireteam[0]);
       } else {
         $scope.fireteam = null;
       }

@@ -118,10 +118,8 @@ angular.module('trialsReportApp')
           toastr.error('Player not found', 'Error');
           return;
         }
-        var name = resultAcc.data.Response[0].displayName;
-        var membershipType = resultAcc.data.Response[0].membershipType;
-        var membershipId = resultAcc.data.Response[0].membershipId;
-        return getCharacters(membershipType, membershipId, name);
+        var response = resultAcc.data.Response[0];
+        return getCharacters(response.membershipType, response.membershipId, response.displayName);
       }).catch(function () {});
     };
 
