@@ -1,5 +1,5 @@
-<div class="player-stats">
-  <div class="player-stats__main">
+<div class="player-tab--stats">
+  <div class="player__content player-tab__section player-stats__main">
     <div class="row stat-row">
       <div class="col-xs-4 stat">
         <span ng-bind="player.stats.kills.basic.displayValue"></span>
@@ -43,131 +43,129 @@
       </div>
     </div>
   </div>
-  <div class="player-stats__detail">
-    <div class="player-stats__weapons">
-      <div class="row stat-row">
-        <div class="col-xs-6 stat">
-          <span ng-bind="player.stats.weaponBestType.basic.displayValue"></span>
-          <label>Best weapon</label>
-        </div>
-        <div class="col-xs-6 stat">
-          <span ng-bind="player.stats.precisionKills.basic.displayValue"></span>
-          <label>Headshots</label>
-        </div>
+  <div class="player__content player-tab__section">
+    <div class="row stat-row">
+      <div class="col-xs-6 stat">
+        <span ng-bind="player.stats.weaponBestType.basic.displayValue"></span>
+        <label>Best weapon</label>
       </div>
-      <div class="stat-row__header">
-        Total kills with
-      </div>
-      <div class="row stat-row">
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsHandCannon.basic.displayValue"></span>
-          <label>Hand Cannon</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsPulseRifle.basic.displayValue"></span>
-          <label>Pulse Rifle</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsScoutRifle.basic.displayValue"></span>
-          <label>Scout Rifle</label>
-        </div>
-      </div>
-      <div class="row stat-row">
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsAutoRifle.basic.displayValue"></span>
-          <label>Auto Rifle</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsSniper.basic.displayValue"></span>
-          <label>Sniper Rifle</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsShotgun.basic.displayValue"></span>
-          <label>Shotgun</label>
-        </div>
-      </div>
-      <div class="row stat-row">
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsFusionRifle.basic.displayValue"></span>
-          <label>Fusion Rifle</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsRocketLauncher.basic.displayValue"></span>
-          <label>Launcher</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsMachinegun.basic.displayValue"></span>
-          <label>Machine Gun</label>
-        </div>
-      </div>
-      <div class="row stat-row">
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsGrenade.basic.displayValue"></span>
-          <label>Grenade</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsMelee.basic.displayValue"></span>
-          <label>Melee</label>
-        </div>
-        <div class="col-xs-4 stat">
-          <span ng-bind="player.stats.weaponKillsSuper.basic.displayValue"></span>
-          <label>Super</label>
-        </div>
+      <div class="col-xs-6 stat">
+        <span ng-bind="player.stats.precisionKills.basic.displayValue"></span>
+        <label>Headshots</label>
       </div>
     </div>
-    <!--<div class="player-stats__other">-->
-      <!--<div class="row stat-row">-->
-        <!--<div class="col-xs-4 stat">-->
-          <!--<span ng-bind="player.stats.resurrectionsPerformed.basic.displayValue"></span>-->
-          <!--<label>Revives</label>-->
-        <!--</div>-->
-        <!--<div class="col-xs-4 stat">-->
-          <!--<span ng-bind="player.stats.resurrectionsReceived.basic.displayValue"></span>-->
-          <!--<label>Been revived</label>-->
-        <!--</div>-->
-        <!--<div class="col-xs-4 stat">-->
-          <!--<span ng-bind="player.stats.suicides.basic.displayValue"></span>-->
-          <!--<label>Suicides</label>-->
-        <!--</div>-->
+    <div class="stat-row__header">
+      Total kills with
+    </div>
+    <div class="row stat-row">
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsHandCannon.basic.displayValue"></span>
+        <label>Hand Cannon</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsPulseRifle.basic.displayValue"></span>
+        <label>Pulse Rifle</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsScoutRifle.basic.displayValue"></span>
+        <label>Scout Rifle</label>
+      </div>
+    </div>
+    <div class="row stat-row">
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsAutoRifle.basic.displayValue"></span>
+        <label>Auto Rifle</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsSniper.basic.displayValue"></span>
+        <label>Sniper Rifle</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsShotgun.basic.displayValue"></span>
+        <label>Shotgun</label>
+      </div>
+    </div>
+    <div class="row stat-row">
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsFusionRifle.basic.displayValue"></span>
+        <label>Fusion Rifle</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsRocketLauncher.basic.displayValue"></span>
+        <label>Launcher</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsMachinegun.basic.displayValue"></span>
+        <label>Machine Gun</label>
+      </div>
+    </div>
+    <div class="row stat-row">
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsGrenade.basic.displayValue"></span>
+        <label>Grenade</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsMelee.basic.displayValue"></span>
+        <label>Melee</label>
+      </div>
+      <div class="col-xs-4 stat">
+        <span ng-bind="player.stats.weaponKillsSuper.basic.displayValue"></span>
+        <label>Super</label>
+      </div>
+    </div>
+  </div>
+  <!--<div class="player-stats__other">-->
+    <!--<div class="row stat-row">-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="player.stats.resurrectionsPerformed.basic.displayValue"></span>-->
+        <!--<label>Revives</label>-->
       <!--</div>-->
-      <!--<div class="row stat-row">-->
-        <!--<div class="col-xs-4 stat">-->
-          <!--<span ng-bind="player.stats.averageKillDistance.basic.displayValue"></span>-->
-          <!--<label>Avg kill distance</label>-->
-        <!--</div>-->
-        <!--<div class="col-xs-4 stat">-->
-          <!--<span ng-bind="player.stats.zonesCaptured.basic.displayValue"></span>-->
-          <!--<label>Zones captured</label>-->
-        <!--</div>-->
-        <!--<div class="col-xs-4 stat">-->
-          <!--<span ng-bind="player.stats.orbsDropped.basic.displayValue"></span>-->
-          <!--<label>Orbs<br>created</label>-->
-        <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="player.stats.resurrectionsReceived.basic.displayValue"></span>-->
+        <!--<label>Been revived</label>-->
+      <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="player.stats.suicides.basic.displayValue"></span>-->
+        <!--<label>Suicides</label>-->
       <!--</div>-->
     <!--</div>-->
-    <div class="player-stats__bests">
-      <div class="stat-row__header">
-        Character records
+    <!--<div class="row stat-row">-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="player.stats.averageKillDistance.basic.displayValue"></span>-->
+        <!--<label>Avg kill distance</label>-->
+      <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="player.stats.zonesCaptured.basic.displayValue"></span>-->
+        <!--<label>Zones captured</label>-->
+      <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="player.stats.orbsDropped.basic.displayValue"></span>-->
+        <!--<label>Orbs<br>created</label>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="player__content player-tab__section player-stats__bests">
+    <div class="stat-row__header">
+      Character records
+    </div>
+    <div class="row stat-row">
+      <div class="col-xs-6 stat">
+        <span ng-bind="player.stats.bestSingleGameKills.basic.displayValue"></span>
+        <label>Kills in one game</label>
       </div>
-      <div class="row stat-row">
-        <div class="col-xs-6 stat">
-          <span ng-bind="player.stats.bestSingleGameKills.basic.displayValue"></span>
-          <label>Kills in one game</label>
-        </div>
-        <div class="col-xs-6 stat">
-          <span ng-bind="player.stats.mostPrecisionKills.basic.displayValue"></span>
-          <label>Headshots in one game</label>
-        </div>
+      <div class="col-xs-6 stat">
+        <span ng-bind="player.stats.mostPrecisionKills.basic.displayValue"></span>
+        <label>Headshots in one game</label>
       </div>
-      <div class="row stat-row">
-        <div class="col-xs-6 stat">
-          <span ng-bind="player.stats.longestSingleLife.basic.displayValue"></span>
-          <label>Longest life</label>
-        </div>
-        <div class="col-xs-6 stat">
-          <span ng-bind="player.stats.longestKillSpree.basic.displayValue"></span>
-          <label>Longest kill spree</label>
-        </div>
+    </div>
+    <div class="row stat-row">
+      <div class="col-xs-6 stat">
+        <span ng-bind="player.stats.longestSingleLife.basic.displayValue"></span>
+        <label>Longest life</label>
+      </div>
+      <div class="col-xs-6 stat">
+        <span ng-bind="player.stats.longestKillSpree.basic.displayValue"></span>
+        <label>Longest kill spree</label>
       </div>
     </div>
   </div>

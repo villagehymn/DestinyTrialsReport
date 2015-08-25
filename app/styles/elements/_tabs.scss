@@ -84,3 +84,18 @@
     }
   }
 }
+
+.player-tab--stats {
+  @include tab-background($stats-background);
+
+  ul &.active {
+    background: $stats-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($stats-background, 50%);
+    }
+  }
+}
