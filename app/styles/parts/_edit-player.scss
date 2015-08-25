@@ -1,124 +1,63 @@
-.edit-player {
-  z-index: 2;
-  position: absolute;
-  background: rgba(255, 255, 255, 0.8);
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  border-radius: 1em;
-  transition: opacity ease .2s, transform ease .2s;
-  transform: scale(1.05);
-
-  opacity: 0;
-  pointer-events: none;
-}
-
-.edit-player__close {
+.edit-player__btn {
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   color: white;
   transition: opacity ease .2s;
   cursor: pointer;
   position: absolute;
-  margin-top: 1em;
-  margin-left: 1em;
-  left: 0;
+  margin-top: $player-content-padding;
+  margin-right: $player-content-padding;
+  right: 0;
   top: 0;
-  height: 3em;
-  width: 3em;
-  text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+  height: #{$player-emblem-size - 2 * $player-content-padding};
+  width: #{$player-emblem-size - 2 * $player-content-padding};
+  text-shadow: $text-shadow;
+  opacity: 0;
+  animation: hint 4s;
+
+  .player-header:hover & {
+    opacity: 1;
+  }
 
   i {
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @include align-both();
     overflow: hidden;
   }
 }
 
 .edit-player__input {
   font-size: 1em;
-  margin-left: 5.5em;
-  height: 4.1em;
-  vertical-align: middle;
-  margin-top: .9em;
+  margin-left: 5.8em;
+  position: relative;
 
-  button[type="submit"] {
-    float: right;
-    display: inline-block;
-    margin: 0;
-    margin-right: 1em;
+  form {
+    height: $player-emblem-size;
   }
-}
 
-.edit-player__input input {
-  height: 2em;
-  width: calc(100% - 3.5em);
-  display: inline-block;
-  padding: 0;
-  line-height: 1.4em;
-  font-weight: normal;
-  font-size: 1.3em;
-  letter-spacing: -.75px;
-  background-image: linear-gradient(#2196F3, #2196F3), linear-gradient(#333, #333);
-
-  &:focus {
+  input[type="text"] {
+    position: relative;
+    @include align-vertically();
     height: 2em;
+    width: calc(100% - 3.5em);
+    display: inline-block;
+    padding: 0;
+    line-height: 1.4em;
+    font-weight: normal;
+    font-size: 1.3em;
+    letter-spacing: -.75px;
     background-image: linear-gradient(#2196F3, #2196F3), linear-gradient(#333, #333);
-  }
-}
 
-.player.is-editing {
-  .player__emblem,
-  .player__main-stats,
-  .player__history,
-  .player__hazards,
-  .player-tabs,
-  .player-links,
-  .player__char {
-    filter: blur(2px);
-  }
-
-  .player-overview {
-    .player__gamertag,
-    .player__kd,
-    .player__edit,
-    .player__race {
-      opacity: 0;
+    &:focus {
+      height: 2em;
+      background-image: linear-gradient(#2196F3, #2196F3), linear-gradient(#333, #333);
     }
   }
 
-  .edit-player {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale(1);
+  button[type="submit"] {
+    @include align-vertically();
+    position: absolute;
+    right: $player-content-padding;
+    margin: 0;
   }
-}
-
-.edit-player__actions {
-  text-align: center;
-}
-
-.edit-player-action__header {
-  text-transform: uppercase;
-  color: #999;
-  margin: 1em 0;
-}
-
-.recent-players {
-  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.5);
-  padding: 1em;
-}
-
-.recent-player {
-  display: inline-block;
-  margin: .2em;
-}
-
-.recent-player .btn {
-  margin: 0;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
-  text-transform: none;
 }

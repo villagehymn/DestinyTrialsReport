@@ -1,5 +1,9 @@
 .player-quick-look {
   @include inset-shadow();
+
+  .player.with-overlay & {
+    @include overlay-modifiers();
+  }
 }
 
 .player-quick-look__form {

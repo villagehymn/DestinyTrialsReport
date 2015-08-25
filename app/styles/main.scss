@@ -25,13 +25,16 @@
 @import 'parts/main-search';
 @import 'parts/footer';
 @import 'parts/blog-post';
+@import 'parts/player-overlay';
 
 // Player card
 @import 'parts/player';
+@import 'parts/edit-player';
 @import 'parts/player-overview';
 @import 'parts/player-quick-look';
 @import 'parts/player-main-stats';
 @import 'parts/player-hazards';
+@import 'parts/recent-players';
 
 // Equipped tab
 @import 'parts/player-weapons';
@@ -39,8 +42,11 @@
 @import 'parts/player-perks';
 @import 'parts/player-armor';
 
-@import 'parts/last-match';
+// Last matches tab
+@import 'parts/player-last-matches';
+
+// Stats tab
 @import 'parts/player-stats';
+
+// Maps tab
 @import 'parts/player-maps';
-@import 'parts/edit-player';
-@import 'parts/maps';

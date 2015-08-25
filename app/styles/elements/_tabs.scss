@@ -1,6 +1,10 @@
 .player-tabs {
   overflow: hidden;
 
+  .player.with-overlay & {
+    @include overlay-modifiers();
+  }
+
   ul {
     overflow: hidden;
     margin-bottom: -1px;
@@ -45,53 +49,15 @@
     box-shadow: 0px 0px 8px 0 rgba(0,0,0,0.5);
   }
 
-  li:nth-child(2).active {
-    background: $last-match-background;
-
-    a,
-    a:focus,
-    a:active,
-    a:hover {
-      color: darken($last-match-background, 50%);
-    }
-
-    .my-dtr & {
-      background: $maps-background;
-
-      a,
-      a:focus,
-      a:active,
-      a:hover {
-        color: darken($maps-background, 50%);
-      }
-    }
-  }
-
-  li:nth-child(3).active {
-    background: $stats-background;
-
-    a,
-    a:focus,
-    a:active,
-    a:hover {
-      color: darken($stats-background, 50%);
-    }
-
-    .my-dtr & {
-      background: $last-match-background;
-
-      a,
-      a:focus,
-      a:active,
-      a:hover {
-        color: darken($last-match-background, 50%);
-      }
-    }
-  }
-
   .tab-content {
     height: auto;
   }
+}
+
+.player-tab__section {
+  padding: $player-content-padding;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, .7);
 }
 
 .player-tab--equipped {
@@ -109,7 +75,47 @@
   }
 }
 
-.player-tab__section {
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
-  box-shadow: 0 1px 0 0 rgba(255, 255, 255, .5);
+.player-tab--last-matches {
+  @include tab-background($last-matches-background);
+
+  ul &.active {
+    background: $last-matches-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($last-matches-background, 50%);
+    }
+  }
+}
+
+.player-tab--stats {
+  @include tab-background($stats-background);
+
+  ul &.active {
+    background: $stats-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($stats-background, 50%);
+    }
+  }
+}
+
+.player-tab--maps {
+  @include tab-background($maps-background);
+
+  ul &.active {
+    background: $maps-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($maps-background, 50%);
+    }
+  }
 }
