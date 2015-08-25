@@ -94,6 +94,11 @@
   }
 }
 
+.player-tab__section {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, .7);
+}
+
 .player-tab--equipped {
   @include tab-background($equipped-background);
 
@@ -107,9 +112,4 @@
       color: darken($equipped-background, 50%);
     }
   }
-}
-
-.player-tab__section {
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
-  box-shadow: 0 1px 0 0 rgba(255, 255, 255, .5);
 }
