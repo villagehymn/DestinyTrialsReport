@@ -23,43 +23,45 @@ angular.module('trialsReportApp')
 
     var getInventory = function (membershipType, player) {
       var setInventory = function (membershipType, player) {
-          return getData(player)
-            .then(function (inventory) {
-              return inventory;
-            });
+          var dfd = $q.defer();
+          dfd.resolve(getData(player));
+
+          return dfd.promise;
         },
-        parallelLoad = function (inventoryItems) {
+        inventoryInParallel = function (inventoryItems) {
           var methods = [
             weaponStats.getData(inventoryItems),
             armorStats.getData(inventoryItems),
             classStats.getData(inventoryItems)
           ];
-          return $q.all(methods)
-            .then($q.spread(function (weapons, armors, classItems) {
-              player.background = classItems.bg;
-              player.emblem = classItems.bg[1];
-              player.weapons = weapons.weapons;
-              player.armors = armors.armors;
-              player.classNodes = classItems.classNodes;
-              player.class = classItems.subClass;
-              setStatPercentage(player, armors);
-              if (classItems.blink && weapons.shotgun) {
-                player.weapons.hazards.push('Blink Shotgun');
-              }
-              if (classItems.hasFusionGrenade && armors.hasStarfireProtocolPerk) {
-                player.armors.hazards.push('Double Grenade');
-              }
-            })
-          );
+          return $q.all(methods);
+        },
+        setPlayerInventory = function (results) {
+          var dfd = $q.defer();
+          var weapons = results[0], armors = results[1], classItems = results[2];
+          player.background = classItems.bg;
+          player.emblem = classItems.bg[1];
+          player.weapons = weapons.weapons;
+          player.armors = armors.armors;
+          player.classNodes = classItems.classNodes;
+          player.class = classItems.subClass;
+          setStatPercentage(player, armors);
+          if (classItems.blink && weapons.shotgun) {
+            player.weapons.hazards.push('Blink Shotgun');
+          }
+          if (classItems.hasFusionGrenade && armors.hasStarfireProtocolPerk) {
+            player.armors.hazards.push('Double Grenade');
+          }
+          dfd.resolve(player);
+
+          return dfd.promise;
         },
         reportProblems = function (fault) {
           console.log(String(fault));
         };
       return setInventory(membershipType, player)
-        .then(function(inventory) {
-          parallelLoad(inventory);
-          return player;
-        })
+        .then(inventoryInParallel)
+        .then(setPlayerInventory)
         .catch(reportProblems);
     };
 

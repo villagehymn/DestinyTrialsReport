@@ -9,7 +9,8 @@ var weaponAtts = ['uniqueWeaponKills', 'uniqueWeaponKillsPrecisionKills', 'uniqu
 function setOrIncrement(object, value, index) {
   if (object[index]){
     object[index].count += value.basic.value;
-  } else {
+  }
+  else {
     object[index] = {
       id: index,
       count: value.basic.value
@@ -21,7 +22,8 @@ function getExtendedStats(member, medals, abilityKills) {
   angular.forEach(member.extended.values, function (value, index) {
     if (index.substring(0, 6) === 'medals') {
       setOrIncrement(medals, value, index);
-    } else if (index.substring(0, 11) === 'weaponKills') {
+    }
+    else if (index.substring(0, 11) === 'weaponKills') {
       setOrIncrement(abilityKills, value, index);
     }
   });
@@ -62,7 +64,8 @@ function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i
         for (var v = 0; v < weaponAtts.length; v++) {
           fireTeam[player_id].weaponsUsed[key][weaponAtts[v]] += value[weaponAtts[v]];
         }
-      } else {
+      }
+      else {
         fireTeam[player_id].weaponsUsed[key] = {referenceId: value.referenceId};
         for (var v = 0; v < weaponAtts.length; v++) {
           fireTeam[player_id].weaponsUsed[key][weaponAtts[v]] = value[weaponAtts[v]];
@@ -72,15 +75,18 @@ function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i
   fireTeam[player_id].playerWeapons = entries[i].extended.weapons;
 }
 
-function setPlayerStats(data, player) {
-  if (data.matchStats[player.id]) {
-    player.allStats = data.matchStats[player.id].allStats;
-    player.recentMatches = data.matchStats[player.id].recentMatches;
-    player.abilityKills = data.matchStats[player.id].abilityKills;
-    player.medals = data.matchStats[player.id].medals;
-    player.weaponsUsed = data.matchStats[player.id].weaponsUsed;
-    player.fireTeam = data.fireTeam;
-  }
+function addPlayerToFireteam(entries, i, fireTeam) {
+  var teammateId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
+  fireTeam[teammateId] = {
+    id: entries[i].player.destinyUserInfo.membershipId,
+    name: entries[i].player.destinyUserInfo.displayName,
+    membershipId: entries[i].player.destinyUserInfo.membershipId,
+    membershipType: entries[i].player.destinyUserInfo.membershipType,
+    emblem: 'http://www.bungie.net' + entries[i].player.destinyUserInfo.iconPath,
+    characterId: entries[i].characterId,
+    level: entries[i].player.characterLevel,
+    class: entries[i].player.characterClass
+  };
 }
 
 angular.module('trialsReportApp')
@@ -106,19 +112,37 @@ angular.module('trialsReportApp')
         url: '/Platform/Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'
       }).then(function (resultPostAct) {
         player.lastThree[recentActivity.id].result = resultPostAct;
-        return {result: resultPostAct, standing: recentActivity.standing};
+        return {result: resultPostAct, standing: recentActivity.standing, isMostRecent: recentActivity.mostRecent};
+      }).catch(function () {});
+    };
+
+    var getFireteamFromActivitiy = function (recentActivity, id) {
+      return $http({
+        method: 'GET',
+        url: '/Platform/Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'
+      }).then(function (resultPostAct) {
+        var fireTeam = {};
+        var data = resultPostAct.data.Response.data;
+        var entries = data.entries, standing = recentActivity.standing;
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].standing === standing) {
+            var player_id = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
+
+            if (player_id !== angular.lowercase(id)) {
+              addPlayerToFireteam(entries, i, fireTeam);
+            }
+          }
+        }
+        return fireTeam;
       }).catch(function () {});
     };
 
     var getMatchSummary = function (lastMatches, id) {
-      var fireTeam = {};
-      var matchStats = {};
-      var recentMatches = [];
+      var fireTeam = {}, matchStats = {}, recentMatches = [];
       for (var m = 0; m < lastMatches.length; m++) {
         if (lastMatches[m]) {
           var data = lastMatches[m].result.data.Response.data;
-          var entries = data.entries;
-          var standing = lastMatches[m].standing;
+          var entries = data.entries, standing = lastMatches[m].standing;
           for (var i = 0; i < entries.length; i++) {
             if (entries[i].standing === standing) {
               var values = entries[i].extended.values, medals = {},
@@ -131,7 +155,8 @@ angular.module('trialsReportApp')
                 if (matchStats[player_id]) {
                   getExtendedStats(entries[i], matchStats[player_id].medals, matchStats[player_id].abilityKills, matchStats[player_id].extendedStats);
                   sumExistingStats(allStats, matchStats, player_id, weaponsUsed, entries, i);
-                } else {
+                }
+                else {
                   getExtendedStats(entries[i], medals, abilityKills, extendedStats);
                   matchStats[player_id] = {
                     allStats: allStats,
@@ -141,18 +166,11 @@ angular.module('trialsReportApp')
                     extendedStats: extendedStats
                   };
                 }
-              } else {
-                var teammateId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-                fireTeam[teammateId] = {
-                  id: entries[i].player.destinyUserInfo.membershipId,
-                  name: entries[i].player.destinyUserInfo.displayName,
-                  membershipId: entries[i].player.destinyUserInfo.membershipId,
-                  membershipType: entries[i].player.destinyUserInfo.membershipType,
-                  emblem: 'http://www.bungie.net' + entries[i].player.destinyUserInfo.iconPath,
-                  characterId: entries[i].characterId,
-                  level: entries[i].player.characterLevel,
-                  class: entries[i].player.characterClass
-                };
+              }
+              else {
+                if (lastMatches[m].isMostRecent) {
+                  addPlayerToFireteam(entries, i, fireTeam);
+                }
               }
             }
           }
@@ -175,15 +193,19 @@ angular.module('trialsReportApp')
     var getLastFive = function (player) {
       var collectMatches = function (player) {
           var dfd = $q.defer();
+          if (player.searched) {
+            player.lastThree[player.recentActivity.id].mostRecent = true;
+          }
           dfd.resolve(player.lastThree);
 
           return dfd.promise;
         },
-        pLoadPostGame = function (previousMatches) {
+        postGameInParallel = function (previousMatches) {
           var methods = [];
           angular.forEach(previousMatches, function (value, key) {
             methods.push(getPostGame(previousMatches[key], player))
           });
+
           return $q.all(methods)
         },
         calculateMatchStats = function (postGames) {
@@ -196,7 +218,7 @@ angular.module('trialsReportApp')
           console.log(String(fault));
         };
       return collectMatches(player)
-        .then(pLoadPostGame)
+        .then(postGameInParallel)
         .then(calculateMatchStats)
         .catch(reportProblems);
     };
@@ -206,6 +228,7 @@ angular.module('trialsReportApp')
       getMatchSummary: getMatchSummary,
       getPostGame: getPostGame,
       getLastFive: getLastFive,
-      getTeamSummary: getTeamSummary
+      getTeamSummary: getTeamSummary,
+      getFireteamFromActivitiy: getFireteamFromActivitiy
     };
   });

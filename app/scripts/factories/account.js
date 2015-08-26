@@ -49,7 +49,8 @@ function setPastActivities(mapStats, mapHash, reversedAct, n, totals, pastActivi
   if (reversedAct[n].values.standing.basic.value === 0) {
     mapStats[mapHash].wins += 1;
     totals.wins += 1;
-  } else {
+  }
+  else {
     mapStats[mapHash].losses += 1;
     totals.losses += 1;
   }

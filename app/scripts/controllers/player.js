@@ -1,6 +1,6 @@
 'use strict';
 
-var getActivitiesFromChar = function ($scope, account, character, currentAccount) {
+var getActivitiesFromChar = function ($scope, account, character, currentAccount, trialsStats) {
 
   var setRecentActivities = function (account, character) {
       return currentAccount.getLastTwentyOne(account, character)
@@ -11,7 +11,7 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 
     setRecentPlayers = function (activities) {
       angular.forEach(activities, function (activity) {
-        currentAccount.getMatchSummary(activity, account.id).then(function (resMembers) {
+        trialsStats.getFireteamFromActivitiy(activity, account.id).then(function (resMembers) {
           var recents = {};
           angular.forEach(resMembers, function (member, key) {
             if (key !== account.id) {
@@ -33,7 +33,7 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 };
 
 angular.module('trialsReportApp')
-  .controller('PlayerCtrl', function ($scope, $routeParams, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard) {
+  .controller('PlayerCtrl', function ($scope, currentAccount, $analytics, playerCard, trialsStats) {
 
     var sendAnalytic = function (event, cat, label) {
       $analytics.eventTrack(event, {
@@ -100,7 +100,7 @@ angular.module('trialsReportApp')
       if (angular.isUndefined($scope.recentPlayers)) {
         $scope.recentPlayers = {};
         angular.forEach($scope.fireteam[0].otherCharacters, function (character) {
-          getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount);
+          getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount, trialsStats);
         });
       }
     };

@@ -22,15 +22,16 @@ angular.module('trialsReportApp')
         });
 
         return $q.all(methods)
-          .then($q.spread(function (playerTwo, playerThree) {
-            mainPlayer.teamFromParams = [playerTwo, playerThree];
-          }));
-      };
+        },
+        addTeamToPlayer = function (playerTwo, playerThree) {
+          var dfd = $q.defer();
+          dfd.resolve(mainPlayer.teamFromParams = [playerTwo, playerThree]);
+
+          return dfd.promise;
+        };
 
       return loadTeam(mainPlayer, teammates)
-        .then(function() {
-          return mainPlayer;
-        })
+        .then(addTeamToPlayer)
         .catch(reportProblems);
     };
 
@@ -41,7 +42,7 @@ angular.module('trialsReportApp')
             return player;
           });
       },
-      parallelLoad = function (player) {
+      playerStatsInParallel = function (player) {
 
         var methods = [
           inventoryStats.getInventory(player.membershipType, player),
@@ -65,19 +66,24 @@ angular.module('trialsReportApp')
         }
 
         return $q.all(methods)
-          .then($q.spread(function (player, stats, postGame) {
-            if (postGame.matchStats[player.id]) {
-              player.allStats = postGame.matchStats[player.id].allStats;
-              player.recentMatches = postGame.matchStats[player.id].recentMatches;
-              player.abilityKills = postGame.matchStats[player.id].abilityKills;
-              player.medals = postGame.matchStats[player.id].medals;
-              player.weaponsUsed = postGame.matchStats[player.id].weaponsUsed;
-              player.fireTeam = postGame.fireTeam;
-            }
-            player.stats = stats.stats;
-            player.nonHazard = stats.nonHazard;
-            player.lighthouse = stats.lighthouse;
-          }));
+      },
+      setPlayerStats = function (result) {
+        var dfd = $q.defer();
+        var player = result[0], stats = result[1], postGame = result[2];
+        if (postGame.matchStats[player.id]) {
+          player.allStats = postGame.matchStats[player.id].allStats;
+          player.recentMatches = postGame.matchStats[player.id].recentMatches;
+          player.abilityKills = postGame.matchStats[player.id].abilityKills;
+          player.medals = postGame.matchStats[player.id].medals;
+          player.weaponsUsed = postGame.matchStats[player.id].weaponsUsed;
+          player.fireTeam = postGame.fireTeam;
+        }
+        player.stats = stats.stats;
+        player.nonHazard = stats.nonHazard;
+        player.lighthouse = stats.lighthouse;
+        dfd.resolve(player);
+
+        return dfd.promise;
       },
       reportProblems = function (fault) {
         console.log(String(fault));
@@ -85,19 +91,14 @@ angular.module('trialsReportApp')
 
     var getPlayerCard = function (player) {
       return setPlayerCard(player)
-        .then(function(player) {
-          return refreshInventory(player).then(function() {
-            return player;
-          });
-        })
+        .then(playerStatsInParallel)
+        .then(setPlayerStats)
         .catch(reportProblems);
     };
 
     var refreshInventory = function (player) {
-      return parallelLoad(player)
-        .then(function() {
-          return player;
-        })
+      return playerStatsInParallel(player)
+        .then(setPlayerStats)
         .catch(reportProblems);
     };
 
