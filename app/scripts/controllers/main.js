@@ -71,7 +71,7 @@ function updateUrl($scope, locationChanger) {
 }
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, currentAccount, $analytics, $location, locationChanger, $localStorage, playerCard, $sce, screenSize) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, playerCard, screenSize) {
     $scope.currentMap = DestinyTrialsDefinitions[257451727];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
