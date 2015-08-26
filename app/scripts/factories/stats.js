@@ -190,7 +190,7 @@ angular.module('trialsReportApp')
       return {fireTeam: fireTeam, matchStats: matchStats};
     };
 
-    var getLastFive = function (player) {
+    var getLastThree = function (player) {
       var collectMatches = function (player) {
           var dfd = $q.defer();
           if (player.searched) {
@@ -227,7 +227,7 @@ angular.module('trialsReportApp')
       getData: getData,
       getMatchSummary: getMatchSummary,
       getPostGame: getPostGame,
-      getLastFive: getLastFive,
+      getLastThree: getLastThree,
       getTeamSummary: getTeamSummary,
       getFireteamFromActivitiy: getFireteamFromActivitiy
     };

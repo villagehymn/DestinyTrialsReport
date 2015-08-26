@@ -62,7 +62,7 @@ angular.module('trialsReportApp')
             trialsStats.getTeamSummary(player.lastThree, player);
           });
         } else {
-          methods.push(trialsStats.getLastFive(player));
+          methods.push(trialsStats.getLastThree(player));
         }
 
         return $q.all(methods)
