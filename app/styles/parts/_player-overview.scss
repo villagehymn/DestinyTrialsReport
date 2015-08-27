@@ -15,7 +15,8 @@
   white-space: nowrap;
   overflow: hidden;
 
-  .player.with-overlay & {
+  .player.with-overlay &,
+  .player.is-virgin {
     @include overlay-modifiers();
   }
 }
@@ -25,6 +26,10 @@
   height: $player-emblem-size;
   margin-right: .5em;
   border-top-left-radius: $player-card-border-radius;
+
+  .player.is-invalid & {
+    opacity: 0;
+  }
 }
 
 .player-header__char {
@@ -32,6 +37,10 @@
   color: $player-card;
   vertical-align: middle;
   max-width: calc(100% - #{$player-emblem-size + 1em});
+
+  .player.with-overlay & {
+    opacity: 0;
+  }
 }
 
 .player-header__gamertag {

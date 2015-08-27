@@ -1,7 +1,8 @@
 .player-quick-look {
   @include inset-shadow();
 
-  .player.with-overlay & {
+  .player.with-overlay &,
+  .player.is-virgin & {
     @include overlay-modifiers();
   }
 }
@@ -43,6 +44,7 @@
   transition: transform ease .2s;
   transition-delay: 1s;
   will-change: transform;
+  opacity: .4;
 
   &:hover {
     opacity: 1;

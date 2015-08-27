@@ -5,6 +5,11 @@
     @include overlay-modifiers();
   }
 
+  .player.is-virgin & {
+    @include overlay-modifiers();
+    pointer-events: none;
+  }
+
   ul {
     overflow: hidden;
     margin-bottom: -1px;
