@@ -27,15 +27,23 @@ function getTeammatesFromCharacters($scope, playerCard, fireTeam) {
   });
 }
 
-function getTeammatesFromHistory($scope, playerCard, locationChanger, fireTeam) {
-  if (fireTeam){
-    angular.forEach(fireTeam, function (player) {
-      player.fireTeam = fireTeam;
-      playerCard.getTeammate(player).then(function (teammate) {
-        $scope.fireteam.push(teammate);
-        updateUrl($scope, locationChanger);
+function addFireteamMember(fireTeam, playerCard, $scope, locationChanger) {
+  angular.forEach(fireTeam, function (teammate) {
+    playerCard.compareLastMatchResults(teammate, $scope.fireteam[0].lastThree).then(function (teammate) {
+      angular.extend($scope.fireteam[0].lastThree, teammate.lastThree);
+      playerCard.refreshInventory(teammate).then(function (player) {
+        $scope.fireteam.push(player);
+        if (locationChanger){
+          updateUrl($scope, locationChanger);
+        }
       });
     });
+  });
+}
+
+function getTeammatesFromHistory($scope, playerCard, locationChanger, fireTeam) {
+  if (fireTeam){
+    addFireteamMember(fireTeam, playerCard, $scope, locationChanger);
   }
   else {
     $scope.fireteam.push(
@@ -48,11 +56,7 @@ function getTeammatesFromHistory($scope, playerCard, locationChanger, fireTeam) 
 function getTeammatesFromParams($scope, playerCard) {
   $scope.fireteam[0].inUrl = true;
   playerCard.getPlayerCard($scope.fireteam[0]).then(function (mainPlayer) {
-    playerCard.teammatesFromUrl(mainPlayer, mainPlayer.teamFromParams).then(function (teammates) {
-      angular.forEach(teammates, function (teammate) {
-        $scope.fireteam.push(teammate);
-      });
-    });
+    addFireteamMember(mainPlayer.teamFromParams, playerCard, $scope);
   });
 }
 

@@ -108,7 +108,7 @@ angular.module('trialsReportApp')
     var getPostGame = function (recentActivity, player) {
       return $http({
         method: 'GET',
-        url: '/Platform/Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'
+        url: 'http://api2.destinytrialsreport.com/PostGameCarnageReport/' + recentActivity.id
       }).then(function (resultPostAct) {
         player.lastThree[recentActivity.id].result = resultPostAct;
         return {result: resultPostAct, standing: recentActivity.standing, isMostRecent: recentActivity.mostRecent};
@@ -118,7 +118,7 @@ angular.module('trialsReportApp')
     var getFireteamFromActivitiy = function (recentActivity, id) {
       return $http({
         method: 'GET',
-        url: '/Platform/Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'
+        url: 'http://api2.destinytrialsreport.com/PostGameCarnageReport/' + recentActivity.id
       }).then(function (resultPostAct) {
         var fireTeam = {};
         var data = resultPostAct.data.Response.data;

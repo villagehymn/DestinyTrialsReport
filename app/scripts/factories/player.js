@@ -2,37 +2,38 @@
 
 angular.module('trialsReportApp')
   .factory('playerCard', function ($http, currentAccount, inventoryStats, trialsStats, $q) {
-    var getTeammate = function (player) {
-      return currentAccount.getCharacters(player.membershipType, player.membershipId, player.name)
-        .then(function (teammate) {
-          teammate.fireTeam = player.fireTeam;
-          teammate.mainPlayerLastThree = player.lastThree;
-          return getPlayerCard(teammate);
-        });
-    };
 
-    var teammatesFromUrl = function (mainPlayer, teammates) {
-      var loadTeam = function (mainPlayer, teammates) {
-
-        var methods = [];
-        angular.forEach(teammates, function (player) {
-          player.inUrl = true;
-          player.mainPlayerLastThree = mainPlayer.lastThree;
-          player.mainPlayerFireteam = mainPlayer.fireTeam;
-          methods.push(getPlayerCard(player));
-        });
-
-        return $q.all(methods)
-        },
-        addTeamToPlayer = function (playerCards) {
+    var compareLastMatchResults = function (player, postGameResults) {
+      var getTeammateCharacters = function (player) {
           var dfd = $q.defer();
-          dfd.resolve(playerCards);
-
+          dfd.resolve(currentAccount.getCharacters(player.membershipType, player.membershipId, player.name));
+          return dfd.promise;
+        },
+        getTeammateActivities = function (teammate) {
+          var dfd = $q.defer();
+          dfd.resolve(currentAccount.getActivities(teammate, 25));
+          return dfd.promise;
+        },
+        updateLastMatchResults = function (teammate) {
+          var dfd = $q.defer();
+          teammate.isTeammate = true;
+          angular.forEach(teammate.lastThree, function (match, key) {
+              if (postGameResults[key]) {
+                teammate.lastThree[key] = postGameResults[key];
+              } else {
+                trialsStats.getPostGame(teammate.lastThree[key], teammate)
+                  .then(function (match) {
+                    teammate.lastThree[key] = match;
+                  });
+              }
+            });
+          dfd.resolve(teammate);
           return dfd.promise;
         };
 
-      return loadTeam(mainPlayer, teammates)
-        .then(addTeamToPlayer)
+      return getTeammateCharacters(player)
+        .then(getTeammateActivities)
+        .then(updateLastMatchResults)
         .catch(reportProblems);
     };
 
@@ -50,24 +51,8 @@ angular.module('trialsReportApp')
           trialsStats.getData(player)
         ];
 
-        if (player.mainPlayerLastThree){
-          var dfd = $q.defer();
-          dfd.resolve(angular.forEach(player.lastThree, function (match, key) {
-            if (player.mainPlayerLastThree[key]) {
-              player.lastThree[key] = player.mainPlayerLastThree[key];
-            } else {
-              trialsStats.getPostGame(player.lastThree[key], player)
-                .then(function (match) {
-                  player.mainPlayerLastThree[key] = match;
-                  player.lastThree[key] = match;
-                });
-            }
-          }));
-          methods.push(dfd.promise);
-        } else {
-          if (player.lastThree) {
-            methods.push(trialsStats.getLastThree(player));
-          }
+        if (player.lastThree && !player.isTeammate) {
+          methods.push(trialsStats.getLastThree(player));
         }
 
         return $q.all(methods)
@@ -75,8 +60,8 @@ angular.module('trialsReportApp')
       setPlayerStats = function (result) {
         var dfd = $q.defer();
         var player = result[0], stats = result[1], postGame = result[2];
-        if (postGame && !postGame.matchStats){
-          postGame = trialsStats.getTeamSummary(postGame, player);
+        if (player.isTeammate) {
+          postGame = trialsStats.getTeamSummary(player.lastThree, player);
         }
         if (postGame && postGame.matchStats[player.id]) {
           player.allStats = postGame.matchStats[player.id].allStats;
@@ -113,8 +98,7 @@ angular.module('trialsReportApp')
 
     return {
       getPlayerCard: getPlayerCard,
-      getTeammate: getTeammate,
       refreshInventory: refreshInventory,
-      teammatesFromUrl: teammatesFromUrl
+      compareLastMatchResults: compareLastMatchResults
     };
   });
