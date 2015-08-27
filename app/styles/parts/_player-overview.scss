@@ -14,11 +14,6 @@
 
   white-space: nowrap;
   overflow: hidden;
-
-  .player.with-overlay &,
-  .player.is-virgin {
-    @include overlay-modifiers();
-  }
 }
 
 .player-header__emblem {
