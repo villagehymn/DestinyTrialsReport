@@ -1,9 +1,14 @@
-<div class="player-tab--last-matches">
+<!-- Mark, you can probably style this better. Consider this a placeholder for now. -->
+<div class="player-tab--last-matches" ng-if="!player.recentMatches">
+  <div class="player-tab__section">
+    <span>No match history exists.</span>
+  </div>
+</div>
+<div class="player-tab--last-matches" ng-if="player.recentMatches">
   <div class="player-tab__section">
     <div class="row">
       <div class="last-match__result col-xs-4" ng-repeat="match in player.recentMatches">
-        <span class="match match--loss" ng-if="match.standing === 1"></span>
-        <span class="match match--win" ng-if="match.standing === 0"></span>
+        <span class="match" ng-class="{'match--win': match.standing === 0, 'match--loss': match.standing === 1}"></span>
         <span class="last-match__score">
           <span class="last-match__score--team" ng-bind="match.team_score"></span>
           -
@@ -16,37 +21,38 @@
   <div class="player-tab__section">
     <div class="row stat-row">
       <div class="col-xs-3 stat">
-        <span ng-bind="player.allStats.kills"></span>
+        <span ng-bind="player.allStats.kills || 0"></span>
         <label>Kills</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.allStats.deaths"></span>
+        <span ng-bind="player.allStats.deaths || 0"></span>
         <label>Deaths</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.allStats.assists"></span>
+        <span ng-bind="player.allStats.assists || 0"></span>
         <label>Assists</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.allStats.precisionKills"></span>
+        <span ng-bind="player.allStats.precisionKills || 0"></span>
         <label>Headshots</label>
       </div>
     </div>
     <div class="row stat-row">
       <div class="col-xs-3 stat">
-        <span ng-bind="player.allStats.killsDeathsAssists | number : 2"></span>
+        <span ng-bind="(player.allStats.killsDeathsAssists | number:2) || 0"></span>
         <label>KA/D</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.allStats.killsDeathsRatio | number : 2"></span>
+        <span ng-bind="(player.allStats.killsDeathsRatio | number:2) || 0"></span>
         <label>K/D</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.allStats.resurrectionsPerformed"></span>
+        <span ng-bind="player.allStats.resurrectionsPerformed || 0"></span>
         <label>Revives</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.allStats.averageLifespan | number : 0"></span>
+        <!-- this really needs to be changed to 'Xm Xs' format -->
+        <span ng-bind="(player.allStats.averageLifespan | number:0) || 0"></span>
         <label>Lifespan</label>
       </div>
     </div>

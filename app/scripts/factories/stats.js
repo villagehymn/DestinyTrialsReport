@@ -97,6 +97,13 @@ angular.module('trialsReportApp')
         method: 'GET',
         url: 'http://api.destinytrialsreport.com/trialsStats/' + player.membershipType + '/' + player.membershipId + '/' + player.characterId
       }).then(function (result) {
+        if(!angular.isUndefined(result.data.stats)) {
+          result.data.stats.activitiesWinPercentage = {
+            'basic': {'value': +(100 * result.data.stats.activitiesWon.basic.value / result.data.stats.activitiesEntered.basic.value).toFixed()},
+            'statId': 'activitiesWinPercentage'
+          };
+          result.data.stats.activitiesWinPercentage.basic.displayValue = result.data.stats.activitiesWinPercentage.basic.value + '%';
+        }
         return result.data;
       });
     };
@@ -153,8 +160,7 @@ angular.module('trialsReportApp')
                 if (matchStats[player_id]) {
                   getExtendedStats(entries[i], matchStats[player_id].medals, matchStats[player_id].abilityKills, matchStats[player_id].extendedStats);
                   sumExistingStats(allStats, matchStats, player_id, weaponsUsed, entries, i);
-                }
-                else {
+                } else {
                   getExtendedStats(entries[i], medals, abilityKills, extendedStats);
                   matchStats[player_id] = {
                     allStats: allStats,
@@ -164,8 +170,7 @@ angular.module('trialsReportApp')
                     extendedStats: extendedStats
                   };
                 }
-              }
-              else {
+              } else {
                 if (lastMatches[key].isMostRecent) {
                   addPlayerToFireteam(entries, i, fireTeam);
                 }
