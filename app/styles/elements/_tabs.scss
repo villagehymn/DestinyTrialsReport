@@ -5,7 +5,12 @@
     @include overlay-modifiers();
   }
 
-  .player.is-virgin & {
+  .player.is-virgin & ul {
+    @include overlay-modifiers();
+    pointer-events: none;
+  }
+
+  .my-dtr .player.is-virgin & {
     @include overlay-modifiers();
     pointer-events: none;
   }
