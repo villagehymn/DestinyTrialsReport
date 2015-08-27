@@ -11,12 +11,6 @@ function getTeammates($scope, playerCard, locationChanger, mainPlayer) {
     else if (mainPlayer.teamFromParams) {
       getTeammatesFromParams($scope, playerCard);
     }
-    else {
-      $scope.fireteam.push(
-        {name: 'Enter Player Name', invalidResult: true},
-        {name: 'Enter Player Name', invalidResult: true}
-      );
-    }
   }
 }
 
@@ -34,13 +28,21 @@ function getTeammatesFromCharacters($scope, playerCard, fireTeam) {
 }
 
 function getTeammatesFromHistory($scope, playerCard, locationChanger, fireTeam) {
-  angular.forEach(fireTeam, function (player) {
-    player.fireTeam = fireTeam;
-    playerCard.getTeammate(player).then(function (teammate) {
-      $scope.fireteam.push(teammate);
-      updateUrl($scope, locationChanger);
+  if (fireTeam){
+    angular.forEach(fireTeam, function (player) {
+      player.fireTeam = fireTeam;
+      playerCard.getTeammate(player).then(function (teammate) {
+        $scope.fireteam.push(teammate);
+        updateUrl($scope, locationChanger);
+      });
     });
-  });
+  }
+  else {
+    $scope.fireteam.push(
+      {name: 'Enter Player Name', invalidResult: true},
+      {name: 'Enter Player Name', invalidResult: true}
+    );
+  }
 }
 
 function getTeammatesFromParams($scope, playerCard) {
