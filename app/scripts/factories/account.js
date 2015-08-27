@@ -77,9 +77,11 @@ function setMapReturnStreak(reversedAct, mapStats, totals, pastActivities, $filt
 
 function setLastThreeMatches(lastThree, activities) {
   for (var l = 0; l < 3; l++) {
-    lastThree[activities[l].activityDetails.instanceId] = {
-      'id': activities[l].activityDetails.instanceId,
-      'standing': activities[l].values.standing.basic.value
+    if (activities[l]){
+      lastThree[activities[l].activityDetails.instanceId] = {
+        'id': activities[l].activityDetails.instanceId,
+        'standing': activities[l].values.standing.basic.value
+      }
     }
   }
 }
