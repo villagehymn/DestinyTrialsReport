@@ -6,6 +6,7 @@ angular.module('trialsReportApp')
       return currentAccount.getCharacters(player.membershipType, player.membershipId, player.name)
         .then(function (teammate) {
           teammate.fireTeam = player.fireTeam;
+          teammate.mainPlayerLastThree = player.lastThree;
           return getPlayerCard(teammate);
         });
     };
@@ -23,9 +24,9 @@ angular.module('trialsReportApp')
 
         return $q.all(methods)
         },
-        addTeamToPlayer = function (playerTwo, playerThree) {
+        addTeamToPlayer = function (playerCards) {
           var dfd = $q.defer();
-          dfd.resolve(mainPlayer.teamFromParams = [playerTwo, playerThree]);
+          dfd.resolve(playerCards);
 
           return dfd.promise;
         };
@@ -50,17 +51,19 @@ angular.module('trialsReportApp')
         ];
 
         if (player.mainPlayerLastThree){
-          angular.forEach(player.lastThree, function (match, key) {
+          var dfd = $q.defer();
+          dfd.resolve(angular.forEach(player.lastThree, function (match, key) {
             if (player.mainPlayerLastThree[key]) {
               player.lastThree[key] = player.mainPlayerLastThree[key];
             } else {
-              return trialsStats.getPostGame(player.lastThree[key])
+              trialsStats.getPostGame(player.lastThree[key], player)
                 .then(function (match) {
+                  player.mainPlayerLastThree[key] = match;
                   player.lastThree[key] = match;
                 });
             }
-            trialsStats.getTeamSummary(player.lastThree, player);
-          });
+          }));
+          methods.push(dfd.promise);
         } else {
           if (player.lastThree) {
             methods.push(trialsStats.getLastThree(player));
@@ -72,6 +75,9 @@ angular.module('trialsReportApp')
       setPlayerStats = function (result) {
         var dfd = $q.defer();
         var player = result[0], stats = result[1], postGame = result[2];
+        if (postGame && !postGame.matchStats){
+          postGame = trialsStats.getTeamSummary(postGame, player);
+        }
         if (postGame && postGame.matchStats[player.id]) {
           player.allStats = postGame.matchStats[player.id].allStats;
           player.recentMatches = postGame.matchStats[player.id].recentMatches;

@@ -151,7 +151,6 @@ angular.module('trialsReportApp')
         var pastActivities = __ret.pastActivities, recentActivity = __ret.recentActivity,
           streak = __ret.streak, totals = __ret.totals, mapStats = __ret.mapStats,
           lastThree = __ret.lastThree;
-
         return angular.extend(account, {
           recentActivity: recentActivity,
           pastActivities: pastActivities.reverse().slice(0, 24).reverse(),

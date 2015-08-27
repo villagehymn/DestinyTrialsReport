@@ -47,15 +47,10 @@ function getTeammatesFromHistory($scope, playerCard, locationChanger, fireTeam) 
 
 function getTeammatesFromParams($scope, playerCard) {
   $scope.fireteam[0].inUrl = true;
-  playerCard.getPlayerCard($scope.fireteam[0]).then(function (player) {
-    $scope.fireteam[0] = player;
-    angular.forEach($scope.fireteam[0].teamFromParams, function (player, index) {
-      player.inUrl = true;
-      player.mainPlayerActivity = $scope.fireteam[0].recentActivity;
-      player.mainPlayerFireteam = $scope.fireteam[0].fireTeam;
-      $scope.fireteam.push(player);
-      playerCard.getPlayerCard(player).then(function (teammate) {
-        $scope.fireteam[index + 1] = teammate;
+  playerCard.getPlayerCard($scope.fireteam[0]).then(function (mainPlayer) {
+    playerCard.teammatesFromUrl(mainPlayer, mainPlayer.teamFromParams).then(function (teammates) {
+      angular.forEach(teammates, function (teammate) {
+        $scope.fireteam.push(teammate);
       });
     });
   });

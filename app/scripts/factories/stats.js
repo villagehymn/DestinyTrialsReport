@@ -102,8 +102,7 @@ angular.module('trialsReportApp')
     };
 
     var getTeamSummary = function (lastMatches, player) {
-      var data = getMatchSummary(lastMatches, player.id);
-      setPlayerStats(data, player);
+      return getMatchSummary(lastMatches, player.id)
     };
 
     var getPostGame = function (recentActivity, player) {
@@ -139,17 +138,16 @@ angular.module('trialsReportApp')
 
     var getMatchSummary = function (lastMatches, id) {
       var fireTeam = {}, matchStats = {}, recentMatches = [];
-      for (var m = 0; m < lastMatches.length; m++) {
-        if (lastMatches[m]) {
-          var data = lastMatches[m].result.data.Response.data;
-          var entries = data.entries, standing = lastMatches[m].standing;
+      angular.forEach(lastMatches, function (match, key) {
+        if (lastMatches[key]) {
+          var data = lastMatches[key].result.data.Response.data;
+          var entries = data.entries, standing = lastMatches[key].standing;
           for (var i = 0; i < entries.length; i++) {
             if (entries[i].standing === standing) {
               var values = entries[i].extended.values, medals = {},
                 abilityKills = {}, allStats = {}, extendedStats = {},
                 extendedWeapons = entries[i].extended.weapons, weaponsUsed = {};
               var player_id = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-
               if (player_id === angular.lowercase(id)) {
                 collectMatchData(extendedWeapons, weaponsUsed, allStats, values);
                 if (matchStats[player_id]) {
@@ -168,7 +166,7 @@ angular.module('trialsReportApp')
                 }
               }
               else {
-                if (lastMatches[m].isMostRecent) {
+                if (lastMatches[key].isMostRecent) {
                   addPlayerToFireteam(entries, i, fireTeam);
                 }
               }
@@ -186,7 +184,7 @@ angular.module('trialsReportApp')
             value.recentMatches = recentMatches;
           });
         }
-      }
+      });
       return {fireTeam: fireTeam, matchStats: matchStats};
     };
 
