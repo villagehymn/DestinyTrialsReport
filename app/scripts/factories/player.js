@@ -62,7 +62,9 @@ angular.module('trialsReportApp')
             trialsStats.getTeamSummary(player.lastThree, player);
           });
         } else {
-          methods.push(trialsStats.getLastThree(player));
+          if (player.lastThree) {
+            methods.push(trialsStats.getLastThree(player));
+          }
         }
 
         return $q.all(methods)
@@ -70,7 +72,7 @@ angular.module('trialsReportApp')
       setPlayerStats = function (result) {
         var dfd = $q.defer();
         var player = result[0], stats = result[1], postGame = result[2];
-        if (postGame.matchStats[player.id]) {
+        if (postGame && postGame.matchStats[player.id]) {
           player.allStats = postGame.matchStats[player.id].allStats;
           player.recentMatches = postGame.matchStats[player.id].recentMatches;
           player.abilityKills = postGame.matchStats[player.id].abilityKills;
