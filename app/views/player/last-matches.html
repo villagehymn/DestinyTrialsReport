@@ -1,4 +1,4 @@
-<div class="player-tab--last-matches" ng-if="player.recentMatches">
+<div class="player-tab--last-matches">
   <div class="player-tab__section">
     <div class="row">
       <div class="last-match__result col-xs-4" ng-repeat="match in player.recentMatches">
@@ -46,7 +46,7 @@
       </div>
       <div class="col-xs-3 stat">
         <!-- this really needs to be changed to 'Xm Xs' format -->
-        <span ng-bind="(player.allStats.averageLifespan | number:0) || 0"></span>
+        <span ng-bind="(player.allStats.averageLifespan | number:0) || '0s'"></span>
         <label>Lifespan</label>
       </div>
     </div>
