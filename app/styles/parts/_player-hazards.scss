@@ -5,7 +5,8 @@
   border-top: 1px solid #eee;
   line-height: 1;
 
-  .player.with-overlay & {
+  .player.with-overlay &,
+  .player.is-virgin & {
     @include overlay-modifiers();
   }
 }

@@ -1,5 +1,5 @@
 <div class="player shadow-z-1"
-     ng-class="(player.isEditing || player.invalidResult) ? 'with-overlay' : 'not-editing'"
+     ng-class="{'with-overlay': player.isEditing, 'is-virgin': (player.name !== 'Enter Player Name' && !player.recentMatches), 'with-overlay is-invalid': player.name === 'Enter Player Name'}"
      ng-if="fireteam[0].name && $index < 3"
      ng-controller="PlayerCtrl">
 

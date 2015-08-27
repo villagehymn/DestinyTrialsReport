@@ -1,13 +1,6 @@
 <div class="player-tab--maps player-maps">
   <div class="player-tab__section">
     <div class="row">
-      <!-- Mark, you can probably style this better. Consider this a placeholder for now. -->
-      <div class="col-xs-12" ng-if="!player.mapStats">
-        <div class="stat-row__header">
-          <span>No match history exists.</span>
-        </div>
-        <div class="row stat-row"></div>
-      </div>
       <div class="col-xs-12" ng-if="player.mapStats" ng-repeat="(key, value) in player.mapStats track by $index">
         <div class="stat-row__header">
           <span ng-bind="DestinyTrialsDefinitions[key].activityName"></span>
