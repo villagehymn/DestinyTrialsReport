@@ -14,11 +14,10 @@ var BUCKET_HEAVY_WEAPON = 953998645;
 var STAT_INTELLECT = 144602215;
 var STAT_DISCIPLINE = 1735777505;
 var STAT_STRENGTH = 4244567218;
-
-// Destiny Stat Definition
-
 var STAT_LIGHT = 2391494160;
+
 var STAT_BASE_DAMAGE = 4043523819;
+
 
 var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
 
