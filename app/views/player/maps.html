@@ -1,7 +1,7 @@
 <div class="player-tab--maps player-maps">
   <div class="player-tab__section">
     <div class="row">
-      <div class="col-xs-12" ng-if="player.mapStats" ng-repeat="(key, value) in player.mapStats track by $index">
+      <div class="col-xs-12" ng-repeat="(key, value) in player.mapStats track by $index">
         <div class="stat-row__header">
           <span ng-bind="DestinyTrialsDefinitions[key].activityName"></span>
         </div>
