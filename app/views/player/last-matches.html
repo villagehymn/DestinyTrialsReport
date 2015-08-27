@@ -51,7 +51,8 @@
         <label>Revives</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.allStats.averageLifespan || 0"></span>
+        <!-- this really needs to be changed to 'Xm Xs' format -->
+        <span ng-bind="(player.allStats.averageLifespan | number:0) || 0"></span>
         <label>Lifespan</label>
       </div>
     </div>
