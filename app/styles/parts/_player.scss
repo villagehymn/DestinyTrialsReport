@@ -12,10 +12,15 @@
       left: 0;
       right: 0;
       z-index: 1;
-      background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.8) 60%);
+      background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.8) 20%, transparent 35%);
       @include mild-inset-shadow();
       border-bottom-left-radius: $player-card-border-radius;
       border-bottom-right-radius: $player-card-border-radius;
+      pointer-events: none;
+
+      .my-dtr & {
+        background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.8) 40%);  
+      }
     }
   }
 
