@@ -117,8 +117,11 @@ angular.module('trialsReportApp')
         method: 'GET',
         url: 'http://api2.destinytrialsreport.com/PostGameCarnageReport/' + recentActivity.id
       }).then(function (resultPostAct) {
+        var dfd = $q.defer();
         player.lastThree[recentActivity.id].result = resultPostAct;
-        return {result: resultPostAct, standing: recentActivity.standing, isMostRecent: recentActivity.mostRecent};
+        dfd.resolve({result: resultPostAct, standing: recentActivity.standing, isMostRecent: recentActivity.mostRecent});
+
+        return dfd.promise;
       }).catch(function () {});
     };
 
@@ -146,7 +149,7 @@ angular.module('trialsReportApp')
     var getMatchSummary = function (lastMatches, id) {
       var fireTeam = {}, matchStats = {}, recentMatches = [];
       angular.forEach(lastMatches, function (match, key) {
-        if (lastMatches[key]) {
+        if (lastMatches[key] && lastMatches[key].result) {
           var data = lastMatches[key].result.data.Response.data;
           var entries = data.entries, standing = lastMatches[key].standing;
           for (var i = 0; i < entries.length; i++) {

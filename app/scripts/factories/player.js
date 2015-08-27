@@ -15,20 +15,19 @@ angular.module('trialsReportApp')
           return dfd.promise;
         },
         updateLastMatchResults = function (teammate) {
-          var dfd = $q.defer();
           teammate.isTeammate = true;
+          var lastThree = {};
           angular.forEach(teammate.lastThree, function (match, key) {
               if (postGameResults[key]) {
-                teammate.lastThree[key] = postGameResults[key];
+                lastThree[key] = postGameResults[key];
               } else {
-                trialsStats.getPostGame(teammate.lastThree[key], teammate)
-                  .then(function (match) {
-                    teammate.lastThree[key] = match;
-                  });
+                lastThree[key] = trialsStats.getPostGame(teammate.lastThree[key], teammate);
               }
             });
-          dfd.resolve(teammate);
-          return dfd.promise;
+          return $q.all(lastThree).then(function (result) {
+            teammate.lastThree = result;
+            return teammate;
+          });
         };
 
       return getTeammateCharacters(player)

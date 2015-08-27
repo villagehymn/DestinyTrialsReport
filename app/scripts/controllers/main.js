@@ -28,17 +28,31 @@ function getTeammatesFromCharacters($scope, playerCard, fireTeam) {
 }
 
 function addFireteamMember(fireTeam, playerCard, $scope, locationChanger) {
-  angular.forEach(fireTeam, function (teammate) {
-    playerCard.compareLastMatchResults(teammate, $scope.fireteam[0].lastThree).then(function (teammate) {
+  var first = fireTeam[Object.keys(fireTeam)[0]];
+  var second = fireTeam[Object.keys(fireTeam)[1]];
+  if (first) {
+    $scope.fireteam[1] = first;
+    playerCard.compareLastMatchResults(first, $scope.fireteam[0].lastThree).then(function (teammate) {
       angular.extend($scope.fireteam[0].lastThree, teammate.lastThree);
+      $scope.fireteam[1] = teammate;
       playerCard.refreshInventory(teammate).then(function (player) {
-        $scope.fireteam.push(player);
-        if (locationChanger){
-          updateUrl($scope, locationChanger);
-        }
+        $scope.$evalAsync( $scope.fireteam[1] = player );
       });
+      if (second) {
+        $scope.fireteam[2] = second;
+        playerCard.compareLastMatchResults(second, $scope.fireteam[0].lastThree).then(function (teammate) {
+          angular.extend($scope.fireteam[0].lastThree, teammate.lastThree);
+          $scope.fireteam[2] = teammate;
+          playerCard.refreshInventory(teammate).then(function (player) {
+            $scope.$evalAsync( $scope.fireteam[2] = player );
+            if (locationChanger){
+              updateUrl($scope, locationChanger);
+            }
+          });
+        });
+      }
     });
-  });
+  }
 }
 
 function getTeammatesFromHistory($scope, playerCard, locationChanger, fireTeam) {
