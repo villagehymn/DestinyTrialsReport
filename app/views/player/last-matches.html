@@ -33,11 +33,11 @@
     </div>
     <div class="row stat-row">
       <div class="col-xs-3 stat">
-        <span ng-bind="(player.allStats.killsDeathsAssists | number:2) || 0"></span>
+        <span ng-bind="(player.allStats.killsDeathsAssists/player.recentMatches.length | number:2) || 0"></span>
         <label>KA/D</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="(player.allStats.killsDeathsRatio | number:2) || 0"></span>
+        <span ng-bind="(player.allStats.killsDeathsRatio/player.recentMatches.length  | number:2) || 0"></span>
         <label>K/D</label>
       </div>
       <div class="col-xs-3 stat">
@@ -46,7 +46,7 @@
       </div>
       <div class="col-xs-3 stat">
         <!-- this really needs to be changed to 'Xm Xs' format -->
-        <span ng-bind="(player.allStats.averageLifespan | number:0) || '0s'"></span>
+        <span ng-bind="(player.allStats.averageLifespan/player.recentMatches.length  | secondsToDateTime | date:'mm:ss') || '0s'"></span>
         <label>Lifespan</label>
       </div>
     </div>
