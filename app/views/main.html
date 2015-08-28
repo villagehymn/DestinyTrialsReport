@@ -1,5 +1,5 @@
 <div class="wrapper" ng-class="{'my-dtr': subdomain}">
-  <header ng-include="headerPartial"></header>
+  <header ng-include="'views/shared/header.html'" ng-controller="HeaderCtrl"></header>
   <div class="content">
     <div class="container-fluid" ng-if="status">
       <div class="row">
@@ -15,5 +15,5 @@
       </div>
     </div>
   </div>
-  <footer ng-include="footerPartial"></footer>
+  <footer ng-include="'views/shared/footer.html'"></footer>
 </div>

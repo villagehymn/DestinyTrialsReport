@@ -1,6 +1,20 @@
 .player-tabs {
   overflow: hidden;
 
+  .player.with-overlay & {
+    @include overlay-modifiers();
+  }
+
+  .player.is-virgin & ul {
+    @include overlay-modifiers();
+    pointer-events: none;
+  }
+
+  .my-dtr .player.is-virgin & {
+    @include overlay-modifiers();
+    pointer-events: none;
+  }
+
   ul {
     overflow: hidden;
     margin-bottom: -1px;
@@ -9,7 +23,7 @@
 
   li {
     width: 33.33%;
-    box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
+    @include inset-shadow();
     text-align: center;
     background: #90A4AE;
 
@@ -45,51 +59,51 @@
     box-shadow: 0px 0px 8px 0 rgba(0,0,0,0.5);
   }
 
-  li:nth-child(1).active {
-    background: $weapons-background;
+  .tab-content {
+    height: auto;
+  }
+}
+
+.player-tab__section {
+  padding: $player-content-padding;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, .7);
+}
+
+.player-tab--equipped {
+  @include tab-background($equipped-background);
+
+  ul &.active {
+    background: $equipped-background;
 
     a,
     a:focus,
     a:active,
     a:hover {
-      color: darken($weapons-background, 50%);
-    }
-
-    .my-dtr & {
-      background: $stats-background;
-
-      a,
-      a:focus,
-      a:active,
-      a:hover {
-        color: darken($stats-background, 50%);
-      }
+      color: darken($equipped-background, 50%);
     }
   }
+}
 
-  li:nth-child(2).active {
-    background: $last-match-background;
+.player-tab--last-matches {
+  @include tab-background($last-matches-background);
+
+  ul &.active {
+    background: $last-matches-background;
 
     a,
     a:focus,
     a:active,
     a:hover {
-      color: darken($last-match-background, 50%);
-    }
-
-    .my-dtr & {
-      background: $maps-background;
-
-      a,
-      a:focus,
-      a:active,
-      a:hover {
-        color: darken($maps-background, 50%);
-      }
+      color: darken($last-matches-background, 50%);
     }
   }
+}
 
-  li:nth-child(3).active {
+.player-tab--stats {
+  @include tab-background($stats-background);
+
+  ul &.active {
     background: $stats-background;
 
     a,
@@ -98,20 +112,20 @@
     a:hover {
       color: darken($stats-background, 50%);
     }
-
-    .my-dtr & {
-      background: $last-match-background;
-
-      a,
-      a:focus,
-      a:active,
-      a:hover {
-        color: darken($last-match-background, 50%);
-      }
-    }
   }
+}
 
-  .tab-content {
-    height: auto;
+.player-tab--maps {
+  @include tab-background($maps-background);
+
+  ul &.active {
+    background: $maps-background;
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      color: darken($maps-background, 50%);
+    }
   }
 }

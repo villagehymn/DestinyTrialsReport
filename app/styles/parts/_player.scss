@@ -1,0 +1,76 @@
+.player {
+  background: #fff;
+  border-radius: 1em;
+  position: relative;
+
+  &.is-virgin {
+    &:after {
+      content: "";
+      position: absolute;
+      top: $player-emblem-size;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.8) 20%, transparent 35%);
+      @include mild-inset-shadow();
+      border-bottom-left-radius: $player-card-border-radius;
+      border-bottom-right-radius: $player-card-border-radius;
+      pointer-events: none;
+
+      .my-dtr & {
+        background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.8) 40%);  
+      }
+    }
+  }
+
+  &.is-invalid {
+    .player-overlay__close {
+      display: none;
+    }
+
+    .edit-player__input {
+      margin-left: $player-content-padding * 2;
+    }
+
+    .edit-player__input input[type="text"] {
+      margin-top: -.1em;
+    }
+  }
+}
+
+.player__content {
+  padding: $player-content-padding;
+}
+
+.player__links {
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.25);
+  background: transparentize(#eee, .3);
+
+  .with-overlay &,
+  .is-virgin & {
+    @include overlay-modifiers();
+  }
+}
+
+.player__links__btns.player__links__btns.player__links__btns {
+  display: flex;
+
+  a {
+    font-size: .9em;
+    color: #999;
+    display: block;
+    flex-grow: 1;
+    text-transform: none;
+    margin: 0;
+    padding: 1em 1em;
+
+     &:first-child {
+      border-bottom-left-radius: 1em;
+    }
+
+    &:nth-child(2) {
+      border-bottom-right-radius: 1em;
+    }
+  }
+}

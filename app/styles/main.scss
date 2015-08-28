@@ -1,5 +1,9 @@
+@import 'inc/vars';
 @import 'inc/fonts';
 @import 'inc/colors';
+@import 'inc/icons';
+@import 'inc/mixins';
+@import 'inc/animations';
 
 @import 'vendor/theme-override';
 
@@ -7,23 +11,42 @@
 @import 'main/typography';
 @import 'main/buttons';
 
-@import 'elements/header';
 @import 'elements/navbar';
-@import 'elements/main-search';
-@import 'elements/footer';
 @import 'elements/loading';
-@import 'elements/player';
-@import 'elements/weapons';
-@import 'elements/gear';
 @import 'elements/popover';
-@import 'elements/post';
 @import 'elements/tabs';
-@import 'elements/last-match';
-@import 'elements/player-stats';
-@import 'elements/player-maps';
 @import 'elements/stats';
-@import 'elements/edit-player';
-@import 'elements/maps';
+@import 'elements/match';
 @import 'elements/modal';
-@import 'elements/blog';
 @import 'elements/carousel';
+
+// Main parts
+@import 'parts/header';
+@import 'parts/main-search';
+@import 'parts/footer';
+@import 'parts/blog-post';
+@import 'parts/player-overlay';
+
+// Player card
+@import 'parts/player';
+@import 'parts/edit-player';
+@import 'parts/player-overview';
+@import 'parts/player-quick-look';
+@import 'parts/player-main-stats';
+@import 'parts/player-hazards';
+@import 'parts/recent-players';
+
+// Equipped tab
+@import 'parts/player-weapons';
+@import 'parts/player-cooldowns';
+@import 'parts/player-perks';
+@import 'parts/player-armor';
+
+// Last matches tab
+@import 'parts/player-last-matches';
+
+// Stats tab
+@import 'parts/player-stats';
+
+// Maps tab
+@import 'parts/player-maps';

@@ -1,0 +1,95 @@
+<div class="player-tab--last-matches">
+  <div class="player-tab__section">
+    <div class="row">
+      <div class="last-match__result col-xs-4" ng-repeat="match in player.recentMatches">
+        <span class="match" ng-class="{'match--win': match.standing === 0, 'match--loss': match.standing === 1}"></span>
+        <span class="last-match__score">
+          <span class="last-match__score--team" ng-bind="match.team_score"></span>
+          -
+          <span class="last-match__score--opponents" ng-bind="match.enemy_score"></span>
+        </span>
+        <span class="last-match__date" ng-bind="match.dateAgo"></span>
+      </div>
+    </div>
+  </div>
+  <div class="player-tab__section">
+    <div class="row stat-row">
+      <div class="col-xs-3 stat">
+        <span ng-bind="player.allStats.kills || 0"></span>
+        <label>Kills</label>
+      </div>
+      <div class="col-xs-3 stat">
+        <span ng-bind="player.allStats.deaths || 0"></span>
+        <label>Deaths</label>
+      </div>
+      <div class="col-xs-3 stat">
+        <span ng-bind="player.allStats.assists || 0"></span>
+        <label>Assists</label>
+      </div>
+      <div class="col-xs-3 stat">
+        <span ng-bind="player.allStats.precisionKills || 0"></span>
+        <label>Headshots</label>
+      </div>
+    </div>
+    <div class="row stat-row">
+      <div class="col-xs-3 stat">
+        <span ng-bind="(player.allStats.killsDeathsAssists/player.recentMatches.length | number:2) || 0"></span>
+        <label>KA/D</label>
+      </div>
+      <div class="col-xs-3 stat">
+        <span ng-bind="(player.allStats.killsDeathsRatio/player.recentMatches.length  | number:2) || 0"></span>
+        <label>K/D</label>
+      </div>
+      <div class="col-xs-3 stat">
+        <span ng-bind="player.allStats.resurrectionsPerformed || 0"></span>
+        <label>Revives</label>
+      </div>
+      <div class="col-xs-3 stat">
+        <!-- this really needs to be changed to 'Xm Xs' format -->
+        <span ng-bind="(player.allStats.averageLifespan/player.recentMatches.length  | secondsToDateTime | date:'mm:ss') || '0s'"></span>
+        <label>Lifespan</label>
+      </div>
+    </div>
+  </div>
+  <div class="player-tab__section">
+    <div class="row">
+      <div class="last-match-weapon col-xs-12" ng-repeat="weapon in player.weaponsUsed track by $index">
+        <div class="row">
+          <div class="col-xs-6 last-weapon-weapon__descr">
+            <img class="last-match-weapon__img img-responsive" ng-src="{{getWeaponByHash(weapon.referenceId).icon}}" alt="{{getWeaponByHash(weapon.referenceId).name}}">
+            <span class="last-match-weapon__title" ng-bind="getWeaponByHash(weapon.referenceId).name"></span>
+          </div>
+          <div class="col-xs-2 stat">
+            <span ng-bind="weapon.uniqueWeaponKills"></span>
+            <label>Kills</label>
+          </div>
+          <div class="col-xs-4 stat">
+            <span ng-bind="weapon.uniqueWeaponPrecisionKills"></span>
+            <label>Headshots</label>
+          </div>
+        </div>
+      </div>
+      <div class="last-match-weapon last-match-weapon--{{specialWeapon.id}} col-xs-12" ng-repeat="specialWeapon in player.abilityKills track by $index"
+           ng-if="getWeaponTitle(specialWeapon.id)">
+        <div class="row">
+          <div class="col-xs-6 last-weapon-weapon__descr">
+            <span class="last-match-weapon__img" style="background-image: url('{{player.classNodes.abilities[specialWeapon.id].icon}}')"></span>
+            <span class="last-match-weapon__title" ng-bind="player.classNodes.abilities[specialWeapon.id].name"></span>
+          </div>
+          <div class="col-xs-2 stat">
+            <span ng-bind="specialWeapon.count"></span>
+            <label>Kills</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="player-tab__section">
+    <div class="row">
+      <div class="col-xs-2 last-match__medal" ng-repeat="medal in player.medals track by $index"
+           bs-popover="{title:DestinyMedalDefinition[medal.id].statName,content:DestinyMedalDefinition[medal.id].statDescription}">
+        <img class="img-responsive" ng-src="{{'https://www.bungie.net' + DestinyMedalDefinition[medal.id].iconImage}}" alt="{{DestinyMedalDefinition[medal.id].statName}}">
+      </div>
+    </div>
+  </div>
+</div>

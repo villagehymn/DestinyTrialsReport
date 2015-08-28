@@ -1,0 +1,27 @@
+@mixin align-both() {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin align-vertically() {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin inset-shadow() {
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.75);
+}
+
+@mixin mild-inset-shadow() {
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.25);
+}
+
+@mixin tab-background($bg) {
+  background-image: linear-gradient(180deg, $bg 0%, darken($bg, 10%) 50%, lighten($bg, 1%) 100%);
+}
+
+@mixin overlay-modifiers() {
+  filter: blur(2px);
+  pointer-events: none;
+}

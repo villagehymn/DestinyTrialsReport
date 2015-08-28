@@ -1,5 +1,5 @@
-<div class="maps">
-  <div class="maps__specific">
+<div class="player-tab--maps player-maps">
+  <div class="player-tab__section">
     <div class="row">
       <div class="col-xs-12" ng-repeat="(key, value) in player.mapStats track by $index">
         <div class="stat-row__header">
@@ -7,52 +7,52 @@
         </div>
         <div class="row stat-row">
           <div class="col-xs-2 col-xs-offset-2 stat">
-            <span ng-bind="value.kills"></span>
+            <span ng-bind="value.kills || 0"></span>
             <label>Kills</label>
           </div>
           <div class="col-xs-2 stat">
-            <span ng-bind="value.deaths"></span>
+            <span ng-bind="value.deaths || 0"></span>
             <label>Deaths</label>
           </div>
           <div class="col-xs-2 stat">
-            <span ng-bind="value.assists"></span>
+            <span ng-bind="value.assists || 0"></span>
             <label>Assists</label>
           </div>
           <div class="col-xs-2 stat">
-            <span ng-bind="value.wins"></span>
+            <span ng-bind="value.wins || 0"></span>
             <label>Wins</label>
           </div>
           <div class="col-xs-2 stat">
-            <span ng-bind="value.losses"></span>
+            <span ng-bind="value.losses || 0"></span>
             <label>Loss</label>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="maps__totals">
+  <div class="player-tab__section">
     <div class="stat-row__header">
       <span>Totals</span>
     </div>
     <div class="row stat-row">
       <div class="col-xs-2 col-xs-offset-2 stat">
-        <span ng-bind="player.totals.kills"></span>
+        <span ng-bind="player.totals.kills || 0"></span>
         <label>Kills</label>
       </div>
       <div class="col-xs-2 stat">
-        <span ng-bind="player.totals.deaths"></span>
+        <span ng-bind="player.totals.deaths || 0"></span>
         <label>Deaths</label>
       </div>
       <div class="col-xs-2 stat">
-        <span ng-bind="player.totals.assists"></span>
+        <span ng-bind="player.totals.assists || 0"></span>
         <label>Assists</label>
       </div>
       <div class="col-xs-2 stat">
-        <span ng-bind="player.totals.wins"></span>
+        <span ng-bind="player.totals.wins || 0"></span>
         <label>Wins</label>
       </div>
       <div class="col-xs-2 stat">
-        <span ng-bind="player.totals.losses"></span>
+        <span ng-bind="player.totals.losses || 0"></span>
         <label>Loss</label>
       </div>
     </div>
