@@ -1,8 +1,7 @@
 .player-quick-look {
   @include inset-shadow();
 
-  .player.with-overlay &,
-  .player.is-virgin & {
+  .player.with-overlay & {
     @include overlay-modifiers();
   }
 }

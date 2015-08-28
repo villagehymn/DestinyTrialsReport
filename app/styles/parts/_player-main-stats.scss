@@ -2,8 +2,7 @@
   padding: $player-content-padding;
   border-top: 1px solid #eee;
 
-  .player.with-overlay &,
-  .player.is-virgin & {
+  .player.with-overlay & {
     @include overlay-modifiers();
   }
 }

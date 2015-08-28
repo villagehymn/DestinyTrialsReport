@@ -5,9 +5,13 @@
     @include overlay-modifiers();
   }
 
-  .player.is-virgin & ul {
+  .player.is-virgin & ul li {
     @include overlay-modifiers();
     pointer-events: none;
+  }
+
+  div:not(.my-dtr) .player.is-virgin & ul li:first-child {
+    filter: blur(0);
   }
 
   .my-dtr .player.is-virgin & {
