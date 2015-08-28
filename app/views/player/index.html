@@ -21,10 +21,10 @@
     <tab class="player-tab--stats" heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
       <div ng-include="'views/player/stats.html'"></div>
     </tab>
-    <tab class="player-tab--maps" heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps">
+    <tab class="player-tab--maps" heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps" disabled="{{player.noRecentMatches}}">
       <div ng-include="'views/player/maps.html'"></div>
     </tab>
-    <tab class="player-tab--last-matches" heading="Last Matches" analytics-on analytics-event="Click" analytics-category="Last Matches">
+    <tab class="player-tab--last-matches" heading="Last Matches" analytics-on analytics-event="Click" analytics-category="Last Matches" disabled="{{player.noRecentMatches}}">
       <div ng-include="'views/player/last-matches.html'"></div>
     </tab>
   </tabset>
