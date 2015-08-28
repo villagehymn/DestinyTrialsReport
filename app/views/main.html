@@ -1,5 +1,5 @@
 <div class="wrapper" ng-class="{'my-dtr': subdomain}">
-  <header ng-include="headerPartial"></header>
+  <header ng-include="'views/shared/header.html'" ng-controller="HeaderCtrl"></header>
   <div class="content">
     <div class="container-fluid" ng-if="status">
       <div class="row">
@@ -11,9 +11,9 @@
     <div class="container-fluid" ng-if="!status">
       <div class="row">
         <div ng-include="'views/blog/index.html'" ng-show="!fireteam[0]"></div>
-        <div ng-include="'views/fireteam/index.html'" ng-show="fireteam[0]"></div>
+        <div ng-include="'views/fireteam/index.html'" ng-show="fireteam[0]" ng-controller="PlayerCtrl"></div>
       </div>
     </div>
   </div>
-  <footer ng-include="footerPartial"></footer>
+  <footer ng-include="'views/shared/footer.html'"></footer>
 </div>

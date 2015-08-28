@@ -1,12 +1,5 @@
 'use strict';
 
-var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
-var avoidNodes = [
-  'Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage', 'Hive Disruptor', 'Oracle Disruptor',
-  'Lich Bane', 'Disciplinarian', 'Demotion', 'Mutineer', 'Dreg Burn', 'Shank Burn', 'Vandal Burn', 'Aspect Swap', 'Burgeoning Hunger',
-  'Cannibalism', 'Dark Breaker', 'Upgrade Damage'
-];
-
 function pushNode(nodeStep, nodes) {
   nodes.push({
     'name': nodeStep.nodeStepName,
@@ -29,6 +22,43 @@ function setDmgElement(nodeStep, weapon) {
   }
 }
 
+function getDefinitionsByBucket(bucketHash) {
+  switch (bucketHash) {
+    case BUCKET_PRIMARY_WEAPON:
+      return {file: DestinyPrimaryWeaponDefinitions, name: 'primary'};
+    case BUCKET_SPECIAL_WEAPON:
+      return {file: DestinySpecialWeaponDefinitions, name: 'special'};
+    case BUCKET_HEAVY_WEAPON:
+      return {file: DestinyHeavyWeaponDefinitions, name: 'heavy'};
+  }
+}
+
+function setNodes(itemS, nodes, object, weapons, type) {
+  for (var i = 0; i < itemS.nodes.length; i++) {
+    if (itemS.nodes[i].isActivated === true) {
+      var nodeStep = itemS.nodes[i].steps;
+      if (nodeStep) {
+        if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
+          if (type === 'special') {
+            if (object.subType === 12) {
+              if (nodeStep.perkHashes[0] === 3752206822) {
+                weapons.hazards.push('Final Round Sniper');
+              }
+            }
+          }
+          pushNode(nodeStep, nodes);
+        } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
+          setDmgElement(nodeStep, object);
+        }
+      }
+    }
+  }
+  weapons[type] = {
+    'definition': object,
+    'nodes': nodes
+  };
+}
+
 angular.module('trialsReportApp')
   .factory('weaponStats', function () {
     var getData = function (items) {
@@ -44,79 +74,24 @@ angular.module('trialsReportApp')
         if (weapons.primary.length && weapons.special.length && weapons.heavy.length) {
           return;
         }
-        var nodes = [];
-        var itemS = items[n];
+        var nodes = [], itemS = items[n];
+        var definitions = getDefinitionsByBucket(itemS.bucketHash);
 
-        if (DestinyPrimaryWeaponDefinitions[itemS.itemHash]) {
-          var primaryW = DestinyPrimaryWeaponDefinitions[itemS.itemHash];
-          for (var i = 0; i < itemS.nodes.length; i++) {
-            if (itemS.nodes[i].isActivated === true) {
-              var nodeStep = itemS.nodes[i].steps;
-              if (nodeStep) {
-                if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                  pushNode(nodeStep, nodes);
-                } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                  setDmgElement(nodeStep, primaryW);
-                }
-              }
-            }
-          }
-          weapons.primary = {
-            'definition': primaryW,
-            'nodes': nodes
-          };
-        } else if (DestinySpecialWeaponDefinitions[itemS.itemHash]) {
-          var secondaryW = DestinySpecialWeaponDefinitions[itemS.itemHash];
-          for (var i = 0; i < itemS.nodes.length; i++) {
-            if (itemS.nodes[i].isActivated === true) {
-              var nodeStep = itemS.nodes[i].steps;
-              if (nodeStep) {
-                if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                  if (secondaryW.subType === 12) {
-                    if (nodeStep.perkHashes[0] === 3752206822) {
-                      weapons.hazards.push('Final Round Sniper');
-                    }
-                  }
-                  pushNode(nodeStep, nodes);
-                } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                  setDmgElement(nodeStep, secondaryW);
-                }
-              }
-            }
-          }
-          weapons.special = {
-            'definition': secondaryW,
-            'nodes': nodes
-          };
-          if ((secondaryW.subType === 12) && (secondaryW.name !== 'No Land Beyond')) {
+        if (definitions) {
+          var weapon = definitions.file[itemS.itemHash];
+          setNodes(itemS, nodes, weapon, weapons, definitions.name);
+
+          if ((weapon.subType === 12) && (weapon.name !== 'No Land Beyond')) {
             for (var i = 0; i < itemS.stats.length; i++) {
-              if (itemS.stats[i].statHash === 4043523819 && itemS.stats[i].value > 16) {
+              if (itemS.stats[i].statHash === STAT_BASE_DAMAGE && itemS.stats[i].value > 16) {
                 if ((itemS.primaryStat.value * itemS.stats[i].value) > 8577) {
                   weapons.hazards.push('Revive Kill Sniper');
                 }
               }
             }
-          } else if (secondaryW.subType === 7) {
+          } else if (weapon.subType === 7) {
             shotgun = true;
           }
-        } else if (DestinyHeavyWeaponDefinitions[itemS.itemHash]) {
-          var heavyW = DestinyHeavyWeaponDefinitions[itemS.itemHash];
-          for (var i = 0; i < itemS.nodes.length; i++) {
-            if (itemS.nodes[i].isActivated === true) {
-              var nodeStep = itemS.nodes[i].steps;
-              if (nodeStep) {
-                if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-                  pushNode(nodeStep, nodes);
-                } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-                  setDmgElement(nodeStep, heavyW);
-                }
-              }
-            }
-          }
-          weapons.heavy = {
-            'definition': heavyW,
-            'nodes': nodes
-          };
         }
       }
 

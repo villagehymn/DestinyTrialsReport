@@ -1,31 +1,30 @@
 <div class="player shadow-z-1"
-     ng-class="(player.isEditing || player.invalidResult) ? 'is-editing' : 'not-editing'"
+     ng-class="{'with-overlay': player.isEditing, 'is-virgin': (player.name !== 'Enter Player Name' && !player.recentMatches), 'with-overlay is-invalid': player.name === 'Enter Player Name'}"
      ng-if="fireteam[0].name && $index < 3">
 
-  <div ng-include="infoPartial"></div>
+  <div ng-include="'views/player/overview.html'"></div>
 
   <tabset class="player-tabs" ng-if="!subdomain">
-    <tab heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
-      <div ng-include="'views/fireteam/weapons.html'"></div>
-      <div ng-include="'views/fireteam/gear.html'"></div>
+    <tab class="player-tab--equipped" heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
+      <div ng-include="'views/player/equipped.html'"></div>
     </tab>
-    <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
-      <div ng-include="'views/fireteam/history.html'"></div>
+    <tab class="player-tab--last-matches" heading="Last Matches" analytics-on analytics-event="Click" analytics-category="Last Matches">
+      <div ng-include="'views/player/last-matches.html'"></div>
     </tab>
-    <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
-      <div ng-include="'views/fireteam/addStats.html'"></div>
+    <tab class="player-tab--stats" heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+      <div ng-include="'views/player/stats.html'"></div>
     </tab>
   </tabset>
 
   <tabset class="player-tabs" ng-if="subdomain">
-    <tab heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
-      <div ng-include="'views/fireteam/addStats.html'"></div>
+    <tab class="player-tab--stats" heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+      <div ng-include="'views/player/stats.html'"></div>
     </tab>
-    <tab heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps">
-      <div ng-include="'views/fireteam/maps.html'"></div>
+    <tab class="player-tab--maps" heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps">
+      <div ng-include="'views/player/maps.html'"></div>
     </tab>
-    <tab heading="Last Match" analytics-on analytics-event="Click" analytics-category="Last Match">
-      <div ng-include="'views/fireteam/history.html'"></div>
+    <tab class="player-tab--last-matches" heading="Last Matches" analytics-on analytics-event="Click" analytics-category="Last Matches">
+      <div ng-include="'views/player/last-matches.html'"></div>
     </tab>
   </tabset>
 
@@ -51,8 +50,8 @@
     </div>
   </div>
 
-  <div class="edit-player">
-    <div class="edit-player__close" ng-click="toggleEdit(player)">
+  <div class="player-overlay">
+    <div class="player-overlay__close" ng-click="toggleEdit(player)">
       <i class="material-icons">&#xE5CD;</i>
     </div>
     <div ng-if="fireteam[0].name && $index < 3 && $index > -1">
@@ -64,8 +63,8 @@
           <input type="text" placeholder="{{fireteam[$index].name}}" class="form-control" ng-model="teammateName">
         </form>
       </div>
-      <div class="edit-player__actions" ng-if="!player.invalidResult">
-        <!--<div class="edit-player-action__header">
+      <div class="player-overlay__content" ng-if="!player.invalidResult">
+        <!--<div class="player-overlay-action__header">
           <span ng-bind="fireteam[$index].name"></span>'s characters
         </div>
         <div class="btn-group" ng-if="subdomain != 'my'" ng-show="fireteam[$index].otherCharacters.length > 1">
@@ -82,12 +81,12 @@
           </ul>
         </div>-->
         <div class="recent-players" ng-show="!$first">
-          <div class="edit-player-action__header">
+          <div class="player-overlay-content__header">
             <span ng-bind="fireteam[0].name + '\'s recent teammates'"></span>
           </div>
           <div class="recent-player" ng-repeat="player in recentPlayers track by $index">
             <a class="btn btn-white btn-raised" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
-              analytics-on analytics-event="Click" analytics-category="Recent Player">
+               analytics-on analytics-event="Click" analytics-category="Recent Player">
             </a>
           </div>
         </div>

@@ -1,0 +1,94 @@
+<div class="player-overview">
+  <div class="player-header" style="background-image:url('{{player.background[0]}}')">
+    <div class="player-header__title">
+      <img class="player-header__emblem" ng-src="{{player.emblem}}" alt="Emblem">
+      <div class="player-header__char">
+        <h2 class="player-header__gamertag" ng-bind="player.name"></h2>
+        <div class="player-info" ng-show="player.level && player.class.name">
+          <span class="player-info__class" ng-bind="player.class.name"></span>
+          <span class="player-info__light highlight"><span ng-bind-html="'<span>&#10022;</span>' + player.level"></span></span>
+          <span class="player-info__grimoire">
+            <img src="/images/grimoire.png" alt="Grimoire"><span ng-bind="player.grimoire"></span>
+          </span>
+        </div>
+      </div>
+      <span class="edit-player__btn shadow-z-1"
+            ng-if="!subdomain && !$first" ng-click="toggleEdit(player)"
+            analytics-on analytics-event="Click" analytics-category="Edit">
+        <i class="material-icons">&#xE254;</i>
+      </span>
+    </div>
+  </div>
+  <!--<div class="player__summary">-->
+     <!--<div class="ng-class: {'highly-skilled' : player.stats.killsDeathsRatio.basic.value >= 2.0,-->
+                            <!--'skilled' : player.stats.killsDeathsRatio.basic.value < 2.0 && player.stats.killsDeathsRatio.basic.value >= 1.5,-->
+                            <!--'above-average' : player.stats.killsDeathsRatio.basic.value < 1.5 && player.stats.killsDeathsRatio.basic.value >= 1.1,-->
+                            <!--'average' : player.stats.killsDeathsRatio.basic.value < 1.1 && player.stats.killsDeathsRatio.basic.value >= 0.9,-->
+                            <!--'below-average' : player.stats.killsDeathsRatio.basic.value < 0.9 && player.stats.killsDeathsRatio.basic.value >= 0.7,-->
+                            <!--'has-other-qualities' : player.stats.killsDeathsRatio.basic.value < 0.7 }">-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value >= 2.0">-->
+         <!--Highly skilled player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 2.0 && player.stats.killsDeathsRatio.basic.value >= 1.5">-->
+         <!--Skilled player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 1.5 && player.stats.killsDeathsRatio.basic.value >= 1.1">-->
+         <!--Above average player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 1.1 && player.stats.killsDeathsRatio.basic.value >= 0.9">-->
+         <!--Average player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 0.9 && player.stats.killsDeathsRatio.basic.value >= 0.7">-->
+         <!--Below average player-->
+       <!--</div>-->
+       <!--<div ng-show="player.stats.killsDeathsRatio.basic.value < 0.7">-->
+         <!--Has other qualities-->
+       <!--</div>-->
+     <!--</div>-->
+  </div>
+  <div class="player__content player-quick-look">
+    <div class="row">
+      <div class="player-quick-look__form col-xs-9">
+        <div class="player-quick-look__form__matches" trials-history="player.pastActivities" player-kd="player.stats.killsDeathsRatio.basic.value"></div>
+        <label class="data-label">Recent Matches</label>
+      </div>
+      <div class="player-quick-look__kd col-xs-3">
+        <div class="player-quick-look__kd__nr">
+          <span ng-bind="player.stats.killsDeathsRatio.basic.displayValue || 'N/A'"></span>
+        </div>
+        <label class="data-label">K/D</label>
+      </div>
+    </div>
+  </div>
+  <div class="player-main-stats">
+    <div class="row">
+      <div class="col-xs-3 stat">
+        <span ng-bind="player.stats.activitiesWinPercentage.basic.displayValue || 'N/A'"></span>
+        <label>Wins</label>
+      </div>
+      <div class="col-xs-3 stat">
+        <span ng-bind="player.winStreak.length || 'N/A'"></span>
+        <span class="match player-main-stats__streak" ng-class="{'match--win': player.winStreak.type === 0, 'match--loss': player.winStreak.type === 1}"></span>
+        <label>Streak</label>
+      </div>
+      <div class="col-xs-3 stat">
+        <span ng-bind="player.stats.combatRating.basic.displayValue || 'N/A'"></span>
+        <label>Rating</label>
+      </div>
+      <div class="col-xs-3 stat">
+        <span class="player-main-stats__lighthouse fail" ng-if="player.lighthouse !== true"><i class="material-icons">&#xE14C;</i></span>
+        <span class="player-main-stats__lighthouse success" ng-if="player.lighthouse === true"><i class="material-icons">&#xE876;</i></span>
+        <label>Flawless</label>
+      </div>
+    </div>
+  </div>
+  <div class="player-hazards">
+    <div ng-repeat="hazard in player.nonHazard.concat(player.weapons.hazards, player.armors.hazards, player.classNodes.hazards) track by $index"
+         ng-bind="hazard" ng-class="{'player-hazard--developer': hazard === 'Site Developer', 'player-hazard--donator': hazard === 'Site Donator'}"
+         bs-popover="{content:DestinyHazardDefinition[hazard]}" class="player-hazard">
+    </div>
+    <div class="player-hazard player-hazard--none">
+      This Guardian doesn't need cheap tricks
+    </div>
+  </div>
+</div>

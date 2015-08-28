@@ -1,0 +1,54 @@
+.player {
+  background: #fff;
+  border-radius: 1em;
+  position: relative;
+
+  &.is-invalid {
+    .player-overlay__close {
+      display: none;
+    }
+
+    .edit-player__input {
+      margin-left: $player-content-padding * 2;
+    }
+
+    .edit-player__input input[type="text"] {
+      margin-top: -.1em;
+    }
+  }
+}
+
+.player__content {
+  padding: $player-content-padding;
+}
+
+.player__links {
+  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.25);
+  background: transparentize(#eee, .3);
+
+  .with-overlay & {
+    @include overlay-modifiers();
+  }
+}
+
+.player__links__btns.player__links__btns.player__links__btns {
+  display: flex;
+
+  a {
+    font-size: .9em;
+    color: #999;
+    display: block;
+    flex-grow: 1;
+    text-transform: none;
+    margin: 0;
+    padding: 1em 1em;
+
+     &:first-child {
+      border-bottom-left-radius: 1em;
+    }
+
+    &:nth-child(2) {
+      border-bottom-right-radius: 1em;
+    }
+  }
+}
