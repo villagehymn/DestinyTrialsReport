@@ -19,6 +19,10 @@
     opacity: 1;
   }
 
+  .is-invalid & {
+    display: none;
+  }
+
   i {
     position: relative;
     @include align-both();
