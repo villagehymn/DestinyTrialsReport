@@ -11,7 +11,7 @@
     <div class="container-fluid" ng-if="!status">
       <div class="row">
         <div ng-include="'views/blog/index.html'" ng-show="!fireteam[0]"></div>
-        <div ng-include="'views/fireteam/index.html'" ng-show="fireteam[0]"></div>
+        <div ng-include="'views/fireteam/index.html'" ng-show="fireteam[0]" ng-controller="PlayerCtrl"></div>
       </div>
     </div>
   </div>
