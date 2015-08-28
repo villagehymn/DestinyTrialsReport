@@ -1,5 +1,5 @@
 <div class="player shadow-z-1"
-     ng-class="{'with-overlay': player.isEditing, 'is-virgin': (player.name !== 'Enter Player Name' && !player.recentMatches), 'with-overlay is-invalid': player.name === 'Enter Player Name'}"
+     ng-class="{'with-overlay': player.isEditing, 'with-overlay is-invalid': player.name === 'Enter Player Name'}"
      ng-if="fireteam[0].name && $index < 3"
      ng-controller="PlayerCtrl">
 
@@ -9,10 +9,10 @@
     <tab class="player-tab--equipped" heading="Equipped" analytics-on analytics-event="Click" analytics-category="Equipped">
       <div ng-include="'views/player/equipped.html'"></div>
     </tab>
-    <tab class="player-tab--last-matches" heading="Last Matches" analytics-on analytics-event="Click" analytics-category="Last Matches">
+    <tab class="player-tab--last-matches" heading="Last Matches" analytics-on analytics-event="Click" analytics-category="Last Matches" disabled="{{player.noRecentMatches}}">
       <div ng-include="'views/player/last-matches.html'"></div>
     </tab>
-    <tab class="player-tab--stats" heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats">
+    <tab class="player-tab--stats" heading="Stats" analytics-on analytics-event="Click" analytics-category="Stats" disabled="{{player.noRecentMatches}}">
       <div ng-include="'views/player/stats.html'"></div>
     </tab>
   </tabset>

@@ -70,6 +70,7 @@ angular.module('trialsReportApp')
           player.weaponsUsed = postGame.matchStats[player.id].weaponsUsed;
           player.fireTeam = postGame.fireTeam;
         }
+        player.noRecentMatches = !player.recentMatches;
         player.stats = stats.stats;
         player.nonHazard = stats.nonHazard;
         player.lighthouse = stats.lighthouse;
