@@ -83,15 +83,6 @@ angular.module('trialsReportApp')
           player.searched = getFireteam;
           playerCard.getPlayerCard(player).then(function (teammate) {
             $scope.$evalAsync( $scope.fireteam[index] = teammate );
-            if (getFireteam) {
-              var charCount = 1;
-              angular.forEach($scope.fireteam[0].fireTeam, function (member) {
-                playerCard.getPlayerCard(member).then(function (teammate) {
-                  $scope.$evalAsync( $scope.fireteam[charCount] = teammate );
-                  charCount++;
-                });
-              });
-            }
           });
         });
     };
