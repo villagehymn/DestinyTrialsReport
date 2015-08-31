@@ -1,20 +1,20 @@
 'use strict';
 
+function setPlayerLastMatches(postGame, player) {
+  if (postGame && postGame.matchStats[player.id]) {
+    player.allStats = postGame.matchStats[player.id].allStats;
+    player.recentMatches = postGame.matchStats[player.id].recentMatches;
+    player.abilityKills = postGame.matchStats[player.id].abilityKills;
+    player.medals = postGame.matchStats[player.id].medals;
+    player.weaponsUsed = postGame.matchStats[player.id].weaponsUsed;
+    player.fireTeam = postGame.fireTeam;
+  }
+}
 angular.module('trialsReportApp')
   .factory('playerCard', function ($http, currentAccount, inventoryStats, trialsStats, $q) {
 
     var compareLastMatchResults = function (player, postGameResults) {
-      var getTeammateCharacters = function (player) {
-          var dfd = $q.defer();
-          dfd.resolve(currentAccount.getCharacters(player.membershipType, player.membershipId, player.name));
-          return dfd.promise;
-        },
-        getTeammateActivities = function (teammate) {
-          var dfd = $q.defer();
-          dfd.resolve(currentAccount.getActivities(teammate, 25));
-          return dfd.promise;
-        },
-        updateLastMatchResults = function (teammate) {
+      var updateLastMatchResults = function (teammate) {
           teammate.isTeammate = true;
           var lastThree = {};
           angular.forEach(teammate.lastThree, function (match, key) {
@@ -28,11 +28,18 @@ angular.module('trialsReportApp')
             teammate.lastThree = result;
             return teammate;
           });
-        };
+      },
+      updateMatchStats = function (player) {
+        var dfd = $q.defer();
+        dfd.resolve(trialsStats.getTeamSummary(player.lastThree, player));
 
-      return getTeammateCharacters(player)
-        .then(getTeammateActivities)
-        .then(updateLastMatchResults)
+        return dfd.promise.then(function (postGame) {
+          setPlayerLastMatches(postGame, player);
+        });
+      };
+
+      return updateLastMatchResults(player, postGameResults)
+        .then(updateMatchStats)
         .catch(reportProblems);
     };
 
@@ -59,17 +66,7 @@ angular.module('trialsReportApp')
       setPlayerStats = function (result) {
         var dfd = $q.defer();
         var player = result[0], stats = result[1], postGame = result[2];
-        if (player.isTeammate) {
-          postGame = trialsStats.getTeamSummary(player.lastThree, player);
-        }
-        if (postGame && postGame.matchStats[player.id]) {
-          player.allStats = postGame.matchStats[player.id].allStats;
-          player.recentMatches = postGame.matchStats[player.id].recentMatches;
-          player.abilityKills = postGame.matchStats[player.id].abilityKills;
-          player.medals = postGame.matchStats[player.id].medals;
-          player.weaponsUsed = postGame.matchStats[player.id].weaponsUsed;
-          player.fireTeam = postGame.fireTeam;
-        }
+        setPlayerLastMatches(postGame, player);
         player.noRecentMatches = !player.recentMatches;
         player.stats = stats.stats;
         player.nonHazard = stats.nonHazard;

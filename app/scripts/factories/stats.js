@@ -181,16 +181,18 @@ angular.module('trialsReportApp')
             }
           }
           var teamIndex = data.teams[0].standing.basic.value === standing ? 0 : 1;
-          recentMatches.push({
-            standing: standing,
-            team_score: data.teams[teamIndex].score.basic.value,
-            enemy_score: data.teams[teamIndex == 0 ? 1 : 0].score.basic.value,
-            dateAgo: moment(data.period).fromNow(),
-            duration: data.entries[0].values.activityDurationSeconds.basic.displayValue
-          });
-          angular.forEach(matchStats, function (value) {
-            value.recentMatches = recentMatches;
-          });
+          if (data.teams[teamIndex]) {
+            recentMatches.push({
+              standing: standing,
+              team_score: data.teams[teamIndex].score.basic.value,
+              enemy_score: data.teams[teamIndex == 0 ? 1 : 0].score.basic.value,
+              dateAgo: moment(data.period).fromNow(),
+              duration: data.entries[0].values.activityDurationSeconds.basic.displayValue
+            });
+            angular.forEach(matchStats, function (value) {
+              value.recentMatches = recentMatches;
+            });
+          }
         }
       });
       return {fireTeam: fireTeam, matchStats: matchStats};
