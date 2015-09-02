@@ -75,22 +75,13 @@ function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i
   fireTeam[player_id].playerWeapons = entries[i].extended.weapons;
 }
 
-function addPlayerToFireteam(entries, i, fireTeam, User) {
+function addPlayerToFireteam(entries, i, fireTeam, Player) {
   var teammateId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-  fireTeam[teammateId] = User.build(entries[i].player.destinyUserInfo, entries[i].player.destinyUserInfo.displayName, entries[i]);
-  //fireTeam[teammateId] = {
-  //  name: entries[i].player.destinyUserInfo.displayName,
-  //  membershipId: entries[i].player.destinyUserInfo.membershipId,
-  //  membershipType: entries[i].player.destinyUserInfo.membershipType,
-  //  characterInfo: {characterId: entries[i].characterId}
-  //  //emblem: 'http://www.bungie.net' + entries[i].player.destinyUserInfo.iconPath,
-  //  //level: entries[i].player.characterLevel,
-  //  //class: entries[i].player.characterClass
-  //};
+  fireTeam[teammateId] = Player.build(entries[i].player.destinyUserInfo, entries[i].player.destinyUserInfo.displayName, entries[i]);
 }
 
 angular.module('trialsReportApp')
-  .factory('trialsStats', function ($http, $q, User) {
+  .factory('trialsStats', function ($http, $q, Player) {
 
     var getData = function (player) {
       return $http({
@@ -138,7 +129,7 @@ angular.module('trialsReportApp')
             var player_id = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
 
             if (player_id !== angular.lowercase(id)) {
-              addPlayerToFireteam(entries, i, fireTeam, User);
+              addPlayerToFireteam(entries, i, fireTeam, Player);
             }
           }
         }
@@ -175,7 +166,7 @@ angular.module('trialsReportApp')
                 }
               } else {
                 if (lastMatches[key].isMostRecent) {
-                  addPlayerToFireteam(entries, i, fireTeam, User);
+                  addPlayerToFireteam(entries, i, fireTeam, Player);
                 }
               }
             }

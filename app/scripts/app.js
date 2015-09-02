@@ -1,6 +1,6 @@
 'use strict';
 
-function setUser(currentAccount, name, platform, playerCard) {
+function setUser(currentAccount, name, platform) {
   var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/';
   return currentAccount.getAccount(url)
     .then(function (player) {
@@ -8,21 +8,21 @@ function setUser(currentAccount, name, platform, playerCard) {
       var segments = location.hostname.split('.');
       var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
         player.myProfile = subdomain === 'my';
-      return playerCard.getPlayerCard(player)
+      return currentAccount.getPlayerCard(player)
         .then(function (player) {
           return [player];
         });
     });
 }
 
-function getFromParams(currentAccount, $route, playerCard) {
+function getFromParams(currentAccount, $route) {
   if (angular.isDefined($route.current.params.playerName)) {
     var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
-    return setUser(currentAccount, $route.current.params.playerName, platform, playerCard);
+    return setUser(currentAccount, $route.current.params.playerName, platform);
   }
 }
 
-function getAllFromParams($route, currentAccount, playerCard, $q) {
+function getAllFromParams($route, currentAccount, $q) {
   if (angular.isDefined($route.current.params.playerOne)) {
     var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
     var params = $route.current.params;
@@ -38,7 +38,7 @@ function getAllFromParams($route, currentAccount, playerCard, $q) {
       },
       teammatesInParallel = function (player) {
         var methods = [
-          playerCard.getPlayerCard(player),
+          currentAccount.getPlayerCard(player),
           currentAccount.getAccount(url + params.playerTwo),
           currentAccount.getAccount(url + params.playerThree)
         ];

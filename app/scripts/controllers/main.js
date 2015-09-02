@@ -1,6 +1,6 @@
 'use strict';
 
-function getTeammates($scope, playerCard, locationChanger, mainPlayer) {
+function getTeammates($scope, locationChanger, mainPlayer) {
   if ($scope.subdomain) {
     getTeammatesFromCharacters($scope, mainPlayer.characters);
   }
@@ -87,7 +87,7 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, playerCard, screenSize, currentAccount, trialsStats) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats) {
     $scope.currentMap = DestinyTrialsDefinitions[270739640];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
@@ -141,7 +141,7 @@ angular.module('trialsReportApp')
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
       if (angular.isDefined($scope.fireteam[0])) {
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
-        getTeammates($scope, playerCard, locationChanger, $scope.fireteam[0]);
+        getTeammates($scope, locationChanger, $scope.fireteam[0]);
       } else {
         $scope.fireteam = null;
       }

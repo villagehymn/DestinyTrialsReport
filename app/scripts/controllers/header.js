@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('HeaderCtrl', function ($scope, $location, playerCard, $sce) {
+  .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce) {
     $scope.mapModal = {
       content: $sce.trustAsHtml(
         '<div class="map-modal">' +
@@ -23,7 +23,7 @@ angular.module('trialsReportApp')
 
     $scope.refreshInventory = function (fireteam) {
       angular.forEach(fireteam, function (player, index) {
-        playerCard.refreshInventory($scope.fireteam[index]).then(function (teammate) {
+        currentAccount.refreshInventory($scope.fireteam[index]).then(function (teammate) {
           $scope.$evalAsync( $scope.fireteam[index] = teammate );
         });
       });

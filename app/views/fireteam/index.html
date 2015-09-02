@@ -1,12 +1,12 @@
 <div ng-if="screenSize.xs">
   <ul rn-carousel>
-    <li ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></li>
+    <li ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-model="player" ng-include="'views/player/index.html'"></li>
   </ul>
 </div>
 
 <div ng-if="screenSize.sm">
   <ul rn-carousel>
-    <li><div class="col-xs-12" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></div></li>
+    <li><div class="col-xs-12" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-model="player" ng-include="'views/player/index.html'"></div></li>
     <li><div class="col-xs-12"></div></li>
   </ul>
 </div>
