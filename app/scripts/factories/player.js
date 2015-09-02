@@ -1,12 +1,13 @@
 'use strict';
 
 function setPlayerLastMatches(postGame, player) {
-  if (postGame && postGame.matchStats[player.id]) {
-    player.allStats = postGame.matchStats[player.id].allStats;
-    player.recentMatches = postGame.matchStats[player.id].recentMatches;
-    player.abilityKills = postGame.matchStats[player.id].abilityKills;
-    player.medals = postGame.matchStats[player.id].medals;
-    player.weaponsUsed = postGame.matchStats[player.id].weaponsUsed;
+  var playerId = player.membershipId;
+  if (postGame && postGame.matchStats[playerId]) {
+    player.allStats = postGame.matchStats[playerId].allStats;
+    player.recentMatches = postGame.matchStats[playerId].recentMatches;
+    player.abilityKills = postGame.matchStats[playerId].abilityKills;
+    player.medals = postGame.matchStats[playerId].medals;
+    player.weaponsUsed = postGame.matchStats[playerId].weaponsUsed;
     player.fireTeam = postGame.fireTeam;
   }
 }
@@ -17,21 +18,21 @@ angular.module('trialsReportApp')
       var updateLastMatchResults = function (teammate) {
           teammate.isTeammate = true;
           var lastThree = {};
-          angular.forEach(teammate.lastThree, function (match, key) {
+          angular.forEach(teammate.activities.lastThree, function (match, key) {
               if (postGameResults[key]) {
                 lastThree[key] = postGameResults[key];
               } else {
-                lastThree[key] = trialsStats.getPostGame(teammate.lastThree[key], teammate);
+                lastThree[key] = trialsStats.getPostGame(teammate.activities.lastThree[key], teammate);
               }
             });
           return $q.all(lastThree).then(function (result) {
-            teammate.lastThree = result;
+            teammate.activities.lastThree = result;
             return teammate;
           });
       },
       updateMatchStats = function (player) {
         var dfd = $q.defer();
-        dfd.resolve(trialsStats.getTeamSummary(player.lastThree, player));
+        dfd.resolve(trialsStats.getTeamSummary(player.activities.lastThree, player));
 
         return dfd.promise.then(function (postGame) {
           setPlayerLastMatches(postGame, player);
@@ -51,13 +52,12 @@ angular.module('trialsReportApp')
           });
       },
       playerStatsInParallel = function (player) {
-
         var methods = [
           inventoryStats.getInventory(player.membershipType, player),
           trialsStats.getData(player)
         ];
 
-        if (player.lastThree && !player.isTeammate) {
+        if (player.activities.lastThree && !player.isTeammate) {
           methods.push(trialsStats.getLastThree(player));
         }
 
@@ -67,7 +67,7 @@ angular.module('trialsReportApp')
         var dfd = $q.defer();
         var player = result[0], stats = result[1], postGame = result[2];
         setPlayerLastMatches(postGame, player);
-        player.noRecentMatches = !player.recentMatches;
+        player.noRecentMatches = !player.activities.lastTwentyFive;
         player.stats = stats.stats;
         player.nonHazard = stats.nonHazard;
         player.lighthouse = stats.lighthouse;

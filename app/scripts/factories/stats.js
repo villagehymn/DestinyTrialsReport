@@ -75,27 +75,27 @@ function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i
   fireTeam[player_id].playerWeapons = entries[i].extended.weapons;
 }
 
-function addPlayerToFireteam(entries, i, fireTeam) {
+function addPlayerToFireteam(entries, i, fireTeam, User) {
   var teammateId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-  fireTeam[teammateId] = {
-    id: entries[i].player.destinyUserInfo.membershipId,
-    name: entries[i].player.destinyUserInfo.displayName,
-    membershipId: entries[i].player.destinyUserInfo.membershipId,
-    membershipType: entries[i].player.destinyUserInfo.membershipType,
-    emblem: 'http://www.bungie.net' + entries[i].player.destinyUserInfo.iconPath,
-    characterId: entries[i].characterId,
-    level: entries[i].player.characterLevel,
-    class: entries[i].player.characterClass
-  };
+  fireTeam[teammateId] = User.build(entries[i].player.destinyUserInfo, entries[i].player.destinyUserInfo.displayName, entries[i]);
+  //fireTeam[teammateId] = {
+  //  name: entries[i].player.destinyUserInfo.displayName,
+  //  membershipId: entries[i].player.destinyUserInfo.membershipId,
+  //  membershipType: entries[i].player.destinyUserInfo.membershipType,
+  //  characterInfo: {characterId: entries[i].characterId}
+  //  //emblem: 'http://www.bungie.net' + entries[i].player.destinyUserInfo.iconPath,
+  //  //level: entries[i].player.characterLevel,
+  //  //class: entries[i].player.characterClass
+  //};
 }
 
 angular.module('trialsReportApp')
-  .factory('trialsStats', function ($http, $q) {
+  .factory('trialsStats', function ($http, $q, User) {
 
     var getData = function (player) {
       return $http({
         method: 'GET',
-        url: 'http://api.destinytrialsreport.com/trialsStats/' + player.membershipType + '/' + player.membershipId + '/' + player.characterId
+        url: 'http://api.destinytrialsreport.com/trialsStats/' + player.membershipType + '/' + player.membershipId + '/' + player.characterInfo.characterId
       }).then(function (result) {
         if(!angular.isUndefined(result.data.stats)) {
           result.data.stats.activitiesWinPercentage = {
@@ -109,7 +109,7 @@ angular.module('trialsReportApp')
     };
 
     var getTeamSummary = function (lastMatches, player) {
-      return getMatchSummary(lastMatches, player.id)
+      return getMatchSummary(lastMatches, player.membershipId)
     };
 
     var getPostGame = function (recentActivity, player) {
@@ -118,7 +118,7 @@ angular.module('trialsReportApp')
         url: 'http://api2.destinytrialsreport.com/PostGameCarnageReport/' + recentActivity.id
       }).then(function (resultPostAct) {
         var dfd = $q.defer();
-        player.lastThree[recentActivity.id].result = resultPostAct;
+        player.activities.lastThree[recentActivity.id].result = resultPostAct;
         dfd.resolve({result: resultPostAct, standing: recentActivity.standing, isMostRecent: recentActivity.mostRecent});
 
         return dfd.promise;
@@ -138,7 +138,7 @@ angular.module('trialsReportApp')
             var player_id = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
 
             if (player_id !== angular.lowercase(id)) {
-              addPlayerToFireteam(entries, i, fireTeam);
+              addPlayerToFireteam(entries, i, fireTeam, User);
             }
           }
         }
@@ -175,7 +175,7 @@ angular.module('trialsReportApp')
                 }
               } else {
                 if (lastMatches[key].isMostRecent) {
-                  addPlayerToFireteam(entries, i, fireTeam);
+                  addPlayerToFireteam(entries, i, fireTeam, User);
                 }
               }
             }
@@ -202,9 +202,9 @@ angular.module('trialsReportApp')
       var collectMatches = function (player) {
           var dfd = $q.defer();
           if (player.searched) {
-            player.lastThree[player.recentActivity.id].mostRecent = true;
+            player.activities.lastThree[player.activities.recentActivity.id].mostRecent = true;
           }
-          dfd.resolve(player.lastThree);
+          dfd.resolve(player.activities.lastThree);
 
           return dfd.promise;
         },
@@ -218,7 +218,7 @@ angular.module('trialsReportApp')
         },
         calculateMatchStats = function (postGames) {
           var dfd = $q.defer();
-          dfd.resolve(getMatchSummary(postGames, player.id));
+          dfd.resolve(getMatchSummary(postGames, player.membershipId));
 
           return dfd.promise;
         },

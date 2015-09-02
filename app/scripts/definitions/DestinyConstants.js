@@ -45,6 +45,12 @@ var hazardDoubleGrenade = [
   2978872641 // The Armamentarium (Titan)
 ];
 
+var className = [
+  'Titan',
+  'Warlock',
+  'Hunter'
+];
+
 // Subclass Definitions
 
 var SUNSINGER_CLASS = 3658182170;

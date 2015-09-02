@@ -2,32 +2,26 @@
 
 function getTeammates($scope, playerCard, locationChanger, mainPlayer) {
   if ($scope.subdomain) {
-    getTeammatesFromCharacters($scope, playerCard, mainPlayer.otherCharacters);
+    getTeammatesFromCharacters($scope, mainPlayer.characters);
   }
   else {
     if (mainPlayer.searched){
-      getTeammatesFromHistory($scope, playerCard, locationChanger, mainPlayer.fireTeam);
-    }
-    else if (mainPlayer.teamFromParams) {
-      getTeammatesFromParams($scope, playerCard);
+      getTeammatesFromHistory($scope, locationChanger, mainPlayer.fireTeam);
     }
   }
 }
 
-function getTeammatesFromCharacters($scope, playerCard, fireTeam) {
-  var charCount = 0;
+function getTeammatesFromCharacters($scope, fireTeam) {
+  $scope.fireteam[0].searched = true;
   angular.forEach(fireTeam, function (player) {
-    if (player.characterId !== $scope.fireteam[0].characterId) {
+    if (player.characterInfo.characterId !== $scope.fireteam[0].characterInfo.characterId) {
       player.myProfile = true;
-      playerCard.getPlayerCard(player).then(function (teammate) {
-        $scope.$evalAsync( $scope.fireteam[charCount] = teammate );
-        charCount++;
-      });
+      $scope.fireteam.push(player);
     }
   });
 }
 
-function addFireteamMember(fireTeam, playerCard, $scope, locationChanger) {
+function addFireteamMember(fireTeam, $scope, locationChanger) {
   angular.forEach(fireTeam, function (player) {
     $scope.fireteam.push(player);
     if (locationChanger){
@@ -36,9 +30,9 @@ function addFireteamMember(fireTeam, playerCard, $scope, locationChanger) {
   });
 }
 
-function getTeammatesFromHistory($scope, playerCard, locationChanger, fireTeam) {
+function getTeammatesFromHistory($scope, locationChanger, fireTeam) {
   if (fireTeam){
-    addFireteamMember(fireTeam, playerCard, $scope, locationChanger);
+    addFireteamMember(fireTeam, $scope, locationChanger);
   }
   else {
     $scope.fireteam.push(
@@ -46,13 +40,6 @@ function getTeammatesFromHistory($scope, playerCard, locationChanger, fireTeam) 
       {name: 'Enter Player Name', invalidResult: true}
     );
   }
-}
-
-function getTeammatesFromParams($scope, playerCard) {
-  $scope.fireteam[0].searched = true;
-  playerCard.getPlayerCard($scope.fireteam[0]).then(function (mainPlayer) {
-    addFireteamMember(mainPlayer.teamFromParams, playerCard, $scope);
-  });
 }
 
 function updateUrl($scope, locationChanger) {
@@ -77,10 +64,10 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 
     setRecentPlayers = function (activities) {
       angular.forEach(activities, function (activity) {
-        trialsStats.getFireteamFromActivitiy(activity, account.id).then(function (resMembers) {
+        trialsStats.getFireteamFromActivitiy(activity, account.membershipId).then(function (resMembers) {
           var recents = {};
           angular.forEach(resMembers, function (member, key) {
-            if (key !== account.id) {
+            if (key !== account.membershipId) {
               recents[member.name] = member;
             }
           });
@@ -133,7 +120,7 @@ angular.module('trialsReportApp')
     $scope.suggestRecentPlayers = function () {
       if (angular.isUndefined($scope.recentPlayers)) {
         $scope.recentPlayers = {};
-        angular.forEach($scope.fireteam[0].otherCharacters, function (character) {
+        angular.forEach($scope.fireteam[0].characters, function (character) {
           getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount, trialsStats);
         });
       }

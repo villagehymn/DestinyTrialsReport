@@ -7,7 +7,7 @@ angular.module('trialsReportApp')
       $scope.player.isTeammate = true;
       playerCard.getPlayerCard($scope.player).then(function (player) {
         $scope.player = player;
-        playerCard.compareLastMatchResults($scope.player, $scope.fireteam[0].lastThree)
+        playerCard.compareLastMatchResults($scope.player, $scope.fireteam[0].activities.lastThree)
       });
     }
 
@@ -22,7 +22,8 @@ angular.module('trialsReportApp')
       if (angular.isUndefined(name)) {
         return;
       }
-      return currentAccount.getAccount(name, platform)
+      var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/';
+      return currentAccount.getAccount(url)
         .then(function (player) {
           sendAnalytic('searchedPlayer', 'name', name);
           sendAnalytic('searchedPlayer', 'platform', platform);
@@ -52,7 +53,8 @@ angular.module('trialsReportApp')
 
 
     $scope.setRecentPlayer = function (player) {
-      return currentAccount.getAccount(player.name, player.membershipType)
+      var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + player.membershipType + '/' + player.name;
+      return currentAccount.getAccount(url)
         .then(function (player) {
           playerCard.getPlayerCard(player).then(function (teammate) {
             $scope.$evalAsync( $scope.player = teammate );
