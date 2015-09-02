@@ -58,7 +58,7 @@
       Total kills with
     </div>
     <div class="row stat-row">
-      <div class="col-xs-4 stat" ng-repeat="(key, weaponName) in weaponKills">
+      <div class="col-xs-4 stat stat__kills" ng-repeat="(key, weaponName) in weaponKills">
         <span ng-bind="(player.stats[key].basic.value | number:0) || 0"></span>
         <label ng-bind="weaponName"></label>
       </div>
