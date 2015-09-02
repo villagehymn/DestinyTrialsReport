@@ -58,47 +58,53 @@
       Total kills with
     </div>
     <div class="row stat-row">
-      <div class="col-xs-4 stat">
-        <span ng-bind="(player.stats.weaponKillsHandCannon.basic.value | number:0) || 0"></span>
-        <label>Hand Cannon</label>
-      </div>
-      <div class="col-xs-4 stat">
-        <span ng-bind="(player.stats.weaponKillsPulseRifle.basic.value | number:0) || 0"></span>
-        <label>Pulse Rifle</label>
-      </div>
-      <div class="col-xs-4 stat">
-        <span ng-bind="(player.stats.weaponKillsScoutRifle.basic.value | number:0) || 0"></span>
-        <label>Scout Rifle</label>
+      <div class="col-xs-4 stat" ng-repeat="(key, weaponName) in weaponKills">
+        <span ng-bind="(player.stats[key].basic.value | number:0) || 0"></span>
+        <label ng-bind="weaponName"></label>
       </div>
     </div>
-    <div class="row stat-row">
-      <div class="col-xs-4 stat">
-        <span ng-bind="(player.stats.weaponKillsAutoRifle.basic.value | number:0) || 0"></span>
-        <label>Auto Rifle</label>
-      </div>
-      <div class="col-xs-4 stat">
-        <span ng-bind="(player.stats.weaponKillsSniper.basic.value | number:0) || 0"></span>
-        <label>Sniper Rifle</label>
-      </div>
-      <div class="col-xs-4 stat">
-        <span ng-bind="(player.stats.weaponKillsShotgun.basic.value | number:0) || 0"></span>
-        <label>Shotgun</label>
-      </div>
-    </div>
-    <div class="row stat-row">
-      <div class="col-xs-4 stat">
-        <span ng-bind="(player.stats.weaponKillsFusionRifle.basic.value | number:0) || 0"></span>
-        <label>Fusion Rifle</label>
-      </div>
-      <div class="col-xs-4 stat">
-        <span ng-bind="(player.stats.weaponKillsRocketLauncher.basic.value | number:0) || 0"></span>
-        <label>Launcher</label>
-      </div>
-      <div class="col-xs-4 stat">
-        <span ng-bind="(player.stats.weaponKillsMachinegun.basic.value | number:0) || 0"></span>
-        <label>Machine Gun</label>
-      </div>
-    </div>
+    <!--<div class="row stat-row">-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="(player.stats.weaponKillsHandCannon.basic.value | number:0) || 0"></span>-->
+        <!--<label>Hand Cannon</label>-->
+      <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="(player.stats.weaponKillsPulseRifle.basic.value | number:0) || 0"></span>-->
+        <!--<label>Pulse Rifle</label>-->
+      <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="(player.stats.weaponKillsScoutRifle.basic.value | number:0) || 0"></span>-->
+        <!--<label>Scout Rifle</label>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row stat-row">-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="(player.stats.weaponKillsAutoRifle.basic.value | number:0) || 0"></span>-->
+        <!--<label>Auto Rifle</label>-->
+      <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="(player.stats.weaponKillsSniper.basic.value | number:0) || 0"></span>-->
+        <!--<label>Sniper Rifle</label>-->
+      <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="(player.stats.weaponKillsShotgun.basic.value | number:0) || 0"></span>-->
+        <!--<label>Shotgun</label>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row stat-row">-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="(player.stats.weaponKillsFusionRifle.basic.value | number:0) || 0"></span>-->
+        <!--<label>Fusion Rifle</label>-->
+      <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="(player.stats.weaponKillsRocketLauncher.basic.value | number:0) || 0"></span>-->
+        <!--<label>Launcher</label>-->
+      <!--</div>-->
+      <!--<div class="col-xs-4 stat">-->
+        <!--<span ng-bind="(player.stats.weaponKillsMachinegun.basic.value | number:0) || 0"></span>-->
+        <!--<label>Machine Gun</label>-->
+      <!--</div>-->
+    <!--</div>-->
     <div class="row stat-row">
       <div class="col-xs-4 stat">
         <span ng-bind="(player.stats.weaponKillsGrenade.basic.value | number:0) || 0"></span>

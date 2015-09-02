@@ -6,7 +6,15 @@ function getTeammates($scope, locationChanger, mainPlayer) {
   }
   else {
     if (mainPlayer.searched){
-      getTeammatesFromHistory($scope, locationChanger, mainPlayer.fireTeam);
+      if (mainPlayer.fireTeam){
+        addFireteamMember(mainPlayer.fireTeam, $scope, locationChanger);
+      }
+      else {
+        $scope.fireteam.push(
+          {name: 'Enter Player Name', invalidResult: true},
+          {name: 'Enter Player Name', invalidResult: true}
+        );
+      }
     }
   }
 }
@@ -23,23 +31,12 @@ function getTeammatesFromCharacters($scope, fireTeam) {
 
 function addFireteamMember(fireTeam, $scope, locationChanger) {
   angular.forEach(fireTeam, function (player) {
+    player.refreshCharacter = $scope.fireteam[0].updateTeammates;
     $scope.fireteam.push(player);
     if (locationChanger){
       updateUrl($scope, locationChanger);
     }
   });
-}
-
-function getTeammatesFromHistory($scope, locationChanger, fireTeam) {
-  if (fireTeam){
-    addFireteamMember(fireTeam, $scope, locationChanger);
-  }
-  else {
-    $scope.fireteam.push(
-      {name: 'Enter Player Name', invalidResult: true},
-      {name: 'Enter Player Name', invalidResult: true}
-    );
-  }
 }
 
 function updateUrl($scope, locationChanger) {
@@ -111,6 +108,7 @@ angular.module('trialsReportApp')
       'Site Donator': 'Part of an amazing few who\'ve helped keep this site running'
     };
 
+    $scope.weaponKills = weaponKills;
     $scope.screenSize = {};
     $scope.screenSize.xs = screenSize.on('xs', function (match) { $scope.screenSize.xs = match; });
     $scope.screenSize.sm = screenSize.on('sm', function (match) { $scope.screenSize.sm = match; });

@@ -1,24 +1,40 @@
 'use strict';
 
-function setUser(currentAccount, name, platform) {
-  var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/';
-  return currentAccount.getAccount(url)
-    .then(function (player) {
-      player.searched = true;
-      var segments = location.hostname.split('.');
-      var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
-        player.myProfile = subdomain === 'my';
-      return currentAccount.getPlayerCard(player)
-        .then(function (player) {
-          return [player];
-        });
-    });
-}
-
-function getFromParams(currentAccount, $route) {
+function getFromParams(currentAccount, $route, $q) {
   if (angular.isDefined($route.current.params.playerName)) {
     var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
-    return setUser(currentAccount, $route.current.params.playerName, platform);
+    var segments = location.hostname.split('.');
+    var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
+
+    var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/';
+    var getPlayer = function (url) {
+        return currentAccount.getAccount(url + $route.current.params.playerName + '/')
+          .then(function (result) {
+            var player = result;
+            player.searched = true;
+            player.myProfile = subdomain === 'my';
+            return currentAccount.getPlayerCard(player);
+          });
+      },
+      teammatesInParallel = function (player) {
+        var methods = [player];
+        angular.forEach(player.fireTeam, function (teammate) {
+          methods.push(currentAccount.getCharacters(teammate.membershipType, teammate.membershipId, teammate.name));
+        });
+        return $q.all(methods);
+      },
+      returnPlayer = function (results) {
+        var player = results[0];
+        player.fireTeam = [results[1], results[2]];
+        return [player];
+      },
+      reportProblems = function (fault) {
+        console.log(String(fault));
+      };
+    return getPlayer(url)
+      .then(teammatesInParallel)
+      .then(returnPlayer)
+      .catch(reportProblems);
   }
 }
 

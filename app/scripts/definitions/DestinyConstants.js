@@ -51,6 +51,20 @@ var className = [
   'Hunter'
 ];
 
+// Match summary weapon kill definitions
+
+var weaponKills = {
+  weaponKillsHandCannon: 'Hand Cannon',
+  weaponKillsPulseRifle: 'Pulse Rifle',
+  weaponKillsScoutRifle: 'Scout Rifle',
+  weaponKillsAutoRifle: 'Auto Rifle',
+  weaponKillsSniper: 'Sniper Rifle',
+  weaponKillsShotgun: 'Shotgun',
+  weaponKillsFusionRifle: 'Fusion Rifle',
+  weaponKillsRocketLauncher: 'Launcher',
+  weaponKillsMachinegun: 'Machine Gun'
+};
+
 // Subclass Definitions
 
 var SUNSINGER_CLASS = 3658182170;
