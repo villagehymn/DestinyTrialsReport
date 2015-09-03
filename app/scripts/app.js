@@ -1,36 +1,77 @@
 'use strict';
 
-function setUser(currentAccount, name, platform, playerCard) {
-  return currentAccount.getAccount(name, platform)
-    .then(function (player) {
-      player.searched = true;
-      var segments = location.hostname.split('.');
-      var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
-      player.myProfile = subdomain === 'my';
-      return playerCard.getPlayerCard(player)
-        .then(function (player) {
-          return [player];
-        });
-    });
-}
-
-function getFromParams(currentAccount, $route, playerCard) {
+function getFromParams(currentAccount, $route, $q) {
   if (angular.isDefined($route.current.params.playerName)) {
     var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
-    return setUser(currentAccount, $route.current.params.playerName, platform, playerCard);
+    var segments = location.hostname.split('.');
+    var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
+
+    var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/';
+    var getPlayer = function (url) {
+        return currentAccount.getAccount(url + $route.current.params.playerName + '/')
+          .then(function (result) {
+            var player = result;
+            player.searched = true;
+            player.myProfile = subdomain === 'my';
+            return currentAccount.getPlayerCard(player);
+          });
+      },
+      teammatesInParallel = function (player) {
+        var methods = [player];
+        angular.forEach(player.fireTeam, function (teammate) {
+          methods.push(currentAccount.getCharacters(teammate.membershipType, teammate.membershipId, teammate.name));
+        });
+        return $q.all(methods);
+      },
+      returnPlayer = function (results) {
+        var player = results[0];
+        player.fireTeam = [results[1], results[2]];
+        return [player];
+      },
+      reportProblems = function (fault) {
+        console.log(String(fault));
+      };
+    return getPlayer(url)
+      .then(teammatesInParallel)
+      .then(returnPlayer)
+      .catch(reportProblems);
   }
 }
 
-function getAllFromParams($http, $route) {
+function getAllFromParams($route, currentAccount, $q) {
   if (angular.isDefined($route.current.params.playerOne)) {
     var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
     var params = $route.current.params;
-    return $http({
-      method: 'GET',
-      url: 'http://api.destinytrialsreport.com/getAccounts/' + platform + '/' + params.playerOne + '/' + params.playerTwo + '/' + params.playerThree
-    }).then(function (players) {
-      return [players.data];
-    });
+    var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + platform + '/';
+
+    var getPlayer = function (url, params) {
+      return currentAccount.getAccount(url + params.playerOne)
+        .then(function (result) {
+          var player = result;
+          player.searched = true;
+          return player;
+        });
+      },
+      teammatesInParallel = function (player) {
+        var methods = [
+          currentAccount.getPlayerCard(player),
+          currentAccount.getAccount(url + params.playerTwo),
+          currentAccount.getAccount(url + params.playerThree)
+        ];
+        return $q.all(methods);
+      },
+      returnPlayer = function (results) {
+        var player = results[0];
+        player.fireTeam = [results[1], results[2]];
+        return [player];
+      },
+      reportProblems = function (fault) {
+        console.log(String(fault));
+      };
+    return getPlayer(url, params)
+      .then(teammatesInParallel)
+      .then(returnPlayer)
+      .catch(reportProblems);
   }
 }
 
@@ -86,7 +127,7 @@ angular
     var segments = location.hostname.split('.');
     var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
 
-    $routeProvider
+      $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',

@@ -1,7 +1,7 @@
 <div class="player-tab--maps player-maps">
   <div class="player-tab__section">
     <div class="row">
-      <div class="col-xs-12" ng-repeat="(key, value) in player.mapStats track by $index">
+      <div class="col-xs-12" ng-repeat="(key, value) in player.activities.mapStats track by $index">
         <div class="stat-row__header">
           <span ng-bind="DestinyTrialsDefinitions[key].activityName"></span>
         </div>
@@ -36,23 +36,23 @@
     </div>
     <div class="row stat-row">
       <div class="col-xs-2 col-xs-offset-2 stat">
-        <span ng-bind="player.totals.kills || 0"></span>
+        <span ng-bind="player.activities.totals.kills || 0"></span>
         <label>Kills</label>
       </div>
       <div class="col-xs-2 stat">
-        <span ng-bind="player.totals.deaths || 0"></span>
+        <span ng-bind="player.activities.totals.deaths || 0"></span>
         <label>Deaths</label>
       </div>
       <div class="col-xs-2 stat">
-        <span ng-bind="player.totals.assists || 0"></span>
+        <span ng-bind="player.activities.totals.assists || 0"></span>
         <label>Assists</label>
       </div>
       <div class="col-xs-2 stat">
-        <span ng-bind="player.totals.wins || 0"></span>
+        <span ng-bind="player.activities.totals.wins || 0"></span>
         <label>Wins</label>
       </div>
       <div class="col-xs-2 stat">
-        <span ng-bind="player.totals.losses || 0"></span>
+        <span ng-bind="player.activities.totals.losses || 0"></span>
         <label>Loss</label>
       </div>
     </div>

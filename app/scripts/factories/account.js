@@ -1,121 +1,23 @@
 'use strict';
 
-function setPlayer(membershipId, name, membershipType, characters, i, className, classType, stats) {
-  return {
-    id: membershipId,
-    name: name,
-    membershipId: membershipId,
-    membershipType: membershipType,
-    characterId: characters[i].characterBase.characterId,
-    className: className,
-    classType: classType,
-    level: characters[i].characterLevel,
-    int: stats.STAT_INTELLECT.value,
-    dis: stats.STAT_DISCIPLINE.value,
-    str: stats.STAT_STRENGTH.value,
-    grimoire: characters[i].characterBase.grimoireScore,
-    background: ['https://bungie.net' + characters[i].backgroundPath],
-    emblem: 'https://bungie.net' + characters[i].emblemPath
-  };
-}
-
-function setCharacter(characters, membershipId, membershipType, name){
-  var cResult = [];
-  for (var i = 0; i < characters.length; i++) {
-    var stats = characters[i].characterBase.stats;
-    var classType = characters[i].characterBase.classType;
-    var className = classType === 0 ? 'Titan' : (classType === 2 ? 'Warlock' : 'Hunter');
-    cResult.push(
-      setPlayer(membershipId, name, membershipType, characters, i, className, classType, stats)
-    );
+function setPlayerLastMatches(postGame, player) {
+  var playerId = player.membershipId;
+  if (postGame && postGame.matchStats[playerId]) {
+    player.allStats = postGame.matchStats[playerId].allStats;
+    player.recentMatches = postGame.matchStats[playerId].recentMatches;
+    player.abilityKills = postGame.matchStats[playerId].abilityKills;
+    player.medals = postGame.matchStats[playerId].medals;
+    player.weaponsUsed = postGame.matchStats[playerId].weaponsUsed;
+    player.fireTeam = postGame.fireTeam;
   }
-  return cResult;
-}
-
-function setPastActivities(mapStats, mapHash, reversedAct, n, totals, pastActivities, $filter) {
-  if (!angular.isObject(mapStats[mapHash])) {
-    mapStats[mapHash] = {};
-    mapStats[mapHash].kills = 0;
-    mapStats[mapHash].deaths = 0;
-    mapStats[mapHash].assists = 0;
-    mapStats[mapHash].wins = 0;
-    mapStats[mapHash].losses = 0;
-  }
-  var statAttributes = ['kills', 'deaths', 'assists'];
-  for (var m = 0; m < statAttributes.length; m++) {
-    mapStats[mapHash][statAttributes[m]] += reversedAct[n].values[statAttributes[m]].basic.value;
-    totals[statAttributes[m]] += reversedAct[n].values[statAttributes[m]].basic.value;
-  }
-  if (reversedAct[n].values.standing.basic.value === 0) {
-    mapStats[mapHash].wins += 1;
-    totals.wins += 1;
-  }
-  else {
-    mapStats[mapHash].losses += 1;
-    totals.losses += 1;
-  }
-  pastActivities.push({
-    'id': reversedAct[n].activityDetails.instanceId,
-    'standing': reversedAct[n].values.standing.basic.value,
-    'date': $filter('date')(reversedAct[n].period, 'yyyy-MM-dd h:mm'),
-    'dateAgo': moment(reversedAct[n].period).fromNow(),
-    'kills': reversedAct[n].values.kills.basic.value,
-    'kd': reversedAct[n].values.killsDeathsRatio.basic.displayValue,
-    'deaths': reversedAct[n].values.deaths.basic.value,
-    'assists': reversedAct[n].values.assists.basic.value
-  });
-}
-
-function setMapReturnStreak(reversedAct, mapStats, totals, pastActivities, $filter, streak, recentActivity) {
-  for (var n = 0; n < reversedAct.length; n++) {
-    var mapHash = reversedAct[n].activityDetails.referenceId;
-    setPastActivities(mapStats, mapHash, reversedAct, n, totals, pastActivities, $filter);
-    reversedAct[n].values.standing.basic.value === recentActivity.standing ? streak++ : streak = 0;
-  }
-  return streak;
-}
-
-function setLastThreeMatches(lastThree, activities) {
-  for (var l = 0; l < 3; l++) {
-    if (activities[l]){
-      lastThree[activities[l].activityDetails.instanceId] = {
-        'id': activities[l].activityDetails.instanceId,
-        'standing': activities[l].values.standing.basic.value
-      }
-    }
-  }
-}
-
-function setActivityData(activities, $filter) {
-  var mapStats = {}, lastThree = {}, reversedAct = activities.slice().reverse();
-  var pastActivities = [], streak = 0, totals = {};
-  var recentActivity = {
-    'id': activities[0].activityDetails.instanceId,
-    'standing': activities[0].values.standing.basic.value
-  };
-  totals.kills = 0;
-  totals.deaths = 0;
-  totals.assists = 0;
-  totals.wins = 0;
-  totals.losses = 0;
-  streak = setMapReturnStreak(reversedAct, mapStats, totals, pastActivities, $filter, streak, recentActivity);
-  setLastThreeMatches(lastThree, activities);
-  return {
-    pastActivities: pastActivities,
-    recentActivity: recentActivity,
-    streak: streak,
-    totals: totals,
-    mapStats: mapStats,
-    lastThree: lastThree
-  };
 }
 
 angular.module('trialsReportApp')
-  .factory('currentAccount', function ($http, $filter, toastr) {
-    var getAccount = function (sName, platform) {
+  .factory('currentAccount', function ($http, $filter, toastr, Player, inventoryStats, trialsStats, $q) {
+    var getAccount = function (url) {
       return $http({
         method: 'GET',
-        url: '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/' + sName + '/'
+        url: url
       }).then(function (resultAcc) {
         if (resultAcc.data.Response.length < 1) {
           toastr.error('Player not found', 'Error');
@@ -131,9 +33,7 @@ angular.module('trialsReportApp')
         method: 'GET',
         url: '/Platform/Destiny/' + membershipType + '/Account/' + membershipId + '/'
       }).then(function (resultChar) {
-        var allCharacters = setCharacter(resultChar.data.Response.data.characters, membershipId, membershipType, name);
-        var player = allCharacters[0];
-        player.otherCharacters = allCharacters;
+        var player = Player.build(resultChar.data.Response.data, name, resultChar.data.Response.data.characters[0]);
         return player;
       }).catch(function () {});
     };
@@ -142,26 +42,14 @@ angular.module('trialsReportApp')
       var aCount = count > 0 ? '&count='+ count : '&count=25';
       return $http({
         method: 'GET',
-        url: '/Platform/Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterId + '/?mode=14' + aCount
+        url: '/Platform/Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + account.characterInfo.characterId + '/?mode=14' + aCount
       }).then(function (resultAct) {
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
           toastr.error('No Trials matches found for player', 'Error');
           return account;
         }
-        var __ret = setActivityData(activities, $filter);
-        var pastActivities = __ret.pastActivities, recentActivity = __ret.recentActivity,
-          streak = __ret.streak, totals = __ret.totals, mapStats = __ret.mapStats,
-          lastThree = __ret.lastThree;
-        return angular.extend(account, {
-          recentActivity: recentActivity,
-          pastActivities: pastActivities.reverse().slice(0, 24).reverse(),
-          allActivities: pastActivities,
-          lastThree: lastThree,
-          winStreak: {'length': streak, 'type': recentActivity.standing},
-          mapStats: mapStats,
-          totals: totals
-        });
+        return account.setActivities(account, activities);
       }).catch(function () {});
     };
 
@@ -169,7 +57,7 @@ angular.module('trialsReportApp')
       var allPastActivities = [];
       return $http({
         method: 'GET',
-        url: '/Platform/Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + character.characterId + '/?mode=14&count=21'
+        url: '/Platform/Destiny/Stats/ActivityHistory/' + account.membershipType + '/' + account.membershipId + '/' + character.characterInfo.characterId + '/?mode=14&count=21'
       }).then(function (resultAct) {
         var activities = resultAct.data.Response.data.activities;
         if (angular.isUndefined(activities)) {
@@ -187,10 +75,91 @@ angular.module('trialsReportApp')
       }).catch(function () {});
     };
 
+    var compareLastMatchResults = function (player, postGameResults) {
+      var updateLastMatchResults = function (teammate) {
+          teammate.isTeammate = true;
+          var lastThree = {};
+          angular.forEach(teammate.activities.lastThree, function (match, key) {
+            if (postGameResults[key]) {
+              lastThree[key] = postGameResults[key];
+            } else {
+              lastThree[key] = trialsStats.getPostGame(teammate.activities.lastThree[key], teammate);
+            }
+          });
+          return $q.all(lastThree).then(function (result) {
+            teammate.activities.lastThree = result;
+            return teammate;
+          });
+        },
+        updateMatchStats = function (player) {
+          var dfd = $q.defer();
+          dfd.resolve(trialsStats.getTeamSummary(player.activities.lastThree, player));
+
+          return dfd.promise.then(function (postGame) {
+            setPlayerLastMatches(postGame, player);
+          });
+        };
+
+      return updateLastMatchResults(player, postGameResults)
+        .then(updateMatchStats)
+        .catch(reportProblems);
+    };
+
+    var setPlayerCard = function (player) {
+        var count = player.myProfile ? 250 : 25;
+        return getActivities(player, count)
+          .then(function (player) {
+            return player;
+          });
+      },
+      playerStatsInParallel = function (player) {
+        var methods = [
+          inventoryStats.getInventory(player.membershipType, player),
+          trialsStats.getData(player)
+        ];
+
+        if (player.activities.lastThree && !player.isTeammate) {
+          methods.push(trialsStats.getLastThree(player));
+        }
+
+        return $q.all(methods)
+      },
+      setPlayerStats = function (result) {
+        var dfd = $q.defer();
+        var player = result[0], stats = result[1], postGame = result[2];
+        setPlayerLastMatches(postGame, player);
+        player.noRecentMatches = !player.activities.lastTwentyFive;
+        player.stats = stats.stats;
+        player.nonHazard = stats.nonHazard;
+        player.lighthouse = stats.lighthouse;
+        dfd.resolve(player);
+
+        return dfd.promise;
+      },
+      reportProblems = function (fault) {
+        console.log(String(fault));
+      };
+
+    var getPlayerCard = function (player) {
+      return setPlayerCard(player)
+        .then(playerStatsInParallel)
+        .then(setPlayerStats)
+        .catch(reportProblems);
+    };
+
+    var refreshInventory = function (player) {
+      return playerStatsInParallel(player)
+        .then(setPlayerStats)
+        .catch(reportProblems);
+    };
+
     return {
       getAccount: getAccount,
       getActivities: getActivities,
       getLastTwentyOne: getLastTwentyOne,
-      getCharacters: getCharacters
+      getCharacters: getCharacters,
+      getPlayerCard: getPlayerCard,
+      refreshInventory: refreshInventory,
+      compareLastMatchResults: compareLastMatchResults
     };
   });
