@@ -26,7 +26,7 @@ angular.module('trialsReportApp')
       template: [
         '<!--<div ng-if="!activities">N/A</div>-->',
         '<i class="player-quick-look__form__match match"' +
-          'style="transform: translateY({{calcGraphPoint(str.kd)}});"' +
+          'style="transform: translateY({{calcGraphPoint(str.kd)}}); -webkit-transform: translateY({{calcGraphPoint(str.kd)}}); -ms-transform: translateY({{calcGraphPoint(str.kd)}});"' +
           'ng-repeat="str in activities.slice().reverse()"' +
           'ng-class="str.standing === 0 ? \'match--win\' : \'match--loss\'"' +
           'bs-popover="{title:str.dateAgo,content:\'K/D: {{str.kd}} with {{str.kills}} kills\'}"></i>'
