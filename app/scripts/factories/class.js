@@ -31,7 +31,6 @@ angular.module('trialsReportApp')
       var subClass = [], background = [], blink = false,
         hasFireboltGrenade = false, hasFusionGrenade = false,
         hasVikingFuneral = false, hasTouchOfFlame = false;
-
       for (var n = 0; n < items.length; n++) {
         var itemS = items[n];
         var cItem = DestinyClassDefinition[itemS.itemHash];
@@ -44,10 +43,20 @@ angular.module('trialsReportApp')
             if (itemS.nodes[i].isActivated === true) {
               var nodeStep = itemS.nodes[i];
               if (itemS.itemHash === SUNSINGER_CLASS) {
-                hasFireboltGrenade = nodeStep.nodeHash === FIREBOLT_GRENADE;
-                hasFusionGrenade = nodeStep.nodeHash === FUSION_GRENADE;
-                hasVikingFuneral = nodeStep.nodeHash === VIKING_FUNERAL;
-                hasTouchOfFlame = nodeStep.nodeHash === TOUCH_OF_FLAME;
+                switch (nodeStep.nodeHash) {
+                  case FIREBOLT_GRENADE:
+                    hasFireboltGrenade = true;
+                    break;
+                  case FUSION_GRENADE:
+                    hasFusionGrenade = true;
+                    break;
+                  case VIKING_FUNERAL:
+                    hasVikingFuneral = true;
+                    break;
+                  case TOUCH_OF_FLAME:
+                    hasTouchOfFlame = true;
+                    break;
+                }
               }
               setClassNode(nodeStep, classNodes, [1], 'weaponKillsGrenade', true);
               setClassNode(nodeStep, classNodes, [3], 'weaponKillsSuper', false);

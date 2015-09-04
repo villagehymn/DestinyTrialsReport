@@ -5,7 +5,7 @@
       <div class="player-header__char">
         <h2 class="player-header__gamertag" ng-bind="player.name"></h2>
         <div class="player-info" ng-show="player.characterInfo.level && player.characterInfo.className">
-          <span class="player-info__class" ng-bind="player.characterInfo.className"></span>
+          <span class="player-info__class" ng-bind="player.characterInfo.subclassName"></span>
           <span class="player-info__light highlight"><span ng-bind-html="'<span>&#10022;</span>' + player.characterInfo.level"></span></span>
           <span class="player-info__grimoire">
             <img src="/images/grimoire.png" alt="Grimoire"><span ng-bind="player.grimoire"></span>

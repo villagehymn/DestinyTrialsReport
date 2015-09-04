@@ -126,7 +126,6 @@ angular.module('trialsReportApp')
 
     Player.prototype.setActivities = function (player, activities) {
       player.activities = setActivityData(activities);
-      console.log(player)
       return player
     };
 
@@ -136,7 +135,9 @@ angular.module('trialsReportApp')
         armor: armor.armors,
         classNodes: classItems.classNodes
       };
-      player.subclassName = classItems.subClass.name;
+      if (player.characterInfo) {
+        player.characterInfo.subclassName = classItems.subClass.name;
+      }
       setStatPercentage(player, armor);
       player.emblem = this.setEmblem(classItems.bg[1], classItems.bg[0]);
       if (classItems.blink && weapons.shotgun) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('PlayerCtrl', function ($scope, currentAccount, $analytics) {
+  .controller('PlayerCtrl', function ($scope, currentAccount, $analytics, locationChanger) {
 
     if (!$scope.player.searched) {
       $scope.player.isTeammate = true;
