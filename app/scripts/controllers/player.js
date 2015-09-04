@@ -1,39 +1,15 @@
 'use strict';
 
-var getActivitiesFromChar = function ($scope, account, character, currentAccount, trialsStats) {
-
-  var setRecentActivities = function (account, character) {
-      return currentAccount.getLastTwentyOne(account, character)
-        .then(function (activities) {
-          return activities;
-        });
-    },
-
-    setRecentPlayers = function (activities) {
-      angular.forEach(activities, function (activity) {
-        trialsStats.getFireteamFromActivitiy(activity, account.id).then(function (resMembers) {
-          var recents = {};
-          angular.forEach(resMembers, function (member, key) {
-            if (key !== account.id) {
-              recents[member.name] = member;
-            }
-          });
-          $scope.recentPlayers = angular.extend($scope.recentPlayers, recents);
-        });
-      });
-    },
-
-    reportProblems = function (fault) {
-      console.log(String(fault));
-    };
-
-  setRecentActivities(account, character)
-    .then(setRecentPlayers)
-    .catch(reportProblems);
-};
-
 angular.module('trialsReportApp')
-  .controller('PlayerCtrl', function ($scope, currentAccount, $analytics, playerCard, trialsStats) {
+  .controller('PlayerCtrl', function ($scope, currentAccount, $analytics, locationChanger) {
+
+    if (!$scope.player.searched) {
+      $scope.player.isTeammate = true;
+      currentAccount.getPlayerCard($scope.player).then(function (player) {
+        $scope.player = player;
+        currentAccount.compareLastMatchResults($scope.player, $scope.fireteam[0].activities.lastThree)
+      });
+    }
 
     var sendAnalytic = function (event, cat, label) {
       $analytics.eventTrack(event, {
@@ -42,24 +18,24 @@ angular.module('trialsReportApp')
       });
     };
 
-    function getAccountByName(name, platform, index) {
+    function getAccountByName(name, platform) {
       if (angular.isUndefined(name)) {
         return;
       }
-      return currentAccount.getAccount(name, platform)
+      var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/';
+      return currentAccount.getAccount(url)
         .then(function (player) {
           sendAnalytic('searchedPlayer', 'name', name);
           sendAnalytic('searchedPlayer', 'platform', platform);
-          player.searched = true;
-          playerCard.getPlayerCard(player).then(function (teammate) {
-            $scope.$evalAsync( $scope.fireteam[index] = teammate );
+          currentAccount.getPlayerCard(player).then(function (teammate) {
+            $scope.$evalAsync( $scope.player = teammate );
           });
         });
     }
 
-    $scope.searchPlayerbyName = function (name, platform, index, includeFireteam) {
+    $scope.searchPlayerbyName = function (name, platform) {
       if (angular.isDefined(name)) {
-        getAccountByName(name, (platform ? 2 : 1), index);
+        getAccountByName(name, (platform ? 2 : 1));
         sendAnalytic('loadedPlayer', 'name', name);
         sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
       }
@@ -76,24 +52,14 @@ angular.module('trialsReportApp')
     };
 
 
-    $scope.setRecentPlayer = function (player, index, getFireteam) {
-      return currentAccount.getAccount(player.name, player.membershipType)
+    $scope.setRecentPlayer = function (player) {
+      var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + player.membershipType + '/' + player.name;
+      return currentAccount.getAccount(url)
         .then(function (player) {
-          player.otherCharacters = $scope.fireteam[index].otherCharacters;
-          player.searched = getFireteam;
-          playerCard.getPlayerCard(player).then(function (teammate) {
-            $scope.$evalAsync( $scope.fireteam[index] = teammate );
+          currentAccount.getPlayerCard(player).then(function (teammate) {
+            $scope.$evalAsync( $scope.player = teammate );
           });
         });
-    };
-
-    $scope.suggestRecentPlayers = function () {
-      if (angular.isUndefined($scope.recentPlayers)) {
-        $scope.recentPlayers = {};
-        angular.forEach($scope.fireteam[0].otherCharacters, function (character) {
-          getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount, trialsStats);
-        });
-      }
     };
 
     $scope.getWeaponTitle = function (title) {

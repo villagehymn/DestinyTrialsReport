@@ -1,104 +1,166 @@
 'use strict';
 
+function setMapBasedStats(mapStats, mapHash, reversedAct, n, totals) {
+  if (!angular.isObject(mapStats[mapHash])) {
+    mapStats[mapHash] = {};
+    mapStats[mapHash].kills = 0;
+    mapStats[mapHash].deaths = 0;
+    mapStats[mapHash].assists = 0;
+    mapStats[mapHash].wins = 0;
+    mapStats[mapHash].losses = 0;
+  }
+  var statAttributes = ['kills', 'deaths', 'assists'];
+  for (var m = 0; m < statAttributes.length; m++) {
+    mapStats[mapHash][statAttributes[m]] += reversedAct[n].values[statAttributes[m]].basic.value;
+    totals[statAttributes[m]] += reversedAct[n].values[statAttributes[m]].basic.value;
+  }
+  if (reversedAct[n].values.standing.basic.value === 0) {
+    mapStats[mapHash].wins += 1;
+    totals.wins += 1;
+  }
+  else {
+    mapStats[mapHash].losses += 1;
+    totals.losses += 1;
+  }
+}
+
+function setPastActivities(reversedAct, n, pastActivities) {
+  pastActivities.push({
+    'id': reversedAct[n].activityDetails.instanceId,
+    'standing': reversedAct[n].values.standing.basic.value,
+    'date': reversedAct[n].period,
+    'dateAgo': moment(reversedAct[n].period).fromNow(),
+    'kills': reversedAct[n].values.kills.basic.value,
+    'kd': reversedAct[n].values.killsDeathsRatio.basic.displayValue,
+    'deaths': reversedAct[n].values.deaths.basic.value,
+    'assists': reversedAct[n].values.assists.basic.value
+  });
+}
+
+function setLastThreeMatches(lastThree, activities) {
+  for (var l = 0; l < 3; l++) {
+    if (activities[l]){
+      lastThree[activities[l].activityDetails.instanceId] = {
+        'id': activities[l].activityDetails.instanceId,
+        'standing': activities[l].values.standing.basic.value
+      }
+    }
+  }
+}
+
+function setMapReturnStreak(reversedAct, pastActivities, streak, recentActivity, mapStats, totals) {
+  for (var n = 0; n < reversedAct.length; n++) {
+    setPastActivities(reversedAct, n, pastActivities);
+    setMapBasedStats(mapStats, reversedAct[n].activityDetails.referenceId, reversedAct, n, totals);
+    reversedAct[n].values.standing.basic.value === recentActivity.standing ? streak++ : streak = 0;
+  }
+  return streak;
+}
+
+function setActivityData(activities) {
+  var lastThree = {}, reversedAct = activities.slice().reverse(),
+    mapStats = {}, totals = {};
+  totals.kills = 0;
+  totals.deaths = 0;
+  totals.assists = 0;
+  totals.wins = 0;
+  totals.losses = 0;
+  var pastActivities = [], streak = 0;
+  var recentActivity = {
+    'id': activities[0].activityDetails.instanceId,
+    'standing': activities[0].values.standing.basic.value
+  };
+  streak = setMapReturnStreak(reversedAct, pastActivities, streak, recentActivity, mapStats, totals);
+  setLastThreeMatches(lastThree, activities);
+  return {
+    lastTwentyFive: pastActivities,
+    recentActivity: recentActivity,
+    streak: streak,
+    lastThree: lastThree,
+    mapStats: mapStats,
+    totals: totals
+  };
+}
+
+function setStatPercentage(player, armors) {
+  var stat = ['int', 'dis', 'str'];
+  for (var s = 0; s < stat.length; s++) {
+    player[stat[s]] = armors[stat[s]];
+    var cName = stat[s].substring(0,1).toUpperCase() + stat[s].substring(1);
+    player[cName] = player[stat[s]] > 270 ? 270 : armors[stat[s]];
+    player[stat[s] + 'Percent'] = +(100 * player[cName] / 270).toFixed();
+  }
+}
+
 angular.module('trialsReportApp')
-  .factory('playerCard', function ($http, currentAccount, inventoryStats, trialsStats, $q) {
+  .factory('Player', function () {
 
-    var compareLastMatchResults = function (player, postGameResults) {
-      var getTeammateCharacters = function (player) {
-          var dfd = $q.defer();
-          dfd.resolve(currentAccount.getCharacters(player.membershipType, player.membershipId, player.name));
-          return dfd.promise;
-        },
-        getTeammateActivities = function (teammate) {
-          var dfd = $q.defer();
-          dfd.resolve(currentAccount.getActivities(teammate, 25));
-          return dfd.promise;
-        },
-        updateLastMatchResults = function (teammate) {
-          teammate.isTeammate = true;
-          var lastThree = {};
-          angular.forEach(teammate.lastThree, function (match, key) {
-              if (postGameResults[key]) {
-                lastThree[key] = postGameResults[key];
-              } else {
-                lastThree[key] = trialsStats.getPostGame(teammate.lastThree[key], teammate);
-              }
-            });
-          return $q.all(lastThree).then(function (result) {
-            teammate.lastThree = result;
-            return teammate;
-          });
-        };
+    function Player(data, name, character) {
+      this.name = name;
+      this.membershipId = data.membershipId;
+      this.membershipType = data.membershipType;
+      if (character.characterBase) {
+        this.emblem = this.setEmblem(character.emblemPath, character.backgroundPath);
+        this.characterInfo = this.setCharacterInfo(character);
+        this.grimoire = character.characterBase.grimoireScore;
+      } else {
+        this.characterInfo = {characterId: character.characterId}
+      }
+    }
 
-      return getTeammateCharacters(player)
-        .then(getTeammateActivities)
-        .then(updateLastMatchResults)
-        .catch(reportProblems);
+    Player.prototype.setCharacterInfo = function (character) {
+      return {
+        characterId: character.characterBase.characterId,
+        className: className[character.characterBase.classType],
+        classType: character.characterBase.classType,
+        level: character.characterLevel
+      }
     };
 
-    var setPlayerCard = function (player) {
-        var count = player.myProfile ? 250 : 25;
-        return currentAccount.getActivities(player, count)
-          .then(function (player) {
-            return player;
-          });
-      },
-      playerStatsInParallel = function (player) {
+    Player.prototype.setEmblem = function (icon, background) {
+      return {
+        icon: 'https://bungie.net' + icon,
+        background: 'https://bungie.net' + background
+      }
+    };
 
-        var methods = [
-          inventoryStats.getInventory(player.membershipType, player),
-          trialsStats.getData(player)
-        ];
+    Player.prototype.setActivities = function (player, activities) {
+      player.activities = setActivityData(activities);
+      return player
+    };
 
-        if (player.lastThree && !player.isTeammate) {
-          methods.push(trialsStats.getLastThree(player));
-        }
-
-        return $q.all(methods)
-      },
-      setPlayerStats = function (result) {
-        var dfd = $q.defer();
-        var player = result[0], stats = result[1], postGame = result[2];
-        if (player.isTeammate) {
-          postGame = trialsStats.getTeamSummary(player.lastThree, player);
-        }
-        if (postGame && postGame.matchStats[player.id]) {
-          player.allStats = postGame.matchStats[player.id].allStats;
-          player.recentMatches = postGame.matchStats[player.id].recentMatches;
-          player.abilityKills = postGame.matchStats[player.id].abilityKills;
-          player.medals = postGame.matchStats[player.id].medals;
-          player.weaponsUsed = postGame.matchStats[player.id].weaponsUsed;
-          player.fireTeam = postGame.fireTeam;
-        }
-        player.noRecentMatches = !player.recentMatches;
-        player.stats = stats.stats;
-        player.nonHazard = stats.nonHazard;
-        player.lighthouse = stats.lighthouse;
-        dfd.resolve(player);
-
-        return dfd.promise;
-      },
-      reportProblems = function (fault) {
-        console.log(String(fault));
+    Player.prototype.setInventory = function (player, weapons, armor, classItems) {
+      player.inventory = {
+        weapons: weapons.weapons,
+        armor: armor.armors,
+        classNodes: classItems.classNodes
       };
-
-    var getPlayerCard = function (player) {
-      return setPlayerCard(player)
-        .then(playerStatsInParallel)
-        .then(setPlayerStats)
-        .catch(reportProblems);
+      if (player.characterInfo) {
+        player.characterInfo.subclassName = classItems.subClass.name;
+      }
+      setStatPercentage(player, armor);
+      player.emblem = this.setEmblem(classItems.bg[1], classItems.bg[0]);
+      if (classItems.blink && weapons.shotgun) {
+        player.inventory.weapons.hazards.push('Blink Shotgun');
+      }
+      if (classItems.hasFusionGrenade && armor.hasStarfireProtocolPerk) {
+        player.inventory.armors.hazards.push('Double Grenade');
+      }
+      return player
     };
 
-    var refreshInventory = function (player) {
-      return playerStatsInParallel(player)
-        .then(setPlayerStats)
-        .catch(reportProblems);
+
+    Player.build = function (data, name, character) {
+      var player = new Player(data, name, character);
+      if (data.characters) {
+        var characters = [];
+        for (var i = 0; i < data.characters.length; i++) {
+          characters.push(new Player(data, name, data.characters[i]))
+        }
+        player.characters = characters;
+      }
+      return player;
     };
 
-
-    return {
-      getPlayerCard: getPlayerCard,
-      refreshInventory: refreshInventory,
-      compareLastMatchResults: compareLastMatchResults
-    };
+    return Player;
   });

@@ -20,13 +20,19 @@ angular.module('trialsReportApp')
           } else {
             x = Math.min(range, matchKd - $scope.kd);
           }
-          return x * factor + unit;
+          var value = x * factor + unit;
+          var translateY = 'translateY(' + value + '); ';
+          var style = '';
+          angular.forEach(['transform: ', '-webkit-transform: ', '-ms-transform: '], function(key) {
+            style += key + translateY;
+          });
+          return style;
         }
       },
       template: [
         '<!--<div ng-if="!activities">N/A</div>-->',
         '<i class="player-quick-look__form__match match"' +
-          'style="transform: translateY({{calcGraphPoint(str.kd)}});"' +
+          'style="{{calcGraphPoint(str.kd)}}"' +
           'ng-repeat="str in activities.slice().reverse()"' +
           'ng-class="str.standing === 0 ? \'match--win\' : \'match--loss\'"' +
           'bs-popover="{title:str.dateAgo,content:\'K/D: {{str.kd}} with {{str.kills}} kills\'}"></i>'

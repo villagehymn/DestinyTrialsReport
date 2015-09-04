@@ -1,6 +1,6 @@
 <div class="player shadow-z-1"
-     ng-class="{'with-overlay': player.isEditing, 'is-virgin': (player.name !== 'Enter Player Name' && !player.recentMatches), 'with-overlay is-invalid': player.name === 'Enter Player Name'}"
-     ng-if="fireteam[0].name && $index < 3">
+     ng-class="{'with-overlay': player.isEditing, 'is-virgin': (player.name !== 'Enter Player Name' && !player.activities.lastTwentyFive), 'with-overlay is-invalid': player.name === 'Enter Player Name'}"
+     ng-if="player.name && $index < 3">
 
   <div ng-include="'views/player/overview.html'"></div>
 
@@ -56,11 +56,11 @@
     </div>
     <div ng-if="fireteam[0].name && $index < 3 && $index > -1">
       <div class="edit-player__input">
-        <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
+        <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue)">
           <button class="btn btn-icon" type="submit">
             <i class="material-icons">&#xE163;</i>
           </button>
-          <input type="text" placeholder="{{fireteam[$index].name}}" class="form-control" ng-model="teammateName">
+          <input type="text" placeholder="{{player.name}}" class="form-control" ng-model="teammateName">
         </form>
       </div>
       <div class="player-overlay__content" ng-if="!player.invalidResult">
@@ -85,7 +85,7 @@
             <span ng-bind="fireteam[0].name + '\'s recent teammates'"></span>
           </div>
           <div class="recent-player" ng-repeat="player in recentPlayers track by $index">
-            <a class="btn btn-white btn-raised" ng-bind="player.name" ng-click="setRecentPlayer(player, ($parent.$index))"
+            <a class="btn btn-white btn-raised" ng-bind="player.name" ng-click="setRecentPlayer(player)"
                analytics-on analytics-event="Click" analytics-category="Recent Player">
             </a>
           </div>
