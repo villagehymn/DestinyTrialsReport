@@ -118,7 +118,7 @@ angular.module('trialsReportApp')
           trialsStats.getData(player)
         ];
 
-        if (player.activities.lastThree && !player.isTeammate) {
+        if (player.activities && player.activities.lastThree && !player.isTeammate) {
           methods.push(trialsStats.getLastThree(player));
         }
 
@@ -128,7 +128,7 @@ angular.module('trialsReportApp')
         var dfd = $q.defer();
         var player = result[0], stats = result[1], postGame = result[2];
         setPlayerLastMatches(postGame, player);
-        player.noRecentMatches = !player.activities.lastTwentyFive;
+        player.noRecentMatches = !player.activities || !player.activities.lastTwentyFive;
         player.stats = stats.stats;
         player.nonHazard = stats.nonHazard;
         player.lighthouse = stats.lighthouse;
