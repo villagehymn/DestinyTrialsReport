@@ -31,10 +31,16 @@ function getTeammatesFromCharacters($scope, fireTeam) {
 
 function addFireteamMember(fireTeam, $scope, locationChanger) {
   angular.forEach(fireTeam, function (player) {
-    player.refreshCharacter = $scope.fireteam[0].updateTeammates;
-    $scope.fireteam.push(player);
-    if (locationChanger){
-      updateUrl($scope, locationChanger);
+    if (player) {
+      player.refreshCharacter = $scope.fireteam[0].updateTeammates;
+      $scope.fireteam.push(player);
+      if (locationChanger){
+        updateUrl($scope, locationChanger);
+      }
+    } else {
+      $scope.fireteam.push(
+        {name: 'Enter Player Name', invalidResult: true}
+      );
     }
   });
 }

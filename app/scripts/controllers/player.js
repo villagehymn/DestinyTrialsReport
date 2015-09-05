@@ -3,7 +3,7 @@
 angular.module('trialsReportApp')
   .controller('PlayerCtrl', function ($scope, currentAccount, $analytics, locationChanger) {
 
-    if (!$scope.player.searched) {
+    if (!$scope.player.searched && !$scope.player.invalidResult) {
       $scope.player.isTeammate = true;
       currentAccount.getPlayerCard($scope.player).then(function (player) {
         $scope.player = player;
