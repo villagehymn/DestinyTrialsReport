@@ -7,7 +7,6 @@ function getTeammates($scope, locationChanger, mainPlayer) {
   else {
     if (mainPlayer.searched){
       if (mainPlayer.fireTeam){
-        console.log(mainPlayer.fireTeam)
         addFireteamMember(mainPlayer.fireTeam, $scope, locationChanger);
       }
       else {
