@@ -64,7 +64,9 @@ angular.module('trialsReportApp')
               setClassNode(nodeStep, classNodes, [1, 3, 6, 8], 'all', true);
 
               if (itemS.itemHash === VOIDWALKER_CLASS || itemS.itemHash === BLADEDANCER_CLASS) {
-                blink = (nodeStep.row === 3 && nodeStep.column === 2);
+                if (nodeStep.nodeHash === 3452380660) {
+                  blink = (nodeStep.row === 3 && nodeStep.column === 2);
+                }
               }
             }
           }
