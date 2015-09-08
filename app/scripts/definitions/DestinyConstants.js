@@ -16,6 +16,12 @@ var STAT_DISCIPLINE = 1735777505;
 var STAT_STRENGTH = 4244567218;
 var STAT_LIGHT = 2391494160;
 
+var statNames = {
+  STAT_INTELLECT: 'Intellect',
+  STAT_DISCIPLINE: 'Discipline',
+  STAT_STRENGTH: 'Strength'
+};
+
 var STAT_BASE_DAMAGE = 4043523819;
 
 
