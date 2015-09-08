@@ -82,13 +82,19 @@ function setActivityData(activities) {
   };
 }
 
-function setStatPercentage(player, armors) {
-  var stat = ['int', 'dis', 'str'];
-  for (var s = 0; s < stat.length; s++) {
-    player[stat[s]] = armors[stat[s]];
-    var cName = stat[s].substring(0,1).toUpperCase() + stat[s].substring(1);
-    player[cName] = player[stat[s]] > 270 ? 270 : armors[stat[s]];
-    player[stat[s] + 'Percent'] = +(100 * player[cName] / 270).toFixed();
+function setStatPercentage(player) {
+  if (player.characterInfo && player.characterInfo.stats) {
+    var stat = ['STAT_INTELLECT', 'STAT_DISCIPLINE', 'STAT_STRENGTH'];
+    for (var s = 0; s < stat.length; s++) {
+      var statValue = player.characterInfo.stats[stat[s]].value;
+      var normalized = statValue > 170 ? 170 : statValue;
+      player.characterInfo.stats[stat[s]] = {
+        display: statNames[stat[s]],
+        value: statValue,
+        normalized: normalized,
+        percentage: +(100 * normalized / 170).toFixed()
+      };
+    }
   }
 }
 
@@ -113,7 +119,8 @@ angular.module('trialsReportApp')
         characterId: character.characterBase.characterId,
         className: className[character.characterBase.classType],
         classType: character.characterBase.classType,
-        level: character.characterLevel
+        level: character.characterLevel,
+        stats: character.characterBase.stats
       }
     };
 
