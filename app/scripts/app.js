@@ -109,7 +109,7 @@ angular
   .config(function ($modalProvider) {
     angular.extend($modalProvider.defaults, {
       container: 'body',
-      html: 'true',
+      html: true,
       placement: 'center'
     });
   })
@@ -117,6 +117,7 @@ angular
     angular.extend($popoverProvider.defaults, {
       animation: false,
       container: 'body',
+      html: true,
       placement: 'auto top',
       trigger: 'hover'
     });
