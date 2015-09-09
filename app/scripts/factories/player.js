@@ -84,15 +84,23 @@ function setActivityData(activities) {
 
 function setStatPercentage(player) {
   if (player.characterInfo && player.characterInfo.stats) {
-    var stat = ['STAT_INTELLECT', 'STAT_DISCIPLINE', 'STAT_STRENGTH'];
-    for (var s = 0; s < stat.length; s++) {
-      var statValue = player.characterInfo.stats[stat[s]].value;
-      var normalized = statValue > 170 ? 170 : statValue;
-      player.characterInfo.stats[stat[s]] = {
-        display: statNames[stat[s]],
-        value: statValue,
-        normalized: normalized,
-        percentage: +(100 * normalized / 170).toFixed()
+    var stats = ['STAT_INTELLECT', 'STAT_DISCIPLINE', 'STAT_STRENGTH'];
+    for (var s = 0; s < stats.length; s++) {
+      var value = player.characterInfo.stats[stats[s]].value;
+      var normalized = value > 170 ? 170 : value;
+      var tiers = [];
+
+      var remaining = value;
+      for (var t = 0; t < 5; t++) {
+        remaining -= tiers[t] = remaining > 34 ? 34 : remaining;
+      }
+
+      player.characterInfo.stats[stats[s]] = {
+        name: statNames[stats[s]],
+        value: value,
+        percentage: +(100 * normalized / 170).toFixed(),
+        tier: Math.floor(normalized / 34),
+        tiers: tiers
       };
     }
   }

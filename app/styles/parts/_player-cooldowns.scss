@@ -23,3 +23,12 @@
 .player-cooldown__perc {
   padding-left: .5em;
 }
+
+.player-cooldown__tier {
+  display: inline-block;
+  width: 20%;
+}
+
+.player-cooldown__tier + .player-cooldown__tier {
+  padding-left: 1px;
+}
