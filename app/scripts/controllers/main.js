@@ -91,17 +91,15 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats) {
-    $scope.currentMap = DestinyTrialsDefinitions[1596564652];
+    $scope.currentMap = DestinyTrialsDefinition[1596564652];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
     });
 
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
-    $scope.DestinyPrimaryWeaponDefinitions = DestinyPrimaryWeaponDefinitions;
-    $scope.DestinySpecialWeaponDefinitions = DestinySpecialWeaponDefinitions;
-    $scope.DestinyHeavyWeaponDefinitions = DestinyHeavyWeaponDefinitions;
-    $scope.DestinyTrialsDefinitions = DestinyTrialsDefinitions;
+    $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
+    $scope.DestinyTrialsDefinition = DestinyTrialsDefinition;
     $scope.DestinyHazardDefinition = {
       'Double Grenade': 'This Guardian can hold two grenades.',
       'Superburn Grenade': 'This Guardian has grenades that cause very strong burning.',

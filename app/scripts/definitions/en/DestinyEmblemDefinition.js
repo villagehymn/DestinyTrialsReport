@@ -1,4 +1,4 @@
-var DestinyEmblemDefinitions = {
+var DestinyEmblemDefinition = {
   "70035233": {
     "itemHash": 70035233,
     "itemName": "Pride of Nepal",

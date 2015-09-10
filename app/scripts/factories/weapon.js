@@ -25,11 +25,11 @@ function setDmgElement(nodeStep, weapon) {
 function getDefinitionsByBucket(bucketHash) {
   switch (bucketHash) {
     case BUCKET_PRIMARY_WEAPON:
-      return {file: DestinyPrimaryWeaponDefinitions, name: 'primary'};
+      return {file: DestinyWeaponDefinition, name: 'primary'};
     case BUCKET_SPECIAL_WEAPON:
-      return {file: DestinySpecialWeaponDefinitions, name: 'special'};
+      return {file: DestinyWeaponDefinition, name: 'special'};
     case BUCKET_HEAVY_WEAPON:
-      return {file: DestinyHeavyWeaponDefinitions, name: 'heavy'};
+      return {file: DestinyWeaponDefinition, name: 'heavy'};
   }
 }
 

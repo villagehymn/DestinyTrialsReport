@@ -42,12 +42,8 @@ angular.module('trialsReportApp')
     };
 
     $scope.getWeaponByHash = function (hash) {
-      if ($scope.DestinyPrimaryWeaponDefinitions[hash]) {
-        return $scope.DestinyPrimaryWeaponDefinitions[hash];
-      } else if ($scope.DestinySpecialWeaponDefinitions[hash]) {
-        return $scope.DestinySpecialWeaponDefinitions[hash];
-      } else if ($scope.DestinyHeavyWeaponDefinitions[hash]) {
-        return $scope.DestinyHeavyWeaponDefinitions[hash];
+      if ($scope.DestinyWeaponDefinition[hash]) {
+        return $scope.DestinyWeaponDefinition[hash];
       }
     };
 

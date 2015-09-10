@@ -74,9 +74,9 @@ angular.module('trialsReportApp')
           if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
             classNodes.hazards.push('Superburn Grenade');
           }
-        } else if (itemS.itemLevel === 0 && DestinyEmblemDefinitions[itemS.itemHash]) {
-          background[0] = DestinyEmblemDefinitions[itemS.itemHash].secondaryIcon;
-          background[1] = DestinyEmblemDefinitions[itemS.itemHash].icon;
+        } else if (itemS.itemLevel === 0 && DestinyEmblemDefinition[itemS.itemHash]) {
+          background[0] = DestinyEmblemDefinition[itemS.itemHash].secondaryIcon;
+          background[1] = DestinyEmblemDefinition[itemS.itemHash].icon;
         }
       }
 

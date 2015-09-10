@@ -55,90 +55,59 @@ function onManifestDownloaded() {
 }
 
 function extractDB(dbFile) {
-  db = new sqlite3.Database(dbFile);
   var items = {};
-  var primary = {};
-  var special = {};
-  var heavy = {};
-  var armors = {};
-  var emblems = {};
   var nodes = {};
 
+  var DestinyArmorDefinition = {};
+  var DestinyEmblemDefinition = {};
+  var DestinyWeaponDefinition = {};
+
+  db = new sqlite3.Database(dbFile);
   db.all('select * from DestinyInventoryItemDefinition', function(err, rows) {
     if (err) {
       throw err;
     }
 
-    primary = {};
-    special = {};
-    heavy = {};
-    armors = {};
-    emblems = {};
-
     rows.forEach(function(row) {
       var item = JSON.parse(row.json);
       delete item.equippingBlock;
-      if (item.bucketTypeHash === 1498876634) {
-        primary[item.itemHash] = {};
-        primary[item.itemHash].name = item.itemName;
-        primary[item.itemHash].description = item.itemDescription;
-        primary[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
-        primary[item.itemHash].subType = item.itemSubType;
-      }else if (item.bucketTypeHash === 2465295065) {
-        special[item.itemHash] = {};
-        special[item.itemHash].name = item.itemName;
-        special[item.itemHash].description = item.itemDescription;
-        special[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
-        special[item.itemHash].subType = item.itemSubType;
-      }else if (item.bucketTypeHash === 953998645) {
-        heavy[item.itemHash] = {};
-        heavy[item.itemHash].name = item.itemName;
-        heavy[item.itemHash].description = item.itemDescription;
-        heavy[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
-        heavy[item.itemHash].subType = item.itemSubType;
-      }else if (item.itemType === 2) {
-        armors[item.itemHash] = {};
-        armors[item.itemHash].name = item.itemName;
-        armors[item.itemHash].description = item.itemDescription;
-        armors[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
-        armors[item.itemHash].subType = item.itemSubType;
-        armors[item.itemHash].bucketTypeHash = item.bucketTypeHash
-      }else if (item.bucketTypeHash === 4274335291) {
-        emblems[item.itemHash] = item;
-      }else {
+      if ((item.bucketTypeHash === 1498876634) || (item.bucketTypeHash === 2465295065) || (item.bucketTypeHash === 953998645)) {
+        DestinyWeaponDefinition[item.itemHash] = {};
+        DestinyWeaponDefinition[item.itemHash].name = item.itemName;
+        DestinyWeaponDefinition[item.itemHash].description = item.itemDescription;
+        DestinyWeaponDefinition[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
+        DestinyWeaponDefinition[item.itemHash].subType = item.itemSubType;
+      } else if (item.itemType === 2) {
+        DestinyArmorDefinition[item.itemHash] = {};
+        DestinyArmorDefinition[item.itemHash].name = item.itemName;
+        DestinyArmorDefinition[item.itemHash].description = item.itemDescription;
+        DestinyArmorDefinition[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
+        DestinyArmorDefinition[item.itemHash].subType = item.itemSubType;
+        DestinyArmorDefinition[item.itemHash].bucketTypeHash = item.bucketTypeHash
+      } else if (item.bucketTypeHash === 4274335291) {
+        DestinyEmblemDefinition[item.itemHash] = item;
+      } else {
         //console.log(row);
       }
     });
 
-    var defsP = fs.createWriteStream('app/scripts/definitions/en/DestinyPrimaryWeaponDefinitions.js');
-    defsP.write('var DestinyPrimaryWeaponDefinitions = ');
-    defsP.write(JSON.stringify(primary, null, 2));
-    defsP.write(';');
-    defsP.end();
+    var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyArmorDefinition.js');
+    stream.write('var DestinyArmorDefinition = ');
+    stream.write(JSON.stringify(DestinyArmorDefinition, null, 2));
+    stream.write(';');
+    stream.end();
 
-    var defsS = fs.createWriteStream('app/scripts/definitions/en/DestinySpecialWeaponDefinitions.js');
-    defsS.write('var DestinySpecialWeaponDefinitions = ');
-    defsS.write(JSON.stringify(special, null, 2));
-    defsS.write(';');
-    defsS.end();
+    var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyEmblemDefinition.js');
+    stream.write('var DestinyEmblemDefinition = ');
+    stream.write(JSON.stringify(DestinyEmblemDefinition, null, 2));
+    stream.write(';');
+    stream.end();
 
-    var defsH = fs.createWriteStream('app/scripts/definitions/en/DestinyHeavyWeaponDefinitions.js');
-    defsH.write('var DestinyHeavyWeaponDefinitions = ');
-    defsH.write(JSON.stringify(heavy, null, 2));
-    defsH.write(';');
-    defsH.end();
-
-    var defsA = fs.createWriteStream('app/scripts/definitions/en/DestinyArmorDefinition.js');
-    defsA.write('var DestinyArmorDefinition = ');
-    defsA.write(JSON.stringify(armors, null, 2));
-    defsA.write(';');
-    defsA.end();
-
-    var defsE = fs.createWriteStream('app/scripts/definitions/en/DestinyEmblemDefinitions.js');
-    defsE.write('var DestinyEmblemDefinitions = ');
-    defsE.write(JSON.stringify(emblems, null, 2));
-    defsE.write(';');
-    defsE.end();
+    var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyWeaponDefinition.js');
+    stream.write('var DestinyWeaponDefinition = ');
+    stream.write(JSON.stringify(DestinyWeaponDefinition, null, 2));
+    stream.write(';');
+    stream.end();
   });
 }
 

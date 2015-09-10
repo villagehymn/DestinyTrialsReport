@@ -1,4 +1,4 @@
-var DestinyTrialsDefinitions = {
+var DestinyTrialsDefinition = {
   145503874: {
     activityHash: 145503874,
     activityName: "Pantheon",
