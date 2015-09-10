@@ -39,13 +39,6 @@ function setNodes(itemS, nodes, object, weapons, type) {
       var nodeStep = itemS.nodes[i].steps;
       if (nodeStep) {
         if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-          if (type === 'special') {
-            if (object.subType === 12) {
-              if (nodeStep.perkHashes[0] === 3752206822) {
-                weapons.hazards.push('Final Round Sniper');
-              }
-            }
-          }
           pushNode(nodeStep, nodes);
         } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
           setDmgElement(nodeStep, object);

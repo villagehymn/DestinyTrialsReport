@@ -140,24 +140,6 @@ function extractDB(dbFile) {
     defsE.write(';');
     defsE.end();
   });
-
-  db.all('select * from DestinyTalentGridDefinition', function(err, rows) {
-    if (err) {
-      throw err;
-    }
-
-    items = {};
-    nodes = {};
-
-    rows.forEach(function(row) {
-      var item = JSON.parse(row.json);
-      items[item.gridHash] = item;
-    });
-
-    var defs = fs.createWriteStream('app/scripts/definitions/en/DestinyTalentGridDefinition.js');
-    defs.write('var DestinyTalentGridDefinition =');
-    defs.write(JSON.stringify(items));
-  });
 }
 
 request

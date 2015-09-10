@@ -82,13 +82,29 @@ function setActivityData(activities) {
   };
 }
 
-function setStatPercentage(player, armors) {
-  var stat = ['int', 'dis', 'str'];
-  for (var s = 0; s < stat.length; s++) {
-    player[stat[s]] = armors[stat[s]];
-    var cName = stat[s].substring(0,1).toUpperCase() + stat[s].substring(1);
-    player[cName] = player[stat[s]] > 270 ? 270 : armors[stat[s]];
-    player[stat[s] + 'Percent'] = +(100 * player[cName] / 270).toFixed();
+function setStatPercentage(player) {
+  if (player.characterInfo && player.characterInfo.stats) {
+    var stats = ['STAT_INTELLECT', 'STAT_DISCIPLINE', 'STAT_STRENGTH'];
+    for (var s = 0; s < stats.length; s++) {
+      var value = player.characterInfo.stats[stats[s]].value;
+      var normalized = value > 170 ? 170 : value;
+      var tier = Math.floor(normalized / 34);
+      var tiers = [];
+
+      var remaining = value;
+      for (var t = 0; t < 5; t++) {
+        remaining -= tiers[t] = remaining > 34 ? 34 : remaining;
+      }
+
+      player.characterInfo.stats[stats[s]] = {
+        name: statNames[stats[s]],
+        value: value,
+        percentage: +(100 * normalized / 170).toFixed(),
+        tier: tier,
+        tiers: tiers,
+        cooldown: ABILITY_COOLDOWNS[stats[s]][tier]
+      };
+    }
   }
 }
 
@@ -113,7 +129,8 @@ angular.module('trialsReportApp')
         characterId: character.characterBase.characterId,
         className: className[character.characterBase.classType],
         classType: character.characterBase.classType,
-        level: character.characterLevel
+        level: character.characterLevel,
+        stats: character.characterBase.stats
       }
     };
 

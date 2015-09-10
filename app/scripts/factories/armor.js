@@ -17,10 +17,10 @@ function setByBucketType(armor, armors) {
     case BUCKET_HEAD:
       setDefinition(armors, 'head', armor);
       break;
-    case BUCKET_CHEST:
+    case BUCKET_ARMS:
       setDefinition(armors, 'arms', armor);
       break;
-    case BUCKET_ARMS:
+    case BUCKET_CHEST:
       setDefinition(armors, 'chest', armor);
       break;
     case BUCKET_LEGS:

@@ -4,37 +4,16 @@
   </div>
   <div class="player-tab__section">
     <div class="row">
-      <div class="player-cooldown col-xs-4" bs-popover="{content:'Intellect: ' + player.int + ' (' + player.intPercent + '%)'}">
-        <div class="player-cooldown__label">
-          Intellect
-        </div>
+      <div class="player-cooldown col-xs-4"
+           ng-repeat="stat in [player.characterInfo.stats.STAT_INTELLECT, player.characterInfo.stats.STAT_DISCIPLINE, player.characterInfo.stats.STAT_STRENGTH]"
+           bs-popover="{title:stat.name, content:'Tier ' + stat.tier + ' - cooldown is ' + stat.cooldown + '<br>' + stat.value + ' / 170 (' + stat.percentage + '%)'}">
+        <div class="player-cooldown__label" ng-bind="stat.name"></div>
         <div class="player-cooldown__nr">
-          <progress max="100" animate="true" class="progress not-rounded">
-            <bar value="player.intPercent" class="progress-bar-primary">
-            </bar>
-          </progress>
-        </div>
-      </div>
-      <div class="player-cooldown col-xs-4" bs-popover="{content:'Discipline: ' + player.dis + ' (' + player.disPercent + '%)'}">
-        <div class="player-cooldown__label">
-          Discipline
-        </div>
-        <div class="player-cooldown__nr">
-          <progress max="100" animate="true" class="progress not-rounded">
-            <bar value="player.disPercent" class="progress-bar-primary">
-            </bar>
-          </progress>
-        </div>
-      </div>
-      <div class="player-cooldown col-xs-4" bs-popover="{content:'Strength: ' + player.str + ' (' + player.strPercent + '%)'}">
-        <div class="player-cooldown__label">
-          Strength
-        </div>
-        <div class="player-cooldown__nr">
-          <progress max="100" animate="true" class="progress not-rounded">
-            <bar value="player.strPercent" class="progress-bar-primary">
-            </bar>
-          </progress>
+          <div class="player-cooldown__tier" ng-repeat="value in stat.tiers track by $index">
+            <progress max="34" animate="true" class="progress not-rounded">
+              <bar value="value" class="progress-bar-primary"></bar>
+            </progress>
+          </div>
         </div>
       </div>
     </div>
