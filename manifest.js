@@ -112,31 +112,31 @@ function extractDB(dbFile) {
 
     var defsP = fs.createWriteStream('app/scripts/definitions/en/DestinyPrimaryWeaponDefinitions.js');
     defsP.write('var DestinyPrimaryWeaponDefinitions = ');
-    defsP.write(JSON.stringify(primary));
+    defsP.write(JSON.stringify(primary, null, 2));
     defsP.write(';');
     defsP.end();
 
     var defsS = fs.createWriteStream('app/scripts/definitions/en/DestinySpecialWeaponDefinitions.js');
     defsS.write('var DestinySpecialWeaponDefinitions = ');
-    defsS.write(JSON.stringify(special));
+    defsS.write(JSON.stringify(special, null, 2));
     defsS.write(';');
     defsS.end();
 
     var defsH = fs.createWriteStream('app/scripts/definitions/en/DestinyHeavyWeaponDefinitions.js');
     defsH.write('var DestinyHeavyWeaponDefinitions = ');
-    defsH.write(JSON.stringify(heavy));
+    defsH.write(JSON.stringify(heavy, null, 2));
     defsH.write(';');
     defsH.end();
 
     var defsA = fs.createWriteStream('app/scripts/definitions/en/DestinyArmorDefinition.js');
     defsA.write('var DestinyArmorDefinition = ');
-    defsA.write(JSON.stringify(armors));
+    defsA.write(JSON.stringify(armors, null, 2));
     defsA.write(';');
     defsA.end();
 
     var defsE = fs.createWriteStream('app/scripts/definitions/en/DestinyEmblemDefinitions.js');
     defsE.write('var DestinyEmblemDefinitions = ');
-    defsE.write(JSON.stringify(emblems));
+    defsE.write(JSON.stringify(emblems, null, 2));
     defsE.write(';');
     defsE.end();
   });
