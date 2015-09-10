@@ -88,6 +88,7 @@ function setStatPercentage(player) {
     for (var s = 0; s < stats.length; s++) {
       var value = player.characterInfo.stats[stats[s]].value;
       var normalized = value > 170 ? 170 : value;
+      var tier = Math.floor(normalized / 34);
       var tiers = [];
 
       var remaining = value;
@@ -99,8 +100,9 @@ function setStatPercentage(player) {
         name: statNames[stats[s]],
         value: value,
         percentage: +(100 * normalized / 170).toFixed(),
-        tier: Math.floor(normalized / 34),
-        tiers: tiers
+        tier: tier,
+        tiers: tiers,
+        cooldown: ABILITY_COOLDOWNS[stats[s]][tier]
       };
     }
   }

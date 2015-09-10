@@ -6,7 +6,7 @@
     <div class="row">
       <div class="player-cooldown col-xs-4"
            ng-repeat="stat in [player.characterInfo.stats.STAT_INTELLECT, player.characterInfo.stats.STAT_DISCIPLINE, player.characterInfo.stats.STAT_STRENGTH]"
-           bs-popover="{title:stat.name, content:'Tier ' + stat.tier + ' - cooldown is 0:00<br>' + stat.value + ' / 170 (' + stat.percentage + '%)'}">
+           bs-popover="{title:stat.name, content:'Tier ' + stat.tier + ' - cooldown is ' + stat.cooldown + '<br>' + stat.value + ' / 170 (' + stat.percentage + '%)'}">
         <div class="player-cooldown__label" ng-bind="stat.name"></div>
         <div class="player-cooldown__nr">
           <div class="player-cooldown__tier" ng-repeat="value in stat.tiers track by $index">
