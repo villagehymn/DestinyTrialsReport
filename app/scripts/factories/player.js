@@ -146,21 +146,21 @@ angular.module('trialsReportApp')
       return player
     };
 
-    Player.prototype.setInventory = function (player, weapons, armor, classItems) {
+    Player.prototype.setInventory = function (player, inv) {
       player.inventory = {
-        weapons: weapons.weapons,
-        armor: armor.armors,
-        classNodes: classItems.classNodes
+        weapons: inv.weapons,
+        armor: inv.armors,
+        classNodes: inv.classNodes
       };
       if (player.characterInfo) {
-        player.characterInfo.subclassName = classItems.subClass.name;
+        player.characterInfo.subclassName = inv.subClass.name;
       }
-      setStatPercentage(player, armor);
-      player.emblem = this.setEmblem(classItems.bg[1], classItems.bg[0]);
-      if (classItems.blink && weapons.shotgun) {
+      setStatPercentage(player, inv);
+      player.emblem = this.setEmblem(inv.bg[1], inv.bg[0]);
+      if (inv.blink && inv.shotgun) {
         player.inventory.weapons.hazards.push('Blink Shotgun');
       }
-      if (classItems.hasFusionGrenade && armor.hasStarfireProtocolPerk) {
+      if (inv.hasFusionGrenade && inv.hasStarfireProtocolPerk) {
         player.inventory.armors.hazards.push('Double Grenade');
       }
       return player
