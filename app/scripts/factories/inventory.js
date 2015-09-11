@@ -112,7 +112,7 @@ angular.module('trialsReportApp')
       classNodes.abilities = {};
       classNodes.hazards = [];
 
-      var subClass = [], background = [], blink = false,
+      var subClass = [], blink = false,
         hasFireboltGrenade = false, hasFusionGrenade = false,
         hasVikingFuneral = false, hasTouchOfFlame = false;
 
@@ -188,9 +188,6 @@ angular.module('trialsReportApp')
             if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
               classNodes.hazards.push('Superburn Grenade');
             }
-          } else if (item.itemLevel === 0 && DestinyEmblemDefinition[item.itemHash]) {
-            background[0] = DestinyEmblemDefinition[item.itemHash].secondaryIcon;
-            background[1] = DestinyEmblemDefinition[item.itemHash].icon;
           }
         }
       }
@@ -201,7 +198,6 @@ angular.module('trialsReportApp')
         shotgun: shotgun,
         classNodes: classNodes,
         subClass: subClass,
-        bg: background,
         blink: blink,
         hasStarfireProtocolPerk: hasStarfireProtocolPerk,
         hasFusionGrenade: hasFusionGrenade

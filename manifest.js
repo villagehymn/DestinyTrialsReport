@@ -97,12 +97,6 @@ function extractDB(dbFile) {
     stream.write(';');
     stream.end();
 
-    var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyEmblemDefinition.js');
-    stream.write('var DestinyEmblemDefinition = ');
-    stream.write(JSON.stringify(DestinyEmblemDefinition, null, 2));
-    stream.write(';');
-    stream.end();
-
     var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyWeaponDefinition.js');
     stream.write('var DestinyWeaponDefinition = ');
     stream.write(JSON.stringify(DestinyWeaponDefinition, null, 2));

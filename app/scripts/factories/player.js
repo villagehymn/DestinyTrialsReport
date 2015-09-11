@@ -156,7 +156,6 @@ angular.module('trialsReportApp')
         player.characterInfo.subclassName = inv.subClass.name;
       }
       setStatPercentage(player, inv);
-      player.emblem = this.setEmblem(inv.bg[1], inv.bg[0]);
       if (inv.blink && inv.shotgun) {
         player.inventory.weapons.hazards.push('Blink Shotgun');
       }
