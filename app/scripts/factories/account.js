@@ -13,7 +13,7 @@ function setPlayerLastMatches(postGame, player) {
 }
 
 angular.module('trialsReportApp')
-  .factory('currentAccount', function ($http, $filter, toastr, Player, inventoryStats, trialsStats, $q) {
+  .factory('currentAccount', function ($http, $filter, toastr, Player, inventoryService, trialsStats, $q) {
     var getAccount = function (url) {
       return $http({
         method: 'GET',
@@ -114,7 +114,7 @@ angular.module('trialsReportApp')
       },
       playerStatsInParallel = function (player) {
         var methods = [
-          inventoryStats.getInventory(player.membershipType, player),
+          inventoryService.getInventory(player.membershipType, player),
           trialsStats.getData(player)
         ];
 
