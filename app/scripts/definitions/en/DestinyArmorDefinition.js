@@ -1,3 +1,5 @@
+/* exported DestinyArmorDefinition */
+
 var DestinyArmorDefinition = {
   "19464": {
     "name": "Thanatonaut's Bond",

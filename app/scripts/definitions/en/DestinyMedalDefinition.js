@@ -1,3 +1,5 @@
+/* exported DestinyMedalDefinition */
+
 var DestinyMedalDefinition = {
   "medalsAbilityGhostGunKillMulti": {
     "statName": "Way of the Gun",

@@ -1,3 +1,5 @@
+/* exported DestinyWeaponDefinition */
+
 var DestinyWeaponDefinition = {
   "12469152": {
     "name": "Nox Praeli III",

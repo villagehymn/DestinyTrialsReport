@@ -1,3 +1,5 @@
+/* exported DestinySubclassDefinition */
+
 var DestinySubclassDefinition = {
   "21395672": {
     "name": "Sunbreaker"
