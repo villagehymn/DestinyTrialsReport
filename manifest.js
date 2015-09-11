@@ -111,6 +111,32 @@ function extractDB(dbFile) {
     stream.write(';');
     stream.end();
   });
+
+  db.all('SELECT * FROM DestinyHistoricalStatsDefinition', function(err, rows) {
+    if (err) {
+      throw err;
+    }
+
+    var DestinyMedalDefinition = {};
+
+    rows.forEach(function(row) {
+      var item = JSON.parse(row.json);
+
+      // Medals
+      if (item.statId.substring(0, 6) === 'medals') {
+        DestinyMedalDefinition[item.statId] = {};
+        DestinyMedalDefinition[item.statId].statName = item.statName;
+        DestinyMedalDefinition[item.statId].statDescription = item.statDescription;
+        DestinyMedalDefinition[item.statId].iconImage = item.iconImage;
+      }
+    });
+
+    var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyMedalDefinition.js');
+    stream.write('var DestinyMedalDefinition = ');
+    stream.write(JSON.stringify(DestinyMedalDefinition, null, 2));
+    stream.write(';');
+    stream.end();
+  });
 }
 
 request
