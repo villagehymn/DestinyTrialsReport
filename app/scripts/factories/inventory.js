@@ -147,10 +147,10 @@ angular.module('trialsReportApp')
           }
           setDefinition(armors, bucket, armor);
         } else {
-          var cItem = DestinyClassDefinition[item.itemHash];
+          var cItem = DestinySubclassDefinition[item.itemHash];
           if (cItem) {
             subClass = {
-              'name': cItem.name
+              'name': cItem.itemName
             };
 
             for (var i = 0; i < item.nodes.length; i++) {

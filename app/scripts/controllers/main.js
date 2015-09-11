@@ -97,9 +97,6 @@ angular.module('trialsReportApp')
       platform: true
     });
 
-    $scope.DestinyMedalDefinition = DestinyMedalDefinition;
-    $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
-    $scope.DestinyTrialsDefinition = DestinyTrialsDefinition;
     $scope.DestinyHazardDefinition = {
       'Double Grenade': 'This Guardian can hold two grenades.',
       'Superburn Grenade': 'This Guardian has grenades that cause very strong burning.',
@@ -110,6 +107,9 @@ angular.module('trialsReportApp')
       'Site Developer': 'Hey! We made this site, so more than likely we are looking you up too...',
       'Site Donator': 'Part of an amazing few who\'ve helped keep this site running'
     };
+    $scope.DestinyMedalDefinition = DestinyMedalDefinition;
+    $scope.DestinyTrialsDefinition = DestinyTrialsDefinition;
+    $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
 
     $scope.weaponKills = weaponKills;
     $scope.screenSize = {};

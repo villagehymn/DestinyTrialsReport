@@ -47,7 +47,6 @@ angular.module('trialsReportApp')
       }
     };
 
-
     $scope.setRecentPlayer = function (player) {
       var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + player.membershipType + '/' + player.name;
       return currentAccount.getAccount(url)

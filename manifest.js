@@ -19,7 +19,6 @@ function onManifestRequest(error, response, body) {
 
   version = parsedResponse.Response.version;
 
-
   var exists = fs.existsSync(version + '.txt');
 
   // if (!exists) {
@@ -55,45 +54,57 @@ function onManifestDownloaded() {
 }
 
 function extractDB(dbFile) {
-  var items = {};
-  var nodes = {};
-
-  var DestinyArmorDefinition = {};
-  var DestinyEmblemDefinition = {};
-  var DestinyWeaponDefinition = {};
-
   db = new sqlite3.Database(dbFile);
-  db.all('select * from DestinyInventoryItemDefinition', function(err, rows) {
+
+  db.all('SELECT * FROM DestinyInventoryItemDefinition', function(err, rows) {
     if (err) {
       throw err;
     }
 
+    var DestinyArmorDefinition = {};
+    var DestinySubclassDefinition = {};
+    var DestinyWeaponDefinition = {};
+
     rows.forEach(function(row) {
       var item = JSON.parse(row.json);
-      delete item.equippingBlock;
-      if ((item.bucketTypeHash === 1498876634) || (item.bucketTypeHash === 2465295065) || (item.bucketTypeHash === 953998645)) {
-        DestinyWeaponDefinition[item.itemHash] = {};
-        DestinyWeaponDefinition[item.itemHash].name = item.itemName;
-        DestinyWeaponDefinition[item.itemHash].description = item.itemDescription;
-        DestinyWeaponDefinition[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
-        DestinyWeaponDefinition[item.itemHash].subType = item.itemSubType;
-      } else if (item.itemType === 2) {
+
+      // Armor
+      if (item.itemType === 2) {
         DestinyArmorDefinition[item.itemHash] = {};
         DestinyArmorDefinition[item.itemHash].name = item.itemName;
         DestinyArmorDefinition[item.itemHash].description = item.itemDescription;
-        DestinyArmorDefinition[item.itemHash].icon = 'https://www.bungie.net' + item.icon;
+        DestinyArmorDefinition[item.itemHash].icon = item.icon;
         DestinyArmorDefinition[item.itemHash].subType = item.itemSubType;
-        DestinyArmorDefinition[item.itemHash].bucketTypeHash = item.bucketTypeHash
-      } else if (item.bucketTypeHash === 4274335291) {
-        DestinyEmblemDefinition[item.itemHash] = item;
-      } else {
-        //console.log(row);
+        DestinyArmorDefinition[item.itemHash].bucketTypeHash = item.bucketTypeHash;
+      }
+
+      // Weapons
+      if ((item.itemType === 3) && (item.bucketTypeHash !== 2422292810)) {
+        DestinyWeaponDefinition[item.itemHash] = {};
+        DestinyWeaponDefinition[item.itemHash].name = item.itemName;
+        DestinyWeaponDefinition[item.itemHash].description = item.itemDescription;
+        DestinyWeaponDefinition[item.itemHash].icon = item.icon;
+        DestinyWeaponDefinition[item.itemHash].subType = item.itemSubType;
+      }
+
+      switch (item.bucketTypeHash) {
+        // Subclass
+        case 3284755031:
+          DestinySubclassDefinition[item.itemHash] = {};
+          DestinySubclassDefinition[item.itemHash].itemName = item.itemName;
+          break;
       }
     });
 
     var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyArmorDefinition.js');
     stream.write('var DestinyArmorDefinition = ');
     stream.write(JSON.stringify(DestinyArmorDefinition, null, 2));
+    stream.write(';');
+    stream.end();
+
+    var stream = fs.createWriteStream('app/scripts/definitions/en/DestinySubclassDefinition.js');
+    stream.write('var DestinySubclassDefinition = ');
+    stream.write(JSON.stringify(DestinySubclassDefinition, null, 2));
     stream.write(';');
     stream.end();
 
