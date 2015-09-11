@@ -11,7 +11,7 @@ angular.module('trialsReportApp')
         '<div class="row">',
           '<div class="weapon col-xs-12" ng-repeat="weapon in weapons track by $index">',
             '<div class="weapon__img">',
-              '<img class="img-responsive" ng-src="{{\'https://www.bungie.net\' + weapon.definition.icon}}" alt="{{weapon.definition.name}}">',
+              '<img class="img-responsive" ng-src="{{\'https://bungie.net\' + weapon.definition.icon}}" alt="{{weapon.definition.name}}">',
             '</div>',
             '<div class="weapon__info">',
               '<div class="weapon__title">',

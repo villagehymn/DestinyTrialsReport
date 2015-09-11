@@ -74,8 +74,6 @@ function extractDB(dbFile) {
         DestinyArmorDefinition[item.itemHash].name = item.itemName;
         DestinyArmorDefinition[item.itemHash].description = item.itemDescription;
         DestinyArmorDefinition[item.itemHash].icon = item.icon;
-        DestinyArmorDefinition[item.itemHash].subType = item.itemSubType;
-        DestinyArmorDefinition[item.itemHash].bucketTypeHash = item.bucketTypeHash;
       }
 
       // Weapons
