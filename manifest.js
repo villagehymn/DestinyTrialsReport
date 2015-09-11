@@ -82,7 +82,6 @@ function extractDB(dbFile) {
       if ((item.itemType === 3) && (item.bucketTypeHash !== 2422292810)) {
         DestinyWeaponDefinition[item.itemHash] = {};
         DestinyWeaponDefinition[item.itemHash].name = item.itemName;
-        DestinyWeaponDefinition[item.itemHash].description = item.itemDescription;
         DestinyWeaponDefinition[item.itemHash].icon = item.icon;
         DestinyWeaponDefinition[item.itemHash].subType = item.itemSubType;
       }
@@ -91,7 +90,7 @@ function extractDB(dbFile) {
         // Subclass
         case 3284755031:
           DestinySubclassDefinition[item.itemHash] = {};
-          DestinySubclassDefinition[item.itemHash].itemName = item.itemName;
+          DestinySubclassDefinition[item.itemHash].name = item.itemName;
           break;
       }
     });

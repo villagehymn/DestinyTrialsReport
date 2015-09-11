@@ -112,7 +112,7 @@ angular.module('trialsReportApp')
       classNodes.abilities = {};
       classNodes.hazards = [];
 
-      var subClass = [], blink = false,
+      var subclass = {}, blink = false,
         hasFireboltGrenade = false, hasFusionGrenade = false,
         hasVikingFuneral = false, hasTouchOfFlame = false;
 
@@ -147,11 +147,9 @@ angular.module('trialsReportApp')
           }
           setDefinition(armors, bucket, armor);
         } else {
-          var cItem = DestinySubclassDefinition[item.itemHash];
-          if (cItem) {
-            subClass = {
-              'name': cItem.itemName
-            };
+          var subclassDefinition = DestinySubclassDefinition[item.itemHash];
+          if (subclassDefinition) {
+            subclass.definition = subclassDefinition;
 
             for (var i = 0; i < item.nodes.length; i++) {
               if (item.nodes[i].isActivated === true) {
@@ -197,7 +195,7 @@ angular.module('trialsReportApp')
         armors: armors,
         shotgun: shotgun,
         classNodes: classNodes,
-        subClass: subClass,
+        subclass: subclass,
         blink: blink,
         hasStarfireProtocolPerk: hasStarfireProtocolPerk,
         hasFusionGrenade: hasFusionGrenade

@@ -153,7 +153,7 @@ angular.module('trialsReportApp')
         classNodes: inv.classNodes
       };
       if (player.characterInfo) {
-        player.characterInfo.subclassName = inv.subClass.name;
+        player.characterInfo.subclassName = inv.subclass.definition.name;
       }
       setStatPercentage(player, inv);
       if (inv.blink && inv.shotgun) {
