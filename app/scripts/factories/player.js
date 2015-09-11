@@ -136,8 +136,8 @@ angular.module('trialsReportApp')
 
     Player.prototype.setEmblem = function (icon, background) {
       return {
-        icon: 'https://bungie.net' + icon,
-        background: 'https://bungie.net' + background
+        icon: 'https://www.bungie.net' + icon,
+        background: 'https://www.bungie.net' + background
       };
     };
 

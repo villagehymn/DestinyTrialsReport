@@ -4,14 +4,9 @@
 
 var http = require('http');
 var fs = require('fs');
-
 var request = require('request');
 var sqlite3 = require('sqlite3').verbose();
 var unzip = require('unzip');
-
-var db;
-var dbFile;
-var version;
 
 function writeDefinitionFile(path, name, data) {
   var stream = fs.createWriteStream(path);
@@ -124,5 +119,4 @@ function extractDB(dbFile) {
   writeDefinitionFile('app/scripts/definitions/en/DestinyWeaponDefinition.js', 'DestinyWeaponDefinition', DestinyWeaponDefinition);
 }
 
-request
-  .get('http://www.bungie.net/platform/Destiny/Manifest/', onManifestRequest);
+request.get('http://www.bungie.net/platform/Destiny/Manifest/', onManifestRequest);
