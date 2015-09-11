@@ -1,4 +1,4 @@
-var DestinyMedalDefinition = JSON.parse('{
+var DestinyMedalDefinition = {
   "medalsAbilityGhostGunKillMulti": {
     "statName": "Way of the Gun",
     "statDescription": "Kill 3 enemies with a single Golden Gun charge.",
@@ -512,4 +512,4 @@ var DestinyMedalDefinition = JSON.parse('{
     "statDescription": "Avenge a fallen teammate",
     "iconImage": "/common/destiny_content/icons/icon_m324a5681ecdd1ff57498932167c794b3.png"
   }
-}');
+};

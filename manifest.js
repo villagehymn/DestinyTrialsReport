@@ -94,21 +94,21 @@ function extractDB(dbFile) {
     });
 
     var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyArmorDefinition.js');
-    stream.write('var DestinyArmorDefinition = JSON.parse(\'');
+    stream.write('var DestinyArmorDefinition = ');
     stream.write(JSON.stringify(DestinyArmorDefinition, null, 2));
-    stream.write('\');');
+    stream.write(';');
     stream.end();
 
     var stream = fs.createWriteStream('app/scripts/definitions/en/DestinySubclassDefinition.js');
-    stream.write('var DestinySubclassDefinition = JSON.parse(\'');
+    stream.write('var DestinySubclassDefinition = ');
     stream.write(JSON.stringify(DestinySubclassDefinition, null, 2));
-    stream.write('\');');
+    stream.write(';');
     stream.end();
 
     var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyWeaponDefinition.js');
-    stream.write('var DestinyWeaponDefinition = JSON.parse(\'');
+    stream.write('var DestinyWeaponDefinition = ');
     stream.write(JSON.stringify(DestinyWeaponDefinition, null, 2));
-    stream.write('\');');
+    stream.write(';');
     stream.end();
   });
 
@@ -132,9 +132,9 @@ function extractDB(dbFile) {
     });
 
     var stream = fs.createWriteStream('app/scripts/definitions/en/DestinyMedalDefinition.js');
-    stream.write('var DestinyMedalDefinition = JSON.parse(\'');
+    stream.write('var DestinyMedalDefinition = ');
     stream.write(JSON.stringify(DestinyMedalDefinition, null, 2));
-    stream.write('\');');
+    stream.write(';');
     stream.end();
   });
 }

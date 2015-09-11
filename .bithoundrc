@@ -1,14 +1,15 @@
 {
-  "ignore": [
+  "ignore" [
     "**/app/scripts/definitions/en/DestinyArmorDefinition.js",
-    "**/app/scripts/definitions/en/DestinyPrimaryWeaponDefinitions.js",
-    "**/app/scripts/definitions/en/DestinySpecialWeaponDefinitions.js",
-    "**/app/scripts/definitions/en/DestinyHeavyWeaponDefinitions.js",
-    "**/app/scripts/definitions/en/DestinyEmblemDefinitions.js",
-    "**/app/scripts/definitions/en/DestinyTalentGridDefinition.js",
     "**/app/scripts/definitions/en/DestinyMedalDefinition.js",
-    "**/proxy.js",
-    "**/manifest.js",
-    "app/lib/chardinjs.min.js"
-  ]
+    "**/app/scripts/definitions/en/DestinySubclassDefinition.js",
+    "**/app/scripts/definitions/en/DestinyTrialsDefinition.js",
+    "**/app/scripts/definitions/en/DestinyWeaponDefinition.js"
+  ],
+  "dependencies": {
+    "unused-ignores": [
+      "adm-zip",
+      "request-promise"
+    ]
+  }
 }

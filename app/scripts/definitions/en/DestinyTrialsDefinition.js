@@ -1,4 +1,4 @@
-var DestinyTrialsDefinition = JSON.parse('{
+var DestinyTrialsDefinition = {
   145503874: {
     activityHash: 145503874,
     activityName: "Pantheon",
@@ -290,4 +290,4 @@ var DestinyTrialsDefinition = JSON.parse('{
     rewards: [],
     skulls: []
   }
-}');
+};
