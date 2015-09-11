@@ -1,4 +1,4 @@
-var DestinyArmorDefinition = {
+var DestinyArmorDefinition = JSON.parse('{
   "19464": {
     "name": "Thanatonaut's Bond",
     "description": "There's always a gap in the memories.",
@@ -10238,4 +10238,4 @@ var DestinyArmorDefinition = {
     "description": "\"Listen. Some stars won't stop calling to us.\" —Arach Linde",
     "icon": "/common/destiny_content/icons/185ef1ea9381d2c5b83ea2586a8440f8.jpg"
   }
-};
+}');

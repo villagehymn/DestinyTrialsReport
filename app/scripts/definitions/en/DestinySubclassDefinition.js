@@ -1,4 +1,4 @@
-var DestinySubclassDefinition = {
+var DestinySubclassDefinition = JSON.parse('{
   "21395672": {
     "name": "Sunbreaker"
   },
@@ -35,4 +35,4 @@ var DestinySubclassDefinition = {
   "4143670657": {
     "name": "Nightstalker"
   }
-};
+}');

@@ -1,4 +1,4 @@
-var DestinyWeaponDefinition = {
+var DestinyWeaponDefinition = JSON.parse('{
   "12469152": {
     "name": "Nox Praeli III",
     "icon": "/common/destiny_content/icons/f33fc02ccaefe1e829677888098ae721.jpg",
@@ -4359,4 +4359,4 @@ var DestinyWeaponDefinition = {
     "icon": "/common/destiny_content/icons/a45758e552ea00a590ae22ec979e7ba9.jpg",
     "subType": 11
   }
-};
+}');
