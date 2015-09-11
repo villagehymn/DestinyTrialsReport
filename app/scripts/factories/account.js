@@ -122,7 +122,7 @@ angular.module('trialsReportApp')
           methods.push(trialsStats.getLastThree(player));
         }
 
-        return $q.all(methods)
+        return $q.all(methods);
       },
       setPlayerStats = function (result) {
         var dfd = $q.defer();

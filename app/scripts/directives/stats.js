@@ -27,7 +27,7 @@ angular.module('trialsReportApp')
             style += key + translateY;
           });
           return style;
-        }
+        };
       },
       template: [
         '<!--<div ng-if="!activities">N/A</div>-->',

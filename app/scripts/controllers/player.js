@@ -7,7 +7,7 @@ angular.module('trialsReportApp')
       $scope.player.isTeammate = true;
       currentAccount.getPlayerCard($scope.player).then(function (player) {
         $scope.player = player;
-        currentAccount.compareLastMatchResults($scope.player, $scope.fireteam[0].activities.lastThree)
+        currentAccount.compareLastMatchResults($scope.player, $scope.fireteam[0].activities.lastThree);
       });
     }
 

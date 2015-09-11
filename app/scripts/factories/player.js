@@ -43,7 +43,7 @@ function setLastThreeMatches(lastThree, activities) {
       lastThree[activities[l].activityDetails.instanceId] = {
         'id': activities[l].activityDetails.instanceId,
         'standing': activities[l].values.standing.basic.value
-      }
+      };
     }
   }
 }
@@ -120,7 +120,7 @@ angular.module('trialsReportApp')
         this.characterInfo = this.setCharacterInfo(character);
         this.grimoire = character.characterBase.grimoireScore;
       } else {
-        this.characterInfo = {characterId: character.characterId}
+        this.characterInfo = {characterId: character.characterId};
       }
     }
 
@@ -131,19 +131,19 @@ angular.module('trialsReportApp')
         classType: character.characterBase.classType,
         level: character.characterLevel,
         stats: character.characterBase.stats
-      }
+      };
     };
 
     Player.prototype.setEmblem = function (icon, background) {
       return {
         icon: 'https://bungie.net' + icon,
         background: 'https://bungie.net' + background
-      }
+      };
     };
 
     Player.prototype.setActivities = function (player, activities) {
       player.activities = setActivityData(activities);
-      return player
+      return player;
     };
 
     Player.prototype.setInventory = function (player, inv) {
@@ -162,7 +162,7 @@ angular.module('trialsReportApp')
       if (inv.hasFusionGrenade && inv.hasStarfireProtocolPerk) {
         player.inventory.armors.hazards.push('Double Grenade');
       }
-      return player
+      return player;
     };
 
 
@@ -171,7 +171,7 @@ angular.module('trialsReportApp')
       if (data.characters) {
         var characters = [];
         for (var i = 0; i < data.characters.length; i++) {
-          characters.push(new Player(data, name, data.characters[i]))
+          characters.push(new Player(data, name, data.characters[i]));
         }
         player.characters = characters;
       }
