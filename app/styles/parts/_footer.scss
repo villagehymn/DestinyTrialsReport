@@ -2,6 +2,8 @@
   padding: 1em 0;
   background: $footer-bg;
   color: $text-on-dark;
+  z-index: 1;
+  position: relative;
 }
 
 .footer__content {
