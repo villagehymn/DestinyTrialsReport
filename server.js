@@ -45,11 +45,10 @@ function start () {
 
   app.get("/Platform/*?", function (req, res) {
     res.setTimeout(25000);
-    var api_key = process.env.BUNGIE_API;
     var options = {
       url: "https://www.bungie.net/" + req.originalUrl,
       headers: {
-        "X-API-Key": api_key
+        "X-API-Key": process.env.BUNGIE_API_KEY
       }
     };
     try {
