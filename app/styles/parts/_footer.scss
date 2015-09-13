@@ -1,20 +1,12 @@
 .footer {
-  padding: 1em 0;
-  background: $footer-bg;
   color: $text-on-dark;
   z-index: 1;
   position: relative;
 }
 
-.footer__content {
-  display: flex;
-  align-items: center;
-}
-
 .footer__ad {
-  flex-grow: 1;
-  padding: 0 3em;
-  text-align: center;
+  margin-top: 1em;
+  padding: 1em;
   overflow: hidden;
 }
 

@@ -1,30 +1,31 @@
 .wrapper {
+  width: 100vw;
+  height: 100vh;
+}
+
+.controls {
+  position: absolute;
+  height: 100vh;
+  width: 25vw;
   display: flex;
   flex-direction: column;
-  align-content: stretch;
-  min-height: 100vh;
+  background: $header-bg;
 }
 
 .content {
-  padding: 30px 0;
-  flex: 1 1 auto;
+  position: absolute;
+  height: 100vh;
+  width: 75vw;
+  left: 25vw;
+  padding: 30px;
 }
 
-.container-fluid {
-  max-width: 1080px;
+.content {
+  display: flex;
 }
 
 @media all and (min-width: 960px) {
-  .wrapper {
-    height: 100vh;
-  }
   .content {
     overflow-y: auto;
-  }
-}
-
-@media all and (max-width: 1080px) {
-  .content {
-    padding: 15px 0;
   }
 }
