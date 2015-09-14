@@ -1,41 +1,13 @@
 .main-search {
   background: white;
+  padding: $controls-padding;
+  padding-top: .5em;
+  padding-bottom: .5em;
 }
 
 .main-search__content {
   display: flex;
   flex-direction: row;
-}
-
-.main-search__toggle {
-  padding: 18px 2em 18px 0;
-  flex-shrink: 0;
-
-  label {
-    margin-bottom: 0;
-  }
-
-  .toggle {
-    margin-left: 10px;
-  }
-
-  .togglebutton label input[type=checkbox]+.toggle,
-  .togglebutton-default label input[type=checkbox]+.toggle {
-    background: transparentize($playstation-main, 0.5);
-
-    &:after {
-      background: $playstation-main;
-    }
-  }
-
-  .togglebutton label input[type=checkbox]:checked+.toggle,
-  .togglebutton-default label input[type=checkbox]:checked+.toggle {
-    background: transparentize($xbox-main, 0.5);
-
-    &:after {
-      background: $xbox-main;
-    }
-  }
 }
 
 .main-search__fireteam {

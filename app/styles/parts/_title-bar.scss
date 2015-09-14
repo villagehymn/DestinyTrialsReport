@@ -1,0 +1,28 @@
+.title-bar {
+  padding: $controls-padding;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  display: flex;
+  align-items: center;
+  background: darken($header-bg, 5%);
+}
+
+.title-bar__title {
+  font-size: 2em;
+  line-height: 1.4;
+  flex-grow: 1;
+
+  a,
+  a:hover,
+  a:focus,
+  a:active {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.title-bar__btns {
+  .btn.btn.btn {
+    color: $controls-btn-color;
+  }
+}

@@ -1,67 +1,59 @@
-<nav class="navbar navbar-default navbar-static-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" target="_self" class="navbar-brand">
-        <span ng-if="subdomain" class="highlight">my</span>Destiny<span class="highlight">Trials</span>Report
-      </a>
-    </div>
-    <div class="collapse navbar-collapse" id="navbar">
-      <ul class="nav navbar-nav">
-        <li><button type="button" class="btn btn-default navbar-btn" bs-modal="mapModal">Map</button></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a type="button" class="btn btn-default" ng-if="!subdomain" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a></li>
-        <li><a type="button" class="btn btn-default" ng-if="subdomain" href="http://www.destinytrialsreport.com" target="_self"><span class="highlight">trials</span>Report</a></li>
-      </ul>
+<div class="title-bar">
+  <div class="title-bar__title">
+    <a href="/" target="_self">
+      <span ng-if="subdomain" class="highlight">my</span>Destiny<span class="highlight">Trials</span>Report
+    </a>
+  </div>
+  <div class="platform-toggle">
+    <div class="togglebutton">
+      <label class="platform-toggle__name" ng-class="{'is-active' : platformValue}" ng-click="platformValue = true"><img src="images/ps.svg" alt="PlayStation"></label>
+      <label class="platform-toggle__btn">
+        <input type="checkbox" ng-model="platformValue" ng-true-value="false" ng-false-value="true">
+      </label>
+      <label class="platform-toggle__name" ng-class="{'is-active' : !platformValue}" ng-click="platformValue = false"><img src="images/xbox.svg" alt="Xbox"></label>
     </div>
   </div>
-</nav>
+</div>
 
-<div class="main-search shadow-z-1">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="main-search__content">
-          <div class="main-search__toggle">
-            <div class="togglebutton">
-              <label ng-click="platformValue = true">PS<span class="hidden-xs">N</span></label>
-              <label>
-                <input type="checkbox" ng-model="platformValue" ng-true-value="false" ng-false-value="true">
-              </label>
-              <label ng-click="platformValue = false">XB<span class="hidden-xs">L</span></label>
+<div class="main-search">
+  <div class="main-search__content">
+    <div class="main-search__fireteam">
+      <form ng-submit="searchPlayerbyName(mainPlayer, platformValue)">
+        <div class="main-search__row">
+          <div class="main-search__input">
+            <input type="text" class="form-control" placeholder="Enter profile name" ng-model="mainPlayer" ng-value="searchedPlayer || fireteam[0].name">
+          </div>
+          <div class="main-search__controls">
+            <div class="main-search__refresh" ng-if="!subdomain" ng-show="fireteam[0].name != null">
+              <button class="btn btn-default btn-icon" type="button" ng-click="refreshInventory(fireteam)"
+                      analytics-on analytics-event="Click" analytics-category="Refresh Inventory">
+                <i class="material-icons">&#xE86A;</i>
+              </button>
+            </div>
+            <div class="main-search__submit">
+              <button type="submit" class="btn btn-default btn-icon" ng-disabled="status"><i class="material-icons">&#xE163;</i></button>
             </div>
           </div>
-          <div class="main-search__fireteam">
-            <form ng-submit="searchPlayerbyName(mainPlayer, platformValue)">
-              <div class="main-search__row">
-                <div class="main-search__input">
-                  <input type="text" class="form-control" placeholder="Enter profile name" ng-model="mainPlayer" ng-value="searchedPlayer">
-                </div>
-                <div class="main-search__controls">
-                  <div class="main-search__refresh hidden-xs" ng-if="!subdomain" ng-show="fireteam[0].name != null">
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-icon" type="button" ng-click="refreshInventory(fireteam)"
-                              analytics-on analytics-event="Click" analytics-category="Refresh Inventory">
-                        <i class="material-icons">&#xE86A;</i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="main-search__submit">
-                    <button type="submit" class="hidden-sm hidden-md hidden-lg btn btn-default btn-icon" ng-disabled="status"><i class="material-icons">&#xE163;</i></button>
-                    <button type="submit" class="hidden-xs btn btn-default btn-raised" ng-disabled="status">Search</button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
+</div>
+
+<div class="current-map shadow-z-1" style="background-image:url('{{currentMap.headerImage}}');">
+  <div class="current-map__content">
+    <div class="current-map__title">
+      <span ng-bind="currentMap.activityName"></span>
+    </div>
+    <div class="curent-map__heatmap">
+      <button type="button" class="btn btn-default btn-sm" bs-modal="mapModal">Heatmap</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="title-bar__btns">
+  <a type="button" class="btn btn-default btn-sm" ng-if="!subdomain" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a>
+  <a type="button" class="btn btn-default btn-sm" ng-if="subdomain" href="http://www.destinytrialsreport.com" target="_self"><span class="highlight">trials</span>Report</a>
 </div>

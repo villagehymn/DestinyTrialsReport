@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   background: $header-bg;
+  overflow-x: hidden;
 }
 
 .content {
