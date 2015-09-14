@@ -43,7 +43,7 @@ function setLastThreeMatches(lastThree, activities) {
       lastThree[activities[l].activityDetails.instanceId] = {
         'id': activities[l].activityDetails.instanceId,
         'standing': activities[l].values.standing.basic.value
-      }
+      };
     }
   }
 }
@@ -120,7 +120,7 @@ angular.module('trialsReportApp')
         this.characterInfo = this.setCharacterInfo(character);
         this.grimoire = character.characterBase.grimoireScore;
       } else {
-        this.characterInfo = {characterId: character.characterId}
+        this.characterInfo = {characterId: character.characterId};
       }
     }
 
@@ -131,39 +131,38 @@ angular.module('trialsReportApp')
         classType: character.characterBase.classType,
         level: character.characterLevel,
         stats: character.characterBase.stats
-      }
+      };
     };
 
     Player.prototype.setEmblem = function (icon, background) {
       return {
-        icon: 'https://bungie.net' + icon,
-        background: 'https://bungie.net' + background
-      }
+        icon: 'https://www.bungie.net' + icon,
+        background: 'https://www.bungie.net' + background
+      };
     };
 
     Player.prototype.setActivities = function (player, activities) {
       player.activities = setActivityData(activities);
-      return player
+      return player;
     };
 
-    Player.prototype.setInventory = function (player, weapons, armor, classItems) {
+    Player.prototype.setInventory = function (player, inv) {
       player.inventory = {
-        weapons: weapons.weapons,
-        armor: armor.armors,
-        classNodes: classItems.classNodes
+        weapons: inv.weapons,
+        armor: inv.armors,
+        subclass: inv.subclass
       };
       if (player.characterInfo) {
-        player.characterInfo.subclassName = classItems.subClass.name;
+        player.characterInfo.subclassName = inv.subclass.definition.name;
       }
-      setStatPercentage(player, armor);
-      player.emblem = this.setEmblem(classItems.bg[1], classItems.bg[0]);
-      if (classItems.blink && weapons.shotgun) {
+      setStatPercentage(player, inv);
+      if (inv.subclass.blink && inv.weapons.shotgun) {
         player.inventory.weapons.hazards.push('Blink Shotgun');
       }
-      if (classItems.hasFusionGrenade && armor.hasStarfireProtocolPerk) {
+      if (inv.hasFusionGrenade && inv.hasStarfireProtocolPerk) {
         player.inventory.armors.hazards.push('Double Grenade');
       }
-      return player
+      return player;
     };
 
 
@@ -172,7 +171,7 @@ angular.module('trialsReportApp')
       if (data.characters) {
         var characters = [];
         for (var i = 0; i < data.characters.length; i++) {
-          characters.push(new Player(data, name, data.characters[i]))
+          characters.push(new Player(data, name, data.characters[i]));
         }
         player.characters = characters;
       }

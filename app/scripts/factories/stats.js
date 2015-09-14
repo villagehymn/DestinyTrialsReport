@@ -7,14 +7,13 @@ var atts = ['kills', 'deaths', 'assists', 'precisionKills',
 var weaponAtts = ['uniqueWeaponKills', 'uniqueWeaponKillsPrecisionKills', 'uniqueWeaponPrecisionKills'];
 
 function setOrIncrement(object, value, index) {
-  if (object[index]){
+  if (object[index]) {
     object[index].count += value.basic.value;
-  }
-  else {
+  } else {
     object[index] = {
       id: index,
       count: value.basic.value
-    }
+    };
   }
 }
 
@@ -22,8 +21,7 @@ function getExtendedStats(member, medals, abilityKills) {
   angular.forEach(member.extended.values, function (value, index) {
     if (index.substring(0, 6) === 'medals') {
       setOrIncrement(medals, value, index);
-    }
-    else if (index.substring(0, 11) === 'weaponKills') {
+    } else if (index.substring(0, 11) === 'weaponKills') {
       setOrIncrement(abilityKills, value, index);
     }
   });
@@ -100,7 +98,7 @@ angular.module('trialsReportApp')
     };
 
     var getTeamSummary = function (lastMatches, player) {
-      return getMatchSummary(lastMatches, player.membershipId)
+      return getMatchSummary(lastMatches, player.membershipId);
     };
 
     var getPostGame = function (recentActivity, player) {
@@ -172,11 +170,15 @@ angular.module('trialsReportApp')
             }
           }
           var teamIndex = data.teams[0].standing.basic.value === standing ? 0 : 1;
+          var enemy_score = 0;
           if (data.teams[teamIndex]) {
+            if (data.teams[teamIndex === 0 ? 1 : 0]) {
+              enemy_score = data.teams[teamIndex === 0 ? 1 : 0].score.basic.value;
+            }
             recentMatches.push({
               standing: standing,
               team_score: data.teams[teamIndex].score.basic.value,
-              enemy_score: data.teams[teamIndex == 0 ? 1 : 0].score.basic.value,
+              enemy_score: enemy_score,
               dateAgo: moment(data.period).fromNow(),
               duration: data.entries[0].values.activityDurationSeconds.basic.displayValue
             });
@@ -202,10 +204,10 @@ angular.module('trialsReportApp')
         postGameInParallel = function (previousMatches) {
           var methods = [];
           angular.forEach(previousMatches, function (value, key) {
-            methods.push(getPostGame(previousMatches[key], player))
+            methods.push(getPostGame(previousMatches[key], player));
           });
 
-          return $q.all(methods)
+          return $q.all(methods);
         },
         calculateMatchStats = function (postGames) {
           var dfd = $q.defer();

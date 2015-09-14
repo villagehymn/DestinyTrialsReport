@@ -7,7 +7,7 @@ angular.module('trialsReportApp')
       $scope.player.isTeammate = true;
       currentAccount.getPlayerCard($scope.player).then(function (player) {
         $scope.player = player;
-        currentAccount.compareLastMatchResults($scope.player, $scope.fireteam[0].activities.lastThree)
+        currentAccount.compareLastMatchResults($scope.player, $scope.fireteam[0].activities.lastThree);
       });
     }
 
@@ -42,15 +42,10 @@ angular.module('trialsReportApp')
     };
 
     $scope.getWeaponByHash = function (hash) {
-      if ($scope.DestinyPrimaryWeaponDefinitions[hash]) {
-        return $scope.DestinyPrimaryWeaponDefinitions[hash];
-      } else if ($scope.DestinySpecialWeaponDefinitions[hash]) {
-        return $scope.DestinySpecialWeaponDefinitions[hash];
-      } else if ($scope.DestinyHeavyWeaponDefinitions[hash]) {
-        return $scope.DestinyHeavyWeaponDefinitions[hash];
+      if ($scope.DestinyWeaponDefinition[hash]) {
+        return $scope.DestinyWeaponDefinition[hash];
       }
     };
-
 
     $scope.setRecentPlayer = function (player) {
       var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + player.membershipType + '/' + player.name;
