@@ -1,7 +1,6 @@
 'use strict';
 
 var compression = require('compression');
-var domain = require('domain');
 var express = require('express');
 var subdomain = require('express-subdomain');
 var request = require('request');
@@ -16,12 +15,6 @@ function start() {
   var app = express();
   app.use(compression());
   app.use(express.static(__dirname));
-
-  // This isn't even used?
-  var domain = domain.create();
-  domain.on('error', function (err) {
-    console.error(err);
-  });
 
   // DestinyTrialsReport
   app.get('/:platform/:playerName', function (req, res) {
