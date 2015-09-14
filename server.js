@@ -1,55 +1,52 @@
-var throng = require("throng");
-var WORKERS = process.env.WEB_CONCURRENCY || 1;
+'use strict';
+
+var compression = require('compression');
+var domain = require('domain');
+var express = require('express');
+var subdomain = require('express-subdomain');
+var request = require('request');
+var throng = require('throng');
 
 throng(start, {
-  workers: WORKERS,
+  workers: process.env.WEB_CONCURRENCY || 1,
   lifetime: Infinity
 });
 
-function start () {
-  var compression = require("compression");
-  var subdomain = require("express-subdomain");
-  var express = require("express");
-  var request = require("request");
+function start() {
   var app = express();
-
-  var domain = require("domain");
-  var d = domain.create();
-
-  d.on("error", function(err) {
-    console.error(err);
-  });
-
   app.use(compression());
   app.use(express.static(__dirname));
 
-  app.get("/:platform/:playerName", function (req, res) {
-    res.sendFile(__dirname + "/index.html");
+  // This isn't even used?
+  var domain = domain.create();
+  domain.on('error', function (err) {
+    console.error(err);
   });
 
-  app.get("/:platform/:playerOne/:playerTwo/:playerThree", function (req, res) {
-    res.sendFile(__dirname + "/index.html");
+  // DestinyTrialsReport
+  app.get('/:platform/:playerName', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
+  });
+  app.get('/:platform/:playerOne/:playerTwo/:playerThree', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
   });
 
+  // MyTrialsReport
   var router = express.Router();
-
-  router.get("/", function (req, res) {
-    res.sendFile(__dirname + "/index.html");
+  router.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
   });
-
-  router.get("/:platform/:playerName", function (req, res) {
-    res.sendFile(__dirname + "/index.html");
+  router.get('/:platform/:playerName', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
   });
+  app.use(subdomain('my', router));
 
-  app.use(subdomain("my", router));
-
-  app.get("/Platform/*?", function (req, res) {
+  // Bungie API Proxy
+  app.get('/Platform/*?', function (req, res) {
     res.setTimeout(25000);
     var options = {
-      url: "https://www.bungie.net/" + req.originalUrl,
-      headers: {
-        "X-API-Key": process.env.BUNGIE_API_KEY
-      }
+      url: 'https://www.bungie.net/' + req.originalUrl,
+      headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
     };
     try {
       request(options, function (error, response, body) {
@@ -59,19 +56,17 @@ function start () {
           res.send(error);
         }
       });
-    } catch(e) {
-
-    }
+    } catch (e) {}
   });
 
-  app.all("*", function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://www.destinytrialsreport.com");
-    return next();
+  // CORS
+  app.all('*', function (req, res) {
+    res.header('Access-Control-Allow-Origin', 'http://www.destinytrialsreport.com');
   });
 
+  // Start server
   var port = process.env.PORT || 9000;
-
-  app.listen(port, function() {
-    console.log("Listening on port " + port);
+  app.listen(port, function () {
+    console.log('Listening on port ' + port);
   });
 }
