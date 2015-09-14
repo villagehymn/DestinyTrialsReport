@@ -2271,11 +2271,6 @@ var DestinyWeaponDefinition = {
     "icon": "/common/destiny_content/icons/288f928935a5abdb179f3489ebdbd54b.jpg",
     "subType": 9
   },
-  "2291160782": {
-    "name": "",
-    "icon": "/common/destiny_content/icons/57f2e7a49cb7cb731a162c1b04b5f6a8.jpg",
-    "subType": 10
-  },
   "2292120580": {
     "name": "Appellant III",
     "icon": "/common/destiny_content/icons/6ea7e4626cd45e31264f188817b812ef.jpg",
