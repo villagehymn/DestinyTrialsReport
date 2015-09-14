@@ -1,22 +1,31 @@
 .main-search {
   background: white;
-  padding: $controls-padding;
-  padding-top: .5em;
-  padding-bottom: .5em;
-}
-
-.main-search__content {
-  display: flex;
-  flex-direction: row;
 }
 
 .main-search__fireteam {
-  flex-grow: 1;
+  > form,
+  > div {
+    padding: .5em 1.5em
+  }
+
+  > form + div,
+  > form + div + div {
+    background: darken(white, 2%);
+  }
+
+  > form + div {
+    @include mild-inset-shadow();
+  }
+
+  > form + div + div {
+    border-top: 1px solid darken(white, 10%);
+  }
 }
 
 .main-search__row {
   display: flex;
   flex-direction: row;
+  margin-right: -9px;
 }
 
 .main-search__controls {
@@ -25,15 +34,11 @@
   > div {
     display: inline-block;
   }
-
-  .input-group-btn {
-    width: auto;
-  }
 }
 
 .main-search__input {
   flex-grow: 1;
-  padding-right: 2em;
+  padding-right: 1em;
 
   input {
     margin: 10px 0;

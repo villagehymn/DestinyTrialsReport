@@ -21,7 +21,7 @@
       <form ng-submit="searchPlayerbyName(mainPlayer, platformValue)">
         <div class="main-search__row">
           <div class="main-search__input">
-            <input type="text" class="form-control" placeholder="Enter profile name" ng-model="mainPlayer" ng-value="searchedPlayer || fireteam[0].name">
+            <input type="text" class="form-control" placeholder="{{fireteam[0].name || 'Enter profile name'}}" ng-model="mainPlayer" ng-value="(!fireteam[0] ? searchedPlayer : '')">
           </div>
           <div class="main-search__controls">
             <div class="main-search__refresh" ng-if="!subdomain" ng-show="fireteam[0].name != null">
@@ -32,6 +32,21 @@
             </div>
             <div class="main-search__submit">
               <button type="submit" class="btn btn-default btn-icon" ng-disabled="status"><i class="material-icons">&#xE163;</i></button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div ng-if="fireteam[0].name && $index < 3 && $index > 0" ng-repeat="player in fireteam track by $index">
+        <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
+        <div class="main-search__row">
+          <div class="main-search__input">
+            <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter profile name'}}" ng-model="teammateName">
+              </div>
+              <div class="main-search__controls">
+                <div class="main-search__submit">
+                  <button type="submit" class="btn btn-default btn-icon" ng-disabled="status"><i class="material-icons">&#xE163;</i></button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -50,8 +65,6 @@
     </div>
   </div>
 </div>
-
-
 
 <div class="title-bar__btns">
   <a type="button" class="btn btn-default btn-sm" ng-if="!subdomain" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a>
