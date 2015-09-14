@@ -73,7 +73,7 @@
            ng-if="getWeaponTitle(specialWeapon.id)">
         <div class="row">
           <div class="col-xs-6 last-weapon-weapon__descr">
-            <span class="last-match-weapon__img" style="background-image: url('{{player.inventory.subclass.abilities[specialWeapon.id].icon}}')"></span>
+            <span class="last-match-weapon__img" ng-style="{'background-image':'url(\'' + player.inventory.subclass.abilities[specialWeapon.id].icon + '\')'}"></span>
             <span class="last-match-weapon__title" ng-bind="player.inventory.subclass.abilities[specialWeapon.id].name"></span>
           </div>
           <div class="col-xs-2 stat">

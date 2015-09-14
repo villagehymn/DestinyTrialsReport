@@ -1,15 +1,21 @@
 {
   "name": "trials-report",
-  "description": "Destiny Trials Report",
+  "description": "The ultimate companion for Destiny's Trials of Osiris.",
   "version": "1.1.0",
   "license": "Artistic-2.0",
   "homepage": "http://www.destinytrialsreport.com/",
-  "author": "https://github.com/SteffanLong/DestinyTrialsReport/graphs/contributors",
+  "author": "https://github.com/DestinyTrialsReport/DestinyTrialsReport/graphs/contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SteffanLong/DestinyTrialsReport.git"
+    "url": "https://github.com/DestinyTrialsReport/DestinyTrialsReport.git"
   },
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "^0.12.7"
+  },
   "dependencies": {
     "adm-zip": "^0.4.7",
     "compression": "^1.5.2",
@@ -59,11 +65,5 @@
     "load-grunt-tasks": "^3.2.0",
     "phantomjs": "^1.9.18",
     "time-grunt": "^1.2.1"
-  },
-  "engines": {
-    "node": "^0.12.7"
-  },
-  "scripts": {
-    "start": "node server.js"
   }
 }

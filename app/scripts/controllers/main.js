@@ -91,24 +91,15 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats) {
-    $scope.currentMap = DestinyTrialsDefinition[1596564652];
+    $scope.currentMap = DestinyCrucibleMapDefinition[3848655103];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
     });
 
-    $scope.DestinyHazardDefinition = {
-      'Double Grenade': 'This Guardian can hold two grenades.',
-      'Superburn Grenade': 'This Guardian has grenades that cause very strong burning.',
-      'Revive Kill Sniper': 'This Guardian can one hit kill a revived Guardian with equipped sniper rifle.',
-      'Quick Revive': 'This Guardian can revive allies and be revived very quickly.',
-      'Grenade on Spawn': 'This Guardian will have a grenade every round.',
-      'Blink Shotgun': 'This Guardian is using Blink and has a shotgun equipped. Be careful!',
-      'Site Developer': 'Hey! We made this site, so more than likely we are looking you up too...',
-      'Site Donator': 'Part of an amazing few who\'ve helped keep this site running'
-    };
+    $scope.DestinyCrucibleMapDefinition = DestinyCrucibleMapDefinition;
+    $scope.DestinyHazardDefinition = DestinyHazardDefinition;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
-    $scope.DestinyTrialsDefinition = DestinyTrialsDefinition;
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
 
     $scope.weaponKills = weaponKills;
