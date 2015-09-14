@@ -150,13 +150,13 @@ angular.module('trialsReportApp')
       player.inventory = {
         weapons: inv.weapons,
         armor: inv.armors,
-        classNodes: inv.classNodes
+        subclass: inv.subclass
       };
       if (player.characterInfo) {
         player.characterInfo.subclassName = inv.subclass.definition.name;
       }
       setStatPercentage(player, inv);
-      if (inv.blink && inv.shotgun) {
+      if (inv.subclass.blink && inv.weapons.shotgun) {
         player.inventory.weapons.hazards.push('Blink Shotgun');
       }
       if (inv.hasFusionGrenade && inv.hasStarfireProtocolPerk) {
