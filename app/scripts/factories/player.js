@@ -134,6 +134,11 @@ angular.module('trialsReportApp')
       };
     };
 
+    Player.prototype.replace = function (player, character) {
+      player = character;
+      return player;
+    };
+
     Player.prototype.setEmblem = function (icon, background) {
       return {
         icon: 'https://www.bungie.net' + icon,

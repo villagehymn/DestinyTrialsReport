@@ -6,8 +6,8 @@ angular.module('trialsReportApp')
     if (!$scope.player.searched && !$scope.player.invalidResult) {
       $scope.player.isTeammate = true;
       currentAccount.getPlayerCard($scope.player).then(function (player) {
-        $scope.player = player;
-        currentAccount.compareLastMatchResults($scope.player, $scope.fireteam[0].activities.lastThree);
+        //$scope.$evalAsync( $scope.player = player);
+        currentAccount.compareLastMatchResults(player, $scope.fireteam[0].activities.lastThree);
       });
     }
 
@@ -23,12 +23,14 @@ angular.module('trialsReportApp')
         return;
       }
       var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/';
+      console.log(url)
       return currentAccount.getAccount(url)
         .then(function (player) {
           sendAnalytic('searchedPlayer', 'name', name);
           sendAnalytic('searchedPlayer', 'platform', platform);
           currentAccount.getPlayerCard(player).then(function (teammate) {
             $scope.$evalAsync( $scope.player = teammate );
+            console.log(teammate)
           });
         });
     }

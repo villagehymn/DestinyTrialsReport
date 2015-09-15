@@ -18,7 +18,7 @@
 <div class="main-search">
   <div class="main-search__content">
     <div class="main-search__fireteam">
-      <form ng-submit="searchPlayerbyName(mainPlayer, platformValue)">
+      <form ng-submit="searchMainPlayerbyName(mainPlayer, platformValue)">
         <div class="main-search__row">
           <div class="main-search__input">
             <input type="text" class="form-control" placeholder="{{fireteam[0].name || 'Enter profile name'}}" ng-model="mainPlayer" ng-value="(!fireteam[0] ? searchedPlayer : '')">
@@ -37,7 +37,7 @@
         </div>
       </form>
       <div ng-if="fireteam[0].name && $index < 3 && $index > 0" ng-repeat="player in fireteam track by $index">
-        <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index, false)">
+        <form role="form" ng-submit="searchPlayerbyName(player, teammateName, platformValue, $index)">
         <div class="main-search__row">
           <div class="main-search__input">
             <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter profile name'}}" ng-model="teammateName">
