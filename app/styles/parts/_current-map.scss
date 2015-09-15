@@ -20,6 +20,8 @@
 .current-map__content {
   width: 100%;
   padding: $controls-padding;
+  padding-top: 1em;
+  padding-bottom: 1em;
   background: rgba(0, 0, 0, 0.5);
   color: white;
   display: flex;

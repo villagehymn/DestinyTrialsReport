@@ -1,0 +1,29 @@
+header {
+  position: relative;
+  z-index: 1;
+  flex-grow: 1;
+}
+
+.header-bar {
+  padding: .75em 0;
+
+  .header-bar__content {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.domain-switch {
+  margin-left: -9px;
+  border-bottom: 1px solid darken($header-bg, 5%);
+
+  .btn.btn.btn {
+    color: $controls-btn-color;
+  }
+}
+
+.ad {
+  padding: 1em;
+  padding-top: 0;
+  overflow: hidden;
+}

@@ -20,14 +20,15 @@
 @import 'elements/carousel';
 
 // Main parts
-@import 'parts/header';
+@import 'parts/controls';
 @import 'parts/title-bar';
 @import 'parts/main-search';
-@import 'parts/footer';
 @import 'parts/blog-post';
 @import 'parts/player-overlay';
 @import 'parts/current-map';
 @import 'parts/platform-toggle';
+@import 'parts/donate';
+@import 'parts/colofon';
 
 // Player card
 @import 'parts/player';
