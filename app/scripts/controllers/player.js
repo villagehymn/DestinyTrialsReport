@@ -23,14 +23,12 @@ angular.module('trialsReportApp')
         return;
       }
       var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/';
-      console.log(url)
       return currentAccount.getAccount(url)
         .then(function (player) {
           sendAnalytic('searchedPlayer', 'name', name);
           sendAnalytic('searchedPlayer', 'platform', platform);
           currentAccount.getPlayerCard(player).then(function (teammate) {
             $scope.$evalAsync( $scope.player = teammate );
-            console.log(teammate)
           });
         });
     }
