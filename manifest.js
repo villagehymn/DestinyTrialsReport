@@ -19,28 +19,20 @@ function writeDefinitionFile(path, name, data) {
 
 function onManifestRequest(error, response, body) {
   var parsedResponse = JSON.parse(body);
-  var manifestFile = fs.createWriteStream('manifest.zip');
-
   version = parsedResponse.Response.version;
 
-  var exists = fs.existsSync(version + '.txt');
-
-  // if (!exists) {
-  // var versionFile = fs.createWriteStream(version + '.txt');
-  // versionFile.write(JSON.stringify(parsedResponse, null, 2));
-  // versionFile.end();
-
-  request
-    .get('https://www.bungie.net' + parsedResponse.Response.mobileWorldContentPaths.en)
-    .pipe(manifestFile)
-    .on('close', onManifestDownloaded);
-  // } else {
-  //   console.log('Version already exist, \'' + version + '\'.');
-  // }
+  ['en', 'de', 'es'].forEach(function(lang) {
+    request
+      .get('https://www.bungie.net' + parsedResponse.Response.mobileWorldContentPaths[lang])
+      .pipe(fs.createWriteStream(lang + '-manifest.zip'))
+      .on('close',function() {
+        onManifestDownloaded(lang);
+      });
+  });
 }
 
-function onManifestDownloaded() {
-  fs.createReadStream('manifest.zip')
+function onManifestDownloaded(lang) {
+  fs.createReadStream(lang + '-manifest.zip')
     .pipe(unzip.Parse())
     .on('entry', function(entry) {
       ws = fs.createWriteStream('manifest/' + entry.path);
@@ -49,7 +41,7 @@ function onManifestDownloaded() {
         var exists = fs.existsSync('manifest/' + entry.path);
 
         if (exists) {
-          extractDB('manifest/' + entry.path);
+          extractDB('manifest/' + entry.path, lang);
         }
       });
 
@@ -57,7 +49,7 @@ function onManifestDownloaded() {
     });
 }
 
-function extractDB(dbFile) {
+function extractDB(dbFile, lang) {
   db = new sqlite3.Database(dbFile);
 
   db.all('SELECT * FROM DestinyInventoryItemDefinition', function(err, rows) {
@@ -95,9 +87,9 @@ function extractDB(dbFile) {
       }
     });
 
-    writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
-    writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
-    writeDefinitionFile('app/scripts/definitions/en/DestinyWeaponDefinition.js',   'DestinyWeaponDefinition',   DestinyWeaponDefinition);
+    writeDefinitionFile('app/scripts/definitions/'+ lang +'/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
+    writeDefinitionFile('app/scripts/definitions/'+ lang +'/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
+    writeDefinitionFile('app/scripts/definitions/'+ lang +'/DestinyWeaponDefinition.js',   'DestinyWeaponDefinition',   DestinyWeaponDefinition);
   });
 
   db.all('SELECT * FROM DestinyHistoricalStatsDefinition', function(err, rows) {
@@ -117,7 +109,7 @@ function extractDB(dbFile) {
       }
     });
 
-    writeDefinitionFile('app/scripts/definitions/en/DestinyMedalDefinition.js', 'DestinyMedalDefinition', DestinyMedalDefinition);
+    writeDefinitionFile('app/scripts/definitions/'+ lang +'/DestinyMedalDefinition.js', 'DestinyMedalDefinition', DestinyMedalDefinition);
   });
 
   db.all('SELECT * FROM DestinyActivityDefinition', function(err, rows) {
@@ -141,7 +133,7 @@ function extractDB(dbFile) {
       }
     });
 
-    writeDefinitionFile('app/scripts/definitions/en/DestinyCrucibleMapDefinition.js', 'DestinyCrucibleMapDefinition', DestinyCrucibleMapDefinition);
+    writeDefinitionFile('app/scripts/definitions/'+ lang +'/DestinyCrucibleMapDefinition.js', 'DestinyCrucibleMapDefinition', DestinyCrucibleMapDefinition);
   });
 }
 

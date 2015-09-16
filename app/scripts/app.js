@@ -191,4 +191,25 @@ angular
     return function(seconds) {
       return new Date(1970, 0, 1).setSeconds(seconds || 0);
     };
-}]);
+  }])
+  .directive('localeDefinitions', ['$compile', '$window', function($compile, $window) {
+    return {
+      link: function($scope, element, attr) {
+        var userLocale = $window.navigator.language.split('-')[0];
+        $scope.setLocaleDef = function (defName) {
+          var defPath = 'scripts/definitions/'+userLocale+'/'+ defName +'.js';
+          var request = new XMLHttpRequest();
+          request.open('HEAD', defPath, false);
+          request.send();
+          if(request.status != 200) {
+            defPath = 'scripts/definitions/en/'+ defName +'.js';
+          }
+          return defPath;
+        };
+        angular.forEach(['DestinyArmorDefinition', 'DestinyMedalDefinition', 'DestinySubclassDefinition', 'DestinyWeaponDefinition', 'DestinyCrucibleMapDefinition'], function(value) {
+          var domElem = '<script src="'+ $scope.setLocaleDef(value) +'"></script>';
+          $(element).append($compile(domElem)($scope));
+        });
+      }
+    };
+  }]);
