@@ -150,30 +150,33 @@ angular.module('trialsReportApp')
 
         if (weaponBuckets.indexOf(item.bucketHash) > -1) {
           var weapon = DestinyWeaponDefinition[item.itemHash];
-          setNodes(item, weaponNodes, weapon, weapons, bucket);
-
-          if ((weapon.subType === 12) && (weapon.name !== 'No Land Beyond')) {
-            for (var i = 0; i < item.stats.length; i++) {
-              if (item.stats[i].statHash === STAT_BASE_DAMAGE && item.stats[i].value > 16) {
-                if ((item.primaryStat.value * item.stats[i].value) > 8577) {
-                  weapons.hazards.push('Revive Kill Sniper');
+          if (weapon) {
+            setNodes(item, weaponNodes, weapon, weapons, bucket);
+            if ((weapon.subType === 12) && (weapon.name !== 'No Land Beyond')) {
+              for (var i = 0; i < item.stats.length; i++) {
+                if (item.stats[i].statHash === STAT_BASE_DAMAGE && item.stats[i].value > 16) {
+                  if ((item.primaryStat.value * item.stats[i].value) > 8577) {
+                    weapons.hazards.push('Revive Kill Sniper');
+                  }
                 }
               }
+            } else if (weapon.subType === 7) {
+              weapon.shotgun = true;
             }
-          } else if (weapon.subType === 7) {
-            weapon.shotgun = true;
           }
         } else if (armorBuckets.indexOf(item.bucketHash) > -1) {
           var armor = DestinyArmorDefinition[item.itemHash];
-          for (var i = 0; i < item.perks.length; i++) {
-            if (item.perks[i].isActive === true) {
-              setHazard(item.perks[i].perkHash, armors, hazardQuickRevive, 'Quick Revive');
-              setHazard(item.perks[i].perkHash, armors, hazardGrenadeOnSpawn, 'Grenade on Spawn');
-              setHazard(item.perks[i].perkHash, armors, hazardDoubleGrenade, 'Double Grenade');
-              hasStarfireProtocolPerk = (item.perks[i].perkHash === 3471016318);
+          if (armor) {
+            for (var i = 0; i < item.perks.length; i++) {
+              if (item.perks[i].isActive === true) {
+                setHazard(item.perks[i].perkHash, armors, hazardQuickRevive, 'Quick Revive');
+                setHazard(item.perks[i].perkHash, armors, hazardGrenadeOnSpawn, 'Grenade on Spawn');
+                setHazard(item.perks[i].perkHash, armors, hazardDoubleGrenade, 'Double Grenade');
+                hasStarfireProtocolPerk = (item.perks[i].perkHash === 3471016318);
+              }
             }
+            setDefinition(armors, bucket, armor);
           }
-          setDefinition(armors, bucket, armor);
         } else {
           var subclassDefinition = DestinySubclassDefinition[item.itemHash];
           if (subclassDefinition) {
