@@ -95,12 +95,15 @@ function getAbilityCooldown(subclass, ability, tier) {
       case 'Stormcaller':
       case 'Sunbreaker':
       case 'Voidwalker':
+      default:
         return cooldownsSuperB[tier];
     }
   } else if (ability === 'STAT_DISCIPLINE') {
     return cooldownsGrenade[tier];
   } else if (ability === 'STAT_STRENGTH') {
     return cooldownsMelee[tier];
+  } else {
+    return '-:--';
   }
 }
 
