@@ -28,20 +28,13 @@ function setDefinition(object, index, armor) {
 
 function getDefinitionsByBucket(bucketHash) {
   switch (bucketHash) {
-    case BUCKET_PRIMARY_WEAPON:
-      return 'primary';
-    case BUCKET_SPECIAL_WEAPON:
-      return 'special';
-    case BUCKET_HEAVY_WEAPON:
-      return 'heavy';
-    case BUCKET_HEAD:
-      return 'head';
-    case BUCKET_ARMS:
-      return 'arms';
-    case BUCKET_CHEST:
-      return 'chest';
-    case BUCKET_LEGS:
-      return 'legs';
+    case BUCKET_PRIMARY_WEAPON: return 'primary';
+    case BUCKET_SPECIAL_WEAPON: return 'special';
+    case BUCKET_HEAVY_WEAPON:   return 'heavy';
+    case BUCKET_HEAD:           return 'head';
+    case BUCKET_ARMS:           return 'arms';
+    case BUCKET_CHEST:          return 'chest';
+    case BUCKET_LEGS:           return 'legs';
   }
 }
 

@@ -32,7 +32,7 @@ var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
 var avoidNodes = [
   'Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage', 'Hive Disruptor', 'Oracle Disruptor',
   'Lich Bane', 'Disciplinarian', 'Demotion', 'Mutineer', 'Dreg Burn', 'Shank Burn', 'Vandal Burn', 'Aspect Swap', 'Burgeoning Hunger',
-  'Cannibalism', 'Dark Breaker', 'Upgrade Damage', 'Ice Breaker'
+  'Cannibalism', 'Dark Breaker', 'Upgrade Damage', 'Ice Breaker', 'Infuse'
 ];
 
 // Armor perks for hazards
@@ -86,8 +86,7 @@ var TOUCH_OF_FLAME = 527202181;
 
 // Cooldowns
 
-var ABILITY_COOLDOWNS = {
-  'STAT_INTELLECT': ['5:30', '5:14', '4:57', '4:39', '4:20'],
-  'STAT_DISCIPLINE': ['1:00', '0:55', '0:49', '0:42', '0:34'],
-  'STAT_STRENGTH': ['1:00', '0:55', '0:49', '0:42', '0:34']
-};
+var cooldownsSuperA  = ['5:00', '4:46', '4:31', '4:15', '3:58', '3:40'];
+var cooldownsSuperB  = ['5:30', '5:14', '4:57', '4:39', '4:20', '4:00'];
+var cooldownsGrenade = ['1:00', '0:55', '0:49', '0:42', '0:34', '0:25'];
+var cooldownsMelee   = ['1:00', '0:55', '0:49', '0:42', '0:34', '0:25'];
