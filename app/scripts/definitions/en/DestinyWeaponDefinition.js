@@ -1011,6 +1011,16 @@ var DestinyWeaponDefinition = {
     "icon": "/common/destiny_content/icons/681296b1a4dc808def5224d0e38caa30.jpg",
     "subType": 6
   },
+  "1177550374": {
+    "name": "Bad Juju",
+    "icon": "/common/destiny_content/icons/963ea780dfcc0fbbe3ffb0b88ff61959.jpg",
+    "subType": 13
+  },
+  "1177550375": {
+    "name": "Red Death",
+    "icon": "/common/destiny_content/icons/116ed02bc3cabd54ed1a88e914e3014d.jpg",
+    "subType": 13
+  },
   "1201310194": {
     "name": "Hawksaw",
     "icon": "/common/destiny_content/icons/e8cac040d3f6886bbbdc703810d0de5f.jpg",
