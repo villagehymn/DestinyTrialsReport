@@ -142,41 +142,47 @@ angular.module('trialsReportApp')
         var bucket = getDefinitionsByBucket(item.bucketHash);
 
         if (weaponBuckets.indexOf(item.bucketHash) > -1) {
-          var weapon = DestinyWeaponDefinition[item.itemHash];
-          if (weapon) {
-            setNodes(item, weaponNodes, weapon, weapons, bucket);
-            if ((weapon.subType === 12) && (weapon.name !== 'No Land Beyond')) {
-              for (var i = 0; i < item.stats.length; i++) {
-                if (item.stats[i].statHash === STAT_BASE_DAMAGE && item.stats[i].value > 16) {
-                  if ((item.primaryStat.value * item.stats[i].value) > 8577) {
-                    weapons.hazards.push('Revive Kill Sniper');
-                  }
+          if (item.itemHash in DestinyWeaponDefinition) {
+            var definition = DestinyWeaponDefinition[item.itemHash];
+          } else {
+            var definition = {name: 'Classified', icon: '/img/misc/missing_icon.png', subType: 0};
+          }
+          setNodes(item, weaponNodes, definition, weapons, bucket);
+          if ((definition.subType === 12) && (definition.name !== 'No Land Beyond')) {
+            for (var i = 0; i < item.stats.length; i++) {
+              if (item.stats[i].statHash === STAT_BASE_DAMAGE && item.stats[i].value > 16) {
+                if ((item.primaryStat.value * item.stats[i].value) > 8577) {
+                  weapons.hazards.push('Revive Kill Sniper');
                 }
               }
-            } else if (weapon.subType === 7) {
-              weapon.shotgun = true;
             }
+          } else if (definition.subType === 7) {
+            weapons.shotgun = true;
           }
         } else if (armorBuckets.indexOf(item.bucketHash) > -1) {
-          var armor = DestinyArmorDefinition[item.itemHash];
-          if (armor) {
-            for (var i = 0; i < item.perks.length; i++) {
-              if (item.perks[i].isActive === true) {
-                setHazard(item.perks[i].perkHash, armors, hazardQuickRevive, 'Quick Revive');
-                setHazard(item.perks[i].perkHash, armors, hazardGrenadeOnSpawn, 'Grenade on Spawn');
-                setHazard(item.perks[i].perkHash, armors, hazardDoubleGrenade, 'Double Grenade');
-                hasStarfireProtocolPerk = (item.perks[i].perkHash === 3471016318);
-              }
+          if (item.itemHash in DestinyArmorDefinition) {
+            var definition = DestinyArmorDefinition[item.itemHash];
+          } else {
+            var definition = {name: 'Classified', description: 'Classified', icon: '/img/misc/missing_icon.png'};
+          }
+          for (var i = 0; i < item.perks.length; i++) {
+            if (item.perks[i].isActive === true) {
+              setHazard(item.perks[i].perkHash, armors, hazardQuickRevive, 'Quick Revive');
+              setHazard(item.perks[i].perkHash, armors, hazardGrenadeOnSpawn, 'Grenade on Spawn');
+              setHazard(item.perks[i].perkHash, armors, hazardDoubleGrenade, 'Double Grenade');
+              hasStarfireProtocolPerk = (item.perks[i].perkHash === 3471016318);
             }
-            setDefinition(armors, bucket, armor);
           }
+          setDefinition(armors, bucket, definition);
         } else {
-          var subclassDefinition = DestinySubclassDefinition[item.itemHash];
-          if (subclassDefinition) {
-            var subclassNodes = [];
-            setNodes(item, subclassNodes, subclassDefinition, subclass);
-            defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasVikingFuneral, hasTouchOfFlame);
+          if (item.itemHash in DestinySubclassDefinition) {
+            var definition = DestinySubclassDefinition[item.itemHash];
+          } else {
+            var definition = {name: 'Classified'};
           }
+          var subclassNodes = [];
+          setNodes(item, subclassNodes, definition, subclass);
+          defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasVikingFuneral, hasTouchOfFlame);
         }
         if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
           subclass.hazards.push('Superburn Grenade');
