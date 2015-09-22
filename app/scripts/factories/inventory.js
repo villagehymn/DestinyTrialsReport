@@ -174,7 +174,7 @@ angular.module('trialsReportApp')
             }
           }
           setDefinition(armors, bucket, definition);
-        } else {
+        } else if (item.bucketHash === BUCKET_BUILD) {
           if (item.itemHash in DestinySubclassDefinition) {
             var definition = DestinySubclassDefinition[item.itemHash];
           } else {
@@ -184,6 +184,7 @@ angular.module('trialsReportApp')
           setNodes(item, subclassNodes, definition, subclass);
           defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasVikingFuneral, hasTouchOfFlame);
         }
+
         if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
           subclass.hazards.push('Superburn Grenade');
         }
