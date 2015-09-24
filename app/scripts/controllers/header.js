@@ -5,11 +5,11 @@ angular.module('trialsReportApp')
     $scope.mapModal = {
       content: $sce.trustAsHtml(
         '<div class="map-modal">' +
-          '<div class="map-modal__intro" style="background-image: url(\'' + $scope.currentMap.headerImage + '\')">' +
-            '<div class="map-modal__title">' + $scope.currentMap.activityName + '</div>' +
+          '<div class="map-modal__intro" style="background-image: url(\'https://www.bungie.net' + $scope.currentMap.pgcrImage + '\')">' +
+            '<div class="map-modal__title">' + $scope.currentMap.name + '</div>' +
           '</div>' +
           '<div class="map-modal__heatmap">' +
-            '<img class="img-responsive" src="' + $scope.currentMap.heatmapImage + '" alt="Heatmap">' +
+            '<img class="img-responsive" src="' + $scope.currentMap.heatmapImage + '" alt="Heatmap">' + // todo: handle case where heatmapImage does not exist
           '</div>' +
         '</div>'
       )
@@ -24,7 +24,7 @@ angular.module('trialsReportApp')
     $scope.refreshInventory = function (fireteam) {
       angular.forEach(fireteam, function (player, index) {
         currentAccount.refreshInventory($scope.fireteam[index]).then(function (teammate) {
-          $scope.$evalAsync( $scope.fireteam[index] = teammate );
+          $scope.$evalAsync($scope.fireteam[index] = teammate);
         });
       });
     };

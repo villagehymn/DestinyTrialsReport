@@ -119,6 +119,30 @@ function extractDB(dbFile) {
 
     writeDefinitionFile('app/scripts/definitions/en/DestinyMedalDefinition.js', 'DestinyMedalDefinition', DestinyMedalDefinition);
   });
+
+  db.all('SELECT * FROM DestinyActivityDefinition', function(err, rows) {
+    if (err) throw err;
+
+    var DestinyCrucibleMapDefinition = {};
+
+    rows.forEach(function(row) {
+      var item = JSON.parse(row.json);
+
+      // Crucible Maps
+      if ((item.activityTypeHash === 3695721985) && (item.activityName !== "") && (item.activityName !== "Rumble")) {
+        DestinyCrucibleMapDefinition[item.activityHash] = {};
+        DestinyCrucibleMapDefinition[item.activityHash].name = item.activityName;
+        DestinyCrucibleMapDefinition[item.activityHash].pgcrImage = item.pgcrImage;
+
+        var heatmapImage = '/images/heatmaps/' + item.activityName.replace(/'/g, '').replace(/ /g, '_').toLowerCase() + '.jpg';
+        if (fs.existsSync('app' + heatmapImage)) {
+          DestinyCrucibleMapDefinition[item.activityHash].heatmapImage = heatmapImage;
+        }
+      }
+    });
+
+    writeDefinitionFile('app/scripts/definitions/en/DestinyCrucibleMapDefinition.js', 'DestinyCrucibleMapDefinition', DestinyCrucibleMapDefinition);
+  });
 }
 
 request.get('https://www.bungie.net/Platform/Destiny/Manifest/', onManifestRequest);

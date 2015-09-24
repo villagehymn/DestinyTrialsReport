@@ -10,11 +10,11 @@
   margin-left: -2em;
   margin-top: -2em;
   margin-right: -2em;
-
-  img {
-    border-top-left-radius: 2em;
-    border-top-right-radius: 2em;
-  }
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+  background-position: center;
+  background-size: cover;
+  height: 200px;
 }
 
 .blog-post__meta {

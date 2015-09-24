@@ -82,27 +82,52 @@ function setActivityData(activities) {
   };
 }
 
+function getAbilityCooldown(subclass, ability, tier) {
+  if (ability === 'STAT_INTELLECT') {
+    switch (subclass) {
+      case 'Defender':
+      case 'Nightstalker':
+      case 'Striker':
+      case 'Sunsinger':
+        return cooldownsSuperA[tier];
+      case 'Bladedancer':
+      case 'Gunslinger':
+      case 'Stormcaller':
+      case 'Sunbreaker':
+      case 'Voidwalker':
+      default:
+        return cooldownsSuperB[tier];
+    }
+  } else if (ability === 'STAT_DISCIPLINE') {
+    return cooldownsGrenade[tier];
+  } else if (ability === 'STAT_STRENGTH') {
+    return cooldownsMelee[tier];
+  } else {
+    return '-:--';
+  }
+}
+
 function setStatPercentage(player) {
   if (player.characterInfo && player.characterInfo.stats) {
     var stats = ['STAT_INTELLECT', 'STAT_DISCIPLINE', 'STAT_STRENGTH'];
     for (var s = 0; s < stats.length; s++) {
       var value = player.characterInfo.stats[stats[s]].value;
-      var normalized = value > 170 ? 170 : value;
-      var tier = Math.floor(normalized / 34);
+      var normalized = value > 300 ? 300 : value;
+      var tier = Math.floor(normalized / 60);
       var tiers = [];
 
       var remaining = value;
       for (var t = 0; t < 5; t++) {
-        remaining -= tiers[t] = remaining > 34 ? 34 : remaining;
+        remaining -= tiers[t] = remaining > 60 ? 60 : remaining;
       }
 
       player.characterInfo.stats[stats[s]] = {
         name: statNames[stats[s]],
         value: value,
-        percentage: +(100 * normalized / 170).toFixed(),
+        percentage: +(100 * normalized / 300).toFixed(),
         tier: tier,
         tiers: tiers,
-        cooldown: ABILITY_COOLDOWNS[stats[s]][tier]
+        cooldown: getAbilityCooldown(player.characterInfo.subclassName, stats[s], tier)
       };
     }
   }

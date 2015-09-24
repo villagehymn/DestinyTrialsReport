@@ -1,9 +1,10 @@
 {
   "ignore": [
     "**/app/scripts/definitions/en/DestinyArmorDefinition.js",
+    "**/app/scripts/definitions/en/DestinyCrucibleMapDefinition.js",
+    "**/app/scripts/definitions/en/DestinyHazardDefinition.js",
     "**/app/scripts/definitions/en/DestinyMedalDefinition.js",
     "**/app/scripts/definitions/en/DestinySubclassDefinition.js",
-    "**/app/scripts/definitions/en/DestinyTrialsDefinition.js",
     "**/app/scripts/definitions/en/DestinyWeaponDefinition.js"
   ],
   "dependencies": {

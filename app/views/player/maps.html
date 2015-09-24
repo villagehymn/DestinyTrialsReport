@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12" ng-repeat="(key, value) in player.activities.mapStats track by $index">
         <div class="stat-row__header">
-          <span ng-bind="DestinyTrialsDefinition[key].activityName"></span>
+          <span ng-bind="DestinyCrucibleMapDefinition[key].name"></span>
         </div>
         <div class="row stat-row">
           <div class="col-xs-2 col-xs-offset-2 stat">
