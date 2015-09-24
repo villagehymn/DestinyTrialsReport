@@ -95,20 +95,6 @@ function extractDB(dbFile) {
       }
     });
 
-    // Black Spindle
-    DestinyWeaponDefinition[3227022822] = {
-      name: 'Black Spindle',
-      icon: '/img/misc/missing_icon.png',
-      subType: 12
-    };
-
-    // Touch of Malice
-    DestinyWeaponDefinition[3688594189] = {
-      name: 'Touch of Malice',
-      icon: '/img/misc/missing_icon.png',
-      subType: 14
-    };
-
     writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
     writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
     writeDefinitionFile('app/scripts/definitions/en/DestinyWeaponDefinition.js',   'DestinyWeaponDefinition',   DestinyWeaponDefinition);
@@ -148,7 +134,7 @@ function extractDB(dbFile) {
         DestinyCrucibleMapDefinition[item.activityHash].name = item.activityName;
         DestinyCrucibleMapDefinition[item.activityHash].pgcrImage = item.pgcrImage;
 
-        var heatmapImage = '/images/' + item.activityName.replace(/'/g, '').replace(/ /g, '_').toLowerCase() + '_heatmap.jpg';
+        var heatmapImage = '/images/heatmaps/' + item.activityName.replace(/'/g, '').replace(/ /g, '_').toLowerCase() + '.jpg';
         if (fs.existsSync('app' + heatmapImage)) {
           DestinyCrucibleMapDefinition[item.activityHash].heatmapImage = heatmapImage;
         }

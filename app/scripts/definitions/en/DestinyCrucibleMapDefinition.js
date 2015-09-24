@@ -4,7 +4,7 @@ var DestinyCrucibleMapDefinition = {
   "284635225": {
     "name": "The Burning Shrine",
     "pgcrImage": "/img/theme/destiny/bgs/pgcrs/crucible_the_burning_shrine.jpg",
-    "heatmapImage": "/images/the_burning_shrine_heatmap.jpg"
+    "heatmapImage": "/images/heatmaps/the_burning_shrine.jpg"
   },
   "443057682": {
     "name": "Skyshock",
@@ -17,7 +17,7 @@ var DestinyCrucibleMapDefinition = {
   "637046772": {
     "name": "Thieves' Den",
     "pgcrImage": "/img/theme/destiny/bgs/pgcrs/thieves_den.jpg",
-    "heatmapImage": "/images/thieves_den_heatmap.jpg"
+    "heatmapImage": "/images/heatmaps/thieves_den.jpg"
   },
   "1448094960": {
     "name": "The Dungeons",
@@ -42,7 +42,7 @@ var DestinyCrucibleMapDefinition = {
   "2332037858": {
     "name": "Widow's Court",
     "pgcrImage": "/img/theme/destiny/bgs/pgcrs/widows_court.jpg",
-    "heatmapImage": "/images/widows_court_heatmap.jpg"
+    "heatmapImage": "/images/heatmaps/widows_court.jpg"
   },
   "2430076725": {
     "name": "Blind Watch",
@@ -55,7 +55,7 @@ var DestinyCrucibleMapDefinition = {
   "2680821721": {
     "name": "The Cauldron",
     "pgcrImage": "/img/theme/destiny/bgs/pgcrs/crucible_cauldron.jpg",
-    "heatmapImage": "/images/the_cauldron_heatmap.jpg"
+    "heatmapImage": "/images/heatmaps/the_cauldron.jpg"
   },
   "3101475152": {
     "name": "Firebase Delphi",
@@ -84,7 +84,7 @@ var DestinyCrucibleMapDefinition = {
   "3848655103": {
     "name": "Black Shield",
     "pgcrImage": "/img/theme/destiny/bgs/pgcrs/black_shield.jpg",
-    "heatmapImage": "/images/black_shield_heatmap.jpg"
+    "heatmapImage": "/images/heatmaps/black_shield.jpg"
   },
   "3856604751": {
     "name": "First Light",
@@ -105,7 +105,7 @@ var DestinyCrucibleMapDefinition = {
   "4260139097": {
     "name": "Pantheon",
     "pgcrImage": "/img/theme/destiny/bgs/pgcrs/crucible_pantheon.jpg",
-    "heatmapImage": "/images/pantheon_heatmap.jpg"
+    "heatmapImage": "/images/heatmaps/pantheon.jpg"
   },
   "4287936726": {
     "name": "Exodus Blue",

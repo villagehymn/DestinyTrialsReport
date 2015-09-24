@@ -3308,7 +3308,7 @@ var DestinyWeaponDefinition = {
   },
   "3227022822": {
     "name": "Black Spindle",
-    "icon": "/img/misc/missing_icon.png",
+    "icon": "/common/destiny_content/icons/5ba84f54745b74a1099608a29d2a974f.jpg",
     "subType": 12
   },
   "3227022823": {
@@ -3803,7 +3803,7 @@ var DestinyWeaponDefinition = {
   },
   "3688594189": {
     "name": "Touch of Malice",
-    "icon": "/img/misc/missing_icon.png",
+    "icon": "/common/destiny_content/icons/5c889853185590c437899711566a4771.jpg",
     "subType": 14
   },
   "3688594190": {
