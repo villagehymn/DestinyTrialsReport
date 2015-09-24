@@ -3306,6 +3306,11 @@ var DestinyWeaponDefinition = {
     "icon": "/common/destiny_content/icons/9c3ddd14914d799240d89e67f55ab096.jpg",
     "subType": 14
   },
+  "3227022822": {
+    "name": "Black Spindle",
+    "icon": "/img/misc/missing_icon.png",
+    "subType": 12
+  },
   "3227022823": {
     "name": "Hereafter",
     "icon": "/common/destiny_content/icons/f680592704842cba76aec140291ab7db.jpg",
@@ -3794,6 +3799,11 @@ var DestinyWeaponDefinition = {
   "3688594188": {
     "name": "Boolean Gemini",
     "icon": "/common/destiny_content/icons/2fc2da2b4dc4c0a4ca034a8cf0a5df54.jpg",
+    "subType": 14
+  },
+  "3688594189": {
+    "name": "Touch of Malice",
+    "icon": "/img/misc/missing_icon.png",
     "subType": 14
   },
   "3688594190": {
