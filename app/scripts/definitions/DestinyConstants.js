@@ -34,7 +34,7 @@ var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
 var avoidNodes = [
   'Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage', 'Hive Disruptor', 'Oracle Disruptor',
   'Lich Bane', 'Disciplinarian', 'Demotion', 'Mutineer', 'Dreg Burn', 'Shank Burn', 'Vandal Burn', 'Aspect Swap', 'Burgeoning Hunger',
-  'Cannibalism', 'Dark Breaker', 'Upgrade Damage', 'Ice Breaker', 'Infuse'
+  'Cannibalism', 'Dark Breaker', 'Upgrade Damage', 'Ice Breaker', 'Infuse', 'Sword Strike', 'Scabbard'
 ];
 
 // Armor perks for hazards
