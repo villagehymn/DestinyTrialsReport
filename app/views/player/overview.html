@@ -1,5 +1,5 @@
 <div class="player-overview">
-  <div class="player-header" style="background-image:url('{{player.emblem.background}}')">
+  <div class="player-header" ng-style="{'background-image':'url(\'' + player.emblem.background + '\')'}">
     <div class="player-header__title">
       <img class="player-header__emblem" ng-src="{{player.emblem.icon}}" alt="Emblem">
       <div class="player-header__char">
@@ -84,7 +84,7 @@
     </div>
   </div>
   <div class="player-hazards">
-    <div ng-repeat="hazard in player.nonHazard.concat(player.inventory.weapons.hazards, player.inventory.armor.hazards, player.inventory.classNodes.hazards) track by $index"
+    <div ng-repeat="hazard in player.nonHazard.concat(player.inventory.weapons.hazards, player.inventory.armor.hazards, player.inventory.subclass.hazards) track by $index"
          ng-bind="hazard" ng-class="{'player-hazard--developer': hazard === 'Site Developer', 'player-hazard--donator': hazard === 'Site Donator'}"
          bs-popover="{content:DestinyHazardDefinition[hazard]}" class="player-hazard">
     </div>

@@ -3,98 +3,75 @@
 
 'use strict';
 
-function pushNode(nodeStep, nodes) {
-  nodes.push({
-    'name': nodeStep.nodeStepName,
-    'description': nodeStep.nodeStepDescription,
-    'icon': 'https://www.bungie.net' + nodeStep.icon
-  });
-}
-
 function setHazard(perkHash, items, hazardArray, name) {
   if (hazardArray.indexOf(perkHash) > -1) {
     items.hazards.push(name);
   }
 }
 
-function setDefinition(object, index, armor) {
-  object[index] = {
-    'definition': armor
-  };
-}
-
-function populateClassNode(noderStepper) {
-  return {
-    'name': noderStepper.nodeStepName,
-    'description': noderStepper.nodeStepDescription,
-    'icon': 'https://www.bungie.net' + noderStepper.icon
-  };
-}
-
-function setClassNode(nodeStep, classNodes, nodeArray, type, skipFirstAndLast) {
-  if (nodeArray.indexOf(nodeStep.column) > -1) {
-    var condition = skipFirstAndLast ? !(nodeStep.row === 0 && nodeStep.column === 3) : (nodeStep.row === 0);
-    if (condition) {
-      var noderStepper = nodeStep.steps;
-      if (type === 'all') {
-        classNodes.push(populateClassNode(noderStepper));
-      } else {
-        classNodes.abilities[type] = populateClassNode(noderStepper);
-      }
-    }
-  }
-}
-
-function setDmgElement(nodeStep, weapon) {
-  switch (nodeStep.nodeStepName) {
-    case 'Solar Damage':
-      weapon.burnColor = 'solar-dmg';
-      break;
-    case 'Void Damage':
-      weapon.burnColor = 'void-dmg';
-      break;
-    case 'Arc Damage':
-      weapon.burnColor = 'arc-dmg';
-      break;
-  }
-}
-
 function getDefinitionsByBucket(bucketHash) {
   switch (bucketHash) {
-    case BUCKET_PRIMARY_WEAPON:
-      return 'primary';
-    case BUCKET_SPECIAL_WEAPON:
-      return 'special';
-    case BUCKET_HEAVY_WEAPON:
-      return 'heavy';
-    case BUCKET_HEAD:
-      return 'head';
-    case BUCKET_ARMS:
-      return 'arms';
-    case BUCKET_CHEST:
-      return 'chest';
-    case BUCKET_LEGS:
-      return 'legs';
+    case BUCKET_PRIMARY_WEAPON: return 'primary';
+    case BUCKET_SPECIAL_WEAPON: return 'special';
+    case BUCKET_HEAVY_WEAPON:   return 'heavy';
+    case BUCKET_HEAD:           return 'head';
+    case BUCKET_ARMS:           return 'arms';
+    case BUCKET_CHEST:          return 'chest';
+    case BUCKET_LEGS:           return 'legs';
   }
 }
 
-function setNodes(itemS, nodes, object, weapons, type) {
-  for (var i = 0; i < itemS.nodes.length; i++) {
-    if (itemS.nodes[i].isActivated === true) {
-      var nodeStep = itemS.nodes[i].steps;
-      if (nodeStep) {
-        if (nodeStep.nodeStepName && !nodeStep.affectsQuality && (avoidNodes.indexOf(nodeStep.nodeStepName) < 0)) {
-          pushNode(nodeStep, nodes);
-        } else if (burns.indexOf(nodeStep.nodeStepName) > -1) {
-          setDmgElement(nodeStep, object);
+function defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasVikingFuneral, hasTouchOfFlame) {
+  for (var s = 0; s < subclass.nodes.length; s++) {
+    switch (subclass.nodes[s].column) {
+      case 1:
+        subclass.abilities.weaponKillsGrenade = subclass.nodes[s];
+        subclass.displayedNodes[subclass.nodes[s].nodeHash] = subclass.nodes[s];
+        if (subclass.nodes[s].nodeHash == FIREBOLT_GRENADE) {
+          hasFireboltGrenade = true;
+        } else if (subclass.nodes[s].nodeHash == FUSION_GRENADE) {
+          hasFusionGrenade = true;
         }
-      }
+        break;
+      case 2:
+        if (subclass.nodes[s].nodeHash === 3452380660) {
+          subclass.blink = true;
+        }
+        break;
+      case 3:
+        if (subclass.nodes[s].row === 0) {
+          subclass.abilities.weaponKillsSuper = subclass.nodes[s];
+        } else {
+          subclass.displayedNodes[subclass.nodes[s].nodeHash] = subclass.nodes[s];
+        }
+        break;
+      case 4:
+        if (subclass.nodes[s].row === 0) {
+          subclass.abilities.weaponKillsMelee = subclass.nodes[s];
+        }
+        break;
+      case 6:
+        subclass.displayedNodes[subclass.nodes[s].nodeHash] = subclass.nodes[s];
+        if (subclass.nodes[s].nodeHash == VIKING_FUNERAL) {
+          hasVikingFuneral = true;
+        }
+        break;
+      case 8:
+        subclass.displayedNodes[subclass.nodes[s].nodeHash] = subclass.nodes[s];
+        if (subclass.nodes[s].nodeHash == TOUCH_OF_FLAME) {
+          hasTouchOfFlame = true;
+        }
+        break;
     }
   }
-  weapons[type] = {
-    'definition': object,
-    'nodes': nodes
-  };
+}
+
+function setItemDefinition(item, definition) {
+  if (item.itemHash in definition) {
+    return definition[item.itemHash];
+  } else {
+    return {name: 'Classified', description: 'Classified', icon: '/img/misc/missing_icon.png', subType: 0};
+  }
 }
 
 angular.module('trialsReportApp')
@@ -109,25 +86,34 @@ angular.module('trialsReportApp')
         primary: {},
         special: {},
         heavy: {},
-        hazards: []
-      }, shotgun = false;
-      var classNodes = [];
-      classNodes.abilities = {};
-      classNodes.hazards = [];
+        hazards: [],
+        shotgun: false
+      };
+      var subclass = {
+        abilities: {
+          weaponKillsGrenade: {},
+          weaponKillsSuper: {},
+          weaponKillsMelee: {}
+        },
+        nodes: {},
+        displayedNodes: {},
+        hazards: [],
+        blink: false
+      };
 
-      var subclass = {}, blink = false,
-        hasFireboltGrenade = false, hasFusionGrenade = false,
+      var hasFireboltGrenade = false, hasFusionGrenade = false,
         hasVikingFuneral = false, hasTouchOfFlame = false;
 
       for (var n = 0; n < items.length; n++) {
-        var nodes = [], item = items[n];
-        var bucket = getDefinitionsByBucket(item.bucketHash);
-
+        var item = items[n], bucket = getDefinitionsByBucket(item.bucketHash);
+        var definition;
         if (weaponBuckets.indexOf(item.bucketHash) > -1) {
-          var weapon = DestinyWeaponDefinition[item.itemHash];
-          setNodes(item, nodes, weapon, weapons, bucket);
-
-          if ((weapon.subType === 12) && (weapon.name !== 'No Land Beyond')) {
+          definition = setItemDefinition(item, DestinyWeaponDefinition);
+          weapons[bucket] = {
+            'definition': definition,
+            'nodes': item.nodes
+          };
+          if ((definition.subType === 12) && (definition.name !== 'No Land Beyond')) {
             for (var i = 0; i < item.stats.length; i++) {
               if (item.stats[i].statHash === STAT_BASE_DAMAGE && item.stats[i].value > 16) {
                 if ((item.primaryStat.value * item.stats[i].value) > 8577) {
@@ -135,11 +121,11 @@ angular.module('trialsReportApp')
                 }
               }
             }
-          } else if (weapon.subType === 7) {
-            shotgun = true;
+          } else if (definition.subType === 7) {
+            weapons.shotgun = true;
           }
         } else if (armorBuckets.indexOf(item.bucketHash) > -1) {
-          var armor = DestinyArmorDefinition[item.itemHash];
+          definition = setItemDefinition(item, DestinyArmorDefinition);
           for (var i = 0; i < item.perks.length; i++) {
             if (item.perks[i].isActive === true) {
               setHazard(item.perks[i].perkHash, armors, hazardQuickRevive, 'Quick Revive');
@@ -148,58 +134,25 @@ angular.module('trialsReportApp')
               hasStarfireProtocolPerk = (item.perks[i].perkHash === 3471016318);
             }
           }
-          setDefinition(armors, bucket, armor);
-        } else {
-          var subclassDefinition = DestinySubclassDefinition[item.itemHash];
-          if (subclassDefinition) {
-            subclass.definition = subclassDefinition;
+          armors[bucket] = {
+            'definition': definition
+          };
+        } else if (item.bucketHash === BUCKET_BUILD) {
+          definition = setItemDefinition(item, DestinySubclassDefinition);
+          subclass.nodes = item.nodes;
+          subclass.definition = definition;
+          defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasVikingFuneral, hasTouchOfFlame);
+        }
 
-            for (var i = 0; i < item.nodes.length; i++) {
-              if (item.nodes[i].isActivated === true) {
-                var nodeStep = item.nodes[i];
-                if (item.itemHash === SUNSINGER_CLASS) {
-                  switch (nodeStep.nodeHash) {
-                    case FIREBOLT_GRENADE:
-                      hasFireboltGrenade = true;
-                      break;
-                    case FUSION_GRENADE:
-                      hasFusionGrenade = true;
-                      break;
-                    case VIKING_FUNERAL:
-                      hasVikingFuneral = true;
-                      break;
-                    case TOUCH_OF_FLAME:
-                      hasTouchOfFlame = true;
-                      break;
-                  }
-                }
-                setClassNode(nodeStep, classNodes, [1], 'weaponKillsGrenade', true);
-                setClassNode(nodeStep, classNodes, [3], 'weaponKillsSuper', false);
-                setClassNode(nodeStep, classNodes, [4], 'weaponKillsMelee', false);
-                setClassNode(nodeStep, classNodes, [1, 3, 6, 8], 'all', true);
-
-                if (item.itemHash === VOIDWALKER_CLASS || item.itemHash === BLADEDANCER_CLASS) {
-                  if (nodeStep.nodeHash === 3452380660) {
-                    blink = (nodeStep.row === 3 && nodeStep.column === 2);
-                  }
-                }
-              }
-            }
-
-            if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
-              classNodes.hazards.push('Superburn Grenade');
-            }
-          }
+        if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
+          subclass.hazards.push('Superburn Grenade');
         }
       }
 
       return {
         weapons: weapons,
         armors: armors,
-        shotgun: shotgun,
-        classNodes: classNodes,
         subclass: subclass,
-        blink: blink,
         hasStarfireProtocolPerk: hasStarfireProtocolPerk,
         hasFusionGrenade: hasFusionGrenade
       };

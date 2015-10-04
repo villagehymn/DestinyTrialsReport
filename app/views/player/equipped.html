@@ -6,11 +6,11 @@
     <div class="row">
       <div class="player-cooldown col-xs-4"
            ng-repeat="stat in [player.characterInfo.stats.STAT_INTELLECT, player.characterInfo.stats.STAT_DISCIPLINE, player.characterInfo.stats.STAT_STRENGTH]"
-           bs-popover="{content:'Tier ' + stat.tier + ' - cooldown is ' + stat.cooldown + '<br>' + stat.value + ' / 170 (' + stat.percentage + '%)'}">
+           bs-popover="{content:'Tier ' + stat.tier + ' - cooldown is ' + stat.cooldown + '<br>' + stat.value + ' / 300 (' + stat.percentage + '%)'}">
         <div class="player-cooldown__label" ng-bind="stat.name"></div>
         <div class="player-cooldown__nr">
           <div class="player-cooldown__tier" ng-repeat="value in stat.tiers track by $index">
-            <progress max="34" animate="true" class="progress not-rounded">
+            <progress max="60" animate="true" class="progress not-rounded">
               <bar value="value" class="progress-bar-primary"></bar>
             </progress>
           </div>
@@ -20,9 +20,9 @@
   </div>
   <div class="player-tab__section">
     <div class="row">
-      <div class="player-perk col-xs-6" ng-repeat="classNode in player.inventory.classNodes track by $index" bs-popover="{content:classNode.description}">
-        <img class="player-perk__icon img-responsive" ng-src="{{classNode.icon}}" alt="{{classNode.name}}">
-        <span class="player-perk__title" ng-bind="classNode.name"></span>
+      <div class="player-perk col-xs-6" ng-repeat="subclassNode in player.inventory.subclass.displayedNodes track by $index" bs-popover="{content:subclassNode.description}">
+        <img class="player-perk__icon img-responsive" ng-src="{{subclassNode.icon}}" alt="{{subclassNode.name}}">
+        <span class="player-perk__title" ng-bind="subclassNode.name"></span>
       </div>
     </div>
   </div>

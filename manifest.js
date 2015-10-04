@@ -31,7 +31,7 @@ function onManifestRequest(error, response, body) {
   // versionFile.end();
 
   request
-    .get('http://www.bungie.net' + parsedResponse.Response.mobileWorldContentPaths.en)
+    .get('https://www.bungie.net' + parsedResponse.Response.mobileWorldContentPaths.en)
     .pipe(manifestFile)
     .on('close', onManifestDownloaded);
   // } else {
@@ -58,15 +58,14 @@ function onManifestDownloaded() {
 }
 
 function extractDB(dbFile) {
-  var DestinyArmorDefinition = {};
-  var DestinyMedalDefinition = {};
-  var DestinySubclassDefinition = {};
-  var DestinyWeaponDefinition = {};
-
   db = new sqlite3.Database(dbFile);
 
   db.all('SELECT * FROM DestinyInventoryItemDefinition', function(err, rows) {
     if (err) throw err;
+
+    var DestinyArmorDefinition = {};
+    var DestinySubclassDefinition = {};
+    var DestinyWeaponDefinition = {};
 
     rows.forEach(function(row) {
       var item = JSON.parse(row.json);
@@ -95,10 +94,16 @@ function extractDB(dbFile) {
           break;
       }
     });
+
+    writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
+    writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
+    writeDefinitionFile('app/scripts/definitions/en/DestinyWeaponDefinition.js',   'DestinyWeaponDefinition',   DestinyWeaponDefinition);
   });
 
   db.all('SELECT * FROM DestinyHistoricalStatsDefinition', function(err, rows) {
     if (err) throw err;
+
+    var DestinyMedalDefinition = {};
 
     rows.forEach(function(row) {
       var item = JSON.parse(row.json);
@@ -111,12 +116,33 @@ function extractDB(dbFile) {
         DestinyMedalDefinition[item.statId].iconImage = item.iconImage;
       }
     });
+
+    writeDefinitionFile('app/scripts/definitions/en/DestinyMedalDefinition.js', 'DestinyMedalDefinition', DestinyMedalDefinition);
   });
 
-  writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js', 'DestinyArmorDefinition', DestinyArmorDefinition);
-  writeDefinitionFile('app/scripts/definitions/en/DestinyMedalDefinition.js', 'DestinyMedalDefinition', DestinyMedalDefinition);
-  writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
-  writeDefinitionFile('app/scripts/definitions/en/DestinyWeaponDefinition.js', 'DestinyWeaponDefinition', DestinyWeaponDefinition);
+  db.all('SELECT * FROM DestinyActivityDefinition', function(err, rows) {
+    if (err) throw err;
+
+    var DestinyCrucibleMapDefinition = {};
+
+    rows.forEach(function(row) {
+      var item = JSON.parse(row.json);
+
+      // Crucible Maps
+      if ((item.activityTypeHash === 3695721985) && (item.activityName !== "") && (item.activityName !== "Rumble")) {
+        DestinyCrucibleMapDefinition[item.activityHash] = {};
+        DestinyCrucibleMapDefinition[item.activityHash].name = item.activityName;
+        DestinyCrucibleMapDefinition[item.activityHash].pgcrImage = item.pgcrImage;
+
+        var heatmapImage = '/images/heatmaps/' + item.activityName.replace(/'/g, '').replace(/ /g, '_').toLowerCase() + '.jpg';
+        if (fs.existsSync('app' + heatmapImage)) {
+          DestinyCrucibleMapDefinition[item.activityHash].heatmapImage = heatmapImage;
+        }
+      }
+    });
+
+    writeDefinitionFile('app/scripts/definitions/en/DestinyCrucibleMapDefinition.js', 'DestinyCrucibleMapDefinition', DestinyCrucibleMapDefinition);
+  });
 }
 
-request.get('http://www.bungie.net/platform/Destiny/Manifest/', onManifestRequest);
+request.get('https://www.bungie.net/Platform/Destiny/Manifest/', onManifestRequest);
