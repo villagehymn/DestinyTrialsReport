@@ -3,11 +3,6 @@
 }
 
 .main-search__fireteam {
-  > form,
-  > div {
-    padding: .5em 1.5em
-  }
-
   > form + div,
   > form + div + div {
     background: darken(white, 2%);
@@ -25,7 +20,7 @@
 .main-search__row {
   display: flex;
   flex-direction: row;
-  margin-right: -9px;
+  align-items: center;
 }
 
 .main-search__controls {
@@ -41,9 +36,17 @@
   padding-right: 1em;
 
   input {
-    margin: 10px 0;
+    padding-left: $controls-padding;
     height: auto !important;
-    line-height: 2.6em;
+    background-image: none !important;
+    line-height: 4em;
+    cursor: pointer;
+    font-size: 1.1em;
+
+    &:focus,
+    &:active {
+      padding-left: $controls-padding;
+    }
   }
 }
 

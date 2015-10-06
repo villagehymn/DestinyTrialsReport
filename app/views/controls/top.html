@@ -21,7 +21,7 @@
       <form ng-submit="searchMainPlayerbyName(mainPlayer, platformValue)">
         <div class="main-search__row">
           <div class="main-search__input">
-            <input type="text" class="form-control" placeholder="{{fireteam[0].name || 'Enter your next victim'}}" ng-model="mainPlayer" ng-value="(!fireteam[0] ? searchedPlayer : '')">
+            <input autofocus type="text" class="form-control" placeholder="{{fireteam[0].name || 'Enter your next victim'}}" ng-model="mainPlayer" ng-value="(!fireteam[0] ? searchedPlayer : '')">
           </div>
           <div class="main-search__controls">
             <div class="main-search__refresh" ng-if="!subdomain" ng-show="fireteam[0].name != null">
@@ -54,11 +54,10 @@
     </div>
   </div>
 </div>
-
 <div class="current-map shadow-z-1" style="background-image:url('http://bungie.net{{currentMap.pgcrImage}}');">
   <div class="current-map__content">
     <div class="current-map__title">
-      <span ng-bind="currentMap.activityName"></span>
+      <span ng-bind="currentMap.name"></span>
     </div>
     <div class="curent-map__heatmap">
       <button type="button" class="btn btn-default btn-sm" bs-modal="mapModal">Heatmap</button>
