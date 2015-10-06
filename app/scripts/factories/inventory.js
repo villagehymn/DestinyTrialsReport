@@ -135,7 +135,8 @@ angular.module('trialsReportApp')
             }
           }
           armors[bucket] = {
-            'definition': definition
+            'definition': definition,
+            'isExotic': definition.tierType === 6
           };
         } else if (item.bucketHash === BUCKET_BUILD) {
           definition = setItemDefinition(item, DestinySubclassDefinition);

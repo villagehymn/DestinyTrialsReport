@@ -76,6 +76,7 @@ function extractDB(dbFile) {
         DestinyArmorDefinition[item.itemHash].name = item.itemName;
         DestinyArmorDefinition[item.itemHash].description = item.itemDescription;
         DestinyArmorDefinition[item.itemHash].icon = item.icon;
+        DestinyArmorDefinition[item.itemHash].tierType = item.tierType;
       }
 
       // Weapons
@@ -84,6 +85,7 @@ function extractDB(dbFile) {
         DestinyWeaponDefinition[item.itemHash].name = item.itemName;
         DestinyWeaponDefinition[item.itemHash].icon = item.icon;
         DestinyWeaponDefinition[item.itemHash].subType = item.itemSubType;
+        DestinyWeaponDefinition[item.itemHash].tierType = item.tierType;
       }
 
       switch (item.bucketTypeHash) {
