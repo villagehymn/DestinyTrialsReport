@@ -3,69 +3,21 @@
 
 'use strict';
 
-function pushNode(node, nodes) {
-  nodes.push({
-    'nodeHash': node.nodeHash,
-    'name': node.steps.nodeStepName,
-    'description': node.steps.nodeStepDescription,
-    'icon': 'https://www.bungie.net' + node.steps.icon,
-    'row': node.row,
-    'column': node.column
-  });
-}
-
 function setHazard(perkHash, items, hazardArray, name) {
   if (hazardArray.indexOf(perkHash) > -1) {
     items.hazards.push(name);
   }
 }
 
-function setDefinition(object, index, armor) {
-  object[index] = {
-    'definition': armor
-  };
-}
-
 function getDefinitionsByBucket(bucketHash) {
   switch (bucketHash) {
-    case BUCKET_PRIMARY_WEAPON:
-      return 'primary';
-    case BUCKET_SPECIAL_WEAPON:
-      return 'special';
-    case BUCKET_HEAVY_WEAPON:
-      return 'heavy';
-    case BUCKET_HEAD:
-      return 'head';
-    case BUCKET_ARMS:
-      return 'arms';
-    case BUCKET_CHEST:
-      return 'chest';
-    case BUCKET_LEGS:
-      return 'legs';
-  }
-}
-
-function setNodes(item, nodes, definition, object, type) {
-  for (var i = 0; i < item.nodes.length; i++) {
-    if (item.nodes[i].isActivated === true && item.nodes[i].column > -1) {
-      var node = item.nodes[i];
-      var nodeSteps = node.steps;
-      if (nodeSteps) {
-        if (nodeSteps.nodeStepName && !nodeSteps.affectsQuality && (avoidNodes.indexOf(nodeSteps.nodeStepName) < 0)) {
-          pushNode(node, nodes);
-        }
-      }
-    }
-  }
-
-  if (type) {
-    object[type] = {
-      'definition': definition,
-      'nodes': nodes
-    };
-  } else {
-    object.nodes = nodes;
-    object.definition = definition;
+    case BUCKET_PRIMARY_WEAPON: return 'primary';
+    case BUCKET_SPECIAL_WEAPON: return 'special';
+    case BUCKET_HEAVY_WEAPON:   return 'heavy';
+    case BUCKET_HEAD:           return 'head';
+    case BUCKET_ARMS:           return 'arms';
+    case BUCKET_CHEST:          return 'chest';
+    case BUCKET_LEGS:           return 'legs';
   }
 }
 
@@ -114,6 +66,14 @@ function defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasViki
   }
 }
 
+function setItemDefinition(item, definition) {
+  if (item.itemHash in definition) {
+    return definition[item.itemHash];
+  } else {
+    return {name: 'Classified', description: 'Classified', icon: '/img/misc/missing_icon.png', subType: 0};
+  }
+}
+
 angular.module('trialsReportApp')
   .factory('inventoryStats', function () {
     var getData = function (items) {
@@ -145,14 +105,15 @@ angular.module('trialsReportApp')
         hasVikingFuneral = false, hasTouchOfFlame = false;
 
       for (var n = 0; n < items.length; n++) {
-        var weaponNodes = [], item = items[n];
-        var bucket = getDefinitionsByBucket(item.bucketHash);
-
+        var item = items[n], bucket = getDefinitionsByBucket(item.bucketHash);
+        var definition;
         if (weaponBuckets.indexOf(item.bucketHash) > -1) {
-          var weapon = DestinyWeaponDefinition[item.itemHash];
-          setNodes(item, weaponNodes, weapon, weapons, bucket);
-
-          if ((weapon.subType === 12) && (weapon.name !== 'No Land Beyond')) {
+          definition = setItemDefinition(item, DestinyWeaponDefinition);
+          weapons[bucket] = {
+            'definition': definition,
+            'nodes': item.nodes
+          };
+          if ((definition.subType === 12) && (definition.name !== 'No Land Beyond')) {
             for (var i = 0; i < item.stats.length; i++) {
               if (item.stats[i].statHash === STAT_BASE_DAMAGE && item.stats[i].value > 16) {
                 if ((item.primaryStat.value * item.stats[i].value) > 8577) {
@@ -160,11 +121,11 @@ angular.module('trialsReportApp')
                 }
               }
             }
-          } else if (weapon.subType === 7) {
-            weapon.shotgun = true;
+          } else if (definition.subType === 7) {
+            weapons.shotgun = true;
           }
         } else if (armorBuckets.indexOf(item.bucketHash) > -1) {
-          var armor = DestinyArmorDefinition[item.itemHash];
+          definition = setItemDefinition(item, DestinyArmorDefinition);
           for (var i = 0; i < item.perks.length; i++) {
             if (item.perks[i].isActive === true) {
               setHazard(item.perks[i].perkHash, armors, hazardQuickRevive, 'Quick Revive');
@@ -173,15 +134,16 @@ angular.module('trialsReportApp')
               hasStarfireProtocolPerk = (item.perks[i].perkHash === 3471016318);
             }
           }
-          setDefinition(armors, bucket, armor);
-        } else {
-          var subclassDefinition = DestinySubclassDefinition[item.itemHash];
-          if (subclassDefinition) {
-            var subclassNodes = [];
-            setNodes(item, subclassNodes, subclassDefinition, subclass);
-            defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasVikingFuneral, hasTouchOfFlame);
-          }
+          armors[bucket] = {
+            'definition': definition
+          };
+        } else if (item.bucketHash === BUCKET_BUILD) {
+          definition = setItemDefinition(item, DestinySubclassDefinition);
+          subclass.nodes = item.nodes;
+          subclass.definition = definition;
+          defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasVikingFuneral, hasTouchOfFlame);
         }
+
         if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
           subclass.hazards.push('Superburn Grenade');
         }

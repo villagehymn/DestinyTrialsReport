@@ -1,9 +1,9 @@
 ### Destiny Trials Report - [www.DestinyTrialsReport.com](http://www.destinytrialsreport.com/)
 
-[![Build Status](https://secure.travis-ci.org/SteffanLong/DestinyTrialsReport.svg)](http://travis-ci.org/SteffanLong/DestinyTrialsReport)
-[![Dependency Status](https://david-dm.org/SteffanLong/DestinyTrialsReport.svg)](https://david-dm.org/SteffanLong/DestinyTrialsReport)
-[![devDependency Status](https://david-dm.org/SteffanLong/DestinyTrialsReport/dev-status.svg)](https://david-dm.org/SteffanLong/DestinyTrialsReport#info=devDependencies)
-[![bitHound Score](https://www.bithound.io/github/SteffanLong/DestinyTrialsReport/badges/score.svg)](https://www.bithound.io/github/SteffanLong/DestinyTrialsReport/master)
+[![Build Status](https://secure.travis-ci.org/SteffanLong/DestinyTrialsReport.svg)](http://travis-ci.org/DestinyTrialsReport/DestinyTrialsReport)
+[![Dependency Status](https://david-dm.org/SteffanLong/DestinyTrialsReport.svg)](https://david-dm.org/DestinyTrialsReport/DestinyTrialsReport)
+[![devDependency Status](https://david-dm.org/SteffanLong/DestinyTrialsReport/dev-status.svg)](https://david-dm.org/DestinyTrialsReport/DestinyTrialsReport#info=devDependencies)
+[![bitHound Score](https://www.bithound.io/github/SteffanLong/DestinyTrialsReport/badges/score.svg)](https://www.bithound.io/github/DestinyTrialsReport/DestinyTrialsReport/master)
 
 ### Quick links
 - [Installation](#installation)

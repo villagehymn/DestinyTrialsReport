@@ -126,7 +126,7 @@ function extractDB(dbFile, lang) {
         DestinyCrucibleMapDefinition[item.activityHash].name = item.activityName;
         DestinyCrucibleMapDefinition[item.activityHash].pgcrImage = item.pgcrImage;
 
-        var heatmapImage = '/images/' + item.activityName.replace(/'/g, '').replace(/ /g, '_').toLowerCase() + '_heatmap.jpg';
+        var heatmapImage = '/images/heatmaps/' + item.activityName.replace(/'/g, '').replace(/ /g, '_').toLowerCase() + '.jpg';
         if (fs.existsSync('app' + heatmapImage)) {
           DestinyCrucibleMapDefinition[item.activityHash].heatmapImage = heatmapImage;
         }
