@@ -4,6 +4,8 @@ var BUCKET_HEAD = 3448274439;
 var BUCKET_CHEST = 14239492;
 var BUCKET_ARMS = 3551918588;
 var BUCKET_LEGS = 20886954;
+var BUCKET_ARTIFACT = 434908299;
+var BUCKET_GHOST = 4023194814;
 
 var BUCKET_PRIMARY_WEAPON = 1498876634;
 var BUCKET_SPECIAL_WEAPON = 2465295065;
@@ -28,14 +30,6 @@ var STAT_BASE_DAMAGE = 4043523819;
 
 
 var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
-
-// Weapon perks to avoid
-
-var avoidNodes = [
-  'Ascend', 'Reforge Ready', 'Void Damage', 'Arc Damage', 'Solar Damage', 'Kinetic Damage', 'Hive Disruptor', 'Oracle Disruptor',
-  'Lich Bane', 'Disciplinarian', 'Demotion', 'Mutineer', 'Dreg Burn', 'Shank Burn', 'Vandal Burn', 'Aspect Swap', 'Burgeoning Hunger',
-  'Cannibalism', 'Dark Breaker', 'Upgrade Damage', 'Ice Breaker', 'Infuse', 'Sword Strike', 'Scabbard'
-];
 
 // Armor perks for hazards
 

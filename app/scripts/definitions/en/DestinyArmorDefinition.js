@@ -121,6 +121,42 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/3c33b3e86914bce35a1e41ec40e91233.jpg",
     "tierType": 5
   },
+  "27771120": {
+    "name": "Wax-Sealed Case",
+    "description": "Definitely not made of wax. Probably actually a case, though.",
+    "icon": "/common/destiny_content/icons/eb34add68a8eab24cfc8da26322c8f92.jpg",
+    "tierType": 4
+  },
+  "27771121": {
+    "name": "Thrice-Wrapped Thing",
+    "description": "Sure, try and unwrap it. I mean, what could possibly go wrong?",
+    "icon": "/common/destiny_content/icons/23b608e5291a7e9109d30302b3f6f385.jpg",
+    "tierType": 4
+  },
+  "27771122": {
+    "name": "Filament Hex",
+    "description": "A Hive totem woven and bound from filaments of the universe itself.",
+    "icon": "/common/destiny_content/icons/af134514aedc65d1224bce4e6ba915f5.jpg",
+    "tierType": 4
+  },
+  "27771123": {
+    "name": "Dredgen Yor's Rose",
+    "description": "\"In his strong hand the man held a Rose. And his aura burned bright.\"",
+    "icon": "/common/destiny_content/icons/55d7ed2d4292cba4d474d4d342a3fe76.jpg",
+    "tierType": 5
+  },
+  "27771124": {
+    "name": "Ankh of Sai Mota",
+    "description": "//…a rattling shriek, the crunch of bones and the fading echoes of a brave woman's last laugh…//",
+    "icon": "/common/destiny_content/icons/c3586902fd0043aa7422139aa9b2f9d2.jpg",
+    "tierType": 5
+  },
+  "27771125": {
+    "name": "Blood-Soaked Charm",
+    "description": "To carry this charm is to fight for the lost world that fashioned it.",
+    "icon": "/common/destiny_content/icons/4e95ff81025cc137f5590b1743a1451e.jpg",
+    "tierType": 5
+  },
   "35226794": {
     "name": "KALI-GNT Scout Rig",
     "description": "I am a KALI-GNT SKULL MOUNT. Let us find prey.",
@@ -1063,6 +1099,12 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/a2bd1804a16a02444d37ac9d730a959e.jpg",
     "tierType": 5
   },
+  "295124230": {
+    "name": "Special Delivery",
+    "description": "Guardian,\nThis shell was left for your Ghost, with instructions to deliver it upon his return. Welcome to the Tower. \n—Special Orders",
+    "icon": "/common/destiny_content/icons/feb2d10df81f6d79a68bf795ac080692.jpg",
+    "tierType": 2
+  },
   "299288132": {
     "name": "Mark of Favor",
     "description": "City communities work together to produce these marks as gifts for their champions.",
@@ -1163,6 +1205,24 @@ var DestinyArmorDefinition = {
     "name": "Dead Light Vest",
     "description": "\"Success is not about survival. It is about discovery.\" —Arach Modesta",
     "icon": "/common/destiny_content/icons/b70710948971f76ddf7f52d217823e97.jpg",
+    "tierType": 5
+  },
+  "327933420": {
+    "name": "Numinous Web",
+    "description": "A web spun from the flayed and frozen Light of Guardians lost.",
+    "icon": "/common/destiny_content/icons/21770347e38a5dcdb50e5aa4790407da.jpg",
+    "tierType": 5
+  },
+  "327933421": {
+    "name": "Broken Crown",
+    "description": "Eliksni songs still tell of Chelchis, Kell of Stone, who stood before the Maw.",
+    "icon": "/common/destiny_content/icons/2255e9345d53a2b54090d038e0dc5086.jpg",
+    "tierType": 5
+  },
+  "327933423": {
+    "name": "Leaf of the Bleeding Tree",
+    "description": "Eat not of the fruit of this tree.",
+    "icon": "/common/destiny_content/icons/22cfe760493ed16d4612a41566085aa0.jpg",
     "tierType": 5
   },
   "330109185": {
@@ -1326,6 +1386,42 @@ var DestinyArmorDefinition = {
     "description": "Ornate armor forged by the Lords of Iron beneath the Iron Banner.",
     "icon": "/common/destiny_content/icons/a030cc107fcc15da6111821c2caaa9bd.jpg",
     "tierType": 5
+  },
+  "392830824": {
+    "name": "Ring of Living Stone",
+    "description": "\"In memory of the Deep Stone Crypt, the tower where we were born.\"",
+    "icon": "/common/destiny_content/icons/e52a51a2f98df812b7b76cba40236441.jpg",
+    "tierType": 4
+  },
+  "392830825": {
+    "name": "Silent Oracle",
+    "description": "\"Sometimes I swear I could hear it speaking, but I can never remember. I think it spoke of a name.\"",
+    "icon": "/common/destiny_content/icons/2a1bbc051bbec1463eb964063c3955f9.jpg",
+    "tierType": 4
+  },
+  "392830828": {
+    "name": "Skorri's Dirge",
+    "description": "They say she's apart from the Iron Banner, yet she sings songs of her lost companions.",
+    "icon": "/common/destiny_content/icons/ade7d8df211a192847010ebf9b90c6b7.jpg",
+    "tierType": 4
+  },
+  "392830829": {
+    "name": "Techeun Bangle",
+    "description": "An approximation of the glittering augments worn by the Queen of the Awoken's advisors.",
+    "icon": "/common/destiny_content/icons/168f7254aab6ce3137b6d393b104e527.jpg",
+    "tierType": 4
+  },
+  "392830830": {
+    "name": "Segoth's Head",
+    "description": "\"Thought we formed the Banner to fight the Darkness, not ourselves. Just don't bode well, s'all I'm sayin'.\" —Gheleon",
+    "icon": "/common/destiny_content/icons/aa0083b6fdf0e1a53e958b6379e3776b.jpg",
+    "tierType": 4
+  },
+  "392830831": {
+    "name": "Spectral Dust",
+    "description": "A sample of the mysterious particulate that protects and hides the Reef from invaders.",
+    "icon": "/common/destiny_content/icons/ed53b08c0b16917a270aa4bbac1dbc7d.jpg",
+    "tierType": 4
   },
   "398096866": {
     "name": "\"Death of Fate\"",
@@ -2047,6 +2143,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/d1150aabb60d2a60a05d9c0ee52b7f02.jpg",
     "tierType": 3
   },
+  "616180714": {
+    "name": "Sunlit Shell",
+    "description": "For Ghosts who believe.",
+    "icon": "/common/destiny_content/icons/ba400462293f761080009fd162253b19.jpg",
+    "tierType": 5
+  },
+  "616701191": {
+    "name": "Vanguard Shell",
+    "description": "For Ghosts who have proven themselves as leaders in the field time and time again.",
+    "icon": "/common/destiny_content/icons/1190970a6adf8971e1fc095f5b9127eb.jpg",
+    "tierType": 5
+  },
   "616878404": {
     "name": "Astrolord Boots",
     "description": "When the last war comes, we will be the victors.",
@@ -2201,6 +2309,42 @@ var DestinyArmorDefinition = {
     "name": "Molniya Custom T2",
     "description": "Relentless advance. All-terrain grip. Sporty trim.",
     "icon": "/common/destiny_content/icons/ad2fa4ecaa6916df21e8e80e12b29d2d.jpg",
+    "tierType": 5
+  },
+  "678497672": {
+    "name": "Weregilt",
+    "description": "Even among the Hive, all death has its cost.",
+    "icon": "/common/destiny_content/icons/b7d349e50e8c2e8daf5fee6d31aa0877.jpg",
+    "tierType": 4
+  },
+  "678497673": {
+    "name": "Light of Moths",
+    "description": "In the Hive's ontoformic reality, this glow is the manifestation of bound, dying souls.",
+    "icon": "/common/destiny_content/icons/0d08b800f5e977d27c686c04e550faea.jpg",
+    "tierType": 4
+  },
+  "678497674": {
+    "name": "Sins of Kharad-Tan",
+    "description": "For you are not the first hero—nor even Oryx the first villain—to meet upon this plane.",
+    "icon": "/common/destiny_content/icons/468dd4325c258bbad7e95403fa58ee8b.jpg",
+    "tierType": 5
+  },
+  "678497675": {
+    "name": "Tome of Nothing",
+    "description": "The few who have claimed to see words on its seemingly blank pages have subsequently gone mad.",
+    "icon": "/common/destiny_content/icons/a42ec1752eb1e2c206e4d17cf8692884.jpg",
+    "tierType": 4
+  },
+  "678497676": {
+    "name": "The Damned Lute",
+    "description": "\"Hey nonny nonny, hey nonny nonny, be not blithe nor bonny...\"",
+    "icon": "/common/destiny_content/icons/f136365d1039b3eef636f8c2d4d6a9ed.jpg",
+    "tierType": 5
+  },
+  "678497677": {
+    "name": "The Traitor's Die",
+    "description": "Every roll of this die is already written into the fabric of Oryx's reality.",
+    "icon": "/common/destiny_content/icons/d3140befab85fb18382ec9dc755af425.jpg",
     "tierType": 5
   },
   "687119876": {
@@ -2781,6 +2925,60 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/f81b96171f9fc34e77a9b233311bcabf.jpg",
     "tierType": 5
   },
+  "904176962": {
+    "name": "Yzoz's Pendulum",
+    "description": "\"First test of the mechanism codenamed Yzoz's Pendulum was...not ideal.\" —RECORD 360-CHASM-2334",
+    "icon": "/common/destiny_content/icons/f1e1ee3a1ba938face8929ae95d10082.jpg",
+    "tierType": 5
+  },
+  "904176963": {
+    "name": "Intact Warmind Core",
+    "description": "Codename: MARTEL. Parent: !REDACTED!. Status: ILIODOR COMPLETE.",
+    "icon": "/common/destiny_content/icons/0d5f291fabd6613000218f74f10617df.jpg",
+    "tierType": 5
+  },
+  "904176964": {
+    "name": "Incubation Shell",
+    "description": "Cryptarchs still have no idea where Vex come from, or how they came to be.",
+    "icon": "/common/destiny_content/icons/cb4dede551c881360f1ad0c1ac13a30d.jpg",
+    "tierType": 5
+  },
+  "904176965": {
+    "name": "Judgment of Mars",
+    "description": "Cryptarchs say this orb is our first clue toward the identity of the Cabal commander leading the siege of Mars.",
+    "icon": "/common/destiny_content/icons/6ca107b49386e346f2411b1f5d84f6a5.jpg",
+    "tierType": 5
+  },
+  "904176966": {
+    "name": "Firebreak Eternal",
+    "description": "A piece of the Fire Victorious, the ever-burning flame of the Titan Firebreak order.",
+    "icon": "/common/destiny_content/icons/f729755f6e7616230f539c4ab3a40727.jpg",
+    "tierType": 5
+  },
+  "904176967": {
+    "name": "Stoneborn Relic",
+    "description": "A piece of the City's first Wall, carved into the shape of the sigil of the Titan Stoneborn order.",
+    "icon": "/common/destiny_content/icons/4c65cd35a1faa7c87d93bcee97d3ef93.jpg",
+    "tierType": 5
+  },
+  "907343237": {
+    "name": "Rainbow Blade",
+    "description": "The beauty of this sacrificial weapon belies the deadliness of its infinitesimally sharp edge.",
+    "icon": "/common/destiny_content/icons/3674936ab2fb0db8681ab8327b0aebc0.jpg",
+    "tierType": 5
+  },
+  "907343238": {
+    "name": "Hezen Totem",
+    "description": "Can a machine change its ways? Any more or less than a human can?",
+    "icon": "/common/destiny_content/icons/1d73f86f6a3a1db71595f1725e357df6.jpg",
+    "tierType": 5
+  },
+  "907343239": {
+    "name": "Prismatic Heart",
+    "description": "\"You must learn to tease apart the hues of your own heart.\" —Parables of the Allspring",
+    "icon": "/common/destiny_content/icons/e8403f454836f6b6a80dde8c1a38484b.jpg",
+    "tierType": 5
+  },
   "909225554": {
     "name": "Peregrine Greaves",
     "description": "Victory from on high.",
@@ -3097,6 +3295,42 @@ var DestinyArmorDefinition = {
     "name": "Elector's Heart",
     "description": "They will know you fight not for yourself, but for the people's will.",
     "icon": "/common/destiny_content/icons/5be2f1a618acceae6b84cdccf15cccd8.jpg",
+    "tierType": 5
+  },
+  "1040215528": {
+    "name": "Vanguard Shell",
+    "description": "This shell marks the Ghost as a trusted instrument of the Guardian Vanguard.",
+    "icon": "/common/destiny_content/icons/1f99211f1ec2a756afc332ee638513ac.jpg",
+    "tierType": 5
+  },
+  "1040215529": {
+    "name": "Shipwright Shell",
+    "description": "Sometimes the best way to troubleshoot a faulty NLS drive is to dive in and get your shell dirty.",
+    "icon": "/common/destiny_content/icons/457838e0979963afbaaa32cc7b8a6688.jpg",
+    "tierType": 5
+  },
+  "1040215532": {
+    "name": "Frontier Shell",
+    "description": "Tough, rugged, and defiantly colored - ready to brave the high frontier. Ghosts can self-modify at will.",
+    "icon": "/common/destiny_content/icons/feb2d10df81f6d79a68bf795ac080692.jpg",
+    "tierType": 5
+  },
+  "1040215533": {
+    "name": "Intrusion Shell",
+    "description": "Rigged for eavesdropping, surveillance, and intrusion into unfriendly networks. Ghosts can self-modify at will.",
+    "icon": "/common/destiny_content/icons/29b48d45f1486132d415c8cb57479df3.jpg",
+    "tierType": 5
+  },
+  "1040215534": {
+    "name": "Consensus Shell",
+    "description": "Ghosts who give testimony before the City's great Consensus often remake their shells in this traditional form.",
+    "icon": "/common/destiny_content/icons/dfb56f5b5e214208043ffda0f7ea65ea.jpg",
+    "tierType": 5
+  },
+  "1040215535": {
+    "name": "Foundry Shell",
+    "description": "City's artisans welcome the deep memories and painstaking finesse of the Ghosts.",
+    "icon": "/common/destiny_content/icons/66eeaae255d1f660204852056e80a548.jpg",
     "tierType": 5
   },
   "1050422086": {
@@ -5753,6 +5987,42 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/ca94246b9009d896e062f868157fdfc7.jpg",
     "tierType": 5
   },
+  "2026036808": {
+    "name": "Efrideet's Eye",
+    "description": "Every time she pulled the trigger, an enemy of the City died.",
+    "icon": "/common/destiny_content/icons/d599e3bb10a280c3049e7418e184b53a.jpg",
+    "tierType": 4
+  },
+  "2026036809": {
+    "name": "Pallas Ring",
+    "description": "The Queen of the Reef commissioned these rings for each of the survivors of the Siege of Pallas.",
+    "icon": "/common/destiny_content/icons/ecd82658533a45b6b22f1c19630bfb7a.jpg",
+    "tierType": 4
+  },
+  "2026036812": {
+    "name": "Neural Bezoar",
+    "description": "\"Don't eat that!\" \"…Too late.\"",
+    "icon": "/common/destiny_content/icons/6d2cba43f1bf6c69437425ab7c7f2adf.jpg",
+    "tierType": 4
+  },
+  "2026036813": {
+    "name": "Trinary Star",
+    "description": "\"We were fools to trust this god-machine, this bringer of death and Darkness.\"",
+    "icon": "/common/destiny_content/icons/3dc67cdf70c0b4942c44cd4725c42c48.jpg",
+    "tierType": 4
+  },
+  "2026036814": {
+    "name": "Ahamkara Scale",
+    "description": "\"And that Warlock thought I couldn't do it. Hah!\"",
+    "icon": "/common/destiny_content/icons/b43eff88c8e4f054614c17439eba2d29.jpg",
+    "tierType": 4
+  },
+  "2026036815": {
+    "name": "The Maraid",
+    "description": "The chronicle of Queen Mara Sov of the Awoken, compiled by the Primarchs of the Reef Cryptarchy.",
+    "icon": "/common/destiny_content/icons/e3da26db293efc2bf7ee24e6c4d7d08c.jpg",
+    "tierType": 4
+  },
   "2027496356": {
     "name": "Sinaa Jaguar 2.1",
     "description": "If the enemy flees, run them down. If the enemy strikes back, reposition. Speed is always the answer.",
@@ -6009,6 +6279,24 @@ var DestinyArmorDefinition = {
     "name": "Infinite Lines Boots",
     "description": "\"Every time I look, the Darkness just grows larger.\" —RECORD 345-CHASM-6736",
     "icon": "/common/destiny_content/icons/2ee83e831b7381f2263b304a4da12381.jpg",
+    "tierType": 5
+  },
+  "2125621864": {
+    "name": "Claw of Command",
+    "description": "On the might of your hand does your authority depend.",
+    "icon": "/common/destiny_content/icons/dc54078e265a5504b1c7200eb4b64da2.jpg",
+    "tierType": 5
+  },
+  "2125621866": {
+    "name": "Sootpearl",
+    "description": "These oddly beautiful orbs can sometimes be found sunk into the rot and filth of the Dreadnaught.",
+    "icon": "/common/destiny_content/icons/667a30da87e567aa6a4c724972fbe05d.jpg",
+    "tierType": 5
+  },
+  "2125621867": {
+    "name": "Scroll of Eimin-Tin",
+    "description": "You hold in your hands the last record of a long-dead civilization.",
+    "icon": "/common/destiny_content/icons/994e6a2d2a9ac4b8b6ec85fe65205823.jpg",
     "tierType": 5
   },
   "2129462487": {
@@ -6443,6 +6731,24 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/f2ddea89e683ab113f31a0da43959dc4.jpg",
     "tierType": 4
   },
+  "2238915204": {
+    "name": "Whispering Sphere",
+    "description": "You can't be sure, but you think you've seen Lord Shaxx speaking into a sphere just like this one.",
+    "icon": "/common/destiny_content/icons/81cf6b9be96fafbdab68b92eb9955ca7.jpg",
+    "tierType": 5
+  },
+  "2238915206": {
+    "name": "Hourless Glass",
+    "description": "The sand in this seemingly ancient timepiece will not move, no matter which way you turn it.",
+    "icon": "/common/destiny_content/icons/62c4fdb0f841c43462e18ab6778ab86e.jpg",
+    "tierType": 5
+  },
+  "2238915207": {
+    "name": "Transcendent Eye",
+    "description": "\"You are not the seer. Not yet. You are the one who is seen.\" —Parables of the Allspring",
+    "icon": "/common/destiny_content/icons/b84c1e1616e7d479754b14fbb777ab96.jpg",
+    "tierType": 5
+  },
   "2239662500": {
     "name": "Skorri's Iron Bond",
     "description": "\"Rise above, so that you may lift those below.\"",
@@ -6742,6 +7048,30 @@ var DestinyArmorDefinition = {
     "description": "Guide and protect the new Warlocks you meet on your travels.",
     "icon": "/common/destiny_content/icons/906059d2117562655e3add5e2aa5195b.jpg",
     "tierType": 3
+  },
+  "2360294836": {
+    "name": "Brave Shell",
+    "description": "For Ghosts who have been there since the beginning.",
+    "icon": "/common/destiny_content/icons/70a45f1326e974d09090992a078c485c.jpg",
+    "tierType": 5
+  },
+  "2360294837": {
+    "name": "Dread Explorer Shell",
+    "description": "For Ghosts who scouted the Dreadnaught and lived to tell the tale.",
+    "icon": "/common/destiny_content/icons/9e5ed83406729a14cb56c83a3e5210cf.jpg",
+    "tierType": 5
+  },
+  "2360294838": {
+    "name": "Questing Shell",
+    "description": "For Ghosts who love adventure.",
+    "icon": "/common/destiny_content/icons/99a58641ff4480448474830024b4fc18.jpg",
+    "tierType": 5
+  },
+  "2360294839": {
+    "name": "Pursuer Shell",
+    "description": "For Ghosts who are always chasing the next challenge.",
+    "icon": "/common/destiny_content/icons/7c1598459263f73f76df6e06a3d2977c.jpg",
+    "tierType": 5
   },
   "2360689228": {
     "name": "\"Emerald Light\"",
@@ -7208,6 +7538,54 @@ var DestinyArmorDefinition = {
     "description": "A Warlock's helmet bristles with tiny, precise sensors - each one attuned to an individual nerve in the brain.",
     "icon": "/common/destiny_content/icons/efe4c4abb1cbdb005b3595f8129251f2.jpg",
     "tierType": 2
+  },
+  "2502086552": {
+    "name": "Metropolitan Shell",
+    "description": "For a Ghost of the Last City.",
+    "icon": "/common/destiny_content/icons/045d2e0a48992249102e0d9a47e968fb.jpg",
+    "tierType": 3
+  },
+  "2502086553": {
+    "name": "Weathered Shell",
+    "description": "For Ghosts who have braved the elements.",
+    "icon": "/common/destiny_content/icons/f06f41e73313a365de6d847d9f44a787.jpg",
+    "tierType": 3
+  },
+  "2502086554": {
+    "name": "Standard Shell",
+    "description": "For Ghosts who prefer the classics.",
+    "icon": "/common/destiny_content/icons/57c61c311b2501818ea49699978ba9d2.jpg",
+    "tierType": 3
+  },
+  "2502086555": {
+    "name": "Redux Shell",
+    "description": "For Ghosts who favor a new take on a classic look.",
+    "icon": "/common/destiny_content/icons/3839c9859f9d2aacebb13b0e19afeb1f.jpg",
+    "tierType": 3
+  },
+  "2502086556": {
+    "name": "Ishtar Shell",
+    "description": "For Ghosts who have forged new paths on Venus.",
+    "icon": "/common/destiny_content/icons/8d0b5374d1b67c8a0702f27327cdb20c.jpg",
+    "tierType": 3
+  },
+  "2502086557": {
+    "name": "Meridian Shell",
+    "description": "For Ghosts who have forged new paths on Mars.",
+    "icon": "/common/destiny_content/icons/d3d5f401997cd117f9bce14b7aad2cb0.jpg",
+    "tierType": 3
+  },
+  "2502086558": {
+    "name": "Skywatch Shell",
+    "description": "For Ghosts who have forged new paths in the Cosmodrome.",
+    "icon": "/common/destiny_content/icons/46a6e04b53c67f540868cdcaedbae8dc.jpg",
+    "tierType": 3
+  },
+  "2502086559": {
+    "name": "Mare Cognitum Shell",
+    "description": "For Ghosts who have forged new paths on the Moon.",
+    "icon": "/common/destiny_content/icons/bcb9efe0dc9eb6e07a380cae67dc8b20.jpg",
+    "tierType": 3
   },
   "2504856474": {
     "name": "Kabr's Forceful Greaves",
@@ -7815,6 +8193,54 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/59d20d929387c77f80f5205da684cf78.jpg",
     "tierType": 4
   },
+  "2691519024": {
+    "name": "Turquoise Shell",
+    "description": "For Ghosts with bright personalities.",
+    "icon": "/common/destiny_content/icons/24fa7940502496051d2e3d00df84fa06.jpg",
+    "tierType": 4
+  },
+  "2691519025": {
+    "name": "Bold Red Shell",
+    "description": "For Ghosts who aren't afraid to make themselves a target.",
+    "icon": "/common/destiny_content/icons/48d5912efa21ca9a2245c40ad48497da.jpg",
+    "tierType": 4
+  },
+  "2691519026": {
+    "name": "Winter Sky Shell",
+    "description": "For Ghosts who feel blue.",
+    "icon": "/common/destiny_content/icons/4b315d3f307fb274dd7e109450584775.jpg",
+    "tierType": 4
+  },
+  "2691519027": {
+    "name": "Verdant Shell",
+    "description": "For Ghosts looking to brighten their Guardian's day.",
+    "icon": "/common/destiny_content/icons/4f035e2d9c8e3f02668add28751d0d10.jpg",
+    "tierType": 4
+  },
+  "2691519028": {
+    "name": "Purple Spine Shell",
+    "description": "For ghosts with a \"prickly\" personality.",
+    "icon": "/common/destiny_content/icons/0fe39475399c1c31f72d342b3017289a.jpg",
+    "tierType": 4
+  },
+  "2691519029": {
+    "name": "Blue Spine Shell",
+    "description": "For Ghosts with a sharp tongue.",
+    "icon": "/common/destiny_content/icons/8345ea431c4118b31b550a9d9fa8318f.jpg",
+    "tierType": 4
+  },
+  "2691519030": {
+    "name": "Pale Dawn Shell",
+    "description": "For Ghosts who trust in the Light.",
+    "icon": "/common/destiny_content/icons/521035b586bfc8645f87424c256c4e0f.jpg",
+    "tierType": 4
+  },
+  "2691519031": {
+    "name": "Amethyst Shell",
+    "description": "For Ghosts who are fond of the Reef.",
+    "icon": "/common/destiny_content/icons/4faca245962b4d24dbbdfbded7fcdbef.jpg",
+    "tierType": 4
+  },
   "2702267948": {
     "name": "Takenome Ranger 1.1",
     "description": "\"In the Dark Age, before the safety of the City, before the rise of the Tower, there were only the Rangers.\" —Chiyoko Mey",
@@ -7902,6 +8328,12 @@ var DestinyArmorDefinition = {
     "description": "Ornate armor forged by the Lords of Iron beneath the Iron Banner.",
     "icon": "/common/destiny_content/icons/3e9e03f2dc11f105d48b9ca9cd91cbed.jpg",
     "tierType": 5
+  },
+  "2751204699": {
+    "name": "Generalist Shell",
+    "description": "Born from the Traveler, built of machinery and Light, the Ghost is your companion and faithful guide.",
+    "icon": "/common/destiny_content/icons/a054074a1ea02f9660152d6177b3e3e2.jpg",
+    "tierType": 2
   },
   "2756821693": {
     "name": "Nemesis Plane IV",
@@ -8161,6 +8593,24 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/b5a4aaf3a7547b4c7a837c99236b507c.jpg",
     "tierType": 5
   },
+  "2801714428": {
+    "name": "Jasper Carcanet",
+    "description": "I WAS MIDHA, CONSORT OF STARS. I WILL NOT BE FORGOTTEN.",
+    "icon": "/common/destiny_content/icons/d19f53279a5a3285e965bbd6784bc8ce.jpg",
+    "tierType": 5
+  },
+  "2801714429": {
+    "name": "Thrallskin Drum",
+    "description": "A drum made from the skin of a Hive Thrall. Even when no one is playing it, you can always hear a faint beat.",
+    "icon": "/common/destiny_content/icons/1ba5672672561b7054635527ab9ae031.jpg",
+    "tierType": 5
+  },
+  "2801714430": {
+    "name": "Fist of Eight Moons",
+    "description": "Only in the Ascendant Plane—where a well-defended idea is a reality—do these moons, in this small way, still exist.",
+    "icon": "/common/destiny_content/icons/a3a015ce724686136344cd3f735a0a11.jpg",
+    "tierType": 5
+  },
   "2810003152": {
     "name": "Aura Purge I",
     "description": "Only through many journeys do rough paths become smooth roads.",
@@ -8213,6 +8663,42 @@ var DestinyArmorDefinition = {
     "name": "Commando Custom",
     "description": "Commando tactical rig repurposed for Crucible competition.",
     "icon": "/common/destiny_content/icons/ab1f196fe0f8c4b19d04a408e4972264.jpg",
+    "tierType": 5
+  },
+  "2815148216": {
+    "name": "Parasitic Optic",
+    "description": "\"Listen, I don't know how it works—I just know that it works, okay? No, I'm not worried.\"",
+    "icon": "/common/destiny_content/icons/24aadf36f6db1a5dfa1934df81a5654c.jpg",
+    "tierType": 5
+  },
+  "2815148217": {
+    "name": "Unerring Compass",
+    "description": "Its needle always points toward the Traveler.",
+    "icon": "/common/destiny_content/icons/034471838565690ffdc656ab534358d6.jpg",
+    "tierType": 5
+  },
+  "2815148218": {
+    "name": "Two-Sided Coin",
+    "description": "A Hunter doesn't leave anything to chance.",
+    "icon": "/common/destiny_content/icons/733e0a56b61ce70e5730d85287c2d8da.jpg",
+    "tierType": 5
+  },
+  "2815148219": {
+    "name": "The Pahanin Errata",
+    "description": "The collected sayings, quips and observations by the legendary Hunter Pahanin.",
+    "icon": "/common/destiny_content/icons/edfda7a806c6f3fe6af7dc6e913624ad.jpg",
+    "tierType": 5
+  },
+  "2815148220": {
+    "name": "Butterfly Code",
+    "description": "\"Sensitive dependence between microfunctions,\" reads the inscription. Cryptarchs disagree on whether its origins are from the Vex or Golden Age Mars.",
+    "icon": "/common/destiny_content/icons/0e91eb1901bb30c7177c8543611ed0a2.jpg",
+    "tierType": 5
+  },
+  "2815148221": {
+    "name": "Coyote's Luck",
+    "description": "A relic of the legendary Six Coyotes, the first Hunters to scout the Cosmodrome.",
+    "icon": "/common/destiny_content/icons/7f6d0a0015158516d3317c10fea6e7bb.jpg",
     "tierType": 5
   },
   "2815927676": {
@@ -8947,6 +9433,12 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/c0a4af415a8698400ab0378406ba75a4.jpg",
     "tierType": 3
   },
+  "3072256885": {
+    "name": "Scholar Shell",
+    "description": "For Ghosts who have contributed to the City's knowledge.",
+    "icon": "/common/destiny_content/icons/a3cf3093a1e0c513163fdf9aaaa7a351.jpg",
+    "tierType": 5
+  },
   "3077117500": {
     "name": "Dead Light Wrap",
     "description": "\"Success is not about survival. It is about discovery.\" —Arach Modesta",
@@ -9589,6 +10081,12 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/c9fbb77a95c597791033a067aee64776.jpg",
     "tierType": 5
   },
+  "3311034942": {
+    "name": "Special Delivery",
+    "description": "Guardian,\nThis Ghost shell is an unusual one, and so was the Exo who left it. I believe she meant it for you. \n—Special Orders",
+    "icon": "/common/destiny_content/icons/29b48d45f1486132d415c8cb57479df3.jpg",
+    "tierType": 2
+  },
   "3316745440": {
     "name": "Rogue 4.5",
     "description": "Most Hunters favor a light plate cuirass over the field wire underweave.",
@@ -9797,6 +10295,12 @@ var DestinyArmorDefinition = {
     "name": "Dead Light Greaves",
     "description": "\"When all is shadow, know your journey has begun.\" —Arach Parnell",
     "icon": "/common/destiny_content/icons/fa9d9b1b03ad4b2871e416e430b29f10.jpg",
+    "tierType": 5
+  },
+  "3380876004": {
+    "name": "Competitive Shell",
+    "description": "For Ghosts who stood with their Guardians as they became champions of the Crucible.",
+    "icon": "/common/destiny_content/icons/c7832cce8bcfd5dcf377394c46d56394.jpg",
     "tierType": 5
   },
   "3383355340": {
@@ -10189,6 +10693,12 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/6ee14f6d4dbff1ee4ee01d4e1f3b9dd2.jpg",
     "tierType": 3
   },
+  "3542867423": {
+    "name": "Kingslayer Shell",
+    "description": "For Ghosts who were there when Oryx fell.",
+    "icon": "/common/destiny_content/icons/3f7447d42f6b3ea6cc612b8edb1693ae.jpg",
+    "tierType": 5
+  },
   "3544127854": {
     "name": "Prototype 0.9b",
     "description": "Your Ghost built this wire armor from available mass. It handles life support, but little else.",
@@ -10469,6 +10979,24 @@ var DestinyArmorDefinition = {
     "name": "Aspriet 1.1",
     "description": "Crucible variant. Combines flexible fieldwire with tough fullerene plates.",
     "icon": "/common/destiny_content/icons/198345e422cd4f9d0b1dc18742e07faa.jpg",
+    "tierType": 5
+  },
+  "3654604872": {
+    "name": "Sunscorched Lens",
+    "description": "\"We have mastered the art of shaping and tempering physical Light.\"",
+    "icon": "/common/destiny_content/icons/5d5c0044cb16bc84a44c010e3c145067.jpg",
+    "tierType": 5
+  },
+  "3654604873": {
+    "name": "Wings of Apris-Fol",
+    "description": "\"To you goes the glory and the honor of battle.\" —Fractal Scrolls",
+    "icon": "/common/destiny_content/icons/a8c36137cc802f931eefd02718ef376f.jpg",
+    "tierType": 5
+  },
+  "3654604875": {
+    "name": "Echo of Honor",
+    "description": "\"For he was once of your City, and honored there.\" —Fractal Scrolls",
+    "icon": "/common/destiny_content/icons/933b48c238df943f16e6ab47bfd842aa.jpg",
     "tierType": 5
   },
   "3657704990": {
@@ -10860,6 +11388,42 @@ var DestinyArmorDefinition = {
     "description": "Shielded optics and an armored rebreather for long-duration sorties into the wild.",
     "icon": "/common/destiny_content/icons/4d565b6ac97b81f98f64a062f20c61ce.jpg",
     "tierType": 2
+  },
+  "3807039688": {
+    "name": "Skyburners' Obol",
+    "description": "A coin suspected to be part of a Cabal funerary rite.",
+    "icon": "/common/destiny_content/icons/19db19feb5585620d2585140afbb44de.jpg",
+    "tierType": 4
+  },
+  "3807039689": {
+    "name": "Wei Ning's Cong",
+    "description": "This ancient jade artifact has been in the Hive's possession ever since Wei Ning's heroic death.",
+    "icon": "/common/destiny_content/icons/8d1b03f6fca71c0077714b5964dc8f88.jpg",
+    "tierType": 5
+  },
+  "3807039690": {
+    "name": "Iglatho-Cyu",
+    "description": "Drink, if you dare.",
+    "icon": "/common/destiny_content/icons/1e969fc0f1ff4ffc604f271e4bca739b.jpg",
+    "tierType": 4
+  },
+  "3807039691": {
+    "name": "Cyclopean Enigma",
+    "description": "\"More eyes, more problems. That's what I always say.\"",
+    "icon": "/common/destiny_content/icons/caed9919edcaca1617b0a55d70fe7a09.jpg",
+    "tierType": 4
+  },
+  "3807039694": {
+    "name": "Scales of Eao",
+    "description": "WE STAND UPON OUR OWN UNENDING DEATHS.",
+    "icon": "/common/destiny_content/icons/b1b723a2c6bc29c45198ac321098658c.jpg",
+    "tierType": 5
+  },
+  "3807039695": {
+    "name": "Vell Tarlowe's Vigil",
+    "description": "His Light is gone, but his memory remains.",
+    "icon": "/common/destiny_content/icons/4ec25f317d4910fead5c17db6ec1067d.jpg",
+    "tierType": 5
   },
   "3812790140": {
     "name": "Enigma Burn III",
@@ -11601,6 +12165,42 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/e7862281f144db23aa03ba78dcd089c8.jpg",
     "tierType": 4
   },
+  "4023667584": {
+    "name": "Warp Fragment",
+    "description": "This piece of Golden Age technology is covered in particulate originating from beyond our solar system.",
+    "icon": "/common/destiny_content/icons/f3da71756808cf1eeda5953873ffe96b.jpg",
+    "tierType": 5
+  },
+  "4023667585": {
+    "name": "Sisyphus Project",
+    "description": "\"Clovis refuses to back down. Meanwhile, the others have taken to calling it 'the Sisyphus Project'…\" — laboratory notes found at a Clovis Bray facility",
+    "icon": "/common/destiny_content/icons/5bc5e391c45b96f36e6a9f5deaa4528c.jpg",
+    "tierType": 5
+  },
+  "4023667586": {
+    "name": "Flamel Crest",
+    "description": "Anything can be anything else, if only you will it so.",
+    "icon": "/common/destiny_content/icons/bb52c20b027c71b37bdbd82aa25a79b0.jpg",
+    "tierType": 5
+  },
+  "4023667587": {
+    "name": "Thanatonaut's Lullaby",
+    "description": "Makes the passage just that much easier.",
+    "icon": "/common/destiny_content/icons/8162ccafb6f005508824ee21489df793.jpg",
+    "tierType": 5
+  },
+  "4023667590": {
+    "name": "Specimen Twelve",
+    "description": "Running hot with the effort of simulating not one group of scientists, but two hundred and twenty-seven.",
+    "icon": "/common/destiny_content/icons/60c925677af0cf205708a9947d8cf93d.jpg",
+    "tierType": 5
+  },
+  "4023667591": {
+    "name": "Oddly Colored Cube",
+    "description": "\"Gallida died to bring these cubes back from Venus and I still don't know why.\" —Despoina Kore",
+    "icon": "/common/destiny_content/icons/a38480ce96b357d2a1c9d0d806dee2b3.jpg",
+    "tierType": 5
+  },
   "4025430873": {
     "name": "Infinite Lines Helm",
     "description": "\"I saw Darkness. No Light, no Earth, no air. Only Darkness. I...I can't breathe...\" —RECORD 342-CHASM-6827",
@@ -11852,6 +12452,12 @@ var DestinyArmorDefinition = {
     "description": "The Sun used to give us life. Now, staying near the Sun will be our doom.",
     "icon": "/common/destiny_content/icons/81a454819a623d19a493d161be43301b.jpg",
     "tierType": 5
+  },
+  "4158489058": {
+    "name": "Joyride Shell",
+    "description": "For Ghosts that like to feel the wind on their casings.",
+    "icon": "/common/destiny_content/icons/133b292895277b452e4e9533f6f3d58d.jpg",
+    "tierType": 4
   },
   "4159298074": {
     "name": "Oblivion Greaves",
@@ -12206,6 +12812,42 @@ var DestinyArmorDefinition = {
     "description": "\"We called her Verok; it was her and her Thrall that finally overwhelmed him.\" - Eris",
     "icon": "/common/destiny_content/icons/a2112393a7e1b514aa563185c444d896.jpg",
     "tierType": 5
+  },
+  "4275796002": {
+    "name": "Kabr's Pocket Watch",
+    "description": "The tick-tock of this strange watch sometimes feels like a heartbeat.",
+    "icon": "/common/destiny_content/icons/f32bc4fcca71cf3f750ee5854011f5c1.jpg",
+    "tierType": 4
+  },
+  "4275796003": {
+    "name": "Horn of Six Wars",
+    "description": "How many have died with the blast of this horn ringing in their ears?",
+    "icon": "/common/destiny_content/icons/2fc76ac8f34c713406b402a90ee7722e.jpg",
+    "tierType": 4
+  },
+  "4275796004": {
+    "name": "Saint-14's Ring",
+    "description": "\"Was there ever another Guardian so beloved by the people?\" —Paean to Saint-14",
+    "icon": "/common/destiny_content/icons/dc3c95a78144eb1814aa20f9b513bd10.jpg",
+    "tierType": 4
+  },
+  "4275796005": {
+    "name": "Asharru's Hope",
+    "description": "\"I know not why we left the Reef, nor why we live so long, nor even why we are called Awoken. But I hope one day to have answers.\" —Asharru",
+    "icon": "/common/destiny_content/icons/fc255cb4c831d6d4b11fe683377b3564.jpg",
+    "tierType": 4
+  },
+  "4275796006": {
+    "name": "Radegast's Blade",
+    "description": "So long as this sword was whole, the Iron Banner could not be broken.",
+    "icon": "/common/destiny_content/icons/c5eb66818b1df50792ed3ff9da027b57.jpg",
+    "tierType": 4
+  },
+  "4275796007": {
+    "name": "Fortuna Pendant",
+    "description": "A necklace made out of the remains of the asteroid destroyed during the Reef Wars.",
+    "icon": "/common/destiny_content/icons/be22f480e21c5b993831042d4c72680c.jpg",
+    "tierType": 4
   },
   "4279147592": {
     "name": "Agema Type 0",

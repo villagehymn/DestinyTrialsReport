@@ -18,6 +18,8 @@ function getDefinitionsByBucket(bucketHash) {
     case BUCKET_ARMS:           return 'arms';
     case BUCKET_CHEST:          return 'chest';
     case BUCKET_LEGS:           return 'legs';
+    case BUCKET_ARTIFACT:       return 'artifact';
+    case BUCKET_GHOST:          return 'ghost';
   }
 }
 
@@ -78,7 +80,7 @@ angular.module('trialsReportApp')
   .factory('inventoryStats', function () {
     var getData = function (items) {
       var weaponBuckets = [BUCKET_PRIMARY_WEAPON, BUCKET_SPECIAL_WEAPON, BUCKET_HEAVY_WEAPON];
-      var armorBuckets = [BUCKET_HEAD, BUCKET_ARMS, BUCKET_CHEST, BUCKET_LEGS];
+      var armorBuckets = [BUCKET_HEAD, BUCKET_ARMS, BUCKET_CHEST, BUCKET_LEGS, BUCKET_ARTIFACT, BUCKET_GHOST];
       var armors = {
           hazards: []
         }, hasStarfireProtocolPerk = false;
@@ -134,9 +136,12 @@ angular.module('trialsReportApp')
               hasStarfireProtocolPerk = (item.perks[i].perkHash === 3471016318);
             }
           }
+          if (definition.tierType === 6 && item.bucketHash !== BUCKET_ARTIFACT) {
+            bucket = 'exotic'
+          }
           armors[bucket] = {
             'definition': definition,
-            'isExotic': definition.tierType === 6
+            'nodes': item.nodes
           };
         } else if (item.bucketHash === BUCKET_BUILD) {
           definition = setItemDefinition(item, DestinySubclassDefinition);
@@ -150,6 +155,11 @@ angular.module('trialsReportApp')
         }
       }
 
+      //TODO: better way to handle no exotic armor
+      if (!armors.exotic) {
+        armors.exotic = armors.head;
+        delete armors.head;
+      }
       return {
         weapons: weapons,
         armors: armors,

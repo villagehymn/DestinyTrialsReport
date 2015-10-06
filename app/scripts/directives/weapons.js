@@ -5,7 +5,8 @@ angular.module('trialsReportApp')
     return {
       restrict: 'A',
       scope: {
-        weapons: '=weaponNodes'
+        weapons: '=weaponNodes',
+        exoticArmor: '=exoticArmor'
       },
       template: [
         '<div class="row">',
@@ -19,6 +20,24 @@ angular.module('trialsReportApp')
               '</div>',
               '<div class="weapon__perks">',
                 '<div class="weapon-perk" ng-repeat="node in weapon.nodes track by $index" bs-popover="{title:node.name,content:node.description}">',
+                  '<i class="weapon-perk__icon">',
+                    '<img class="img-responsive" ng-src="{{node.icon}}" alt="{{node.name}}">',
+                  '</i>',
+                '</div>',
+              '</div>',
+            '</div>',
+          '</div>',
+
+          '<div class="weapon col-xs-12" ng-if="exoticArmor">',
+            '<div class="weapon__img">',
+              '<img class="img-responsive" ng-src="{{\'https://www.bungie.net\' + exoticArmor.definition.icon}}" alt="{{exoticArmor.definition.name}}">',
+            '</div>',
+            '<div class="weapon__info">',
+              '<div class="weapon__title">',
+                '<span ng-bind="exoticArmor.definition.name"></span>',
+              '</div>',
+              '<div class="weapon__perks">',
+                '<div class="weapon-perk" ng-repeat="node in exoticArmor.nodes track by $index" bs-popover="{title:node.name,content:node.description}">',
                   '<i class="weapon-perk__icon">',
                     '<img class="img-responsive" ng-src="{{node.icon}}" alt="{{node.name}}">',
                   '</i>',
