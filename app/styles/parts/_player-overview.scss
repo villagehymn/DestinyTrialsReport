@@ -6,8 +6,9 @@
 }
 
 .player-header {
-  background-size: auto 114%;
-  background-position: $player-emblem-size top;
+  background-size: cover;
+  background-position: 0 top;
+  background-repeat: no-repeat;
   border-top-left-radius: 1em;
   border-top-right-radius: 1em;
   position: relative;
