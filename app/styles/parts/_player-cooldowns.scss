@@ -2,6 +2,7 @@
   text-transform: uppercase;
   font-family: 'Roboto Condensed';
   color: #666;
+  margin-bottom: .3em;
 }
 
 .player-cooldown__nr .progress {
@@ -24,8 +25,12 @@
 }
 
 .player-cooldown__tier {
-  display: inline-block;
+  float: left;
   width: 20%;
+
+  &.is-half-full .progress .progress-bar-primary {
+    background: lighten(#607D8B, 20%);
+  }
 }
 
 .player-cooldown__tier + .player-cooldown__tier {

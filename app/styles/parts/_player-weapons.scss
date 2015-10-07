@@ -34,8 +34,8 @@
       border-color: transparent darken($equipped-background, 8%);
     }
 
-    .weapon:nth-child(4) & {
-      border-color: transparent darken($equipped-background, 8%);
+    .weapon.armor & {
+      border-color: transparent darken($equipped-background, 9%);
     }
   }
 
@@ -56,8 +56,8 @@
       border-color: transparent darken($equipped-background, 10%);
     }
 
-    .weapon:nth-child(4) & {
-      border-color: transparent darken($equipped-background, 10%);
+    .weapon.armor & {
+      border-color: transparent darken($equipped-background, 6%);
     }
   }
 }
@@ -89,4 +89,12 @@
   float: left;
   height: 1.5em;
   width: 1.5em;
+}
+
+.weapon__label {
+  font-size: .8em;
+  margin-top: -.5em;
+  text-transform: uppercase;
+  color: lighten(#333, 40%);
+  font-family: 'Roboto Condensed';
 }

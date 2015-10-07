@@ -157,8 +157,7 @@ angular.module('trialsReportApp')
 
       //TODO: better way to handle no exotic armor
       if (!armors.exotic) {
-        armors.exotic = armors.head;
-        delete armors.head;
+        armors.exotic = null;
       }
       return {
         weapons: weapons,
