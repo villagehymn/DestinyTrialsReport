@@ -28,7 +28,7 @@ angular.module('trialsReportApp')
               '<div class="weapon__label" ng-if="!hasExotic && !exoticArmor.hazard">',
                 'No exotic armor equipped',
               '</div>',
-              '<div class="weapon__label" ng-bind="exoticArmor.hazard">',
+              '<div class="weapon__label" ng-repeat="hazard in exoticArmor.hazards" ng-bind="hazard">',
               '</div>',
             '</div>',
           '</div>',
