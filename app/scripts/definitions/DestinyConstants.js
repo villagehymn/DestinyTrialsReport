@@ -144,9 +144,9 @@ var hazardDoubleGrenadeByPerk = {
 };
 
 var hazardBurnDefense = {
-  1723656171: 'Solar',
-  2095340230: 'Void',
-  539512168: 'Arc'
+  1723656171: 'Solar Burn Res',
+  2095340230: 'Void Burn Res',
+  539512168: 'Arc Burn Res'
 };
 
 var hazardIncreasedArmor = {

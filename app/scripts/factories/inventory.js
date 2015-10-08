@@ -3,15 +3,19 @@
 
 'use strict';
 
-function setHazard(perkHash, items) {
-  if (hazardQuickRevive.indexOf(perkHash) > -1) {
-    items.hazards.push('Quick Revive');
+function setHazard(perkHash, object, constant) {
+  var hazard;
+  if (angular.isString(constant)) {
+    hazard = constant;
+  } else {
+    hazard = constant[perkHash];
   }
-  if (hazardGrenadeOnSpawn.indexOf(perkHash) > -1) {
-    items.hazards.push('Grenade on Spawn');
-  }
-  if (hazardDoubleGrenade.indexOf(perkHash) > -1) {
-    items.hazards.push('Double Grenade');
+  if (hazard) {
+    if (angular.isArray(object)) {
+      object.push(hazard);
+    } else {
+      object = hazard;
+    }
   }
 }
 
@@ -39,9 +43,7 @@ function defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame) {
         subclass.grenadeHash = subclass.nodes[s].nodeStepHash;
         break;
       case 2:
-        if (subclass.nodes[s].nodeStepHash === 3452380660) {
-          subclass.blink = true;
-        }
+        subclass.blink = subclass.nodes[s].nodeStepHash === 3452380660;
         break;
       case 3:
         if (subclass.nodes[s].row === 0) {
@@ -57,15 +59,11 @@ function defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame) {
         break;
       case 6:
         subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
-        if (subclass.nodes[s].nodeStepHash == VIKING_FUNERAL) {
-          hasVikingFuneral = true;
-        }
+        hasVikingFuneral = subclass.nodes[s].nodeStepHash == VIKING_FUNERAL;
         break;
       case 8:
         subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
-        if (subclass.nodes[s].nodeStepHash == TOUCH_OF_FLAME) {
-          hasTouchOfFlame = true;
-        }
+        hasTouchOfFlame = subclass.nodes[s].nodeStepHash == TOUCH_OF_FLAME;
         break;
     }
   }
@@ -79,11 +77,54 @@ function setItemDefinition(item, definition) {
   }
 }
 
+function setArmorHazards(armors, itemPerk, weapons) {
+  armors.doubleGrenadeHash = hazardDoubleGrenadeByPerk[itemPerk.perkHash];
+  setHazard(itemPerk.perkHash, armors.equipped.hazards, hazardMiscArmorPerks);
+  setHazard(itemPerk.perkHash, armors.equipped.increasedArmor, hazardIncreasedArmor);
+  setHazard(itemPerk.perkHash, armors.hazards, hazardBurnDefense);
+  if (itemPerkToBucket[itemPerk.perkHash]) {
+    weapons[itemPerkToBucket[itemPerk.perkHash]].hazards.push("Increased Reload");
+  } else {
+    var reloadPerk = reloadPerksToItemType[itemPerk.perkHash];
+    if (reloadPerk) {
+      var tempItem = weapons[itemTypeToBucket[reloadPerk]];
+      if (tempItem.definition.subType === reloadPerk) {
+        tempItem.hazards.push("Increased Reload");
+      }
+    }
+  }
+}
+
+function setWeaponHazards(item, weapons, bucket, definition) {
+  for (var w = 0; w < item.perks.length; w++) {
+    var itemPerk = item.perks[w];
+    if (itemPerk.isActive) {
+      setHazard(itemPerk.perkHash, weapons[bucket].hazards, hazardMiscWeaponPerks);
+    }
+  }
+  if ((definition.subType === 12)) {
+    for (var s = 0; s < item.stats.length; s++) {
+      if (item.stats[s].statHash === STAT_BASE_DAMAGE && item.stats[s].value > 20) {
+        //if ((item.primaryStat.value * item.stats[i].value) > 8577) {
+        if (weapons[bucket].hazards.length > 1) {
+          weapons[bucket].hazards[1] = 'Revive Kill';
+        } else {
+          weapons[bucket].hazards.push('Revive Kill');
+        }
+        //}
+      }
+    }
+  } else if (definition.subType === 7) {
+    weapons.shotgun = true;
+  }
+}
+
 angular.module('trialsReportApp')
   .factory('inventoryStats', function () {
     var getData = function (items) {
       var weaponBuckets = [BUCKET_PRIMARY_WEAPON, BUCKET_SPECIAL_WEAPON, BUCKET_HEAVY_WEAPON];
       var armorBuckets = [BUCKET_HEAD, BUCKET_ARMS, BUCKET_CHEST, BUCKET_LEGS, BUCKET_ARTIFACT, BUCKET_GHOST, BUCKET_CLASS_ITEM];
+      var itemPerk;
       var armors = {
           hazards: [],
           equipped: {
@@ -124,54 +165,13 @@ angular.module('trialsReportApp')
           definition = setItemDefinition(item, DestinyWeaponDefinition);
           weapons[bucket].definition = definition;
           weapons[bucket].nodes = item.nodes;
-          for (var i = 0; i < item.perks.length; i++) {
-            if (item.perks[i].isActive) {
-              if (hazardMiscWeaponPerks[item.perks[i].perkHash]) {
-                weapons[bucket].hazards.push(hazardMiscWeaponPerks[item.perks[i].perkHash]);
-              }
-            }
-          }
-          if ((definition.subType === 12)) {
-            for (var i = 0; i < item.stats.length; i++) {
-              if (item.stats[i].statHash === STAT_BASE_DAMAGE && item.stats[i].value > 20) {
-                //if ((item.primaryStat.value * item.stats[i].value) > 8577) {
-                if (weapons[bucket].hazards.length > 1){
-                  weapons[bucket].hazards[1] = 'Revive Kill';
-                } else {
-                  weapons[bucket].hazards.push('Revive Kill');
-                }
-                //}
-              }
-            }
-          } else if (definition.subType === 7) {
-            weapons.shotgun = true;
-          }
+          setWeaponHazards(item, weapons, bucket, definition);
         } else if (armorBuckets.indexOf(item.bucketHash) > -1) {
           definition = setItemDefinition(item, DestinyArmorDefinition);
-          for (var i = 0; i < item.perks.length; i++) {
-            if (item.perks[i].isActive) {
-              //setHazard(item.perks[i].perkHash, armors);
-              armors.doubleGrenadeHash = hazardDoubleGrenadeByPerk[item.perks[i].perkHash];
-              if (hazardMiscArmorPerks[item.perks[i].perkHash]) {
-                armors.equipped.hazards.push(hazardMiscArmorPerks[item.perks[i].perkHash]);
-              }
-              if (hazardIncreasedArmor[item.perks[i].perkHash]) {
-                armors.equipped.increasedArmor = hazardIncreasedArmor[item.perks[i].perkHash];
-              }
-              if (hazardBurnDefense[item.perks[i].perkHash]) {
-                armors.hazards.push(hazardBurnDefense[item.perks[i].perkHash] + ' Burn Res');
-              }
-              if (itemPerkToBucket[item.perks[i].perkHash]) {
-                weapons[itemPerkToBucket[item.perks[i].perkHash]].hazards.push("Increased Reload");
-              } else {
-                var reloadPerk = reloadPerksToItemType[item.perks[i].perkHash];
-                if (reloadPerk) {
-                  var tempItem = weapons[itemTypeToBucket[reloadPerk]];
-                  if (tempItem.definition.subType === reloadPerk) {
-                    tempItem.hazards.push("Increased Reload");
-                  }
-                }
-              }
+          for (var a = 0; a < item.perks.length; a++) {
+            itemPerk = item.perks[a];
+            if (itemPerk.isActive) {
+              setArmorHazards(armors, itemPerk, weapons);
             }
           }
           if (definition.tierType === 6 && item.bucketHash !== BUCKET_CLASS_ITEM) {
@@ -189,9 +189,9 @@ angular.module('trialsReportApp')
           subclass.definition.itemHash = item.itemHash;
           defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame);
         }
-        if ((subclass.grenadeHash === FIREBOLT_GRENADE) && hasVikingFuneral && hasTouchOfFlame) {
-          subclass.hazards.push('Superburn Grenade');
-        }
+      }
+      if ((subclass.grenadeHash === FIREBOLT_GRENADE) && hasVikingFuneral && hasTouchOfFlame) {
+        subclass.hazards.push('Superburn Grenade');
       }
       if (armors.equipped.increasedArmor) {
         if (armors.equipped.increasedArmor.indexOf(subclass.definition.itemHash) > -1) {
