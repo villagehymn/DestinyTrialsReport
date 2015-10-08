@@ -24,6 +24,9 @@ angular.module('trialsReportApp')
                   '</i>',
                 '</div>',
               '</div>',
+              '<div class="weapon__label" ng-if="weapon.increasedReload">',
+                'Faster Reload',
+              '</div>',
             '</div>',
           '</div>'
       ].join('')
