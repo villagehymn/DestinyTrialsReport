@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger) {
+  .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams) {
     $scope.mapModal = {
       content: $sce.trustAsHtml(
         '<div class="map-modal">' +
@@ -12,9 +12,21 @@ angular.module('trialsReportApp')
       )
     };
 
-    $scope.searchMainPlayerbyName = function (name, platform) {
+    if ($routeParams.playerName) {
+      $scope.searchedPlayer = $routeParams.playerName;
+    }
+
+    $scope.togglePlatform = function () {
+      $scope.platformValue = !$scope.platformValue;
+    };
+
+    $scope.searchMainPlayerbyName = function (name) {
       if (angular.isDefined(name)) {
-        $location.path((platform ? '/ps/' : '/xbox/') + name);
+        $location.path(($scope.platformValue ? '/ps/' : '/xbox/') + name);
+      } else {
+        if (angular.isDefined($scope.searchedPlayer)) {
+          $location.path(($scope.platformValue ? '/ps/' : '/xbox/') + $scope.searchedPlayer);
+        }
       }
     };
 
@@ -33,7 +45,7 @@ angular.module('trialsReportApp')
       if (angular.isUndefined(name)) {
         return;
       }
-      var url = '/Platform/Destiny/SearchDestinyPlayer/' + (platform ? 2 : 1) + '/' + name + '/';
+      var url = '/Platform/Destiny/SearchDestinyPlayer/' + ($scope.platformValue ? 2 : 1) + '/' + name + '/';
       return currentAccount.getAccount(url)
         .then(function (player) {
           player.isTeammate = true;

@@ -10,23 +10,35 @@ function getFromParams(currentAccount, $route, $q) {
     var getPlayer = function (url) {
         return currentAccount.getAccount(url + $route.current.params.playerName + '/')
           .then(function (result) {
-            var player = result;
-            player.searched = true;
-            player.myProfile = subdomain === 'my';
-            return currentAccount.getPlayerCard(player);
+            if (result) {
+              var player = result;
+              player.searched = true;
+              player.myProfile = subdomain === 'my';
+              return currentAccount.getPlayerCard(player);
+            } else {
+              return false;
+            }
           });
       },
       teammatesInParallel = function (player) {
-        var methods = [player];
-        angular.forEach(player.fireTeam, function (teammate) {
-          methods.push(currentAccount.getCharacters(teammate.membershipType, teammate.membershipId, teammate.name));
-        });
-        return $q.all(methods);
+        if (player) {
+          var methods = [player];
+          angular.forEach(player.fireTeam, function (teammate) {
+            methods.push(currentAccount.getCharacters(teammate.membershipType, teammate.membershipId, teammate.name));
+          });
+          return $q.all(methods);
+        } else {
+          return false;
+        }
       },
       returnPlayer = function (results) {
-        var player = results[0];
-        player.fireTeam = [results[1], results[2]];
-        return [player];
+        if (results) {
+          var player = results[0];
+          player.fireTeam = [results[1], results[2]];
+          return [player];
+        } else {
+          return [];
+        }
       },
       reportProblems = function (fault) {
         console.log(String(fault));
