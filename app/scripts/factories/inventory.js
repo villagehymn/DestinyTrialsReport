@@ -168,7 +168,7 @@ angular.module('trialsReportApp')
             armors.equipped.definition = definition;
             armors.equipped.nodes = item.nodes;
           }
-          if (!armors.equipped && item.bucketHash === BUCKET_HEAD) {
+          if (!armors.equipped.definition && item.bucketHash === BUCKET_HEAD) {
             armors.equipped.definition = definition;
             armors.equipped.nodes = item.nodes;
           }
