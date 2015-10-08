@@ -98,11 +98,15 @@ function extractDB(dbFile) {
     });
 
     // Sleeper Simulant
-    DestinyWeaponDefinition[3012398149] = {
-      name: 'Sleeper Simulant',
-      icon: '/common/destiny_content/icons/9be72c64fdd81ccd068e766365cd38c6.jpg',
-      subType: 11
-    };
+    if (!(3012398149 in DestinyWeaponDefinition)) {
+      DestinyWeaponDefinition[3012398149] = {
+        name: 'Sleeper Simulant',
+        icon: '/common/destiny_content/icons/9be72c64fdd81ccd068e766365cd38c6.jpg',
+        subType: 11
+      };
+    } else {
+      console.log('Sleeper Simulant now exists in the manifest file and the override can be removed.');
+    }
 
     writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
     writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
