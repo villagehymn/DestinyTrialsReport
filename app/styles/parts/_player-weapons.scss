@@ -62,6 +62,17 @@
   }
 }
 
+.armor__img {
+  position: relative;
+  flex-shrink: 0;
+  width: 5em;
+  height: 5em;
+
+  img {
+    border-radius: 5px;
+  }
+}
+
 .weapon__title {
   margin-bottom: .4em;
 }

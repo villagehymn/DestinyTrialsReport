@@ -189,9 +189,6 @@ angular.module('trialsReportApp')
       if (inv.subclass.blink && inv.weapons.shotgun) {
         player.inventory.weapons.hazards.push('Blink Shotgun');
       }
-      if (inv.hasFusionGrenade && inv.hasStarfireProtocolPerk) {
-        player.inventory.armors.hazards.push('Double Grenade');
-      }
       return player;
     };
 

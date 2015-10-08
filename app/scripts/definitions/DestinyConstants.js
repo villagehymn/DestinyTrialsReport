@@ -47,6 +47,18 @@ var TRIPMINE_GRENADE = 455260043;
 var AXION_GRENADE = 243660113;
 var SKIP_GRENADE = 328872098;
 
+// Subclass Definitions
+
+var SUNSINGER_CLASS = 3658182170;
+var VOIDWALKER_CLASS = 3828867689;
+var BLADEDANCER_CLASS = 2962927168;
+var SUNBREAKER_CLASS = 21395672; //or 21395673
+var NIGHTSTALKER_CLASS = 151296639; //or 151296640
+var STORMCALLER_CLASS = 1256644900; //or 1256644901
+var GUNSLINGER_CLASS = 1716862031;
+var STRIKER_CLASS = 2455559914;
+var DEFENDER_CLASS = 2007186000;
+
 // Armor perks for hazards
 
 var hazardQuickRevive = [
@@ -67,6 +79,59 @@ var hazardDoubleGrenade = [
   2978872641 // The Armamentarium (Titan)
 ];
 
+var hazardDoubleMelee = [
+  405554470,
+  1318675793,
+  2340078883,
+  2783259970,
+  3406171126
+];
+
+hazardMiscArmorPerks = {
+  40760096: 'Quick Revive',
+  2682002320: 'Quick Revive',
+  3821972036: 'Quick Revive',
+  1190369844: 'Quick Revive',
+  1509404812: 'Quick Revive',
+  1760211262: 'Quick Revive',
+  2978872641: 'Double Grenade',
+  2289894117: 'Grenade on Spawn',
+  2671461052: 'Grenade on Spawn',
+  2819174431: 'Grenade on Spawn',
+  405554470: 'Double Melee',
+  1318675793: 'Double Melee',
+  2340078883: 'Double Melee',
+  2783259970: 'Double Melee',
+  3406171126: 'Double Melee'
+};
+
+hazardMiscWeaponPerks = {
+  77746637:   'Kills Grant Tracking',
+  431159510:  'Third Eye',
+  770631416:  'Third Eye',
+  1485291076: 'Final Round (Burst)',
+  1568304667: 'Luck in Chamber',
+  2758635242: 'Increased Radar Resolution',
+  3464328064: 'Bonus Damage when Surrounded',
+  3505787429: 'Highlights Enemies',
+  3752206822: 'Final Round',
+  3921735041: 'Final Round',
+  315800403:  'Precision Hits Return Ammo',
+  661681055:  'Body Shots Increase Precision Damage',
+  1026458383: 'Kills While Wounded Regen Health',
+  1279198574: 'Better Rate of Fire if Super Charged',
+  1843659180: 'Increased Precision Damage',
+  4271995221: 'Increased Precision Damage',
+  2047535886: 'Bonus Melee Damage After Shooting',
+  2417835318: 'Regen Health After Kill',
+  2566491829: 'Bonus Precision Damage',
+  3523239750: 'Faster Reload when Last Standing',
+  3911170550: 'Firefly',
+  3031234337: 'Increased Stats when Behind Cover',
+  3695773985: 'Camouflage while aiming',
+  3369212512: 'Precision Kills Blind (Chance)'
+};
+
 var hazardDoubleGrenadeByPerk = {
   280851997: SCATTER_GRENADE,
   4109126941: SCATTER_GRENADE,
@@ -78,6 +143,17 @@ var hazardDoubleGrenadeByPerk = {
   1617397024: SKIP_GRENADE
 };
 
+var hazardBurnDefense = {
+  1723656171: 'Solar',
+  2095340230: 'Void',
+  539512168: 'Arc'
+};
+
+var hazardIncreasedArmor = {
+  3944665868: [BLADEDANCER_CLASS, STORMCALLER_CLASS, STRIKER_CLASS],
+  671224739:  [SUNSINGER_CLASS, SUNBREAKER_CLASS, GUNSLINGER_CLASS],
+  1028572792: [VOIDWALKER_CLASS, NIGHTSTALKER_CLASS, DEFENDER_CLASS]
+};
 
 var RELOAD_PRIMARY = 1844502900;
 var RELOAD_SPECIAL = 765056859;
@@ -99,7 +175,7 @@ var itemPerkToBucket = {
   1844502900: 'primary',
   765056859: 'special',
   1094584227: 'heavy'
-}
+};
 
 var reloadPerksToItemType = {
   2129333927:   14,
@@ -152,15 +228,6 @@ var weaponKills = {
   weaponKillsSideArm: 'Sidearm',
   weaponKillsSword: 'Sword'
 };
-
-// Subclass Definitions
-
-var SUNSINGER_CLASS = 3658182170;
-var VOIDWALKER_CLASS = 3828867689;
-var BLADEDANCER_CLASS = 2962927168;
-var SUNBREAKER_CLASS = 21395672; //or 21395673
-var NIGHTSTALKER_CLASS = 151296639; //or 151296640
-var STORMCALLER_CLASS = 1256644900; //or 1256644901
 
 // Class nodes definitions
 var VIKING_FUNERAL = 2443566286;

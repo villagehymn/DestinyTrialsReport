@@ -30,18 +30,13 @@ function getDefinitionsByBucket(bucketHash) {
   }
 }
 
-function defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasVikingFuneral, hasTouchOfFlame) {
+function defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame) {
   for (var s = 0; s < subclass.nodes.length; s++) {
     switch (subclass.nodes[s].column) {
       case 1:
         subclass.abilities.weaponKillsGrenade = subclass.nodes[s];
         subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
         subclass.grenadeHash = subclass.nodes[s].nodeStepHash;
-        if (subclass.nodes[s].nodeStepHash == FIREBOLT_GRENADE) {
-          hasFireboltGrenade = true;
-        } else if (subclass.nodes[s].nodeStepHash == FUSION_GRENADE) {
-          hasFusionGrenade = true;
-        }
         break;
       case 2:
         if (subclass.nodes[s].nodeStepHash === 3452380660) {
@@ -90,8 +85,9 @@ angular.module('trialsReportApp')
       var weaponBuckets = [BUCKET_PRIMARY_WEAPON, BUCKET_SPECIAL_WEAPON, BUCKET_HEAVY_WEAPON];
       var armorBuckets = [BUCKET_HEAD, BUCKET_ARMS, BUCKET_CHEST, BUCKET_LEGS, BUCKET_ARTIFACT, BUCKET_GHOST, BUCKET_CLASS_ITEM];
       var armors = {
-          hazards: []
-        }, hasStarfireProtocolPerk = false;
+          hazards: [],
+          equipped: {}
+        };
       var weapons = {
         primary: {},
         special: {},
@@ -111,8 +107,7 @@ angular.module('trialsReportApp')
         blink: false
       };
 
-      var hasFireboltGrenade = false, hasFusionGrenade = false,
-        hasVikingFuneral = false, hasTouchOfFlame = false;
+      var hasVikingFuneral = false, hasTouchOfFlame = false;
 
       for (var n = 0; n < items.length; n++) {
         var item = items[n], bucket = getDefinitionsByBucket(item.bucketHash);
@@ -123,12 +118,19 @@ angular.module('trialsReportApp')
             'definition': definition,
             'nodes': item.nodes
           };
+          for (var i = 0; i < item.perks.length; i++) {
+            if (item.perks[i].isActive) {
+              if (hazardMiscWeaponPerks[item.perks[i].perkHash]) {
+                weapons[bucket].hazard = hazardMiscWeaponPerks[item.perks[i].perkHash];
+              }
+            }
+          }
           if ((definition.subType === 12)) {
             for (var i = 0; i < item.stats.length; i++) {
-              if (item.stats[i].statHash === STAT_BASE_DAMAGE && item.stats[i].value > 16) {
-                if ((item.primaryStat.value * item.stats[i].value) > 8577) {
+              if (item.stats[i].statHash === STAT_BASE_DAMAGE && item.stats[i].value > 20) {
+                //if ((item.primaryStat.value * item.stats[i].value) > 8577) {
                   weapons.hazards.push('Revive Kill Sniper');
-                }
+                //}
               }
             }
           } else if (definition.subType === 7) {
@@ -138,54 +140,63 @@ angular.module('trialsReportApp')
           definition = setItemDefinition(item, DestinyArmorDefinition);
           for (var i = 0; i < item.perks.length; i++) {
             if (item.perks[i].isActive) {
-              setHazard(item.perks[i].perkHash, armors);
-              hasStarfireProtocolPerk = (item.perks[i].perkHash === 3471016318);
+              //setHazard(item.perks[i].perkHash, armors);
               armors.doubleGrenadeHash = hazardDoubleGrenadeByPerk[item.perks[i].perkHash];
+              if (hazardMiscArmorPerks[item.perks[i].perkHash]) {
+                armors.equipped.hazard = hazardMiscArmorPerks[item.perks[i].perkHash];
+              }
+              if (hazardIncreasedArmor[item.perks[i].perkHash]) {
+                armors.equipped.increasedArmor = hazardIncreasedArmor[item.perks[i].perkHash];
+              }
+              if (hazardBurnDefense[item.perks[i].perkHash]) {
+                armors.hazards.push(hazardBurnDefense[item.perks[i].perkHash] + ' Burn Res');
+              }
               if (itemPerkToBucket[item.perks[i].perkHash]) {
-                weapons[itemPerkToBucket[item.perks[i].perkHash]].increasedReload = true;
+                weapons[itemPerkToBucket[item.perks[i].perkHash]].hazard = "Increased Reload";
               } else {
                 var reloadPerk = reloadPerksToItemType[item.perks[i].perkHash];
                 if (reloadPerk) {
                   var tempItem = weapons[itemTypeToBucket[reloadPerk]];
-                  tempItem.increasedReload = (tempItem.definition.subType === reloadPerk);
+                  if (tempItem.definition.subType === reloadPerk) {
+                    tempItem.hazard = "Increased Reload";
+                  }
                 }
               }
             }
           }
           if (definition.tierType === 6 && item.bucketHash !== BUCKET_CLASS_ITEM) {
-            armors.equipped = {
-              'definition': definition,
-              'nodes': item.nodes
-            };
+            armors.equipped.definition = definition;
+            armors.equipped.nodes = item.nodes;
           }
           if (!armors.equipped && item.bucketHash === BUCKET_HEAD) {
-            armors.equipped = {
-              'definition': definition,
-              'nodes': item.nodes
-            };
+            armors.equipped.definition = definition;
+            armors.equipped.nodes = item.nodes;
           }
         } else if (item.bucketHash === BUCKET_BUILD) {
           definition = setItemDefinition(item, DestinySubclassDefinition);
           subclass.nodes = item.nodes;
           subclass.definition = definition;
-          defineAbilities(subclass, hasFireboltGrenade, hasFusionGrenade, hasVikingFuneral, hasTouchOfFlame);
+          subclass.definition.itemHash = item.itemHash;
+          defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame);
         }
-
-        if (armors.doubleGrenadeHash) {
-          if (armors.doubleGrenadeHash ===  subclass.grenadeHash) {
-            armors.hazards.push('Double Grenade');
-          }
-        }
-        if (hasFireboltGrenade && hasVikingFuneral && hasTouchOfFlame) {
+        if ((subclass.grenadeHash === FIREBOLT_GRENADE) && hasVikingFuneral && hasTouchOfFlame) {
           subclass.hazards.push('Superburn Grenade');
+        }
+      }
+      if (armors.equipped.increasedArmor) {
+        if (armors.equipped.increasedArmor.indexOf(subclass.definition.itemHash) > -1) {
+          armors.hazards.push('Increased Armor');
+        }
+      }
+      if (armors.doubleGrenadeHash) {
+        if (armors.doubleGrenadeHash === subclass.grenadeHash) {
+          armors.hazards.push('Double Grenade');
         }
       }
       return {
         weapons: weapons,
         armors: armors,
-        subclass: subclass,
-        hasStarfireProtocolPerk: hasStarfireProtocolPerk,
-        hasFusionGrenade: hasFusionGrenade
+        subclass: subclass
       };
     };
 
