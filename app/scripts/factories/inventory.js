@@ -82,13 +82,14 @@ function setArmorHazards(armors, itemPerk, weapons) {
   setHazard(itemPerk.perkHash, armors.equipped.hazards, hazardMiscArmorPerks);
   setHazard(itemPerk.perkHash, armors.equipped.increasedArmor, hazardIncreasedArmor);
   setHazard(itemPerk.perkHash, armors.hazards, hazardBurnDefense);
+
   if (itemPerkToBucket[itemPerk.perkHash]) {
     weapons[itemPerkToBucket[itemPerk.perkHash]].hazards.push("Increased Reload");
   } else {
-    var reloadPerk = reloadPerksToItemType[itemPerk.perkHash];
-    if (reloadPerk) {
-      var tempItem = weapons[itemTypeToBucket[reloadPerk]];
-      if (tempItem.definition.subType === reloadPerk) {
+    var itemType = reloadPerksToItemType[itemPerk.perkHash];
+    if (itemType) {
+      var tempItem = weapons[itemTypeToBucket[itemType]];
+      if (tempItem.definition.subType === itemType) {
         tempItem.hazards.push("Increased Reload");
       }
     }
@@ -96,12 +97,18 @@ function setArmorHazards(armors, itemPerk, weapons) {
 }
 
 function setWeaponHazards(item, weapons, bucket, definition) {
-  for (var w = 0; w < item.perks.length; w++) {
-    var itemPerk = item.perks[w];
-    if (itemPerk.isActive) {
-      setHazard(itemPerk.perkHash, weapons[bucket].hazards, hazardMiscWeaponPerks);
+
+  for (var w = 0; w < item.nodes.length; w++) {
+    var itemNode = item.nodes[w];
+    if (itemNode.isActivated) {
+      for (var n = 0; n < itemNode.perkHashes.length; n++) {
+        if (hazardMiscWeaponPerks.indexOf(itemNode.perkHashes[n]) > -1) {
+          itemNode.isHazard = true;
+        }
+      }
     }
   }
+
   if ((definition.subType === 12)) {
     for (var s = 0; s < item.stats.length; s++) {
       if (item.stats[s].statHash === STAT_BASE_DAMAGE && item.stats[s].value > 20) {
@@ -161,12 +168,16 @@ angular.module('trialsReportApp')
       for (var n = 0; n < items.length; n++) {
         var item = items[n], bucket = getDefinitionsByBucket(item.bucketHash);
         var definition;
+
         if (weaponBuckets.indexOf(item.bucketHash) > -1) {
+
           definition = setItemDefinition(item, DestinyWeaponDefinition);
           weapons[bucket].definition = definition;
           weapons[bucket].nodes = item.nodes;
           setWeaponHazards(item, weapons, bucket, definition);
+
         } else if (armorBuckets.indexOf(item.bucketHash) > -1) {
+
           definition = setItemDefinition(item, DestinyArmorDefinition);
           for (var a = 0; a < item.perks.length; a++) {
             itemPerk = item.perks[a];
@@ -174,14 +185,17 @@ angular.module('trialsReportApp')
               setArmorHazards(armors, itemPerk, weapons);
             }
           }
+
           if (definition.tierType === 6 && item.bucketHash !== BUCKET_CLASS_ITEM) {
             armors.equipped.definition = definition;
             armors.equipped.nodes = item.nodes;
           }
+
           if (!armors.equipped.definition && item.bucketHash === BUCKET_HEAD) {
             armors.equipped.definition = definition;
             armors.equipped.nodes = item.nodes;
           }
+
         } else if (item.bucketHash === BUCKET_BUILD) {
           definition = setItemDefinition(item, DestinySubclassDefinition);
           subclass.nodes = item.nodes;
@@ -190,19 +204,23 @@ angular.module('trialsReportApp')
           defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame);
         }
       }
+
       if ((subclass.grenadeHash === FIREBOLT_GRENADE) && hasVikingFuneral && hasTouchOfFlame) {
         subclass.hazards.push('Superburn Grenade');
       }
+
       if (armors.equipped.increasedArmor) {
         if (armors.equipped.increasedArmor.indexOf(subclass.definition.itemHash) > -1) {
           armors.hazards.push('Increased Armor');
         }
       }
+
       if (armors.doubleGrenadeHash) {
         if (armors.doubleGrenadeHash === subclass.grenadeHash) {
           armors.hazards.push('Double Grenade');
         }
       }
+
       return {
         weapons: weapons,
         armors: armors,

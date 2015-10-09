@@ -105,32 +105,58 @@ hazardMiscArmorPerks = {
   3406171126: 'Double Melee'
 };
 
-hazardMiscWeaponPerks = {
-  77746637:   'Kills Grant Tracking',
-  431159510:  'Third Eye',
-  770631416:  'Third Eye',
-  1485291076: 'Final Round (Burst)',
-  1568304667: 'Luck in Chamber',
-  2758635242: 'Increased Radar Resolution',
-  3464328064: '+Damage when Surrounded',
-  3505787429: 'Highlights Enemies',
-  3752206822: 'Final Round',
-  3921735041: 'Final Round',
-  315800403:  'Precision Hits Return Ammo',
-  661681055:  'Body Hits Increase Precision DMG',
-  1026458383: 'Wounded Kills Regen HP',
-  1279198574: '+RoF if Super Charged',
-  1843659180: 'Increased Precision Damage',
-  4271995221: 'Increased Precision Damage',
-  2047535886: '+Melee Damage After Shooting',
-  2417835318: 'Regen Health After Kill',
-  2566491829: 'Bonus Precision Damage',
-  //3523239750: 'Faster Reload when Last Standing',
-  3911170550: 'Firefly',
-  3031234337: '+Stats when Behind Cover',
-  3695773985: 'Camouflage while aiming',
-  3369212512: 'Precision Kills Blind (Chance)'
-};
+//hazardMiscWeaponPerks = {
+//  77746637:   'Kills Grant Tracking',
+//  431159510:  'Third Eye',
+//  770631416:  'Third Eye',
+//  1485291076: 'Final Round (Burst)',
+//  1568304667: 'Luck in Chamber',
+//  2758635242: 'Increased Radar Resolution',
+//  3464328064: '+Damage when Surrounded',
+//  3505787429: 'Highlights Enemies',
+//  3752206822: 'Final Round',
+//  3921735041: 'Final Round',
+//  315800403:  'Precision Hits Return Ammo',
+//  661681055:  'Body Hits Increase Precision DMG',
+//  1026458383: 'Wounded Kills Regen HP',
+//  1279198574: '+RoF if Super Charged',
+//  1843659180: 'Increased Precision Damage',
+//  4271995221: 'Increased Precision Damage',
+//  2047535886: '+Melee Damage After Shooting',
+//  2417835318: 'Regen Health After Kill',
+//  2566491829: 'Bonus Precision Damage',
+//  //3523239750: 'Faster Reload when Last Standing',
+//  3911170550: 'Firefly',
+//  3031234337: '+Stats when Behind Cover',
+//  3695773985: 'Camouflage while aiming',
+//  3369212512: 'Precision Kills Blind (Chance)'
+//};
+
+hazardMiscWeaponPerks = [
+  77746637, // Relentless Tracker
+  315800403, // Rewind Again
+  431159510, // Third Eye
+  661681055, // Headseeker
+  770631416, // Third Eye
+  1026458383, // Life Support
+  1279198574, // Overflow
+  1485291076, // Hat Trick
+  1568304667, // Luck in the Chamber
+  1843659180, // The Master
+  2047535886, // Close and/or Personal
+  2417835318, // Red Death
+  2566491829, // Marksman
+  2758635242, // Self Spotter
+  3031234337, // Guerilla Fighter
+  3369212512, // Blinding Light
+  3464328064, // Surrounded
+  3505787429, // Target Mark
+  3695773985, // Patience and Time
+  3752206822, // Final Round
+  3911170550, // Firefly
+  3921735041, // Final Round
+  4271995221 // The Master
+];
 
 var hazardDoubleGrenadeByPerk = {
   280851997: SCATTER_GRENADE,
