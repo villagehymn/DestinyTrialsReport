@@ -118,11 +118,7 @@ function setWeaponHazards(item, weapons, bucket, definition) {
     for (var s = 0; s < item.stats.length; s++) {
       if (item.stats[s].statHash === STAT_BASE_DAMAGE && item.stats[s].value > 20) {
         //if ((item.primaryStat.value * item.stats[i].value) > 8577) {
-        if (weapons[bucket].hazards.length > 1) {
-          weapons[bucket].hazards[1] = 'Revive Kill';
-        } else {
-          weapons[bucket].hazards.push('Revive Kill');
-        }
+        weapons[bucket].hazards.push('Revive Kill');
         //}
       }
     }
