@@ -89,13 +89,13 @@
       </div>
     </div>
   </div>
-  <div class="player-hazards">
-    <div ng-repeat="hazard in player.nonHazard.concat(player.inventory.weapons.hazards, player.inventory.armor.hazards, player.inventory.subclass.hazards) track by $index"
-         ng-bind="hazard" ng-class="{'player-hazard--developer': hazard === 'Site Developer', 'player-hazard--donator': hazard === 'Site Donator'}"
-         bs-popover="{content:DestinyHazardDefinition[hazard]}" class="player-hazard">
-    </div>
-    <div class="player-hazard player-hazard--none">
-      This Guardian doesn't need cheap tricks
-    </div>
-  </div>
+  <!--<div class="player-hazards">-->
+    <!--<div ng-repeat="hazard in player.nonHazard.concat(player.inventory.weapons.hazards, player.inventory.armor.hazards, player.inventory.subclass.hazards) track by $index"-->
+         <!--ng-bind="hazard" ng-class="{'player-hazard--developer': hazard === 'Site Developer', 'player-hazard--donator': hazard === 'Site Donator'}"-->
+         <!--bs-popover="{content:DestinyHazardDefinition[hazard]}" class="player-hazard">-->
+    <!--</div>-->
+    <!--<div class="player-hazard player-hazard--none">-->
+      <!--This Guardian doesn't need cheap tricks-->
+    <!--</div>-->
+  <!--</div>-->
 </div>

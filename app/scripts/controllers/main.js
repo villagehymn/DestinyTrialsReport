@@ -109,6 +109,8 @@ angular.module('trialsReportApp')
     $scope.screenSize.md = screenSize.on('md', function (match) { $scope.screenSize.md = match; });
     $scope.screenSize.lg = screenSize.on('lg', function (match) { $scope.screenSize.lg = match; });
 
+    $scope.statNamesByHash = statNamesByHash;
+
     $scope.suggestRecentPlayers = function () {
       if (angular.isUndefined($scope.recentPlayers)) {
         $scope.recentPlayers = {};
@@ -132,6 +134,7 @@ angular.module('trialsReportApp')
       $scope.fireteam = fireTeam;
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
       if (angular.isDefined($scope.fireteam[0])) {
+        console.log($scope.fireteam[0].characterInfo.stats)
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
         getTeammates($scope, locationChanger, $scope.fireteam[0]);
       } else {

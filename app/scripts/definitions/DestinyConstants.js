@@ -24,7 +24,16 @@ var STAT_LIGHT = 2391494160;
 var statNames = {
   STAT_INTELLECT: 'Intellect',
   STAT_DISCIPLINE: 'Discipline',
-  STAT_STRENGTH: 'Strength'
+  STAT_STRENGTH: 'Strength',
+  STAT_ARMOR: 'Armor',
+  STAT_AGILITY: 'Agility',
+  STAT_RECOVERY: 'Recovery'
+};
+
+var statNamesByHash = {
+  392767087: 'Armor',
+  2996146975: 'Agility',
+  1943323491: 'Recovery'
 };
 
 var STAT_BASE_DAMAGE = 4043523819;

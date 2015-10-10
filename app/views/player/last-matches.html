@@ -89,6 +89,7 @@
       <div class="col-xs-2 last-match__medal" ng-repeat="medal in player.medals track by $index"
            bs-popover="{title:DestinyMedalDefinition[medal.id].statName,content:DestinyMedalDefinition[medal.id].statDescription}">
         <img class="img-responsive" ng-src="{{'https://www.bungie.net' + DestinyMedalDefinition[medal.id].iconImage}}" alt="{{DestinyMedalDefinition[medal.id].statName}}">
+        <span class="last-match__medal-count text-centered" ng-bind="'x' + medal.count"></span>
       </div>
     </div>
   </div>

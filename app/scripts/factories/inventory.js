@@ -43,6 +43,9 @@ function defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame) {
         subclass.grenadeHash = subclass.nodes[s].nodeStepHash;
         break;
       case 2:
+        if (subclass.nodes[s].row !== 0) {
+          subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
+        }
         subclass.blink = subclass.nodes[s].nodeStepHash === 3452380660;
         break;
       case 3:
@@ -55,6 +58,7 @@ function defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame) {
       case 4:
         if (subclass.nodes[s].row === 0) {
           subclass.abilities.weaponKillsMelee = subclass.nodes[s];
+          subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
         }
         break;
       case 6:

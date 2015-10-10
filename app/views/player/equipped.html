@@ -23,7 +23,20 @@
   </div>
   <div class="player-tab__section">
     <div class="row">
-      <div class="player-perk col-xs-6" ng-repeat="subclassNode in player.inventory.subclass.displayedNodes track by $index" bs-popover="{content:subclassNode.description}">
+      <div class="player-cooldown col-xs-4"
+           ng-repeat="stat in [player.characterInfo.stats.STAT_ARMOR, player.characterInfo.stats.STAT_RECOVERY, player.characterInfo.stats.STAT_AGILITY]">
+        <div class="player-cooldown__label" ng-bind="statNamesByHash[stat.statHash]"></div>
+        <div class="player-cooldown__nr">
+          <progress max="10" animate="true" class="progress not-rounded">
+            <bar value="stat.value" class="progress-bar-primary"></bar>
+          </progress>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="player-tab__section">
+    <div class="row">
+      <div class="player-perk col-xs-6" ng-repeat="subclassNode in player.inventory.subclass.displayedNodes | orderObjectBy:'column'" bs-popover="{content:subclassNode.description}">
         <img class="player-perk__icon img-responsive" ng-src="{{subclassNode.icon}}" alt="{{subclassNode.name}}">
         <span class="player-perk__title" ng-bind="subclassNode.name"></span>
       </div>

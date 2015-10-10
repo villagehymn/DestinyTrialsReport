@@ -18,7 +18,7 @@ angular.module('trialsReportApp')
                 '<span ng-bind="weapon.definition.name"></span>',
               '</div>',
               '<div class="weapon__perks">',
-                '<div class="weapon-perk" ng-class="node.isHazard ? \'weapon-perk__hazard\' : \'\'" ng-repeat="node in weapon.nodes track by $index" bs-popover="{title:node.name,content:node.description}">',
+                '<div class="weapon-perk" ng-class="{\'weapon-perk__hazard\' : node.isHazard}" ng-repeat="node in weapon.nodes track by $index" bs-popover="{title:node.name,content:node.description}">',
                   '<i class="weapon-perk__icon">',
                     '<img class="img-responsive" ng-src="{{node.icon}}" alt="{{node.name}}">',
                   '</i>',
