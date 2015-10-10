@@ -134,7 +134,6 @@ angular.module('trialsReportApp')
       $scope.fireteam = fireTeam;
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
       if (angular.isDefined($scope.fireteam[0])) {
-        console.log($scope.fireteam[0].characterInfo.stats)
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
         getTeammates($scope, locationChanger, $scope.fireteam[0]);
       } else {
