@@ -58,6 +58,7 @@ function defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame) {
       case 4:
         if (subclass.nodes[s].row === 0) {
           subclass.abilities.weaponKillsMelee = subclass.nodes[s];
+        } else {
           subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
         }
         break;
