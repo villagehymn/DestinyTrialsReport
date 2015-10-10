@@ -24,7 +24,7 @@ angular.module('trialsReportApp')
                   '</i>',
                 '</div>',
               '</div>',
-              '<div class="weapon__label" ng-repeat="hazard in weapon.hazards" ng-bind="hazard">',
+              '<div class="weapon__label" ng-bind-html="weapon.hazards.join(\'<span>   —   </span>\')">',
               '</div>',
             '</div>',
           '</div>'
