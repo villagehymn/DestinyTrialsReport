@@ -192,7 +192,6 @@ angular.module('trialsReportApp')
       return player;
     };
 
-
     Player.build = function (data, name, character) {
       var player = new Player(data, name, character);
       if (data.characters) {
