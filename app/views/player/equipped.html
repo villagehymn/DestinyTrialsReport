@@ -8,7 +8,7 @@
   <div class="player-tab__section">
     <div class="row">
       <div class="player-cooldown col-xs-4"
-           ng-repeat="stat in [player.characterInfo.stats.STAT_INTELLECT, player.characterInfo.stats.STAT_DISCIPLINE, player.characterInfo.stats.STAT_STRENGTH]"
+           ng-repeat="stat in [player.characterInfo.stats.STAT_INTELLECT, player.characterInfo.stats.STAT_DISCIPLINE, player.characterInfo.stats.STAT_STRENGTH] track by $index"
            bs-popover="{content:'Tier ' + stat.tier + ' — ' + + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown}">
         <div class="player-cooldown__label" ng-bind="stat.name"></div>
         <div class="player-cooldown__nr">
@@ -24,7 +24,7 @@
   <div class="player-tab__section">
     <div class="row">
       <div class="player-cooldown col-xs-4"
-           ng-repeat="stat in [player.characterInfo.stats.STAT_ARMOR, player.characterInfo.stats.STAT_RECOVERY, player.characterInfo.stats.STAT_AGILITY]">
+           ng-repeat="stat in [player.characterInfo.stats.STAT_ARMOR, player.characterInfo.stats.STAT_RECOVERY, player.characterInfo.stats.STAT_AGILITY] track by $index">
         <div class="player-cooldown__label" ng-bind="statNamesByHash[stat.statHash]"></div>
         <div class="player-cooldown__nr">
           <progress max="10" animate="true" class="progress not-rounded">

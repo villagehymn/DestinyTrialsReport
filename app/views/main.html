@@ -1,22 +1,27 @@
-<div class="wrapper" ng-class="{'my-dtr': subdomain}">
-  <div class="controls shadow-z-1">
-    <header ng-include="'views/controls/top.html'" ng-controller="HeaderCtrl"></header>
-    <footer ng-include="'views/controls/bottom.html'"></footer>
-  </div>
-  <div class="content">
-    <div class="container-fluid" ng-if="status">
-      <div class="row">
-        <div class="text-center alert alert-warning">
-          <strong>{{status}}</strong>
+<div class="main">
+  <div class="wrapper" ng-class="{'my-dtr': subdomain}">
+    <div class="controls shadow-z-1" ng-controller="HeaderCtrl">
+      <header ng-include="'views/controls/top.html'"></header>
+      <footer ng-include="'views/controls/bottom.html'"></footer>
+    </div>
+    <div class="content">
+      <div class="container-fluid" ng-if="status">
+        <div class="row">
+          <div class="text-center alert alert-warning">
+            <strong>{{status}}</strong>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="blog" ng-show="!fireteam[0] && !status">
-      <div ng-include="'views/blog/index.html'"></div>
-    </div>
-    <div class="players" ng-if="fireteam[0] && !status">
-      <div class="row">
-        <div ng-include="'views/fireteam/index.html'" ng-show="fireteam[0]"></div>
+      <div class="blog" ng-show="!fireteam[0] && !status">
+        <div ng-include="'views/blog/index.html'"></div>
+      </div>
+      <div class="players" ng-if="fireteam[0] && !status">
+        <div class="player-container"
+           ng-controller="PlayerCtrl as Player"
+           ng-repeat="player in fireteam track by $index"
+           ng-model="player"
+           ng-include="'views/player/index.html'">
+        </div>
       </div>
     </div>
   </div>

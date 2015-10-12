@@ -1,33 +1,36 @@
-.wrapper {
+.main {
   width: 100vw;
   height: 100vh;
 }
 
+.wrapper {
+  display: flex;
+  min-width: 1280px;
+}
+
 .controls {
-  position: absolute;
   height: 100vh;
+  min-width: 320px;
   width: 25vw;
+  max-width: 420px;
   display: flex;
   flex-direction: column;
   background: $header-bg;
   overflow-x: hidden;
   color: $text-on-dark;
+  z-index: 99;
 }
 
 .content {
-  position: absolute;
   height: 100vh;
-  width: 75vw;
-  left: 25vw;
-  padding: 30px 100px;
-}
-
-.content {
+  flex-grow: 1;
   display: flex;
+  overflow-y: auto;
 }
 
-@media all and (min-width: 960px) {
+
+@media all and (max-width: 1280px) {
   .content {
-    overflow-y: auto;
+    width: 100vw;
   }
 }

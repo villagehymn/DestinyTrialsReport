@@ -3,6 +3,7 @@
 }
 
 .main-search__fireteam {
+  margin-right: -1px;
   > form + div,
   > form + div + div {
     background: darken(white, 2%);

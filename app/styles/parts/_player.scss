@@ -1,3 +1,25 @@
+.players {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: auto;
+}
+
+.player-container {
+  padding: 2em 1em;
+  min-width: 320px;
+  max-width: 380px;
+}
+
+@media all and (max-width: 1550px) {
+  .players {
+    padding: 0 .5em;
+  }
+  .player-container {
+    padding: 1em .5em;
+  }
+}
+
 .player {
   background: #fff;
   border-radius: 1em;
