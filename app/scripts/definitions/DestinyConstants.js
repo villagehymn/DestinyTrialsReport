@@ -114,33 +114,6 @@ hazardMiscArmorPerks = {
   3406171126: 'Double Melee'
 };
 
-//hazardMiscWeaponPerks = {
-//  77746637:   'Kills Grant Tracking',
-//  431159510:  'Third Eye',
-//  770631416:  'Third Eye',
-//  1485291076: 'Final Round (Burst)',
-//  1568304667: 'Luck in Chamber',
-//  2758635242: 'Increased Radar Resolution',
-//  3464328064: '+Damage when Surrounded',
-//  3505787429: 'Highlights Enemies',
-//  3752206822: 'Final Round',
-//  3921735041: 'Final Round',
-//  315800403:  'Precision Hits Return Ammo',
-//  661681055:  'Body Hits Increase Precision DMG',
-//  1026458383: 'Wounded Kills Regen HP',
-//  1279198574: '+RoF if Super Charged',
-//  1843659180: 'Increased Precision Damage',
-//  4271995221: 'Increased Precision Damage',
-//  2047535886: '+Melee Damage After Shooting',
-//  2417835318: 'Regen Health After Kill',
-//  2566491829: 'Bonus Precision Damage',
-//  //3523239750: 'Faster Reload when Last Standing',
-//  3911170550: 'Firefly',
-//  3031234337: '+Stats when Behind Cover',
-//  3695773985: 'Camouflage while aiming',
-//  3369212512: 'Precision Kills Blind (Chance)'
-//};
-
 hazardMiscWeaponPerks = [
   77746637, // Relentless Tracker
   315800403, // Rewind Again
@@ -179,9 +152,9 @@ var hazardDoubleGrenadeByPerk = {
 };
 
 var hazardBurnDefense = {
-  1723656171: 'Solar Burn Res',
-  2095340230: 'Void Burn Res',
-  539512168: 'Arc Burn Res'
+  1723656171: 'Solar Resist',
+  2095340230: 'Void Resist',
+  539512168: 'Arc Resist'
 };
 
 var hazardIncreasedArmor = {
