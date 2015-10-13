@@ -3,19 +3,22 @@
     <div class="player-header__title">
       <img class="player-header__emblem" ng-src="{{player.emblem.icon}}" alt="Emblem">
       <div class="player-header__char">
-        <div class="player-info" ng-show="player.characterInfo.level && player.characterInfo.className">
+        <div class="player-info">
           <h2 class="player-header__gamertag" ng-bind="player.name"></h2>
           <span class="player-info__class" ng-bind="player.characterInfo.subclassName"></span>
-          <span class="player-info__grimoire">
-            <img src="/images/grimoire.png" alt="Grimoire"><span ng-bind="player.grimoire"></span>
+          <span class="player-info__grimoire" ng-show="player.grimoire">
+            <img src="/images/grimoire.png" alt="Grimoire">
+            <span ng-bind="player.grimoire"></span>
           </span>
         </div>
         <div class="player-level">
-          <div class="player-level__light highlight">
-            <span ng-bind-html="'<span>&#10022;</span>' + player.characterInfo.stats.STAT_LIGHT.value"></span>
+          <div class="player-level__light highlight" ng-show="player.characterInfo.stats.STAT_LIGHT.value">
+            <span>&#10022;</span>
+            <span ng-bind="player.characterInfo.stats.STAT_LIGHT.value"></span>
           </div>
-          <div class="player-level__level">
-            Level <span ng-bind="player.characterInfo.level"></span>
+          <div class="player-level__level" ng-show="player.characterInfo.level">
+            <span>Level</span>
+            <span ng-bind="player.characterInfo.level"></span>
           </div>
         </div>
       </div>

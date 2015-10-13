@@ -54,7 +54,7 @@
     </div>
   </div>
 </div>
-<div class="current-map shadow-z-1" style="background-image:url('http://bungie.net{{currentMap.pgcrImage}}');">
+<div class="current-map shadow-z-1" ng-style="{'background-image':'url(\'https://www.bungie.net' + currentMap.pgcrImage + '\')'}">
   <div class="current-map__content">
     <div class="current-map__title">
       <span ng-bind="currentMap.name"></span>
