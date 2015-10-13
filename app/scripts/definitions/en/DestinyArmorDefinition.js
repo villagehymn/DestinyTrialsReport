@@ -58,13 +58,13 @@ var DestinyArmorDefinition = {
   "10673376": {
     "name": "Winged Sun Gauntlets",
     "description": "\"Those who fly beneath the Sun do not come back unscathed.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/9f1f797374b42a89fb021c2b93ad9ad4.jpg",
+    "icon": "/common/destiny_content/icons/76d389cb45924ab25e8fdf245d20e1f5.jpg",
     "tierType": 5
   },
   "10673377": {
     "name": "Blindsight Gauntlets",
     "description": "\"With the sight I saw the self within the self.\" —Fractal Scrolls",
-    "icon": "/common/destiny_content/icons/002b896e0bd7747c93e345003f2de237.jpg",
+    "icon": "/common/destiny_content/icons/282de9eebdc2476c487fc1a4fed47c33.jpg",
     "tierType": 5
   },
   "11037811": {
@@ -1098,12 +1098,6 @@ var DestinyArmorDefinition = {
     "description": "\"The Will of Crota is broken at last. May Sai Mota's restless Light at last find peace.\" —Eris Morn",
     "icon": "/common/destiny_content/icons/a2bd1804a16a02444d37ac9d730a959e.jpg",
     "tierType": 5
-  },
-  "295124230": {
-    "name": "Special Delivery",
-    "description": "Guardian,\nThis shell was left for your Ghost, with instructions to deliver it upon his return. Welcome to the Tower. \n—Special Orders",
-    "icon": "/common/destiny_content/icons/feb2d10df81f6d79a68bf795ac080692.jpg",
-    "tierType": 2
   },
   "299288132": {
     "name": "Mark of Favor",
@@ -2518,13 +2512,13 @@ var DestinyArmorDefinition = {
   "728377844": {
     "name": "Winged Sun Legs",
     "description": "\"Feet alone cannot take us to where we're going.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/bfd67f0c614e437c4c99cdb381e6d746.jpg",
+    "icon": "/common/destiny_content/icons/df8b1df82b4ee8dd53e92050942d8f34.jpg",
     "tierType": 5
   },
   "728377845": {
     "name": "Blindsight Legs",
     "description": "\"The courage to walk into the Darkness, but strength to return to the Light.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/4b52525262ef13ec45f0314f33dfcee8.jpg",
+    "icon": "/common/destiny_content/icons/8f3f583dbdf3b4a68b4c8917494b0d86.jpg",
     "tierType": 5
   },
   "738109042": {
@@ -2689,10 +2683,6 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/3e3a480c23aa609bb86abe96c802bec5.jpg",
     "tierType": 5
   },
-  "814425336": {
-    "icon": "/img/misc/missing_icon.png",
-    "tierType": 5
-  },
   "815653400": {
     "name": "Nemesis Plane IX",
     "description": "A Warlock understands the power of symbols. Treat a Hunter's cloak and a Titan's mark with respect.",
@@ -2739,10 +2729,6 @@ var DestinyArmorDefinition = {
     "name": "Wolfswood Mark",
     "description": "And beneath its branches, the Iron Wolves forged an unbreakable oath.",
     "icon": "/common/destiny_content/icons/d1a8b4a9bbd36ebcfde16fbd8f482988.jpg",
-    "tierType": 5
-  },
-  "827442314": {
-    "icon": "/img/misc/missing_icon.png",
     "tierType": 5
   },
   "830705927": {
@@ -3954,7 +3940,7 @@ var DestinyArmorDefinition = {
   "1278603962": {
     "name": "Blind Jackal Mask",
     "description": "\"Even the dead are not beyond our reach.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/f82dfc6804f9c5036f325717645919af.jpg",
+    "icon": "/common/destiny_content/icons/2fd7c44fd3adf3409ace88f364c00fc9.jpg",
     "tierType": 5
   },
   "1288845412": {
@@ -4656,13 +4642,13 @@ var DestinyArmorDefinition = {
   "1566345524": {
     "name": "Blindsight Boots",
     "description": "\"The courage to walk into the Darkness, but strength to return to the Light.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/b46a578e78b352242ce78d55ee859378.jpg",
+    "icon": "/common/destiny_content/icons/acdca820a8986de65d5ae04de700152d.jpg",
     "tierType": 5
   },
   "1566345525": {
     "name": "Winged Sun Boots",
     "description": "\"Feet alone cannot take us to where we're going.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/6455438af3cc7fd4f12f104373104987.jpg",
+    "icon": "/common/destiny_content/icons/919a40d8d2d8fee29d6a0bcc2b15c3fa.jpg",
     "tierType": 5
   },
   "1571566214": {
@@ -5007,10 +4993,6 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/40b7e37e497473f45f2058ab85e99a33.jpg",
     "tierType": 5
   },
-  "1675805765": {
-    "icon": "/img/misc/missing_icon.png",
-    "tierType": 5
-  },
   "1679707196": {
     "name": "Fieldplate Type 3",
     "description": "Melee combat tests your nerve. Ignore every instinct to flee. Remember: you are a monster too.",
@@ -5098,13 +5080,13 @@ var DestinyArmorDefinition = {
   "1705510184": {
     "name": "Winged Sun Plate",
     "description": "\"Like a meteor burning until nothing is left but the idea of a Light.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/ef2627b558cb120dcade35b30f2d24d1.jpg",
+    "icon": "/common/destiny_content/icons/b9bcf2a123fac4a941f5bf6d3ff836ab.jpg",
     "tierType": 5
   },
   "1705510185": {
     "name": "Blindsight Plate",
     "description": "\"I shrouded myself so when the Light returned I could see it all the clearer.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/927f3a2daec600236a932b358298df58.jpg",
+    "icon": "/common/destiny_content/icons/d0defd9bd4af5aea2e1ec75fb00e92e8.jpg",
     "tierType": 5
   },
   "1712294560": {
@@ -5281,10 +5263,6 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/40274d5a173a236163e7f296e1ca1b8d.jpg",
     "tierType": 4
   },
-  "1755781788": {
-    "icon": "/img/misc/missing_icon.png",
-    "tierType": 5
-  },
   "1764683367": {
     "name": "\"Immanent War\"",
     "description": "\"The next war is already here, waged in the theater of the inmost.\"",
@@ -5336,19 +5314,19 @@ var DestinyArmorDefinition = {
   "1776632644": {
     "name": "\"The Cure\"",
     "description": "\"We have a solution.\" - Ikora Rey, in an emergency session of the City Consensus",
-    "icon": "/common/destiny_content/icons/b95c8b1e0b5e091e03bdde5e03d87eea.png",
+    "icon": "/common/destiny_content/icons/bedf184f7aa49c78a34733db1805c70e.png",
     "tierType": 4
   },
   "1776632646": {
     "name": "\"The Unconquerable\"",
     "description": "\"Let's stop thinking about how to open the lock and start thinking about removing the wall.\"",
-    "icon": "/common/destiny_content/icons/9e25f08eed710832b1b0f778f994dd28.png",
+    "icon": "/common/destiny_content/icons/75a6e298aee92594d628895a5fee59b8.png",
     "tierType": 4
   },
   "1776632647": {
     "name": "\"Born of Sight\"",
     "description": "\"Reality is the most ruthless analyst.\" - Praxic saying",
-    "icon": "/common/destiny_content/icons/0fcb7cf208e2e89264adc77fa9d98397.png",
+    "icon": "/common/destiny_content/icons/d4cc6cb58bfcacbd1e56aa3f4f1da9cf.png",
     "tierType": 4
   },
   "1777045417": {
@@ -5438,13 +5416,13 @@ var DestinyArmorDefinition = {
   "1811367950": {
     "name": "Winged Sun Vest",
     "description": "\"Like a meteor burning until nothing is left but the idea of a Light.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/37714f95488c4b5da93acd6202fb2f0f.jpg",
+    "icon": "/common/destiny_content/icons/d1a810e52032042dbc94b67aad925788.jpg",
     "tierType": 5
   },
   "1811367951": {
     "name": "Blindsight Vest",
     "description": "\"I shrouded myself so when the Light returned I could see it all the clearer.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/b28be751001def23b892ca7f3663d829.jpg",
+    "icon": "/common/destiny_content/icons/df954ba127ac266d20bddc111c71ae03.jpg",
     "tierType": 5
   },
   "1824954739": {
@@ -6302,7 +6280,7 @@ var DestinyArmorDefinition = {
   "2129462487": {
     "name": "Mantle of Sublime Light",
     "description": "A trial by fire, the purpose of which is transformation.",
-    "icon": "/common/destiny_content/icons/d548aa619755ac5e3566916223c9d0fb.jpg",
+    "icon": "/common/destiny_content/icons/718f39112d5ca39c467900d173472406.jpg",
     "tierType": 5
   },
   "2136148892": {
@@ -7010,7 +6988,7 @@ var DestinyArmorDefinition = {
   "2339777344": {
     "name": "Sublime Light Bond",
     "description": "A trial by fire, the purpose of which is transformation.",
-    "icon": "/common/destiny_content/icons/1e0090a946394bef76c1842475e57042.jpg",
+    "icon": "/common/destiny_content/icons/e1873b28ee13e4d8ae991501c2e2b867.jpg",
     "tierType": 5
   },
   "2350173678": {
@@ -7173,10 +7151,6 @@ var DestinyArmorDefinition = {
     "name": "Iron Companion Boots",
     "description": "Ornate armor forged by the Lords of Iron beneath the Iron Banner.",
     "icon": "/common/destiny_content/icons/66196727177c7449738cb9dec9e57470.jpg",
-    "tierType": 5
-  },
-  "2409603710": {
-    "icon": "/img/misc/missing_icon.png",
     "tierType": 5
   },
   "2411847828": {
@@ -7824,13 +7798,13 @@ var DestinyArmorDefinition = {
   "2580679412": {
     "name": "\"Inertia Engine\"",
     "description": "\"I believe that the Traveler and its Light are advanced technology. I refuse to accept that this diminishes me.\"",
-    "icon": "/common/destiny_content/icons/3bb8774cb8cbc3fedddf9f8610a919d0.png",
+    "icon": "/common/destiny_content/icons/4f6670a785a8cad3ecdf213c9fe516d4.png",
     "tierType": 3
   },
   "2580679413": {
     "name": "\"Cosmic Truths\"",
     "description": "\"To bind Light into the same framework as the proton or the mere neutrino is an act of close-minded hubris.\"",
-    "icon": "/common/destiny_content/icons/3bb8774cb8cbc3fedddf9f8610a919d0.png",
+    "icon": "/common/destiny_content/icons/4f6670a785a8cad3ecdf213c9fe516d4.png",
     "tierType": 3
   },
   "2580679414": {
@@ -7878,7 +7852,7 @@ var DestinyArmorDefinition = {
   "2602145129": {
     "name": "Golden Bull Mask",
     "description": "\"A sacrifice is required.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/42b1f49d8c91c5956ca051c79681968a.jpg",
+    "icon": "/common/destiny_content/icons/965992a143562b4b9afe4d36ecb43404.jpg",
     "tierType": 5
   },
   "2604951151": {
@@ -8264,10 +8238,6 @@ var DestinyArmorDefinition = {
     "description": "Slippery as an eel.",
     "icon": "/common/destiny_content/icons/1702bd5d53457ab2a8cd4261739a73a7.jpg",
     "tierType": 4
-  },
-  "2713700468": {
-    "icon": "/img/misc/missing_icon.png",
-    "tierType": 5
   },
   "2716750484": {
     "name": "Order's Hood",
@@ -9130,13 +9100,13 @@ var DestinyArmorDefinition = {
   "2959003546": {
     "name": "Winged Sun Greaves",
     "description": "\"Feet alone cannot take us to where we're going.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/7b54228513ade280bda7ca182aba35ef.jpg",
+    "icon": "/common/destiny_content/icons/4be2225245f5a1a2182cd34b8e0d1cfc.jpg",
     "tierType": 5
   },
   "2959003547": {
     "name": "Blindsight Greaves",
     "description": "\"The courage to walk into the Darkness, but strength to return to the Light.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/895b9acec0fffc3fb37b09f820e1084f.jpg",
+    "icon": "/common/destiny_content/icons/b9dc20032437660c21927668f3d19244.jpg",
     "tierType": 5
   },
   "2962205747": {
@@ -10081,12 +10051,6 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/c9fbb77a95c597791033a067aee64776.jpg",
     "tierType": 5
   },
-  "3311034942": {
-    "name": "Special Delivery",
-    "description": "Guardian,\nThis Ghost shell is an unusual one, and so was the Exo who left it. I believe she meant it for you. \n—Special Orders",
-    "icon": "/common/destiny_content/icons/29b48d45f1486132d415c8cb57479df3.jpg",
-    "tierType": 2
-  },
   "3316745440": {
     "name": "Rogue 4.5",
     "description": "Most Hunters favor a light plate cuirass over the field wire underweave.",
@@ -10138,13 +10102,13 @@ var DestinyArmorDefinition = {
   "3342415802": {
     "name": "Winged Sun Sleeves",
     "description": "\"Those who fly beneath the Sun do not come back unscathed.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/7acabf11fe38b3abf38a7bf8bbc04f0b.jpg",
+    "icon": "/common/destiny_content/icons/e8bd663dc1d2a31a4edd744f7b96ca4a.jpg",
     "tierType": 5
   },
   "3342415803": {
     "name": "Blindsight Sleeves",
     "description": "\"With the sight, I saw the self within the self.\" —Fractal Scrolls",
-    "icon": "/common/destiny_content/icons/82467d7b9b9640e627813122360b7f90.jpg",
+    "icon": "/common/destiny_content/icons/1fe8bc8488695aa7b6c292229aba9b54.jpg",
     "tierType": 5
   },
   "3346519200": {
@@ -10156,13 +10120,13 @@ var DestinyArmorDefinition = {
   "3346519202": {
     "name": "Bond of the Universal",
     "description": "Some orders argue that Light and Darkness can be explained in the context of supersymmetric physics.",
-    "icon": "/common/destiny_content/icons/e37f430f9cc6e11ff07169c7777fdf01.png",
+    "icon": "/common/destiny_content/icons/3a2e74400ed0b5f30903162d67e7bb87.png",
     "tierType": 2
   },
   "3346519203": {
     "name": "Bond of Polarity",
     "description": "Some orders believe that Light and Darkness exist beyond the merely material, with a logic of their own.",
-    "icon": "/common/destiny_content/icons/dcf62327778639530a7d5822abc37fd8.png",
+    "icon": "/common/destiny_content/icons/8469f8581da806c80872d6d794bb63ec.png",
     "tierType": 2
   },
   "3346783228": {
@@ -10246,7 +10210,7 @@ var DestinyArmorDefinition = {
   "3359564871": {
     "name": "\"The Gone\"",
     "description": "\"He came at me with a knife. I put out my hand and - just so - made him into ash.\"",
-    "icon": "/common/destiny_content/icons/87ccf2f826613ed55f007dbf12b5e55f.png",
+    "icon": "/common/destiny_content/icons/8cbc0992ad6a0d991bdb7caf90ffbf9a.png",
     "tierType": 4
   },
   "3366017012": {
@@ -10396,7 +10360,7 @@ var DestinyArmorDefinition = {
   "3407607557": {
     "name": "Sublime Light Mark",
     "description": "A trial by fire, the purpose of which is transformation.",
-    "icon": "/common/destiny_content/icons/e047e6b4d7e4d04d1af96e6a8776a067.jpg",
+    "icon": "/common/destiny_content/icons/f821208ef823c43609ef15e64bed4eb2.jpg",
     "tierType": 5
   },
   "3410875392": {
@@ -10660,13 +10624,13 @@ var DestinyArmorDefinition = {
   "3515978626": {
     "name": "Blindsight Gloves",
     "description": "\"With the sight I saw the self within the self.\" —Fractal Scrolls",
-    "icon": "/common/destiny_content/icons/18fb6e8e29c18a51d7d43ce3971ccd9e.jpg",
+    "icon": "/common/destiny_content/icons/c2ec031ba662b97cbf56ba7bd3af6c68.jpg",
     "tierType": 5
   },
   "3515978627": {
     "name": "Winged Sun Gloves",
     "description": "\"Those who fly beneath the Sun do not come back unscathed.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/a3aedb59a9703a44a973ff0affd1a751.jpg",
+    "icon": "/common/destiny_content/icons/35c77b082605536081c01e8e7d4f25e6.jpg",
     "tierType": 5
   },
   "3523581236": {
@@ -10696,7 +10660,7 @@ var DestinyArmorDefinition = {
   "3542867423": {
     "name": "Kingslayer Shell",
     "description": "For Ghosts who were there when Oryx fell.",
-    "icon": "/common/destiny_content/icons/3f7447d42f6b3ea6cc612b8edb1693ae.jpg",
+    "icon": "/common/destiny_content/icons/f2505597c2206379efb150523f010743.jpg",
     "tierType": 5
   },
   "3544127854": {
@@ -11557,10 +11521,6 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/d9b2865c4d16bf6205caad8ed09af587.jpg",
     "tierType": 5
   },
-  "3861045933": {
-    "icon": "/img/misc/missing_icon.png",
-    "tierType": 5
-  },
   "3863421728": {
     "name": "Gloves of the Exile",
     "description": "\"Strengthen the body, empower the mind.\" —Parables of the Allspring",
@@ -11751,10 +11711,6 @@ var DestinyArmorDefinition = {
     "name": "Kellbreaker's Path",
     "description": "We travel a delicate path toward understanding. Our learning can be volatile. Our subjects, aggressive.",
     "icon": "/common/destiny_content/icons/57a70a386bf0273d5932f21de2fedc26.jpg",
-    "tierType": 5
-  },
-  "3915373504": {
-    "icon": "/img/misc/missing_icon.png",
     "tierType": 5
   },
   "3919932809": {
@@ -12480,13 +12436,13 @@ var DestinyArmorDefinition = {
   "4184289356": {
     "name": "Blindsight Vestments",
     "description": "\"I shrouded myself so when the Light returned I could see it all the clearer.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/855437145e30265a17a3370a56145d6c.jpg",
+    "icon": "/common/destiny_content/icons/a599d7847813275afe2f8ac99bc90186.jpg",
     "tierType": 5
   },
   "4184289357": {
     "name": "Winged Sun Vestments",
     "description": "\"Like a meteor burning until nothing is left but the idea of a Light.\" —Parables of the Allspring",
-    "icon": "/common/destiny_content/icons/1dce0edb27b19e8616d051e157f79ddd.jpg",
+    "icon": "/common/destiny_content/icons/d2cfdee854e24dfc8069d6f0dfe9bb64.jpg",
     "tierType": 5
   },
   "4186410520": {
@@ -12522,7 +12478,7 @@ var DestinyArmorDefinition = {
   "4187038139": {
     "name": "\"Trained Chaos\"",
     "description": "\"Control space and time. Mere matter and energy will follow.\"",
-    "icon": "/common/destiny_content/icons/805cec017512fe863f97cbfee27907da.png",
+    "icon": "/common/destiny_content/icons/df29cf84259b8175e175d7630b067819.png",
     "tierType": 4
   },
   "4187254944": {

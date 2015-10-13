@@ -71,7 +71,7 @@ function extractDB(dbFile) {
       var item = JSON.parse(row.json);
 
       // Armor
-      if (item.itemType === 2 || (item.bucketTypeHash === 434908299) || (item.bucketTypeHash === 4023194814)) {
+      if (item.itemType === 2) {
         DestinyArmorDefinition[item.itemHash] = {};
         DestinyArmorDefinition[item.itemHash].name = item.itemName;
         DestinyArmorDefinition[item.itemHash].description = item.itemDescription;
@@ -96,17 +96,6 @@ function extractDB(dbFile) {
           break;
       }
     });
-
-    // Sleeper Simulant
-    if (!(3012398149 in DestinyWeaponDefinition)) {
-      DestinyWeaponDefinition[3012398149] = {
-        name: 'Sleeper Simulant',
-        icon: '/common/destiny_content/icons/9be72c64fdd81ccd068e766365cd38c6.jpg',
-        subType: 11
-      };
-    } else {
-      console.log('Sleeper Simulant now exists in the manifest file and the override can be removed.');
-    }
 
     writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
     writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
