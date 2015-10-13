@@ -3056,6 +3056,11 @@ var DestinyWeaponDefinition = {
     "icon": "/common/destiny_content/icons/0f282e925a856d0d77924cf8d3e67ba2.jpg",
     "subType": 11
   },
+  "3012398149": {
+    "name": "Sleeper Simulant",
+    "icon": "/common/destiny_content/icons/9be72c64fdd81ccd068e766365cd38c6.jpg",
+    "subType": 11
+  },
   "3028978726": {
     "name": "The Infinite Theorem",
     "icon": "/common/destiny_content/icons/736a27c0844a11c05e41a486990109cc.jpg",
