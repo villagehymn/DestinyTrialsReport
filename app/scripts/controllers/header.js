@@ -1,22 +1,8 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams, snapRemote, $window, $timeout) {
+  .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams) {
 
-    var controlEl = angular.element(document.querySelector('#controls'));
-    var contentEl = angular.element(document.querySelector('#content'));
-    if ($scope.screenSize.xs || $scope.screenSize.sm) {
-      controlEl.wrap('<div class="snap-drawers"></div>')
-        .wrap('<snap-drawer class="snap-drawer snap-drawer-left"></snap-drawer>');
-      //contentEl.wrap('<snap-content id="snap-content" style="background-color: #fff" snap-options="snapOpts"></snap-content>');
-      //angular.element(document.querySelector('#snap-content')).prepend(
-      //  '<snap-dragger>' +
-      //    '<button class="btn btn-icon" snap-toggle>' +
-      //      '<i class="material-icons">&#xE5D2;</i>' +
-      //    '</button>' +
-      //  '</snap-dragger>'
-      //);
-    }
 
     $scope.mapModal = {
       content: $sce.trustAsHtml(

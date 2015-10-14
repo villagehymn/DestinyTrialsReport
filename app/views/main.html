@@ -1,5 +1,11 @@
 <div class="wrapper" ng-class="{'my-dtr': subdomain}">
-  <div id="controls" class="controls shadow-z-1" ng-controller="HeaderCtrl">
+  <snap-drawer ng-if="screenSize.xs || screenSize.sm">
+    <div class="controls shadow-z-1" ng-controller="HeaderCtrl">
+      <header ng-include="'views/controls/top.html'"></header>
+      <footer ng-include="'views/controls/bottom.html'"></footer>
+    </div>
+  </snap-drawer>
+  <div class="controls shadow-z-1" ng-controller="HeaderCtrl" ng-if="screenSize.md || screenSize.lg">
     <header ng-include="'views/controls/top.html'"></header>
     <footer ng-include="'views/controls/bottom.html'"></footer>
   </div>
