@@ -10,16 +10,14 @@
   <div ng-include="'views/blog/index.html'"></div>
 </div>
 
-<div class="players" ng-if="fireteam[0] && !status" ng-if="screenSize.md || screenSize.ls">
+<div class="players" ng-if="fireteam[0] && !status">
   <div class="player-container"
        ng-controller="PlayerCtrl as Player"
        ng-repeat="player in fireteam track by $index"
-       ng-include="'views/player/index.html'">
+       ng-include="'views/player/index.html'"
+       ng-if="screenSize.md || screenSize.lg">
   </div>
-</div>
-
-<div class="players" ng-if="fireteam[0] && !status" ng-if="screenSize.xs || screenSize.sm">
-  <div class="row">
+  <div class="row" ng-if="screenSize.xs || screenSize.sm">
     <div ng-if="screenSize.xs">
       <ul rn-carousel>
         <li class="col-xs-4" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></li>

@@ -3,7 +3,6 @@
 angular.module('trialsReportApp')
   .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams) {
 
-
     $scope.mapModal = {
       content: $sce.trustAsHtml(
         '<div class="map-modal">' +
