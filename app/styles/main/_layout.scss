@@ -34,3 +34,35 @@
     width: 100vw;
   }
 }
+
+@media all and (max-width: 1550px) {
+  .players {
+    margin: 0 !important;
+  }
+}
+
+@media all and (max-width: 990px) {
+  .content {
+    width: 100vw;
+    left: 0;
+  }
+  .controls {
+    width: 85vw;
+    min-width: 0;
+  }
+  .snap-drawer {
+    width: 85vw;
+  }
+  .players {
+    width: 100%;
+  }
+  .title-bar__title {
+    font-size: 1.8em !important;
+  }
+  .title-bar {
+    max-height: 80px;
+  }
+  .material-icons.light {
+    color: white;
+  }
+}

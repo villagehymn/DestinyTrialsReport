@@ -1,0 +1,35 @@
+<div class="container-fluid" ng-if="status">
+  <div class="row">
+    <div class="text-center alert alert-warning">
+      <strong>{{status}}</strong>
+    </div>
+  </div>
+</div>
+
+<div class="blog" ng-show="!fireteam[0] && !status">
+  <div ng-include="'views/blog/index.html'"></div>
+</div>
+
+<div class="players" ng-if="fireteam[0] && !status" ng-if="screenSize.md || screenSize.ls">
+  <div class="player-container"
+       ng-controller="PlayerCtrl as Player"
+       ng-repeat="player in fireteam track by $index"
+       ng-include="'views/player/index.html'">
+  </div>
+</div>
+
+<div class="players" ng-if="fireteam[0] && !status" ng-if="screenSize.xs || screenSize.sm">
+  <div class="row">
+    <div ng-if="screenSize.xs">
+      <ul rn-carousel>
+        <li class="col-xs-4" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></li>
+      </ul>
+    </div>
+    <div ng-if="screenSize.sm">
+      <ul rn-carousel>
+        <li><div class="col-xs-12" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></div></li>
+        <li><div class="col-xs-12"></div></li>
+      </ul>
+    </div>
+  </div>
+</div>

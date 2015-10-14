@@ -88,13 +88,27 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
     .catch(reportProblems);
 };
 
+function getContentOffset(innerWidth) {
+  var contentOffset = Math.round(innerWidth * 0.85);
+  return contentOffset > 420 ? 420 : contentOffset
+}
+
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats, $window, snapRemote, $timeout) {
     $scope.currentMap = DestinyCrucibleMapDefinition[3848655103];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
+    });
+
+    $scope.snapOpts = {
+      maxPosition: getContentOffset($window.innerWidth)
+    };
+    var w = angular.element($window);
+    w.bind('resize', function () {
+      $scope.snapOpts.maxPosition = getContentOffset($window.innerWidth);
+      $timeout( function(){ snapRemote.toggle('left') }, 300);
     });
 
     $scope.DestinyCrucibleMapDefinition = DestinyCrucibleMapDefinition;
