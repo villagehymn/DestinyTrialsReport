@@ -18,9 +18,10 @@
         </div>
       </div>
       <div class="weapon__label" ng-if="!hasExotic && !exoticArmor.hazard">
-        'No exotic armor equipped
+        <span class="player-hazard">No Exotic armor equipped</span>
       </div>
-      <div class="weapon__label" ng-repeat="hazard in exoticArmor.hazards" ng-bind="hazard">
+      <div class="weapon__hazards">
+        <span class="player-hazard" ng-repeat="hazard in exoticArmor.hazards">{{hazard}}</span>
       </div>
     </div>
   </div>

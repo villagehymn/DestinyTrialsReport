@@ -26,6 +26,10 @@
   }
 }
 
+.weapon__hazards .player-hazard {
+  background: $hazard-background;
+}
+
 .player-hazard--developer {
   background: white;
   text-shadow: none;
