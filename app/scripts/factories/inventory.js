@@ -171,10 +171,10 @@ angular.module('trialsReportApp')
         var definition;
 
         if (weaponBuckets.indexOf(item.bucketHash) > -1) {
-
           definition = setItemDefinition(item, DestinyWeaponDefinition);
           weapons[bucket].definition = definition;
           weapons[bucket].nodes = item.nodes;
+          weapons[bucket].damage = item.primaryStat.value;
           setWeaponHazards(item, weapons, bucket, definition);
 
           for (var a = 0; a < weapons[bucket].nodes.length; a++) {

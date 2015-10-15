@@ -77,6 +77,14 @@
   margin-bottom: .2em;
 }
 
+.weapon__damage {
+  font-size: .8em;
+  line-height: 1.6em;
+  color: lighten($main-dark, 40%);
+  margin-left: .5em;
+  text-transform: uppercase;
+}
+
 .weapon__info {
   flex-grow: 1;
   padding-left: 1em;
