@@ -42,6 +42,9 @@ function addFireteamMember(fireTeam, $scope, locationChanger) {
         {name: 'Enter Player Name', invalidResult: true}
       );
     }
+    if ($scope.fireteam.length === 3) {
+      $scope.focusOnPlayers = true;
+    }
   });
 }
 
@@ -108,6 +111,7 @@ angular.module('trialsReportApp')
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
 
     $scope.weaponKills = weaponKills;
+
     $scope.screenSize = {};
     $scope.screenSize.xs = screenSize.on('xs', function (match) { $scope.screenSize.xs = match; });
     $scope.screenSize.sm = screenSize.on('sm', function (match) { $scope.screenSize.sm = match; });
@@ -115,6 +119,11 @@ angular.module('trialsReportApp')
     $scope.screenSize.lg = screenSize.on('lg', function (match) { $scope.screenSize.lg = match; });
 
     $scope.statNamesByHash = statNamesByHash;
+
+    $scope.focusOnPlayers = false;
+    $scope.switchFocus = function () {
+      $scope.focusOnPlayers = !$scope.focusOnPlayers;
+    }
 
     var controlEl = angular.element(document.querySelector('#controls'));
     var contentEl = angular.element(document.querySelector('#content'));

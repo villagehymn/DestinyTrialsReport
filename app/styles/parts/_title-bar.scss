@@ -21,13 +21,13 @@
   }
 }
 
-@media all and (max-width: 1500px) {
+@media all and (max-width: 1500px) and (min-width: 1279px) {
   .title-bar__title {
     font-size: 1.5em;
   }
 }
 
-@media all and (max-width: 1380px) {
+@media all and (max-width: 1380px) and (min-width: 1279px) {
   .title-bar__title {
     font-size: 2em;
     line-height: 1.1;

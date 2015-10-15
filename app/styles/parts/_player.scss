@@ -1,4 +1,5 @@
 .players {
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -17,6 +18,12 @@
   }
   .player-container {
     padding: 1em .5em;
+  }
+}
+
+@media all and (max-width: 991px) {
+  .players {
+    display: block;
   }
 }
 

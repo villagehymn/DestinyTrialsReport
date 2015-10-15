@@ -5,12 +5,12 @@
 
 .wrapper {
   display: flex;
-  min-width: 1280px;
+  overflow-y: auto;
 }
 
 .controls {
-  height: 100vh;
-  min-width: 320px;
+  min-height: 100vh;
+  min-width: 300px;
   width: 25vw;
   max-width: 420px;
   display: flex;
@@ -22,47 +22,63 @@
 }
 
 .content {
-  height: 100vh;
+  min-height: 100vh;
   flex-grow: 1;
   display: flex;
-  overflow-y: auto;
+  overflow: hidden;
 }
-
 
 @media all and (max-width: 1280px) {
-  .content {
-    width: 100vw;
+  .wrapper {
+    display: block;
+    overflow: auto;
   }
-}
 
-@media all and (max-width: 1550px) {
-  .players {
-    margin: 0 !important;
-  }
-}
-
-@media all and (max-width: 990px) {
-  .content {
-    width: 100vw;
-    left: 0;
-  }
   .controls {
-    width: 85vw;
-    min-width: 0;
-  }
-  .snap-drawer {
-    width: 85vw;
-  }
-  .players {
+    position: fixed;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    bottom: 0;
+    overflow-y: auto;
+    right: 0;
     width: 100%;
+    transition: transform cubic-bezier(.55,0,.1,1) .3s;
+    height: 95vh;
+    min-height: auto;
   }
-  .title-bar__title {
-    font-size: 1.8em !important;
+
+  .content {
+    width: 100%;
+    filter: blur(2px);
+    transition: filter linear .3s;
   }
-  .title-bar {
-    max-height: 80px;
+
+  .overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 50;
+    transition: opacity linear .3s;
   }
-  .material-icons.light {
-    color: white;
+
+  .focus-on-players {
+    .controls {
+      transform: translate(-50%, calc(100% - 3em));
+      overflow-y: hidden;
+    }
+
+    .content {
+      filter: blur(0px);
+    }
+
+    .overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 }
