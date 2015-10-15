@@ -5,64 +5,98 @@
 
 .wrapper {
   display: flex;
-  min-width: 1280px;
-}
-
-.controls {
-  height: 100vh;
-  min-width: 320px;
-  width: 25vw;
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  background: $header-bg;
-  overflow-x: hidden;
-  color: $text-on-dark;
-  z-index: 99;
-}
-
-.content {
-  height: 100vh;
-  flex-grow: 1;
-  display: flex;
+  align-items: stretch;
   overflow-y: auto;
 }
 
+.controls-wrapper {
+  min-height: 100vh;
+  min-width: 300px;
+  width: 25vw;
+  max-width: 420px;
+  overflow-x: hidden;
+  z-index: 99;
+  display: flex;
+}
+
+.controls {
+  width: 100%;
+  background: $header-bg;
+  display: flex;
+  flex-direction: column;
+  color: $text-on-dark;
+  flex-grow: 1;
+}
+
+.content {
+  min-height: 100vh;
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+}
 
 @media all and (max-width: 1280px) {
-  .content {
-    width: 100vw;
+  .wrapper {
+    display: block;
+    overflow: auto;
+    min-height: 100vh;
   }
-}
 
-@media all and (max-width: 1550px) {
-  .players {
-    margin: 0 !important;
-  }
-}
-
-@media all and (max-width: 990px) {
-  .content {
-    width: 100vw;
-    left: 0;
-  }
-  .controls {
-    width: 85vw;
-    min-width: 0;
-  }
-  .snap-drawer {
-    width: 85vw;
-  }
-  .players {
+  .controls-wrapper {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
     width: 100%;
+    transition: transform cubic-bezier(.55,0,.1,1) .3s;
+    min-height: 100vh;
+    padding: 3em 15px 0 15px;
+    box-shadow: none;
   }
-  .title-bar__title {
-    font-size: 1.8em !important;
+
+  .controls {
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
   }
-  .title-bar {
-    max-height: 80px;
+
+  .content {
+    position: fixed;
+    width: 100%;
+    pointer-events: none;
+    top: 0;
   }
-  .material-icons.light {
-    color: white;
+
+  .wrapper {
+    overflow: hidden;
+  }
+
+  .overlay {
+    cursor: pointer;
+    pointer-events: auto;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 50;
+    transition: opacity linear .3s;
+  }
+
+  .focus-on-players {
+    .controls-wrapper {
+      position: fixed;
+      transform: translate(-50%, calc(100vh - 6em));
+    }
+
+    .content {
+      position: static;
+      filter: blur(0px);
+      pointer-events: auto;
+    }
+
+    .overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 }

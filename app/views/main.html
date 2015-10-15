@@ -1,47 +1,46 @@
-<div class="wrapper" ng-class="{'my-dtr': subdomain}">
-  <snap-drawer ng-if="screenSize.xs || screenSize.sm">
-    <div class="controls shadow-z-1" ng-controller="HeaderCtrl">
+<div class="wrapper" ng-class="{'my-dtr': subdomain, 'focus-on-players': focusOnPlayers}">
+  <div class="controls-wrapper shadow-z-2">
+    <div class="controls" ng-controller="HeaderCtrl">
+      <div class="controls__expand" ng-if="screenSize.xs || screenSize.sm || screenSize.md" ng-click="switchFocus()">
+        <span ng-if="!fireteam[0]">Blog</span>
+        <i class="material-icons">&#xE5CF;</i>
+      </div>
       <header ng-include="'views/controls/top.html'"></header>
       <footer ng-include="'views/controls/bottom.html'"></footer>
     </div>
-  </snap-drawer>
-  <div class="controls shadow-z-1" ng-controller="HeaderCtrl" ng-if="screenSize.md || screenSize.lg">
-    <header ng-include="'views/controls/top.html'"></header>
-    <footer ng-include="'views/controls/bottom.html'"></footer>
   </div>
-  <snap-content style="background-color: #fff" snap-options="snapOpts" ng-if="screenSize.xs || screenSize.sm">
-    <snap-dragger>
-      <button class="btn btn-icon" snap-toggle>
-        <i class="material-icons">&#xE5D2;</i>
-      </button>
-    </snap-dragger>
-    <div class="content" ng-include="'views/content.html'"></div>
-  </snap-content>
-  <div class="content" ng-include="'views/content.html'" ng-if="screenSize.md || screenSize.lg"></div>
+  <div class="content">
+    <div class="container-fluid" ng-if="status">
+      <div class="row">
+        <div class="text-center alert alert-warning">
+          <strong>{{status}}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="blog" ng-show="!fireteam[0] && !status">
+      <div ng-include="'views/blog/index.html'"></div>
+    </div>
+    <div class="players" ng-if="fireteam[0] && !status">
+      <div class="player-container"
+           ng-if="screenSize.md || screenSize.lg"
+           ng-controller="PlayerCtrl as Player"
+           ng-repeat="player in fireteam track by $index"
+           ng-include="'views/player/index.html'">
+      </div>
+      <div class="row" ng-if="screenSize.xs || screenSize.sm">
+        <div ng-if="screenSize.xs">
+          <ul rn-carousel>
+            <li class="col-xs-4" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></li>
+          </ul>
+        </div>
+        <div ng-if="screenSize.sm">
+          <ul rn-carousel>
+            <li><div class="col-xs-12" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></div></li>
+            <li><div class="col-xs-12"></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div ng-click="switchFocus()" class="overlay"></div>
+  </div>
 </div>
-
-<!--<div class="wrapper" ng-class="{'my-dtr': subdomain}" ng-if="screenSize.md || screenSize.lg">-->
-  <!--<div id="controls"  class="controls shadow-z-1" ng-controller="HeaderCtrl">-->
-    <!--<header ng-include="'views/controls/top.html'"></header>-->
-    <!--<footer ng-include="'views/controls/bottom.html'"></footer>-->
-  <!--</div>-->
-  <!--<div class="content">-->
-    <!--<div class="container-fluid" ng-if="status">-->
-      <!--<div class="row">-->
-        <!--<div class="text-center alert alert-warning">-->
-          <!--<strong>{{status}}</strong>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="blog" ng-show="!fireteam[0] && !status">-->
-      <!--<div ng-include="'views/blog/index.html'"></div>-->
-    <!--</div>-->
-    <!--<div class="players" ng-if="fireteam[0] && !status">-->
-      <!--<div class="player-container"-->
-           <!--ng-controller="PlayerCtrl as Player"-->
-           <!--ng-repeat="player in fireteam track by $index"-->
-           <!--ng-include="'views/player/index.html'">-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->

@@ -42,6 +42,9 @@ function addFireteamMember(fireTeam, $scope, locationChanger) {
         {name: 'Enter Player Name', invalidResult: true}
       );
     }
+    if ($scope.fireteam.length === 3) {
+      $scope.focusOnPlayers = true;
+    }
   });
 }
 
@@ -95,20 +98,11 @@ function getContentOffset(innerWidth) {
 
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats, $window, snapRemote, $timeout) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats, $window, $timeout) {
     $scope.currentMap = DestinyCrucibleMapDefinition[3848655103];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
-    });
-
-    $scope.snapOpts = {
-      maxPosition: getContentOffset($window.innerWidth)
-    };
-    var w = angular.element($window);
-    w.bind('resize', function () {
-      $scope.snapOpts.maxPosition = getContentOffset($window.innerWidth);
-      $timeout( function(){ snapRemote.toggle('left') }, 300);
     });
 
     $scope.DestinyCrucibleMapDefinition = DestinyCrucibleMapDefinition;
@@ -117,6 +111,13 @@ angular.module('trialsReportApp')
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
 
     $scope.weaponKills = weaponKills;
+
+    screenSize.rules = {
+      xs: '(max-width: 640px)',
+      sm: '(min-width: 641px) and (max-width: 960px)',
+      md: '(min-width: 961px) and (max-width: 1280px)',
+      lg: '(min-width: 1281px)'
+    };
     $scope.screenSize = {};
     $scope.screenSize.xs = screenSize.on('xs', function (match) { $scope.screenSize.xs = match; });
     $scope.screenSize.sm = screenSize.on('sm', function (match) { $scope.screenSize.sm = match; });
@@ -124,6 +125,11 @@ angular.module('trialsReportApp')
     $scope.screenSize.lg = screenSize.on('lg', function (match) { $scope.screenSize.lg = match; });
 
     $scope.statNamesByHash = statNamesByHash;
+
+    $scope.focusOnPlayers = false;
+    $scope.switchFocus = function () {
+      $scope.focusOnPlayers = !$scope.focusOnPlayers;
+    }
 
     var controlEl = angular.element(document.querySelector('#controls'));
     var contentEl = angular.element(document.querySelector('#content'));
