@@ -5,20 +5,27 @@
 
 .wrapper {
   display: flex;
+  align-items: stretch;
   overflow-y: auto;
 }
 
-.controls {
+.controls-wrapper {
   min-height: 100vh;
   min-width: 300px;
   width: 25vw;
   max-width: 420px;
+  overflow-x: hidden;
+  z-index: 99;
+  display: flex;
+}
+
+.controls {
+  width: 100%;
+  background: $header-bg;
   display: flex;
   flex-direction: column;
-  background: $header-bg;
-  overflow-x: hidden;
   color: $text-on-dark;
-  z-index: 99;
+  flex-grow: 1;
 }
 
 .content {
@@ -32,30 +39,39 @@
   .wrapper {
     display: block;
     overflow: auto;
+    min-height: 100vh;
+  }
+
+  .controls-wrapper {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100%;
+    transition: transform cubic-bezier(.55,0,.1,1) .3s;
+    min-height: 100vh;
+    padding: 3em 15px 0 15px;
+    box-shadow: none;
   }
 
   .controls {
-    position: fixed;
-    border-top-left-radius: 2em;
-    border-top-right-radius: 2em;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    bottom: 0;
-    overflow-y: auto;
-    right: 0;
-    width: 100%;
-    transition: transform cubic-bezier(.55,0,.1,1) .3s;
-    height: 95vh;
-    min-height: auto;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
   }
 
   .content {
+    position: fixed;
     width: 100%;
-    filter: blur(2px);
-    transition: filter linear .3s;
+    pointer-events: none;
+    top: 0;
+  }
+
+  .wrapper {
+    overflow: hidden;
   }
 
   .overlay {
+    cursor: pointer;
+    pointer-events: auto;
     position: fixed;
     left: 0;
     top: 0;
@@ -67,13 +83,16 @@
   }
 
   .focus-on-players {
-    .controls {
-      transform: translate(-50%, calc(100% - 3em));
-      overflow-y: hidden;
+    .controls-wrapper {
+      bottom: 0;
+      position: fixed;
+      transform: translate(-50%, calc(100% - 6em));
     }
 
     .content {
+      position: static;
       filter: blur(0px);
+      pointer-events: auto;
     }
 
     .overlay {
