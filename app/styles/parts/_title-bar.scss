@@ -37,3 +37,14 @@
     }
   }
 }
+
+@media all and (max-width: 400px) {
+  .title-bar__title {
+    font-size: 2em;
+    line-height: 1.1;
+
+    .hide-on-small {
+      display: none;
+    }
+  }
+}

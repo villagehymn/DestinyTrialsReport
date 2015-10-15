@@ -84,9 +84,8 @@
 
   .focus-on-players {
     .controls-wrapper {
-      bottom: 0;
       position: fixed;
-      transform: translate(-50%, calc(100% - 6em));
+      transform: translate(-50%, calc(100vh - 6em));
     }
 
     .content {
