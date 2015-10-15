@@ -115,8 +115,7 @@ angular
     'toastr',
     'ui.bootstrap.tpls',
     'ui.bootstrap.progressbar',
-    'ui.bootstrap.tabs',
-    'snap'
+    'ui.bootstrap.tabs'
   ])
   .config(window.$QDecorator)
   .config(function ($modalProvider) {
@@ -134,12 +133,6 @@ angular
       placement: 'auto top',
       trigger: 'hover'
     });
-  })
-  .config(function(snapRemoteProvider) {
-    snapRemoteProvider.globalOptions = {
-      tapToClose: true,
-      touchToDrag : false
-    }
   })
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
     $.material.init();
