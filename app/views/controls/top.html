@@ -6,11 +6,11 @@
   </div>
   <div class="platform-toggle">
     <div class="togglebutton">
-      <label class="platform-toggle__name" ng-class="{'is-active' : platformValue}"><img src="images/ps.svg" alt="PlayStation"></label>
+      <label class="platform-toggle__name" ng-class="{'is-active' : platformValue}" ng-click="platformValue = true"><img src="images/ps.svg" alt="PlayStation"></label>
       <label class="platform-toggle__btn">
         <input type="checkbox" ng-click="togglePlatform()" ng-model="platformValue" ng-true-value="false" ng-false-value="true">
       </label>
-      <label class="platform-toggle__name" ng-class="{'is-active' : !platformValue}"><img src="images/xbox.svg" alt="Xbox"></label>
+      <label class="platform-toggle__name" ng-class="{'is-active' : !platformValue}" ng-click="platformValue = false"><img src="images/xbox.svg" alt="Xbox"></label>
     </div>
   </div>
 </div>

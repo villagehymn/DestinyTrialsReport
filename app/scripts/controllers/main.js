@@ -112,6 +112,12 @@ angular.module('trialsReportApp')
 
     $scope.weaponKills = weaponKills;
 
+    screenSize.rules = {
+      xs: '(max-width: 640px)',
+      sm: '(min-width: 641px) and (max-width: 960px)',
+      md: '(min-width: 961px) and (max-width: 1280px)',
+      lg: '(min-width: 1281px)'
+    };
     $scope.screenSize = {};
     $scope.screenSize.xs = screenSize.on('xs', function (match) { $scope.screenSize.xs = match; });
     $scope.screenSize.sm = screenSize.on('sm', function (match) { $scope.screenSize.sm = match; });
