@@ -2,6 +2,7 @@
   <div class="controls-wrapper shadow-z-2">
     <div class="controls" ng-controller="HeaderCtrl">
       <div class="controls__expand" ng-if="screenSize.xs || screenSize.sm || screenSize.md" ng-click="switchFocus()">
+        <span ng-if="!fireteam[0]">Blog</span>
         <i class="material-icons">&#xE5CF;</i>
       </div>
       <header ng-include="'views/controls/top.html'"></header>

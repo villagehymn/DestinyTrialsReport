@@ -1,7 +1,7 @@
 .blog {
   align-self: center;
-  max-height: 100vh;
-  margin: auto;
+  margin: 0 auto;
+  padding: 1em;
 }
 
 .blog-post {
@@ -16,6 +16,7 @@
   margin-left: -2em;
   margin-top: -2em;
   margin-right: -2em;
+  margin-bottom: 1.5em;
   border-top-left-radius: 2em;
   border-top-right-radius: 2em;
   background-position: center;

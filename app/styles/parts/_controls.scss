@@ -34,14 +34,29 @@ header {
   cursor: pointer;
   text-align: center;
 
+  span {
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
+
   i {
-    transition: transform cubic-bezier(.55,0,.1,1) .3s;
+    vertical-align: middle;
     font-size: 2em;
     line-height: 1.5em;
     color: white;
   }
 
-  .focus-on-players & i {
-    transform: rotateZ(180deg);
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .focus-on-players & {
+    span {
+      display: none;
+    }
+
+    i {
+      transform: rotateZ(180deg);
+    }
   }
 }
