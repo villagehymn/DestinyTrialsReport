@@ -46,7 +46,7 @@
 .player-header__gamertag {
   margin: 0;
   font-weight: normal;
-  font-size: 1.3em;
+  font-size: 1.5em;
   line-height: 1.5em;
   white-space: nowrap;
   overflow: hidden;
@@ -55,7 +55,7 @@
 }
 
 .player-info {
-  font-size: .9em;
+  font-size: .8em;
   flex-grow: 1;
   text-shadow: $text-shadow;
 }
@@ -71,7 +71,7 @@
 }
 
 .player-level {
-  padding: 0 1em;
+  padding: 0 1em 0 0.5em;
   text-align: right;
   float: right;
   text-shadow: $text-shadow;
