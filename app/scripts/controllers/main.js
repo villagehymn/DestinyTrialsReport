@@ -91,14 +91,8 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
     .catch(reportProblems);
 };
 
-function getContentOffset(innerWidth) {
-  var contentOffset = Math.round(innerWidth * 0.85);
-  return contentOffset > 420 ? 420 : contentOffset
-}
-
-
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats, $window, $timeout) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats) {
     $scope.currentMap = DestinyCrucibleMapDefinition[3848655103];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
@@ -129,22 +123,7 @@ angular.module('trialsReportApp')
     $scope.focusOnPlayers = false;
     $scope.switchFocus = function () {
       $scope.focusOnPlayers = !$scope.focusOnPlayers;
-    }
-
-    var controlEl = angular.element(document.querySelector('#controls'));
-    var contentEl = angular.element(document.querySelector('#content'));
-    //if ($scope.screenSize.xs || $scope.screenSize.sm) {
-      //controlEl.wrap('<div class="snap-drawers"></div>')
-      //  .wrap('<snap-drawer class="snap-drawer snap-drawer-left"></snap-drawer>');
-      //contentEl.wrap('<snap-content id="snap-content" style="background-color: #fff" snap-options="snapOpts"></snap-content>');
-      //angular.element(document.querySelector('#snap-content')).prepend(
-      //  '<snap-dragger>' +
-      //    '<button class="btn btn-icon" snap-toggle>' +
-      //      '<i class="material-icons">&#xE5D2;</i>' +
-      //    '</button>' +
-      //  '</snap-dragger>'
-      //);
-    //}
+    };
 
     $scope.suggestRecentPlayers = function () {
       if (angular.isUndefined($scope.recentPlayers)) {
