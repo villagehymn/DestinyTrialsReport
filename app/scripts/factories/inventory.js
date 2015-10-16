@@ -108,7 +108,7 @@ function setWeaponHazards(item, weapons, bucket, definition) {
     if (itemNode.isActivated) {
       for (var n = 0; n < itemNode.perkHashes.length; n++) {
         if (hazardMiscWeaponPerks.indexOf(itemNode.perkHashes[n]) > -1) {
-          itemNode.isHazard = true;
+          weapons[bucket].hazards.push(itemNode.name);
         }
       }
     }
@@ -176,13 +176,6 @@ angular.module('trialsReportApp')
           weapons[bucket].nodes = item.nodes;
           weapons[bucket].damage = item.primaryStat.value;
           setWeaponHazards(item, weapons, bucket, definition);
-
-          for (var a = 0; a < weapons[bucket].nodes.length; a++) {
-            var weaponPerk = weapons[bucket].nodes[a];
-            if (weaponPerk.isHazard) {
-              weapons[bucket].hazards.push(weaponPerk.name);
-            }
-          }
 
         } else if (armorBuckets.indexOf(item.bucketHash) > -1) {
 
