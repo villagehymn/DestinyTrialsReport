@@ -31,4 +31,24 @@ angular.module('trialsReportApp')
       },
       templateUrl: 'views/directives/stats.html'
     };
-});
+  }).directive('buildStats', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        stats: '=buildStats'
+      },
+      link: function ($scope, element, attrs) {
+        $scope.statPopover = function (stat) {
+          var popover;
+
+          if (stat.tier) {
+            popover = {content:'Tier ' + stat.tier + ' — ' + + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown}
+          } else {
+            popover = {content: stat.name + ': ' + (stat.value / 10) * 100 + '%'}
+          }
+          return popover;
+        };
+      },
+      templateUrl: 'views/directives/build.html'
+    };
+  });

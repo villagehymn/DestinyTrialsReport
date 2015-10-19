@@ -1,39 +1,15 @@
 <div class="player-tab--equipped">
+
   <div class="player-tab__section">
     <div weapon-nodes="[player.inventory.weapons.primary, player.inventory.weapons.special, player.inventory.weapons.heavy]"></div>
   </div>
   <div class="player-tab__section">
     <div armor="player.inventory.armor.equipped" has-exotic="player.inventory.armor.equipped.definition.tierType === 6"></div>
   </div>
-  <div class="player-tab__section">
-    <div class="row">
-      <div class="player-cooldown col-xs-4"
-           ng-repeat="stat in [player.characterInfo.stats.STAT_INTELLECT, player.characterInfo.stats.STAT_DISCIPLINE, player.characterInfo.stats.STAT_STRENGTH] track by $index"
-           bs-popover="{content:'Tier ' + stat.tier + ' — ' + + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown}">
-        <div class="player-cooldown__label" ng-bind="stat.name"></div>
-        <div class="player-cooldown__nr">
-          <div class="player-cooldown__tier" ng-class="{'is-incomplete': value !== 60}" ng-repeat="value in stat.tiers track by $index">
-            <progress max="60" animate="true" class="progress not-rounded">
-              <bar value="value" class="progress-bar-primary"></bar>
-            </progress>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="player-tab__section">
-    <div class="row">
-      <div class="player-cooldown col-xs-4"
-           ng-repeat="stat in [player.characterInfo.stats.STAT_ARMOR, player.characterInfo.stats.STAT_RECOVERY, player.characterInfo.stats.STAT_AGILITY] track by $index">
-        <div class="player-cooldown__label" ng-bind="statNamesByHash[stat.statHash]"></div>
-        <div class="player-cooldown__nr">
-          <progress max="10" animate="true" class="progress not-rounded">
-            <bar value="stat.value" class="progress-bar-primary"></bar>
-          </progress>
-        </div>
-      </div>
-    </div>
-  </div>
+
+  <div build-stats="[player.characterInfo.stats.STAT_INTELLECT, player.characterInfo.stats.STAT_DISCIPLINE, player.characterInfo.stats.STAT_STRENGTH]"></div>
+  <div build-stats="[player.characterInfo.stats.STAT_ARMOR, player.characterInfo.stats.STAT_RECOVERY, player.characterInfo.stats.STAT_AGILITY]"></div>
+
   <div class="player-tab__section">
     <div class="row">
       <div class="player-perk col-xs-6" ng-repeat="subclassNode in player.inventory.subclass.displayedNodes | orderObjectBy:'column'" bs-popover="{content:subclassNode.description}">

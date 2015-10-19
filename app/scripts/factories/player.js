@@ -109,26 +109,28 @@ function getAbilityCooldown(subclass, ability, tier) {
 
 function setStatPercentage(player) {
   if (player.characterInfo && player.characterInfo.stats) {
-    var stats = ['STAT_INTELLECT', 'STAT_DISCIPLINE', 'STAT_STRENGTH'];
+    var statsWithTiers = ['STAT_INTELLECT', 'STAT_DISCIPLINE', 'STAT_STRENGTH'];
+    var stats = ['STAT_INTELLECT', 'STAT_DISCIPLINE', 'STAT_STRENGTH', 'STAT_ARMOR', 'STAT_RECOVERY', 'STAT_AGILITY'];
     for (var s = 0; s < stats.length; s++) {
-      var value = player.characterInfo.stats[stats[s]].value;
-      var normalized = value > 300 ? 300 : value;
-      var tier = Math.floor(normalized / 60);
-      var tiers = [];
+      var statHash = {};
+      statHash.name = statNames[stats[s]];
+      statHash.value = player.characterInfo.stats[stats[s]].value;
 
-      var remaining = value;
-      for (var t = 0; t < 5; t++) {
-        remaining -= tiers[t] = remaining > 60 ? 60 : remaining;
+      if (statsWithTiers.indexOf(stats[s]) > -1) {
+        statHash.normalized = statHash.value > 300 ? 300 : statHash.value;
+        statHash.tier = Math.floor(statHash.normalized / 60);
+        statHash.tiers = [];
+        statHash.remaining = statHash.value;
+        for (var t = 0; t < 5; t++) {
+          statHash.remaining -= statHash.tiers[t] = statHash.remaining > 60 ? 60 : statHash.remaining;
+        }
+        statHash.cooldown = getAbilityCooldown(player.characterInfo.subclassName, stats[s], statHash.tier);
+        statHash.percentage = +(100 * statHash.normalized / 300).toFixed()
+      } else {
+        statHash.percentage = +(100 * statHash.value / 10).toFixed()
       }
 
-      player.characterInfo.stats[stats[s]] = {
-        name: statNames[stats[s]],
-        value: value,
-        percentage: +(100 * normalized / 300).toFixed(),
-        tier: tier,
-        tiers: tiers,
-        cooldown: getAbilityCooldown(player.characterInfo.subclassName, stats[s], tier)
-      };
+      player.characterInfo.stats[stats[s]] = statHash;
     }
   }
 }
