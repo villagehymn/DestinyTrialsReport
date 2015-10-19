@@ -85,8 +85,8 @@ function setItemDefinition(item, definition) {
 function setArmorHazards(armors, itemPerk, weapons) {
   armors.doubleGrenadeHash = hazardDoubleGrenadeByPerk[itemPerk.perkHash];
   setHazard(itemPerk.perkHash, armors.equipped.hazards, hazardMiscArmorPerks);
+  setHazard(itemPerk.perkHash, armors.equipped.hazards, hazardBurnDefense);
   setHazard(itemPerk.perkHash, armors.equipped.increasedArmor, hazardIncreasedArmor);
-  setHazard(itemPerk.perkHash, armors.hazards, hazardBurnDefense);
 
   if (itemPerkToBucket[itemPerk.perkHash]) {
     weapons[itemPerkToBucket[itemPerk.perkHash]].hazards.push("Fast Reload");
@@ -207,18 +207,18 @@ angular.module('trialsReportApp')
       }
 
       if ((subclass.grenadeHash === FIREBOLT_GRENADE) && hasVikingFuneral && hasTouchOfFlame) {
-        subclass.hazards.push('Superburn Grenade');
+        armors.equipped.hazards.push('Superburn Grenade');
       }
 
       if (armors.equipped.increasedArmor) {
         if (armors.equipped.increasedArmor.indexOf(subclass.definition.itemHash) > -1) {
-          armors.hazards.push('Increased Armor');
+          armors.equipped.hazards.push('Increased Armor');
         }
       }
 
       if (armors.doubleGrenadeHash) {
         if (armors.doubleGrenadeHash === subclass.grenadeHash) {
-          armors.hazards.push('Double Grenade');
+          armors.equipped.hazards.push('Double Grenade');
         }
       }
 
