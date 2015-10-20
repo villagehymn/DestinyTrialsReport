@@ -25,10 +25,18 @@
 }
 
 .player-cooldown__tier {
-  display: inline-block;
+  float: left;
   width: 20%;
+
+  &.is-incomplete .progress .progress-bar-primary {
+    background: lighten(#607D8B, 25%);
+  }
 }
 
-.player-cooldown__tier + .player-cooldown__tier {
+.player-cooldown__tier:first-child {
+  margin-left: -1px;
+}
+
+.player-cooldown__tier {
   padding-left: 1px;
 }

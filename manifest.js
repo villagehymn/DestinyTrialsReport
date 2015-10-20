@@ -76,6 +76,7 @@ function extractDB(dbFile) {
         DestinyArmorDefinition[item.itemHash].name = item.itemName;
         DestinyArmorDefinition[item.itemHash].description = item.itemDescription;
         DestinyArmorDefinition[item.itemHash].icon = item.icon;
+        DestinyArmorDefinition[item.itemHash].tierType = item.tierType;
       }
 
       // Weapons
@@ -84,6 +85,7 @@ function extractDB(dbFile) {
         DestinyWeaponDefinition[item.itemHash].name = item.itemName;
         DestinyWeaponDefinition[item.itemHash].icon = item.icon;
         DestinyWeaponDefinition[item.itemHash].subType = item.itemSubType;
+        DestinyWeaponDefinition[item.itemHash].tierType = item.tierType;
       }
 
       switch (item.bucketTypeHash) {
@@ -94,6 +96,19 @@ function extractDB(dbFile) {
           break;
       }
     });
+
+    // No Time To Explain
+    if (!(4097026463 in DestinyWeaponDefinition)) {
+      DestinyWeaponDefinition[4097026463] = {
+        name: 'No Time To Explain',
+        icon: '/images/weapons/NoTimeToExplain.png',
+        subType: 13,
+        tierType: 6,
+        localIcon: true
+      };
+    } else {
+      console.log('No Time To Explain now exists in the manifest file and the override can be removed.');
+    }
 
     writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
     writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);

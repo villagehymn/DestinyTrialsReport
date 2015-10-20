@@ -42,6 +42,9 @@ function addFireteamMember(fireTeam, $scope, locationChanger) {
         {name: 'Enter Player Name', invalidResult: true}
       );
     }
+    if ($scope.fireteam.length === 3) {
+      $scope.focusOnPlayers = true;
+    }
   });
 }
 
@@ -88,7 +91,6 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
     .catch(reportProblems);
 };
 
-
 angular.module('trialsReportApp')
   .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats) {
     $scope.currentMap = DestinyCrucibleMapDefinition[3848655103];
@@ -103,11 +105,25 @@ angular.module('trialsReportApp')
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
 
     $scope.weaponKills = weaponKills;
+
+    screenSize.rules = {
+      xs: '(max-width: 640px)',
+      sm: '(min-width: 641px) and (max-width: 960px)',
+      md: '(min-width: 961px) and (max-width: 1280px)',
+      lg: '(min-width: 1281px)'
+    };
     $scope.screenSize = {};
     $scope.screenSize.xs = screenSize.on('xs', function (match) { $scope.screenSize.xs = match; });
     $scope.screenSize.sm = screenSize.on('sm', function (match) { $scope.screenSize.sm = match; });
     $scope.screenSize.md = screenSize.on('md', function (match) { $scope.screenSize.md = match; });
     $scope.screenSize.lg = screenSize.on('lg', function (match) { $scope.screenSize.lg = match; });
+
+    $scope.statNamesByHash = statNamesByHash;
+
+    $scope.focusOnPlayers = false;
+    $scope.switchFocus = function () {
+      $scope.focusOnPlayers = !$scope.focusOnPlayers;
+    };
 
     $scope.suggestRecentPlayers = function () {
       if (angular.isUndefined($scope.recentPlayers)) {

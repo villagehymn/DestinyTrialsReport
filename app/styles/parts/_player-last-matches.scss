@@ -58,3 +58,12 @@
 .last-match__medal {
   margin: .5em 0;
 }
+
+.last-match__medal-count {
+  text-align: center;
+
+  sup {
+    top: -.2em;
+    margin-right: .1em;
+  }
+}

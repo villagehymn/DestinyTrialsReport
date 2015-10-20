@@ -3,21 +3,29 @@
     <div class="player-header__title">
       <img class="player-header__emblem" ng-src="{{player.emblem.icon}}" alt="Emblem">
       <div class="player-header__char">
-        <h2 class="player-header__gamertag" ng-bind="player.name"></h2>
-        <div class="player-info" ng-show="player.characterInfo.level && player.characterInfo.className">
-          <span class="player-info__level" ng-bind="player.characterInfo.level"></span>
+        <div class="player-info">
+          <h2 class="player-header__gamertag" ng-bind="player.name"></h2>
           <span class="player-info__class" ng-bind="player.characterInfo.subclassName"></span>
-          <span class="player-info__light highlight"><span ng-bind-html="'<span>&#10022;</span>' + player.characterInfo.stats.STAT_LIGHT.value"></span></span>
-          <span class="player-info__grimoire">
-            <img src="/images/grimoire.png" alt="Grimoire"><span ng-bind="player.grimoire"></span>
+          <span class="player-info__grimoire" ng-show="player.grimoire">
+            <img src="/images/grimoire.png" alt="Grimoire">
+            <span ng-bind="player.grimoire"></span>
           </span>
+          <div ng-repeat="hazard in player.nonHazard track by $index"
+               ng-bind="hazard.split(' ')[1]" ng-class="{'player-hazard--developer': hazard === 'Site Developer', 'player-hazard--donator': hazard === 'Site Donator'}"
+               bs-popover="{content:DestinyHazardDefinition[hazard]}" class="player-hazard">
+          </div>
+        </div>
+        <div class="player-level">
+          <div class="player-level__light highlight" ng-show="player.characterInfo.stats.STAT_LIGHT.value">
+            <span>&#10022;</span>
+            <span ng-bind="player.characterInfo.stats.STAT_LIGHT.value"></span>
+          </div>
+          <div class="player-level__level" ng-show="player.characterInfo.level">
+            <span>Level</span>
+            <span ng-bind="player.characterInfo.level"></span>
+          </div>
         </div>
       </div>
-      <span class="edit-player__btn shadow-z-1"
-            ng-if="!subdomain && !$first" ng-click="toggleEdit(player)"
-            analytics-on analytics-event="Click" analytics-category="Edit">
-        <i class="material-icons">&#xE254;</i>
-      </span>
     </div>
   </div>
   <!--<div class="player__summary">-->
@@ -83,13 +91,13 @@
       </div>
     </div>
   </div>
-  <div class="player-hazards">
-    <div ng-repeat="hazard in player.nonHazard.concat(player.inventory.weapons.hazards, player.inventory.armor.hazards, player.inventory.subclass.hazards) track by $index"
-         ng-bind="hazard" ng-class="{'player-hazard--developer': hazard === 'Site Developer', 'player-hazard--donator': hazard === 'Site Donator'}"
-         bs-popover="{content:DestinyHazardDefinition[hazard]}" class="player-hazard">
-    </div>
-    <div class="player-hazard player-hazard--none">
-      This Guardian doesn't need cheap tricks
-    </div>
-  </div>
+  <!--<div class="player-hazards">-->
+    <!--<div ng-repeat="hazard in player.nonHazard.concat(player.inventory.weapons.hazards, player.inventory.armor.hazards, player.inventory.subclass.hazards) track by $index"-->
+         <!--ng-bind="hazard" ng-class="{'player-hazard--developer': hazard === 'Site Developer', 'player-hazard--donator': hazard === 'Site Donator'}"-->
+         <!--bs-popover="{content:DestinyHazardDefinition[hazard]}" class="player-hazard">-->
+    <!--</div>-->
+    <!--<div class="player-hazard player-hazard--none">-->
+      <!--This Guardian doesn't need cheap tricks-->
+    <!--</div>-->
+  <!--</div>-->
 </div>
