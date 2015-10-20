@@ -97,6 +97,18 @@ function extractDB(dbFile) {
       }
     });
 
+    // No Time To Explain
+    if (!(4097026463 in DestinyWeaponDefinition)) {
+      DestinyWeaponDefinition[4097026463] = {
+        name: 'No Time To Explain',
+        icon: '/common/destiny_content/icons/116ed02bc3cabd54ed1a88e914e3014d.jpg',
+        subType: 13,
+        tierType: 6
+      };
+    } else {
+      console.log('No Time To Explain now exists in the manifest file and the override can be removed.');
+    }
+
     writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
     writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
     writeDefinitionFile('app/scripts/definitions/en/DestinyWeaponDefinition.js',   'DestinyWeaponDefinition',   DestinyWeaponDefinition);
