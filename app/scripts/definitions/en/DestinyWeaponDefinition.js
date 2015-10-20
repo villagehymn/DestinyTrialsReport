@@ -5025,9 +5025,10 @@ var DestinyWeaponDefinition = {
   },
   "4097026463": {
     "name": "No Time To Explain",
-    "icon": "/common/destiny_content/icons/80da6cbfde86ecd6a8bb720c3df54d0b.jpg",
+    "icon": "/images/weapons/NoTimeToExplain.png",
     "subType": 13,
-    "tierType": 6
+    "tierType": 6,
+    "localIcon": true
   },
   "4100639360": {
     "name": "Sol Edge",

@@ -76,9 +76,17 @@ function defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame) {
 
 function setItemDefinition(item, definition) {
   if (item.itemHash in definition) {
+    if ('icon' in definition[item.itemHash]) {
+      if (definition[item.itemHash].localIcon !== true) {
+        if (definition[item.itemHash].icon.substr(0, 4) !== 'http') {
+          definition[item.itemHash].icon = 'https://www.bungie.net' + definition[item.itemHash].icon;
+        }
+      }
+    }
     return definition[item.itemHash];
   } else {
-    return {name: 'Classified', description: 'Classified', icon: '/img/misc/missing_icon.png', subType: 0};
+    console.log('Classified Item Hash: ' + item.itemHash);
+    return {name: 'Classified', description: 'Classified', icon: 'https://www.bungie.net/img/misc/missing_icon.png', subType: 0}; // tierType?
   }
 }
 
