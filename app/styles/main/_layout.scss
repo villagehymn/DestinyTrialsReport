@@ -20,8 +20,7 @@
 }
 
 .controls {
-  position: fixed;
-  width: 92%;
+  width: 100%;
   background: $header-bg;
   display: flex;
   flex-direction: column;
@@ -84,6 +83,11 @@
   }
 
   .focus-on-players {
+    .controls {
+      position: fixed;
+      width: 92%;
+    }
+
     .controls-wrapper {
       position: fixed;
       //transform: translate(-50%, calc(100vh - 6em));
