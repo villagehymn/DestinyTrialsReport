@@ -1,5 +1,3 @@
-<button class="btn btn-fab btn-raised btn-material-grey" ng-click="switchFocus()" ng-if="focusOnPlayers"><i class="material-icons">&#xE5CE;</i></button>
-
 <div class="wrapper" ng-class="{'my-dtr': subdomain, 'focus-on-players': focusOnPlayers}">
   <div class="controls-wrapper shadow-z-2">
     <div class="controls" ng-controller="HeaderCtrl">
@@ -30,6 +28,7 @@
            ng-include="'views/player/index.html'">
       </div>
       <div class="row" ng-if="screenSize.xs || screenSize.sm">
+        <button class="btn btn-fab btn-raised btn-material-grey" ng-click="switchFocus()" ng-if="focusOnPlayers"><i class="material-icons">&#xE5CE;</i></button>
         <div ng-if="screenSize.xs">
           <ul rn-carousel>
             <li class="col-xs-4" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></li>
