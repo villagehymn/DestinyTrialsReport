@@ -6,8 +6,8 @@ angular.module('trialsReportApp')
     if (!$scope.player.searched && !$scope.player.invalidResult) {
       $scope.player.isTeammate = true;
       currentAccount.getPlayerCard($scope.player).then(function (player) {
-        $scope.player = player;
-        currentAccount.compareLastMatchResults($scope.player, $scope.fireteam[0].activities.lastThree);
+        //$scope.$evalAsync( $scope.player = player);
+        currentAccount.compareLastMatchResults(player, $scope.fireteam[0].activities.lastThree);
       });
     }
 

@@ -1,0 +1,18 @@
+<div class="player-tab__section">
+  <div class="row">
+    <div class="player-cooldown col-xs-4"
+         ng-repeat="stat in stats track by $index" bs-popover="statPopover(stat)">
+      <div class="player-cooldown__label" ng-bind="stat.name"></div>
+      <div class="player-cooldown__nr">
+        <progress max="10" animate="true" class="progress not-rounded" ng-if="!stat.tiers">
+          <bar value="stat.value" class="progress-bar-primary"></bar>
+        </progress>
+        <div class="player-cooldown__tier" ng-class="{'is-incomplete': value !== 60}" ng-repeat="value in stat.tiers track by $index" ng-if="stat.tiers">
+          <progress max="60" animate="true" class="progress not-rounded">
+            <bar value="value" class="progress-bar-primary"></bar>
+          </progress>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

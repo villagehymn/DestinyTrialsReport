@@ -1,34 +1,21 @@
 <div class="player-tab--equipped">
+
   <div class="player-tab__section">
     <div weapon-nodes="[player.inventory.weapons.primary, player.inventory.weapons.special, player.inventory.weapons.heavy]"></div>
   </div>
   <div class="player-tab__section">
-    <div class="row">
-      <div class="player-cooldown col-xs-4"
-           ng-repeat="stat in [player.characterInfo.stats.STAT_INTELLECT, player.characterInfo.stats.STAT_DISCIPLINE, player.characterInfo.stats.STAT_STRENGTH]"
-           bs-popover="{content:'Tier ' + stat.tier + ' - cooldown is ' + stat.cooldown + '<br>' + stat.value + ' / 300 (' + stat.percentage + '%)'}">
-        <div class="player-cooldown__label" ng-bind="stat.name"></div>
-        <div class="player-cooldown__nr">
-          <div class="player-cooldown__tier" ng-repeat="value in stat.tiers track by $index">
-            <progress max="60" animate="true" class="progress not-rounded">
-              <bar value="value" class="progress-bar-primary"></bar>
-            </progress>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div armor="player.inventory.armor.equipped" has-exotic="player.inventory.armor.equipped.definition.tierType === 6"></div>
   </div>
+
+  <div build-stats="[player.characterInfo.stats.STAT_INTELLECT, player.characterInfo.stats.STAT_DISCIPLINE, player.characterInfo.stats.STAT_STRENGTH]"></div>
+  <div build-stats="[player.characterInfo.stats.STAT_ARMOR, player.characterInfo.stats.STAT_RECOVERY, player.characterInfo.stats.STAT_AGILITY]"></div>
+
   <div class="player-tab__section">
     <div class="row">
-      <div class="player-perk col-xs-6" ng-repeat="subclassNode in player.inventory.subclass.displayedNodes track by $index" bs-popover="{content:subclassNode.description}">
+      <div class="player-perk col-xs-6" ng-repeat="subclassNode in player.inventory.subclass.displayedNodes | orderObjectBy:'column'" bs-popover="{content:subclassNode.description}">
         <img class="player-perk__icon img-responsive" ng-src="{{subclassNode.icon}}" alt="{{subclassNode.name}}">
         <span class="player-perk__title" ng-bind="subclassNode.name"></span>
       </div>
-    </div>
-  </div>
-  <div class="player-tab__section">
-    <div class="row">
-      <div armor-list="[player.inventory.armor.head, player.inventory.armor.arms, player.inventory.armor.chest, player.inventory.armor.legs]"></div>
     </div>
   </div>
 </div>

@@ -1,5 +1,14 @@
-<div class="wrapper" ng-class="{'my-dtr': subdomain}">
-  <header ng-include="'views/shared/header.html'" ng-controller="HeaderCtrl"></header>
+<div class="wrapper" ng-class="{'my-dtr': subdomain, 'focus-on-players': focusOnPlayers}">
+  <div class="controls-wrapper shadow-z-2">
+    <div class="controls" ng-controller="HeaderCtrl">
+      <div class="controls__expand" ng-if="screenSize.xs || screenSize.sm || screenSize.md" ng-click="switchFocus()">
+        <span ng-if="!fireteam[0]">Blog</span>
+        <i class="material-icons">&#xE5CF;</i>
+      </div>
+      <header ng-include="'views/controls/top.html'"></header>
+      <footer ng-include="'views/controls/bottom.html'"></footer>
+    </div>
+  </div>
   <div class="content">
     <div class="container-fluid" ng-if="status">
       <div class="row">
@@ -8,12 +17,31 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid" ng-if="!status">
-      <div class="row">
-        <div ng-include="'views/blog/index.html'" ng-show="!fireteam[0]"></div>
-        <div ng-include="'views/fireteam/index.html'" ng-show="fireteam[0]"></div>
+    <div class="blog" ng-show="!fireteam[0] && !status">
+      <div ng-include="'views/blog/index.html'"></div>
+    </div>
+    <div class="players" ng-if="fireteam[0] && !status">
+      <div class="player-container"
+           ng-if="screenSize.md || screenSize.lg"
+           ng-controller="PlayerCtrl as Player"
+           ng-repeat="player in fireteam track by $index"
+           ng-include="'views/player/index.html'">
+      </div>
+      <div class="row" ng-if="screenSize.xs || screenSize.sm">
+        <button class="btn btn-fab btn-raised btn-material-grey" ng-click="switchFocus()" ng-if="focusOnPlayers"><i class="material-icons">&#xE5CE;</i></button>
+        <div ng-if="screenSize.xs">
+          <ul rn-carousel>
+            <li class="col-xs-4" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></li>
+          </ul>
+        </div>
+        <div ng-if="screenSize.sm">
+          <ul rn-carousel>
+            <li><div class="col-xs-12" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></div></li>
+            <li><div class="col-xs-12"></div></li>
+          </ul>
+        </div>
       </div>
     </div>
+    <div ng-click="switchFocus()" class="overlay"></div>
   </div>
-  <footer ng-include="'views/shared/footer.html'"></footer>
 </div>

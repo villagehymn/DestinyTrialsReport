@@ -406,57 +406,57 @@ var DestinyMedalDefinition = {
   },
   "medalsKillSpreeAbsurd": {
     "statName": "We Ran out of Medals",
-    "statDescription": "Defeat 25 opposing Guardians without dying",
+    "statDescription": "Defeat 25 opposing Guardians without dying.",
     "iconImage": "/common/destiny_content/icons/icon_m6f1b07d32eb09ae45b9a44da40d45a62.png"
   },
   "medalsKillSpreeNoDamage": {
     "statName": "Phantom",
-    "statDescription": "Defeat seven opposing Guardians while taking no damage",
+    "statDescription": "Defeat 7 opposing Guardians while taking no damage.",
     "iconImage": "/common/destiny_content/icons/icon_m48d3402e9e10aefcb0da677f9d740175.png"
   },
   "medalsActivityCompleteSingularityPerfectRunner": {
     "statName": "Perfect Runner",
-    "statDescription": "Complete a Rift match with 2 or more carries and a 100% capture rate",
+    "statDescription": "Complete a Rift match with 2 or more carries and a 100% capture rate.",
     "iconImage": "/common/destiny_content/icons/icon_mf41a75c0811f5592673f77d1a888b3e8.png"
   },
   "medalsArtifactKillSpree": {
     "statName": "Armed and Dangerous",
-    "statDescription": "Defeat 5 Guardians in a single Armament run",
+    "statDescription": "Defeat 5 opposing Guardians in a single Armament run.",
     "iconImage": "/common/destiny_content/icons/icon_m6ce460f071bd845b703bda41d4cda83c.png"
   },
   "medalsSingularityFlagHolderKilledClose": {
     "statName": "Denied",
-    "statDescription": "Defeat an enemy Spark Runner near the Rift",
+    "statDescription": "Defeat an enemy Spark Runner near the Rift.",
     "iconImage": "/common/destiny_content/icons/icon_m749cc44215ecc39fe3d0a5493d78e34a.png"
   },
   "medalsActivityCompleteCycle": {
     "statName": "The Cycle",
-    "statDescription": "Complete a round with at least 1 primary, special, heavy, grenade, melee, and super kill.",
+    "statDescription": "Complete a round with at least a Primary, Special, Heavy, Grenade, Melee, and Super kill.",
     "iconImage": "/common/destiny_content/icons/icon_mdb8d7a333bf5e55553107cfaa643c77e.png"
   },
   "medalsAbilityVoidBowKillMulti": {
     "statName": "Wild Hunt",
-    "statDescription": "Rapidly defeat 3 enemies with Shadowshot",
+    "statDescription": "Rapidly defeat 3 opposing Guardians with Shadowshot.",
     "iconImage": "/common/destiny_content/icons/icon_mf3d36ba306e3709cde0c33a241997412.png"
   },
   "medalsAbilityThermalHammerKillMulti": {
     "statName": "Hammer and Tongs",
-    "statDescription": "Defeat 3 enemies with a single Hammer of Sol activation",
+    "statDescription": "Defeat 3 opposing Guardians with a single Hammer of Sol activation.",
     "iconImage": "/common/destiny_content/icons/icon_m2f168c48897ba93ba070d440f7d2f701.png"
   },
   "medalsAbilityArcLightningKillMulti": {
     "statName": "Storm Bringer",
-    "statDescription": "Defeat 3 enemies with a single Stormtrance activation",
+    "statDescription": "Defeat 3 opposing Guardians with a single Stormtrance activation.",
     "iconImage": "/common/destiny_content/icons/icon_ma1e1ec6efaac7d54bb684db25fde6033.png"
   },
   "medalsSingularityFlagCaptureMulti": {
     "statName": "Unstoppable Force",
-    "statDescription": "Capture the Spark 3 times in a single match",
+    "statDescription": "Capture the Spark 3 times in a single match.",
     "iconImage": "/common/destiny_content/icons/icon_m4c0c0424c25b86ccf80a73aec1fa5cd0.png"
   },
   "medalsSingularityFlagHolderKilledMulti": {
     "statName": "Immovable Object",
-    "statDescription": "Defeat an opposing Spark Runner 3 times in a single match",
+    "statDescription": "Defeat an opposing Spark Runner 3 times in a single match.",
     "iconImage": "/common/destiny_content/icons/icon_m02a734da81d66414c55e3f267658b47c.png"
   },
   "medalsWeaponSwordKillSpree": {
@@ -466,52 +466,52 @@ var DestinyMedalDefinition = {
   },
   "medalsRadianceShutdown": {
     "statName": "...And Stay Down!",
-    "statDescription": "Defeat a Warlock within 3 seconds of self-reviving with Radiance",
+    "statDescription": "Defeat a Warlock within 3 seconds of their self-reviving with Radiance.",
     "iconImage": "/common/destiny_content/icons/icon_m7a1ba4190b056693e497d1ac1e05d6b2.png"
   },
   "medalsArtifactHeist": {
     "statName": "The Heist",
-    "statDescription": "Take the Armament after defeating its previous carrier",
+    "statDescription": "Take the Armament after defeating its previous carrier.",
     "iconImage": "/common/destiny_content/icons/icon_me9f4d46fdb3f511e9b0ee04afdcdc37a.png"
   },
   "medalsSingularityRunnerDefenseMulti": {
     "statName": "Clear a Path",
-    "statDescription": "In a single Spark run, defeat 2 enemies who damage your team's Runner",
+    "statDescription": "In a single Spark run, defeat 2 enemies who damage your team's Runner.",
     "iconImage": "/common/destiny_content/icons/icon_m36ae16c5a210ed1a3d377f38f94540a1.png"
   },
   "medalsWeaponAutoRifleKillSpree": {
     "statName": "Automatic",
-    "statDescription": "In a single life, defeat 5 opposing Guardians with an Auto Rifle",
+    "statDescription": "In a single life, defeat 5 opposing Guardians with an Auto Rifle.",
     "iconImage": "/common/destiny_content/icons/icon_m8f1fe9c611ec24e7a1c4f58cb840555d.png"
   },
   "medalsWeaponPulseRifleKillSpree": {
     "statName": "Finger on the Pulse",
-    "statDescription": "In a single life, defeat 5 opposing Guardians with a Pulse Rifle",
+    "statDescription": "In a single life, defeat 5 opposing Guardians with a Pulse Rifle.",
     "iconImage": "/common/destiny_content/icons/icon_mb1919d9fa1432844e7c0735855e8d5d9.png"
   },
   "medalsWeaponScoutRifleKillSpree": {
     "statName": "Scout's Honor",
-    "statDescription": "In a single life, defeat 5 opposing Guardians with a Scout Rifle",
+    "statDescription": "In a single life, defeat 5 opposing Guardians with a Scout Rifle.",
     "iconImage": "/common/destiny_content/icons/icon_m19f521f962f4aed842251ca89c508196.png"
   },
   "medalsWeaponSidearmKillSpree": {
     "statName": "Sidekick",
-    "statDescription": "In a single life, defeat 3 opposing Guardians with a Sidearm",
+    "statDescription": "In a single life, defeat 3 opposing Guardians with a Sidearm.",
     "iconImage": "/common/destiny_content/icons/icon_me8f0611a5aba8cc115e2eb5485373b7d.png"
   },
   "medalsZoneCapturedBInitial": {
     "statName": "B-Line",
-    "statDescription": "In a Control match, capture Zone B first",
+    "statDescription": "In a Control match, capture Zone B first.",
     "iconImage": "/common/destiny_content/icons/icon_me39f3c3f3ed3565184b9fb666b22f8b3.png"
   },
   "medalsPaybackKill": {
     "statName": "Payback",
-    "statDescription": "Defeat the enemy who killed you last",
+    "statDescription": "Defeat the opposing Guardian who killed you last.",
     "iconImage": "/common/destiny_content/icons/icon_mbc31aa22e2fd55d1e79a77274f39eb65.png"
   },
   "medalsAvenger": {
     "statName": "Avenger",
-    "statDescription": "Avenge a fallen teammate",
+    "statDescription": "Avenge a defeated teammate.",
     "iconImage": "/common/destiny_content/icons/icon_m324a5681ecdd1ff57498932167c794b3.png"
   }
 };

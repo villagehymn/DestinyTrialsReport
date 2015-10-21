@@ -33,8 +33,12 @@ angular.module('trialsReportApp')
         method: 'GET',
         url: '/Platform/Destiny/' + membershipType + '/Account/' + membershipId + '/'
       }).then(function (resultChar) {
-        var player = Player.build(resultChar.data.Response.data, name, resultChar.data.Response.data.characters[0]);
-        return player;
+        if (resultChar.data.Response) {
+          var player = Player.build(resultChar.data.Response.data, name, resultChar.data.Response.data.characters[0]);
+          return player;
+        } else {
+          toastr.error('Player not found', 'Error');
+        }
       }).catch(function () {});
     };
 

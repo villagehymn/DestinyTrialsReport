@@ -29,13 +29,26 @@ angular.module('trialsReportApp')
           return style;
         };
       },
-      template: [
-        '<!--<div ng-if="!activities">N/A</div>-->',
-        '<i class="player-quick-look__form__match match"' +
-          'style="{{calcGraphPoint(str.kd)}}"' +
-          'ng-repeat="str in activities.slice().reverse()"' +
-          'ng-class="str.standing === 0 ? \'match--win\' : \'match--loss\'"' +
-          'bs-popover="{title:str.dateAgo,content:\'K/D: {{str.kd}} with {{str.kills}} kills\'}"></i>'
-      ].join('')
+      templateUrl: 'views/directives/stats.html'
     };
-});
+  }).directive('buildStats', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        stats: '=buildStats'
+      },
+      link: function ($scope, element, attrs) {
+        $scope.statPopover = function (stat) {
+          var popover;
+
+          if (stat.tier) {
+            popover = {content:'Tier ' + stat.tier + ' — ' + + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown}
+          } else {
+            popover = {content: stat.name + ': ' + (stat.value / 10) * 100 + '%'}
+          }
+          return popover;
+        };
+      },
+      templateUrl: 'views/directives/build.html'
+    };
+  });

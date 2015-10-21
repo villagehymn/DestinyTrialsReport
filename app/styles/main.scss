@@ -11,7 +11,6 @@
 @import 'main/typography';
 @import 'main/buttons';
 
-@import 'elements/navbar';
 @import 'elements/loading';
 @import 'elements/popover';
 @import 'elements/tabs';
@@ -21,11 +20,15 @@
 @import 'elements/carousel';
 
 // Main parts
-@import 'parts/header';
+@import 'parts/controls';
+@import 'parts/title-bar';
 @import 'parts/main-search';
-@import 'parts/footer';
 @import 'parts/blog-post';
 @import 'parts/player-overlay';
+@import 'parts/current-map';
+@import 'parts/platform-toggle';
+@import 'parts/donate';
+@import 'parts/colofon';
 
 // Player card
 @import 'parts/player';

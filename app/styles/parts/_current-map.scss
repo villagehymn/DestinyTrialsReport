@@ -1,0 +1,36 @@
+.current-map {
+  background: center center no-repeat;
+  background-size: cover;
+  min-height: 12em;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  transition: filter linear .5s;
+}
+
+.current-map__content {
+  width: 100%;
+  padding: $controls-padding;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.current-map__title {
+  flex-grow: 1;
+
+  span {
+    font-size: 1.5em;
+    display: block;
+    line-height: 1;
+  }
+}
+
+.curent-map__heatmap .btn.btn.btn {
+  color: $controls-btn-color;
+  margin: 0;
+  margin-right: -15px;
+}

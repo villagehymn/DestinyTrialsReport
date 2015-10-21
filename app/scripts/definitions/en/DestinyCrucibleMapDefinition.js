@@ -73,6 +73,9 @@ var DestinyCrucibleMapDefinition = {
     "name": "Asylum",
     "pgcrImage": "/img/theme/destiny/bgs/pgcrs/crucible_asylum.jpg"
   },
+  "3412406993": {
+    "name": "Cathedral of Dusk"
+  },
   "3602734434": {
     "name": "Bannerfall",
     "pgcrImage": "/img/theme/destiny/bgs/pgcrs/bannerfall.jpg"

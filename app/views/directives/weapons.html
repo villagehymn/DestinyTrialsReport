@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="weapon col-xs-12" ng-repeat="weapon in weapons track by $index" ng-if="weapons">
+    <div class="weapon__img">
+      <img class="img-responsive"
+           ng-src="{{weapon.definition.icon}}"
+           alt="{{weapon.definition.name}}">
+    </div>
+    <div class="weapon__info">
+      <div class="weapon__title">
+        <span ng-bind="weapon.definition.name"></span>
+        <span class="weapon__damage" ng-bind="weapon.damage + ' atk'"></span>
+      </div>
+      <div class="weapon__perks">
+        <div class="weapon-perk"
+             ng-repeat="node in weapon.nodes track by $index" bs-popover="{title:node.name,content:node.description}">
+          <i class="weapon-perk__icon">
+            <img class="img-responsive" ng-src="{{node.icon}}" alt="{{node.name}}">
+          </i>
+        </div>
+      </div>
+      <div class="weapon__hazards">
+        <span class="player-hazard" ng-repeat="hazard in weapon.hazards">{{hazard}}</span>
+      </div>
+    </div>
+  </div>
+</div>
