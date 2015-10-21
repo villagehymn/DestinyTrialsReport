@@ -6,9 +6,9 @@ function getFromParams(currentAccount, $route, $q) {
     var segments = location.hostname.split('.');
     var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
 
-    var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/';
+    var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + platform + '/';
     var getPlayer = function (url) {
-        return currentAccount.getAccount(url + $route.current.params.playerName + '/')
+        return currentAccount.getAccount(url + $route.current.params.playerName)
           .then(function (result) {
             if (result) {
               var player = result;

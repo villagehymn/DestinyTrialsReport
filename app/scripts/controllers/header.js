@@ -49,11 +49,12 @@ angular.module('trialsReportApp')
       var url = '/Platform/Destiny/SearchDestinyPlayer/' + ($scope.platformValue ? 2 : 1) + '/' + name + '/';
       return currentAccount.getAccount(url)
         .then(function (player) {
+          $scope.switchFocus();
           player.isTeammate = true;
           currentAccount.getPlayerCard(player).then(function (teammate) {
             $scope.$evalAsync( $scope.fireteam[index] = teammate );
             currentAccount.compareLastMatchResults($scope.fireteam[index], $scope.fireteam[0].activities.lastThree);
-            updateUrl($scope, locationChanger)
+            updateUrl($scope, locationChanger);
           });
         });
     };
