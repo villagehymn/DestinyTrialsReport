@@ -53,6 +53,7 @@ angular.module('trialsReportApp')
         .then(function (player) {
           if (player) {
             $scope.switchFocus();
+            document.activeElement.blur();
             player.isTeammate = true;
             currentAccount.getPlayerCard(player).then(function (teammate) {
               $scope.$evalAsync( $scope.fireteam[index] = teammate );
