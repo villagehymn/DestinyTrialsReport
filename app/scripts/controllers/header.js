@@ -52,9 +52,11 @@ angular.module('trialsReportApp')
       return currentAccount.getAccount(url)
         .then(function (player) {
           if (player) {
-            $scope.switchFocus();
-            document.activeElement.blur();
-            player.isTeammate = true;
+            if (angular.isDefined($scope.fireteam[1].name) || angular.isDefined($scope.fireteam[2].name)) {
+              $scope.switchFocus();
+              document.activeElement.blur();
+              player.isTeammate = true;
+            }
             currentAccount.getPlayerCard(player).then(function (teammate) {
               $scope.$evalAsync( $scope.fireteam[index] = teammate );
               if (!$scope.fireteam[0].activities) {
