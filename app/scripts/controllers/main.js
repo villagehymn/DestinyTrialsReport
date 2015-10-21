@@ -11,8 +11,8 @@ function getTeammates($scope, locationChanger, mainPlayer) {
       }
       else {
         $scope.fireteam.push(
-          {name: 'Enter Player Name', invalidResult: true},
-          {name: 'Enter Player Name', invalidResult: true}
+          {invalidResult: true},
+          {invalidResult: true}
         );
       }
     }
@@ -39,7 +39,7 @@ function addFireteamMember(fireTeam, $scope, locationChanger) {
       }
     } else {
       $scope.fireteam.push(
-        {name: 'Enter Player Name', invalidResult: true}
+        {invalidResult: true}
       );
     }
     if ($scope.fireteam.length === 3) {
