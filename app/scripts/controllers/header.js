@@ -3,15 +3,17 @@
 angular.module('trialsReportApp')
   .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams) {
 
-    $scope.mapModal = {
-      content: $sce.trustAsHtml(
-        '<div class="map-modal">' +
-          '<div class="map-modal__heatmap">' +
-            '<img class="img-responsive" src="' + $scope.currentMap.heatmapImage + '" alt="Heatmap">' + // todo: handle case where heatmapImage does not exist
-          '</div>' +
-        '</div>'
-      )
-    };
+    if ('heatmapImage' in $scope.currentMap) {
+      $scope.mapModal = {
+        content: $sce.trustAsHtml(
+          '<div class="map-modal">' +
+            '<div class="map-modal__heatmap">' +
+              '<img class="img-responsive" src="' + $scope.currentMap.heatmapImage + '" alt="Heatmap">' +
+            '</div>' +
+          '</div>'
+        )
+      };
+    }
 
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
