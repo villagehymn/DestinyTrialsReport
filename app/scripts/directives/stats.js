@@ -42,10 +42,10 @@ angular.module('trialsReportApp')
           var popover;
 
           if (stat) {
-            if (stat.tier) {
-              popover = {content:'Tier ' + stat.tier + ' — ' + + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown}
+            if (angular.isDefined(stat.tier)) {
+              popover = 'Tier ' + stat.tier + ' — ' + + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown
             } else {
-              popover = {content: stat.name + ': ' + (stat.value / 10) * 100 + '%'}
+              popover = stat.name + ': ' + (stat.value / 10) * 100 + '%'
             }
           }
           return popover;
