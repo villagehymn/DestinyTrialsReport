@@ -6,11 +6,11 @@
   </div>
   <div class="platform-toggle">
     <div class="togglebutton">
-      <label class="platform-toggle__name" ng-class="{'is-active' : platformValue}" ng-click="platformValue = true"><img src="images/ps.svg" alt="PlayStation"></label>
+      <label class="platform-toggle__name" ng-class="{'is-active':platformValue}" ng-click="platformValue = true"><img src="images/ps.svg" alt="PlayStation"></label>
       <label class="platform-toggle__btn">
         <input type="checkbox" ng-click="togglePlatform()" ng-model="platformValue" ng-true-value="false" ng-false-value="true">
       </label>
-      <label class="platform-toggle__name" ng-class="{'is-active' : !platformValue}" ng-click="platformValue = false"><img src="images/xbox.svg" alt="Xbox"></label>
+      <label class="platform-toggle__name" ng-class="{'is-active':!platformValue}" ng-click="platformValue = false"><img src="images/xbox.svg" alt="Xbox"></label>
     </div>
   </div>
 </div>
@@ -21,7 +21,7 @@
       <form ng-submit="searchMainPlayerbyName(mainPlayer)">
         <div class="main-search__row">
           <div class="main-search__input">
-            <input type="text" class="form-control" placeholder="{{fireteam[0].name || 'Enter your next victim'}}" ng-model="mainPlayer" ng-value="(!fireteam[0] ? searchedPlayer : '')">
+            <input type="text" class="form-control" placeholder="{{fireteam[0].name || 'Enter your opponent\'s gamertag'}}" ng-model="mainPlayer" ng-value="(!fireteam[0] ? searchedPlayer : '')">
           </div>
           <div class="main-search__controls">
             <div class="main-search__refresh" ng-if="!subdomain" ng-show="fireteam[0].name != null">
@@ -40,7 +40,7 @@
         <form role="form" ng-submit="searchPlayerbyName(player, teammateName, platformValue, $index)">
         <div class="main-search__row">
           <div class="main-search__input">
-            <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter your next victim'}}" ng-model="teammateName">
+            <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter their teammates\' gamertag'}}" ng-model="teammateName">
           </div>
           <div class="main-search__controls">
             <div class="main-search__submit">
@@ -57,7 +57,7 @@
     <div class="current-map__title">
       <span ng-bind="currentMap.name"></span>
     </div>
-    <div class="curent-map__heatmap">
+    <div class="curent-map__heatmap" ng-if="mapModal">
       <button type="button" class="btn btn-default btn-sm" bs-modal="mapModal">Heatmap</button>
     </div>
   </div>
