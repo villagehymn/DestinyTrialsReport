@@ -147,7 +147,7 @@ function extractDB(dbFile) {
       if ((item.activityTypeHash === 3695721985) && (item.activityName !== "") && (item.activityName !== "Rumble")) {
         DestinyCrucibleMapDefinition[item.activityHash] = {};
         DestinyCrucibleMapDefinition[item.activityHash].name = item.activityName;
-        DestinyCrucibleMapDefinition[item.activityHash].pgcrImage = item.pgcrImage;
+        DestinyCrucibleMapDefinition[item.activityHash].pgcrImage = 'https://www.bungie.net' + item.pgcrImage;
 
         var heatmapImage = '/images/heatmaps/' + item.activityName.replace(/'/g, '').replace(/ /g, '_').toLowerCase() + '.jpg';
         if (fs.existsSync('app' + heatmapImage)) {
@@ -155,6 +155,16 @@ function extractDB(dbFile) {
         }
       }
     });
+
+    // Cathedral of Dusk
+    if (3412406993 in DestinyCrucibleMapDefinition) {
+      var cathedral = DestinyCrucibleMapDefinition[3412406993];
+      if (cathedral.pgcrImage !== 'https://www.bungie.netundefined') {
+        console.log('Cathedral of Dusk now exists in the manifest file and the override can be removed.');
+      } else {
+        cathedral.pgcrImage = '/images/maps/CathedralOfDusk.png';
+      }
+    }
 
     writeDefinitionFile('app/scripts/definitions/en/DestinyCrucibleMapDefinition.js', 'DestinyCrucibleMapDefinition', DestinyCrucibleMapDefinition);
   });
