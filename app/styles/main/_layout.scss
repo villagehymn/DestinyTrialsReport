@@ -74,9 +74,10 @@
   }
 
   .focus-on-players {
+
     .controls-wrapper {
       position: fixed;
-      transform: translateY(100%);
+      transform: translateY(100vh);
     }
 
     .content {
