@@ -1,6 +1,7 @@
 .players-wrapper {
   overflow: hidden;
   margin: auto;
+  min-height: 100vh;
 }
 
 .players {
@@ -9,11 +10,12 @@
 }
 
 .player-container {
+  vertical-align: top;
   white-space: normal;
   display: inline-block;
   padding: 1em;
   width: 25vw;
-  min-width: 320px;
+  min-width: 280px;
   max-width: 380px;
 
   &:nth-child(1) {
