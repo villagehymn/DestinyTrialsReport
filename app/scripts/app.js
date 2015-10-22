@@ -181,9 +181,6 @@ angular
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
   })
-  .run(function() {
-    FastClick.attach(document.body);
-  })
   .service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
     this.skipReload = function () {
       var lastRoute = $route.current;
