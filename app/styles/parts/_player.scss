@@ -1,30 +1,110 @@
+.players-wrapper {
+  overflow: hidden;
+  margin: auto;
+}
+
 .players {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  margin: 0 auto;
+  white-space: nowrap;
+  transition: transform cubic-bezier(.55,0,.1,1) .3s;
 }
 
 .player-container {
+  white-space: normal;
+  display: inline-block;
   padding: 1em;
+  width: 25vw;
   min-width: 320px;
   max-width: 380px;
+
+  &:nth-child(1) {
+    padding-right: .333em;
+  }
+
+  &:nth-child(2) {
+    padding: 1em .667em;
+  }
+
+  &:nth-child(3) {
+    padding-left: .333em;
+  }
 }
 
-@media all and (max-width: 1550px) {
-  .players {
-    padding: 0 .5em;
-  }
+.player-shift-focus {
+  position: fixed;
+  height: 100%;
+  width: 5vw;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity linear .3s;
+  background: linear-gradient( to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+.player-shift-focus--right {
+  right: 0;
+  background: linear-gradient( to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+@media all and (max-width: 1280px) {
   .player-container {
-    padding: 1em .5em;
+    width: 33vw;
   }
 }
+
 
 @media all and (max-width: 960px) {
-  .players {
-    padding-top: 1em;
-    width: 100%;
-    display: block;
+  .player-container {
+    width: 48vw;
+    max-width: none;
+  }
+
+  .focus-on-player-one {
+    .player-shift-focus--right {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .focus-on-player-three {
+    .player-shift-focus--left {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .focus-on-player-three .players {
+    transform: translateX(-44vw);
+  }
+}
+
+
+@media all and (max-width: 640px) {
+  .player-container {
+    width: 95vw;
+  }
+
+  .focus-on-player-two .players {
+    transform: translateX(-92.5vw);
+  }
+
+  .focus-on-player-three .players {
+    transform: translateX(-186vw);
+  }
+
+  .focus-on-player-two,
+  .focus-on-player-one {
+    .player-shift-focus--right {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .focus-on-player-two,
+  .focus-on-player-three {
+    .player-shift-focus--left {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 }
 

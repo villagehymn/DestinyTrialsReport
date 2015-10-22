@@ -125,6 +125,11 @@ angular.module('trialsReportApp')
       $scope.focusOnPlayers = !$scope.focusOnPlayers;
     };
 
+    $scope.focusOnPlayer = 1;
+    $scope.shiftPlayerFocus = function (direction) {
+      $scope.focusOnPlayer = Math.min(3, Math.max(1, $scope.focusOnPlayer + Math.floor(window.innerWidth / 320) * direction));
+    }
+
     if ($scope.screenSize.xs || $scope.screenSize.sm) {
       $scope.slides = $scope.screenSize.xs ? ['1', '2', '3'] : ['1', '2'];
       window.addEventListener('resize', function() {
