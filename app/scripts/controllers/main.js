@@ -92,7 +92,7 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 };
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats, $window) {
     $scope.currentMap = DestinyCrucibleMapDefinition[3412406993];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
@@ -124,6 +124,15 @@ angular.module('trialsReportApp')
     $scope.switchFocus = function () {
       $scope.focusOnPlayers = !$scope.focusOnPlayers;
     };
+
+    $scope.slides = $scope.screenSize.xs ? ['1', '2', '3'] : ['1', '2'];
+    angular.element($window).bind('resize', function () {
+      if ($scope.screenSize.xs && $scope.slides.length < 3) {
+        $scope.slides.push('3')
+      } else if ($scope.screenSize.sm && $scope.slides.length > 2) {
+        $scope.slides.splice(2, 1);
+      }
+    });
 
     $scope.suggestRecentPlayers = function () {
       if (angular.isUndefined($scope.recentPlayers)) {
