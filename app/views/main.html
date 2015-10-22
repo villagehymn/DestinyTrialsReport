@@ -34,7 +34,7 @@
       </div>
       <div class="row" ng-if="screenSize.xs || screenSize.sm">
         <div>
-          <ul rn-carousel rn-carousel-deep-watch>
+          <ul rn-carousel>
             <li ng-repeat="placeholder in slides">
               <div class="col-xs-12" ng-controller="PlayerCtrl as Player"
                    ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"
