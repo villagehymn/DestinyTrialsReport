@@ -38,17 +38,18 @@
       </form>
       <div ng-if="fireteam[0].name && $index < 3 && $index > 0" ng-repeat="player in fireteam track by $index">
         <form role="form" ng-submit="searchPlayerbyName(player, teammateName, platformValue, $index)">
-        <div class="main-search__row">
-          <div class="main-search__input">
-            <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter their teammates\' gamertag'}}" ng-model="teammateName">
-          </div>
-          <div class="main-search__controls">
-            <div class="main-search__submit">
-              <button type="submit" class="btn btn-default btn-icon" ng-disabled="status"><i class="material-icons">&#xE163;</i></button>
+          <div class="main-search__row">
+            <div class="main-search__input">
+              <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter their teammates\' gamertag'}}" ng-model="teammateName">
+            </div>
+            <div class="main-search__controls">
+              <div class="main-search__submit">
+                <button type="submit" class="btn btn-default btn-icon" ng-disabled="status"><i class="material-icons">&#xE163;</i></button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>

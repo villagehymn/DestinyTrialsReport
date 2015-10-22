@@ -126,13 +126,13 @@ angular.module('trialsReportApp')
     };
 
     $scope.slides = $scope.screenSize.xs ? ['1', '2', '3'] : ['1', '2'];
-    angular.element($window).bind('resize', function () {
+    window.addEventListener("resize", function() {
       if ($scope.screenSize.xs && $scope.slides.length < 3) {
         $scope.slides.push('3')
       } else if ($scope.screenSize.sm && $scope.slides.length > 2) {
         $scope.slides.splice(2, 1);
       }
-    });
+    }, false);
 
     $scope.suggestRecentPlayers = function () {
       if (angular.isUndefined($scope.recentPlayers)) {

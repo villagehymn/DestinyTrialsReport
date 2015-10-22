@@ -10,6 +10,11 @@
     </div>
   </div>
   <div class="content">
+    <button class="btn btn-fab btn-raised btn-material-grey"
+            ng-click="switchFocus()"
+            ng-if="focusOnPlayers && !screenSize.lg">
+      <i class="material-icons">&#xE5CE;</i>
+    </button>
     <div class="container-fluid" ng-if="status">
       <div class="row">
         <div class="text-center alert alert-warning">
@@ -28,8 +33,7 @@
            ng-include="'views/player/index.html'">
       </div>
       <div class="row" ng-if="screenSize.xs || screenSize.sm">
-        <button class="btn btn-fab btn-raised btn-material-grey" ng-click="switchFocus()" ng-if="focusOnPlayers"><i class="material-icons">&#xE5CE;</i></button>
-        <div ng-show="screenSize.xs || screenSize.sm">
+        <div>
           <ul rn-carousel rn-carousel-deep-watch>
             <li ng-repeat="placeholder in slides">
               <div class="col-xs-12" ng-controller="PlayerCtrl as Player"
