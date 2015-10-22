@@ -1,20 +1,11 @@
 <div class="wrapper" ng-class="{'my-dtr': subdomain, 'focus-on-players': focusOnPlayers}">
   <div class="controls-wrapper shadow-z-2">
     <div class="controls" ng-controller="HeaderCtrl">
-      <div class="controls__expand" ng-if="screenSize.xs || screenSize.sm || screenSize.md" ng-click="switchFocus()">
-        <span ng-if="!fireteam[0]">Blog</span>
-        <i class="material-icons">&#xE5CF;</i>
-      </div>
       <header ng-include="'views/controls/top.html'"></header>
       <footer ng-include="'views/controls/bottom.html'"></footer>
     </div>
   </div>
   <div class="content">
-    <button class="btn btn-fab btn-raised btn-material-grey"
-            ng-click="switchFocus()"
-            ng-if="focusOnPlayers && !screenSize.lg">
-      <i class="material-icons">&#xE5CE;</i>
-    </button>
     <div class="container-fluid" ng-if="status">
       <div class="row">
         <div class="text-center alert alert-warning">
@@ -46,4 +37,8 @@
       </div>
     </div>
   </div>
+  <button class="control-btn btn btn-fab btn-raised btn-material-grey"
+          ng-mobile-click="switchFocus()">
+    <i class="material-icons">&#xE5CE;</i>
+  </button>
 </div>

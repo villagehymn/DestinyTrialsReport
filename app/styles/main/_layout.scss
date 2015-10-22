@@ -50,7 +50,7 @@
     padding: 3em 15px 0 15px;
     box-shadow: none;
     background: rgba(0, 0, 0, 0.75);
-    transition: transform cubic-bezier(.55,0,.1,1) .3s;
+    transition: transform cubic-bezier(.55,0,.1,1) .5s;
     transform: translateY(0%);
     will-change: transform;
   }
@@ -74,10 +74,9 @@
   }
 
   .focus-on-players {
-
     .controls-wrapper {
       position: fixed;
-      transform: translateY(100vh);
+      transform: translateY(120vh);
     }
 
     .content {
