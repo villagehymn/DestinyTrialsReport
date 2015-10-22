@@ -115,7 +115,8 @@ angular
     'toastr',
     'ui.bootstrap.tpls',
     'ui.bootstrap.progressbar',
-    'ui.bootstrap.tabs'
+    'ui.bootstrap.tabs',
+    'ng-fastclick'
   ])
   .config(window.$QDecorator)
   .config(function ($modalProvider) {
@@ -179,6 +180,9 @@ angular
     $locationProvider.hashPrefix('!');
     $httpProvider.useApplyAsync(true);
     $compileProvider.debugInfoEnabled(false);
+  })
+  .run(function() {
+    FastClick.attach(document.body);
   })
   .service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
     this.skipReload = function () {
