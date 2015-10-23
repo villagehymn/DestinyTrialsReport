@@ -112,8 +112,8 @@ angular.module('trialsReportApp')
       $scope.focusOnPlayers = !$scope.focusOnPlayers;
     };
 
+    $scope.slides = $window.innerWidth <= 567 ? ['1', '2', '3'] : ['1', '2'];
     if ($window.innerWidth <= 960) {
-      $scope.slides = $window.innerWidth <= 567 ? ['1', '2', '3'] : ['1', '2'];
       $window.addEventListener('resize', function () {
         if ($window.innerWidth <= 567 && $scope.slides.length < 3) {
           $scope.slides.push('3');
