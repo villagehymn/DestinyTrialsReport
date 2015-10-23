@@ -50,7 +50,7 @@ angular.module('trialsReportApp')
     };
 
     $scope.setRecentPlayer = function (player) {
-      var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + player.membershipType + '/' + player.name;
+      var url = '/api/SearchDestinyPlayer/' + player.membershipType + '/' + player.name;
       return currentAccount.getAccount(url)
         .then(function (player) {
           currentAccount.getPlayerCard(player).then(function (teammate) {

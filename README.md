@@ -29,20 +29,9 @@ Install bower packages
 
 Insert API Key
 * Get an API key from [Bungie.net](https://www.bungie.net/en/User/API)
-* Insert your API key in Gruntfile.js here:
+* Insert your API key towards the top of Gruntfile.js here:
 ```
-proxies: [{
-          context: '/bungie',
-          host: 'www.bungie.net',
-          port: 80,
-          https: false,
-          xforward: false,
-          rewrite: {'^/bungie': '/Platform'},
-          headers: {
-            'host': 'www.bungie.net',
-            'X-API-Key': 'API KEY GOES HERE'
-          }
-        }]
+var BUNGIE_API_KEY = 'API KEY GOES HERE'
 ```
 
 Update the definition files
@@ -84,21 +73,11 @@ npm install
 
 [Insert API Key]
 * Get an API key from [Bungie.net](https://www.bungie.net/en/User/API)
-* Insert your API key in Gruntfile.js here:
+* Insert your API key towards the top of Gruntfile.js here:
 ```
-proxies: [{
-          context: '/bungie',
-          host: 'www.bungie.net',
-          port: 80,
-          https: false,
-          xforward: false,
-          rewrite: {'^/bungie': '/Platform'},
-          headers: {
-            'host': 'www.bungie.net',
-            'X-API-Key': 'API KEY GOES HERE'
-          }
-        }]
+var BUNGIE_API_KEY = 'API KEY GOES HERE'
 ```
+
 
 [Update the definition files]
 `sudo node manifest.js`

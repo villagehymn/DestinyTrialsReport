@@ -6,7 +6,7 @@ function getFromParams(currentAccount, $route, $q) {
     var segments = location.hostname.split('.');
     var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
 
-    var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + platform + '/';
+    var url = '/api/SearchDestinyPlayer/' + platform + '/';
     var getPlayer = function (url) {
         return currentAccount.getAccount(url + $route.current.params.playerName)
           .then(function (result) {
@@ -54,7 +54,7 @@ function getAllFromParams($route, currentAccount, $q) {
   if (angular.isDefined($route.current.params.playerOne)) {
     var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
     var params = $route.current.params;
-    var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + platform + '/';
+    var url = '/api/SearchDestinyPlayer/' + platform + '/';
 
     var getPlayer = function (url, params) {
       return currentAccount.getAccount(url + params.playerOne)

@@ -16,6 +16,26 @@ function start() {
   app.use(compression());
   app.use(express.static(__dirname));
 
+  // Internal API Proxy
+  app.get('/api/*?', function (req, res) {
+    res.setTimeout(25000);
+    console.log(req.path);
+    var options = {
+      url: 'http://api.destinytrialsreport.com' + req.originalUrl,
+      headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
+    };
+    try {
+      request(options, function (error, response, body) {
+        if (!error) {
+          res.send(body);
+        } else {
+          res.send(error);
+        }
+      });
+    } catch (e) {}
+  });
+
+
   // DestinyTrialsReport
   app.get('/:platform/:playerName', function (req, res) {
     res.sendFile(__dirname + '/index.html');
@@ -36,20 +56,24 @@ function start() {
 
   // Bungie API Proxy
   app.get('/Platform/*?', function (req, res) {
-    res.setTimeout(25000);
-    var options = {
-      url: 'https://www.bungie.net/' + req.originalUrl,
-      headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
-    };
-    try {
-      request(options, function (error, response, body) {
-        if (!error) {
-          res.send(body);
-        } else {
-          res.send(error);
-        }
-      });
-    } catch (e) {}
+    if (req.headers[process.env.AUTH]) {
+      res.setTimeout(25000);
+      var options = {
+        url: 'https://www.bungie.net/' + req.originalUrl,
+        headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
+      };
+      try {
+        request(options, function (error, response, body) {
+          if (!error) {
+            res.send(body);
+          } else {
+            res.send(error);
+          }
+        });
+      } catch (e) {}
+    } else {
+      res.send('Nope');
+    }
   });
 
   // CORS

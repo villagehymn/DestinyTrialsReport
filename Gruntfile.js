@@ -24,6 +24,8 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
+  var BUNGIE_API_KEY = 'ENTER KEY HERE';
+
   // Define the configuration for all the tasks
   grunt.initConfig({
     // Project settings
@@ -151,7 +153,18 @@ module.exports = function (grunt) {
           xforward: false,
           headers: {
             'host': 'www.bungie.net',
-            'X-API-Key': 'API KEY GOES HERE'
+            'X-API-Key': BUNGIE_API_KEY
+          }
+        },
+        {
+          context: '/api',
+          host: 'api.destinytrialsreport.com',
+          port: 80,
+          https: false,
+          xforward: false,
+          headers: {
+            'host': 'api.destinytrialsreport.com',
+            'X-API-Key': BUNGIE_API_KEY
           }
         }]
       },
