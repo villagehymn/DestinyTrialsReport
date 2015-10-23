@@ -92,7 +92,7 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 };
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, screenSize, currentAccount, trialsStats, $window) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, currentAccount, trialsStats, $window) {
     $scope.currentMap = DestinyCrucibleMapDefinition[3412406993];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
@@ -105,19 +105,6 @@ angular.module('trialsReportApp')
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
 
     $scope.weaponKills = weaponKills;
-
-    screenSize.rules = {
-      xs: '(max-width: 567px)',
-      sm: '(min-width: 568px) and (max-width: 960px)',
-      md: '(min-width: 961px) and (max-width: 1280px)',
-      lg: '(min-width: 1281px)'
-    };
-    $scope.screenSize = {};
-    $scope.screenSize.xs = screenSize.on('xs', function (match) { $scope.screenSize.xs = match; });
-    $scope.screenSize.sm = screenSize.on('sm', function (match) { $scope.screenSize.sm = match; });
-    $scope.screenSize.md = screenSize.on('md', function (match) { $scope.screenSize.md = match; });
-    $scope.screenSize.lg = screenSize.on('lg', function (match) { $scope.screenSize.lg = match; });
-
     $scope.statNamesByHash = statNamesByHash;
 
     $scope.focusOnPlayers = false;
@@ -125,12 +112,12 @@ angular.module('trialsReportApp')
       $scope.focusOnPlayers = !$scope.focusOnPlayers;
     };
 
-    if ($scope.screenSize.xs || $scope.screenSize.sm) {
-      $scope.slides = $scope.screenSize.xs ? ['1', '2', '3'] : ['1', '2'];
-      window.addEventListener('resize', function() {
-        if ($scope.screenSize.xs && $scope.slides.length < 3) {
-          $scope.slides.push('3')
-        } else if ($scope.screenSize.sm && $scope.slides.length > 2) {
+    if ($window.innerWidth <= 960) {
+      $scope.slides = $window.innerWidth <= 567 ? ['1', '2', '3'] : ['1', '2'];
+      $window.addEventListener('resize', function () {
+        if ($window.innerWidth <= 567 && $scope.slides.length < 3) {
+          $scope.slides.push('3');
+        } else if ($window.innerWidth > 567 && $scope.slides.length > 2) {
           $scope.slides.splice(2, 1);
         }
       }, false);

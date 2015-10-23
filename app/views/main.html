@@ -17,18 +17,19 @@
       <div ng-include="'views/blog/index.html'"></div>
     </div>
     <div class="players" ng-if="fireteam[0] && !status">
-      <div class="player-container"
-           ng-show="screenSize.md || screenSize.lg"
+      <div class="player-container hidden-xs hidden-sm"
            ng-controller="PlayerCtrl as Player"
            ng-repeat="player in fireteam track by $index"
            ng-include="'views/player/index.html'">
       </div>
-      <div class="row" ng-if="screenSize.xs || screenSize.sm">
+      <div class="row hidden-md hidden-lg">
         <div>
           <ul rn-carousel>
             <li ng-repeat="placeholder in slides">
-              <div class="col-xs-12" ng-controller="PlayerCtrl as Player"
-                   ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"
+              <div class="col-xs-12"
+                   ng-controller="PlayerCtrl as Player"
+                   ng-repeat="player in fireteam track by $index"
+                   ng-include="'views/player/index.html'"
                    ng-if="$parent.$index === 0">
               </div>
             </li>

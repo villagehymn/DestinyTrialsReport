@@ -104,7 +104,6 @@ angular
     'angulartics.google.analytics',
     'angular-carousel',
     'angular-loading-bar',
-    'matchMedia',
     'mgcrea.ngStrap.modal',
     'mgcrea.ngStrap.popover',
     'ngAnimate',
