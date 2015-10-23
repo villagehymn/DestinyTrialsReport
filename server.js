@@ -59,7 +59,7 @@ function start() {
     if (req.headers[process.env.AUTH]) {
       res.setTimeout(25000);
       var options = {
-        url: 'https://www.bungie.net/' + req.originalUrl,
+        url: 'https://www.bungie.net' + req.originalUrl,
         headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
       };
       try {
