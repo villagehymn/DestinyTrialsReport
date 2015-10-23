@@ -16,12 +16,17 @@ function start() {
   app.use(compression());
   app.use(express.static(__dirname));
 
+  // Internal API Proxy
   app.use('/api/*?', function(req, res) {
-    var options = {
-      url: 'http://api.destinytrialsreport.com' + req.originalUrl,
-      headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
-    };
-    req.pipe(request(options)).pipe(res);
+    if (req.headers[process.env.AUTH]) {
+      var options = {
+        url: 'http://api.destinytrialsreport.com' + req.originalUrl,
+        headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
+      };
+      req.pipe(request(options)).pipe(res);
+    } else {
+      res.send('Nope');
+    }
   });
 
   // DestinyTrialsReport
