@@ -27,36 +27,3 @@ header {
   padding-top: 0;
   overflow: hidden;
 }
-
-.controls__expand {
-  border-top-left-radius: 1em;
-  border-top-right-radius: 1em;
-  cursor: pointer;
-  text-align: center;
-
-  span {
-    vertical-align: middle;
-    text-transform: uppercase;
-  }
-
-  i {
-    vertical-align: middle;
-    font-size: 2em;
-    line-height: 1.5em;
-    color: white;
-  }
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .focus-on-players & {
-    span {
-      display: none;
-    }
-
-    i {
-      transform: rotateZ(180deg);
-    }
-  }
-}

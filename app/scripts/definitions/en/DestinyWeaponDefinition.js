@@ -5024,7 +5024,7 @@ var DestinyWeaponDefinition = {
     "tierType": 4
   },
   "4097026463": {
-    "name": "No Time To Explain",
+    "name": "No Time to Explain",
     "icon": "/images/weapons/NoTimeToExplain.png",
     "subType": 13,
     "tierType": 6,

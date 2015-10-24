@@ -5,7 +5,7 @@ angular.module('trialsReportApp')
     var getData = function (player) {
       return $http({
         method: 'GET',
-        url: 'http://api.destinytrialsreport.com/getInventory/' + player.membershipType + '/' + player.membershipId + '/' + player.characterInfo.characterId
+        url: '/api/getInventory/' + player.membershipType + '/' + player.membershipId + '/' + player.characterInfo.characterId
       }).then(function (result) {
         return result.data;
       });

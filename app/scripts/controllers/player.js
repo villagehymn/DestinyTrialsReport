@@ -4,11 +4,13 @@ angular.module('trialsReportApp')
   .controller('PlayerCtrl', function ($scope, currentAccount, $analytics, locationChanger) {
 
     if (!$scope.player.searched && !$scope.player.invalidResult) {
-      $scope.player.isTeammate = true;
-      currentAccount.getPlayerCard($scope.player).then(function (player) {
-        //$scope.$evalAsync( $scope.player = player);
-        currentAccount.compareLastMatchResults(player, $scope.fireteam[0].activities.lastThree);
-      });
+      if (angular.isUndefined($scope.player.isTeammate)) {
+        $scope.player.isTeammate = true;
+        currentAccount.getPlayerCard($scope.player).then(function (player) {
+          //$scope.$evalAsync( $scope.player = player);
+          currentAccount.compareLastMatchResults(player, $scope.fireteam[0].activities.lastThree);
+        });
+      }
     }
 
     var sendAnalytic = function (event, cat, label) {
@@ -48,7 +50,7 @@ angular.module('trialsReportApp')
     };
 
     $scope.setRecentPlayer = function (player) {
-      var url = 'http://api.destinytrialsreport.com/SearchDestinyPlayer/' + player.membershipType + '/' + player.name;
+      var url = '/api/SearchDestinyPlayer/' + player.membershipType + '/' + player.name;
       return currentAccount.getAccount(url)
         .then(function (player) {
           currentAccount.getPlayerCard(player).then(function (teammate) {

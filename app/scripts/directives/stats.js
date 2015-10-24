@@ -41,10 +41,12 @@ angular.module('trialsReportApp')
         $scope.statPopover = function (stat) {
           var popover;
 
-          if (stat.tier) {
-            popover = {content:'Tier ' + stat.tier + ' — ' + + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown}
-          } else {
-            popover = {content: stat.name + ': ' + (stat.value / 10) * 100 + '%'}
+          if (stat) {
+            if (angular.isDefined(stat.tier)) {
+              popover = 'Tier ' + stat.tier + ' — ' + + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown
+            } else {
+              popover = stat.name + ': ' + (stat.value / 10) * 100 + '%'
+            }
           }
           return popover;
         };

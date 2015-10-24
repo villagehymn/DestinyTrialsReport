@@ -1,6 +1,4 @@
-<div class="player shadow-z-1"
-     ng-class="{'with-overlay': player.isEditing, 'is-virgin': (player.name !== 'Enter Player Name' && !player.activities.lastTwentyFive), 'with-overlay is-invalid': player.name === 'Enter Player Name'}"
-     ng-if="player.name && $index < 3">
+<div class="player shadow-z-1" ng-class="{'is-virgin':!player.activities.lastTwentyFive, 'with-overlay is-invalid':player.invalidResult}">
 
   <div ng-include="'views/player/overview.html'"></div>
 

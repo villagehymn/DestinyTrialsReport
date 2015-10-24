@@ -8,7 +8,7 @@
     <div class="weapon__info">
       <div class="weapon__title">
         <span ng-bind="weapon.definition.name"></span>
-        <span class="weapon__damage" ng-bind="weapon.damage + ' atk'"></span>
+        <span class="weapon__damage" ng-if="weapon.damage" ng-bind="weapon.damage + ' atk'"></span>
       </div>
       <div class="weapon__perks">
         <div class="weapon-perk"

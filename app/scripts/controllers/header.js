@@ -3,15 +3,17 @@
 angular.module('trialsReportApp')
   .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams) {
 
-    $scope.mapModal = {
-      content: $sce.trustAsHtml(
-        '<div class="map-modal">' +
-          '<div class="map-modal__heatmap">' +
-            '<img class="img-responsive" src="' + $scope.currentMap.heatmapImage + '" alt="Heatmap">' + // todo: handle case where heatmapImage does not exist
-          '</div>' +
-        '</div>'
-      )
-    };
+    if ('heatmapImage' in $scope.currentMap) {
+      $scope.mapModal = {
+        content: $sce.trustAsHtml(
+          '<div class="map-modal">' +
+            '<div class="map-modal__heatmap">' +
+              '<img class="img-responsive" src="' + $scope.currentMap.heatmapImage + '" alt="Heatmap">' +
+            '</div>' +
+          '</div>'
+        )
+      };
+    }
 
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
@@ -49,12 +51,21 @@ angular.module('trialsReportApp')
       var url = '/Platform/Destiny/SearchDestinyPlayer/' + ($scope.platformValue ? 2 : 1) + '/' + name + '/';
       return currentAccount.getAccount(url)
         .then(function (player) {
-          player.isTeammate = true;
-          currentAccount.getPlayerCard(player).then(function (teammate) {
-            $scope.$evalAsync( $scope.fireteam[index] = teammate );
-            currentAccount.compareLastMatchResults($scope.fireteam[index], $scope.fireteam[0].activities.lastThree);
-            updateUrl($scope, locationChanger)
-          });
+          if (player) {
+            if (angular.isDefined($scope.fireteam[1].name) || angular.isDefined($scope.fireteam[2].name)) {
+              $scope.switchFocus();
+              document.activeElement.blur();
+              player.isTeammate = true;
+            }
+            currentAccount.getPlayerCard(player).then(function (teammate) {
+              $scope.$evalAsync( $scope.fireteam[index] = teammate );
+              if (!$scope.fireteam[0].activities) {
+                $scope.fireteam[0].activities = {lastThree: {}};
+              }
+              currentAccount.compareLastMatchResults($scope.fireteam[index], $scope.fireteam[0].activities.lastThree);
+              updateUrl($scope, locationChanger);
+            });
+          }
         });
     };
 

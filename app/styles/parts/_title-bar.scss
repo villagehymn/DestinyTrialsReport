@@ -21,6 +21,13 @@
   }
 }
 
+@media all and (max-width: 1280px) {
+  .title-bar {
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+  }
+}
+
 @media all and (max-width: 1500px) and (min-width: 1280px) {
   .title-bar__title {
     font-size: 1.5em;
@@ -40,11 +47,7 @@
 
 @media all and (max-width: 400px) {
   .title-bar__title {
-    font-size: 2em;
+    font-size: 1.3em;
     line-height: 1.1;
-
-    .hide-on-small {
-      display: none;
-    }
   }
 }

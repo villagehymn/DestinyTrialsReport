@@ -83,6 +83,9 @@ angular.module('trialsReportApp')
       var updateLastMatchResults = function (teammate) {
           teammate.isTeammate = true;
           var lastThree = {};
+          if (!teammate.activities) {
+            teammate.activities = {lastThree: {}};
+          }
           angular.forEach(teammate.activities.lastThree, function (match, key) {
             if (postGameResults[key]) {
               lastThree[key] = postGameResults[key];

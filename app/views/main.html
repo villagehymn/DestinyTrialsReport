@@ -1,10 +1,6 @@
 <div class="wrapper" ng-class="{'my-dtr': subdomain, 'focus-on-players': focusOnPlayers}">
   <div class="controls-wrapper shadow-z-2">
     <div class="controls" ng-controller="HeaderCtrl">
-      <div class="controls__expand" ng-if="screenSize.xs || screenSize.sm || screenSize.md" ng-click="switchFocus()">
-        <span ng-if="!fireteam[0]">Blog</span>
-        <i class="material-icons">&#xE5CF;</i>
-      </div>
       <header ng-include="'views/controls/top.html'"></header>
       <footer ng-include="'views/controls/bottom.html'"></footer>
     </div>
@@ -13,7 +9,7 @@
     <div class="container-fluid" ng-if="status">
       <div class="row">
         <div class="text-center alert alert-warning">
-          <strong>{{status}}</strong>
+          <strong ng-bind="status"></strong>
         </div>
       </div>
     </div>
@@ -21,27 +17,30 @@
       <div ng-include="'views/blog/index.html'"></div>
     </div>
     <div class="players" ng-if="fireteam[0] && !status">
-      <div class="player-container"
-           ng-if="screenSize.md || screenSize.lg"
+      <div class="player-container hidden-xs hidden-sm"
            ng-controller="PlayerCtrl as Player"
            ng-repeat="player in fireteam track by $index"
            ng-include="'views/player/index.html'">
       </div>
-      <div class="row" ng-if="screenSize.xs || screenSize.sm">
-        <button class="btn btn-fab btn-raised btn-material-grey" ng-click="switchFocus()" ng-if="focusOnPlayers"><i class="material-icons">&#xE5CE;</i></button>
-        <div ng-if="screenSize.xs">
+      <div class="row hidden-md hidden-lg">
+        <div>
           <ul rn-carousel>
-            <li class="col-xs-4" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></li>
-          </ul>
-        </div>
-        <div ng-if="screenSize.sm">
-          <ul rn-carousel>
-            <li><div class="col-xs-12" ng-controller="PlayerCtrl as Player" ng-repeat="player in fireteam track by $index" ng-include="'views/player/index.html'"></div></li>
-            <li><div class="col-xs-12"></div></li>
+            <li ng-repeat="placeholder in slides">
+              <div class="col-xs-12"
+                   ng-controller="PlayerCtrl as Player"
+                   ng-repeat="player in fireteam track by $index"
+                   ng-include="'views/player/index.html'"
+                   ng-if="$parent.$index === 0">
+              </div>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-    <div ng-click="switchFocus()" class="overlay"></div>
   </div>
+  <div class="overlay"></div>
+  <button class="control-btn btn btn-fab btn-raised btn-material-grey"
+          ng-mobile-click="switchFocus()">
+    <i class="material-icons">&#xE5CE;</i>
+  </button>
 </div>
