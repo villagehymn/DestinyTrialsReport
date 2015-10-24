@@ -84,7 +84,7 @@ angular.module('trialsReportApp')
     var getData = function (player) {
       return $http({
         method: 'GET',
-        url: 'http://api.destinytrialsreport.com/trialsStats/' + player.membershipType + '/' + player.membershipId + '/' + player.characterInfo.characterId
+        url: '/api/trialsStats/' + player.membershipType + '/' + player.membershipId + '/' + player.characterInfo.characterId
       }).then(function (result) {
         if(!angular.isUndefined(result.data.stats)) {
           result.data.stats.activitiesWinPercentage = {
@@ -104,7 +104,7 @@ angular.module('trialsReportApp')
     var getPostGame = function (recentActivity, player) {
       return $http({
         method: 'GET',
-        url: 'http://api.destinytrialsreport.com/PostGameCarnageReport/' + recentActivity.id
+        url: '/api/PostGameCarnageReport/' + recentActivity.id
       }).then(function (resultPostAct) {
         var dfd = $q.defer();
         player.activities.lastThree[recentActivity.id].result = resultPostAct;
@@ -117,7 +117,7 @@ angular.module('trialsReportApp')
     var getFireteamFromActivitiy = function (recentActivity, id) {
       return $http({
         method: 'GET',
-        url: 'http://api.destinytrialsreport.com/PostGameCarnageReport/' + recentActivity.id
+        url: '/api/PostGameCarnageReport/' + recentActivity.id
       }).then(function (resultPostAct) {
         var fireTeam = {};
         var data = resultPostAct.data.Response.data;
