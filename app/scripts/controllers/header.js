@@ -59,6 +59,7 @@ angular.module('trialsReportApp')
             }
             currentAccount.getPlayerCard(player).then(function (teammate) {
               $scope.$evalAsync( $scope.fireteam[index] = teammate );
+              $scope.$parent.focusOnPlayer = index + 1;
               if (!$scope.fireteam[0].activities) {
                 $scope.fireteam[0].activities = {lastThree: {}};
               }
