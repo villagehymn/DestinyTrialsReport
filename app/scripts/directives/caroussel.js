@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .directive('caroussel', ['$customSwipe', function($customSwipe) {
+  .directive('caroussel', ['$customSwipe', '$timeout', function($customSwipe, $timeout) {
     return {
       restrict: 'A',
       link: function(scope, ele, attrs, ctrl) {
@@ -9,9 +9,11 @@ angular.module('trialsReportApp')
         var startTransformX;
         var container = $('.players').first();
         var active = false;
+        var activePlayer = scope.$parent.focusOnPlayer;
         $customSwipe.bind(ele, {
           start: function (coords) {
             if (window.innerWidth <= 960) {
+              activePlayer = scope.$parent.focusOnPlayer;
               active = true;
               container.css('transition', 'none');
               container.css('-webkit-transition', 'none');
@@ -33,6 +35,23 @@ angular.module('trialsReportApp')
           end: function(coords) {
             var delta = coords.x - startX;
             container.removeAttr('style');
+            if (delta < -10) {
+              if (activePlayer === 1) {
+                $('.players-wrapper').removeClass('focus-on-player-one').addClass('focus-on-player-two');
+                scope.$parent.focusOnPlayer = 2;
+              } else if (activePlayer === 2) {
+                $('.players-wrapper').removeClass('focus-on-player-two').addClass('focus-on-player-three');
+                scope.$parent.focusOnPlayer = 3;
+              }
+            } else if (delta > 10) {
+              if (activePlayer === 2) {
+                $('.players-wrapper').removeClass('focus-on-player-two').addClass('focus-on-player-one');
+                scope.$parent.focusOnPlayer = 1;
+              } else if (activePlayer === 3) {
+                $('.players-wrapper').removeClass('focus-on-player-three').addClass('focus-on-player-two');
+                scope.$parent.focusOnPlayer = 2;
+              }
+            }
             active = false;
           }
         }, 0)

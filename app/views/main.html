@@ -19,7 +19,7 @@
     <div class="players-wrapper" ng-if="fireteam[0] && !status" ng-class="{'focus-on-player-one': focusOnPlayer === 1, 'focus-on-player-two': focusOnPlayer === 2, 'focus-on-player-three': focusOnPlayer === 3}">
       <div class="player-shift-focus player-shift-focus--left" ng-mobile-click="shiftPlayerFocus(-1)"></div>
       <div class="player-shift-focus player-shift-focus--right" ng-mobile-click="shiftPlayerFocus(1)"></div>
-      <div class="players" caroussel ng-swipe-right="shiftPlayerFocus(-1)" ng-swipe-left="shiftPlayerFocus(1)">
+      <div class="players" caroussel>
         <div class="player-container"
              ng-controller="PlayerCtrl as Player"
              ng-repeat="player in fireteam track by $index"
