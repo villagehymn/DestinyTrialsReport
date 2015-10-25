@@ -6,9 +6,11 @@
 
 .players {
   white-space: nowrap;
-  transition: transform cubic-bezier(.55,0,.1,1) .3s;
+  transition: transform ease-out .3s;
   perspective: 1000px;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  will-change: transform;
 }
 
 .player-container {
@@ -19,6 +21,9 @@
   width: 25vw;
   min-width: 280px;
   max-width: 380px;
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 
   &:nth-child(1) {
     padding-right: .333em;

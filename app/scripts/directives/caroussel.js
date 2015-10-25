@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .directive('caroussel', ['$swipe', function($swipe) {
+  .directive('caroussel', ['$customSwipe', function($customSwipe) {
     return {
       restrict: 'A',
       link: function(scope, ele, attrs, ctrl) {
@@ -9,7 +9,7 @@ angular.module('trialsReportApp')
         var startTransformX;
         var container = $('.players').first();
         var active = false;
-        $swipe.bind(ele, {
+        $customSwipe.bind(ele, {
           start: function (coords) {
             if (window.innerWidth <= 960) {
               active = true;
@@ -25,16 +25,17 @@ angular.module('trialsReportApp')
           move: function(coords) {
             if (active) {
               var delta = coords.x - startX;
-              container.css('transform', 'translateX(' + (startTransformX + (delta / 2)) + 'px)');
-              container.css('-webkit-transform', 'translateX(' + (startTransformX + (delta / 2)) + 'px)');
-              container.css('-ms-transform', 'translateX(' + (startTransformX + (delta / 2)) + 'px)');
+              container.css('transform', 'translate3d(' + (startTransformX + (delta / 2)) + 'px, 0px, 0px)');
+              container.css('-webkit-transform', 'translate3d(' + (startTransformX + (delta / 2)) + 'px, 0px, 0px)');
+              container.css('-ms-transform', 'translate3d(' + (startTransformX + (delta / 2)) + 'px, 0px, 0px)');
             }
           },
           end: function(coords) {
+            var delta = coords.x - startX;
             container.removeAttr('style');
             active = false;
           }
-        })
+        }, 0)
       }
     };
   }]);
