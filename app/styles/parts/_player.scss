@@ -7,6 +7,8 @@
 .players {
   white-space: nowrap;
   transition: transform cubic-bezier(.55,0,.1,1) .3s;
+  perspective: 1000px;
+  backface-visibility: hidden;
 }
 
 .player-container {
