@@ -8,24 +8,31 @@ angular.module('trialsReportApp')
         var startX;
         var startTransformX;
         var container = $('.players').first();
+        var active = false;
         $swipe.bind(ele, {
           start: function (coords) {
-            container.css('transition', 'none');
-            container.css('-webkit-transition', 'none');
-            startX = coords.x;
-            startTransformX = parseFloat(container.css('transform').split(',')[4]);
-            if (isNaN(startTransformX)) {
-              startTransformX = 0;
+            if (window.innerWidth <= 960) {
+              active = true;
+              container.css('transition', 'none');
+              container.css('-webkit-transition', 'none');
+              startX = coords.x;
+              startTransformX = parseFloat(container.css('transform').split(',')[4]);
+              if (isNaN(startTransformX)) {
+                startTransformX = 0;
+              }
             }
           },
           move: function(coords) {
-            var delta = coords.x - startX;
-            container.css('transform', 'translateX(' + (startTransformX + (delta / 2)) + 'px)');
-            container.css('-webkit-transform', 'translateX(' + (startTransformX + (delta / 2)) + 'px)');
-            container.css('-ms-transform', 'translateX(' + (startTransformX + (delta / 2)) + 'px)');
+            if (active) {
+              var delta = coords.x - startX;
+              container.css('transform', 'translateX(' + (startTransformX + (delta / 2)) + 'px)');
+              container.css('-webkit-transform', 'translateX(' + (startTransformX + (delta / 2)) + 'px)');
+              container.css('-ms-transform', 'translateX(' + (startTransformX + (delta / 2)) + 'px)');
+            }
           },
           end: function(coords) {
             container.removeAttr('style');
+            active = false;
           }
         })
       }
