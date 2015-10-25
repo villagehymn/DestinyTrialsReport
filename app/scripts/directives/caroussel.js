@@ -13,7 +13,6 @@ angular.module('trialsReportApp')
         $customSwipe.bind(ele, {
           start: function (coords) {
             if (window.innerWidth <= 960) {
-              container = $('.players').first();
               activePlayer = scope.$parent.focusOnPlayer;
               active = true;
               container.css('transition', 'none');
