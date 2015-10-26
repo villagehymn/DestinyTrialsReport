@@ -71,7 +71,7 @@ function extractDB(dbFile) {
       var item = JSON.parse(row.json);
 
       // Armor
-      if (item.itemType === 2) {
+      if ((item.itemType === 2) || (item.itemTypeName === 'Mask')) {
         DestinyArmorDefinition[item.itemHash] = {};
         DestinyArmorDefinition[item.itemHash].name = item.itemName;
         DestinyArmorDefinition[item.itemHash].description = item.itemDescription;

@@ -679,6 +679,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/b96bfc683f126435e18eb41159d46a43.jpg",
     "tierType": 5
   },
+  "177212690": {
+    "name": "Traveler Mask",
+    "description": "\"Such simplicity. Such contours! Been inside the Traveler, you know. Smells faintly of vanilla.\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/00f1b28b0f6246f7c514557de8faf5be.jpg",
+    "tierType": 5
+  },
+  "177212691": {
+    "name": "Traveler Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/79e98c164b63770e7e548b0fd9005d31.jpg",
+    "tierType": 4
+  },
   "179288772": {
     "name": "Lightmail",
     "description": "Fabricated by your Ghost with available mass, this basic armor is very thin on plating.",
@@ -1441,6 +1453,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/7ef40f3593af3aa6289fabb433f46484.jpg",
     "tierType": 5
   },
+  "403146260": {
+    "name": "Tiger Mask",
+    "description": "\"In the Vex's time conflux I befriended a being with this striking visage. He was noble, brave, and bestial.\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/ee28b6847dc13b37ecb5ac68dd14c7c6.jpg",
+    "tierType": 5
+  },
+  "403146261": {
+    "name": "Tiger Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/8e0723ca659c4d00e7dab562049796a8.jpg",
+    "tierType": 4
+  },
   "417729562": {
     "name": "Golden Hour Mark",
     "description": "I wear this in service. I earned this by sacrifice.",
@@ -1999,6 +2023,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/3687e4897582698b94c857adf8ee0ed4.jpg",
     "tierType": 4
   },
+  "571199368": {
+    "name": "Speaker Mask",
+    "description": "\"In my travels I have learned that speaking is much easier than listening.\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/4b320d997edede5b28434404d457af9b.jpg",
+    "tierType": 5
+  },
+  "571199369": {
+    "name": "Speaker Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/17597f9fadd7c973536195816f344023.jpg",
+    "tierType": 4
+  },
   "582029658": {
     "name": "Queen's Guard Hood",
     "description": "\"Show me all that I have yet to rule.\"",
@@ -2190,6 +2226,18 @@ var DestinyArmorDefinition = {
     "description": "True power comes from the hands of the people.",
     "icon": "/common/destiny_content/icons/925386e7eb9f9a8b423276463a47c44b.jpg",
     "tierType": 5
+  },
+  "634687982": {
+    "name": "Atheon Mask",
+    "description": "\"It's about time!\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/c0ea2b9c093ef93cc95b0d48d1e5a7ae.jpg",
+    "tierType": 5
+  },
+  "634687983": {
+    "name": "Atheon Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/7705b982eaa4abfd1fbbf064fcddaab0.jpg",
+    "tierType": 4
   },
   "634731106": {
     "name": "Robe of the Exile",
@@ -2508,6 +2556,18 @@ var DestinyArmorDefinition = {
     "description": "Titan gauntlets typically leave the fingers free of bulky armor. Weapon handling is paramount.",
     "icon": "/common/destiny_content/icons/d69ff8037287790f33e289505951a70e.jpg",
     "tierType": 2
+  },
+  "719019280": {
+    "name": "Crota Mask",
+    "description": "\"Don this monster's face to hide the monsters lurking behind your own.\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/42f10f71ab106574a1e1bbee0ac157c7.jpg",
+    "tierType": 5
+  },
+  "719019281": {
+    "name": "Crota Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/15954881540b9e6e1e4afb05112fb64e.jpg",
+    "tierType": 4
   },
   "728377844": {
     "name": "Winged Sun Legs",
@@ -3955,6 +4015,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/ea6d498a64fe3efc6b402986c16a43cc.jpg",
     "tierType": 5
   },
+  "1299166026": {
+    "name": "Eris Morn Mask",
+    "description": "There's something very disturbing about this mask.",
+    "icon": "/common/destiny_content/icons/f73a2ca1b70d315fbe3ef5b3de0ab2bd.jpg",
+    "tierType": 5
+  },
+  "1299166027": {
+    "name": "Eris Morn Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/d37290b0d08a745d4347306e3fa0359d.jpg",
+    "tierType": 4
+  },
   "1302424880": {
     "name": "Cormorant Line II",
     "description": "The most valiant among the Praxic Warlocks are honored with the Cormorant Seal.",
@@ -4187,6 +4259,18 @@ var DestinyArmorDefinition = {
     "name": "Wolf Pelt Weave 3.0",
     "description": "\"In the Reef, you use what you can find, even if all you can find is Fallen.\"",
     "icon": "/common/destiny_content/icons/ef331be311c17ca57887e6510e8f6d02.jpg",
+    "tierType": 4
+  },
+  "1350744010": {
+    "name": "Exotic Engram Mask",
+    "description": "\"That's an 'exotic' look, Guardian.\" —Tess Everis",
+    "icon": "/common/destiny_content/icons/e1d92a64d870aafafc8c6ad81534ab1c.jpg",
+    "tierType": 5
+  },
+  "1350744011": {
+    "name": "Exotic Engram Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/21297fc3426a86ab213a7e4c60f96e84.jpg",
     "tierType": 4
   },
   "1353391432": {
@@ -6205,6 +6289,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/37a2b2ca34871d232c6a806cf39d9f12.jpg",
     "tierType": 5
   },
+  "2112419342": {
+    "name": "Legendary Engram Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/f125153efe58dba0d9b6e66b488d0b39.jpg",
+    "tierType": 4
+  },
+  "2112419343": {
+    "name": "Legendary Engram Mask",
+    "description": "\"Yes, it's true—the Legendary Engram was named after me.\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/f0e89ef64c30b8d8a7cfbb69b6e2893f.jpg",
+    "tierType": 5
+  },
   "2113871045": {
     "name": "Holocide Helm",
     "description": "A prestigious trophy earned in battle during the Trials of Osiris.",
@@ -6289,6 +6385,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/37a2b2ca34871d232c6a806cf39d9f12.jpg",
     "tierType": 5
   },
+  "2136544540": {
+    "name": "Cryptarch Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/b642b0a4983acb0367f78e71c00eaf1a.jpg",
+    "tierType": 4
+  },
+  "2136544541": {
+    "name": "Cryptarch Mask",
+    "description": "\"I myself frequently don the guise of my old friend Rahool in order to enter the Tower unremarked.\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/665ac408396ad35eb61f854e8be79a52.jpg",
+    "tierType": 5
+  },
   "2137413904": {
     "name": "Gwalior  Type 1",
     "description": "The Gwalior pattern improves on standard Fieldplate while remaining economical.",
@@ -6312,6 +6420,18 @@ var DestinyArmorDefinition = {
     "description": "A single mark painted upon the forehead in remembrance of a lost comrade.",
     "icon": "/common/destiny_content/icons/ec4da577233288c5d20050274b620ba1.jpg",
     "tierType": 5
+  },
+  "2140586598": {
+    "name": "Uncommon Engram Mask",
+    "description": "\"I see that you and I have 'common' interests, Guardian.\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/2571f2c1db8ecf1af06d6cb49a08d73c.jpg",
+    "tierType": 5
+  },
+  "2140586599": {
+    "name": "Uncommon Engram Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/6fff8b32078c10fccce98274dc1f8766.jpg",
+    "tierType": 4
   },
   "2140646756": {
     "name": "Haliaetus II",
@@ -6955,6 +7075,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/26be8fe08a572d9823c231910a90d0ad.jpg",
     "tierType": 5
   },
+  "2327193420": {
+    "name": "Skolas Mask",
+    "description": "The Kell of Kells.",
+    "icon": "/common/destiny_content/icons/bb73d05cca185e6519160993a9b1a122.jpg",
+    "tierType": 5
+  },
+  "2327193421": {
+    "name": "Skolas Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/02d5f0150ab637e80ba8a0ed0e0ecbcf.jpg",
+    "tierType": 4
+  },
   "2335332317": {
     "name": "Sunbreakers",
     "description": "\"When one can wield the fire of stars, what use is flesh and bone?\"",
@@ -7140,6 +7272,18 @@ var DestinyArmorDefinition = {
     "description": "\"The City's defenses are only as strong as your two arms.\"",
     "icon": "/common/destiny_content/icons/6c05904aee727f50ff648a8541188197.jpg",
     "tierType": 3
+  },
+  "2380856832": {
+    "name": "Rare Engram Mask",
+    "description": "\"To be a Guardian is to be part of a rarified company of heroes.\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/9c2028ae37861bb3baaf1dabba3dc065.jpg",
+    "tierType": 5
+  },
+  "2380856833": {
+    "name": "Rare Engram Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/b8405cd3a83a614d57c75ee11a8a27ba.jpg",
+    "tierType": 4
   },
   "2393479518": {
     "name": "Immanent War Robes",
@@ -8052,6 +8196,18 @@ var DestinyArmorDefinition = {
     "description": "Coordinated strikes demand more than individual talent. The fireteam must cohere as a unit.",
     "icon": "/common/destiny_content/icons/179f9d181c820abb509f9ea1734c1b17.jpg",
     "tierType": 4
+  },
+  "2652799928": {
+    "name": "Petra Venj Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/fa00189cf1a8ade884f0f2982db1d001.jpg",
+    "tierType": 4
+  },
+  "2652799929": {
+    "name": "Petra Venj Mask",
+    "description": "The Queen's Wrath is beautiful and terrible to behold.",
+    "icon": "/common/destiny_content/icons/26130952a2bdb38d07f166e5f2e65ef8.jpg",
+    "tierType": 5
   },
   "2659960491": {
     "name": "Terra Bide",
@@ -9427,6 +9583,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/404405c530fb57c230b96b769f5e3404.jpg",
     "tierType": 5
   },
+  "3080373384": {
+    "name": "Warden Mask",
+    "description": "\"You mock me, Guardian?\" —Variks",
+    "icon": "/common/destiny_content/icons/59c0ce1f7772e0a43111f964df3d2503.jpg",
+    "tierType": 5
+  },
+  "3080373385": {
+    "name": "Warden Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/f34b9093e9ddd5aa01fd1d9a3b529771.jpg",
+    "tierType": 4
+  },
   "3092622518": {
     "name": "All My Victims Cloak",
     "description": "Made from the torn cloaks of other Hunters. Other, lesser Hunters.",
@@ -10621,6 +10789,18 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/7f3f7a073f2a4de896a91ce149c1ccdd.jpg",
     "tierType": 5
   },
+  "3507021084": {
+    "name": "Oryx Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/961e15fc6006661b843dd878febb9fdc.jpg",
+    "tierType": 4
+  },
+  "3507021085": {
+    "name": "Oryx Mask",
+    "description": "I am the Taken King!",
+    "icon": "/common/destiny_content/icons/56fa341239e1876787428710bbc554e7.jpg",
+    "tierType": 5
+  },
   "3515978626": {
     "name": "Blindsight Gloves",
     "description": "\"With the sight I saw the self within the self.\" —Fractal Scrolls",
@@ -11412,6 +11592,18 @@ var DestinyArmorDefinition = {
     "description": "Attune yourself to your fieldweave. A clean circuit should feel like a good night's rest.",
     "icon": "/common/destiny_content/icons/aa8202e973e789ee1e618c885c7d4182.jpg",
     "tierType": 3
+  },
+  "3813534254": {
+    "name": "Xûr Mask",
+    "description": "\"Even with all my lengthy travels, my knowledge has limits. Ah, do keep that quiet.\" —Fenchurch Everis",
+    "icon": "/common/destiny_content/icons/eada38f94444ec72ac97f12dc8bf97a4.jpg",
+    "tierType": 5
+  },
+  "3813534255": {
+    "name": "Xûr Mask",
+    "description": "Shoddy construction and flimsy materials, but an upgrade with some Paper Glue might make it Legendary. \n\nExpires at the end of the Festival of the Lost.",
+    "icon": "/common/destiny_content/icons/49f01f528b56f3760a55601bf2c13c91.jpg",
+    "tierType": 4
   },
   "3815792479": {
     "name": "Kallipolis Boots",
