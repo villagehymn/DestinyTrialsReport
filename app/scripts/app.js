@@ -102,7 +102,6 @@ angular
   .module('trialsReportApp', [
     'angulartics',
     'angulartics.google.analytics',
-    'angular-carousel',
     'angular-loading-bar',
     'mgcrea.ngStrap.modal',
     'mgcrea.ngStrap.popover',
@@ -114,8 +113,7 @@ angular
     'toastr',
     'ui.bootstrap.tpls',
     'ui.bootstrap.progressbar',
-    'ui.bootstrap.tabs',
-    'ng-fastclick'
+    'ui.bootstrap.tabs'
   ])
   .config(window.$QDecorator)
   .config(function ($modalProvider) {
