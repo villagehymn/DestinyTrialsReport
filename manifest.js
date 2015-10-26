@@ -97,6 +97,19 @@ function extractDB(dbFile) {
       }
     });
 
+    // Skull Mask
+    if (!(3678707177 in DestinyArmorDefinition)) {
+      DestinyArmorDefinition[3678707177] = {
+        name: 'Skull Mask',
+        description: 'Festival of the Lost 2015\nYou have risen from eternal night to haunt the dreams of your enemies.',
+        icon: '/images/armor/SkullMask.png',
+        tierType: 5,
+        localIcon: true
+      };
+    } else {
+      console.log('Skull Mask now exists in the manifest file and the override can be removed.');
+    }
+
     // No Time To Explain
     if (!(4097026463 in DestinyWeaponDefinition)) {
       DestinyWeaponDefinition[4097026463] = {

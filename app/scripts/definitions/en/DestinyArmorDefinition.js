@@ -11209,6 +11209,13 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/cdb06ded034ce417b16fccc82a81e8e2.jpg",
     "tierType": 3
   },
+  "3678707177": {
+    "name": "Skull Mask",
+    "description": "Festival of the Lost 2015\nYou have risen from eternal night to haunt the dreams of your enemies.",
+    "icon": "/images/armor/SkullMask.png",
+    "tierType": 5,
+    "localIcon": true
+  },
   "3691267894": {
     "name": "Fear Eater",
     "description": "When I wear the mask I am a machine, the purpose of which is consumption.",
