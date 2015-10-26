@@ -112,15 +112,9 @@ angular.module('trialsReportApp')
       $scope.focusOnPlayers = !$scope.focusOnPlayers;
     };
 
-    $scope.slides = $window.innerWidth <= 567 ? ['1', '2', '3'] : ['1', '2'];
-    if ($window.innerWidth <= 960) {
-      $window.addEventListener('resize', function () {
-        if ($window.innerWidth <= 567 && $scope.slides.length < 3) {
-          $scope.slides.push('3');
-        } else if ($window.innerWidth > 567 && $scope.slides.length > 2) {
-          $scope.slides.splice(2, 1);
-        }
-      }, false);
+    $scope.focusOnPlayer = 1;
+    $scope.shiftPlayerFocus = function (direction) {
+      $scope.focusOnPlayer = Math.min(3, Math.max(1, $scope.focusOnPlayer + Math.floor(window.innerWidth / 320) * direction));
     }
 
     $scope.suggestRecentPlayers = function () {

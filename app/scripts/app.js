@@ -114,7 +114,8 @@ angular
     'toastr',
     'ui.bootstrap.tpls',
     'ui.bootstrap.progressbar',
-    'ui.bootstrap.tabs'
+    'ui.bootstrap.tabs',
+    'ng-fastclick'
   ])
   .config(window.$QDecorator)
   .config(function ($modalProvider) {
