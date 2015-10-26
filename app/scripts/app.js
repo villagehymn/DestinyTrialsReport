@@ -102,7 +102,6 @@ angular
   .module('trialsReportApp', [
     'angulartics',
     'angulartics.google.analytics',
-    'angular-carousel',
     'angular-loading-bar',
     'mgcrea.ngStrap.modal',
     'mgcrea.ngStrap.popover',
