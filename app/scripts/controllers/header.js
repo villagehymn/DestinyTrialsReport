@@ -15,7 +15,7 @@ angular.module('trialsReportApp')
       };
     }
 
-    var faqModal = $modal({ scope: $scope, contentTemplate: "app/views/modals/faq.html", show: false});
+    var faqModal = $modal({ scope: $scope, contentTemplate: "views/modals/faq.html", show: false});
 
     $scope.showModal = function () {
       faqModal.$promise.then(faqModal.show);
