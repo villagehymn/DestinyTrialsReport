@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams) {
+  .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams, $modal) {
 
     if ('heatmapImage' in $scope.currentMap) {
       $scope.mapModal = {
@@ -14,6 +14,12 @@ angular.module('trialsReportApp')
         )
       };
     }
+
+    var faqModal = $modal({ scope: $scope, contentTemplate: "app/views/modals/faq.html", show: false});
+
+    $scope.showModal = function () {
+      faqModal.$promise.then(faqModal.show);
+    };
 
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
