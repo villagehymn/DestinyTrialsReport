@@ -11212,7 +11212,7 @@ var DestinyArmorDefinition = {
   "3678707177": {
     "name": "Skull Mask",
     "description": "Festival of the Lost 2015\nYou have risen from eternal night to haunt the dreams of your enemies.",
-    "icon": "/images/armor/SkullMask.png",
+    "icon": "/images/armor/SkullMask.jpg",
     "tierType": 5,
     "localIcon": true
   },
