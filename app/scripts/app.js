@@ -119,7 +119,6 @@ angular
   .config(function ($modalProvider) {
     angular.extend($modalProvider.defaults, {
       container: 'body',
-      html: true,
       placement: 'center'
     });
   })

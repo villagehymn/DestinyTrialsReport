@@ -3,21 +3,26 @@
 angular.module('trialsReportApp')
   .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams, $modal) {
 
+    // titles in modals need styling or could be removed
     if ('heatmapImage' in $scope.currentMap) {
-      $scope.mapModal = {
-        content: $sce.trustAsHtml(
-          '<div class="map-modal">' +
-            '<div class="map-modal__heatmap">' +
-              '<img class="img-responsive" src="' + $scope.currentMap.heatmapImage + '" alt="Heatmap">' +
-            '</div>' +
-          '</div>'
-        )
+      var heatmapModal = $modal({
+        scope: $scope,
+        title: 'Heatmap',
+        contentTemplate: 'views/modals/heatmap.html',
+        show: false
+      });
+      $scope.showHeatmap = function () {
+        heatmapModal.$promise.then(heatmapModal.show);
       };
     }
 
-    var faqModal = $modal({ scope: $scope, contentTemplate: "views/modals/faq.html", show: false});
-
-    $scope.showModal = function () {
+    var faqModal = $modal({
+      scope: $scope,
+      title: 'FAQ',
+      contentTemplate: 'views/modals/faq.html',
+      show: false
+    });
+    $scope.showFAQ = function () {
       faqModal.$promise.then(faqModal.show);
     };
 
