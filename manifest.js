@@ -71,7 +71,7 @@ function extractDB(dbFile) {
       var item = JSON.parse(row.json);
 
       // Armor
-      if (item.itemType === 2) {
+      if ((item.itemType === 2) || (item.itemTypeName === 'Mask')) {
         DestinyArmorDefinition[item.itemHash] = {};
         DestinyArmorDefinition[item.itemHash].name = item.itemName;
         DestinyArmorDefinition[item.itemHash].description = item.itemDescription;
@@ -96,6 +96,19 @@ function extractDB(dbFile) {
           break;
       }
     });
+
+    // Skull Mask
+    if (!(3678707177 in DestinyArmorDefinition)) {
+      DestinyArmorDefinition[3678707177] = {
+        name: 'Skull Mask',
+        description: 'Festival of the Lost 2015\nYou have risen from eternal night to haunt the dreams of your enemies.',
+        icon: '/images/armor/SkullMask.jpg',
+        tierType: 5,
+        localIcon: true
+      };
+    } else {
+      console.log('Skull Mask now exists in the manifest file and the override can be removed.');
+    }
 
     // No Time To Explain
     if (!(4097026463 in DestinyWeaponDefinition)) {
