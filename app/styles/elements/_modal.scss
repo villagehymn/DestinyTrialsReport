@@ -25,28 +25,6 @@
 
 .modal-content {
   background: #333;
-  text-align: center;
-  box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.5);
-  padding: 0;
-
-  button {
-    color: white;
-    text-indent: -9999px;
-    line-height: 0;
-    display: block;
-    width: 100%;
-    border-bottom-left-radius: 2em;
-    border-bottom-right-radius: 2em;
-    padding: 1em 0;
-
-    &:after {
-      line-height: initial;
-      display: block;
-      text-indent: 0;
-      color: #333;
-      content: "Close";
-    }
-  }
 }
 
 .modal-content .modal-body {

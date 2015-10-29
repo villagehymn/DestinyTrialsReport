@@ -30,7 +30,7 @@
   }
 
   &:nth-child(2) {
-    padding: 1em .667em;
+    padding: 0 .667em;
   }
 
   &:nth-child(3) {
@@ -99,6 +99,7 @@
 @media all and (max-width: 640px) {
   .player-container {
     width: 95vw;
+    padding-top: 0;
   }
 
   .focus-on-player-two .players {
@@ -179,4 +180,10 @@
       border-bottom-right-radius: 1em;
     }
   }
+}
+
+.pull-indicator {
+  height: 25px !important;
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
 }
