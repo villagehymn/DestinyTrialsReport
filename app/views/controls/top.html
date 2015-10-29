@@ -43,6 +43,7 @@
               <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter their teammates\' gamertag'}}"
                      ng-model="teammateName" basic-click="suggestRecentPlayers()" ng-change="filter(teammateName)" data-toggle="dropdown">
               <ul class="dropdown-menu">
+                <li class="dropdown-menu__label">{{fireteam[0].name}}'s recent teammates</li>
                 <li ng-repeat="recentPlayer in recentPlayers" ng-if="recentPlayer.name !== fireteam[$parent.$index].name">
                   <a href="#" ng-click="searchPlayerbyName(recentPlayer.name, platformValue, $parent.$parent.$index)" ng-bind="recentPlayer.name"></a>
                 </li>
