@@ -62,7 +62,7 @@ var SUNSINGER_CLASS = 3658182170;
 var VOIDWALKER_CLASS = 3828867689;
 var BLADEDANCER_CLASS = 2962927168;
 var SUNBREAKER_CLASS = 21395672; //or 21395673
-var NIGHTSTALKER_CLASS = 151296639; //or 151296640
+var NIGHTSTALKER_CLASS = 4143670657; //or 4143670656
 var STORMCALLER_CLASS = 1256644900; //or 1256644901
 var GUNSLINGER_CLASS = 1716862031;
 var STRIKER_CLASS = 2455559914;
@@ -157,6 +157,22 @@ var hazardBurnDefense = {
   539512168: 'Arc Resist'
 };
 
+var hazardGrantsAbilty = {
+  136095187: 'Explosive Pyre',
+  138051548: 'Death from Above and Headstrong',
+  1195575848: 'Death from Above and Headstrong',
+  285151207: 'Unstoppable',
+  836092325: 'Unstoppable',
+  896109025: 'Shadestep',
+  1506633456: 'Landfall'
+};
+
+var hazardGrantsAbiltySubclass = {};
+hazardGrantsAbiltySubclass[STRIKER_CLASS] = [138051548, 1195575848, 285151207, 836092325];
+hazardGrantsAbiltySubclass[SUNBREAKER_CLASS] = [136095187];
+hazardGrantsAbiltySubclass[NIGHTSTALKER_CLASS] = [896109025];
+hazardGrantsAbiltySubclass[STORMCALLER_CLASS] = [1506633456];
+
 var hazardIncreasedArmor = {
   3944665868: [BLADEDANCER_CLASS, STORMCALLER_CLASS, STRIKER_CLASS],
   671224739:  [SUNSINGER_CLASS, SUNBREAKER_CLASS, GUNSLINGER_CLASS],
@@ -240,7 +256,12 @@ var weaponKills = {
 // Class nodes definitions
 var VIKING_FUNERAL = 2443566286;
 var TOUCH_OF_FLAME = 2233737290;
+var IONIC_BLINK = 2719650973;
+var JUMP_BLINK = 3452380660;
 
+// Weapon + Armor node definitions
+var QUICKDRAW = 3409718360;
+var FORCE_MULTI = [910871216, 910871217];
 // Cooldowns
 
 var cooldownsSuperA  = ['5:00', '4:46', '4:31', '4:15', '3:58', '3:40'];
