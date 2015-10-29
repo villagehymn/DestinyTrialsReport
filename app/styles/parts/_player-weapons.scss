@@ -1,6 +1,7 @@
 .weapon {
   display: flex;
   margin: .25em 0;
+  height: 72px;
 
   &:not(:first-child) {
     margin-top: 1em;

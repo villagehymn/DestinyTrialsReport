@@ -17,7 +17,7 @@
   vertical-align: top;
   white-space: normal;
   display: inline-block;
-  padding: 1em;
+  padding: 0;
   width: 25vw;
   min-width: 280px;
   max-width: 380px;
@@ -27,6 +27,7 @@
 
   &:nth-child(1) {
     padding-right: .333em;
+    padding-left: 1em;
   }
 
   &:nth-child(2) {
@@ -35,6 +36,7 @@
 
   &:nth-child(3) {
     padding-left: .333em;
+    padding-right: 1em;
   }
 }
 
@@ -74,6 +76,7 @@
   .player-container {
     width: 48vw;
     max-width: none;
+    padding-bottom: 0;
   }
 
   .focus-on-player-one {
