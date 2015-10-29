@@ -7,6 +7,15 @@
   top: 50%;
 }
 
+.modal-title {
+  color: $trials-gold;
+  font-weight: 500;
+}
+
+.modal-header {
+  padding-left: 14px !important;
+}
+
 .modal-content {
   border-radius: 2em;
   overflow: hidden;
@@ -14,7 +23,8 @@
   overflow-y: auto;
 }
 
-.modal-content .modal-footer {
+.modal-content {
+  background: #333;
   text-align: center;
   box-shadow: inset 0px 10px 8px -10px rgba(0,0,0,0.5);
   padding: 0;
@@ -43,6 +53,10 @@
   padding: 0;
 }
 
+.modal-footer {
+  display: none;
+}
+
 .map-modal__intro {
   background-size: cover;
   padding-top: 12em;
@@ -64,6 +78,24 @@
   font-size: 2em;
   color: white;
   text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+}
+
+.close, .close:hover {
+  color: $equipped-background;
+}
+
+.faq-modal__container {
+  margin: auto;
+  padding: 1em;
+}
+
+.faq-modal__question {
+  color: $equipped-background;
+  font-weight: 500;
+}
+
+.faq-modal__answer {
+  color: $text-on-dark;
 }
 
 @media all and (max-width: 800px) {
