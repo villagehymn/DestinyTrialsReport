@@ -24,7 +24,8 @@
              ng-xpull="refreshInventory(fireteam)"
              ng-controller="PlayerCtrl as Player"
              ng-repeat="player in fireteam track by $index"
-             ng-include="'views/player/index.html'">
+             ng-include="'views/player/index.html'"
+             ng-if="player.name">
         </div>
       </div>
     </div>
