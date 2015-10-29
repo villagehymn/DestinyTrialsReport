@@ -12,10 +12,6 @@
   font-weight: 500;
 }
 
-.modal-header {
-  padding-left: 14px !important;
-}
-
 .modal-content {
   border-radius: 2em;
   overflow: hidden;
@@ -83,18 +79,26 @@
   display: none;
 }
 
-.faq-modal__container {
-  margin: auto;
-  padding: 1em;
+.faq-modal {
+  padding: 24px;
+}
+
+.faq-modal__container + .faq-modal__container {
+  margin-top: 32px;
 }
 
 .faq-modal__question {
-  color: $equipped-background;
+  color: lighten($text-on-dark, 30%);
   font-weight: 500;
 }
 
 .faq-modal__answer {
   color: $text-on-dark;
+
+  a {
+    color: lighten($text-on-dark, 20%);
+    text-decoration: underline;
+  }
 }
 
 @media all and (max-width: 800px) {
