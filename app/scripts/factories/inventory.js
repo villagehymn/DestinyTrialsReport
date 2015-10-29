@@ -46,13 +46,14 @@ function defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame) {
         if (subclass.nodes[s].row !== 0) {
           subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
         }
-        subclass.blink = subclass.nodes[s].nodeStepHash === 3452380660;
+        subclass.blink = subclass.nodes[s].nodeStepHash === JUMP_BLINK;
         break;
       case 3:
         if (subclass.nodes[s].row === 0) {
           subclass.abilities.weaponKillsSuper = subclass.nodes[s];
         } else {
           subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
+          subclass.ionicBlink = subclass.nodes[s].nodeStepHash === IONIC_BLINK
         }
         break;
       case 4:
@@ -91,10 +92,21 @@ function setItemDefinition(item, definition) {
 }
 
 function setArmorHazards(armors, itemPerk, weapons) {
-  armors.doubleGrenadeHash = hazardDoubleGrenadeByPerk[itemPerk.perkHash];
   setHazard(itemPerk.perkHash, armors.equipped.hazards, hazardMiscArmorPerks);
   setHazard(itemPerk.perkHash, armors.equipped.hazards, hazardBurnDefense);
   setHazard(itemPerk.perkHash, armors.equipped.increasedArmor, hazardIncreasedArmor);
+
+  if (hazardDoubleGrenadeByPerk[itemPerk.perkHash]) {
+    armors.doubleGrenadeHash = hazardDoubleGrenadeByPerk[itemPerk.perkHash];
+  }
+
+  if (hazardGrantsAbilty[itemPerk.perkHash]) {
+    armors.equipped.grantsClassNode = itemPerk.perkHash;
+  }
+
+  if (FORCE_MULTI.indexOf(itemPerk.perkHash) > -1) {
+    armors.equipped.forceMultiplier = true;
+  }
 
   if (itemPerkToBucket[itemPerk.perkHash]) {
     weapons[itemPerkToBucket[itemPerk.perkHash]].hazards.push("Fast Reload");
@@ -117,6 +129,9 @@ function setWeaponHazards(item, weapons, bucket, definition) {
       for (var n = 0; n < itemNode.perkHashes.length; n++) {
         if (hazardMiscWeaponPerks.indexOf(itemNode.perkHashes[n]) > -1) {
           weapons[bucket].hazards.push(itemNode.name);
+        }
+        if (itemNode.perkHashes[n] === QUICKDRAW) {
+          weapons.quickdraw = true;
         }
       }
     }
@@ -224,10 +239,28 @@ angular.module('trialsReportApp')
         }
       }
 
+      if (armors.equipped.grantsClassNode && hazardGrantsAbiltySubclass[subclass.definition.itemHash]) {
+        if (hazardGrantsAbiltySubclass[subclass.definition.itemHash].indexOf(armors.equipped.grantsClassNode) > -1) {
+          armors.equipped.hazards.push(hazardGrantsAbilty[armors.equipped.grantsClassNode]);
+        }
+      }
+
       if (armors.doubleGrenadeHash) {
         if (armors.doubleGrenadeHash === subclass.grenadeHash) {
           armors.equipped.hazards.push('Double Grenade');
         }
+      }
+
+      if (weapons.quickdraw && weapons.blink) {
+        armors.equipped.hazards.push('Blink Quickdraw');
+      }
+
+      if (subclass.ionicBlink) {
+        armors.equipped.hazards.push('Ionic Blink');
+      }
+
+      if (armors.equipped.forceMultiplier && weapons.shotgun) {
+        armors.equipped.hazards.push('Shotgun Kill Shield');
       }
 
       return {

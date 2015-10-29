@@ -97,31 +97,18 @@ function extractDB(dbFile) {
       }
     });
 
-    // Skull Mask
-    if (!(3678707177 in DestinyArmorDefinition)) {
-      DestinyArmorDefinition[3678707177] = {
-        name: 'Skull Mask',
-        description: 'Festival of the Lost 2015\nYou have risen from eternal night to haunt the dreams of your enemies.',
-        icon: '/images/armor/SkullMask.jpg',
-        tierType: 5,
-        localIcon: true
-      };
-    } else {
-      console.log('Skull Mask now exists in the manifest file and the override can be removed.');
-    }
-
-    // No Time To Explain
-    if (!(4097026463 in DestinyWeaponDefinition)) {
-      DestinyWeaponDefinition[4097026463] = {
-        name: 'No Time to Explain',
-        icon: '/images/weapons/NoTimeToExplain.png',
-        subType: 13,
-        tierType: 6,
-        localIcon: true
-      };
-    } else {
-      console.log('No Time To Explain now exists in the manifest file and the override can be removed.');
-    }
+    // Keeping as a reference for next time
+    //if (!(4097026463 in DestinyWeaponDefinition)) {
+    //  DestinyWeaponDefinition[4097026463] = {
+    //    name: 'No Time to Explain',
+    //    icon: '/images/weapons/NoTimeToExplain.png',
+    //    subType: 13,
+    //    tierType: 6,
+    //    localIcon: true
+    //  };
+    //} else {
+    //  console.log('No Time To Explain now exists in the manifest file and the override can be removed.');
+    //}
 
     writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
     writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);

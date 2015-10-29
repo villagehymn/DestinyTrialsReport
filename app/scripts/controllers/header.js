@@ -50,20 +50,20 @@ angular.module('trialsReportApp')
       }
     }
 
-    $scope.searchPlayerbyName = function (player, name, platform, index) {
+    $scope.searchPlayerbyName = function (name, platform, index) {
       if (angular.isUndefined(name)) {
         return;
       }
       var url = '/Platform/Destiny/SearchDestinyPlayer/' + ($scope.platformValue ? 2 : 1) + '/' + name + '/';
       return currentAccount.getAccount(url)
-        .then(function (player) {
-          if (player) {
+        .then(function (account) {
+          if (account) {
             if (angular.isDefined($scope.fireteam[1].name) || angular.isDefined($scope.fireteam[2].name)) {
               $scope.switchFocus();
               document.activeElement.blur();
-              player.isTeammate = true;
+              account.isTeammate = true;
             }
-            currentAccount.getPlayerCard(player).then(function (teammate) {
+            currentAccount.getPlayerCard(account).then(function (teammate) {
               $scope.$evalAsync( $scope.fireteam[index] = teammate );
               $scope.$parent.focusOnPlayer = index + 1;
               if (!$scope.fireteam[0].activities) {

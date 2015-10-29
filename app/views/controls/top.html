@@ -40,7 +40,13 @@
         <form role="form" ng-submit="searchPlayerbyName(player, teammateName, platformValue, $index)">
           <div class="main-search__row">
             <div class="main-search__input">
-              <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter their teammates\' gamertag'}}" ng-model="teammateName">
+              <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter their teammates\' gamertag'}}"
+                     ng-model="teammateName" basic-click="suggestRecentPlayers()" ng-change="filter(teammateName)" data-toggle="dropdown">
+              <ul class="dropdown-menu">
+                <li ng-repeat="recentPlayer in recentPlayers" ng-if="recentPlayer.name !== fireteam[$parent.$index].name">
+                  <a href="#" ng-click="searchPlayerbyName(recentPlayer.name, platformValue, $parent.$parent.$index)" ng-bind="recentPlayer.name"></a>
+                </li>
+              </ul>
             </div>
             <div class="main-search__controls">
               <div class="main-search__submit">
