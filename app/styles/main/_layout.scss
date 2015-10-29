@@ -23,9 +23,11 @@
   overflow-x: hidden;
   z-index: 99;
   display: flex;
+  pointer-events: none;
 }
 
 .controls {
+  pointer-events: auto;
   width: 100%;
   background: $header-bg;
   display: flex;
