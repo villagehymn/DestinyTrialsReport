@@ -50,9 +50,17 @@
       padding-left: $controls-padding;
     }
   }
+
+  &.open {
+    position: relative;
+  }
 }
 
 .main-search__replace {
   float: right;
   margin-left: 6px;
+}
+
+.dropdown-menu {
+  min-width: 100%;
 }
