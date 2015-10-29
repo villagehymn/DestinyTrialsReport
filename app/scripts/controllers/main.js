@@ -115,7 +115,7 @@ angular.module('trialsReportApp')
     $scope.focusOnPlayer = 1;
     $scope.shiftPlayerFocus = function (direction) {
       $scope.focusOnPlayer = Math.min(3, Math.max(1, $scope.focusOnPlayer + Math.floor(window.innerWidth / 320) * direction));
-    }
+    };
 
     $scope.suggestRecentPlayers = function () {
       if (angular.isUndefined($scope.recentPlayers)) {
@@ -123,7 +123,18 @@ angular.module('trialsReportApp')
         angular.forEach($scope.fireteam[0].characters, function (character) {
           getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount, trialsStats);
         });
+        $scope.recentPlayersCopy = $scope.recentPlayers;
       }
+    };
+
+    $scope.filter = function (change) {
+      var result = {};
+      angular.forEach($scope.recentPlayersCopy, function (value, key) {
+        if (angular.lowercase(key).indexOf(angular.lowercase(change)) === 0) {
+          result[key] = value;
+        }
+      });
+      $scope.recentPlayers = result;
     };
 
     if ($routeParams.playerName) {
