@@ -21,6 +21,7 @@
       <div class="player-shift-focus player-shift-focus--right" ng-mobile-click="shiftPlayerFocus(1)"></div>
       <div class="players" caroussel>
         <div class="player-container"
+             ng-xpull="refreshInventory(fireteam)"
              ng-controller="PlayerCtrl as Player"
              ng-repeat="player in fireteam track by $index"
              ng-include="'views/player/index.html'">

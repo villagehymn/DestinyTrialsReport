@@ -137,6 +137,14 @@ angular.module('trialsReportApp')
       $scope.recentPlayers = result;
     };
 
+    $scope.refreshInventory = function (fireteam) {
+      angular.forEach(fireteam, function (player, index) {
+        currentAccount.refreshInventory($scope.fireteam[index]).then(function (teammate) {
+          $scope.$evalAsync($scope.fireteam[index] = teammate);
+        });
+      });
+    };
+
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
     }

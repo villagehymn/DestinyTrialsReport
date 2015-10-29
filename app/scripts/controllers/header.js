@@ -80,12 +80,4 @@ angular.module('trialsReportApp')
           }
         });
     };
-
-    $scope.refreshInventory = function (fireteam) {
-      angular.forEach(fireteam, function (player, index) {
-        currentAccount.refreshInventory($scope.fireteam[index]).then(function (teammate) {
-          $scope.$evalAsync($scope.fireteam[index] = teammate);
-        });
-      });
-    };
   });
