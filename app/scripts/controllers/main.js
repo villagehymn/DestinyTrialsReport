@@ -27,6 +27,7 @@ function getTeammatesFromCharacters($scope, fireTeam) {
       $scope.fireteam.push(player);
     }
   });
+  $scope.focusOnPlayers = true;
 }
 
 function addFireteamMember(fireTeam, $scope, locationChanger) {
