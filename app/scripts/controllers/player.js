@@ -45,7 +45,11 @@ angular.module('trialsReportApp')
 
     $scope.getWeaponByHash = function (hash) {
       if ($scope.DestinyWeaponDefinition[hash]) {
-        return $scope.DestinyWeaponDefinition[hash];
+        var definition = $scope.DestinyWeaponDefinition[hash];
+        if (definition.icon.substr(0, 4) !== 'http') {
+          definition.icon = 'https://www.bungie.net' + definition.icon;
+        }
+        return definition;
       }
     };
 
