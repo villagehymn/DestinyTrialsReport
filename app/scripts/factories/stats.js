@@ -169,22 +169,25 @@ angular.module('trialsReportApp')
               }
             }
           }
-          var teamIndex = data.teams[0].standing.basic.value === standing ? 0 : 1;
-          var enemy_score = 0;
-          if (data.teams[teamIndex]) {
-            if (data.teams[teamIndex === 0 ? 1 : 0]) {
-              enemy_score = data.teams[teamIndex === 0 ? 1 : 0].score.basic.value;
+          var firstTeam = data.teams[0];
+          if (firstTeam) {
+            var teamIndex = data.teams[0].standing.basic.value === standing ? 0 : 1;
+            var enemy_score = 0;
+            if (data.teams[teamIndex]) {
+              if (data.teams[teamIndex === 0 ? 1 : 0]) {
+                enemy_score = data.teams[teamIndex === 0 ? 1 : 0].score.basic.value;
+              }
+              recentMatches.push({
+                standing: standing,
+                team_score: data.teams[teamIndex].score.basic.value,
+                enemy_score: enemy_score,
+                dateAgo: moment(data.period).fromNow(),
+                duration: data.entries[0].values.activityDurationSeconds.basic.displayValue
+              });
+              angular.forEach(matchStats, function (value) {
+                value.recentMatches = recentMatches;
+              });
             }
-            recentMatches.push({
-              standing: standing,
-              team_score: data.teams[teamIndex].score.basic.value,
-              enemy_score: enemy_score,
-              dateAgo: moment(data.period).fromNow(),
-              duration: data.entries[0].values.activityDurationSeconds.basic.displayValue
-            });
-            angular.forEach(matchStats, function (value) {
-              value.recentMatches = recentMatches;
-            });
           }
         }
       });
