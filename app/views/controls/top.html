@@ -21,7 +21,7 @@
       <form ng-submit="searchMainPlayerbyName(mainPlayer)">
         <div class="main-search__row">
           <div class="main-search__input">
-            <input type="text" class="form-control" placeholder="{{fireteam[0].name || 'Enter your opponent\'s gamertag'}}" ng-model="mainPlayer" ng-value="(!fireteam[0] ? searchedPlayer : '')">
+            <input type="text" class="form-control" placeholder="{{fireteam[0].name || (!subdomain ? 'Enter your opponent\'s gamertag' : 'Enter your gamertag')}}" ng-model="mainPlayer" ng-value="(!fireteam[0] ? searchedPlayer : '')">
           </div>
           <div class="main-search__controls">
             <div class="main-search__refresh" ng-if="!subdomain" ng-show="fireteam[0].name != null">
