@@ -57,6 +57,7 @@ module.exports = function(config) {
       'bower_components/bootstrap-material-design/dist/js/ripples.js',
       'bower_components/ngstorage/ngStorage.js',
       'bower_components/xpull/xpull.js',
+      'bower_components/underscore/underscore.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/app.js',

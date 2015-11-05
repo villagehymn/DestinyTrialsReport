@@ -81,8 +81,8 @@
         <label>Streak</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.stats.combatRating.basic.displayValue || 'N/A'"></span>
-        <label>Rating</label>
+        <span ng-bind="player.elo || 'N/A'"></span>
+        <label>ELO</label>
       </div>
       <div class="col-xs-3 stat">
         <span class="player-main-stats__lighthouse fail" ng-if="player.lighthouse !== true"><i class="material-icons">&#xE14C;</i></span>

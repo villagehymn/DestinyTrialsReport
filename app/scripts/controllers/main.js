@@ -1,24 +1,5 @@
 'use strict';
 
-function getTeammates($scope, locationChanger, mainPlayer) {
-  if ($scope.subdomain) {
-    getTeammatesFromCharacters($scope, mainPlayer.characters);
-  }
-  else {
-    if (mainPlayer.searched){
-      if (mainPlayer.fireTeam){
-        addFireteamMember(mainPlayer.fireTeam, $scope, locationChanger);
-      }
-      else {
-        $scope.fireteam.push(
-          {invalidResult: true},
-          {invalidResult: true}
-        );
-      }
-    }
-  }
-}
-
 function getTeammatesFromCharacters($scope, fireTeam) {
   $scope.fireteam[0].searched = true;
   angular.forEach(fireTeam, function (player) {
@@ -71,7 +52,7 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
 
     setRecentPlayers = function (activities) {
       angular.forEach(activities, function (activity) {
-        trialsStats.getFireteamFromActivitiy(activity, account.membershipId).then(function (resMembers) {
+        currentAccount.getFireteamFromActivitiy(activity, account.membershipId).then(function (resMembers) {
           var recents = {};
           angular.forEach(resMembers, function (member, key) {
             if (key !== account.membershipId) {
@@ -161,7 +142,8 @@ angular.module('trialsReportApp')
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
       if (angular.isDefined($scope.fireteam[0])) {
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
-        getTeammates($scope, locationChanger, $scope.fireteam[0]);
+        console.log($scope.fireteam)
+        //getTeammates($scope, locationChanger, $scope.fireteam[0]);
       } else {
         $scope.fireteam = null;
       }

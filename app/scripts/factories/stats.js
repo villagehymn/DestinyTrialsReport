@@ -73,13 +73,8 @@ function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i
   fireTeam[player_id].playerWeapons = entries[i].extended.weapons;
 }
 
-function addPlayerToFireteam(entries, i, fireTeam, Player) {
-  var teammateId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-  fireTeam[teammateId] = Player.build(entries[i].player.destinyUserInfo, entries[i].player.destinyUserInfo.displayName, entries[i]);
-}
-
 angular.module('trialsReportApp')
-  .factory('trialsStats', function ($http, $q, Player) {
+  .factory('trialsStats', function ($http, $q, guardianGG) {
 
     var getData = function (player) {
       return $http({
@@ -93,12 +88,11 @@ angular.module('trialsReportApp')
           };
           result.data.stats.activitiesWinPercentage.basic.displayValue = result.data.stats.activitiesWinPercentage.basic.value + '%';
         }
-        return result.data;
+        player.stats = result.data.stats;
+        player.nonHazard = result.data.nonHazard;
+        player.lighthouse = result.data.lighthouse;
+        return player;
       });
-    };
-
-    var getTeamSummary = function (lastMatches, player) {
-      return getMatchSummary(lastMatches, player.membershipId);
     };
 
     var getPostGame = function (recentActivity, player) {
@@ -114,27 +108,6 @@ angular.module('trialsReportApp')
       }).catch(function () {});
     };
 
-    var getFireteamFromActivitiy = function (recentActivity, id) {
-      return $http({
-        method: 'GET',
-        url: '/api/PostGameCarnageReport/' + recentActivity.id
-      }).then(function (resultPostAct) {
-        var fireTeam = {};
-        var data = resultPostAct.data.Response.data;
-        var entries = data.entries, standing = recentActivity.standing;
-        for (var i = 0; i < entries.length; i++) {
-          if (entries[i].standing === standing) {
-            var player_id = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-
-            if (player_id !== angular.lowercase(id)) {
-              addPlayerToFireteam(entries, i, fireTeam, Player);
-            }
-          }
-        }
-        return fireTeam;
-      }).catch(function () {});
-    };
-
     var getMatchSummary = function (lastMatches, id) {
       var fireTeam = {}, matchStats = {}, recentMatches = [];
       angular.forEach(lastMatches, function (match, key) {
@@ -146,8 +119,8 @@ angular.module('trialsReportApp')
               var values = entries[i].extended.values, medals = {},
                 abilityKills = {}, allStats = {}, extendedStats = {},
                 extendedWeapons = entries[i].extended.weapons, weaponsUsed = {};
-              var player_id = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-              if (player_id === angular.lowercase(id)) {
+              var player_id = entries[i].player.destinyUserInfo.membershipId;
+              if (player_id === id) {
                 collectMatchData(extendedWeapons, weaponsUsed, allStats, values);
                 if (matchStats[player_id]) {
                   getExtendedStats(entries[i], matchStats[player_id].medals, matchStats[player_id].abilityKills, matchStats[player_id].extendedStats);
@@ -161,10 +134,6 @@ angular.module('trialsReportApp')
                     weaponsUsed: weaponsUsed,
                     extendedStats: extendedStats
                   };
-                }
-              } else {
-                if (lastMatches[key].isMostRecent) {
-                  addPlayerToFireteam(entries, i, fireTeam, Player);
                 }
               }
             }
@@ -197,9 +166,6 @@ angular.module('trialsReportApp')
     var getLastThree = function (player) {
       var collectMatches = function (player) {
           var dfd = $q.defer();
-          if (player.searched) {
-            player.activities.lastThree[player.activities.recentActivity.id].mostRecent = true;
-          }
           dfd.resolve(player.activities.lastThree);
 
           return dfd.promise;
@@ -231,8 +197,6 @@ angular.module('trialsReportApp')
       getData: getData,
       getMatchSummary: getMatchSummary,
       getPostGame: getPostGame,
-      getLastThree: getLastThree,
-      getTeamSummary: getTeamSummary,
-      getFireteamFromActivitiy: getFireteamFromActivitiy
+      getLastThree: getLastThree
     };
   });

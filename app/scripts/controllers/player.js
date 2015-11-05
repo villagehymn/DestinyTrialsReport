@@ -1,17 +1,11 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('PlayerCtrl', function ($scope, currentAccount, $analytics, locationChanger) {
+  .controller('PlayerCtrl', function ($scope, currentAccount, trialsStats, trialsReport, $analytics, locationChanger, guardianFactory) {
 
-    if (!$scope.player.searched && !$scope.player.invalidResult) {
-      if (angular.isUndefined($scope.player.isTeammate)) {
-        $scope.player.isTeammate = true;
-        currentAccount.getPlayerCard($scope.player).then(function (player) {
-          //$scope.$evalAsync( $scope.player = player);
-          currentAccount.compareLastMatchResults(player, $scope.fireteam[0].activities.lastThree);
-        });
-      }
-    }
+    trialsReport.getActivities($scope.player, '25');
+    guardianFactory.getElo($scope.player);
+    trialsStats.getData($scope.player);
 
     var sendAnalytic = function (event, cat, label) {
       $analytics.eventTrack(event, {
@@ -34,6 +28,21 @@ angular.module('trialsReportApp')
           });
         });
     }
+
+    $scope.getLastMatch = function (player) {
+      return trialsStats.getLastThree(player)
+        .then(function (postGame) {
+          var playerId = player.membershipId;
+          if (postGame && postGame.matchStats[playerId]) {
+            player.allStats = postGame.matchStats[playerId].allStats;
+            player.recentMatches = postGame.matchStats[playerId].recentMatches;
+            player.abilityKills = postGame.matchStats[playerId].abilityKills;
+            player.medals = postGame.matchStats[playerId].medals;
+            player.weaponsUsed = postGame.matchStats[playerId].weaponsUsed;
+            player.fireTeam = postGame.fireTeam;
+          }
+        });
+    };
 
     $scope.searchPlayerbyName = function (name, platform) {
       if (angular.isDefined(name)) {

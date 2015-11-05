@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('HeaderCtrl', function ($scope, $location, currentAccount, $sce, locationChanger, $routeParams, $modal) {
+  .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, $sce, locationChanger, $routeParams, $modal, $q) {
 
     // titles in modals need styling or could be removed
     if ('heatmapImage' in $scope.currentMap) {
@@ -59,22 +59,26 @@ angular.module('trialsReportApp')
       if (angular.isUndefined(name)) {
         return;
       }
-      var url = '/Platform/Destiny/SearchDestinyPlayer/' + ($scope.platformValue ? 2 : 1) + '/' + name + '/';
-      return currentAccount.getAccount(url)
+      return trialsReport.getAccount(($scope.platformValue ? 2 : 1), name)
         .then(function (account) {
           if (account) {
             if (angular.isDefined($scope.fireteam[1].name) || angular.isDefined($scope.fireteam[2].name)) {
               $scope.switchFocus();
               document.activeElement.blur();
-              account.isTeammate = true;
             }
-            currentAccount.getPlayerCard(account).then(function (teammate) {
+            var methods = [
+              inventoryService.getInventory(account.membershipType, account),
+              trialsStats.getData(account),
+              trialsReport.getActivities(account, '25')
+            ];
+
+            $q.all(methods).then(function (results) {
+              var teammate = results[0];
               $scope.$evalAsync( $scope.fireteam[index] = teammate );
               $scope.$parent.focusOnPlayer = index + 1;
               if (!$scope.fireteam[0].activities) {
                 $scope.fireteam[0].activities = {lastThree: {}};
               }
-              currentAccount.compareLastMatchResults($scope.fireteam[index], $scope.fireteam[0].activities.lastThree);
               updateUrl($scope, locationChanger);
             });
           }

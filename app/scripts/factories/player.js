@@ -57,31 +57,6 @@ function setMapReturnStreak(reversedAct, pastActivities, streak, recentActivity,
   return streak;
 }
 
-function setActivityData(activities) {
-  var lastThree = {}, reversedAct = activities.slice().reverse(),
-    mapStats = {}, totals = {};
-  totals.kills = 0;
-  totals.deaths = 0;
-  totals.assists = 0;
-  totals.wins = 0;
-  totals.losses = 0;
-  var pastActivities = [], streak = 0;
-  var recentActivity = {
-    'id': activities[0].activityDetails.instanceId,
-    'standing': activities[0].values.standing.basic.value
-  };
-  streak = setMapReturnStreak(reversedAct, pastActivities, streak, recentActivity, mapStats, totals);
-  setLastThreeMatches(lastThree, activities);
-  return {
-    lastTwentyFive: pastActivities,
-    recentActivity: recentActivity,
-    streak: streak,
-    lastThree: lastThree,
-    mapStats: mapStats,
-    totals: totals
-  };
-}
-
 function getAbilityCooldown(subclass, ability, tier) {
   if (ability === 'STAT_INTELLECT') {
     switch (subclass) {

@@ -1,41 +1,83 @@
 'use strict';
 
-function getFromParams(currentAccount, $route, $q) {
-  if (angular.isDefined($route.current.params.playerName)) {
+function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $q) {
+  var params = $route.current.params;
+  var name = params.playerName || params.playerOne;
+  if (angular.isDefined(name)) {
     var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
     var segments = location.hostname.split('.');
     var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
 
-    var url = '/api/SearchDestinyPlayer/' + platform + '/';
-    var getPlayer = function (url) {
-        return currentAccount.getAccount(url + $route.current.params.playerName)
+    var getPlayer = function () {
+        return trialsReport.getAccount(platform, params.playerName)
           .then(function (result) {
             if (result) {
               var player = result;
               player.searched = true;
               player.myProfile = subdomain === 'my';
-              return currentAccount.getPlayerCard(player);
+              //return guardianGG.getFireteam(player.membershipId)
+              return trialsReport.getRecentActivity(player);
             } else {
               return false;
             }
           });
       },
-      teammatesInParallel = function (player) {
-        if (player) {
-          var methods = [player];
-          angular.forEach(player.fireTeam, function (teammate) {
-            methods.push(currentAccount.getCharacters(teammate.membershipType, teammate.membershipId, teammate.name));
+      getFireteam = function (activities) {
+        if (angular.isUndefined(activities)) {
+          toastr.error('No Trials matches found for player', 'Error');
+          return activities;
+        }
+        return bungie.getPgcr(activities[0].activityDetails.instanceId)
+          .then(function(result) {
+            return _.filter(result.data.Response.data.entries, function(player) {
+              return player.standing === activities[0].values.standing.basic.value;
+            });
+          });
+
+      },
+      teammatesFromParams = function () {
+        var methods = [
+          trialsReport.getAccount(platform, params.playerOne),
+          trialsReport.getAccount(platform, params.playerTwo),
+          trialsReport.getAccount(platform, params.playerThree)
+        ];
+        return $q.all(methods);
+      },
+      teammatesFromRecent = function (players) {
+        if (players) {
+          console.log(name)
+          var playerOne = _.find(players, function(player) {
+            return angular.lowercase(player.player.destinyUserInfo.displayName) === angular.lowercase(name);
+          });
+          var methods = [trialsReport.getCharacters(
+            playerOne.player.destinyUserInfo.membershipType,
+            playerOne.player.destinyUserInfo.membershipId,
+            playerOne.player.destinyUserInfo.displayName
+          )];
+          angular.forEach(players, function (player) {
+            if (angular.lowercase(player.player.destinyUserInfo.displayName) !== angular.lowercase(name)) {
+              methods.push(trialsReport.getCharacters(
+                player.player.destinyUserInfo.membershipType,
+                player.player.destinyUserInfo.membershipId,
+                player.player.destinyUserInfo.displayName
+              ));
+            }
           });
           return $q.all(methods);
         } else {
           return false;
         }
       },
+      getInventory = function (players) {
+        var methods = [];
+        angular.forEach(players, function (player) {
+          methods.push(inventoryService.getInventory(player.membershipType, player));
+        });
+        return $q.all(methods);
+      },
       returnPlayer = function (results) {
         if (results) {
-          var player = results[0];
-          player.fireTeam = [results[1], results[2]];
-          return [player];
+          return [results[0],results[1], results[2]];
         } else {
           return [];
         }
@@ -43,47 +85,19 @@ function getFromParams(currentAccount, $route, $q) {
       reportProblems = function (fault) {
         console.log(String(fault));
       };
-    return getPlayer(url)
-      .then(teammatesInParallel)
-      .then(returnPlayer)
-      .catch(reportProblems);
-  }
-}
-
-function getAllFromParams($route, currentAccount, $q) {
-  if (angular.isDefined($route.current.params.playerOne)) {
-    var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
-    var params = $route.current.params;
-    var url = '/api/SearchDestinyPlayer/' + platform + '/';
-
-    var getPlayer = function (url, params) {
-      return currentAccount.getAccount(url + params.playerOne)
-        .then(function (result) {
-          var player = result;
-          player.searched = true;
-          return player;
-        });
-      },
-      teammatesInParallel = function (player) {
-        var methods = [
-          currentAccount.getPlayerCard(player),
-          currentAccount.getAccount(url + params.playerTwo),
-          currentAccount.getAccount(url + params.playerThree)
-        ];
-        return $q.all(methods);
-      },
-      returnPlayer = function (results) {
-        var player = results[0];
-        player.fireTeam = [results[1], results[2]];
-        return [player];
-      },
-      reportProblems = function (fault) {
-        console.log(String(fault));
-      };
-    return getPlayer(url, params)
-      .then(teammatesInParallel)
-      .then(returnPlayer)
-      .catch(reportProblems);
+    if (params.playerOne) {
+      return teammatesFromParams()
+        .then(getInventory)
+        .then(returnPlayer)
+        .catch(reportProblems);
+    } else {
+      return getPlayer()
+        .then(getFireteam)
+        .then(teammatesFromRecent)
+        .then(getInventory)
+        .then(returnPlayer)
+        .catch(reportProblems);
+    }
   }
 }
 
@@ -162,7 +176,7 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam: getAllFromParams,
+          fireTeam: getFromParams,
           subDomain: function(){
             return {name: subdomain};
           }
