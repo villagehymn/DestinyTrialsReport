@@ -1,28 +1,36 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('currentAccount', function ($http, $filter, toastr, Player, inventoryService, trialsStats, guardianGG, $q, bungie) {
+  .factory('currentAccount', function (Player, inventoryService, trialsStats, $q, bungie) {
 
     var getLastTwentyOne = function (account) {
       var allPastActivities = [];
-      return bungie.getActivityHistory(
-        account.membershipType,
-        account.membershipId,
-        account.characterInfo.characterId,
-        '14',
-        '21'
-      ).then(function(result) {
-          var activities = result.data.Response.data.activities;
-          if (angular.isUndefined(activities)) {
-            return;
-          }
-          angular.forEach(activities.slice().reverse(), function (activity, index) {
-            if (index % 5 === 0) {
-              allPastActivities.push({
-                'id': activity.activityDetails.instanceId,
-                'standing': activity.values.standing.basic.value
-              });
+      var methods = [];
+      angular.forEach(account.characters, function (character) {
+        methods.push(
+          bungie.getActivityHistory(
+            character.membershipType,
+            character.membershipId,
+            character.characterInfo.characterId,
+            '14',
+            '21'
+          )
+        )});
+      return $q.all(methods)
+        .then(function(results) {
+          angular.forEach(results, function (result) {
+            var activities = result.data.Response.data.activities;
+            if (angular.isUndefined(activities)) {
+              return;
             }
+            angular.forEach(activities.slice().reverse(), function (activity, index) {
+              if (index % 5 === 0) {
+                allPastActivities.push({
+                  'id': activity.activityDetails.instanceId,
+                  'standing': activity.values.standing.basic.value
+                });
+              }
+            });
           });
           return allPastActivities;
         });

@@ -1,12 +1,16 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('inventoryService', function ($http, inventoryStats, $q) {
+  .factory('inventoryService', function (inventoryStats, api, $q) {
     var getData = function (player) {
-      return $http({
-        method: 'GET',
-        url: '/api/getInventory/' + player.membershipType + '/' + player.membershipId + '/' + player.characterInfo.characterId
-      }).then(function (result) {
+      return api.getInventory(
+        player.membershipType,
+        player.membershipId,
+        player.characterInfo.characterId,
+        '14',
+        '21'
+      )
+      .then(function (result) {
         return result.data;
       });
     };

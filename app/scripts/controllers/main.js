@@ -1,50 +1,9 @@
 'use strict';
 
-function getTeammatesFromCharacters($scope, fireTeam) {
-  $scope.fireteam[0].searched = true;
-  angular.forEach(fireTeam, function (player) {
-    if (player.characterInfo.characterId !== $scope.fireteam[0].characterInfo.characterId) {
-      player.myProfile = true;
-      $scope.fireteam.push(player);
-    }
-  });
-  $scope.focusOnPlayers = true;
-}
+var getActivitiesFromChar = function ($scope, account, currentAccount) {
 
-function addFireteamMember(fireTeam, $scope, locationChanger) {
-  angular.forEach(fireTeam, function (player) {
-    if (player) {
-      player.refreshCharacter = $scope.fireteam[0].updateTeammates;
-      $scope.fireteam.push(player);
-      if (locationChanger){
-        updateUrl($scope, locationChanger);
-      }
-    } else {
-      $scope.fireteam.push(
-        {invalidResult: true}
-      );
-    }
-    if ($scope.fireteam.length === 3) {
-      $scope.focusOnPlayers = true;
-    }
-  });
-}
-
-function updateUrl($scope, locationChanger) {
-  if ($scope.fireteam[0] && $scope.fireteam[1] && $scope.fireteam[2]) {
-    if ($scope.fireteam[2].membershipId) {
-      var platformUrl = $scope.platformValue ? '/ps/' : '/xbox/';
-      locationChanger.skipReload()
-        .withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' +
-        $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
-    }
-  }
-}
-
-var getActivitiesFromChar = function ($scope, account, character, currentAccount, trialsStats) {
-
-  var setRecentActivities = function (account, character) {
-      return currentAccount.getLastTwentyOne(account, character)
+  var setRecentActivities = function (account) {
+      return currentAccount.getLastTwentyOne(account)
         .then(function (activities) {
           return activities;
         });
@@ -68,13 +27,13 @@ var getActivitiesFromChar = function ($scope, account, character, currentAccount
       console.log(String(fault));
     };
 
-  setRecentActivities(account, character)
+  setRecentActivities(account)
     .then(setRecentPlayers)
     .catch(reportProblems);
 };
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, currentAccount, trialsStats, $window) {
+  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, currentAccount) {
     $scope.currentMap = DestinyCrucibleMapDefinition[3602734434];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
@@ -102,9 +61,7 @@ angular.module('trialsReportApp')
     $scope.suggestRecentPlayers = function () {
       if (angular.isUndefined($scope.recentPlayers)) {
         $scope.recentPlayers = {};
-        angular.forEach($scope.fireteam[0].characters, function (character) {
-          getActivitiesFromChar($scope, $scope.fireteam[0], character, currentAccount, trialsStats);
-        });
+        getActivitiesFromChar($scope, $scope.fireteam[0], currentAccount);
         $scope.recentPlayersCopy = $scope.recentPlayers;
       }
     };
@@ -142,8 +99,15 @@ angular.module('trialsReportApp')
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
       if (angular.isDefined($scope.fireteam[0])) {
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
-        console.log($scope.fireteam)
-        //getTeammates($scope, locationChanger, $scope.fireteam[0]);
+        if ($scope.fireteam[0] && $scope.fireteam[1] && $scope.fireteam[2]) {
+          if ($scope.fireteam[2].membershipId) {
+            $scope.focusOnPlayers = true;
+            var platformUrl = $scope.platformValue ? '/ps/' : '/xbox/';
+            locationChanger.skipReload()
+              .withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' +
+              $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
+          }
+        }
       } else {
         $scope.fireteam = null;
       }

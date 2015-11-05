@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, $sce, locationChanger, $routeParams, $modal, $q) {
+  .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, locationChanger, $routeParams, $modal, $q) {
 
     // titles in modals need styling or could be removed
     if ('heatmapImage' in $scope.currentMap) {

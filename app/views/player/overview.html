@@ -81,8 +81,14 @@
         <label>Streak</label>
       </div>
       <div class="col-xs-3 stat">
-        <span ng-bind="player.elo || 'N/A'"></span>
-        <label>ELO</label>
+        <span>
+          {{player.elo || 'N/A'}}
+          <a href='https://guardian.gg/en/faq' target='_blank'
+             bs-popover="{content:'Elo is an account-wide rating system provided by Guardian.gg'}">
+            <i class='material-icons small-icon'>&#xE887;</i>
+          </a>
+        </span>
+        <label>Elo Rating</label>
       </div>
       <div class="col-xs-3 stat">
         <span class="player-main-stats__lighthouse fail" ng-if="player.lighthouse !== true"><i class="material-icons">&#xE14C;</i></span>

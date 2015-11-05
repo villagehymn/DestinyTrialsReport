@@ -74,13 +74,14 @@ function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i
 }
 
 angular.module('trialsReportApp')
-  .factory('trialsStats', function ($http, $q, guardianGG) {
+  .factory('trialsStats', function ($http, api, $q) {
 
     var getData = function (player) {
-      return $http({
-        method: 'GET',
-        url: '/api/trialsStats/' + player.membershipType + '/' + player.membershipId + '/' + player.characterInfo.characterId
-      }).then(function (result) {
+      return api.trialsStats(
+        player.membershipType,
+        player.membershipId,
+        player.characterInfo.characterId
+      ).then(function (result) {
         if(!angular.isUndefined(result.data.stats)) {
           result.data.stats.activitiesWinPercentage = {
             'basic': {'value': +(100 * result.data.stats.activitiesWon.basic.value / result.data.stats.activitiesEntered.basic.value).toFixed()},

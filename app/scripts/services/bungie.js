@@ -8,7 +8,7 @@ app.service('bungie', [
     return new function () {
       var BASE_URL = '/Platform/Destiny';
       var ENDPOINTS = {
-        account: '/{platform}/Account/{membershipId}/Summary/',
+        account: '/{platform}/Account/{membershipId}/',
         inventory: '/{platform}/Account/{membershipId}/Character/{characterId}/Inventory/?definitions=true&lc={locale}',
         activityHistory: '/Stats/ActivityHistory/{platform}/{membershipId}/{characterId}/?mode={mode}&count={count}',
         pgcr: '/Stats/PostGameCarnageReport/{instanceId}/'

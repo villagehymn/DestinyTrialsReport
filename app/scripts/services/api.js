@@ -9,7 +9,8 @@ app.service('api', [
       var BASE_URL = '/api';
       var ENDPOINTS = {
         searchForPlayer: '/SearchDestinyPlayer/{platform}/{name}',
-        trialsStats: '/trialsStats/{platform}/{membershipId}/{characterId}'
+        trialsStats: '/trialsStats/{platform}/{membershipId}/{characterId}',
+        getInventory: '/getInventory/{platform}/{membershipId}/{characterId}'
       };
 
       this.searchForPlayer = function(platform, name) {
@@ -20,7 +21,15 @@ app.service('api', [
       };
 
       this.trialsStats = function(platform, membershipId, characterId) {
-        return this.get(ENDPOINTS.activityHistory, {
+        return this.get(ENDPOINTS.trialsStats, {
+          platform: platform,
+          membershipId: membershipId,
+          characterId: characterId
+        });
+      };
+
+      this.getInventory = function(platform, membershipId, characterId) {
+        return this.get(ENDPOINTS.getInventory, {
           platform: platform,
           membershipId: membershipId,
           characterId: characterId

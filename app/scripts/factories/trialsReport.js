@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('trialsReport', function ($http, $filter, toastr, Player, inventoryService, trialsStats, guardianGG, bungie, api, $q) {
+  .factory('trialsReport', function (toastr, Player, bungie, api) {
     var getAccount = function (platform, name) {
       return api.searchForPlayer(
         platform,
@@ -17,10 +17,10 @@ angular.module('trialsReportApp')
     };
 
     var getCharacters = function (membershipType, membershipId, name) {
-      return $http({
-        method: 'GET',
-        url: '/Platform/Destiny/' + membershipType + '/Account/' + membershipId + '/'
-      }).then(function (resultChar) {
+      return bungie.getAccount(
+        membershipType,
+        membershipId
+      ).then(function (resultChar) {
         if (resultChar.data.Response) {
           return Player.build(
             resultChar.data.Response.data,

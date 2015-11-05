@@ -15,7 +15,6 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
               var player = result;
               player.searched = true;
               player.myProfile = subdomain === 'my';
-              //return guardianGG.getFireteam(player.membershipId)
               return trialsReport.getRecentActivity(player);
             } else {
               return false;
@@ -45,7 +44,6 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
       },
       teammatesFromRecent = function (players) {
         if (players) {
-          console.log(name)
           var playerOne = _.find(players, function(player) {
             return angular.lowercase(player.player.destinyUserInfo.displayName) === angular.lowercase(name);
           });

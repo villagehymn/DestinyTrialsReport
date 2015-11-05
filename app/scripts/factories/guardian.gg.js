@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('guardianFactory', function ($http, guardianGG) {
+  .factory('guardianFactory', function (guardianGG) {
 
     var getElo = function (player) {
       return guardianGG.getElo(player.membershipId)

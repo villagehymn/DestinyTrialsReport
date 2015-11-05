@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('PlayerCtrl', function ($scope, currentAccount, trialsStats, trialsReport, $analytics, locationChanger, guardianFactory) {
+  .controller('PlayerCtrl', function ($scope, api, trialsStats, trialsReport, $analytics, guardianFactory) {
 
     trialsReport.getActivities($scope.player, '25');
     guardianFactory.getElo($scope.player);
@@ -13,21 +13,6 @@ angular.module('trialsReportApp')
         label: label
       });
     };
-
-    function getAccountByName(name, platform) {
-      if (angular.isUndefined(name)) {
-        return;
-      }
-      var url = '/Platform/Destiny/SearchDestinyPlayer/' + platform + '/' + name + '/';
-      return currentAccount.getAccount(url)
-        .then(function (player) {
-          sendAnalytic('searchedPlayer', 'name', name);
-          sendAnalytic('searchedPlayer', 'platform', platform);
-          currentAccount.getPlayerCard(player).then(function (teammate) {
-            $scope.$evalAsync( $scope.player = teammate );
-          });
-        });
-    }
 
     $scope.getLastMatch = function (player) {
       return trialsStats.getLastThree(player)
@@ -44,14 +29,6 @@ angular.module('trialsReportApp')
         });
     };
 
-    $scope.searchPlayerbyName = function (name, platform) {
-      if (angular.isDefined(name)) {
-        getAccountByName(name, (platform ? 2 : 1));
-        sendAnalytic('loadedPlayer', 'name', name);
-        sendAnalytic('loadedPlayer', 'platform', (platform ? 2 : 1));
-      }
-    };
-
     $scope.getWeaponByHash = function (hash) {
       if ($scope.DestinyWeaponDefinition[hash]) {
         var definition = $scope.DestinyWeaponDefinition[hash];
@@ -62,26 +39,11 @@ angular.module('trialsReportApp')
       }
     };
 
-    $scope.setRecentPlayer = function (player) {
-      var url = '/api/SearchDestinyPlayer/' + player.membershipType + '/' + player.name;
-      return currentAccount.getAccount(url)
-        .then(function (player) {
-          currentAccount.getPlayerCard(player).then(function (teammate) {
-            $scope.$evalAsync( $scope.player = teammate );
-          });
-        });
-    };
-
     $scope.getWeaponTitle = function (title) {
       switch (title) {
         case 'weaponKillsGrenade': return 'Grenade';
         case 'weaponKillsMelee':   return 'Melee';
         case 'weaponKillsSuper':   return 'Super';
       }
-    };
-
-    $scope.toggleEdit = function (player) {
-      $scope.suggestRecentPlayers();
-      player.isEditing = !player.isEditing;
     };
   });
