@@ -14,15 +14,22 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
             if (result) {
               var player = result;
               player.searched = true;
-              player.myProfile = subdomain === 'my';
-              return trialsReport.getRecentActivity(player);
+              if (subdomain === 'my') {
+                return trialsReport.getCharacters(
+                  player.membershipType,
+                  player.membershipId,
+                  params.playerName
+                );
+              } else {
+                return trialsReport.getRecentActivity(player);
+              }
             } else {
               return false;
             }
           });
       },
       getFireteam = function (activities) {
-        if (angular.isUndefined(activities)) {
+        if (angular.isUndefined(activities[0])) {
           toastr.error('No Trials matches found for player', 'Error');
           return activities;
         }
@@ -32,7 +39,6 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
               return player.standing === activities[0].values.standing.basic.value;
             });
           });
-
       },
       teammatesFromParams = function () {
         var methods = [
@@ -42,8 +48,20 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
         ];
         return $q.all(methods);
       },
+      teammatesFromChars = function (player) {
+        if (player) {
+          var methods = [];
+          angular.forEach(player.characters, function (character) {
+            methods.push(character);
+          });
+          return $q.all(methods);
+        } else {
+          return false;
+        }
+      },
       teammatesFromRecent = function (players) {
-        if (players) {
+        if (players && players[0] && !players[0].characterInfo) {
+          console.log(players)
           var playerOne = _.find(players, function(player) {
             return angular.lowercase(player.player.destinyUserInfo.displayName) === angular.lowercase(name);
           });
@@ -62,6 +80,8 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
             }
           });
           return $q.all(methods);
+        } else if (players && players.characterInfo) {
+          return [players]
         } else {
           return false;
         }
@@ -85,6 +105,12 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
       };
     if (params.playerOne) {
       return teammatesFromParams()
+        .then(getInventory)
+        .then(returnPlayer)
+        .catch(reportProblems);
+    } else if (subdomain === 'my') {
+      return getPlayer()
+        .then(teammatesFromChars)
         .then(getInventory)
         .then(returnPlayer)
         .catch(reportProblems);

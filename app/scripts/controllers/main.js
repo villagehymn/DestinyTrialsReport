@@ -103,9 +103,11 @@ angular.module('trialsReportApp')
           if ($scope.fireteam[2].membershipId) {
             $scope.focusOnPlayers = true;
             var platformUrl = $scope.platformValue ? '/ps/' : '/xbox/';
-            locationChanger.skipReload()
-              .withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' +
-              $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
+            if (!$scope.subdomain) {
+              locationChanger.skipReload()
+                .withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' +
+                $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
+            }
           }
         }
       } else {
