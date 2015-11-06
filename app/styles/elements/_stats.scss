@@ -1,8 +1,13 @@
 .stat {
-  span {
+  white-space: nowrap;
+
+  span i {
     font-size: 1.2em;
     line-height: 1;
-    white-space: nowrap;
+  }
+
+  i {
+    vertical-align: text-bottom;
   }
 
   label {

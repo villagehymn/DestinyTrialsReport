@@ -81,11 +81,11 @@
         <label>Streak</label>
       </div>
       <div class="col-xs-3 stat">
+        <span ng-bind="player.elo || 'N/A'"></span>
         <span>
-          {{player.elo || 'N/A'}}
-          <a href='https://guardian.gg/en/faq' target='_blank'
+          <a href="https://guardian.gg/en/faq" target="_blank"
              bs-popover="{content:'Elo is an account-wide rating system provided by Guardian.gg'}">
-            <i class='material-icons small-icon'>&#xE887;</i>
+            <i class="material-icons">&#xE887;</i>
           </a>
         </span>
         <label>Elo Rating</label>
