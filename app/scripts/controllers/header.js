@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, locationChanger, $routeParams, $modal, $q) {
+  .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, locationChanger, $routeParams, $modal, guardianFactory, $q) {
 
     // titles in modals need styling or could be removed
     if ('heatmapImage' in $scope.currentMap) {
@@ -29,10 +29,6 @@ angular.module('trialsReportApp')
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
     }
-
-    $scope.togglePlatform = function () {
-      $scope.platformValue = !$scope.platformValue;
-    };
 
     $scope.searchMainPlayerbyName = function (name) {
       if (angular.isDefined(name)) {
@@ -69,7 +65,8 @@ angular.module('trialsReportApp')
             var methods = [
               inventoryService.getInventory(account.membershipType, account),
               trialsStats.getData(account),
-              trialsReport.getActivities(account, '25')
+              trialsReport.getActivities(account, '25'),
+              guardianFactory.getElo(account)
             ];
 
             $q.all(methods).then(function (results) {

@@ -6,7 +6,7 @@ app.service('guardianGG', [
 
   function ($http, util) {
     return new function () {
-      var BASE_URL = 'http://api.guardian.gg';
+      var BASE_URL = 'https://api.guardian.gg';
       var ENDPOINTS = {
         getElo: '/elo/{membershipId}',
         getFireteam: '/fireteam/{mode}/{membershipId}',
@@ -20,7 +20,7 @@ app.service('guardianGG', [
         });
       };
 
-      this.getFireteam = function(membershipId) {
+      this.getFireteam = function(mode, membershipId) {
         return this.get(ENDPOINTS.getFireteam, {
           mode: mode,
           membershipId: membershipId

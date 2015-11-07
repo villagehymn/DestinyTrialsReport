@@ -33,9 +33,9 @@ var getActivitiesFromChar = function ($scope, account, currentAccount) {
 };
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, $filter, fireTeam, subDomain, locationChanger, $localStorage, currentAccount, guardianFactory) {
+  .controller('MainCtrl', function ($scope, $routeParams, $filter, locationChanger, $localStorage, currentAccount, config, guardianFactory) {
     $scope.currentMap = DestinyCrucibleMapDefinition[4287936726];
-    $scope.subdomain = subDomain.name === 'my';
+    $scope.subdomain = config.subdomain === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
     });
@@ -84,6 +84,35 @@ angular.module('trialsReportApp')
       });
     };
 
+    $scope.togglePlatform = function () {
+      $scope.platformValue = !$scope.platformValue;
+      $localStorage.platform = $scope.platformValue;
+      $scope.platformNumeric = $scope.platformValue ? 2 : 1;
+      if (config.gggWeapons) {
+        if (!$scope.gggWeapons[$scope.platformNumeric]) {
+          return guardianFactory.getWeapons(
+            $scope.platformNumeric
+          ).then(function (result) {
+              $scope.gggWeapons[$scope.platformNumeric] = result.gggWeapons;
+            });
+        }
+      }
+    };
+
+    $scope.getWeaponTypeByIndex = function (index) {
+      switch (index) {
+        case 0:
+          return 'Primary';
+          break;
+        case 1:
+          return 'Special';
+          break;
+        case 2:
+          return 'Heavy';
+          break;
+      }
+    };
+
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
     }
@@ -94,8 +123,8 @@ angular.module('trialsReportApp')
       $scope.platformValue = $scope.$storage.platform;
     }
 
-    if (angular.isObject(fireTeam)) {
-      $scope.fireteam = fireTeam;
+    if (config.fireteam) {
+      $scope.fireteam = config.fireteam;
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
       if (angular.isDefined($scope.fireteam[0])) {
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
@@ -103,7 +132,7 @@ angular.module('trialsReportApp')
           if ($scope.fireteam[2].membershipId) {
             $scope.focusOnPlayers = true;
             var platformUrl = $scope.platformValue ? '/ps/' : '/xbox/';
-            if (!$scope.subdomain) {
+            if (!$scope.subdomain && angular.isDefined(config.updateUrl)) {
               locationChanger.skipReload()
                 .withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' +
                 $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
@@ -113,18 +142,12 @@ angular.module('trialsReportApp')
       } else {
         $scope.fireteam = null;
       }
-    } else if (angular.isString(fireTeam)) {
-      $scope.status = fireTeam;
-    } else {
-      var friday = new Date();
-      $scope.platformNumeric = $scope.platformValue ? 2 : 1;
-      $scope.dateBeginTrials = $filter('date')(friday.setDate(friday.getDate() - friday.getDay() + 5),'yyyy-MM-dd');
-      guardianFactory.getWeapons(
-        $scope.platformNumeric,
-        $scope.dateBeginTrials
-      ).then(function (gggWeapons) {
-        $scope.gggWeapons = gggWeapons;
-      });
-      console.log( $scope.gggWeapons)
+    }
+
+    if (config.gggWeapons) {
+      $scope.gggWeapons = {};
+      $scope.gggWeapons[config.platformNumeric] = config.gggWeapons;
+      $scope.platformNumeric = config.platformNumeric;
+      $scope.dateBeginTrials = config.dateBeginTrials;
     }
   });

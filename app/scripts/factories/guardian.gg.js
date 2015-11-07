@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('guardianFactory', function (guardianGG) {
+  .factory('guardianFactory', function ($filter, guardianGG) {
 
     var getElo = function (player) {
       return guardianGG.getElo(player.membershipId)
@@ -14,15 +14,28 @@ angular.module('trialsReportApp')
         }).catch(function () {});
     };
 
-    var getWeapons = function (platform, start, end) {
-      return guardianGG.getWeapons(platform, start, end)
+    var getWeapons = function (platform) {
+      var friday = new Date();
+      var dateBeginTrials = $filter('date')(friday.setDate(friday.getDate() - friday.getDay() + 5),'yyyy-MM-dd');
+      return guardianGG.getWeapons(platform, dateBeginTrials)
         .then(function (weapons) {
-          return weapons.data;
+          return {
+            gggWeapons: weapons.data,
+            dateBeginTrials: dateBeginTrials
+          };
+        }).catch(function () {});
+    };
+
+    var getFireteam = function (mode, membershipId) {
+      return guardianGG.getFireteam(mode, membershipId)
+        .then(function (result) {
+          return result;
         }).catch(function () {});
     };
 
     return {
       getElo: getElo,
-      getWeapons: getWeapons
+      getWeapons: getWeapons,
+      getFireteam: getFireteam
     };
   });

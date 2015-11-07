@@ -2,7 +2,8 @@
 
 angular.module('trialsReportApp')
   .factory('trialsReport', function (toastr, Player, bungie, api) {
-    var getAccount = function (platform, name) {
+
+    var searchByName = function (platform, name) {
       return api.searchForPlayer(
         platform,
         name
@@ -12,7 +13,14 @@ angular.module('trialsReportApp')
             return;
           }
           var response = result.data.Response[0];
-          return getCharacters(response.membershipType, response.membershipId, response.displayName);
+          return response;
+        });
+    };
+
+    var getAccount = function (platform, name) {
+      return searchByName(platform, name)
+        .then(function(result) {
+          return getCharacters(result.membershipType, result.membershipId, result.displayName);
         });
     };
 
@@ -100,6 +108,7 @@ angular.module('trialsReportApp')
     }
 
     return {
+      searchByName: searchByName,
       getAccount: getAccount,
       getRecentActivity: getRecentActivity,
       getCharacters: getCharacters,

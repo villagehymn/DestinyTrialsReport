@@ -1,12 +1,11 @@
 'use strict';
 
-function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $q) {
+function getFromParams(trialsReport, inventoryService, guardianFactory, toastr, bungie, $route, $q) {
   var params = $route.current.params;
   var name = params.playerName || params.playerOne;
   if (angular.isDefined(name)) {
-    var platform = $route.current.params.platformName === 'xbox' ? 1 : 2;
-    var segments = location.hostname.split('.');
-    var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
+    var platform = params.platformName === 'xbox' ? 1 : 2;
+    var subdomain = getSubdomain();
 
     var getPlayer = function () {
         return trialsReport.getAccount(platform, params.playerName)
@@ -21,7 +20,17 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
                   params.playerName
                 );
               } else {
-                return trialsReport.getRecentActivity(player);
+                return guardianFactory.getFireteam('14', player.membershipId)
+                  .then(function (result) {
+                    if (result && result.data.length > 0) {
+                      return result.data
+                    } else {
+                      return trialsReport.getRecentActivity(player)
+                        .then(function (result) {
+                          return getFireteam(result);
+                      })
+                    }
+                })
               }
             } else {
               return false;
@@ -35,9 +44,17 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
         }
         return bungie.getPgcr(activities[0].activityDetails.instanceId)
           .then(function(result) {
-            return _.filter(result.data.Response.data.entries, function(player) {
-              return player.standing === activities[0].values.standing.basic.value;
+            var fireteam = [];
+            _.each(result.data.Response.data.entries, function(player) {
+              if (player.standing === activities[0].values.standing.basic.value) {
+                fireteam.push({
+                  membershipType: player.player.destinyUserInfo.membershipType,
+                  membershipId: player.player.destinyUserInfo.membershipId,
+                  name: player.player.destinyUserInfo.displayName
+                })
+              }
             });
+            return fireteam;
           });
       },
       teammatesFromParams = function () {
@@ -61,21 +78,20 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
       },
       teammatesFromRecent = function (players) {
         if (players && players[0] && !players[0].characterInfo) {
-          console.log(players)
           var playerOne = _.find(players, function(player) {
-            return angular.lowercase(player.player.destinyUserInfo.displayName) === angular.lowercase(name);
+            return angular.lowercase(player.name) === angular.lowercase(name);
           });
           var methods = [trialsReport.getCharacters(
-            playerOne.player.destinyUserInfo.membershipType,
-            playerOne.player.destinyUserInfo.membershipId,
-            playerOne.player.destinyUserInfo.displayName
+            playerOne.membershipType,
+            playerOne.membershipId,
+            playerOne.name
           )];
           angular.forEach(players, function (player) {
-            if (angular.lowercase(player.player.destinyUserInfo.displayName) !== angular.lowercase(name)) {
+            if (angular.lowercase(player.name) !== angular.lowercase(name)) {
               methods.push(trialsReport.getCharacters(
-                player.player.destinyUserInfo.membershipType,
-                player.player.destinyUserInfo.membershipId,
-                player.player.destinyUserInfo.displayName
+                player.membershipType,
+                player.membershipId,
+                player.name
               ));
             }
           });
@@ -95,45 +111,61 @@ function getFromParams(trialsReport, inventoryService, toastr, bungie, $route, $
       },
       returnPlayer = function (results) {
         if (results) {
-          return [results[0],results[1], results[2]];
+          return {
+            fireteam: [results[0],results[1], results[2]],
+            subdomain: subdomain,
+            updateUrl: params.playerName
+          };
         } else {
-          return [];
+          return {
+            fireteam: [],
+            subdomain: subdomain
+          };
         }
       },
       reportProblems = function (fault) {
         console.log(String(fault));
       };
-    if (params.playerOne) {
-      return teammatesFromParams()
-        .then(getInventory)
-        .then(returnPlayer)
-        .catch(reportProblems);
-    } else if (subdomain === 'my') {
-      return getPlayer()
-        .then(teammatesFromChars)
-        .then(getInventory)
-        .then(returnPlayer)
-        .catch(reportProblems);
-    } else {
-      return getPlayer()
-        .then(getFireteam)
-        .then(teammatesFromRecent)
-        .then(getInventory)
-        .then(returnPlayer)
-        .catch(reportProblems);
+    if (!$route.current.params.preventLoad) {
+      if (params.playerOne) {
+        return teammatesFromParams()
+          .then(getInventory)
+          .then(returnPlayer)
+          .catch(reportProblems);
+      } else if (subdomain === 'my') {
+        return getPlayer()
+          .then(teammatesFromChars)
+          .then(getInventory)
+          .then(returnPlayer)
+          .catch(reportProblems);
+      } else {
+        return getPlayer()
+          .then(teammatesFromRecent)
+          .then(getInventory)
+          .then(returnPlayer)
+          .catch(reportProblems);
+      }
     }
   }
 }
 
-function checkStatus() {
-  //return $http({
-  //  method: 'GET',
-  //  url: 'http://api.destinytrialsreport.com/GlobalAlerts'
-  //}).then(function (result) {
-  //  if(result.data.length > 0){
-  //    return result.data[0].AlertHtml;
-  //  }
-  //});
+function getSubdomain() {
+  var segments = location.hostname.split('.');
+  return segments.length>2?segments[segments.length-3].toLowerCase():null;
+}
+
+function gggWeapons($localStorage, guardianFactory) {
+  var platformNumeric = $localStorage.platform ? 2 : 1;
+  return guardianFactory.getWeapons(
+    platformNumeric
+  ).then(function (result) {
+      return {
+        gggWeapons: result.gggWeapons,
+        platformNumeric: platformNumeric,
+        dateBeginTrials: result.dateBeginTrials,
+        subdomain: getSubdomain()
+      };
+    });
 }
 
 angular
@@ -172,38 +204,26 @@ angular
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
     $.material.init();
 
-    var segments = location.hostname.split('.');
-    var subdomain = segments.length>2?segments[segments.length-3].toLowerCase():null;
-
       $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam: checkStatus,
-          subDomain: function(){
-            return {name: subdomain};
-          }
+          config: gggWeapons
         }
       })
       .when('/:platformName/:playerName', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          subDomain: function(){
-            return {name: subdomain};
-          },
-          fireTeam: getFromParams
+          config: getFromParams
         }
       })
       .when('/:platformName/:playerOne/:playerTwo/:playerThree', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          fireTeam: getFromParams,
-          subDomain: function(){
-            return {name: subdomain};
-          }
+          config: getFromParams
         }
       })
       .otherwise({
@@ -220,6 +240,7 @@ angular
       var lastRoute = $route.current;
       $rootScope.$on('$locationChangeSuccess', function () {
         if (angular.isUndefined($route.current.params.playerName)){
+          lastRoute.params.preventLoad = true;
           $route.current = lastRoute;
         }
       });
