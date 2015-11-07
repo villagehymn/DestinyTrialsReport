@@ -14,11 +14,12 @@ header {
 }
 
 .domain-switch {
-  margin-left: -9px;
   border-bottom: 1px solid darken($header-bg, 5%);
+  padding: 10px 5px;
 
   .btn.btn.btn {
     color: $controls-btn-color;
+    padding: 8px 15px;
   }
 }
 
