@@ -40,11 +40,11 @@
 .platform-toggle__name {
   img {
     height: 1.3em;
-    //filter: brightness(.8);
+    filter: brightness(.8);
     transition: filter linear .5s;
   }
 
   &.is-active img {
-    //filter: brightness(2);
+    filter: brightness(2);
   }
 }
