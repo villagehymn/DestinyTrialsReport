@@ -33,7 +33,7 @@ var getActivitiesFromChar = function ($scope, account, currentAccount) {
 };
 
 angular.module('trialsReportApp')
-  .controller('MainCtrl', function ($scope, $routeParams, fireTeam, subDomain, locationChanger, $localStorage, currentAccount) {
+  .controller('MainCtrl', function ($scope, $routeParams, $filter, fireTeam, subDomain, locationChanger, $localStorage, currentAccount, guardianFactory) {
     $scope.currentMap = DestinyCrucibleMapDefinition[4287936726];
     $scope.subdomain = subDomain.name === 'my';
     $scope.$storage = $localStorage.$default({
@@ -115,5 +115,16 @@ angular.module('trialsReportApp')
       }
     } else if (angular.isString(fireTeam)) {
       $scope.status = fireTeam;
+    } else {
+      var friday = new Date();
+      $scope.platformNumeric = $scope.platformValue ? 2 : 1;
+      $scope.dateBeginTrials = $filter('date')(friday.setDate(friday.getDate() - friday.getDay() + 5),'yyyy-MM-dd');
+      guardianFactory.getWeapons(
+        $scope.platformNumeric,
+        $scope.dateBeginTrials
+      ).then(function (gggWeapons) {
+        $scope.gggWeapons = gggWeapons;
+      });
+      console.log( $scope.gggWeapons)
     }
   });

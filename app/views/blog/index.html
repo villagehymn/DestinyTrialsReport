@@ -34,3 +34,39 @@
     </p>
   </div>
 </article>
+
+<article class="blog-post blog-ggg__weapons shadow-z-1">
+  <div class="blog-weapon__header">
+    <div class="blog-weapon__title">
+      <h4>Top <span class="highlight">Weapons</span> This Week</h4>
+    </div>
+    <div class="blog-weapon__logo">
+      <span class="highlight">Powered by:</span><a href="https://Guardian.gg" target="_top"><img src="https://guardian.gg/asset/image/logo.png"></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4" ng-repeat="type in [gggWeapons.primary, gggWeapons.special, gggWeapons.heavy] track by $index">
+      <div class="row">
+        <div class="row" ng-repeat="weapon in type track by $index" ng-if="$index < 3">
+          <div class="col-xs-6 last-weapon-weapon__descr">
+            <img class="last-match-weapon__img img-responsive" ng-src="{{'https://bungie.net/' + weapon.icon}}" alt="{{weapon.name}}">
+            <span class="last-match-weapon__title" ng-bind="weapon.name"></span>
+          </div>
+          <div class="col-xs-2 stat">
+            <span ng-bind="weapon.kills | number:2"></span>%
+            <label>Kills</label>
+          </div>
+          <div class="col-xs-4 stat">
+            <span ng-bind="weapon.precisionKills | number:2"></span>%
+            <label>Headshots</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="blog-weapon__show-more">
+      <span class="pull-right"><a href="https://guardian.gg/en/weapon-stats?platform={{$scope.platformNumeric}}&start={{dateBeginTrials}}&mode=14" target="_top">Show More</a></span>
+    </div>
+  </div>
+</article>

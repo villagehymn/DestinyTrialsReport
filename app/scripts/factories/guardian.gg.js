@@ -14,7 +14,15 @@ angular.module('trialsReportApp')
         }).catch(function () {});
     };
 
+    var getWeapons = function (platform, start, end) {
+      return guardianGG.getWeapons(platform, start, end)
+        .then(function (weapons) {
+          return weapons.data;
+        }).catch(function () {});
+    };
+
     return {
-      getElo: getElo
+      getElo: getElo,
+      getWeapons: getWeapons
     };
   });

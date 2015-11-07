@@ -5,11 +5,22 @@
 }
 
 .blog-post {
-  max-width: 720px;
+  max-width: 1000px;
   margin: auto;
+  margin-bottom: 4em;
   background: #fff;
   padding: 2em;
   border-radius: 2em;
+}
+
+.blog-ggg__weapons {
+  margin-bottom: auto;
+  padding-bottom: 1em;
+}
+
+.blog-weapon__show-more {
+  margin-top: 11px;
+  margin-right: 1em;
 }
 
 .blog-post__img {
@@ -22,6 +33,60 @@
   background-position: center;
   background-size: cover;
   height: 200px;
+}
+
+.blog-weapon__header {
+  margin-left: -2em;
+  margin-top: -2em;
+  margin-right: -2em;
+  margin-bottom: 1.5em;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+  background-position: center;
+  background-size: cover;
+  height: 50px;
+  background-color: #333;
+  color: #fff;
+
+  .blog-weapon__title {
+    width: 40%;
+    float: left;
+    h4 {
+      line-height: 2em;
+      margin-left: 1em;
+    }
+  }
+
+  .blog-weapon__logo {
+    width: 30%;
+    float: right;
+    height: 100%;
+    img {
+      vertical-align: text-bottom;
+      height: 30px;
+      margin-left: 11px;
+      margin-top: 11px;
+      filter: contrast(0%);
+    }
+  }
+}
+
+@media (max-width: 970px) {
+  .blog-weapon__header {
+    .blog-weapon__logo {
+      width: 50%;
+      img {
+        width: 70px;
+        height: auto;
+        margin-top: 25px;
+      }
+    }
+  }
+  .blog-weapon__show-more {
+    span {
+      float: left!important;
+    }
+  }
 }
 
 .blog-post__meta {

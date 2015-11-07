@@ -9,8 +9,9 @@ app.service('guardianGG', [
       var BASE_URL = 'http://api.guardian.gg';
       var ENDPOINTS = {
         getElo: '/elo/{membershipId}',
-        getFireteam: '/ggg/fireteam/{mode}/{membershipId}',
-        getTeam: '/ggg/dtr/{membershipIdArray}'
+        getFireteam: '/fireteam/{mode}/{membershipId}',
+        getTeam: '/dtr/{membershipIdArray}',
+        getWeapons: '/weapon/top?mode=14&platform={platform}&start={start}'
       };
 
       this.getElo = function(membershipId) {
@@ -29,6 +30,13 @@ app.service('guardianGG', [
       this.getTeam = function(membershipIdArray) {
         return this.get(ENDPOINTS.getTeam, {
           membershipIdArray: membershipIdArray
+        });
+      };
+
+      this.getWeapons = function(platform, start) {
+        return this.get(ENDPOINTS.getWeapons, {
+          platform: platform,
+          start: start
         });
       };
 
