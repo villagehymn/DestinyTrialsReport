@@ -20,7 +20,9 @@ angular.module('trialsReportApp')
     var getAccount = function (platform, name) {
       return searchByName(platform, name)
         .then(function(result) {
-          return getCharacters(result.membershipType, result.membershipId, result.displayName);
+          if (result) {
+            return getCharacters(result.membershipType, result.membershipId, result.displayName);
+          }
         });
     };
 

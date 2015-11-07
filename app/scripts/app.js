@@ -160,9 +160,8 @@ function gggWeapons($localStorage, guardianFactory) {
     platformNumeric
   ).then(function (result) {
       return {
-        gggWeapons: result.gggWeapons,
+        gggWeapons: result,
         platformNumeric: platformNumeric,
-        dateBeginTrials: result.dateBeginTrials,
         subdomain: getSubdomain()
       };
     });

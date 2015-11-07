@@ -146,8 +146,8 @@ angular.module('trialsReportApp')
 
     if (config.gggWeapons) {
       $scope.gggWeapons = {};
-      $scope.gggWeapons[config.platformNumeric] = config.gggWeapons;
+      $scope.gggWeapons[config.platformNumeric] = config.gggWeapons.gggWeapons;
       $scope.platformNumeric = config.platformNumeric;
-      $scope.dateBeginTrials = config.dateBeginTrials;
+      $scope.dateBeginTrials = config.gggWeapons.dateBeginTrials;
     }
   });
