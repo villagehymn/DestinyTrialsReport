@@ -16,6 +16,12 @@
 .blog-ggg__weapons {
   margin-bottom: auto;
   padding-bottom: 1em;
+  .stat {
+    span {
+      font-size: 1em;
+      font-weight: 400;
+    }
+  }
 }
 
 .blog-weapon__show-more {
@@ -36,14 +42,6 @@
 }
 
 .blog-weapon__header {
-  margin-left: -2em;
-  margin-top: -2em;
-  margin-right: -2em;
-  margin-bottom: 1.5em;
-  border-top-left-radius: 2em;
-  border-top-right-radius: 2em;
-  background-position: center;
-  background-size: cover;
   height: 50px;
   background-color: #333;
   color: #fff;
