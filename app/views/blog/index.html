@@ -41,7 +41,11 @@
       <h4>Top <span class="highlight">Weapons</span> This Week</h4>
     </div>
     <div class="blog-weapon__logo">
-      <span class="highlight">Powered by:</span><a href="https://Guardian.gg" target="_top"><img src="https://guardian.gg/asset/image/logo.png"></a>
+      <span class="highlight">Powered by</span>
+      <a href="https://guardian.gg" target="_blank"
+         analytics-on analytics-event="Click" analytics-category="GGG Powered By">
+        <img src="https://guardian.gg/asset/image/logo.png">
+      </a>
     </div>
   </div>
   <div class="row">
@@ -66,7 +70,12 @@
   </div>
   <div class="row">
     <div class="blog-weapon__show-more">
-      <span class="pull-right"><a ng-href="https://guardian.gg/en/weapon-stats?platform={{platformNumeric}}&start={{dateBeginTrials}}&mode=14" target="_blank">Show More</a></span>
+      <span class="pull-right">
+        <a ng-href="https://guardian.gg/en/weapon-stats?platform={{platformNumeric}}&start={{dateBeginTrials}}&mode=14"
+           target="_blank" analytics-on analytics-event="Click" analytics-category="GGG Show More">
+          Show More
+        </a>
+      </span>
     </div>
   </div>
 </article>

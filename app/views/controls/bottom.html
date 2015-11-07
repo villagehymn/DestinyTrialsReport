@@ -1,12 +1,20 @@
 <div class="domain-switch">
-  <a type="button" class="btn btn-default" ng-if="!subdomain" href="http://my.destinytrialsreport.com" target="_self"><span class="highlight">my</span>Report</a>
-  <a type="button" class="btn btn-default" ng-if="subdomain" href="http://www.destinytrialsreport.com" target="_self"><span class="highlight">trials</span>Report</a>
+  <a type="button" class="btn btn-default" ng-if="!subdomain" href="http://my.destinytrialsreport.com" target="_self">
+    <span class="highlight">my</span>Report
+  </a>
+  <a type="button" class="btn btn-default" ng-if="subdomain" href="http://www.destinytrialsreport.com" target="_self">
+    <span class="highlight">trials</span>Report
+  </a>
+  <a type="button" class="btn btn-default" href="https://guardian.gg" target="_self"
+     analytics-on analytics-event="Click" analytics-category="GGG Controls">
+    Guardian<span class="highlight">.gg</span>
+  </a>
   <button type="button" class="btn btn-default" ng-mobile-click="showFAQ()"><span class="highlight">FAQ</span></button>
-  <a type="button" class="btn btn-default" href="https://guardian.gg" target="_self">Guardian<span class="highlight">.gg</span></a>
 </div>
 
 <div class="donate">
-  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A3T6F2QDXUTCN" target="_blank">
+  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A3T6F2QDXUTCN" target="_blank"
+     analytics-on analytics-event="Click" analytics-category="Donate">
     <div class="donate__title">
       Help us run this site, donate with <img src="/images/paypal.svg" alt="PayPal">
     </div>
@@ -24,7 +32,8 @@
     <a href="mailto:destinytrialsreport@gmail.com" target="_blank"><i class="material-icons">&#xE158;</i></a>
   </div>
   <div class="colofon__contribute">
-    <a href="https://github.com/DestinyTrialsReport/DestinyTrialsReport" target="_blank">
+    <a href="https://github.com/DestinyTrialsReport/DestinyTrialsReport" target="_blank"
+       analytics-on analytics-event="Click" analytics-category="GitHub">
       <img src="/images/github.svg" alt="GitHub">
     </a>
   </div>
