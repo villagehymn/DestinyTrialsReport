@@ -7,9 +7,9 @@
       <div class="last-match__result col-xs-4" ng-repeat="match in player.recentMatches">
         <span class="match" ng-class="{'match--win': match.standing === 0, 'match--loss': match.standing === 1}"></span>
         <span class="last-match__score">
-          <span class="last-match__score--team" ng-bind="match.team_score"></span>
+          <span class="last-match__score--team" ng-bind="match.teamScore"></span>
           -
-          <span class="last-match__score--opponents" ng-bind="match.enemy_score"></span>
+          <span class="last-match__score--opponents" ng-bind="match.enemyScore"></span>
         </span>
         <span class="last-match__date" ng-bind="match.dateAgo"></span>
       </div>

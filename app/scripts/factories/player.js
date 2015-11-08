@@ -37,17 +37,6 @@ function setPastActivities(reversedAct, n, pastActivities) {
   });
 }
 
-function setLastThreeMatches(lastThree, activities) {
-  for (var l = 0; l < 3; l++) {
-    if (activities[l]){
-      lastThree[activities[l].activityDetails.instanceId] = {
-        'id': activities[l].activityDetails.instanceId,
-        'standing': activities[l].values.standing.basic.value
-      };
-    }
-  }
-}
-
 function setMapReturnStreak(reversedAct, pastActivities, streak, recentActivity, mapStats, totals) {
   for (var n = 0; n < reversedAct.length; n++) {
     setPastActivities(reversedAct, n, pastActivities);
@@ -65,11 +54,6 @@ function getAbilityCooldown(subclass, ability, tier) {
       case 'Striker':
       case 'Sunsinger':
         return cooldownsSuperA[tier];
-      case 'Bladedancer':
-      case 'Gunslinger':
-      case 'Stormcaller':
-      case 'Sunbreaker':
-      case 'Voidwalker':
       default:
         return cooldownsSuperB[tier];
     }
@@ -100,9 +84,9 @@ function setStatPercentage(player) {
           statHash.remaining -= statHash.tiers[t] = statHash.remaining > 60 ? 60 : statHash.remaining;
         }
         statHash.cooldown = getAbilityCooldown(player.characterInfo.subclassName, stats[s], statHash.tier);
-        statHash.percentage = +(100 * statHash.normalized / 300).toFixed()
+        statHash.percentage = +(100 * statHash.normalized / 300).toFixed();
       } else {
-        statHash.percentage = +(100 * statHash.value / 10).toFixed()
+        statHash.percentage = +(100 * statHash.value / 10).toFixed();
       }
 
       player.characterInfo.stats[stats[s]] = statHash;

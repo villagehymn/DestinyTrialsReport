@@ -7,13 +7,6 @@ angular.module('trialsReportApp')
     guardianFactory.getElo($scope.player);
     trialsStats.getData($scope.player);
 
-    var sendAnalytic = function (event, cat, label) {
-      $analytics.eventTrack(event, {
-        category: cat,
-        label: label
-      });
-    };
-
     $scope.getLastMatch = function (player) {
       return trialsStats.getLastThree(player)
         .then(function (postGame) {

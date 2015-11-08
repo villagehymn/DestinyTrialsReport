@@ -15,7 +15,8 @@ angular.module('trialsReportApp')
             '14',
             '21'
           )
-        )});
+        );
+      });
       return $q.all(methods)
         .then(function(results) {
           angular.forEach(results, function (result) {
@@ -74,9 +75,9 @@ angular.module('trialsReportApp')
           var entries = data.entries, standing = recentActivity.standing;
           for (var i = 0; i < entries.length; i++) {
             if (entries[i].standing === standing) {
-              var player_id = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
+              var playerId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
 
-              if (player_id !== angular.lowercase(id)) {
+              if (playerId !== angular.lowercase(id)) {
                 var teammateId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
                 fireTeam[teammateId] = Player.build(entries[i].player.destinyUserInfo, entries[i].player.destinyUserInfo.displayName, entries[i]);
               }

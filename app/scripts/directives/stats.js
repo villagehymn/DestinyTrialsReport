@@ -8,7 +8,7 @@ angular.module('trialsReportApp')
         activities: '=trialsHistory',
         kd: '=playerKd'
       },
-      link: function ($scope, element, attrs) {
+      link: function ($scope) {
         var factor = -60,
             range = 1.5,
             unit = '%';
@@ -43,9 +43,9 @@ angular.module('trialsReportApp')
 
           if (stat) {
             if (angular.isDefined(stat.tier)) {
-              popover = 'Tier ' + stat.tier + ' — ' + + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown
+              popover = 'Tier ' + stat.tier + ' — ' + stat.value + ' / 300 (' + stat.percentage + '%)' + '<br>' + 'Cooldown: ' + stat.cooldown;
             } else {
-              popover = stat.name + ': ' + (stat.value / 10) * 100 + '%'
+              popover = stat.name + ': ' + (stat.value / 10) * 100 + '%';
             }
           }
           return popover;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .directive("ngXpull", function() {
+  .directive('ngXpull', function() {
     return function(scope, elm, attr) {
       return $(elm[0]).xpull({
         'pullThreshold': 100,

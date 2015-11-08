@@ -1,5 +1,10 @@
 'use strict';
 
+function getSubdomain() {
+  var segments = location.hostname.split('.');
+  return segments.length>2?segments[segments.length-3].toLowerCase():null;
+}
+
 function getFromParams(trialsReport, inventoryService, guardianFactory, toastr, bungie, $route, $q) {
   var params = $route.current.params;
   var name = params.playerName || params.playerOne;
@@ -23,14 +28,14 @@ function getFromParams(trialsReport, inventoryService, guardianFactory, toastr, 
                 return guardianFactory.getFireteam('14', player.membershipId)
                   .then(function (result) {
                     if (result && result.data.length > 0) {
-                      return result.data
+                      return result.data;
                     } else {
                       return trialsReport.getRecentActivity(player)
                         .then(function (result) {
                           return getFireteam(result);
-                      })
+                      });
                     }
-                })
+                });
               }
             } else {
               return false;
@@ -51,7 +56,7 @@ function getFromParams(trialsReport, inventoryService, guardianFactory, toastr, 
                   membershipType: player.player.destinyUserInfo.membershipType,
                   membershipId: player.player.destinyUserInfo.membershipId,
                   name: player.player.destinyUserInfo.displayName
-                })
+                });
               }
             });
             return fireteam;
@@ -97,7 +102,7 @@ function getFromParams(trialsReport, inventoryService, guardianFactory, toastr, 
           });
           return $q.all(methods);
         } else if (players && players.characterInfo) {
-          return [players]
+          return [players];
         } else {
           return false;
         }
@@ -149,11 +154,6 @@ function getFromParams(trialsReport, inventoryService, guardianFactory, toastr, 
   }
 }
 
-function getSubdomain() {
-  var segments = location.hostname.split('.');
-  return segments.length>2?segments[segments.length-3].toLowerCase():null;
-}
-
 function gggWeapons($localStorage, guardianFactory) {
   var platformNumeric = $localStorage.platform ? 2 : 1;
   return guardianFactory.getWeapons(
@@ -166,109 +166,3 @@ function gggWeapons($localStorage, guardianFactory) {
       };
     });
 }
-
-angular
-  .module('trialsReportApp', [
-    'angulartics',
-    'angulartics.google.analytics',
-    'angular-loading-bar',
-    'mgcrea.ngStrap.modal',
-    'mgcrea.ngStrap.popover',
-    'ngAnimate',
-    'ngRoute',
-    'ngSanitize',
-    'ngStorage',
-    'ngTouch',
-    'toastr',
-    'ui.bootstrap.tpls',
-    'ui.bootstrap.progressbar',
-    'ui.bootstrap.tabs'
-  ])
-  .config(window.$QDecorator)
-  .config(function ($modalProvider) {
-    angular.extend($modalProvider.defaults, {
-      container: 'body',
-      placement: 'center'
-    });
-  })
-  .config(function ($popoverProvider) {
-    angular.extend($popoverProvider.defaults, {
-      animation: false,
-      container: 'body',
-      html: true,
-      placement: 'auto top',
-      trigger: 'hover'
-    });
-  })
-  .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
-    $.material.init();
-
-      $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        resolve: {
-          config: gggWeapons
-        }
-      })
-      .when('/:platformName/:playerName', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        resolve: {
-          config: getFromParams
-        }
-      })
-      .when('/:platformName/:playerOne/:playerTwo/:playerThree', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        resolve: {
-          config: getFromParams
-        }
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-
-    $locationProvider.html5Mode(true);
-    $locationProvider.hashPrefix('!');
-    $httpProvider.useApplyAsync(true);
-    $compileProvider.debugInfoEnabled(false);
-  })
-  .service('locationChanger', ['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
-    this.skipReload = function () {
-      var lastRoute = $route.current;
-      $rootScope.$on('$locationChangeSuccess', function () {
-        if (angular.isUndefined($route.current.params.playerName)){
-          lastRoute.params.preventLoad = true;
-          $route.current = lastRoute;
-        }
-      });
-      return this;
-    };
-
-    this.withoutRefresh = function (url, doesReplace) {
-      if (doesReplace) {
-        $location.path(url).replace();
-      } else {
-        $location.path(url || '/');
-      }
-    };
-  }])
-  .filter('secondsToDateTime', [function() {
-    return function(seconds) {
-      return new Date(1970, 0, 1).setSeconds(seconds || 0);
-    };
-  }])
-  .filter('orderObjectBy', function() {
-    return function(items, field, reverse) {
-      var filtered = [];
-      angular.forEach(items, function(item) {
-        filtered.push(item);
-      });
-      filtered.sort(function (a, b) {
-        return (a[field] > b[field] ? 1 : -1);
-      });
-      if(reverse) filtered.reverse();
-      return filtered;
-    };
-  });

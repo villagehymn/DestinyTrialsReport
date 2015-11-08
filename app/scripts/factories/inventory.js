@@ -65,11 +65,11 @@ function defineAbilities(subclass, hasVikingFuneral, hasTouchOfFlame) {
         break;
       case 6:
         subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
-        hasVikingFuneral = subclass.nodes[s].nodeStepHash == VIKING_FUNERAL;
+        hasVikingFuneral = subclass.nodes[s].nodeStepHash === VIKING_FUNERAL;
         break;
       case 8:
         subclass.displayedNodes[subclass.nodes[s].nodeStepHash] = subclass.nodes[s];
-        hasTouchOfFlame = subclass.nodes[s].nodeStepHash == TOUCH_OF_FLAME;
+        hasTouchOfFlame = subclass.nodes[s].nodeStepHash === TOUCH_OF_FLAME;
         break;
     }
   }

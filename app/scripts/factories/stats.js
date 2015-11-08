@@ -55,22 +55,22 @@ function sumValuesByAttribute(collection, attribute) {
   });
 }
 
-function sumExistingStats(allStats, fireTeam, player_id, weaponsUsed, entries, i) {
-  sumValuesByAttribute(allStats, fireTeam[player_id].allStats);
+function sumExistingStats(allStats, fireTeam, playerId, weaponsUsed, entries, i) {
+  sumValuesByAttribute(allStats, fireTeam[playerId].allStats);
   angular.forEach(weaponsUsed, function (value, key) {
-      if (fireTeam[player_id].weaponsUsed[key]) {
+      if (fireTeam[playerId].weaponsUsed[key]) {
         for (var v = 0; v < weaponAtts.length; v++) {
-          fireTeam[player_id].weaponsUsed[key][weaponAtts[v]] += value[weaponAtts[v]];
+          fireTeam[playerId].weaponsUsed[key][weaponAtts[v]] += value[weaponAtts[v]];
         }
       }
       else {
-        fireTeam[player_id].weaponsUsed[key] = {referenceId: value.referenceId};
-        for (var v = 0; v < weaponAtts.length; v++) {
-          fireTeam[player_id].weaponsUsed[key][weaponAtts[v]] = value[weaponAtts[v]];
+        fireTeam[playerId].weaponsUsed[key] = {referenceId: value.referenceId};
+        for (var w = 0; w < weaponAtts.length; w++) {
+          fireTeam[playerId].weaponsUsed[key][weaponAtts[w]] = value[weaponAtts[w]];
         }
       }
   });
-  fireTeam[player_id].playerWeapons = entries[i].extended.weapons;
+  fireTeam[playerId].playerWeapons = entries[i].extended.weapons;
 }
 
 angular.module('trialsReportApp')
@@ -120,15 +120,15 @@ angular.module('trialsReportApp')
               var values = entries[i].extended.values, medals = {},
                 abilityKills = {}, allStats = {}, extendedStats = {},
                 extendedWeapons = entries[i].extended.weapons, weaponsUsed = {};
-              var player_id = entries[i].player.destinyUserInfo.membershipId;
-              if (player_id === id) {
+              var playerId = entries[i].player.destinyUserInfo.membershipId;
+              if (playerId === id) {
                 collectMatchData(extendedWeapons, weaponsUsed, allStats, values);
-                if (matchStats[player_id]) {
-                  getExtendedStats(entries[i], matchStats[player_id].medals, matchStats[player_id].abilityKills, matchStats[player_id].extendedStats);
-                  sumExistingStats(allStats, matchStats, player_id, weaponsUsed, entries, i);
+                if (matchStats[playerId]) {
+                  getExtendedStats(entries[i], matchStats[playerId].medals, matchStats[playerId].abilityKills, matchStats[playerId].extendedStats);
+                  sumExistingStats(allStats, matchStats, playerId, weaponsUsed, entries, i);
                 } else {
                   getExtendedStats(entries[i], medals, abilityKills, extendedStats);
-                  matchStats[player_id] = {
+                  matchStats[playerId] = {
                     allStats: allStats,
                     medals: medals,
                     abilityKills: abilityKills,
@@ -142,15 +142,15 @@ angular.module('trialsReportApp')
           var firstTeam = data.teams[0];
           if (firstTeam) {
             var teamIndex = data.teams[0].standing.basic.value === standing ? 0 : 1;
-            var enemy_score = 0;
+            var enemyScore = 0;
             if (data.teams[teamIndex]) {
               if (data.teams[teamIndex === 0 ? 1 : 0]) {
-                enemy_score = data.teams[teamIndex === 0 ? 1 : 0].score.basic.value;
+                enemyScore = data.teams[teamIndex === 0 ? 1 : 0].score.basic.value;
               }
               recentMatches.push({
                 standing: standing,
-                team_score: data.teams[teamIndex].score.basic.value,
-                enemy_score: enemy_score,
+                teamScore: data.teams[teamIndex].score.basic.value,
+                enemyScore: enemyScore,
                 dateAgo: moment(data.period).fromNow(),
                 duration: data.entries[0].values.activityDurationSeconds.basic.displayValue
               });

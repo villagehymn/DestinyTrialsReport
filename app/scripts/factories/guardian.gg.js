@@ -6,21 +6,23 @@ angular.module('trialsReportApp')
     var getElo = function (player) {
       return guardianGG.getElo(player.membershipId)
         .then(function (elo) {
-          var elo = _.find(elo.data, function(arr){ return arr.mode == 14; });
-          if (elo) {
-            player.elo = elo.elo
+          var playerElo = _.find(elo.data, function(arr){ return arr.mode === 14; });
+          if (playerElo) {
+            player.elo = elo.elo;
           }
           return player;
         }).catch(function () {});
     };
 
     var getWeapons = function (platform) {
+      var dateFriday;
       var dateBeginTrials;
-      if (moment().day() === 0) {
-        dateBeginTrials = moment().day(-3).format('YYYY-MM-DD');
+      if (moment().day() < 5) {
+        dateFriday = moment().day(- (moment().day() + 2));
       } else {
-        dateBeginTrials = moment().startOf('week').add(5, 'days').format('YYYY-MM-DD');
+        dateFriday = moment().startOf('week').add(5, 'days');
       }
+      dateBeginTrials = dateFriday.format('YYYY-MM-DD');
       return guardianGG.getWeapons(platform, dateBeginTrials)
         .then(function (weapons) {
           return {

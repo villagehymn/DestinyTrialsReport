@@ -1,3 +1,5 @@
+'use strict';
+
 var app = angular.module('trialsReportApp');
 
 app.service('bungie', [

@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .directive('caroussel', ['$customSwipe', '$timeout', function($customSwipe, $timeout) {
+  .directive('caroussel', ['$customSwipe', '$timeout', function($customSwipe) {
     return {
       restrict: 'A',
-      link: function(scope, ele, attrs, ctrl) {
+      link: function(scope, ele) {
         var startX;
         var startTransformX;
         var container = $('.players').first();
@@ -65,7 +65,7 @@ angular.module('trialsReportApp')
             }
             active = false;
           }
-        }, 0)
+        }, 0);
       }
     };
   }]);

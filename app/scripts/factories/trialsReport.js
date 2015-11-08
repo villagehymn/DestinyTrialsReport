@@ -78,6 +78,17 @@ angular.module('trialsReportApp')
         });
     };
 
+    function setLastThreeMatches(lastThree, activities) {
+      for (var l = 0; l < 3; l++) {
+        if (activities[l]){
+          lastThree[activities[l].activityDetails.instanceId] = {
+            'id': activities[l].activityDetails.instanceId,
+            'standing': activities[l].values.standing.basic.value
+          };
+        }
+      }
+    }
+
     function setActivityData(account, activities) {
       var lastThree = {},
         reversedAct = activities.slice().reverse(),
@@ -106,7 +117,7 @@ angular.module('trialsReportApp')
         totals: totals
       };
 
-      return account
+      return account;
     }
 
     return {

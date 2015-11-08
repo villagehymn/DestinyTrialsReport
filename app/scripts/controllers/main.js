@@ -103,13 +103,10 @@ angular.module('trialsReportApp')
       switch (index) {
         case 0:
           return 'Primary';
-          break;
         case 1:
           return 'Special';
-          break;
         case 2:
           return 'Heavy';
-          break;
       }
     };
 
