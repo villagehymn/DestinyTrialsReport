@@ -25,17 +25,21 @@ function getFromParams(trialsReport, inventoryService, guardianFactory, toastr, 
                   params.playerName
                 );
               } else {
-                return guardianFactory.getFireteam('14', player.membershipId)
+                return trialsReport.getRecentActivity(player)
                   .then(function (result) {
-                    if (result && result.data.length > 0) {
-                      return result.data;
-                    } else {
-                      return trialsReport.getRecentActivity(player)
-                        .then(function (result) {
-                          return getFireteam(result);
-                      });
-                    }
-                });
+                    return getFireteam(result);
+                  });
+                //return guardianFactory.getFireteam('14', player.membershipId)
+                //  .then(function (result) {
+                //    if (result && result.data.length > 0) {
+                //      return result.data;
+                //    } else {
+                //      return trialsReport.getRecentActivity(player)
+                //        .then(function (result) {
+                //          return getFireteam(result);
+                //      });
+                //    }
+                //});
               }
             } else {
               return false;
