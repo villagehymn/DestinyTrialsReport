@@ -15,8 +15,12 @@ angular.module('trialsReportApp')
     };
 
     var getWeapons = function (platform) {
-      var friday = new Date();
-      var dateBeginTrials = $filter('date')(friday.setDate(friday.getDate() - friday.getDay() + 5),'yyyy-MM-dd');
+      var dateBeginTrials;
+      if (moment().day() === 0) {
+        dateBeginTrials = moment().day(-3).format('YYYY-MM-DD');
+      } else {
+        dateBeginTrials = moment().startOf('week').add(5, 'days').format('YYYY-MM-DD');
+      }
       return guardianGG.getWeapons(platform, dateBeginTrials)
         .then(function (weapons) {
           return {
