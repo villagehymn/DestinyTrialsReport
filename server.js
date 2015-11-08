@@ -29,6 +29,15 @@ function start() {
     }
   });
 
+  // Guardian.net API Proxy
+  app.use('/ggg/*?', function(req, res) {
+    var options = {
+      url: 'https://api.guardian.gg/' + req.originalUrl.replace("/ggg/", ""),
+      headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
+    };
+    req.pipe(request(options)).pipe(res);
+  });
+
   // DestinyTrialsReport
   app.get('/:platform/:playerName', function (req, res) {
     res.sendFile(__dirname + '/index.html');
