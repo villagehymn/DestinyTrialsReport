@@ -8,7 +8,7 @@ angular.module('trialsReportApp')
         .then(function (elo) {
           var playerElo = _.find(elo.data, function(arr){ return arr.mode === 14; });
           if (playerElo) {
-            player.elo = elo.elo;
+            player.elo = playerElo.elo;
           }
           return player;
         }).catch(function () {});
