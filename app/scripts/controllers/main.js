@@ -84,8 +84,8 @@ angular.module('trialsReportApp')
       });
     };
 
-    $scope.togglePlatform = function () {
-      $scope.platformValue = !$scope.platformValue;
+    $scope.togglePlatform = function (platformBool) {
+      $scope.platformValue = angular.isDefined(platformBool) ? $scope.platformValue = platformBool : !$scope.platformValue;
       $localStorage.platform = $scope.platformValue;
       $scope.platformNumeric = $scope.platformValue ? 2 : 1;
       if (config.gggWeapons) {
