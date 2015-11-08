@@ -85,7 +85,7 @@ angular.module('trialsReportApp')
     };
 
     $scope.togglePlatform = function (platformBool) {
-      $scope.platformValue = angular.isDefined(platformBool) ? platformBool : !$scope.platformValue;
+      angular.isDefined(platformBool) ? $scope.platformValue = platformBool : $scope.platformValue = !$scope.platformValue;
       $localStorage.platform = $scope.platformValue;
       $scope.platformNumeric = $scope.platformValue ? 2 : 1;
       if (config.gggWeapons) {
