@@ -84,10 +84,8 @@ angular.module('trialsReportApp')
       });
     };
 
-    $scope.togglePlatform = function (platformBool) {
-      angular.isDefined(platformBool) ? $scope.platformValue = platformBool : $scope.platformValue = !$scope.platformValue;
-      $localStorage.platform = $scope.platformValue;
-      $scope.platformNumeric = $scope.platformValue ? 2 : 1;
+    $scope.gggLoadWeapons = function (platform) {
+      $scope.platformNumeric = platform ? 2 : 1;
       if (config.gggWeapons) {
         if (!$scope.gggWeapons[$scope.platformNumeric]) {
           return guardianFactory.getWeapons(
@@ -97,6 +95,19 @@ angular.module('trialsReportApp')
             });
         }
       }
+    };
+
+    $scope.togglePlatform = function () {
+      $scope.platformValue = !$scope.platformValue;
+      $localStorage.platform = $scope.platformValue;
+      $scope.gggLoadWeapons($scope.platformValue);
+    };
+
+    $scope.setPlatform = function (platformBool) {
+      $scope.platformValue = platformBool;
+      $localStorage.platform = $scope.platformValue;
+      $scope.gggLoadWeapons($scope.platformValue);
+      return platformBool;
     };
 
     $scope.getWeaponTypeByIndex = function (index) {
