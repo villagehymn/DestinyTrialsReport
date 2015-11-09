@@ -61,7 +61,7 @@
         <p ng-bind="getWeaponTypeByIndex($index)"></p>
         <div class="row" ng-repeat="weapon in type track by $index" ng-if="$index < 3">
           <div class="col-xs-6 last-weapon-weapon__descr">
-            <img class="last-match-weapon__img img-responsive" ng-src="{{'https://bungie.net/' + weapon.icon}}" alt="{{weapon.name}}">
+            <img class="last-match-weapon__img img-responsive" ng-src="{{'https://www.bungie.net/' + weapon.icon}}" alt="{{weapon.name}}">
             <span class="last-match-weapon__title" ng-bind="weapon.name"></span>
           </div>
           <div class="col-xs-2 stat">
@@ -69,7 +69,10 @@
             <label>Kills</label>
           </div>
           <div class="col-xs-4 stat">
-            <span ng-bind="weapon.precisionKills | number:2"></span>%
+            <span ng-if="weapon.precisionKills >= 0.01">
+              <span ng-bind="weapon.precisionKills | number:2"></span>%
+            </span>
+            <span ng-if="weapon.precisionKills < 0.01">N/A</span>
             <label>Headshots</label>
           </div>
         </div>
