@@ -38,8 +38,8 @@
     <link rel="stylesheet" href="bower_components/xpull/xpull.css" />
     <!-- endbower -->
     <!-- endbuild -->
-    <!-- build:css(.tmp) styles/app.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <!-- build:css(.tmp) assets/css/app.css -->
+    <link rel="stylesheet" href="assets/css/main.css">
     <!-- endbuild -->
   </head>
   <body>
@@ -91,38 +91,40 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/app.js -->
-    <script src="scripts/definitions/DestinyConstants.js"></script>
-    <script src="scripts/definitions/en/DestinyArmorDefinition.js"></script>
-    <script src="scripts/definitions/en/DestinyCrucibleMapDefinition.js"></script>
-    <script src="scripts/definitions/en/DestinyHazardDefinition.js"></script>
-    <script src="scripts/definitions/en/DestinyMedalDefinition.js"></script>
-    <script src="scripts/definitions/en/DestinySubclassDefinition.js"></script>
-    <script src="scripts/definitions/en/DestinyWeaponDefinition.js"></script>
-    <script src="lib/$QDecorator.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="scripts/routes.js"></script>
-    <script src="scripts/services/api.js"></script>
-    <script src="scripts/services/bungie.js"></script>
-    <script src="scripts/services/guardian.gg.js"></script>
-    <script src="scripts/services/util.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/player.js"></script>
-    <script src="scripts/controllers/header.js"></script>
-    <script src="scripts/factories/player.js"></script>
-    <script src="scripts/factories/trialsReport.js"></script>
-    <script src="scripts/factories/account.js"></script>
-    <script src="scripts/factories/guardian.gg.js"></script>
-    <script src="scripts/factories/stats.js"></script>
-    <script src="scripts/factories/inventoryService.js"></script>
-    <script src="scripts/factories/inventory.js"></script>
-    <script src="scripts/factories/custom-swipe.js"></script>
-    <script src="scripts/directives/weapons.js"></script>
-    <script src="scripts/directives/armor.js"></script>
-    <script src="scripts/directives/stats.js"></script>
-    <script src="scripts/directives/adsense.js"></script>
-    <script src="scripts/directives/mobile-click.js"></script>
-    <script src="scripts/directives/xpull.js"></script>
-    <script src="scripts/directives/caroussel.js"></script>
+    <script src="shared/definitions/DestinyConstants.js"></script>
+    <script src="shared/definitions/en/DestinyArmorDefinition.js"></script>
+    <script src="shared/definitions/en/DestinyCrucibleMapDefinition.js"></script>
+    <script src="shared/definitions/en/DestinyHazardDefinition.js"></script>
+    <script src="shared/definitions/en/DestinyMedalDefinition.js"></script>
+    <script src="shared/definitions/en/DestinySubclassDefinition.js"></script>
+    <script src="shared/definitions/en/DestinyWeaponDefinition.js"></script>
+    <script src="assets/js/$QDecorator.js"></script>
+    <script src="app.module.js"></script>
+    <script src="app.routes.js"></script>
+    <script src="app.config.js"></script>
+    <script src="shared/services/api.js"></script>
+    <script src="shared/services/bungie.js"></script>
+    <script src="shared/services/guardian.gg.js"></script>
+    <script src="shared/services/util.js"></script>
+    <script src="shared/services/locationChanger.js"></script>
+    <script src="components/controls/controls.controller.js"></script>
+    <script src="components/home/home.factory.js"></script>
+    <script src="components/home/home.controller.js"></script>
+    <script src="components/player/player.controller.js"></script>
+    <script src="components/player/player.factory.js"></script>
+    <script src="components/inventory/inventory.service.js"></script>
+    <script src="components/inventory/inventory.factory.js"></script>
+    <script src="components/inventory/inventory.directive.js"></script>
+    <script src="components/stats/stats.factory.js"></script>
+    <script src="components/stats/stats.directive.js"></script>
+    <script src="shared/factories/customSwipe.factory.js"></script>
+    <script src="shared/factories/guardiangg.factory.js"></script>
+    <script src="shared/directives/adsense.directive.js"></script>
+    <script src="shared/directives/mobileClick.directive.js"></script>
+    <script src="shared/directives/xpull.directive.js"></script>
+    <script src="shared/directives/caroussel.directive.js"></script>
+    <script src="shared/filters/orderObjectBy.filter.js"></script>
+    <script src="shared/filters/secondsToDateTime.filter.js"></script>
     <!-- endbuild -->
 
     <script>

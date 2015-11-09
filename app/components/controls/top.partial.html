@@ -1,0 +1,72 @@
+<div class="title-bar">
+  <div class="title-bar__title">
+    <a href="/" target="_self">
+      <span ng-if="subdomain" class="highlight">my</span>D<span class="hide-on-small">estiny</span><span class="highlight">T<span class="hide-on-small">rials</span></span>R<span class="hide-on-small">eport</span>
+    </a>
+  </div>
+  <div class="platform-toggle">
+    <div class="togglebutton">
+      <label class="platform-toggle__name" ng-class="{'is-active':platformValue}" ng-click="platformValue = setPlatform(true)"><img src="assets/img/ps.svg" alt="PlayStation"></label>
+      <label class="platform-toggle__btn">
+        <input type="checkbox" ng-click="togglePlatform()" ng-model="platformValue" ng-true-value="false" ng-false-value="true">
+      </label>
+      <label class="platform-toggle__name" ng-class="{'is-active':!platformValue}" ng-click="platformValue = setPlatform(false)"><img src="assets/img/xbox.svg" alt="Xbox"></label>
+    </div>
+  </div>
+</div>
+
+<div class="main-search">
+  <div class="main-search__content">
+    <div class="main-search__fireteam">
+      <form ng-submit="searchMainPlayerbyName(mainPlayer)">
+        <div class="main-search__row">
+          <div class="main-search__input">
+            <input type="text" class="form-control" placeholder="{{fireteam[0].name || (!subdomain ? 'Enter your opponent\'s gamertag' : 'Enter your gamertag')}}" ng-model="mainPlayer" ng-value="(!fireteam[0] ? searchedPlayer : '')">
+          </div>
+          <div class="main-search__controls">
+            <div class="main-search__refresh" ng-if="!subdomain" ng-show="fireteam[0].name != null">
+              <button class="btn btn-default btn-icon" type="button" ng-click="refreshInventory(fireteam)"
+                      analytics-on analytics-event="Click" analytics-category="Refresh Inventory">
+                <i class="material-icons">&#xE86A;</i>
+              </button>
+            </div>
+            <div class="main-search__submit">
+              <button type="submit" class="btn btn-default btn-icon" ng-disabled="status"><i class="material-icons">&#xE163;</i></button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div ng-if="!subdomain && fireteam[0].name && $index < 3 && $index > 0" ng-repeat="player in fireteam track by $index">
+        <form role="form" ng-submit="searchPlayerbyName(teammateName, platformValue, $index)">
+          <div class="main-search__row">
+            <div class="main-search__input">
+              <input type="text" class="form-control" placeholder="{{fireteam[$index].name || 'Enter their teammates\' gamertag'}}"
+                     ng-model="teammateName" basic-click="suggestRecentPlayers()" ng-change="filter(teammateName)" data-toggle="dropdown">
+              <ul class="dropdown-menu">
+                <li class="dropdown-menu__label">{{fireteam[0].name}}'s recent teammates</li>
+                <li ng-repeat="recentPlayer in recentPlayers" ng-if="recentPlayer.name !== fireteam[$parent.$index].name">
+                  <a href="#" ng-click="searchPlayerbyName(recentPlayer.name, platformValue, $parent.$parent.$index)" ng-bind="recentPlayer.name"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="main-search__controls">
+              <div class="main-search__submit">
+                <button type="submit" class="btn btn-default btn-icon" ng-disabled="status"><i class="material-icons">&#xE163;</i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="current-map shadow-z-1" ng-style="{'background-image':'url(' + currentMap.pgcrImage + ')'}">
+  <div class="current-map__content">
+    <div class="current-map__title">
+      <span ng-bind="currentMap.name"></span>
+    </div>
+    <div class="current-map__heatmap" ng-if="showHeatmap">
+      <button type="button" class="btn btn-default btn-sm" ng-mobile-click="showHeatmap()">Heatmap</button>
+    </div>
+  </div>
+</div>

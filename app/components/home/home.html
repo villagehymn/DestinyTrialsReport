@@ -1,0 +1,38 @@
+<div class="wrapper" ng-class="{'my-dtr':subdomain, 'focus-on-players':focusOnPlayers}">
+  <div class="controls-wrapper shadow-z-2">
+    <div class="controls" ng-controller="controlsController">
+      <header ng-include="'components/controls/top.partial.html'"></header>
+      <footer ng-include="'components/controls/bottom.partial.html'"></footer>
+    </div>
+  </div>
+  <div class="content">
+    <div class="container-fluid" ng-if="status">
+      <div class="row">
+        <div class="text-center alert alert-warning">
+          <strong ng-bind="status"></strong>
+        </div>
+      </div>
+    </div>
+    <div class="blog" ng-show="!fireteam[0] && !status">
+      <div ng-include="'components/home/blog.partial.html'"></div>
+    </div>
+    <div class="players-wrapper" ng-if="fireteam[0] && !status" ng-class="{'focus-on-player-one':focusOnPlayer===1, 'focus-on-player-two':focusOnPlayer===2, 'focus-on-player-three':focusOnPlayer===3}">
+      <div class="player-shift-focus player-shift-focus--left" ng-mobile-click="shiftPlayerFocus(-1)"></div>
+      <div class="player-shift-focus player-shift-focus--right" ng-mobile-click="shiftPlayerFocus(1)"></div>
+      <div class="players" caroussel>
+        <div class="player-container"
+             ng-xpull="refreshInventory(fireteam)"
+             ng-controller="playerController as Player"
+             ng-repeat="player in fireteam track by $index"
+             ng-include="'components/player/player.html'"
+             ng-if="player.name">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" ng-mobile-click="switchFocus()"></div>
+  <button class="control-btn btn btn-fab btn-raised btn-material-grey"
+          ng-mobile-click="switchFocus()">
+    <i class="material-icons">&#xE5CE;</i>
+  </button>
+</div>
