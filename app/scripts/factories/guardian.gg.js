@@ -41,7 +41,7 @@ angular.module('trialsReportApp')
       var dateFriday;
       var dateBeginTrials;
       if (moment().day() < 5) {
-        dateFriday = moment().day(- (moment().day() + 2));
+        dateFriday = moment().day(- (moment().day() + 1));
       } else {
         dateFriday = moment().startOf('week').add(5, 'days');
       }
