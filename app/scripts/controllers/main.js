@@ -99,25 +99,22 @@ angular.module('trialsReportApp')
 
     $scope.togglePlatform = function () {
       $scope.platformValue = !$scope.platformValue;
-      $localStorage.platform = $scope.platformValue;
+      $scope.$storage.platform = $scope.platformValue;
       $scope.gggLoadWeapons($scope.platformValue);
     };
 
     $scope.setPlatform = function (platformBool) {
       $scope.platformValue = platformBool;
-      $localStorage.platform = $scope.platformValue;
+      $scope.$storage.platform = $scope.platformValue;
       $scope.gggLoadWeapons($scope.platformValue);
       return platformBool;
     };
 
     $scope.getWeaponTypeByIndex = function (index) {
       switch (index) {
-        case 0:
-          return 'Primary';
-        case 1:
-          return 'Special';
-        case 2:
-          return 'Heavy';
+        case 0: return 'Primary';
+        case 1: return 'Special';
+        case 2: return 'Heavy';
       }
     };
 

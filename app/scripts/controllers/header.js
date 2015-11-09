@@ -3,7 +3,6 @@
 angular.module('trialsReportApp')
   .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, locationChanger, $routeParams, $modal, guardianFactory, $q) {
 
-    // titles in modals need styling or could be removed
     if ('heatmapImage' in $scope.currentMap) {
       var heatmapModal = $modal({
         scope: $scope,
