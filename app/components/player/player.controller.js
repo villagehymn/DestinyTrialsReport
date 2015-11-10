@@ -1,24 +1,31 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('playerController', function ($scope, api, statsFactory, homeFactory, $analytics, guardianggFactory) {
+  .controller('playerController', function ($scope, api, statsFactory, matchesFactory, homeFactory, $analytics, guardianggFactory) {
 
     homeFactory.getActivities($scope.player, '25');
     guardianggFactory.getElo($scope.player);
-    statsFactory.getData($scope.player);
+    statsFactory.getstats($scope.player);
 
     $scope.getLastMatch = function (player) {
-      return statsFactory.getLastThree(player)
+      return matchesFactory.getLastThree(player)
         .then(function (postGame) {
-          var playerId = player.membershipId;
-          if (postGame && postGame.matchStats[playerId]) {
-            player.allStats = postGame.matchStats[playerId].allStats;
-            player.recentMatches = postGame.matchStats[playerId].recentMatches;
-            player.abilityKills = postGame.matchStats[playerId].abilityKills;
-            player.medals = postGame.matchStats[playerId].medals;
-            player.weaponsUsed = postGame.matchStats[playerId].weaponsUsed;
-            player.fireTeam = postGame.fireTeam;
-          }
+          var lastMatches = {};
+          _.each(postGame, function(match) {
+            var player = _.filter(match.entries, function(matchPlayer) {
+              return matchPlayer.characterId === $scope.player.characterInfo.characterId;
+            });
+            if (player && player[0]) {
+              var enemyTeam = _.find(match.teams, function(matchTeam) {
+                return matchTeam.standing.basic.value !== player[0].standing;
+              });
+              player[0].values.enemyScore = enemyTeam.score;
+              player[0].values.dateAgo = moment(match.period).fromNow();
+              var matchId = match.activityDetails.instanceId;
+              lastMatches[matchId] = player[0];
+            }
+          });
+          $scope.player.activities.lastMatches = lastMatches;
         });
     };
 

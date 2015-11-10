@@ -64,7 +64,7 @@ angular.module('trialsReportApp')
             }
             var methods = [
               inventoryService.getInventory(account.membershipType, account),
-              statsFactory.getData(account),
+              statsFactory.getstats(account),
               homeFactory.getActivities(account, '25'),
               guardianggFactory.getElo(account)
             ];
@@ -74,7 +74,7 @@ angular.module('trialsReportApp')
               $scope.$evalAsync( $scope.fireteam[index] = teammate );
               $scope.$parent.focusOnPlayer = index + 1;
               if (!$scope.fireteam[0].activities) {
-                $scope.fireteam[0].activities = {lastThree: {}};
+                $scope.fireteam[0].activities = {lastThree: {}, lastMatches: {}};
               }
               updateUrl($scope, locationChanger);
             });

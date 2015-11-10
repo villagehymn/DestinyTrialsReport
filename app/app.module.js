@@ -170,3 +170,21 @@ function gggWeapons($localStorage, guardianggFactory) {
       };
     });
 }
+
+angular
+  .module('trialsReportApp', [
+    'angulartics',
+    'angulartics.google.analytics',
+    'angular-loading-bar',
+    'mgcrea.ngStrap.modal',
+    'mgcrea.ngStrap.popover',
+    'ngAnimate',
+    'ngRoute',
+    'ngSanitize',
+    'ngStorage',
+    'ngTouch',
+    'toastr',
+    'ui.bootstrap.tpls',
+    'ui.bootstrap.progressbar',
+    'ui.bootstrap.tabs'
+  ]);

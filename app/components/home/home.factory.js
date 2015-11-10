@@ -157,7 +157,7 @@ angular.module('trialsReportApp')
     var playerStatsInParallel = function (player) {
         var methods = [
           inventoryService.getInventory(player.membershipType, player),
-          statsFactory.getData(player)
+          statsFactory.getstats(player)
         ];
 
         return $q.all(methods);

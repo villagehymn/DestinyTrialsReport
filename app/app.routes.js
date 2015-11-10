@@ -1,38 +1,7 @@
 'use strict';
 
 angular
-  .module('trialsReportApp', [
-    'angulartics',
-    'angulartics.google.analytics',
-    'angular-loading-bar',
-    'mgcrea.ngStrap.modal',
-    'mgcrea.ngStrap.popover',
-    'ngAnimate',
-    'ngRoute',
-    'ngSanitize',
-    'ngStorage',
-    'ngTouch',
-    'toastr',
-    'ui.bootstrap.tpls',
-    'ui.bootstrap.progressbar',
-    'ui.bootstrap.tabs'
-  ])
-  .config(window.$QDecorator)
-  .config(function ($modalProvider) {
-    angular.extend($modalProvider.defaults, {
-      container: 'body',
-      placement: 'center'
-    });
-  })
-  .config(function ($popoverProvider) {
-    angular.extend($popoverProvider.defaults, {
-      animation: false,
-      container: 'body',
-      html: true,
-      placement: 'auto top',
-      trigger: 'hover'
-    });
-  })
+  .module('trialsReportApp')
   .config(function ($routeProvider, $httpProvider, $compileProvider, $locationProvider) {
     $.material.init();
 
