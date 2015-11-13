@@ -13,7 +13,7 @@ app.service('guardianGG', [
         getElo: '/elo/{membershipId}',
         getFireteam: '/fireteam/{mode}/{membershipId}',
         getTeam: '/dtr/{membershipIdArray}',
-        getWeapons: '/weapon/top?mode=14&platform={platform}&start={start}'
+        getWeapons: '/weapon/top?mode=14&platform={platform}&start={start}&end={start}'
       };
 
       this.getElo = function(membershipId) {
