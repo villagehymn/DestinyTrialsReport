@@ -109,13 +109,13 @@ function setArmorHazards(armors, itemPerk, weapons) {
   }
 
   if (itemPerkToBucket[itemPerk.perkHash]) {
-    weapons[itemPerkToBucket[itemPerk.perkHash]].hazards.push("Fast Reload");
+    weapons[itemPerkToBucket[itemPerk.perkHash]].hazards.push('Fast Reload');
   } else {
     var itemType = reloadPerksToItemType[itemPerk.perkHash];
     if (itemType) {
       var tempItem = weapons[itemTypeToBucket[itemType]];
       if (tempItem.definition.subType === itemType) {
-        tempItem.hazards.push("Fast Reload");
+        tempItem.hazards.push('Fast Reload');
       }
     }
   }
