@@ -14,12 +14,14 @@ var BUCKET_HEAVY_WEAPON = 953998645;
 
 var BUCKET_BUILD = 3284755031;
 
+
 // Destiny Stat Definition
 
 var STAT_INTELLECT = 144602215;
 var STAT_DISCIPLINE = 1735777505;
 var STAT_STRENGTH = 4244567218;
 var STAT_LIGHT = 2391494160;
+var STAT_BASE_DAMAGE = 4043523819;
 
 var statNames = {
   STAT_INTELLECT: 'Intellect',
@@ -31,19 +33,14 @@ var statNames = {
 };
 
 var statNamesByHash = {
-  392767087: 'Armor',
+   392767087: 'Armor',
   2996146975: 'Agility',
   1943323491: 'Recovery'
 };
 
-var STAT_BASE_DAMAGE = 4043523819;
-
-
 var burns = ['Void Damage', 'Arc Damage', 'Solar Damage'];
 
-
 // Grenade defs
-
 var FIREBOLT_GRENADE = 2927723086;
 var FUSION_GRENADE = 2995804739;
 var VOIDWALL_GRENADE = 2576774201;
@@ -56,70 +53,48 @@ var TRIPMINE_GRENADE = 455260043;
 var AXION_GRENADE = 243660113;
 var SKIP_GRENADE = 328872098;
 
-// Subclass Definitions
 
+// Subclass Definitions
 var SUNSINGER_CLASS = 3658182170;
 var VOIDWALKER_CLASS = 3828867689;
 var BLADEDANCER_CLASS = 2962927168;
-var SUNBREAKER_CLASS = 21395672; //or 21395673
-var NIGHTSTALKER_CLASS = 4143670657; //or 4143670656
-var STORMCALLER_CLASS = 1256644900; //or 1256644901
+var SUNBREAKER_CLASS = 21395672;     // or 21395673
+var NIGHTSTALKER_CLASS = 4143670657; // or 4143670656
+var STORMCALLER_CLASS = 1256644900;  // or 1256644901
 var GUNSLINGER_CLASS = 1716862031;
 var STRIKER_CLASS = 2455559914;
 var DEFENDER_CLASS = 2007186000;
 
-// Armor perks for hazards
 
-var hazardQuickRevive = [
-  40760096, // Light Beyond Nemesis (Warlock)
-  2682002320, // Crest of Alpha Lupi (Titan)
-  3821972036, // Crest of Alpha Lupi (Hunter)
-  1190369844,
-  1509404812,
-  1760211262
-];
-var hazardGrenadeOnSpawn = [
-  2289894117, // Lucky Raspberry (Hunter)
-  2671461052, // Voidfang Vestments (Warlock)
-  2819174431
-];
-
-var hazardDoubleGrenade = [
-  2978872641 // The Armamentarium (Titan)
-];
-
-var hazardDoubleMelee = [
-  405554470,
-  1318675793,
-  2340078883,
-  2783259970,
-  3406171126
-];
+// Hazards
 
 hazardMiscArmorPerks = {
-  40760096: 'Faster Revive',
-  2682002320: 'Faster Revive',
-  3821972036: 'Faster Revive',
-  1190369844: 'Faster Revive',
-  1509404812: 'Faster Revive',
-  1760211262: 'Faster Revive',
-  2978872641: 'Double Grenade',
-  2289894117: 'Grenade on Spawn',
-  2671461052: 'Grenade on Spawn',
-  2819174431: 'Grenade on Spawn',
-  405554470: 'Double Melee',
-  1318675793: 'Double Melee',
-  2340078883: 'Double Melee',
-  2783259970: 'Double Melee',
-  3406171126: 'Double Melee'
+  2682002320: 'Faster Revive',    // Crest of Alpha Lupi (Titan) Year 1
+  1190369844: 'Faster Revive',    // Crest of Alpha Lupi (Titan) Year 2 (or 1190369845)
+  3821972036: 'Faster Revive',    // Crest of Alpha Lupi (Hunter) Year 1
+  1760211262: 'Faster Revive',    // Crest of Alpha Lupi (Hunter) Year 2 (or 1760211263)
+    40760096: 'Faster Revive',    // Light Beyond Nemesis Year 1
+  1509404812: 'Faster Revive',    // Light Beyond Nemesis Year 2 (or 1509404813)
+  2289894117: 'Grenade on Spawn', // Lucky Raspberry Year 1
+  2819174431: 'Grenade on Spawn', // Lucky Raspberry Year 2
+  2671461052: 'Grenade on Spawn', // Voidfang Vestments Year 1
+  1351885744: 'Grenade on Spawn', // Voidfang Vestments Year 2
+  2978872641: 'Double Grenade',   // The Armamentarium Year 1
+  3911579221: 'Double Grenade',   // The Armamentarium Year 2
+  2908652391: 'Melee on Spawn',   // An Insurmountable Skullfort Year 1
+  2340078883: 'Double Melee',     // An Insurmountable Skullfort Year 2 (also Melee on Spawn)
+  2783259970: 'Double Melee',     // Thagomizers Year 2
+  1318675793: 'Double Melee',     // Sealed Ahamkara Grasps Year 2
+  3406171126: 'Double Melee',     // Claws of Ahamkara Year 1
+   405554470: 'Double Melee',     // Claws of Ahamkara Year 2
 };
 
 hazardMiscWeaponPerks = [
-  77746637, // Relentless Tracker
-  315800403, // Rewind Again
-  431159510, // Third Eye
-  661681055, // Headseeker
-  770631416, // Third Eye
+    77746637, // Relentless Tracker
+   315800403, // Rewind Again
+   431159510, // Third Eye
+   661681055, // Headseeker
+   770631416, // Third Eye
   1026458383, // Life Support
   1279198574, // Overflow
   1485291076, // Hat Trick
@@ -137,34 +112,33 @@ hazardMiscWeaponPerks = [
   3752206822, // Final Round
   3911170550, // Firefly
   3921735041, // Final Round
-  4271995221 // The Master
+  4271995221  // The Master
 ];
 
 var hazardDoubleGrenadeByPerk = {
-  280851997: SCATTER_GRENADE,
-  4109126941: SCATTER_GRENADE,
-  469911339: FUSION_GRENADE,
-  3471016318: FUSION_GRENADE,
-  3544054727: SOLAR_GRENADE,
-  1170991030: TRIPMINE_GRENADE,
-  1351885744: AXION_GRENADE,
-  1617397024: SKIP_GRENADE
+   280851997: SCATTER_GRENADE,  // Nothing Manacles Year 1
+  4109126941: SCATTER_GRENADE,  // Nothing Manacles Year 2
+  3471016318: FUSION_GRENADE,   // Starfire Protocol Year 1
+   469911339: FUSION_GRENADE,   // Starfire Protocol Year 2
+  3544054727: SOLAR_GRENADE,    // Sunbreakers Year 2
+  1170991030: TRIPMINE_GRENADE, // Young Ahamkara's Spine Year 2
+  1617397024: SKIP_GRENADE      // Shinobu's Vow Year 2
 };
 
 var hazardBurnDefense = {
   1723656171: 'Solar Resist',
   2095340230: 'Void Resist',
-  539512168: 'Arc Resist'
+   539512168: 'Arc Resist'
 };
 
 var hazardGrantsAbilty = {
-  136095187: 'Explosive Pyre',
-  138051548: 'Death from Above and Headstrong',
-  1195575848: 'Death from Above and Headstrong',
-  285151207: 'Unstoppable',
-  836092325: 'Unstoppable',
-  896109025: 'Shadestep',
-  1506633456: 'Landfall'
+   136095187: 'Explosive Pyre',                  // Immolation Fists Year 2
+   138051548: 'Death from Above and Headstrong', // Helm of Inmost Light Year 1
+  1195575848: 'Death from Above and Headstrong', // Helm of Inmost Light Year 2
+   285151207: 'Unstoppable',                     // Eternal Warrior Year 1
+   836092325: 'Unstoppable',                     // Eternal Warrior Year 2
+   896109025: 'Shadestep',                       // Graviton Forfeit Year 2
+  1506633456: 'Landfall'                         // The Impossible Machines Year 2
 };
 
 var hazardGrantsAbiltySubclass = {};
@@ -175,7 +149,7 @@ hazardGrantsAbiltySubclass[STORMCALLER_CLASS] = [1506633456];
 
 var hazardIncreasedArmor = {
   3944665868: [BLADEDANCER_CLASS, STORMCALLER_CLASS, STRIKER_CLASS],
-  671224739:  [SUNSINGER_CLASS, SUNBREAKER_CLASS, GUNSLINGER_CLASS],
+   671224739: [SUNSINGER_CLASS, SUNBREAKER_CLASS, GUNSLINGER_CLASS],
   1028572792: [VOIDWALKER_CLASS, NIGHTSTALKER_CLASS, DEFENDER_CLASS]
 };
 
@@ -197,37 +171,37 @@ var RELOAD_LAUNCHER = 1938590973;
 
 var itemPerkToBucket = {
   1844502900: 'primary',
-  765056859: 'special',
+   765056859: 'special',
   1094584227: 'heavy'
 };
 
 var reloadPerksToItemType = {
-  2129333927:   14,
-  1394084296:   14,
-  177663318:    13,
-  2482846307:   13,
-  3187783240:   6,
-  3031176193:   6,
-  1175838572:   9,
-  3241361759:   9,
-  4090945472:   7,
-  4111868508:   12,
-  1359068529:   11,
-  3689182788:   17,
-  836377941:    8,
-  1938590973:   10
+  2129333927: 14,
+  1394084296: 14,
+   177663318: 13,
+  2482846307: 13,
+  3187783240:  6,
+  3031176193:  6,
+  1175838572:  9,
+  3241361759:  9,
+  4090945472:  7,
+  4111868508: 12,
+  1359068529: 11,
+  3689182788: 17,
+   836377941:  8,
+  1938590973: 10
 };
 
 var itemTypeToBucket = {
-  6: 'primary',
-  9: 'primary',
+   6: 'primary',
+   9: 'primary',
   13: 'primary',
   14: 'primary',
-  7: 'special',
+   7: 'special',
   11: 'special',
   12: 'special',
   17: 'special',
-  8: 'heavy',
+   8: 'heavy',
   10: 'heavy'
 };
 
@@ -238,7 +212,6 @@ var className = [
 ];
 
 // Match summary weapon kill definitions
-
 var weaponKills = {
   weaponKillsHandCannon: 'Hand Cannon',
   weaponKillsPulseRifle: 'Pulse Rifle',
@@ -262,8 +235,8 @@ var JUMP_BLINK = 3452380660;
 // Weapon + Armor node definitions
 var QUICKDRAW = 3409718360;
 var FORCE_MULTI = [910871216, 910871217];
-// Cooldowns
 
+// Cooldowns
 var cooldownsSuperA  = ['5:00', '4:46', '4:31', '4:15', '3:58', '3:40'];
 var cooldownsSuperB  = ['5:30', '5:14', '4:57', '4:39', '4:20', '4:00'];
 var cooldownsGrenade = ['1:00', '0:55', '0:49', '0:42', '0:34', '0:25'];
