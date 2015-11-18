@@ -65,8 +65,11 @@
     <div class="current-map__title">
       <span ng-bind="currentMap.name"></span>
     </div>
-    <div class="current-map__heatmap" ng-if="showHeatmap">
-      <button type="button" class="btn btn-default btn-sm" ng-mobile-click="showHeatmap()">Heatmap</button>
+    <div class="current-map__heatmap" ng-if="currentMap.heatmapImage">
+      <button type="button" class="btn btn-default btn-sm"
+              title="Heatmap" data-content-template="views/modals/heatmap.html" bs-modal>
+        Heatmap
+      </button>
     </div>
   </div>
 </div>

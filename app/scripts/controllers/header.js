@@ -1,29 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, locationChanger, $routeParams, $modal, guardianFactory, $q) {
-
-    if ('heatmapImage' in $scope.currentMap) {
-      var heatmapModal = $modal({
-        scope: $scope,
-        title: 'Heatmap',
-        contentTemplate: 'views/modals/heatmap.html',
-        show: false
-      });
-      $scope.showHeatmap = function () {
-        heatmapModal.$promise.then(heatmapModal.show);
-      };
-    }
-
-    var faqModal = $modal({
-      scope: $scope,
-      title: 'FAQ',
-      contentTemplate: 'views/modals/faq.html',
-      show: false
-    });
-    $scope.showFAQ = function () {
-      faqModal.$promise.then(faqModal.show);
-    };
+  .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, locationChanger, $routeParams, guardianFactory, $q) {
 
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
