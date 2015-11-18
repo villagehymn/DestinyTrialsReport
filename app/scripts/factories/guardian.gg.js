@@ -40,19 +40,36 @@ angular.module('trialsReportApp')
     };
 
     var getWeapons = function (platform) {
-      var dateFriday;
-      var dateBeginTrials;
-      if (moment().day() < 5) {
-        dateFriday = moment().day(- (moment().day() + 1));
+      var now = moment.utc();
+      var begin = now.clone().hour(18).minute(0).second(0);
+      if (now.day() !== 5) {
+        begin.day(-2);
       } else {
-        dateFriday = moment().startOf('week').add(5, 'days');
+        if (now < begin) {
+          begin.subtract(1, 'week');
+        }
       }
-      dateBeginTrials = dateFriday.format('YYYY-MM-DD');
-      return guardianGG.getWeapons(platform, dateBeginTrials)
+      var end = begin.clone().add(4, 'days').hour(9);
+
+      var dateBeginTrials = begin.format('YYYY-MM-DD');
+      var dateEndTrials = end.format('YYYY-MM-DD');
+
+      return guardianGG.getWeapons(platform, dateBeginTrials, dateEndTrials)
         .then(function (weapons) {
+          var show = false;
+          if (angular.isDefined(weapons.data)) {
+            if (angular.isDefined(weapons.data.primary) && angular.isDefined(weapons.data.special) && angular.isDefined(weapons.data.heavy)) {
+              if (weapons.data.primary.length > 0 && weapons.data.special.length > 0 && weapons.data.heavy.length > 0) {
+                show = true;
+              }
+            }
+          }
+          
           return {
             gggWeapons: weapons.data,
-            dateBeginTrials: dateBeginTrials
+            dateBeginTrials: dateBeginTrials,
+            dateEndTrials: dateEndTrials,
+            show: show
           };
         }).catch(function () {});
     };

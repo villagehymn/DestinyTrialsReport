@@ -36,7 +36,7 @@
 </article>
 
 <!-- temporarily hidden on xs until UI bugs are resolved -->
-<article class="blog-post blog-ggg__weapons shadow-z-1 hidden-xs" ng-show="gggWeapons[platformNumeric]">
+<article class="blog-post blog-ggg__weapons shadow-z-1 hidden-xs" ng-show="gggShow">
   <div class="blog-weapon__header blog-post__img">
     <div class="blog-weapon__title">
       <h4>
@@ -82,7 +82,7 @@
   <div class="row">
     <div class="blog-weapon__show-more">
       <span class="pull-right">
-        <a ng-href="https://guardian.gg/en/weapon-stats?platform={{platformNumeric}}&start={{dateBeginTrials}}&end={{dateBeginTrials}}&mode=14"
+        <a ng-href="https://guardian.gg/en/weapon-stats?platform={{platformNumeric}}&mode=14&start={{dateBeginTrials}}&end={{dateEndTrials}}"
            target="_blank" analytics-on analytics-event="Click" analytics-category="GGG Show More">
           Show More
         </a>

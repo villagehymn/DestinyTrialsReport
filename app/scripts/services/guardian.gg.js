@@ -13,7 +13,7 @@ app.service('guardianGG', [
         getElo: '/elo/{membershipId}',
         getFireteam: '/fireteam/{mode}/{membershipId}',
         getTeam: '/dtr/{membershipIdArray}',
-        getWeapons: '/weapon/top?mode=14&platform={platform}&start={start}&end={start}'
+        getWeapons: '/weapon/top?platform={platform}&mode=14&start={start}&end={end}'
       };
 
       this.getElo = function(membershipId) {
@@ -35,10 +35,11 @@ app.service('guardianGG', [
         });
       };
 
-      this.getWeapons = function(platform, start) {
+      this.getWeapons = function(platform, start, end) {
         return this.get(ENDPOINTS.getWeapons, {
           platform: platform,
-          start: start
+          start: start,
+          end: end
         });
       };
 

@@ -154,5 +154,7 @@ angular.module('trialsReportApp')
       $scope.gggWeapons[config.platformNumeric] = config.gggWeapons.gggWeapons;
       $scope.platformNumeric = config.platformNumeric;
       $scope.dateBeginTrials = config.gggWeapons.dateBeginTrials;
+      $scope.dateEndTrials = config.gggWeapons.dateEndTrials;
+      $scope.gggShow = config.gggWeapons.show;
     }
   });
