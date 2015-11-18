@@ -18,12 +18,14 @@ angular.module('trialsReportApp')
             return arr.mode === 14;
           });
           if (playerElo) {
-            player.elo = playerElo;
-            player.elo.tier = getGggTierByElo(player.elo.elo);
-            if (player.elo.rank > -1) {
-              player.elo.rank = '#' + $filter('number')(player.elo.rank + 1);
-            } else {
-              player.elo.rank = 'Placing';
+            player.ggg = playerElo;
+            player.ggg.tier = getGggTierByElo(player.ggg.elo);
+            if (player.ggg.rank > 0) {
+              player.ggg.rank = '#' + $filter('number')(player.ggg.rank);
+            } else if (player.ggg.rank == -1) {
+              player.ggg.rank = 'Placing';
+            } else if (player.ggg.rank == -2) {
+              player.ggg.rank = 'Inactive';
             }
           }
           return player;
