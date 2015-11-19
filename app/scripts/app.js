@@ -26,8 +26,19 @@ function getFromParams(trialsReport, inventoryService, guardianFactory, toastr, 
                 );
               } else {
                 return trialsReport.getRecentActivity(player)
-                  .then(function (result) {
-                    return getFireteam(result);
+                  .then(function (resultBNG) {
+                    if (resultBNG && resultBNG[0]) {
+                      return getFireteam(resultBNG);
+                    } else {
+                      return guardianFactory.getFireteam('14', player.membershipId)
+                        .then(function (resultGGG) {
+                          if (resultGGG && resultGGG.data.length > 0) {
+                            return resultGGG.data;
+                          } else {
+                            return getFireteam(resultBNG);
+                          }
+                        });
+                    }
                   });
                 //return guardianFactory.getFireteam('14', player.membershipId)
                 //  .then(function (result) {
