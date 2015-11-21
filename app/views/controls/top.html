@@ -67,8 +67,14 @@
     </div>
     <div class="current-map__heatmap" ng-if="currentMap.heatmapImage">
       <button type="button" class="btn btn-default btn-sm"
-              title="Heatmap" data-content-template="views/modals/heatmap.html" bs-modal>
+              data-template-url="views/modals/heatmap.html" bs-modal>
         Heatmap
+      </button>
+    </div>
+    <div class="current-map__heatmap" ng-if="currentMap.mapImage">
+      <button type="button" class="btn btn-default btn-sm"
+              data-template-url="views/modals/map.html" bs-modal>
+        Map
       </button>
     </div>
   </div>
