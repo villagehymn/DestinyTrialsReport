@@ -1,12 +1,12 @@
 .stat {
   white-space: nowrap;
 
-  span {
+  > span {
     font-size: 1.2em;
     line-height: 1;
   }
 
-  label {
+  > label {
     @extend .data-label;
   }
 }

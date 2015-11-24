@@ -1,0 +1,35 @@
+.top-weapons__type {
+  padding: 1em 1.5em;
+  margin: 0 -2em;
+}
+
+.top-weapons__type + .top-weapons__type {
+  border-top: 1px solid #ccc;
+}
+
+.top-weapons__label {
+  font-family: 'Roboto Condensed';
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: .8em;
+  line-height: 1;
+  margin-top: .2em;
+  margin-bottom: 1em;
+  display: block;
+  color: #666;
+}
+
+.top-weapon {
+  .stat > span {
+    font-size: 1em;
+    line-height: 2.1;
+  }
+
+  .last-match-weapon__title {
+    line-height: 1;
+  }
+}
+
+.top-weapon + .top-weapon {
+  margin-top: .75em;
+}
