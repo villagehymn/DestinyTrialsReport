@@ -92,6 +92,7 @@ angular.module('trialsReportApp')
             $scope.platformNumeric
           ).then(function (result) {
               $scope.gggWeapons[$scope.platformNumeric] = result.gggWeapons;
+              $scope.gggShow = result.gggWeapons.show;
             });
         }
       }
