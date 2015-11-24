@@ -163,16 +163,6 @@ function extractDB(dbFile) {
       }
     });
 
-    // Cathedral of Dusk
-    if (3412406993 in DestinyCrucibleMapDefinition) {
-      var cathedral = DestinyCrucibleMapDefinition[3412406993];
-      if (cathedral.pgcrImage !== 'https://www.bungie.netundefined') {
-        console.log('Cathedral of Dusk now exists in the manifest file and the override can be removed.');
-      } else {
-        cathedral.pgcrImage = '/images/pgcr/cathedral_of_dusk.png';
-      }
-    }
-
     writeDefinitionFile('app/scripts/definitions/en/DestinyCrucibleMapDefinition.js', 'DestinyCrucibleMapDefinition', DestinyCrucibleMapDefinition);
   });
 }
