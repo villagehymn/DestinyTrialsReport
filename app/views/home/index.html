@@ -1,5 +1,5 @@
 <div class="home__content">
-  <article class="home__main">
+  <article class="home__main"  ng-class="{'full__width':!gggShow}">
     <div class="block blog-post shadow-z-1">
       <div class="blog-post__img" ng-style="{'background-image':'url(' + currentMap.pgcrImage + ')'}"></div>
       <div class="blog-post__content">
@@ -43,8 +43,8 @@
   </article>
 
   <!-- temporarily hidden on xs until UI bugs are resolved -->
-  <div class="home__aside">
-    <article class="block top-weapons shadow-z-1" ng-if="gggShow">
+  <div class="home__aside" ng-if="gggShow">
+    <article class="block top-weapons shadow-z-1">
       <div class="block__title">
         <figure>
           <img ng-src="{{platformValue ? 'images/ps.svg' : 'images/xbox.svg'}}">

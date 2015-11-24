@@ -14,6 +14,9 @@
 
 .home__main {
   width: 60%;
+  &.full__width {
+    width: 100% !important;
+  }
 }
 
 .home__aside {
