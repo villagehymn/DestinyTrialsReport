@@ -80,7 +80,7 @@ var DestinyCrucibleMapDefinition = {
   },
   "3412406993": {
     "name": "Cathedral of Dusk",
-    "pgcrImage": "/images/pgcr/cathedral_of_dusk.png"
+    "pgcrImage": "https://www.bungie.net/img/theme/destiny/bgs/pgcrs/cathedral_of_dusk.jpg"
   },
   "3602734434": {
     "name": "Bannerfall",
