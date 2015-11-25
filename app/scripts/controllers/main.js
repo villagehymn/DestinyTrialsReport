@@ -92,8 +92,11 @@ angular.module('trialsReportApp')
             $scope.platformNumeric
           ).then(function (result) {
               $scope.gggWeapons[$scope.platformNumeric] = result.gggWeapons;
-              $scope.gggShow = result.show;
+              $scope.gggWeapons[$scope.platformNumeric].show = result.show;
+              $scope.gggShow = $scope.gggWeapons[$scope.platformNumeric].show;
             });
+        } else {
+          $scope.gggShow = $scope.gggWeapons[$scope.platformNumeric].show;
         }
       }
     };
@@ -153,9 +156,10 @@ angular.module('trialsReportApp')
     if (config.gggWeapons) {
       $scope.gggWeapons = {};
       $scope.gggWeapons[config.platformNumeric] = config.gggWeapons.gggWeapons;
+      $scope.gggWeapons[config.platformNumeric].show = config.gggWeapons.show;
       $scope.platformNumeric = config.platformNumeric;
       $scope.dateBeginTrials = config.gggWeapons.dateBeginTrials;
       $scope.dateEndTrials = config.gggWeapons.dateEndTrials;
-      $scope.gggShow = config.gggWeapons.show;
+      $scope.gggShow = $scope.gggWeapons[config.platformNumeric].show;
     }
   });
