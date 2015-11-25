@@ -13,55 +13,38 @@ function getFromParams(homeFactory, inventoryService, guardianggFactory, toastr,
     var subdomain = getSubdomain();
 
     var getPlayer = function () {
-        return homeFactory.getAccount(platform, params.playerName)
-          .then(function (result) {
-            if (result) {
-              var player = result;
-              player.searched = true;
-              if (subdomain === 'my') {
-                return homeFactory.getCharacters(
-                  player.membershipType,
-                  player.membershipId,
-                  params.playerName
-                );
-              } else {
-<<<<<<< HEAD:app/app.module.js
-                return homeFactory.getRecentActivity(player)
-                  .then(function (result) {
-                    return getFireteam(result);
-=======
-                return trialsReport.getRecentActivity(player)
-                  .then(function (resultBNG) {
-                    if (resultBNG && resultBNG[0]) {
-                      return getFireteam(resultBNG);
-                    } else {
-                      return guardianFactory.getFireteam('14', player.membershipId)
-                        .then(function (resultGGG) {
-                          if (resultGGG && resultGGG.data.length > 0) {
-                            return resultGGG.data;
-                          } else {
-                            return getFireteam(resultBNG);
-                          }
-                        });
-                    }
->>>>>>> develop:app/scripts/app.js
-                  });
-                //return guardianggFactory.getFireteam('14', player.membershipId)
-                //  .then(function (result) {
-                //    if (result && result.data.length > 0) {
-                //      return result.data;
-                //    } else {
-                //      return homeFactory.getRecentActivity(player)
-                //        .then(function (result) {
-                //          return getFireteam(result);
-                //      });
-                //    }
-                //});
-              }
+      return homeFactory.getAccount(platform, params.playerName)
+        .then(function (result) {
+          if (result) {
+            var player = result;
+            player.searched = true;
+            if (subdomain === 'my') {
+              return homeFactory.getCharacters(
+                player.membershipType,
+                player.membershipId,
+                params.playerName
+              );
             } else {
-              return false;
+              return homeFactory.getRecentActivity(player)
+                .then(function (resultBNG) {
+                  if (resultBNG && resultBNG[0]) {
+                    return getFireteam(resultBNG);
+                  } else {
+                    return guardianFactory.getFireteam('14', player.membershipId)
+                      .then(function (resultGGG) {
+                        if (resultGGG && resultGGG.data.length > 0) {
+                          return resultGGG.data;
+                        } else {
+                          return getFireteam(resultBNG);
+                        }
+                      });
+                  }
+                });
             }
-          });
+          } else {
+            return false;
+          }
+        });
       },
       getFireteam = function (activities) {
         if (angular.isUndefined(activities[0])) {

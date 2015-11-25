@@ -1,34 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-<<<<<<< HEAD:app/components/controls/controls.controller.js
   .controller('controlsController', function ($scope, $location, homeFactory, statsFactory, inventoryService, locationChanger, $routeParams, $modal, guardianggFactory, $q) {
-
-    // titles in modals need styling or could be removed
-    if ('heatmapImage' in $scope.currentMap) {
-      var heatmapModal = $modal({
-        scope: $scope,
-        title: 'Heatmap',
-        contentTemplate: 'shared/modals/heatmap.modal.html',
-        show: false
-      });
-      $scope.showHeatmap = function () {
-        heatmapModal.$promise.then(heatmapModal.show);
-      };
-    }
-
-    var faqModal = $modal({
-      scope: $scope,
-      title: 'FAQ',
-      contentTemplate: 'shared/modals/faq.modal.html',
-      show: false
-    });
-    $scope.showFAQ = function () {
-      faqModal.$promise.then(faqModal.show);
-    };
-=======
-  .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, locationChanger, $routeParams, guardianFactory, $q) {
->>>>>>> develop:app/scripts/controllers/header.js
 
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;

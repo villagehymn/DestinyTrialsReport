@@ -21,13 +21,8 @@
     <uib-tab class="player-tab--maps" heading="Maps" analytics-on analytics-event="Click" analytics-category="Maps">
       <div ng-include="'components/stats/maps.partial.html'"></div>
     </uib-tab>
-<<<<<<< HEAD:app/components/player/player.html
-    <uib-tab class="player-tab--last-matches" heading="Last Matches" analytics-on analytics-event="Click" analytics-category="Last Matches">
-      <div ng-include="'components/matches/matches.partial.html'"></div>
-=======
     <uib-tab class="player-tab--last-matches" heading="Last Matches" analytics-on analytics-event="Click" analytics-category="Last Matches" ng-click="getLastMatch(player)">
-      <div ng-include="'views/player/last-matches.html'"></div>
->>>>>>> develop:app/views/player/index.html
+      <div ng-include="'components/matches/matches.partial.html'"></div>
     </uib-tab>
   </uib-tabset>
 
@@ -37,7 +32,7 @@
         <a href="https://guardian.gg/en/profile/{{player.membershipType}}/{{player.name}}"
            type="button" target="_blank" class="btn btn-default"
            analytics-on analytics-event="Click" analytics-category="Guardian.gg">
-          <img src="images/ggg-logo.png" alt="Guardian.gg">
+          <img src="/assets/img/ggg-logo.png" alt="Guardian.gg">
         </a>
         <a href="http://my.destinytrialsreport.com/{{player.membershipType === 2 ? 'ps' : 'xbox'}}/{{player.name}}"
            type="button" target="_blank" class="btn btn-default" ng-if="!subdomain"
