@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('matchesFactory', function ($http, api, $q) {
+  .factory('matchesFactory', function ($http, $q) {
 
     var getPostGame = function (recentActivity) {
       return $http({

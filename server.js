@@ -5,6 +5,8 @@ var express = require('express');
 var subdomain = require('express-subdomain');
 var request = require('request');
 var throng = require('throng');
+var siteCreators = JSON.parse(process.env.SITE_CREATORS);
+var siteDonators = JSON.parse(process.env.SITE_DONATORS);
 
 throng(start, {
   workers: process.env.WEB_CONCURRENCY || 1,
@@ -16,17 +18,19 @@ function start() {
   app.use(compression());
   app.use(express.static(__dirname));
 
-  // Internal API Proxy
-  app.use('/api/*?', function(req, res) {
-    if (req.headers[process.env.AUTH]) {
-      var options = {
-        url: 'http://api.destinytrialsreport.com' + req.originalUrl,
-        headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
-      };
-      req.pipe(request(options)).pipe(res);
-    } else {
-      res.send('Nope');
+  // Check devs and donators
+  app.use('/supporterStatus/:membershipId', function(req, res) {
+    var nonHazard = [];
+    var membershipId = req.params.membershipId;
+    if (membershipId) {
+      if (siteCreators.indexOf(membershipId) > -1) {
+        nonHazard.push('Site Developer');
+      }
+      if (siteDonators.indexOf(membershipId) > -1) {
+        nonHazard.push('Site Donator');
+      }
     }
+    res.send(nonHazard);
   });
 
   // Guardian.net API Proxy
@@ -35,7 +39,13 @@ function start() {
       url: 'https://api.guardian.gg/' + req.originalUrl.replace("/ggg/", ""),
       headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
     };
-    req.pipe(request(options)).pipe(res);
+    request(options, function (error, response, body) {
+      if (!error) {
+        res.send(JSON.parse(body));
+      } else {
+        res.send(error);
+      }
+    });
   });
 
   // DestinyTrialsReport
@@ -61,9 +71,15 @@ function start() {
     if (req.headers[process.env.AUTH]) {
       var options = {
         url: 'https://www.bungie.net' + req.originalUrl,
-        headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
+        headers: {'X-API-Key': process.env.BUNGIES_API_KEY}
       };
-      req.pipe(request(options)).pipe(res);
+      request(options, function (error, response, body) {
+        if (!error) {
+          res.send(JSON.parse(body));
+        } else {
+          res.send(error);
+        }
+      });
     } else {
       res.send('Nope');
     }

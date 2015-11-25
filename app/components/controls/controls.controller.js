@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('controlsController', function ($scope, $location, homeFactory, statsFactory, inventoryService, locationChanger, $routeParams, $modal, guardianggFactory, $q) {
+  .controller('controlsController', function ($scope, $location, homeFactory, statsFactory, inventoryService, locationChanger, $routeParams, guardianggFactory, $q) {
 
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
@@ -41,7 +41,7 @@ angular.module('trialsReportApp')
             }
             var methods = [
               inventoryService.getInventory(account.membershipType, account),
-              statsFactory.getstats(account),
+              statsFactory.getStats(account),
               homeFactory.getActivities(account, '25'),
               guardianggFactory.getElo(account)
             ];

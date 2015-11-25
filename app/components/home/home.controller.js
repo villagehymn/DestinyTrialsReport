@@ -33,7 +33,7 @@ var getActivitiesFromChar = function ($scope, account, homeFactory) {
 };
 
 angular.module('trialsReportApp')
-  .controller('homeController', function ($scope, $routeParams, $filter, locationChanger, $localStorage, homeFactory, config, guardianggFactory) {
+  .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, guardianggFactory) {
     $scope.currentMap = DestinyCrucibleMapDefinition[4287936726];
     $scope.subdomain = config.subdomain === 'my';
     $scope.$storage = $localStorage.$default({
@@ -44,6 +44,7 @@ angular.module('trialsReportApp')
     $scope.DestinyHazardDefinition = DestinyHazardDefinition;
     $scope.DestinyMedalDefinition = DestinyMedalDefinition;
     $scope.DestinyWeaponDefinition = DestinyWeaponDefinition;
+    $scope.DestinyTalentGridDefinition = DestinyTalentGridDefinition;
 
     $scope.weaponKills = weaponKills;
     $scope.statNamesByHash = statNamesByHash;

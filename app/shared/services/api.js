@@ -8,33 +8,14 @@ app.service('api', [
 
   function ($http, util) {
     return new function () {
-      var BASE_URL = '/api';
+      var BASE_URL = '';
       var ENDPOINTS = {
-        searchForPlayer: '/SearchDestinyPlayer/{platform}/{name}',
-        trialsStats: '/trialsStats/{platform}/{membershipId}/{characterId}',
-        getInventory: '/getInventory/{platform}/{membershipId}/{characterId}'
+        supporterStatus: '/supporterStatus/{membershipId}'
       };
 
-      this.searchForPlayer = function(platform, name) {
-        return this.get(ENDPOINTS.searchForPlayer, {
-          platform: platform,
-          name: name
-        });
-      };
-
-      this.trialsStats = function(platform, membershipId, characterId) {
-        return this.get(ENDPOINTS.trialsStats, {
-          platform: platform,
-          membershipId: membershipId,
-          characterId: characterId
-        });
-      };
-
-      this.getInventory = function(platform, membershipId, characterId) {
-        return this.get(ENDPOINTS.getInventory, {
-          platform: platform,
-          membershipId: membershipId,
-          characterId: characterId
+      this.checkSupporterStatus = function(membershipId) {
+        return this.get(ENDPOINTS.supporterStatus, {
+          membershipId: membershipId
         });
       };
 

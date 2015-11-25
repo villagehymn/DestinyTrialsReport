@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .factory('homeFactory', function (playerFactory, inventoryService, statsFactory, $q, bungie, api, toastr) {
+  .factory('homeFactory', function (playerFactory, inventoryService, statsFactory, $q, bungie, toastr) {
 
     var searchByName = function (platform, name) {
-      return api.searchForPlayer(
+      return bungie.searchForPlayer(
         platform,
         name
       ).then(function(result) {
@@ -159,7 +159,7 @@ angular.module('trialsReportApp')
     var playerStatsInParallel = function (player) {
         var methods = [
           inventoryService.getInventory(player.membershipType, player),
-          statsFactory.getstats(player)
+          statsFactory.getStats(player)
         ];
 
         return $q.all(methods);

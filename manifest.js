@@ -23,20 +23,10 @@ function onManifestRequest(error, response, body) {
 
   version = parsedResponse.Response.version;
 
-  var exists = fs.existsSync(version + '.txt');
-
-  // if (!exists) {
-  // var versionFile = fs.createWriteStream(version + '.txt');
-  // versionFile.write(JSON.stringify(parsedResponse, null, 2));
-  // versionFile.end();
-
   request
     .get('https://www.bungie.net' + parsedResponse.Response.mobileWorldContentPaths.en)
     .pipe(manifestFile)
     .on('close', onManifestDownloaded);
-  // } else {
-  //   console.log('Version already exist, \'' + version + '\'.');
-  // }
 }
 
 function onManifestDownloaded() {
@@ -110,9 +100,9 @@ function extractDB(dbFile) {
     //  console.log('No Time To Explain now exists in the manifest file and the override can be removed.');
     //}
 
-    writeDefinitionFile('app/scripts/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
-    writeDefinitionFile('app/scripts/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
-    writeDefinitionFile('app/scripts/definitions/en/DestinyWeaponDefinition.js',   'DestinyWeaponDefinition',   DestinyWeaponDefinition);
+    writeDefinitionFile('app/shared/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
+    writeDefinitionFile('app/shared/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
+    writeDefinitionFile('app/shared/definitions/en/DestinyWeaponDefinition.js',   'DestinyWeaponDefinition',   DestinyWeaponDefinition);
   });
 
   db.all('SELECT * FROM DestinyHistoricalStatsDefinition', function(err, rows) {
@@ -132,7 +122,7 @@ function extractDB(dbFile) {
       }
     });
 
-    writeDefinitionFile('app/scripts/definitions/en/DestinyMedalDefinition.js', 'DestinyMedalDefinition', DestinyMedalDefinition);
+    writeDefinitionFile('app/shared/definitions/en/DestinyMedalDefinition.js', 'DestinyMedalDefinition', DestinyMedalDefinition);
   });
 
   db.all('SELECT * FROM DestinyActivityDefinition', function(err, rows) {
@@ -163,7 +153,41 @@ function extractDB(dbFile) {
       }
     });
 
-    writeDefinitionFile('app/scripts/definitions/en/DestinyCrucibleMapDefinition.js', 'DestinyCrucibleMapDefinition', DestinyCrucibleMapDefinition);
+    writeDefinitionFile('app/shared/definitions/en/DestinyCrucibleMapDefinition.js', 'DestinyCrucibleMapDefinition', DestinyCrucibleMapDefinition);
+  });
+
+  db.all('SELECT * FROM DestinyTalentGridDefinition', function(err, rows) {
+    if (err) throw err;
+
+    var DestinyTalentGridDefinition = {};
+
+    rows.forEach(function(row, index) {
+      var nodes = [];
+      var item = JSON.parse(row.json);
+      for (var n = 0, nlen = item.nodes.length; n < nlen; n++) {
+        var nodeDef = item.nodes[n];
+        var steps = [];
+        for (var s = 0, slen = nodeDef.steps.length; s < slen; s++) {
+          steps.push({
+            'name': nodeDef.steps[s].nodeStepName,
+            'nodeStepHash': nodeDef.steps[s].nodeStepHash,
+            'description': nodeDef.steps[s].nodeStepDescription,
+            'icon': 'https://www.bungie.net' + nodeDef.steps[s].icon,
+            'affectsQuality': nodeDef.steps[s].affectsQuality,
+            'perkHashes': nodeDef.steps[s].perkHashes
+          });
+        }
+        nodes.push({
+          nodeHash: nodeDef.nodeHash,
+          row: nodeDef.row,
+          column: nodeDef.column,
+          steps: steps
+        });
+      }
+      DestinyTalentGridDefinition[item.gridHash] = nodes; // only include what's actually needed
+    });
+
+    writeDefinitionFile('app/shared/definitions/en/DestinyTalentGridDefinition.js', 'DestinyTalentGridDefinition', DestinyTalentGridDefinition);
   });
 }
 

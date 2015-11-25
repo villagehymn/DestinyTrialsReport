@@ -88,7 +88,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/**/*.js'],
+        files: ['<%= yeoman.app %>/components/**/*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -157,17 +157,6 @@ module.exports = function (grunt) {
           }
         },
         {
-          context: '/api',
-          host: 'api.destinytrialsreport.com',
-          port: 80,
-          https: false,
-          xforward: false,
-          headers: {
-            'host': 'api.destinytrialsreport.com',
-            'X-API-Key': BUNGIE_API_KEY
-          }
-        },
-        {
           context: '/ggg',
           host: 'api.guardian.gg',
           port: 80,
@@ -205,7 +194,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= yeoman.app %>/components/{,*/}*.js'
         ]
       },
       test: {
@@ -463,7 +452,7 @@ module.exports = function (grunt) {
         src: 'components/{,*/}*.html',
         dest: '.tmp/templates.js',
         options: {
-          usemin: 'app.routes.js',
+          usemin: 'app.js',
           htmlmin: '<%= htmlmin.dist %>'
         }
       }
@@ -475,9 +464,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/concat/scripts',
-          src: '*.js',
-          dest: '.tmp/concat/scripts'
+          cwd: '.tmp/concat',
+          src: '{,**/}*.js',
+          dest: '.tmp/concat'
         }]
       }
     },
@@ -525,6 +514,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt,json}',
             '*.html',
             'components/{,*/}*.html',
+            'shared/{,*/}*.html',
             'assets/img/{,*/}*.{webp}',
             'assets/css/fonts/{,*/}*.*',
             'lib/{,*/}*.*'

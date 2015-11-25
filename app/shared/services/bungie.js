@@ -10,10 +10,19 @@ app.service('bungie', [
     return new function () {
       var BASE_URL = '/Platform/Destiny';
       var ENDPOINTS = {
+        searchForPlayer: '/SearchDestinyPlayer/{platform}/{name}/',
         account: '/{platform}/Account/{membershipId}/',
-        inventory: '/{platform}/Account/{membershipId}/Character/{characterId}/Inventory/?definitions=true&lc={locale}',
+        grimoire: '/Vanguard/Grimoire/{platform}/{membershipId}/?single={cardId}',
+        stats: '/Stats/{platform}/{membershipId}/{characterId}/?modes={mode}',
+        inventory: '/{platform}/Account/{membershipId}/Character/{characterId}/Inventory/?lc={locale}',
         activityHistory: '/Stats/ActivityHistory/{platform}/{membershipId}/{characterId}/?mode={mode}&count={count}',
         pgcr: '/Stats/PostGameCarnageReport/{instanceId}/'
+      };
+      this.searchForPlayer = function(platform, name) {
+        return this.get(ENDPOINTS.searchForPlayer, {
+          platform: platform,
+          name: name
+        });
       };
 
       this.getPgcr = function(instanceId) {
@@ -29,11 +38,11 @@ app.service('bungie', [
         });
       };
 
-      this.getInventory = function(platform, membershipId, characterId) {
-        return this.get(ENDPOINTS.inventory, {
+      this.getGrimoire = function(platform, membershipId, cardId) {
+        return this.get(ENDPOINTS.grimoire, {
           platform: platform,
           membershipId: membershipId,
-          characterId: characterId
+          cardId: cardId
         });
       };
 
@@ -47,11 +56,21 @@ app.service('bungie', [
         });
       };
 
+      this.getStats = function(platform, membershipId, characterId, mode) {
+        return this.get(ENDPOINTS.stats, {
+          platform: platform,
+          membershipId: membershipId,
+          characterId: characterId,
+          mode: mode
+        });
+      };
+
       this.getInventory = function(platform, membershipId, characterId) {
         return this.get(ENDPOINTS.inventory, {
           platform: platform,
           membershipId: membershipId,
-          characterId: characterId
+          characterId: characterId,
+          locale: 'en'
         });
       };
 

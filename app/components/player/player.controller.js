@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('playerController', function ($scope, api, statsFactory, matchesFactory, homeFactory, $analytics, guardianggFactory) {
+  .controller('playerController', function ($scope, statsFactory, matchesFactory, homeFactory, guardianggFactory) {
 
     homeFactory.getActivities($scope.player, '25');
     guardianggFactory.getElo($scope.player);
-    statsFactory.getstats($scope.player);
+    statsFactory.getStats($scope.player);
+    statsFactory.getGrimoire($scope.player);
+    statsFactory.checkSupporter($scope.player);
 
     $scope.getLastMatch = function (player) {
       return matchesFactory.getLastThree(player)
