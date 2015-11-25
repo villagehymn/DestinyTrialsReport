@@ -4117,6 +4117,24 @@ var DestinyWeaponDefinition = {
     "subType": 14,
     "tierType": 4
   },
+  "3373414400": {
+    "name": "Solar Infinite Edge",
+    "icon": "/common/destiny_content/icons/f12bfc272e0419c9f72e0f0be1a95461.jpg",
+    "subType": 18,
+    "tierType": 5
+  },
+  "3373414401": {
+    "name": "Arc Infinite Edge",
+    "icon": "/common/destiny_content/icons/111f6ad0d9402e8aa40bbac015b7c0a9.jpg",
+    "subType": 18,
+    "tierType": 5
+  },
+  "3373414403": {
+    "name": "Void Infinite Edge",
+    "icon": "/common/destiny_content/icons/8e661a285539b217d61bad80f1a6b426.jpg",
+    "subType": 18,
+    "tierType": 5
+  },
   "3376481440": {
     "name": "Preacher Mk. 20",
     "icon": "/common/destiny_content/icons/28fcc2ffd9e20112681ec9cd34ec863a.jpg",

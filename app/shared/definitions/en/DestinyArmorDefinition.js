@@ -5398,19 +5398,19 @@ var DestinyArmorDefinition = {
   "1776632644": {
     "name": "\"The Cure\"",
     "description": "\"We have a solution.\" - Ikora Rey, in an emergency session of the City Consensus",
-    "icon": "/common/destiny_content/icons/933754f0faea2f145f6875b48c6c783a.png",
+    "icon": "/common/destiny_content/icons/20ca2a437b9f3f411212f3376e77866e.png",
     "tierType": 4
   },
   "1776632646": {
     "name": "\"The Unconquerable\"",
     "description": "\"Let's stop thinking about how to open the lock and start thinking about removing the wall.\"",
-    "icon": "/common/destiny_content/icons/99b2ccf663551c4742b9d66f24ebe312.png",
+    "icon": "/common/destiny_content/icons/a3ee829cfde6e3c8d0978c11e3395c97.png",
     "tierType": 4
   },
   "1776632647": {
     "name": "\"Born of Sight\"",
     "description": "\"Reality is the most ruthless analyst.\" - Praxic saying",
-    "icon": "/common/destiny_content/icons/a17fc01bb1b857f58f0ffe9254fdd419.png",
+    "icon": "/common/destiny_content/icons/ae90c84ad7ad73c86bf2c42eddc5810a.png",
     "tierType": 4
   },
   "1777045417": {
@@ -7942,13 +7942,13 @@ var DestinyArmorDefinition = {
   "2580679412": {
     "name": "\"Inertia Engine\"",
     "description": "\"I believe that the Traveler and its Light are advanced technology. I refuse to accept that this diminishes me.\"",
-    "icon": "/common/destiny_content/icons/70ea8ec42280f69bf9d238746ed1ddf5.png",
+    "icon": "/common/destiny_content/icons/c5e5908fb1e304cd06e8780f01146a4c.png",
     "tierType": 3
   },
   "2580679413": {
     "name": "\"Cosmic Truths\"",
     "description": "\"To bind Light into the same framework as the proton or the mere neutrino is an act of close-minded hubris.\"",
-    "icon": "/common/destiny_content/icons/70ea8ec42280f69bf9d238746ed1ddf5.png",
+    "icon": "/common/destiny_content/icons/c5e5908fb1e304cd06e8780f01146a4c.png",
     "tierType": 3
   },
   "2580679414": {
@@ -10288,13 +10288,13 @@ var DestinyArmorDefinition = {
   "3346519202": {
     "name": "Bond of the Universal",
     "description": "Some orders argue that Light and Darkness can be explained in the context of supersymmetric physics.",
-    "icon": "/common/destiny_content/icons/72a122f64441a9d8738eb1b91ee0edd3.png",
+    "icon": "/common/destiny_content/icons/8f1c4b7726b4d812a882f03aaff16523.png",
     "tierType": 2
   },
   "3346519203": {
     "name": "Bond of Polarity",
     "description": "Some orders believe that Light and Darkness exist beyond the merely material, with a logic of their own.",
-    "icon": "/common/destiny_content/icons/ee0623daffb2fc2c0d5d1befeb0be278.png",
+    "icon": "/common/destiny_content/icons/5d31bb6ec6c7b65a88b64be88f516c19.png",
     "tierType": 2
   },
   "3346783228": {
@@ -10378,7 +10378,7 @@ var DestinyArmorDefinition = {
   "3359564871": {
     "name": "\"The Gone\"",
     "description": "\"He came at me with a knife. I put out my hand and - just so - made him into ash.\"",
-    "icon": "/common/destiny_content/icons/84b77cdbc4efa881b05e269c7f6f8c1a.png",
+    "icon": "/common/destiny_content/icons/1bf00810b0a7183f786628f2a0c9435c.png",
     "tierType": 4
   },
   "3366017012": {
@@ -12613,6 +12613,12 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/133b292895277b452e4e9533f6f3d58d.jpg",
     "tierType": 4
   },
+  "4158489060": {
+    "name": "Iron Shell",
+    "description": "For Ghosts who are forged in battle.",
+    "icon": "/common/destiny_content/icons/792bbecbed0c0b605b69faf3a85fcb30.jpg",
+    "tierType": 5
+  },
   "4159298074": {
     "name": "Oblivion Greaves",
     "description": "It will be cold and harrowing and we will not all survive. But it must be done.",
@@ -12676,7 +12682,7 @@ var DestinyArmorDefinition = {
   "4187038139": {
     "name": "\"Trained Chaos\"",
     "description": "\"Control space and time. Mere matter and energy will follow.\"",
-    "icon": "/common/destiny_content/icons/8add36fc049de32c88c66286ddf77056.png",
+    "icon": "/common/destiny_content/icons/264e298d511a57f24f7696636de1a13f.png",
     "tierType": 4
   },
   "4187254944": {

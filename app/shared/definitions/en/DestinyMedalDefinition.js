@@ -412,7 +412,7 @@ var DestinyMedalDefinition = {
   "medalsKillSpreeNoDamage": {
     "statName": "Phantom",
     "statDescription": "Defeat 7 opposing Guardians while taking no damage.",
-    "iconImage": "/common/destiny_content/icons/icon_m48d3402e9e10aefcb0da677f9d740175.png"
+    "iconImage": "/common/destiny_content/icons/icon_mab1a465b2c8fc80b5f867f2486db4f81.png"
   },
   "medalsActivityCompleteSingularityPerfectRunner": {
     "statName": "Perfect Runner",
@@ -447,7 +447,7 @@ var DestinyMedalDefinition = {
   "medalsAbilityArcLightningKillMulti": {
     "statName": "Storm Bringer",
     "statDescription": "Defeat 3 opposing Guardians with a single Stormtrance activation.",
-    "iconImage": "/common/destiny_content/icons/icon_ma1e1ec6efaac7d54bb684db25fde6033.png"
+    "iconImage": "/common/destiny_content/icons/icon_mf4406ecbf05f2e6263a856c900756a6d.png"
   },
   "medalsSingularityFlagCaptureMulti": {
     "statName": "Unstoppable Force",

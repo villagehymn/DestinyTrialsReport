@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
+<<<<<<< HEAD:app/components/controls/controls.controller.js
   .controller('controlsController', function ($scope, $location, homeFactory, statsFactory, inventoryService, locationChanger, $routeParams, $modal, guardianggFactory, $q) {
 
     // titles in modals need styling or could be removed
@@ -25,6 +26,9 @@ angular.module('trialsReportApp')
     $scope.showFAQ = function () {
       faqModal.$promise.then(faqModal.show);
     };
+=======
+  .controller('HeaderCtrl', function ($scope, $location, trialsReport, trialsStats, inventoryService, locationChanger, $routeParams, guardianFactory, $q) {
+>>>>>>> develop:app/scripts/controllers/header.js
 
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;

@@ -1,89 +1,101 @@
-<article class="blog-post shadow-z-1">
-  <div class="blog-post__img" ng-style="{'background-image':'url(' + currentMap.pgcrImage + ')'}"></div>
-  <div class="blog-post__title">
-    <h2>Partnership with Guardian.gg!</h2>
-  </div>
-  <ul class="blog-post__meta">
-    <li>
-      <p><span class="material-icons">&#xE8DF;</span> November 6th, 2015</p>
-    </li>
-  </ul>
-  <div class="blog-post__content">
-    <p>
-      We have recently made some friends over at <a href="https://Guardian.gg" target="_top">Guardian.gg</a>,
-      they love to collect all kinds of data and agreed to let us use anything we want to make our site more useful for you.<br/>
-      All they want in exchange is for you to <a href="https://Guardian.gg" target="_top">visit</a> and let them
-      know what kind of data and content you would like to see more of.<br/>
-    </p>
-    <p>
-      Right now nothing much has changed, we have replaced the Bungie rating with a custom
-      <a href="https://guardian.gg/en/faq" target="_top">Elo rating</a> that is calculated in-house by Guardian.gg<br/>
-    </p>
-    <p>
-      We are planning some big updates coming up so stay tuned and good luck this week Guardians!
-      <br/>
-    </p>
-    <p>
-      As always, if you have any suggestions for us, or if you've found a bug, please feel free to send us a message.
-      Our contact info is below. See everyone soon!<br/>
-    </p>
-    <p>
-      <strong>If you come across any issue, error, or just want to send us a suggestion you can
-      <a href="mailto:destinytrialsreport@gmail.com" target="_top">email</a> us or open a ticket on
-      <a href="https://github.com/DestinyTrialsReport/DestinyTrialsReport" target="_top">GitHub</a>.</strong>
-    </p>
-  </div>
-</article>
-
-<!-- temporarily hidden on xs until UI bugs are resolved -->
-<article class="blog-post blog-ggg__weapons shadow-z-1 hidden-xs" ng-show="gggWeapons[platformNumeric]">
-  <div class="blog-weapon__header blog-post__img">
-    <div class="blog-weapon__title">
-      <h4>
-        <label class="platform-toggle__name"><img ng-src="{{platformValue ? 'assets/img/ps.svg' : 'assets/img/xbox.svg'}}"></label>
-        Top <span class="highlight">Weapons</span> This Week
-      </h4>
-    </div>
-    <div class="blog-weapon__logo">
-      <span class="highlight">Powered by</span>
-      <a href="https://guardian.gg" target="_blank"
-         analytics-on analytics-event="Click" analytics-category="GGG Powered By">
-        <img src="/assets/img/ggg-logo.png">
-      </a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-4"
-         ng-repeat="type in [gggWeapons[platformNumeric].primary,
-                             gggWeapons[platformNumeric].special,
-                             gggWeapons[platformNumeric].heavy] track by $index">
-      <div class="row">
-        <p ng-bind="getWeaponTypeByIndex($index)"></p>
-        <div class="row" ng-repeat="weapon in type track by $index" ng-if="$index < 3">
-          <div class="col-xs-6 last-weapon-weapon__descr">
-            <img class="last-match-weapon__img img-responsive" ng-src="{{'https://bungie.net/' + weapon.icon}}" alt="{{weapon.name}}">
-            <span class="last-match-weapon__title" ng-bind="weapon.name"></span>
-          </div>
-          <div class="col-xs-2 stat">
-            <span ng-bind="weapon.kills | number:2"></span>%
-            <label>Kills</label>
-          </div>
-          <div class="col-xs-4 stat">
-            <span ng-bind="weapon.precisionKills | number:2"></span>%
-            <label>Headshots</label>
-          </div>
+<div class="home__content">
+  <article class="home__main"  ng-class="{'full__width':!gggShow}">
+    <div class="block blog-post shadow-z-1">
+      <div class="blog-post__img" ng-style="{'background-image':'url(' + currentMap.pgcrImage + ')'}"></div>
+      <div class="blog-post__content">
+        <div class="blog-post__title">
+          <h2>Partnership with Guardian.gg!</h2>
+        </div>
+        <ul class="blog-post__meta">
+          <li>
+            <p><span class="material-icons">&#xE8DF;</span> November 6th, 2015</p>
+          </li>
+        </ul>
+        <div class="blog-post__text">
+          <p>
+            We have recently made some friends over at <a href="https://Guardian.gg" target="_top">Guardian.gg</a>,
+            they love to collect all kinds of data and agreed to let us use anything we want to make our site more useful for you.
+          </p>
+          <p>
+            All they want in exchange is for you to <a href="https://Guardian.gg" target="_top">visit</a> and let them
+            know what kind of data and content you would like to see more of.<br/>
+          </p>
+          <p>
+            Right now nothing much has changed, we have replaced the Bungie rating with a custom
+            <a href="https://guardian.gg/en/faq" target="_top">Elo rating</a> that is calculated in-house by Guardian.gg<br/>
+          </p>
+          <p>
+            We are planning some big updates coming up so stay tuned and good luck this week Guardians!
+            <br/>
+          </p>
+          <p>
+            As always, if you have any suggestions for us, or if you've found a bug, please feel free to send us a message.
+            Our contact info is below. See everyone soon!<br/>
+          </p>
+          <p>
+            <strong>If you come across any issue, error, or just want to send us a suggestion you can
+              <a href="mailto:destinytrialsreport@gmail.com" target="_top">email</a> us or open a ticket on
+              <a href="https://github.com/DestinyTrialsReport/DestinyTrialsReport" target="_top">GitHub</a>.</strong>
+          </p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="blog-weapon__show-more">
-      <span class="pull-right">
-        <a ng-href="https://guardian.gg/en/weapon-stats?platform={{platformNumeric}}&start={{dateBeginTrials}}&mode=14"
-           target="_blank" analytics-on analytics-event="Click" analytics-category="GGG Show More">
-          Show More
+  </article>
+
+  <!-- temporarily hidden on xs until UI bugs are resolved -->
+  <div class="home__aside" ng-if="gggShow">
+    <article class="block top-weapons shadow-z-1">
+      <div class="block__title">
+        <figure>
+          <img ng-src="{{platformValue ? 'images/ps.svg' : 'images/xbox.svg'}}">
+        </figure>
+        <h2>
+          <span class="highlight">Top weapons</span> this week
+        </h2>
+      </div>
+      <div class="top-weapons__type" ng-repeat="type in [gggWeapons[platformNumeric].primary,
+                                 gggWeapons[platformNumeric].special,
+                                 gggWeapons[platformNumeric].heavy] track by $index">
+        <div class="row">
+          <div class="col-xs-6">
+            <label class="top-weapons__label" ng-bind="getWeaponTypeByIndex($index)"></label>
+          </div>
+          <div class="col-xs-3 stat">
+            <label>Kills</label>
+          </div>
+          <div class="col-xs-3 stat">
+            <label>Headshots</label>
+          </div>
+        </div>
+        <div class="row top-weapon" ng-repeat="weapon in type track by $index" ng-if="$index < 3">
+          <div class="col-xs-6 last-weapon-weapon__descr">
+            <img class="last-match-weapon__img img-responsive" ng-src="{{'https://www.bungie.net/' + weapon.icon}}" alt="{{weapon.name}}">
+            <span class="last-match-weapon__title" ng-bind="weapon.name"></span>
+          </div>
+          <div class="col-xs-3 stat">
+            <span ng-bind="weapon.kills | number:2"></span>%
+          </div>
+          <div class="col-xs-3 stat">
+            <span ng-if="weapon.precisionKills >= 0.01">
+              <span ng-bind="weapon.precisionKills | number:2"></span>%
+            </span>
+            <span ng-if="weapon.precisionKills < 0.01">N/A</span>
+          </div>
+        </div>
+      </div>
+      <div class="block__footer block__footer--ggg">
+        <label>Powered by</label><br>
+        <a href="https://guardian.gg" target="_blank"
+           analytics-on analytics-event="Click" analytics-category="GGG Powered By">
+          <img src="/images/ggg-logo.png">
         </a>
-      </span>
-    </div>
+      </div>
+      <div class="block__link">
+        <a class="btn" ng-href="https://guardian.gg/en/weapon-stats?platform={{platformNumeric}}&mode=14&start={{dateBeginTrials}}&end={{dateEndTrials}}"
+           target="_blank" analytics-on analytics-event="Click" analytics-category="GGG Show More">
+          Visit them for a lot more stats <i class="material-icons icon--small">&#xE5CC;</i>
+        </a>
+      </div>
+    </article>
   </div>
-</article>
+</div>

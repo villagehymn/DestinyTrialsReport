@@ -135,3 +135,93 @@
   border-right-width: 0;
   border-left-color: #fff;
 }
+
+.popover.ggg-elo {
+  color: rgba(255, 255, 255, .71);
+  text-align: center;
+  line-height: 15.4px;
+  font-size: 10.78px;
+  padding: 0px;
+
+  .popover-title {
+    padding: 2px;
+    height: 19px;
+    border: 0px;
+    font-size: 10.78px;
+    line-height: 15.4px;
+  }
+
+  .popover-content {
+    color: #fff;
+    padding-top: 7px;
+
+    .elo {
+     font-size: 19.6px;
+     line-height: 28px;
+    }
+
+    .rank {
+      font-weight: bold;
+    }
+  }
+}
+
+.popover.ggg-elo.bronze {
+  background-color: rgb(179, 148, 113);
+
+  .arrow:after {
+    border-top-color: rgb(179, 148, 113);
+  }
+
+  .popover-title {
+    background-color: rgba(162, 124, 78, 0.5);
+  }
+}
+
+.popover.ggg-elo.silver {
+  background-color: rgb(179, 179, 179);
+
+  .arrow:after {
+    border-top-color: rgb(179, 179, 179);
+  }
+
+  .popover-title {
+    background-color: rgba(204, 214, 209, 0.5);
+  }
+}
+
+.popover.ggg-elo.gold {
+  background-color: rgb(177, 154, 92);
+
+  .arrow:after {
+    border-top-color: rgb(177, 154, 92);
+  }
+
+  .popover-title {
+    background-color: rgba(231, 194, 68, 0.5);
+  }
+}
+
+.popover.ggg-elo.platinum {
+  background-color: rgb(98, 130, 123);
+
+  .arrow:after {
+    border-top-color: rgb(98, 130, 123);
+  }
+
+  .popover-title {
+    background-color: rgba(77, 158, 130, 0.5);
+  }
+}
+
+.popover.ggg-elo.diamond {
+  background-color: rgb(113, 152, 183);
+
+  .arrow:after {
+    border-top-color: rgb(113, 152, 183);
+  }
+
+  .popover-title {
+    background-color: rgba(75, 139, 189, 0.5);
+  }
+}

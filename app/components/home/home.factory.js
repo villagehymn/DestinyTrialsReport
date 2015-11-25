@@ -50,13 +50,14 @@ angular.module('trialsReportApp')
         '14',
         '1'
       ).then(function(result) {
-          var activities = result.data.Response.data.activities;
-          if (angular.isUndefined(activities)) {
+          if (result && result.data && result.data.Response) {
+            var activities = result.data.Response.data.activities;
+            activities.displayName = account.name;
+            return activities;
+          } else {
             toastr.error('No Trials matches found for player', 'Error');
             return account;
           }
-          activities.displayName = account.name;
-          return activities;
         });
     };
 
@@ -69,12 +70,13 @@ angular.module('trialsReportApp')
         '14',
         aCount
       ).then(function(result) {
-          var activities = result.data.Response.data.activities;
-          if (angular.isUndefined(activities)) {
+          if (result && result.data && result.data.Response) {
+            var activities = result.data.Response.data.activities;
+            return setActivityData(account, activities);
+          } else {
             toastr.error('No Trials matches found for player', 'Error');
             return account;
           }
-          return setActivityData(account, activities);
         });
     };
 

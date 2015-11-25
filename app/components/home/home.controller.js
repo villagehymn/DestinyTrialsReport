@@ -86,38 +86,39 @@ angular.module('trialsReportApp')
 
     $scope.gggLoadWeapons = function (platform) {
       $scope.platformNumeric = platform ? 2 : 1;
-      if (config.gggWeapons) {
+      if ($scope.gggWeapons) {
         if (!$scope.gggWeapons[$scope.platformNumeric]) {
           return guardianggFactory.getWeapons(
             $scope.platformNumeric
           ).then(function (result) {
               $scope.gggWeapons[$scope.platformNumeric] = result.gggWeapons;
+              $scope.gggWeapons[$scope.platformNumeric].show = result.show;
+              $scope.gggShow = $scope.gggWeapons[$scope.platformNumeric].show;
             });
+        } else {
+          $scope.gggShow = $scope.gggWeapons[$scope.platformNumeric].show;
         }
       }
     };
 
     $scope.togglePlatform = function () {
       $scope.platformValue = !$scope.platformValue;
-      $localStorage.platform = $scope.platformValue;
+      $scope.$storage.platform = $scope.platformValue;
       $scope.gggLoadWeapons($scope.platformValue);
     };
 
     $scope.setPlatform = function (platformBool) {
       $scope.platformValue = platformBool;
-      $localStorage.platform = $scope.platformValue;
+      $scope.$storage.platform = $scope.platformValue;
       $scope.gggLoadWeapons($scope.platformValue);
       return platformBool;
     };
 
     $scope.getWeaponTypeByIndex = function (index) {
       switch (index) {
-        case 0:
-          return 'Primary';
-        case 1:
-          return 'Special';
-        case 2:
-          return 'Heavy';
+        case 0: return 'Primary';
+        case 1: return 'Special';
+        case 2: return 'Heavy';
       }
     };
 
@@ -155,7 +156,10 @@ angular.module('trialsReportApp')
     if (config.gggWeapons) {
       $scope.gggWeapons = {};
       $scope.gggWeapons[config.platformNumeric] = config.gggWeapons.gggWeapons;
+      $scope.gggWeapons[config.platformNumeric].show = config.gggWeapons.show;
       $scope.platformNumeric = config.platformNumeric;
       $scope.dateBeginTrials = config.gggWeapons.dateBeginTrials;
+      $scope.dateEndTrials = config.gggWeapons.dateEndTrials;
+      $scope.gggShow = $scope.gggWeapons[config.platformNumeric].show;
     }
   });
