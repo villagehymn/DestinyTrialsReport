@@ -86,13 +86,13 @@ angular.module('trialsReportApp')
 
     $scope.gggLoadWeapons = function (platform) {
       $scope.platformNumeric = platform ? 2 : 1;
-      if (config.gggWeapons) {
+      if ($scope.gggWeapons) {
         if (!$scope.gggWeapons[$scope.platformNumeric]) {
           return guardianFactory.getWeapons(
             $scope.platformNumeric
           ).then(function (result) {
               $scope.gggWeapons[$scope.platformNumeric] = result.gggWeapons;
-              $scope.gggShow = result.gggWeapons.show;
+              $scope.gggShow = result.show;
             });
         }
       }
