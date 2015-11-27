@@ -141,12 +141,12 @@ function extractDB(dbFile) {
 
         var filename = item.activityName.replace(/'/g, '').replace(/ /g, '_').toLowerCase();
 
-        var mapImage = '/images/maps/' + filename + '.jpg';
+        var mapImage = '/assets/img/maps/' + filename + '.jpg';
         if (fs.existsSync('app' + mapImage)) {
           DestinyCrucibleMapDefinition[item.activityHash].mapImage = mapImage;
         }
 
-        var heatmapImage = '/images/heatmaps/' + filename + '.jpg';
+        var heatmapImage = '/assets/img/heatmaps/' + filename + '.jpg';
         if (fs.existsSync('app' + heatmapImage)) {
           DestinyCrucibleMapDefinition[item.activityHash].heatmapImage = heatmapImage;
         }
