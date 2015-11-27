@@ -8,7 +8,6 @@ angular.module('trialsReportApp')
         method: 'GET',
         url: '/Platform/Destiny/Stats/PostGameCarnageReport/' + recentActivity.id + '/'
       }).then(function (resultPostAct) {
-        console.log(resultPostAct)
         return resultPostAct.data.Response.data;
       }).catch(function () {});
     };
