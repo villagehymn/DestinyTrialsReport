@@ -73,13 +73,16 @@ function start() {
         url: 'https://www.bungie.net' + req.originalUrl,
         headers: {'X-API-Key': process.env.BUNGIES_API_KEY}
       };
-      request(options, function (error, response, body) {
-        if (!error) {
-          res.send(JSON.parse(body));
-        } else {
-          res.send(error);
-        }
-      });
+      try {
+        request(options, function (error, response, body) {
+          if (!error && response.statusCode !== 503) {
+            var json = JSON.stringify(body);
+            res.send(JSON.parse(json));
+          } else {
+            res.send(error);
+          }
+        });
+      } catch (e) {}
     } else {
       res.send('Nope');
     }
