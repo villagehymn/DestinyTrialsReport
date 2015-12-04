@@ -34,7 +34,7 @@ var getActivitiesFromChar = function ($scope, account, homeFactory) {
 
 angular.module('trialsReportApp')
   .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, guardianggFactory) {
-    $scope.currentMap = DestinyCrucibleMapDefinition[2082069870];
+    $scope.currentMap = DestinyCrucibleMapDefinition[2332037858];
     $scope.subdomain = config.subdomain === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
