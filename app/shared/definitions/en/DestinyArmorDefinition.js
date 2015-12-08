@@ -40,7 +40,7 @@ var DestinyArmorDefinition = {
   "3509787": {
     "name": "Kellhunter's Hood",
     "description": "\"Here's my plan to be Kell. Fallen seem to respect violence and big capes. I'm really violent, and I found this cape.\"",
-    "icon": "/common/destiny_content/icons/162e04b5913a301007681602043a1d47.jpg",
+    "icon": "/common/destiny_content/icons/bb2b7076ce54bbc8e54829f0b0533d35.jpg",
     "tierType": 5
   },
   "6252344": {
@@ -844,13 +844,13 @@ var DestinyArmorDefinition = {
   "217447094": {
     "name": "Harrowed War Numen's Fist",
     "description": "The start is always the same. Enter his court, and call him out.",
-    "icon": "/common/destiny_content/icons/6ac13b9084cfcbdef46e1c8aa59d1813.jpg",
+    "icon": "/common/destiny_content/icons/0de3f5d7ce203428ebcc57d23f1339f0.jpg",
     "tierType": 5
   },
   "217447095": {
     "name": "War Numen's Fist",
     "description": "The start is always the same. Enter his court, and call him out.",
-    "icon": "/common/destiny_content/icons/bbe049abe20a6c744b78e9351c92c60d.jpg",
+    "icon": "/common/destiny_content/icons/45a1d26f282201ac356c8d347f298cd5.jpg",
     "tierType": 5
   },
   "231278440": {
@@ -1330,7 +1330,7 @@ var DestinyArmorDefinition = {
   "372855005": {
     "name": "Harrowed Chasm of Yuul",
     "description": "A clew of writhing things there was also, on that cusp between Light and Darkness.",
-    "icon": "/common/destiny_content/icons/65bfbebe527f2c9308e37042656e46f0.jpg",
+    "icon": "/common/destiny_content/icons/b365f328142150cb987b5eb68eac1577.jpg",
     "tierType": 5
   },
   "372870450": {
@@ -1582,7 +1582,7 @@ var DestinyArmorDefinition = {
   "454534839": {
     "name": "Mark of a Kellslayer",
     "description": "\"See this mark and know: by my hands a Kell has fallen.\"",
-    "icon": "/common/destiny_content/icons/a8271c6a19cc7ffe73ff2e5456b78d4a.jpg",
+    "icon": "/common/destiny_content/icons/ae143306cf8913d6df814853f464de48.jpg",
     "tierType": 5
   },
   "457764795": {
@@ -1834,7 +1834,7 @@ var DestinyArmorDefinition = {
   "521951205": {
     "name": "Harrowed Grasp of Eir",
     "description": "At the beginning, they stood in thrall of the Formless One, and they offered themselves to its depth.",
-    "icon": "/common/destiny_content/icons/de1d17a313d6b61297211861aff14c9e.jpg",
+    "icon": "/common/destiny_content/icons/174c755f4489707b46a31edcb6f4d931.jpg",
     "tierType": 5
   },
   "530352838": {
@@ -2315,6 +2315,12 @@ var DestinyArmorDefinition = {
     "name": "Commando Custom",
     "description": "Crucible terrain is defined by ammo drop points and the sites where Ghosts revive their Guardians.",
     "icon": "/common/destiny_content/icons/eb6eaf79d289960dedc81406e78cc1cf.jpg",
+    "tierType": 5
+  },
+  "656689057": {
+    "name": "Iron Camelot Cloak",
+    "description": "Forged in remembrance of Gheleon, he who was a true Guardian to the people.",
+    "icon": "/common/destiny_content/icons/00502d26b01d3699222c18f5f4d01489.jpg",
     "tierType": 5
   },
   "656915328": {
@@ -3283,6 +3289,36 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/f0b9a7173bb6055dce82019b694f916a.jpg",
     "tierType": 5
   },
+  "1001251649": {
+    "name": "Momentum Boots",
+    "description": "The unfinished race will never be won.",
+    "icon": "/common/destiny_content/icons/363a76c8f09dfcb0e88137264ba2ae14.jpg",
+    "tierType": 5
+  },
+  "1001251652": {
+    "name": "Boots of the Jade Rabbit",
+    "description": "Just a hop, skip and a jump across Mars.",
+    "icon": "/common/destiny_content/icons/b4c823b4a2a9054ddd3ef74243b3397d.jpg",
+    "tierType": 5
+  },
+  "1001251653": {
+    "name": "Bright Sheath",
+    "description": "Shine bright against the Darkness.",
+    "icon": "/common/destiny_content/icons/d99fe5ce67a5da7209cc262bb511e7d8.jpg",
+    "tierType": 5
+  },
+  "1001251654": {
+    "name": "Circuit Striders",
+    "description": "These boots left their mark on victory lane.",
+    "icon": "/common/destiny_content/icons/5206b3a3e1fddf153d19e25216a7be69.jpg",
+    "tierType": 5
+  },
+  "1001251655": {
+    "name": "Racing Legs",
+    "description": "Designed for speed.",
+    "icon": "/common/destiny_content/icons/fe478279513f4eafa242b5ef70f9e04f.jpg",
+    "tierType": 5
+  },
   "1002359072": {
     "name": "Order of Guardians Bond",
     "description": "\"Just because Warlocks are the superior Guardian class doesn't mean we can't be team players.\"",
@@ -3910,7 +3946,7 @@ var DestinyArmorDefinition = {
   "1245063911": {
     "name": "Harrowed War Numen's Crown",
     "description": "Show them you can contain multitudes, and your interiority will spawn nightmares.",
-    "icon": "/common/destiny_content/icons/7be0b9d895b1888660b92ff63b311a11.jpg",
+    "icon": "/common/destiny_content/icons/575408decbf00d97224be5cd10d30e78.jpg",
     "tierType": 5
   },
   "1256226942": {
@@ -3943,6 +3979,36 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/91dfca63094bd03bf57fac6fd63a5ab3.jpg",
     "tierType": 5
   },
+  "1266297712": {
+    "name": "Circuit Gauntlets",
+    "description": "Worn by champions of the track.",
+    "icon": "/common/destiny_content/icons/7b5a881a07be195929ee8088f0359dc6.jpg",
+    "tierType": 5
+  },
+  "1266297713": {
+    "name": "Racing Gloves",
+    "description": "\"Just buff out the scratches and try not to get so banged up next time.\" —Marcus Ren",
+    "icon": "/common/destiny_content/icons/55d1f37d6e9d9a6fb5eec8432fdba568.jpg",
+    "tierType": 5
+  },
+  "1266297714": {
+    "name": "Gloves of the Jade Rabbit",
+    "description": "There was a moment where the hare chose not to defeat the tortoise.",
+    "icon": "/common/destiny_content/icons/61c98f393ec5bb17e98077f428183877.jpg",
+    "tierType": 5
+  },
+  "1266297715": {
+    "name": "Bright Gauntlets",
+    "description": "Polish your armor and choose your brightest banners.",
+    "icon": "/common/destiny_content/icons/437866281ca8d684b833f04bda6c81a4.jpg",
+    "tierType": 5
+  },
+  "1266297719": {
+    "name": "Momentum Gloves",
+    "description": "The open track is in sight. Conquer it.",
+    "icon": "/common/destiny_content/icons/c377852ea3fa2a8f964acb00b38df2a2.jpg",
+    "tierType": 5
+  },
   "1266513464": {
     "name": "Enigma Burn IV",
     "description": "\"To ignore the the City's peril is to sequester oneself from truth.\" - Pujari, The Transcripts",
@@ -3958,7 +4024,7 @@ var DestinyArmorDefinition = {
   "1275480032": {
     "name": "Claws of Ahamkara",
     "description": "Look at all this life, oh bearer mine. There is so much left to burn...",
-    "icon": "/common/destiny_content/icons/24e6fc20ba19ed4ea4f2539eef842fcd.jpg",
+    "icon": "/common/destiny_content/icons/35e8709cbaa24450927cf52552c730e1.jpg",
     "tierType": 6
   },
   "1275480033": {
@@ -4003,6 +4069,24 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/2fd7c44fd3adf3409ace88f364c00fc9.jpg",
     "tierType": 5
   },
+  "1279450768": {
+    "name": "Celeritate Type 1",
+    "description": "First to the line, first to the finish.",
+    "icon": "/common/destiny_content/icons/4187c6b7b9da84d299bb82ec5d4fb321.jpg",
+    "tierType": 4
+  },
+  "1279450770": {
+    "name": "Stellam Type 1",
+    "description": "Bright shines the star in the heavens.",
+    "icon": "/common/destiny_content/icons/67e5e33cff249cf196c613dd5b2ff42f.jpg",
+    "tierType": 4
+  },
+  "1279450771": {
+    "name": "Rabbit Type 1",
+    "description": "Follow the tracks to the finish.",
+    "icon": "/common/destiny_content/icons/8ad29a3610df5607ccfe41a64d333d7e.jpg",
+    "tierType": 4
+  },
   "1288845412": {
     "name": "Commando Type 0",
     "description": "Commando fireteams rely on their Ghosts for field intelligence and demolition plans.",
@@ -4013,6 +4097,12 @@ var DestinyArmorDefinition = {
     "name": "Spearhead Type 0",
     "description": "\"Evade the Cabal counterattack? My friend, they're finally sending us something worth killing.\" —Wei Ning",
     "icon": "/common/destiny_content/icons/ea6d498a64fe3efc6b402986c16a43cc.jpg",
+    "tierType": 5
+  },
+  "1292884101": {
+    "name": "Iron Camelot Casque",
+    "description": "Forged in remembrance of Efrideet, she whose keen eye never missed her mark.",
+    "icon": "/common/destiny_content/icons/0a52fede45bc37234c677dbf6107d8a6.jpg",
     "tierType": 5
   },
   "1299166026": {
@@ -4273,6 +4363,24 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/21297fc3426a86ab213a7e4c60f96e84.jpg",
     "tierType": 4
   },
+  "1351379796": {
+    "name": "Celeritate Type 2",
+    "description": "The gate is open and the path is clear.",
+    "icon": "/common/destiny_content/icons/2f9f4712541abdf0a42ba1f73ae05b9e.jpg",
+    "tierType": 4
+  },
+  "1351379798": {
+    "name": "Stellam Type 2",
+    "description": "Set a course for the most distant star and trust that you will reach it.",
+    "icon": "/common/destiny_content/icons/c7a28470ed6fda723ebbe2713dab5af5.jpg",
+    "tierType": 4
+  },
+  "1351379799": {
+    "name": "Rabbit Type 2",
+    "description": "Run until you pass the rabbit.",
+    "icon": "/common/destiny_content/icons/eb90906c81173c7f9bc25ad8112b0c84.jpg",
+    "tierType": 4
+  },
   "1353391432": {
     "name": "Cryptid 4.6r2",
     "description": "Seek out other Guardians when the howling loneliness grows too deep. Pretend it's a chance meeting, though.",
@@ -4504,13 +4612,13 @@ var DestinyArmorDefinition = {
   "1458254032": {
     "name": "Young Ahamkara's Spine",
     "description": "Give me your arm, oh bearer mine. Let me help you fill the world with teeth.",
-    "icon": "/common/destiny_content/icons/496297282ca8d6c626d3595780d042ed.jpg",
+    "icon": "/common/destiny_content/icons/2952fd2a816ee272179882d0eda41a7a.jpg",
     "tierType": 6
   },
   "1458254033": {
     "name": "Don't Touch Me",
     "description": "Amputated from a creature that stumbled out of a Vex gate. A vestigial defensive reflex still remains.",
-    "icon": "/common/destiny_content/icons/30716b390061555c88f30513551766f2.jpg",
+    "icon": "/common/destiny_content/icons/a4678b2b41f56ca05eb6df01bf44861b.jpg",
     "tierType": 6
   },
   "1458254034": {
@@ -4642,19 +4750,19 @@ var DestinyArmorDefinition = {
   "1520434776": {
     "name": "Achlyophage Symbiote",
     "description": "\"They told me it would eat my thoughts and leave me full of Light.\"",
-    "icon": "/common/destiny_content/icons/25ad95a0bd90b07e7038c701c071cc85.jpg",
+    "icon": "/common/destiny_content/icons/75d4a2bc6b713ce6fd75750e6fcfcc53.jpg",
     "tierType": 6
   },
   "1520434777": {
     "name": "Knucklehead Radar",
     "description": "You can see the point, right? Who wants to team up with one?",
-    "icon": "/common/destiny_content/icons/41cf4cfa8c07658b814ac31d96e76045.jpg",
+    "icon": "/common/destiny_content/icons/0eb91d9597b46040d2e4d53aadde3b18.jpg",
     "tierType": 6
   },
   "1520434778": {
     "name": "ATS/8 ARACHNID",
     "description": "Advanced tactical sensorium. Induced hallucinations integrate broad-spectrum targeting data.",
-    "icon": "/common/destiny_content/icons/8253832cc526c6b3721d145035e3082d.jpg",
+    "icon": "/common/destiny_content/icons/87cbfa003adc48df5fca65d413242873.jpg",
     "tierType": 6
   },
   "1520434779": {
@@ -4828,7 +4936,7 @@ var DestinyArmorDefinition = {
   "1601524312": {
     "name": "Harrowed War Numen's Boots",
     "description": "Speak, and the Darkness obeys. Command, and the song turns upon itself.",
-    "icon": "/common/destiny_content/icons/c43b2d70cfaad59fa4f66f73f0af6aae.jpg",
+    "icon": "/common/destiny_content/icons/b7652583e7bb6ecb1475465852bf8842.jpg",
     "tierType": 5
   },
   "1601524313": {
@@ -5014,7 +5122,7 @@ var DestinyArmorDefinition = {
   "1658688592": {
     "name": "\"Worm Gods' Boon\"",
     "description": "They had a choice. They chose the hunger. They chose the Formless One. They chose the Worm Gods.",
-    "icon": "/common/destiny_content/icons/85a55d130e55653cdcf63c9a375d59e0.jpg",
+    "icon": "/common/destiny_content/icons/e079be143b43a5dfd07830d3277fd93f.jpg",
     "tierType": 5
   },
   "1658688593": {
@@ -5100,6 +5208,24 @@ var DestinyArmorDefinition = {
     "description": "Melee combat tests your nerve. Ignore every instinct to flee. Remember: you are a monster too.",
     "icon": "/common/destiny_content/icons/8d5b92c1ddcf71f47ce858dcbdf6ee30.jpg",
     "tierType": 2
+  },
+  "1680792364": {
+    "name": "Stellam Type 3",
+    "description": "The race begins when you choose to run.",
+    "icon": "/common/destiny_content/icons/8dc5c68357c39f97e63d5bed2650c27b.jpg",
+    "tierType": 4
+  },
+  "1680792365": {
+    "name": "Rabbit Type 3",
+    "description": "The wolf always catches the rabbit in the end.",
+    "icon": "/common/destiny_content/icons/66af2abb936282d13829959e49868bb8.jpg",
+    "tierType": 4
+  },
+  "1680792366": {
+    "name": "Celeritate Type 3",
+    "description": "Race to win or don't race at all.",
+    "icon": "/common/destiny_content/icons/c9a39d3b44296e6345ad216f748c80ad.jpg",
+    "tierType": 4
   },
   "1685076664": {
     "name": "Raven Sheath",
@@ -5386,7 +5512,7 @@ var DestinyArmorDefinition = {
   "1775312682": {
     "name": "Radiant Dance Machines",
     "description": "Built for swift movement, they provide unexpected and decisive social benefits.",
-    "icon": "/common/destiny_content/icons/6f9062e62493d28b2a1cabd3a129727b.jpg",
+    "icon": "/common/destiny_content/icons/4eebb6a2d52517a6dda2fe4c927157fa.jpg",
     "tierType": 6
   },
   "1775312683": {
@@ -5398,19 +5524,19 @@ var DestinyArmorDefinition = {
   "1776632644": {
     "name": "\"The Cure\"",
     "description": "\"We have a solution.\" - Ikora Rey, in an emergency session of the City Consensus",
-    "icon": "/common/destiny_content/icons/79ce618ece17e476d51cba45ea4ccbc6.png",
+    "icon": "/common/destiny_content/icons/a1338e1ea832fd34269696f0a7c1b79c.png",
     "tierType": 4
   },
   "1776632646": {
     "name": "\"The Unconquerable\"",
     "description": "\"Let's stop thinking about how to open the lock and start thinking about removing the wall.\"",
-    "icon": "/common/destiny_content/icons/2e75c211dbb4821c2844f2e893d97871.png",
+    "icon": "/common/destiny_content/icons/b28a2ebb04cafa499d5a8ce0e5815031.png",
     "tierType": 4
   },
   "1776632647": {
     "name": "\"Born of Sight\"",
     "description": "\"Reality is the most ruthless analyst.\" - Praxic saying",
-    "icon": "/common/destiny_content/icons/23ef716cdbd89088d0089c5900e4e4c2.png",
+    "icon": "/common/destiny_content/icons/08ed66a44e90a35f58c219525e00533d.png",
     "tierType": 4
   },
   "1777045417": {
@@ -5563,6 +5689,12 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/8024c4bfa0796e6198f45e6d463550d2.jpg",
     "tierType": 2
   },
+  "1845370073": {
+    "name": "Racer's Mark",
+    "description": "Your enemies will see the signs of your approach. They will not be able to stop you.",
+    "icon": "/common/destiny_content/icons/87c7d0945fa42059066a85da4bdf5dbf.jpg",
+    "tierType": 5
+  },
   "1846030074": {
     "name": "Greaves of the Seven",
     "description": "Ornate armor forged by the Lords of Iron beneath the Iron Banner.",
@@ -5578,7 +5710,7 @@ var DestinyArmorDefinition = {
   "1846107924": {
     "name": "Harrowed Mouth of Ur",
     "description": "For the more Light the worms consume, the hungrier they become.",
-    "icon": "/common/destiny_content/icons/b85ebf4c1cc911d5f665dc3fc23c6231.jpg",
+    "icon": "/common/destiny_content/icons/ae21790d87e1328061d94b1249087b7b.jpg",
     "tierType": 5
   },
   "1846107925": {
@@ -6037,6 +6169,12 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/415e31a279a4be0bd7444050cf0bbac8.jpg",
     "tierType": 5
   },
+  "2019341558": {
+    "name": "Iron Camelot Gauntlets",
+    "description": "Forged in remembrance of Jolder, she whose mighty hammer taught the Darkness fear.",
+    "icon": "/common/destiny_content/icons/f4946fb5fc3edcf211f206e8731b8b49.jpg",
+    "tierType": 5
+  },
   "2020019240": {
     "name": "Gauntlets of the Seven",
     "description": "Ornate armor forged by the Lords of Iron beneath the Iron Banner.",
@@ -6112,7 +6250,7 @@ var DestinyArmorDefinition = {
   "2028036495": {
     "name": "Harrowed Path of Xol",
     "description": "Bound together, their power knows no limit, save their thirst for more.",
-    "icon": "/common/destiny_content/icons/b750a73d9b3c2c54d8d4a2ff45143559.jpg",
+    "icon": "/common/destiny_content/icons/7d30a1f1d1589c4f02fba72a9455db4a.jpg",
     "tierType": 5
   },
   "2041380554": {
@@ -6209,6 +6347,12 @@ var DestinyArmorDefinition = {
     "name": "Grips of the Exile",
     "description": "A prestigious trophy earned in battle during the Trials of Osiris.",
     "icon": "/common/destiny_content/icons/c11555eb21bac286718f17e0cec8d1fc.jpg",
+    "tierType": 5
+  },
+  "2073560916": {
+    "name": "Iron Camelot Grips",
+    "description": "Forged in remembrance of Perun, she who hunted the Darkness where it dwelt.",
+    "icon": "/common/destiny_content/icons/e62d434aae33e5d00143a5d57bfa805d.jpg",
     "tierType": 5
   },
   "2074277047": {
@@ -6469,6 +6613,36 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/141aa715dee032404f3067a51357dba0.jpg",
     "tierType": 5
   },
+  "2150667280": {
+    "name": "Bright Guard",
+    "description": "Truth shines like a star in the endless night.",
+    "icon": "/common/destiny_content/icons/bdae42a90f9f43e0bdc855b7981e1f76.jpg",
+    "tierType": 5
+  },
+  "2150667281": {
+    "name": "Headpiece of the Jade Rabbit",
+    "description": "\"Where one person sees a god, another sees only a shadow on the moon.\" —Ikora Rey",
+    "icon": "/common/destiny_content/icons/0f29ac59b0f0cbdbd837e2afc8666915.jpg",
+    "tierType": 5
+  },
+  "2150667282": {
+    "name": "Racing Wings",
+    "description": "Take flight.",
+    "icon": "/common/destiny_content/icons/36beb04fc96335f84a8d3ef2c932b0b0.jpg",
+    "tierType": 5
+  },
+  "2150667283": {
+    "name": "Circuit Runner",
+    "description": "The spark ignites the flame.",
+    "icon": "/common/destiny_content/icons/8f46010f62c61993ab40092c32ab20ca.jpg",
+    "tierType": 5
+  },
+  "2150667284": {
+    "name": "Momentum Guard",
+    "description": "The dreamer reaches for the sun. The survivor knows when it is out of reach.",
+    "icon": "/common/destiny_content/icons/fb06ec09a79a32652512728c5c8c010b.jpg",
+    "tierType": 5
+  },
   "2162732532": {
     "name": "H_LD Starwinder",
     "description": "The trigger action is the central action, and so it must feel euphoric.",
@@ -6551,6 +6725,36 @@ var DestinyArmorDefinition = {
     "name": "Justicar's Casque",
     "description": "Enough talk. The time has come for action.",
     "icon": "/common/destiny_content/icons/88f629c54a494332c0f5cbfc72fb4e1a.jpg",
+    "tierType": 5
+  },
+  "2170625065": {
+    "name": "Momentum Shield",
+    "description": "Many will fly. Only one will win.",
+    "icon": "/common/destiny_content/icons/6c55472367a7b0df61f3a5f353e7a7b2.jpg",
+    "tierType": 5
+  },
+  "2170625068": {
+    "name": "Helmet of the Jade Rabbit",
+    "description": "\"There is a precision in speed. The slightest shift can result in victory…or end in disaster.\" —Lord Shaxx",
+    "icon": "/common/destiny_content/icons/e294f739f1eca9db99763f6ca2e45714.jpg",
+    "tierType": 5
+  },
+  "2170625069": {
+    "name": "Bright Ward",
+    "description": "The warriors' helms gleamed bright in the sunlight.",
+    "icon": "/common/destiny_content/icons/46c12fba1344377dfcb1543d35adaf5b.jpg",
+    "tierType": 5
+  },
+  "2170625070": {
+    "name": "Circuit Keeper",
+    "description": "Don't outthink your opponents. Outfly them.",
+    "icon": "/common/destiny_content/icons/94a88bd5a41f6c4a0990ccd083d402f2.jpg",
+    "tierType": 5
+  },
+  "2170625071": {
+    "name": "Crash Helmet",
+    "description": "\"What's a few broken bones between friends?\" —Marcus Ren",
+    "icon": "/common/destiny_content/icons/c456b5671f0406b1922f6d16fb438cae.jpg",
     "tierType": 5
   },
   "2172091906": {
@@ -6874,7 +7078,7 @@ var DestinyArmorDefinition = {
   "2242715339": {
     "name": "Cloak of Seven Bones",
     "description": "\"Let this bone I reaped in battle give me strength to reap again.\"",
-    "icon": "/common/destiny_content/icons/2d61d889d6e448bc2e41120e3a8fde38.jpg",
+    "icon": "/common/destiny_content/icons/b096676604a66a3f0cd2433fd14d8c4d.jpg",
     "tierType": 5
   },
   "2255552808": {
@@ -7042,7 +7246,7 @@ var DestinyArmorDefinition = {
   "2302693612": {
     "name": "Harrowed Darkhollow Grasps",
     "description": "\"All the vastness of our universe is but a blank page on which they scrawl their words of hate and death.\" —Eris Morn",
-    "icon": "/common/destiny_content/icons/19695a3549ca7a07f9e5195abc41c54f.jpg",
+    "icon": "/common/destiny_content/icons/6560985aee1722df31e4845d8ef91080.jpg",
     "tierType": 5
   },
   "2302693613": {
@@ -7344,6 +7548,12 @@ var DestinyArmorDefinition = {
     "description": "\"First, check your cloak for damage. Second, inspect yourself for major wounds.\" - Handbook of (Un)Controversial Advice",
     "icon": "/common/destiny_content/icons/af305801554d046ff8ea76a5404f92cb.jpg",
     "tierType": 4
+  },
+  "2415387782": {
+    "name": "Racer's Bond",
+    "description": "Is it a flash of insight or merely a spark from your bond?",
+    "icon": "/common/destiny_content/icons/dafc018c770363537f2eee886932ab5a.jpg",
+    "tierType": 5
   },
   "2424290514": {
     "name": "Highlander Type 1",
@@ -7828,7 +8038,7 @@ var DestinyArmorDefinition = {
   "2549035182": {
     "name": "Harrowed Darkhollow Treads",
     "description": "\"Even now, the Daughters of Oryx weave black words of blight to bind his realm to ours.\" —Eris Morn",
-    "icon": "/common/destiny_content/icons/feba6ed533cbce73ae941d122714a64e.jpg",
+    "icon": "/common/destiny_content/icons/d90ed55f674779b72dfc919d667db394.jpg",
     "tierType": 5
   },
   "2549035183": {
@@ -7871,6 +8081,12 @@ var DestinyArmorDefinition = {
     "name": "Iron Regalia Greaves",
     "description": "Ornate armor forged by the Lords of Iron beneath the Iron Banner.",
     "icon": "/common/destiny_content/icons/e23399b77b404805dd9471d4f8730e4d.jpg",
+    "tierType": 5
+  },
+  "2563486541": {
+    "name": "Racer's Scarf",
+    "description": "All your rivals will see are your contrails in the distance.",
+    "icon": "/common/destiny_content/icons/0c01a06c856a0e661779c697eca61cd5.jpg",
     "tierType": 5
   },
   "2564278177": {
@@ -7942,13 +8158,13 @@ var DestinyArmorDefinition = {
   "2580679412": {
     "name": "\"Inertia Engine\"",
     "description": "\"I believe that the Traveler and its Light are advanced technology. I refuse to accept that this diminishes me.\"",
-    "icon": "/common/destiny_content/icons/101d80c2ce6478301860a93483b2d2c0.png",
+    "icon": "/common/destiny_content/icons/d8aa0627b98668a09eb770c67925cca0.png",
     "tierType": 3
   },
   "2580679413": {
     "name": "\"Cosmic Truths\"",
     "description": "\"To bind Light into the same framework as the proton or the mere neutrino is an act of close-minded hubris.\"",
-    "icon": "/common/destiny_content/icons/101d80c2ce6478301860a93483b2d2c0.png",
+    "icon": "/common/destiny_content/icons/d8aa0627b98668a09eb770c67925cca0.png",
     "tierType": 3
   },
   "2580679414": {
@@ -8149,6 +8365,12 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/8956a524da0d3d82e8d321faf862e694.jpg",
     "tierType": 5
   },
+  "2642309592": {
+    "name": "Iron Camelot Bond",
+    "description": "Forged in remembrance of Skorri, she who sang out the Iron Song.",
+    "icon": "/common/destiny_content/icons/4164b3a8cbb342c1bd31bdc30f35b5a5.jpg",
+    "tierType": 5
+  },
   "2642511908": {
     "name": "Justicar's Grip",
     "description": "A finger can be broken. A fist cannot.",
@@ -8248,7 +8470,7 @@ var DestinyArmorDefinition = {
   "2661471739": {
     "name": "The Armamentarium",
     "description": "For This, There Is One Remedy",
-    "icon": "/common/destiny_content/icons/fc90d12c51dcca7177687e1d8056fb07.jpg",
+    "icon": "/common/destiny_content/icons/3dbebc31f62a1265bd607d6ea4af9a92.jpg",
     "tierType": 6
   },
   "2662103142": {
@@ -8887,6 +9109,36 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/4d1c333c9aaadf595842327f39ac7e10.jpg",
     "tierType": 6
   },
+  "2828837273": {
+    "name": "Momentum Defense",
+    "description": "Course set and trajectory locked.",
+    "icon": "/common/destiny_content/icons/5ad864bfadb358c3f481ff8a3fad4063.jpg",
+    "tierType": 5
+  },
+  "2828837276": {
+    "name": "Vest of the Jade Rabbit",
+    "description": "Bushy tail not included.",
+    "icon": "/common/destiny_content/icons/59ff7d32014cb38812e01bc9720ebec7.jpg",
+    "tierType": 5
+  },
+  "2828837277": {
+    "name": "Bright Armor",
+    "description": "Choose the lightest armor when speed is your weapon.",
+    "icon": "/common/destiny_content/icons/90ad8dc882b94ece84d12fa4da0b2965.jpg",
+    "tierType": 5
+  },
+  "2828837278": {
+    "name": "Circuit Chestplate",
+    "description": "Scratches and scars are marks of victory.",
+    "icon": "/common/destiny_content/icons/ed978b3cf7dfe11fbe7dd0f2b22415b2.jpg",
+    "tierType": 5
+  },
+  "2828837279": {
+    "name": "Racing Suit",
+    "description": "Sleek, lightweight and strong enough to weather a Sparrow crash or three.",
+    "icon": "/common/destiny_content/icons/d6ae414e86e3b1c2bba1b344f0f70e60.jpg",
+    "tierType": 5
+  },
   "2839289790": {
     "name": "Stratus 3.1.2",
     "description": "Alpine requirements go hand-in-hand with pilot specs: light, low-profile, with excellent life support.",
@@ -9034,13 +9286,13 @@ var DestinyArmorDefinition = {
   "2882684152": {
     "name": "Crest of Alpha Lupi",
     "description": "You've heard every last tale of the wolf by now. None of them are true. You are the wolf.",
-    "icon": "/common/destiny_content/icons/61cd0b82173fa5af0699355a257af084.jpg",
+    "icon": "/common/destiny_content/icons/280caab1fc517da14e07e1bee8f8b048.jpg",
     "tierType": 6
   },
   "2882684153": {
     "name": "Lucky Raspberry",
     "description": "> No one has ever died wearing me. \n# It's true. She leaves the unworthy before they fall.",
-    "icon": "/common/destiny_content/icons/ed921b8dac13510822ef83e16d4f930a.jpg",
+    "icon": "/common/destiny_content/icons/befa570a0114d0746782d612da7da2b8.jpg",
     "tierType": 6
   },
   "2884887211": {
@@ -9526,13 +9778,13 @@ var DestinyArmorDefinition = {
   "3055446326": {
     "name": "No Backup Plans",
     "description": "No ammo? No problem.",
-    "icon": "/common/destiny_content/icons/a52be950514a04d4e2de7e1fb2ebc09a.jpg",
+    "icon": "/common/destiny_content/icons/a1dd669dfb04332d87e56f94ee3b1792.jpg",
     "tierType": 6
   },
   "3055446327": {
     "name": "Ruin Wings",
     "description": "In the Garden grows a tree of silver wings. The leaves are ruin, the bark disaster. Of the seeds we do not speak.",
-    "icon": "/common/destiny_content/icons/464ac444cc042985fcfe211e2051ccc8.jpg",
+    "icon": "/common/destiny_content/icons/541df48f74808c41be590020abb976f5.jpg",
     "tierType": 6
   },
   "3058199040": {
@@ -9838,7 +10090,7 @@ var DestinyArmorDefinition = {
   "3176903680": {
     "name": "Harrowed War Numen's Chest",
     "description": "Death is the game, and the game is always death.",
-    "icon": "/common/destiny_content/icons/b3b6dee0efec82cc0ed4cda76cde4ffb.jpg",
+    "icon": "/common/destiny_content/icons/c79cc1c5f69d60dea9140323879a1f98.jpg",
     "tierType": 5
   },
   "3176903681": {
@@ -9869,6 +10121,12 @@ var DestinyArmorDefinition = {
     "name": "Fear Eater",
     "description": "No one's impervious to psychological warfare. Even the Vex develop reactions to certain foes.",
     "icon": "/common/destiny_content/icons/899be07b0b74ef996daeec70cd724b47.jpg",
+    "tierType": 5
+  },
+  "3187552139": {
+    "name": "Iron Camelot Mark",
+    "description": "Forged in remembrance of Radegast, he who was first among the peers of the Iron Banner.",
+    "icon": "/common/destiny_content/icons/51227708b4fbe21d64bd05e4ebf3344b.jpg",
     "tierType": 5
   },
   "3202328104": {
@@ -10288,13 +10546,13 @@ var DestinyArmorDefinition = {
   "3346519202": {
     "name": "Bond of the Universal",
     "description": "Some orders argue that Light and Darkness can be explained in the context of supersymmetric physics.",
-    "icon": "/common/destiny_content/icons/1e1eef2e3bae3f7fca1c4a0d92a96863.png",
+    "icon": "/common/destiny_content/icons/3979b3abbc926021ba4efb40d34eedb0.png",
     "tierType": 2
   },
   "3346519203": {
     "name": "Bond of Polarity",
     "description": "Some orders believe that Light and Darkness exist beyond the merely material, with a logic of their own.",
-    "icon": "/common/destiny_content/icons/d99e5e147367a2601b914c06784739b1.png",
+    "icon": "/common/destiny_content/icons/5cf713661afcd88363ef2e3382a8e8c9.png",
     "tierType": 2
   },
   "3346783228": {
@@ -10378,7 +10636,7 @@ var DestinyArmorDefinition = {
   "3359564871": {
     "name": "\"The Gone\"",
     "description": "\"He came at me with a knife. I put out my hand and - just so - made him into ash.\"",
-    "icon": "/common/destiny_content/icons/00e86cfb478c9cbd5b7c41bf7d07a3b9.png",
+    "icon": "/common/destiny_content/icons/a402b735d280ffdf8c58ad77e311a81c.png",
     "tierType": 4
   },
   "3366017012": {
@@ -10714,7 +10972,13 @@ var DestinyArmorDefinition = {
   "3471865173": {
     "name": "Harrowed Darkhollow Mask",
     "description": "\"The Dreadnaught is a blighted hollow gouged into our universe.\" —Eris Morn",
-    "icon": "/common/destiny_content/icons/abe02447dc787d7e62a4f5c63eb6b565.jpg",
+    "icon": "/common/destiny_content/icons/70d90211fa2c28a32c691ac45a9b837b.jpg",
+    "tierType": 5
+  },
+  "3472912587": {
+    "name": "Iron Camelot Gloves",
+    "description": "Forged in remembrance of Timur, he whom the City's enemies dreaded most.",
+    "icon": "/common/destiny_content/icons/590d06119fc826cce5e9a0a0e4e69b35.jpg",
     "tierType": 5
   },
   "3473700532": {
@@ -11335,6 +11599,12 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/3f61b6ca1cd1be09bbd2cceb248d4bc7.jpg",
     "tierType": 5
   },
+  "3734616175": {
+    "name": "Iron Camelot Helm",
+    "description": "Forged in remembrance of Silimar, he who was the Last City's first wall.",
+    "icon": "/common/destiny_content/icons/26199af77000ec9933d239fb172b04ce.jpg",
+    "tierType": 5
+  },
   "3738854614": {
     "name": "H_LD Starwinder",
     "description": "Take joy in motion.",
@@ -11768,7 +12038,7 @@ var DestinyArmorDefinition = {
     "tierType": 4
   },
   "3872841536": {
-    "name": "Helm of Krolok",
+    "name": "Hood of Malok",
     "description": "It's like they say: Pride goeth before the fall.",
     "icon": "/common/destiny_content/icons/9f325d93a202c1f917cf59a7b9ad9d4d.jpg",
     "tierType": 5
@@ -11890,7 +12160,7 @@ var DestinyArmorDefinition = {
   "3907799186": {
     "name": "Harrowed Darkhollow  Chiton",
     "description": "\"Heartless and cruel is their realm—but in some ways more malleable than your own.\" —Eris Morn",
-    "icon": "/common/destiny_content/icons/a73bd92987712f6cbd50c12a0332e59d.jpg",
+    "icon": "/common/destiny_content/icons/fa6c0ce50cfecc72683b2cfda2915d33.jpg",
     "tierType": 5
   },
   "3907799187": {
@@ -12616,7 +12886,7 @@ var DestinyArmorDefinition = {
   "4158489060": {
     "name": "Iron Shell",
     "description": "For Ghosts who are forged in battle.",
-    "icon": "/common/destiny_content/icons/792bbecbed0c0b605b69faf3a85fcb30.jpg",
+    "icon": "/common/destiny_content/icons/74e71a5d296bc8799b8dbf46f8155e20.jpg",
     "tierType": 5
   },
   "4159298074": {
@@ -12635,6 +12905,12 @@ var DestinyArmorDefinition = {
     "name": "Mark of the Exile",
     "description": "\"Though the City won a great battle at Twilight Gap, it lost an even greater mind.\" —Sister Lupe",
     "icon": "/common/destiny_content/icons/80f5605e0221b958bac8d19484642a27.jpg",
+    "tierType": 5
+  },
+  "4174844898": {
+    "name": "Iron Camelot Hood",
+    "description": "Forged in remembrance of Felwinter, he who stared into the Void.",
+    "icon": "/common/destiny_content/icons/a4a5472a9ac8d10adc5690c891fe546b.jpg",
     "tierType": 5
   },
   "4184289356": {
@@ -12682,7 +12958,7 @@ var DestinyArmorDefinition = {
   "4187038139": {
     "name": "\"Trained Chaos\"",
     "description": "\"Control space and time. Mere matter and energy will follow.\"",
-    "icon": "/common/destiny_content/icons/e78142200e16f49b0e062882adaafba9.png",
+    "icon": "/common/destiny_content/icons/0aeb825ba5950e5af83f00f25fb2ffd5.png",
     "tierType": 4
   },
   "4187254944": {
@@ -12835,6 +13111,36 @@ var DestinyArmorDefinition = {
     "icon": "/common/destiny_content/icons/5b3d243132c81363c29cfa9a106044a3.jpg",
     "tierType": 2
   },
+  "4223010272": {
+    "name": "Helm of the Jade Rabbit",
+    "description": "Ancient technology repurposed for the modern Guardian.",
+    "icon": "/common/destiny_content/icons/757b4d878bba4b8a2d419d6ee6495345.jpg",
+    "tierType": 5
+  },
+  "4223010273": {
+    "name": "Bright Shield",
+    "description": "Protection from the slings and arrows of life, but not much else.",
+    "icon": "/common/destiny_content/icons/cc03bd12dd270bcea40e73b94de11948.jpg",
+    "tierType": 5
+  },
+  "4223010274": {
+    "name": "Circuit Defender",
+    "description": "A clever Guardian knows which gates to pass through and which ones to pass by.",
+    "icon": "/common/destiny_content/icons/b5b213a417a3639712af1b6a6ad0d76c.jpg",
+    "tierType": 5
+  },
+  "4223010275": {
+    "name": "Racing Helmet",
+    "description": "Crash resistant and fashion forward.",
+    "icon": "/common/destiny_content/icons/cca18e8badc912c9cd9b15ae3fbf5283.jpg",
+    "tierType": 5
+  },
+  "4223010277": {
+    "name": "Momentum Helmet",
+    "description": "Victory is in sight.",
+    "icon": "/common/destiny_content/icons/204b5f70a457e0bbf719297d595ec945.jpg",
+    "tierType": 5
+  },
   "4225277466": {
     "name": "Murvaux Type 0",
     "description": "\"Gunnvor, the Dawncaller. Gave her last full measure at the Ocean of Storms.\" —The Last Stands of First Pillars",
@@ -12922,7 +13228,7 @@ var DestinyArmorDefinition = {
   "4267828624": {
     "name": "Mk. 44 Stand Asides",
     "description": "Pardon me. Coming through.",
-    "icon": "/common/destiny_content/icons/fe4bfe8567d7def6b360966855e68b55.jpg",
+    "icon": "/common/destiny_content/icons/01f70e16998f00610e3b272806d5a3b5.jpg",
     "tierType": 6
   },
   "4267828625": {

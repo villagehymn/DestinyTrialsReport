@@ -15,6 +15,10 @@ var DestinyCrucibleMapDefinition = {
     "name": "Memento",
     "pgcrImage": "https://www.bungie.net/img/theme/destiny/bgs/pgcrs/memento.jpg"
   },
+  "598437332": {
+    "name": "Classified",
+    "pgcrImage": "https://www.bungie.netundefined"
+  },
   "637046772": {
     "name": "Thieves' Den",
     "pgcrImage": "https://www.bungie.net/img/theme/destiny/bgs/pgcrs/thieves_den.jpg",
@@ -23,6 +27,10 @@ var DestinyCrucibleMapDefinition = {
   "1448094960": {
     "name": "The Dungeons",
     "pgcrImage": "https://www.bungie.net/img/theme/destiny/bgs/pgcrs/the_dungeons.jpg"
+  },
+  "1478347980": {
+    "name": "Campus Martius",
+    "pgcrImage": "https://www.bungie.net/img/theme/destiny/bgs/pgcrs/Campus_Martius.jpg"
   },
   "1719392441": {
     "name": "Crossroads",
@@ -40,6 +48,10 @@ var DestinyCrucibleMapDefinition = {
     "name": "The Anomaly",
     "pgcrImage": "https://www.bungie.net/img/theme/destiny/bgs/pgcrs/crucible_the_anomaly.jpg",
     "mapImage": "/assets/img/maps/the_anomaly.jpg"
+  },
+  "2243240710": {
+    "name": "Infinite Descent",
+    "pgcrImage": "https://www.bungie.net/img/theme/destiny/bgs/pgcrs/Infinite_Descent.jpg"
   },
   "2332037858": {
     "name": "Widow's Court",

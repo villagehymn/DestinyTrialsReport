@@ -1215,7 +1215,7 @@ var DestinyWeaponDefinition = {
   },
   "1177550374": {
     "name": "Bad Juju",
-    "icon": "/common/destiny_content/icons/963ea780dfcc0fbbe3ffb0b88ff61959.jpg",
+    "icon": "/common/destiny_content/icons/670d511e877ef6be81d93fa0e5d41fd7.jpg",
     "subType": 13,
     "tierType": 6
   },
@@ -1275,25 +1275,25 @@ var DestinyWeaponDefinition = {
   },
   "1235765600": {
     "name": "Steppe-AR3",
-    "icon": "/common/destiny_content/icons/30d7f4acf77b80db6d79ae5fae9f10bd.jpg",
+    "icon": "/common/destiny_content/icons/7768719524f2faf1f2076d2137e78215.jpg",
     "subType": 6,
     "tierType": 4
   },
   "1235765601": {
     "name": "Veldt-AR3",
-    "icon": "/common/destiny_content/icons/368fedd000575f79513edc686771d41e.jpg",
+    "icon": "/common/destiny_content/icons/b585c743a5ee7f8d7e39fb73d4bf52c3.jpg",
     "subType": 6,
     "tierType": 4
   },
   "1235765602": {
     "name": "SUROS ARN-39",
-    "icon": "/common/destiny_content/icons/6d6085072f804f38a7c145660776bfbd.jpg",
+    "icon": "/common/destiny_content/icons/a0573e267b744b5a39d9ff11ed2ec667.jpg",
     "subType": 6,
     "tierType": 4
   },
   "1235765603": {
     "name": "SUROS ARN-33",
-    "icon": "/common/destiny_content/icons/9ab9bf23fc647b32d918e9c29323a18f.jpg",
+    "icon": "/common/destiny_content/icons/2c562129c837bfaa1d0dd3b9659251d5.jpg",
     "subType": 6,
     "tierType": 4
   },
@@ -3339,7 +3339,7 @@ var DestinyWeaponDefinition = {
   },
   "2748609458": {
     "name": "Fabian Strategy",
-    "icon": "/common/destiny_content/icons/345b954d6e650201b93942bd332ddcf2.jpg",
+    "icon": "/common/destiny_content/icons/70f31a436d4739b3737598fc755207ec.jpg",
     "subType": 6,
     "tierType": 6
   },
