@@ -79,6 +79,12 @@ var DestinyWeaponDefinition = {
     "subType": 9,
     "tierType": 2
   },
+  "57660786": {
+    "name": "Super Good Advice",
+    "icon": "/common/destiny_content/icons/241f4ca98645b111fd39902ef7338009.jpg",
+    "subType": 8,
+    "tierType": 6
+  },
   "57660787": {
     "name": "Thunderlord",
     "icon": "/common/destiny_content/icons/bf13273358a87581440246fbd69a60aa.jpg",
@@ -1495,6 +1501,12 @@ var DestinyWeaponDefinition = {
     "subType": 6,
     "tierType": 5
   },
+  "1346849289": {
+    "name": "MIDA Multi-Tool",
+    "icon": "/common/destiny_content/icons/c4926f5a733801fef0be55f8c5db5fe7.jpg",
+    "subType": 14,
+    "tierType": 6
+  },
   "1355112477": {
     "name": "SUROS BVV-13",
     "icon": "/common/destiny_content/icons/9eb1768e043aa2ddde96ed0ef4de91e7.jpg",
@@ -2340,6 +2352,12 @@ var DestinyWeaponDefinition = {
     "icon": "/common/destiny_content/icons/35ad7bedc0cfb7d6889f10f34e610e0b.jpg",
     "subType": 13,
     "tierType": 5
+  },
+  "2055601060": {
+    "name": "Hard Light",
+    "icon": "/common/destiny_content/icons/5b503f30ffed95cb2bd52a101bfcb40c.jpg",
+    "subType": 6,
+    "tierType": 6
   },
   "2055601061": {
     "name": "SUROS Regime",
@@ -3451,6 +3469,12 @@ var DestinyWeaponDefinition = {
     "subType": 10,
     "tierType": 6
   },
+  "2808364179": {
+    "name": "Dragon's Breath",
+    "icon": "/common/destiny_content/icons/5983fc2fed7e3481a5b1cc8cafcb248f.jpg",
+    "subType": 10,
+    "tierType": 6
+  },
   "2809229973": {
     "name": "Necrochasm",
     "icon": "/common/destiny_content/icons/d5f5eff03eb6952beeb78bda5316d359.jpg",
@@ -3744,6 +3768,12 @@ var DestinyWeaponDefinition = {
     "icon": "/common/destiny_content/icons/3d885679008dea069e0c54c24a8ecd13.jpg",
     "subType": 12,
     "tierType": 4
+  },
+  "3078564839": {
+    "name": "Plan C",
+    "icon": "/common/destiny_content/icons/a39732034b46655967d2e8739f56cf2f.jpg",
+    "subType": 11,
+    "tierType": 6
   },
   "3085976880": {
     "name": "Mitternacht SR3",
@@ -4788,6 +4818,12 @@ var DestinyWeaponDefinition = {
     "icon": "/common/destiny_content/icons/84fde52c69deb13a5b2d0fbd5822383f.jpg",
     "subType": 9,
     "tierType": 4
+  },
+  "3835813881": {
+    "name": "No Land Beyond",
+    "icon": "/common/destiny_content/icons/e6873c6f817a98ae019f230537e3b2ee.jpg",
+    "subType": 12,
+    "tierType": 6
   },
   "3841705359": {
     "name": "Pacifier X",
