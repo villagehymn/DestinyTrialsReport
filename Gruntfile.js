@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
-  var BUNGIE_API_KEY = 'ENTER KEY HERE';
+  var BUNGIE_API_KEY = '10E792629C2A47E19356B8A79EEFA640';
 
   // Define the configuration for all the tasks
   grunt.initConfig({
