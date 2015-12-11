@@ -12,7 +12,8 @@
 
   <div class="player-tab__section">
     <div class="row">
-      <div class="player-perk col-xs-6" ng-repeat="subclassNode in player.inventory.subclass.displayedNodes | orderObjectBy:'column'" bs-popover="{content:subclassNode.description}">
+      <div class="player-perk col-xs-6" ng-repeat="subclassNode in player.inventory.subclass.displayedNodes | orderObjectBy:'column'"
+           data-content="{{subclassNode.description}}" bs-popover>
         <img class="player-perk__icon img-responsive" ng-src="{{subclassNode.icon}}" alt="{{subclassNode.name}}">
         <span class="player-perk__title" ng-bind="subclassNode.name"></span>
       </div>
