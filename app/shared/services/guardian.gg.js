@@ -11,6 +11,7 @@ app.service('guardianGG', [
       var BASE_URL = '/ggg';
       var ENDPOINTS = {
         getElo: '/elo/{membershipId}',
+        getTeamElo: '/dtr/elo?alpha={teamArray}',
         getFireteam: '/fireteam/{mode}/{membershipId}',
         getTeam: '/dtr/{membershipIdArray}',
         getWeapons: '/weapon/top?platform={platform}&mode=14&start={start}&end={end}'
@@ -19,6 +20,12 @@ app.service('guardianGG', [
       this.getElo = function(membershipId) {
         return this.get(ENDPOINTS.getElo, {
           membershipId: membershipId
+        });
+      };
+
+      this.getTeamElo = function(teamArray) {
+        return this.get(ENDPOINTS.getTeamElo, {
+          teamArray: teamArray
         });
       };
 
