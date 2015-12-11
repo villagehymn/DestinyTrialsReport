@@ -34,7 +34,7 @@ var getActivitiesFromChar = function ($scope, account, homeFactory) {
 
 angular.module('trialsReportApp')
   .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, $filter, guardianggFactory) {
-    $scope.currentMap = DestinyCrucibleMapDefinition[2332037858];
+    $scope.currentMap = DestinyCrucibleMapDefinition[1851417512];
     $scope.subdomain = config.subdomain === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
@@ -153,15 +153,19 @@ angular.module('trialsReportApp')
 
             guardianggFactory.getElo($scope.fireteam).then(function (elo) {
               if (elo.players) {
+                var playerElo;
                 angular.forEach($scope.fireteam, function (player) {
-                  player.ggg = elo.players[player.membershipId];
-                  player.ggg.tier = getGggTierByElo(player.ggg.elo);
-                  if (player.ggg.rank > 0) {
-                    player.ggg.rank = '#' + $filter('number')(player.ggg.rank);
-                  } else if (player.ggg.rank == -1) {
-                    player.ggg.rank = 'Placing';
-                  } else if (player.ggg.rank == -2) {
-                    player.ggg.rank = 'Inactive';
+                  playerElo = elo.players[player.membershipId];
+                  if (playerElo) {
+                    player.ggg = playerElo;
+                    player.ggg.tier = getGggTierByElo(player.ggg.elo);
+                    if (player.ggg.rank > 0) {
+                      player.ggg.rank = '#' + $filter('number')(player.ggg.rank);
+                    } else if (player.ggg.rank == -1) {
+                      player.ggg.rank = 'Placing';
+                    } else if (player.ggg.rank == -2) {
+                      player.ggg.rank = 'Inactive';
+                    }
                   }
                 });
               }
