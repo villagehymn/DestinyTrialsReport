@@ -73,7 +73,7 @@
 <div class="player-tab__section">
   <div class="row">
     <div class="col-xs-2 last-match__medal" ng-repeat="medal in medals track by $index"
-         bs-popover="{title:medal.name,content:medal.description}">
+         title="{{medal.name}}" data-content="{{medal.description}}" bs-popover>
       <img class="img-responsive" ng-src="{{'https://www.bungie.net' + medal.icon}}" alt="{{medal.name}}">
       <div class="last-match__medal-count"><sup>x</sup><span ng-bind="medal.count"></span></div>
     </div>
