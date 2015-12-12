@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('controlsController', function ($scope, $location, homeFactory, statsFactory, inventoryService, locationChanger, $routeParams, guardianggFactory, $q) {
+  .controller('controlsController', function ($scope, $location, homeFactory, statsFactory, inventoryService, locationChanger, $routeParams, guardianggFactory, $filter, $q) {
 
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
@@ -28,6 +28,15 @@ angular.module('trialsReportApp')
       }
     }
 
+    // TODO DRY team elo method
+    var getGggTierByElo = function (elo) {
+      if (elo < 1100) return 'Bronze';
+      if (elo < 1300) return 'Silver';
+      if (elo < 1500) return 'Gold';
+      if (elo < 1700) return 'Platinum';
+      return 'Diamond';
+    };
+
     $scope.searchPlayerbyName = function (name, platform, index) {
       if (angular.isUndefined(name)) {
         return;
@@ -42,8 +51,7 @@ angular.module('trialsReportApp')
             var methods = [
               inventoryService.getInventory(account.membershipType, account),
               statsFactory.getStats(account),
-              homeFactory.getActivities(account, '25'),
-              guardianggFactory.getElo(account)
+              homeFactory.getActivities(account, '25')
             ];
 
             $q.all(methods).then(function (results) {
@@ -53,6 +61,25 @@ angular.module('trialsReportApp')
               if (!$scope.fireteam[0].activities) {
                 $scope.fireteam[0].activities = {lastThree: {}, lastMatches: {}};
               }
+              guardianggFactory.getElo($scope.fireteam).then(function (elo) {
+                if (elo.players) {
+                  var playerElo;
+                  angular.forEach($scope.fireteam, function (player) {
+                    playerElo = elo.players[player.membershipId];
+                    if (playerElo) {
+                      player.ggg = playerElo;
+                      player.ggg.tier = getGggTierByElo(player.ggg.elo);
+                      if (player.ggg.rank > 0) {
+                        player.ggg.rank = '#' + $filter('number')(player.ggg.rank);
+                      } else if (player.ggg.rank == -1) {
+                        player.ggg.rank = 'Placing';
+                      } else if (player.ggg.rank == -2) {
+                        player.ggg.rank = 'Inactive';
+                      }
+                    }
+                  });
+                }
+              });
               updateUrl($scope, locationChanger);
             });
           }
