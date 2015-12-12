@@ -61,6 +61,8 @@ angular.module('trialsReportApp')
               if (!$scope.fireteam[0].activities) {
                 $scope.fireteam[0].activities = {lastThree: {}, lastMatches: {}};
               }
+              statsFactory.getGrimoire($scope.fireteam[index]);
+              statsFactory.checkSupporter($scope.fireteam[index]);
               guardianggFactory.getElo($scope.fireteam).then(function (elo) {
                 if (elo.players) {
                   var playerElo;
