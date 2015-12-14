@@ -33,6 +33,27 @@ function start() {
     res.send(nonHazard);
   });
 
+  app.use('/api/*?', function(req, res) {
+    if (req.headers[process.env.AUTH]) {
+      var options = {
+        url: 'http://' + process.env.API_URL + ':8000/' + req.originalUrl,
+        headers: {'X-API-Key': process.env.BUNGIE_API_KEY}
+      };
+      try {
+        request(options, function (error, response, body) {
+          if (!error && response.statusCode !== 503) {
+            var json = JSON.stringify(body);
+            res.send(JSON.parse(json));
+          } else {
+            res.send(error);
+          }
+        });
+      } catch (e) {}
+    } else {
+      res.send('Nope');
+    }
+  });
+
   // Guardian.net API Proxy
   app.use('/ggg/*?', function(req, res) {
     var options = {
