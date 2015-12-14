@@ -169,6 +169,17 @@ module.exports = function (grunt) {
           rewrite: {
             '^/ggg': '/'
           }
+        },
+        {
+          context: '/api',
+          host: '',
+          port: 8000,
+          https: false,
+          xforward: false,
+          headers: {
+            'host': 'http://',
+            'X-API-Key': BUNGIE_API_KEY
+          }
         }]
       },
       test: {

@@ -63,6 +63,8 @@ angular.module('trialsReportApp')
               }
               statsFactory.getGrimoire($scope.fireteam[index]);
               statsFactory.checkSupporter($scope.fireteam[index]);
+              statsFactory.getLighthouseCount($scope.fireteam[index]);
+              statsFactory.getTopWeapons($scope.fireteam[index]);
               guardianggFactory.getElo($scope.fireteam).then(function (elo) {
                 if (elo.players) {
                   var playerElo;

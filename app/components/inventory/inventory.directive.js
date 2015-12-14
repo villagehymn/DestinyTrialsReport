@@ -15,7 +15,8 @@ angular.module('trialsReportApp')
     return {
       restrict: 'A',
       scope: {
-        weapons: '=weaponNodes'
+        weapons: '=weaponNodes',
+        topWeapons:  '=topWeapons'
       },
       templateUrl: 'components/inventory/weapons.template.html'
     };

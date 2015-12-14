@@ -66,7 +66,10 @@
       </div>
       <div class="col-xs-3 stat">
         <span class="player-main-stats__lighthouse fail" ng-if="player.lighthouse !== true"><i class="material-icons">&#xE14C;</i></span>
-        <span class="player-main-stats__lighthouse success" ng-if="player.lighthouse === true"><i class="material-icons">&#xE876;</i></span>
+        <span class="player-main-stats__lighthouse success" ng-if="player.lighthouse === true">
+          <i class="material-icons" ng-if="player.lighthouseCount">&#xE876;</i>
+          {{player.lighthouseCount ? player.lighthouseCount + 'x' : 'Year 1'}}
+        </span>
         <label>Flawless</label>
       </div>
     </div>

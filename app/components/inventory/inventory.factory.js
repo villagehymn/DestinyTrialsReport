@@ -84,6 +84,7 @@ function setItemDefinition(item, definition) {
         }
       }
     }
+    definition[item.itemHash].itemHash = item.itemHash;
     return definition[item.itemHash];
   } else {
     console.log('Classified Item Hash: ' + item.itemHash);

@@ -13,11 +13,13 @@ angular.module('trialsReportApp')
           var stats;
           if(!angular.isUndefined(result.data.Response)) {
             stats = result.data.Response.trialsOfOsiris.allTime;
-            stats.activitiesWinPercentage = {
-              'basic': {'value': +(100 * stats.activitiesWon.basic.value / stats.activitiesEntered.basic.value).toFixed()},
-              'statId': 'activitiesWinPercentage'
-            };
-            stats.activitiesWinPercentage.basic.displayValue = stats.activitiesWinPercentage.basic.value + '%';
+            if (stats) {
+              stats.activitiesWinPercentage = {
+                'basic': {'value': +(100 * stats.activitiesWon.basic.value / stats.activitiesEntered.basic.value).toFixed()},
+                'statId': 'activitiesWinPercentage'
+              };
+              stats.activitiesWinPercentage.basic.displayValue = stats.activitiesWinPercentage.basic.value + '%';
+            }
           }
           player.stats = stats;
           return player;
@@ -39,6 +41,42 @@ angular.module('trialsReportApp')
         });
     };
 
+    var getLighthouseCount = function (player) {
+      return api.lighthouseCount(
+        player.membershipId
+      ).then(function (result) {
+          if (result && result.data && result.data[0] && result.data[0].count) {
+            player.lighthouseCount = result.data[0].count;
+            return player;
+          }
+        });
+    };
+
+    var getTopWeapons = function (player) {
+      return api.topWeapons(
+        player.membershipId
+      ).then(function (result) {
+          if (result && result.data) {
+            var topWeapons = {};
+            _.each(result.data, function(weapon) {
+              topWeapons[weapon.weaponId] = {percision: +(100 * weapon.headshots / weapon.kills).toFixed()};
+            });
+            player.topWeapons = topWeapons;
+            return player;
+          }
+        });
+    };
+
+    var getPreviousMatches = function (player) {
+      return api.previousMatches(
+        player.membershipId
+      ).then(function (result) {
+          if (result && result.data) {
+            return result.data;
+          }
+        });
+    };
+
     var checkSupporter = function (player) {
       return api.checkSupporterStatus(
         player.membershipId
@@ -55,6 +93,9 @@ angular.module('trialsReportApp')
     return {
       getStats: getStats,
       getGrimoire: getGrimoire,
-      checkSupporter: checkSupporter
+      checkSupporter: checkSupporter,
+      getLighthouseCount: getLighthouseCount,
+      getTopWeapons: getTopWeapons,
+      getPreviousMatches: getPreviousMatches
     };
   });
