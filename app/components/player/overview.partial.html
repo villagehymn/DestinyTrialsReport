@@ -69,7 +69,7 @@
           <i class="material-icons">&#xE14C;</i>
         </span>
         <span class="player-main-stats__lighthouse success" ng-if="player.lighthouse.grimoire === true"
-              data-content="Account: {{player.lighthouse.accountCount}}<br>Character: {{player.lighthouse.characterCount}}" bs-popover>
+              data-template-url="shared/popovers/lighthouse.popover.html" bs-popover>
           <i class="material-icons" ng-if="player.lighthouse.accountCount">&#xE876;</i>
           <span ng-bind="player.lighthouse.accountCount ? player.lighthouse.accountCount + 'x' : 'Year 1'"></span>
         </span>

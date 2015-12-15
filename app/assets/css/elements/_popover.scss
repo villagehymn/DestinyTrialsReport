@@ -136,6 +136,35 @@
   border-left-color: #fff;
 }
 
+.popover.lighthouse-count {
+  color: rgba(0, 0, 0, .90);
+  text-align: center;
+  line-height: 15.4px;
+  font-size: 10.78px;
+  padding: 0px;
+
+  .popover-title {
+    padding: 2px;
+    height: 19px;
+    border: 0px;
+    font-size: 10.78px;
+    line-height: 15.4px;
+  }
+
+  .count {
+    font-size: 12.6px;
+    line-height: 18.4px;
+    text-align: left;
+    span {
+      display: block;
+      float: right;
+      margin-left: 8px;
+      font-weight: 400;
+    }
+  }
+
+}
+
 .popover.ggg-elo {
   color: rgba(255, 255, 255, .71);
   text-align: center;
