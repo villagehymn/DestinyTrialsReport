@@ -207,8 +207,8 @@ var itemTypeToBucket = {
 
 var className = [
   'Titan',
-  'Warlock',
-  'Hunter'
+  'Hunter',
+  'Warlock'
 ];
 
 // Match summary weapon kill definitions
