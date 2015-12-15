@@ -23,11 +23,7 @@ angular.module('trialsReportApp')
     var getWeapons = function (platform) {
       var now = moment.utc();
       var begin = now.clone().day(5).hour(18).minute(0).second(0).millisecond(0);
-
-      if (now.isBefore(begin)) {
-        begin.subtract(1, 'week');
-      }
-
+      if (now.isBefore(begin)) begin.subtract(1, 'week');
       var end = begin.clone().add(4, 'days').hour(9);
 
       var dateBeginTrials = begin.format('YYYY-MM-DD');

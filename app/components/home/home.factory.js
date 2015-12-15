@@ -166,13 +166,8 @@ angular.module('trialsReportApp')
       },
       setPlayerStats = function (result) {
         var dfd = $q.defer();
-        var player = result[0], stats = result[1];
-        player.noRecentMatches = !player.activities || !player.activities.lastTwentyFive;
-        player.stats = stats.stats;
-        player.nonHazard = stats.nonHazard;
-        player.lighthouse = stats.lighthouse;
+        var player = result[0];
         dfd.resolve(player);
-
         return dfd.promise;
       },
       reportProblems = function (fault) {

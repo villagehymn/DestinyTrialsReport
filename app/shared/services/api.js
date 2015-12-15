@@ -11,7 +11,7 @@ app.service('api', [
       var BASE_URL = '';
       var ENDPOINTS = {
         supporterStatus: '/supporterStatus/{membershipId}',
-        lighthouseCount: '/api/lighthouseCount/{membershipId}',
+        lighthouseCount: '/api/lighthouseAll/{membershipId}',
         topWeapons: '/api/topWeapons/{membershipId}',
         previousMatches: '/api/previousMatches/{membershipId}'
       };
