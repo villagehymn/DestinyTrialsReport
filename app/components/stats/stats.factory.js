@@ -11,7 +11,7 @@ angular.module('trialsReportApp')
         '14'
       ).then(function (result) {
           var stats;
-          if(angular.isDefined(result.data.Response)) {
+          if (angular.isDefined(result.data.Response)) {
             stats = result.data.Response.trialsOfOsiris.allTime;
             if (stats) {
               stats.activitiesWinPercentage = {
@@ -51,40 +51,40 @@ angular.module('trialsReportApp')
       ).then(function (result) {
           if (result && result.data) {
             var lighthouseVisits = {};
-            var lighthouseAccountCount = 0;
-            var lighthouseCharacterCount = 0;
+            var accountCount = 0;
+            var characterCount = 0;
 
-            var lighthouseByCharacter = _.groupBy(result.data, 'characterId');
-            _.each(lighthouseByCharacter, function (lighthouseVisits, characterId) {
-              var visits = {};
+            var visitsByCharacter = _.groupBy(result.data, 'characterId');
+            _.each(visitsByCharacter, function (visits, characterId) {
+              var weeks = {};
 
-              _.each(lighthouseVisits, function (lighthouseVisit) {
-                var now = moment.utc(lighthouseVisit.period);
+              _.each(visits, function (visit) {
+                var now = moment.utc(visit.period);
                 var begin = now.clone().day(5).hour(18).minute(0).second(0).millisecond(0);
                 if (now.isBefore(begin)) begin.subtract(1, 'week');
 
                 var dateBeginTrials = begin.format('YYYY-MM-DD');
 
-                visits[dateBeginTrials] = visits[dateBeginTrials] + 1 || 1;
+                weeks[dateBeginTrials] = weeks[dateBeginTrials] + 1 || 1;
               });
 
-              var visitsCount = _.size(visits);
-              lighthouseVisits[characterId] = visits;
-              lighthouseAccountCount += visitsCount;
+              var visitsCount = _.size(weeks);
+              lighthouseVisits[characterId] = weeks;
+              accountCount += visitsCount;
               if (characterId == player.characterInfo.characterId) {
-                lighthouseCharacterCount = visitsCount;
+                characterCount = visitsCount;
               }
             });
 
             if (player.hasOwnProperty('lighthouse')) {
               player.lighthouse.visits = lighthouseVisits;
-              player.lighthouse.accountCount = lighthouseAccountCount;
-              player.lighthouse.characterCount = lighthouseCharacterCount;
+              player.lighthouse.accountCount = accountCount;
+              player.lighthouse.characterCount = characterCount;
             } else {
               player.lighthouse = {
                 visits: lighthouseVisits,
-                accountCount: lighthouseAccountCount,
-                characterCount: lighthouseCharacterCount
+                accountCount: accountCount,
+                characterCount: characterCount
               };
             }
             return player;
@@ -122,7 +122,7 @@ angular.module('trialsReportApp')
         player.membershipId
       ).then(function (result) {
           var nonHazard;
-          if(angular.isDefined(result.data)) {
+          if (angular.isDefined(result.data)) {
             nonHazard = result.data;
           }
           player.nonHazard = nonHazard;
