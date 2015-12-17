@@ -1,12 +1,31 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, $filter, guardianggFactory, api) {
-    $scope.currentMap = DestinyCrucibleMapDefinition[1851417512];
+  .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, $filter, guardianggFactory, api, guardianGG) {
     $scope.subdomain = config.subdomain === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
     });
+
+    if ($scope.$storage.currentMap && (moment.utc().diff($scope.$storage.currentMapDate, 'days') > 2 )) {
+      $scope.currentMap = DestinyCrucibleMapDefinition[$scope.$storage.currentMap];
+    } else {
+      return guardianGG.getMap().then(function (result) {
+        var map = result.data;
+        if (map && map.hash != 0) {
+          var now = moment.utc();
+          $scope.$storage.currentMap = map.hash;
+          $scope.$storage.currentMapDate = now;
+          $scope.currentMap = DestinyCrucibleMapDefinition[map.hash];
+        } else {
+          if ($scope.$storage.currentMap) {
+            $scope.currentMap = DestinyCrucibleMapDefinition[$scope.$storage.currentMap];
+          } else {
+            $scope.currentMap = DestinyCrucibleMapDefinition[4200263342];
+          }
+        }
+      })
+    }
 
     $scope.DestinyCrucibleMapDefinition = DestinyCrucibleMapDefinition;
     $scope.DestinyHazardDefinition = DestinyHazardDefinition;

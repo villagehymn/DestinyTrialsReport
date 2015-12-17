@@ -11,6 +11,7 @@ app.service('guardianGG', [
       var BASE_URL = '/ggg';
       var ENDPOINTS = {
         getElo: '/elo/{membershipId}',
+        getMap: '/dtr/trials-map',
         getTeamElo: '/dtr/elo?alpha={teamArray}',
         getFireteam: '/fireteam/{mode}/{membershipId}',
         getTeam: '/dtr/{membershipIdArray}',
@@ -21,6 +22,10 @@ app.service('guardianGG', [
         return this.get(ENDPOINTS.getElo, {
           membershipId: membershipId
         });
+      };
+
+      this.getMap = function() {
+        return this.get(ENDPOINTS.getMap, {});
       };
 
       this.getTeamElo = function(teamArray) {
