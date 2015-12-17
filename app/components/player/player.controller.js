@@ -49,4 +49,12 @@ angular.module('trialsReportApp')
         case 'weaponKillsSuper':   return 'Super';
       }
     };
+
+    $scope.getLighthouseCount = function (lighthouseData, subdomain) {
+      switch (subdomain) {
+        case true: return lighthouseData.characterCount;
+        case false: return lighthouseData.accountCount;
+      }
+    };
+
   });
