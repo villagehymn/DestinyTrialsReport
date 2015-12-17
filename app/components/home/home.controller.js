@@ -1,39 +1,7 @@
 'use strict';
 
-var getActivitiesFromChar = function ($scope, account, homeFactory) {
-
-  var setRecentActivities = function (account) {
-      return homeFactory.getLastTwentyOne(account)
-        .then(function (activities) {
-          return activities;
-        });
-    },
-
-    setRecentPlayers = function (activities) {
-      angular.forEach(activities, function (activity) {
-        homeFactory.getFireteamFromActivitiy(activity, account.membershipId).then(function (resMembers) {
-          var recents = {};
-          angular.forEach(resMembers, function (member, key) {
-            if (key !== account.membershipId) {
-              recents[member.name] = member;
-            }
-          });
-          $scope.recentPlayers = angular.extend($scope.recentPlayers, recents);
-        });
-      });
-    },
-
-    reportProblems = function (fault) {
-      console.log(String(fault));
-    };
-
-  setRecentActivities(account)
-    .then(setRecentPlayers)
-    .catch(reportProblems);
-};
-
 angular.module('trialsReportApp')
-  .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, $filter, guardianggFactory) {
+  .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, $filter, guardianggFactory, api) {
     $scope.currentMap = DestinyCrucibleMapDefinition[1851417512];
     $scope.subdomain = config.subdomain === 'my';
     $scope.$storage = $localStorage.$default({
@@ -62,8 +30,18 @@ angular.module('trialsReportApp')
     $scope.suggestRecentPlayers = function () {
       if (angular.isUndefined($scope.recentPlayers)) {
         $scope.recentPlayers = {};
-        getActivitiesFromChar($scope, $scope.fireteam[0], homeFactory);
-        $scope.recentPlayersCopy = $scope.recentPlayers;
+        return api.recentTeammates(
+          $scope.fireteam[0].membershipId
+        ).then(function (result) {
+            var recents = {};
+            angular.forEach(result.data, function (member) {
+              if (member.membershipId !==  $scope.fireteam[0].membershipId) {
+                recents[member.displayName] = member;
+              }
+            });
+            $scope.recentPlayers = angular.extend($scope.recentPlayers, recents);
+            $scope.recentPlayersCopy = $scope.recentPlayers;
+          });
       }
     };
 

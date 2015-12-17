@@ -13,6 +13,7 @@ app.service('api', [
         supporterStatus: '/supporterStatus/{membershipId}',
         lighthouseCount: '/api/lighthouseAll/{membershipId}',
         topWeapons: '/api/topWeapons/{membershipId}',
+        recentTeammates: '/api/recentTeammates/{membershipId}',
         previousMatches: '/api/previousMatches/{membershipId}'
       };
 
@@ -30,6 +31,12 @@ app.service('api', [
 
       this.topWeapons = function(membershipId) {
         return this.get(ENDPOINTS.topWeapons, {
+          membershipId: membershipId
+        });
+      };
+
+      this.recentTeammates = function(membershipId) {
+        return this.get(ENDPOINTS.recentTeammates, {
           membershipId: membershipId
         });
       };
