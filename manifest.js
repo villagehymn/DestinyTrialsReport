@@ -101,42 +101,6 @@ function extractDB(dbFile) {
     }
     */
 
-    if (!(57660786 in DestinyWeaponDefinition)) {
-      DestinyWeaponDefinition[57660786] = DestinyWeaponDefinition[3191797830];
-    } else {
-      console.log('Super Good Advice now exists in the manifest file and the override can be removed.');
-    }
-
-    if (!(1346849289 in DestinyWeaponDefinition)) {
-      DestinyWeaponDefinition[1346849289] = DestinyWeaponDefinition[3490486525];
-    } else {
-      console.log('MIDA Multi-Tool now exists in the manifest file and the override can be removed.');
-    }
-
-    if (!(2055601060 in DestinyWeaponDefinition)) {
-      DestinyWeaponDefinition[2055601060] = DestinyWeaponDefinition[119482464];
-    } else {
-      console.log('Hard Light now exists in the manifest file and the override can be removed.');
-    }
-
-    if (!(2808364179 in DestinyWeaponDefinition)) {
-      DestinyWeaponDefinition[2808364179] = DestinyWeaponDefinition[3705198528];
-    } else {
-      console.log('Dragon\'s Breath now exists in the manifest file and the override can be removed.');
-    }
-
-    if (!(3078564839 in DestinyWeaponDefinition)) {
-      DestinyWeaponDefinition[3078564839] = DestinyWeaponDefinition[346443851];
-    } else {
-      console.log('Plan C now exists in the manifest file and the override can be removed.');
-    }
-
-    if (!(3835813881 in DestinyWeaponDefinition)) {
-      DestinyWeaponDefinition[3835813881] = DestinyWeaponDefinition[2681212685];
-    } else {
-      console.log('No Land Beyond now exists in the manifest file and the override can be removed.');
-    }
-
     writeDefinitionFile('app/shared/definitions/en/DestinyArmorDefinition.js',    'DestinyArmorDefinition',    DestinyArmorDefinition);
     writeDefinitionFile('app/shared/definitions/en/DestinySubclassDefinition.js', 'DestinySubclassDefinition', DestinySubclassDefinition);
     writeDefinitionFile('app/shared/definitions/en/DestinyWeaponDefinition.js',   'DestinyWeaponDefinition',   DestinyWeaponDefinition);

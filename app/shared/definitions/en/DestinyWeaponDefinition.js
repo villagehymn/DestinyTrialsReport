@@ -81,7 +81,7 @@ var DestinyWeaponDefinition = {
   },
   "57660786": {
     "name": "Super Good Advice",
-    "icon": "/common/destiny_content/icons/241f4ca98645b111fd39902ef7338009.jpg",
+    "icon": "/common/destiny_content/icons/236ac1d84982ee135130279aee788f17.jpg",
     "subType": 8,
     "tierType": 6
   },
@@ -1503,7 +1503,7 @@ var DestinyWeaponDefinition = {
   },
   "1346849289": {
     "name": "MIDA Multi-Tool",
-    "icon": "/common/destiny_content/icons/c4926f5a733801fef0be55f8c5db5fe7.jpg",
+    "icon": "/common/destiny_content/icons/954f8fe742bdee19014685ad2569cfba.jpg",
     "subType": 14,
     "tierType": 6
   },
@@ -2355,7 +2355,7 @@ var DestinyWeaponDefinition = {
   },
   "2055601060": {
     "name": "Hard Light",
-    "icon": "/common/destiny_content/icons/5b503f30ffed95cb2bd52a101bfcb40c.jpg",
+    "icon": "/common/destiny_content/icons/57da315513a31ea4a5fb4f2fa139f0c3.jpg",
     "subType": 6,
     "tierType": 6
   },
@@ -3471,7 +3471,7 @@ var DestinyWeaponDefinition = {
   },
   "2808364179": {
     "name": "Dragon's Breath",
-    "icon": "/common/destiny_content/icons/5983fc2fed7e3481a5b1cc8cafcb248f.jpg",
+    "icon": "/common/destiny_content/icons/3daba2be0356021cbeb2c937de17e391.jpg",
     "subType": 10,
     "tierType": 6
   },
@@ -3771,7 +3771,7 @@ var DestinyWeaponDefinition = {
   },
   "3078564839": {
     "name": "Plan C",
-    "icon": "/common/destiny_content/icons/a39732034b46655967d2e8739f56cf2f.jpg",
+    "icon": "/common/destiny_content/icons/abf1f8e0f408e282d2e5f56bb39743f5.jpg",
     "subType": 11,
     "tierType": 6
   },
@@ -4821,7 +4821,7 @@ var DestinyWeaponDefinition = {
   },
   "3835813881": {
     "name": "No Land Beyond",
-    "icon": "/common/destiny_content/icons/e6873c6f817a98ae019f230537e3b2ee.jpg",
+    "icon": "/common/destiny_content/icons/2fa9b8306978fdfdbe60df490b4a76ec.jpg",
     "subType": 12,
     "tierType": 6
   },
