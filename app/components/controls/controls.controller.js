@@ -28,15 +28,6 @@ angular.module('trialsReportApp')
       }
     }
 
-    // TODO DRY team elo method
-    var getGggTierByElo = function (elo) {
-      if (elo < 1100) return 'Bronze';
-      if (elo < 1300) return 'Silver';
-      if (elo < 1500) return 'Gold';
-      if (elo < 1700) return 'Platinum';
-      return 'Diamond';
-    };
-
     $scope.searchPlayerbyName = function (name, platform, index) {
       if (angular.isUndefined(name)) {
         return;
@@ -65,25 +56,7 @@ angular.module('trialsReportApp')
               statsFactory.checkSupporter($scope.fireteam[index]);
               statsFactory.getLighthouseCount($scope.fireteam[index]);
               statsFactory.getTopWeapons($scope.fireteam[index]);
-              guardianggFactory.getElo($scope.fireteam).then(function (elo) {
-                if (elo.players) {
-                  var playerElo;
-                  angular.forEach($scope.fireteam, function (player) {
-                    playerElo = elo.players[player.membershipId];
-                    if (playerElo) {
-                      player.ggg = playerElo;
-                      player.ggg.tier = getGggTierByElo(player.ggg.elo);
-                      if (player.ggg.rank > 0) {
-                        player.ggg.rank = '#' + $filter('number')(player.ggg.rank);
-                      } else if (player.ggg.rank == -1) {
-                        player.ggg.rank = 'Placing';
-                      } else if (player.ggg.rank == -2) {
-                        player.ggg.rank = 'Inactive';
-                      }
-                    }
-                  });
-                }
-              });
+              guardianggFactory.getElo($scope.fireteam);
               updateUrl($scope, locationChanger);
             });
           }

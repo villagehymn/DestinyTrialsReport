@@ -111,14 +111,6 @@ angular.module('trialsReportApp')
       $scope.platformValue = $scope.$storage.platform;
     }
 
-    var getGggTierByElo = function (elo) {
-      if (elo < 1100) return 'Bronze';
-      if (elo < 1300) return 'Silver';
-      if (elo < 1500) return 'Gold';
-      if (elo < 1700) return 'Platinum';
-      return 'Diamond';
-    };
-
     if (config.fireteam) {
       $scope.fireteam = config.fireteam;
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
@@ -129,25 +121,7 @@ angular.module('trialsReportApp')
             $scope.focusOnPlayers = true;
             var platformUrl = $scope.platformValue ? '/ps/' : '/xbox/';
 
-            guardianggFactory.getElo($scope.fireteam).then(function (elo) {
-              if (elo.players) {
-                var playerElo;
-                angular.forEach($scope.fireteam, function (player) {
-                  playerElo = elo.players[player.membershipId];
-                  if (playerElo) {
-                    player.ggg = playerElo;
-                    player.ggg.tier = getGggTierByElo(player.ggg.elo);
-                    if (player.ggg.rank > 0) {
-                      player.ggg.rank = '#' + $filter('number')(player.ggg.rank);
-                    } else if (player.ggg.rank == -1) {
-                      player.ggg.rank = 'Placing';
-                    } else if (player.ggg.rank == -2) {
-                      player.ggg.rank = 'Inactive';
-                    }
-                  }
-                });
-              }
-            });
+            guardianggFactory.getElo($scope.fireteam);
 
             if (!$scope.subdomain && angular.isDefined(config.updateUrl)) {
               locationChanger.skipReload()

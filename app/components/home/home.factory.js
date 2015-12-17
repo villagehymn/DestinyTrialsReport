@@ -122,40 +122,6 @@ angular.module('trialsReportApp')
       return account;
     }
 
-    var getLastTwentyOne = function (account) {
-      var allPastActivities = [];
-      var methods = [];
-      angular.forEach(account.characters, function (character) {
-        methods.push(
-          bungie.getActivityHistory(
-            character.membershipType,
-            character.membershipId,
-            character.characterInfo.characterId,
-            '14',
-            '21'
-          )
-        );
-      });
-      return $q.all(methods)
-        .then(function(results) {
-          angular.forEach(results, function (result) {
-            var activities = result.data.Response.data.activities;
-            if (angular.isUndefined(activities)) {
-              return;
-            }
-            angular.forEach(activities.slice().reverse(), function (activity, index) {
-              if (index % 5 === 0) {
-                allPastActivities.push({
-                  'id': activity.activityDetails.instanceId,
-                  'standing': activity.values.standing.basic.value
-                });
-              }
-            });
-          });
-          return allPastActivities;
-        });
-    };
-
     var playerStatsInParallel = function (player) {
         var methods = [
           inventoryService.getInventory(player.membershipType, player),
@@ -181,25 +147,6 @@ angular.module('trialsReportApp')
         .catch(reportProblems);
     };
 
-    var getFireteamFromActivitiy = function (recentActivity, id) {
-      return bungie.getPgcr(recentActivity.id)
-        .then(function (resultPostAct) {
-          var fireTeam = {};
-          var data = resultPostAct.data.Response.data;
-          var entries = data.entries, standing = recentActivity.standing;
-          for (var i = 0; i < entries.length; i++) {
-            if (entries[i].standing === standing) {
-              var playerId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-
-              if (playerId !== angular.lowercase(id)) {
-                var teammateId = angular.lowercase(entries[i].player.destinyUserInfo.membershipId);
-                fireTeam[teammateId] = playerFactory.build(entries[i].player.destinyUserInfo, entries[i].player.destinyUserInfo.displayName, entries[i]);
-              }
-            }
-          }
-          return fireTeam;
-        });
-    };
 
     return {
       searchByName: searchByName,
@@ -207,8 +154,6 @@ angular.module('trialsReportApp')
       getRecentActivity: getRecentActivity,
       getCharacters: getCharacters,
       getActivities: getActivities,
-      getLastTwentyOne: getLastTwentyOne,
-      refreshInventory: refreshInventory,
-      getFireteamFromActivitiy: getFireteamFromActivitiy
+      refreshInventory: refreshInventory
     };
   });
