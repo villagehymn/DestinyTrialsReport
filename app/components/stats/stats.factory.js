@@ -99,7 +99,7 @@ angular.module('trialsReportApp')
           if (result && result.data) {
             var topWeapons = {};
             _.each(result.data, function (weapon) {
-              topWeapons[weapon.weaponId] = {percision: +(100 * weapon.headshots / weapon.kills).toFixed()};
+              topWeapons[weapon.weaponId] = {percision: +(100 * weapon.headshots / weapon.kills).toFixed(), kills: weapon.kills, headshots: weapon.headshots};
             });
             player.topWeapons = topWeapons;
             return player;

@@ -19,6 +19,17 @@
     border-radius: 5px;
   }
 
+  span {
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 5px;
+    font-size: .9em;
+    flex-grow: 1;
+    text-shadow: $text-shadow;
+    color: $player-card;
+    font-weight: 500;
+  }
+
   &:before {
     content: "";
     position: absolute;
