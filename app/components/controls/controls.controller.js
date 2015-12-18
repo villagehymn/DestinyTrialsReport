@@ -56,7 +56,7 @@ angular.module('trialsReportApp')
               statsFactory.checkSupporter($scope.fireteam[index]);
               statsFactory.getLighthouseCount($scope.fireteam[index]);
               statsFactory.getTopWeapons($scope.fireteam[index]);
-              guardianggFactory.getElo($scope.fireteam[index]);
+              guardianggFactory.getTeamElo($scope.fireteam);
               updateUrl($scope, locationChanger);
             });
           }

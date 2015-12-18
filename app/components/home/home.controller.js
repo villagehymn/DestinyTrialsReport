@@ -165,7 +165,7 @@ angular.module('trialsReportApp')
             $scope.focusOnPlayers = true;
             var platformUrl = $scope.platformValue ? '/ps/' : '/xbox/';
 
-            //guardianggFactory.getElo($scope.fireteam);
+            guardianggFactory.getTeamElo($scope.fireteam);
 
             if (!$scope.subdomain && angular.isDefined(config.updateUrl)) {
               locationChanger.skipReload()
