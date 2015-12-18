@@ -14,7 +14,9 @@ app.service('api', [
         lighthouseCount: '/api/lighthouseAll/{membershipId}',
         topWeapons: '/api/topWeapons/{membershipId}',
         recentTeammates: '/api/recentTeammates/{membershipId}',
-        previousMatches: '/api/previousMatches/{membershipId}'
+        previousMatches: '/api/previousMatches/{membershipId}',
+        teamByMatch: '/api/teamByMatch/{instanceId}',
+        trialsFirst: '/api/trialsFirst'
       };
 
       this.checkSupporterStatus = function(membershipId) {
@@ -45,6 +47,16 @@ app.service('api', [
         return this.get(ENDPOINTS.previousMatches, {
           membershipId: membershipId
         });
+      };
+
+      this.teamByMatch = function(instanceId) {
+        return this.get(ENDPOINTS.teamByMatch, {
+          instanceId: instanceId
+        });
+      };
+
+      this.trialsFirst = function() {
+        return this.get(ENDPOINTS.trialsFirst, {});
       };
 
       this.get = function(endpoint, tokens) {

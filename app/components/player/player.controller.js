@@ -5,6 +5,7 @@ angular.module('trialsReportApp')
 
     homeFactory.getActivities($scope.player, '25');
     statsFactory.getStats($scope.player);
+    guardianggFactory.getElo($scope.player);
     statsFactory.getGrimoire($scope.player);
     statsFactory.checkSupporter($scope.player);
     statsFactory.getLighthouseCount($scope.player);

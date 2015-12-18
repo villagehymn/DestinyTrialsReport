@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="home" ng-show="!fireteam[0] && !status">
+    <div class="home" ng-show="!fireteam[0] && !status" style="max-width: 1323px !important;">
       <div ng-include="'components/home/blog.partial.html'"></div>
     </div>
     <div class="players-wrapper" ng-if="fireteam[0] && !status" ng-class="{'focus-on-player-one':focusOnPlayer===1, 'focus-on-player-two':focusOnPlayer===2, 'focus-on-player-three':focusOnPlayer===3}">
