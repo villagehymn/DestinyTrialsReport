@@ -2,7 +2,7 @@
 
 angular.module('trialsReportApp')
   .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, $filter, guardianggFactory, api, guardianGG) {
-    $scope.currentMap = DestinyCrucibleMapDefinition[4200263342];
+    $scope.currentMap = DestinyCrucibleMapDefinition[2507231345];
     $scope.subdomain = config.subdomain === 'my';
     $scope.$storage = $localStorage.$default({
       platform: true
@@ -48,22 +48,24 @@ angular.module('trialsReportApp')
       return newDate;
     }
 
-    if (angular.isUndefined($scope.flawlessLeaderboard)) {
-      $scope.flawlessLeaderboard = {};
+    if (angular.isUndefined(config.fireteam)) {
+      if (angular.isUndefined($scope.flawlessLeaderboard)) {
+        $scope.flawlessLeaderboard = {};
 
-      api.trialsFirst()
-        .then(function (matches) {
-          angular.forEach(matches.data, function (match) {
-            return api.teamByMatch(
-              match.instanceId
-            ).then(function (result) {
-                $scope.flawlessLeaderboard[match.instanceId] = result.data;
-                $scope.flawlessLeaderboard[match.instanceId].date = convertUTCDateToLocalDate(new Date(result.data[0].date));
-                $scope.flawlessLeaderboard[match.instanceId].instanceId = match.instanceId;
-                $scope.flawlessLeaderboard[match.instanceId].map = DestinyCrucibleMapDefinition[match.referenceId].pgcrImage;
-              });
+        api.trialsFirst()
+          .then(function (matches) {
+            angular.forEach(matches.data, function (match) {
+              return api.teamByMatch(
+                match.instanceId
+              ).then(function (result) {
+                  $scope.flawlessLeaderboard[match.instanceId] = result.data;
+                  $scope.flawlessLeaderboard[match.instanceId].date = convertUTCDateToLocalDate(new Date(result.data[0].date));
+                  $scope.flawlessLeaderboard[match.instanceId].instanceId = match.instanceId;
+                  $scope.flawlessLeaderboard[match.instanceId].map = DestinyCrucibleMapDefinition[match.referenceId].pgcrImage;
+                });
+            });
           });
-        });
+      }
     }
 
     $scope.focusOnPlayer = 1;
