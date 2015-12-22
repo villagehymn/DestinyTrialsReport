@@ -3,9 +3,10 @@
 function getSubdomain() {
   var segments = location.hostname.split('.');
   return segments.length>2?segments[segments.length-3].toLowerCase():null;
+  //return 'opponents'
 }
 
-function getFromParams(homeFactory, inventoryService, guardianggFactory, toastr, bungie, $route, $q) {
+function getFromParams(homeFactory, inventoryService, guardianggFactory, api, toastr, bungie, $route, $q) {
   var params = $route.current.params;
   var name = params.playerName || params.playerOne;
   if (angular.isDefined(name)) {
@@ -18,7 +19,7 @@ function getFromParams(homeFactory, inventoryService, guardianggFactory, toastr,
           if (result) {
             var player = result;
             player.searched = true;
-            if (subdomain === 'my') {
+            if (subdomain === 'my' || subdomain === 'opponents') {
               return homeFactory.getCharacters(
                 player.membershipType,
                 player.membershipId,
@@ -118,12 +119,16 @@ function getFromParams(homeFactory, inventoryService, guardianggFactory, toastr,
         });
         return $q.all(methods);
       },
+      getOpponents = function (player) {
+        return api.getOpponents(player.membershipId)
+      },
       returnPlayer = function (results) {
         if (results) {
           return {
             fireteam: [results[0],results[1], results[2]],
             subdomain: subdomain,
-            updateUrl: params.playerName
+            updateUrl: params.playerName,
+            data: results.data
           };
         } else {
           return {
@@ -145,6 +150,11 @@ function getFromParams(homeFactory, inventoryService, guardianggFactory, toastr,
         return getPlayer()
           .then(teammatesFromChars)
           .then(getInventory)
+          .then(returnPlayer)
+          .catch(reportProblems);
+      } else if (subdomain === 'opponents') {
+        return getPlayer()
+          .then(getOpponents)
           .then(returnPlayer)
           .catch(reportProblems);
       } else {
@@ -186,5 +196,7 @@ angular
     'toastr',
     'ui.bootstrap.tpls',
     'ui.bootstrap.progressbar',
-    'ui.bootstrap.tabs'
+    'ui.bootstrap.tabs',
+    'ui.bootstrap.pagination',
+    'angularUtils.directives.dirPagination'
   ]);

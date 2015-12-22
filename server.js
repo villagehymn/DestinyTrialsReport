@@ -86,6 +86,7 @@ function start() {
     res.sendFile(__dirname + '/index.html');
   });
   app.use(subdomain('my', router));
+  app.use(subdomain('opponents', router));
 
   // Bungie API Proxy
   app.use('/Platform/*?', function(req, res) {

@@ -23,7 +23,8 @@
     "bootstrap-material-design": "~0.3.0",
     "ngstorage": "~0.3.9",
     "xpull": "*",
-    "underscore": "~1.8.3"
+    "underscore": "~1.8.3",
+    "angularUtils-pagination": "angular-utils-pagination#~0.9.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.7"

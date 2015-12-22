@@ -76,6 +76,10 @@ $duration: 1.4s;
   animation: rotator $duration linear infinite;
 }
 
+.active-player {
+  background-color: #ECEFF1;
+}
+
 @keyframes rotator {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(270deg); }

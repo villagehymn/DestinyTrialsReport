@@ -4,14 +4,20 @@
       <div class="blog-post__img" ng-style="{'background-image':'url(' + currentMap.pgcrImage + ')'}"></div>
       <div class="blog-post__content">
         <div class="blog-post__title">
-          <h2>Year Two Flawless Data!</h2>
+          <h2>Opponent Searching and Year Two Flawless Data!</h2>
         </div>
         <ul class="blog-post__meta">
           <li>
-            <p><span class="material-icons">&#xE8DF;</span> Dec 18th, 2015</p>
+            <p><span class="material-icons">&#xE8DF;</span> Dec 22th, 2015</p>
           </li>
         </ul>
         <div class="blog-post__text">
+          <p>
+            So I made a quick beta version of a feature we want to have up on the site during the holidays,
+            you can now search through your trials opponents! <br/>
+            It's very Beta and has lots of issues but still usable, try it out for yourself over at
+            <strong><a href="http://opponents.destinytrialsreport.com/" target="_top">opponents.destinytrialsreport.com</a>.</strong>
+          </p>
           <p>
             If you haven't already noticed, we figured out a way to bring you a reliable flawless count.
             Currently it's only for Year Two since its not easy to collect but the good news is we are already
@@ -48,7 +54,7 @@
           <span class="highlight">First Flawless</span> by week
         </h2>
       </div>
-      <div class="top-weapons__type" ng-repeat="week in flawlessLeaderboard | orderObjectBy:'-instanceId':true" style="min-height: 112px;">
+      <div class="top-weapons__type" ng-repeat="week in flawlessLeaderboard | orderObjectBy:'instanceId':true" style="min-height: 112px;">
         <div class="row">
           <div class="col-xs-5">
             <label class="top-weapons__label">Player</label>

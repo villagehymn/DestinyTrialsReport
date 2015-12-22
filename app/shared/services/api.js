@@ -12,6 +12,7 @@ app.service('api', [
       var ENDPOINTS = {
         supporterStatus: '/supporterStatus/{membershipId}',
         lighthouseCount: '/api/lighthouseAll/{membershipId}',
+        opponents: '/api/getOpponents/{membershipId}',
         topWeapons: '/api/topWeapons/{membershipId}',
         recentTeammates: '/api/recentTeammates/{membershipId}',
         previousMatches: '/api/previousMatches/{membershipId}',
@@ -27,6 +28,12 @@ app.service('api', [
 
       this.lighthouseCount = function(membershipId) {
         return this.get(ENDPOINTS.lighthouseCount, {
+          membershipId: membershipId
+        });
+      };
+
+      this.getOpponents = function(membershipId) {
+        return this.get(ENDPOINTS.opponents, {
           membershipId: membershipId
         });
       };

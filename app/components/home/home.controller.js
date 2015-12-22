@@ -1,32 +1,14 @@
 'use strict';
 
 angular.module('trialsReportApp')
-  .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, $filter, guardianggFactory, api, guardianGG) {
+  .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, $filter, guardianggFactory, api, matchesFactory) {
     $scope.currentMap = DestinyCrucibleMapDefinition[2507231345];
     $scope.subdomain = config.subdomain === 'my';
+    $scope.sdOpponents = config.subdomain === 'opponents';
+    //$scope.sdOpponents = true;
     $scope.$storage = $localStorage.$default({
       platform: true
     });
-
-    //if ($scope.$storage.currentMap && (moment.utc().diff($scope.$storage.currentMapDate, 'days') > 2 )) {
-    //  $scope.currentMap = DestinyCrucibleMapDefinition[$scope.$storage.currentMap];
-    //} else {
-    //  return guardianGG.getMap().then(function (result) {
-    //    var map = result.data;
-    //    if (map && map.hash != 0) {
-    //      var now = moment.utc();
-    //      $scope.$storage.currentMap = map.hash;
-    //      $scope.$storage.currentMapDate = now;
-    //      $scope.currentMap = DestinyCrucibleMapDefinition[map.hash];
-    //    } else {
-    //      if ($scope.$storage.currentMap) {
-    //        $scope.currentMap = DestinyCrucibleMapDefinition[$scope.$storage.currentMap];
-    //      } else {
-    //        $scope.currentMap = DestinyCrucibleMapDefinition[4200263342];
-    //      }
-    //    }
-    //  })
-    //}
 
     $scope.DestinyCrucibleMapDefinition = DestinyCrucibleMapDefinition;
     $scope.DestinyHazardDefinition = DestinyHazardDefinition;
@@ -160,6 +142,30 @@ angular.module('trialsReportApp')
     if (config.fireteam) {
       $scope.fireteam = config.fireteam;
       $scope.$storage.platform = ($routeParams.platformName === 'ps');
+      if ($scope.sdOpponents) {
+        $scope.opponents = config.data;
+        $scope.opponentsCopy = $scope.opponents;
+        $scope.focusOnPlayers = true;
+
+        $scope.filterPlayers = function (change) {
+          var result = [];
+          angular.forEach($scope.opponentsCopy, function (opponent) {
+            if (angular.lowercase(opponent.displayName).indexOf(angular.lowercase(change)) === 0) {
+              result.push(opponent);
+            }
+          });
+          $scope.opponents = result;
+        };
+
+        $scope.getMatchDetails = function (instanceId) {
+          return matchesFactory.getPostGame({id: instanceId})
+            .then(function (pgcr) {
+              pgcr.map = DestinyCrucibleMapDefinition[pgcr.activityDetails.referenceId];
+              //console.log(pgcr);
+              $scope.matchResults = pgcr;
+            })
+        };
+      }
       if (angular.isDefined($scope.fireteam[0])) {
         $scope.platformValue = $scope.fireteam[0].membershipType === 2;
         if ($scope.fireteam[0] && $scope.fireteam[1] && $scope.fireteam[2]) {
@@ -169,7 +175,7 @@ angular.module('trialsReportApp')
 
             guardianggFactory.getTeamElo($scope.fireteam);
 
-            if (!$scope.subdomain && angular.isDefined(config.updateUrl)) {
+            if (!$scope.subdomain && !$scope.sdOpponents && angular.isDefined(config.updateUrl)) {
               locationChanger.skipReload()
                 .withoutRefresh(platformUrl + $scope.fireteam[0].name + '/' +
                 $scope.fireteam[1].name + '/' + $scope.fireteam[2].name, true);
