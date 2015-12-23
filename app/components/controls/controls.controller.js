@@ -45,7 +45,7 @@
             var methods = [
               inventoryService.getInventory(account.membershipType, account),
               statsFactory.getStats(account),
-              homeFactory.getActivities(account, '25')
+              homeFactory.getActivities(account, '50')
             ];
 
             $q.all(methods).then(function (results) {
