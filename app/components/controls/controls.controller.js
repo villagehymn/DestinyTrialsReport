@@ -1,8 +1,11 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('trialsReportApp')
-  .controller('controlsController', function ($scope, $location, homeFactory, statsFactory, inventoryService, locationChanger, $routeParams, guardianggFactory, $filter, $q) {
+  angular
+    .module('trialsReportApp')
+    .controller('controlsController', controlsController);
 
+  function controlsController(guardianggFactory, homeFactory, inventoryService, $location, locationChanger, $q, $routeParams, $scope, statsFactory) {
     if ($routeParams.playerName) {
       $scope.searchedPlayer = $routeParams.playerName;
     }
@@ -62,4 +65,5 @@ angular.module('trialsReportApp')
           }
         });
     };
-  });
+  }
+})();

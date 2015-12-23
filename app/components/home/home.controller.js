@@ -1,11 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('trialsReportApp')
-  .controller('homeController', function ($scope, $routeParams, locationChanger, $localStorage, homeFactory, config, $filter, guardianggFactory, api, matchesFactory) {
+  angular
+    .module('trialsReportApp')
+    .controller('homeController', homeController);
+
+  function homeController(api, config, guardianggFactory, homeFactory, locationChanger, $localStorage, matchesFactory, $routeParams, $scope, util) {
     $scope.currentMap = DestinyCrucibleMapDefinition[2507231345];
     $scope.subdomain = config.subdomain === 'my';
     $scope.sdOpponents = config.subdomain === 'opponents';
-    //$scope.sdOpponents = true;
     $scope.$storage = $localStorage.$default({
       platform: true
     });
@@ -20,37 +23,12 @@ angular.module('trialsReportApp')
     $scope.statNamesByHash = statNamesByHash;
 
     $scope.focusOnPlayers = false;
+    $scope.focusOnPlayer = 1;
+
     $scope.switchFocus = function () {
       $scope.focusOnPlayers = !$scope.focusOnPlayers;
     };
 
-    function convertUTCDateToLocalDate(date) {
-      var newDate = new Date(date);
-      newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-      return newDate;
-    }
-
-    if (angular.isUndefined(config.fireteam)) {
-      if (angular.isUndefined($scope.flawlessLeaderboard)) {
-        $scope.flawlessLeaderboard = {};
-
-        api.trialsFirst()
-          .then(function (matches) {
-            angular.forEach(matches.data, function (match) {
-              return api.teamByMatch(
-                match.instanceId
-              ).then(function (result) {
-                  $scope.flawlessLeaderboard[match.instanceId] = result.data;
-                  $scope.flawlessLeaderboard[match.instanceId].date = convertUTCDateToLocalDate(new Date(result.data[0].date));
-                  $scope.flawlessLeaderboard[match.instanceId].instanceId = match.instanceId;
-                  $scope.flawlessLeaderboard[match.instanceId].map = DestinyCrucibleMapDefinition[match.referenceId].pgcrImage;
-                });
-            });
-          });
-      }
-    }
-
-    $scope.focusOnPlayer = 1;
     $scope.shiftPlayerFocus = function (direction) {
       $scope.focusOnPlayer = Math.min(3, Math.max(1, $scope.focusOnPlayer + Math.floor(window.innerWidth / 320) * direction));
     };
@@ -62,7 +40,7 @@ angular.module('trialsReportApp')
           $scope.fireteam[0].membershipId
         ).then(function (result) {
             var recents = {};
-            angular.forEach(result.data, function (member) {
+            _.each(result.data, function (member) {
               if (member.membershipId !==  $scope.fireteam[0].membershipId) {
                 recents[member.displayName] = member;
               }
@@ -75,7 +53,7 @@ angular.module('trialsReportApp')
 
     $scope.filter = function (change) {
       var result = {};
-      angular.forEach($scope.recentPlayersCopy, function (value, key) {
+      _.each($scope.recentPlayersCopy, function (value, key) {
         if (angular.lowercase(key).indexOf(angular.lowercase(change)) === 0) {
           result[key] = value;
         }
@@ -84,7 +62,7 @@ angular.module('trialsReportApp')
     };
 
     $scope.refreshInventory = function (fireteam) {
-      angular.forEach(fireteam, function (player, index) {
+      _.each(fireteam, function (player, index) {
         homeFactory.refreshInventory($scope.fireteam[index]).then(function (teammate) {
           $scope.$evalAsync($scope.fireteam[index] = teammate);
         });
@@ -149,7 +127,7 @@ angular.module('trialsReportApp')
 
         $scope.filterPlayers = function (change) {
           var result = [];
-          angular.forEach($scope.opponentsCopy, function (opponent) {
+          _.each($scope.opponentsCopy, function (opponent) {
             if (angular.lowercase(opponent.displayName).indexOf(angular.lowercase(change)) === 0) {
               result.push(opponent);
             }
@@ -161,7 +139,6 @@ angular.module('trialsReportApp')
           return matchesFactory.getPostGame({id: instanceId})
             .then(function (pgcr) {
               pgcr.map = DestinyCrucibleMapDefinition[pgcr.activityDetails.referenceId];
-              //console.log(pgcr);
               $scope.matchResults = pgcr;
             })
         };
@@ -196,4 +173,25 @@ angular.module('trialsReportApp')
       $scope.dateEndTrials = config.gggWeapons.dateEndTrials;
       $scope.gggShow = $scope.gggWeapons[config.platformNumeric].show;
     }
-  });
+
+    if (_.isUndefined(config.fireteam)) {
+      if (_.isUndefined($scope.flawlessLeaderboard)) {
+        $scope.flawlessLeaderboard = {};
+
+        api.trialsFirst()
+          .then(function (matches) {
+            _.each(matches.data, function (match) {
+              return api.teamByMatch(
+                match.instanceId
+              ).then(function (result) {
+                  result.data.date = util.convertUTCDateToLocalDate(new Date(result.data[0].date));
+                  result.data.instanceId = match.instanceId;
+                  result.data.map = DestinyCrucibleMapDefinition[match.referenceId].pgcrImage;
+                  $scope.flawlessLeaderboard[match.instanceId] = result.data;
+                });
+            });
+          });
+      }
+    }
+  }
+})();

@@ -1,7 +1,11 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('trialsReportApp')
-  .directive('matchStats', function() {
+  angular
+    .module('trialsReportApp')
+    .factory('matchStats', matchStats);
+
+  function matchStats() {
     return {
       restrict: 'A',
       scope: {
@@ -84,4 +88,5 @@ angular.module('trialsReportApp')
       },
       templateUrl: 'components/matches/matchStats.template.html'
     };
-  });
+  }
+})();

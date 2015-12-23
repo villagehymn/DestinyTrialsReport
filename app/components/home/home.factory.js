@@ -1,13 +1,16 @@
-'use strict';
+(function () {
+  'use strict';
 
-angular.module('trialsReportApp')
-  .factory('homeFactory', function (playerFactory, inventoryService, statsFactory, $q, bungie, toastr) {
+  angular
+    .module('trialsReportApp')
+    .factory('homeFactory', homeFactory);
 
+  function homeFactory(bungie, inventoryService, playerFactory, $q, statsFactory, toastr) {
     var searchByName = function (platform, name) {
       return bungie.searchForPlayer(
         platform,
         name
-      ).then(function(result) {
+      ).then(function (result) {
           if (result.data.Response.length < 1) {
             toastr.error('Player not found', 'Error');
             return;
@@ -19,7 +22,7 @@ angular.module('trialsReportApp')
 
     var getAccount = function (platform, name) {
       return searchByName(platform, name)
-        .then(function(result) {
+        .then(function (result) {
           if (result) {
             return getCharacters(result.membershipType, result.membershipId, result.displayName);
           }
@@ -39,7 +42,8 @@ angular.module('trialsReportApp')
           } else {
             toastr.error('Player not found', 'Error');
           }
-        }).catch(function () {});
+        }).catch(function () {
+        });
     };
 
     var getRecentActivity = function (account) {
@@ -49,7 +53,7 @@ angular.module('trialsReportApp')
         account.characterInfo.characterId,
         '14',
         '1'
-      ).then(function(result) {
+      ).then(function (result) {
           if (result && result.data && result.data.Response) {
             var activities = result.data.Response.data.activities;
             activities.displayName = account.name;
@@ -69,7 +73,7 @@ angular.module('trialsReportApp')
         account.characterInfo.characterId,
         '14',
         aCount
-      ).then(function(result) {
+      ).then(function (result) {
           if (result && result.data && result.data.Response && result.data.Response.data && result.data.Response.data.activities) {
             var activities = result.data.Response.data.activities;
             return setActivityData(account, activities);
@@ -82,7 +86,7 @@ angular.module('trialsReportApp')
 
     function setLastThreeMatches(lastThree, activities) {
       for (var l = 0; l < 3; l++) {
-        if (activities[l]){
+        if (activities[l]) {
           lastThree[activities[l].activityDetails.instanceId] = {
             'id': activities[l].activityDetails.instanceId,
             'standing': activities[l].values.standing.basic.value
@@ -156,4 +160,5 @@ angular.module('trialsReportApp')
       getActivities: getActivities,
       refreshInventory: refreshInventory
     };
-  });
+  }
+})();

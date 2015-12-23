@@ -1,7 +1,12 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('trialsReportApp')
-  .directive('armorNodes', function() {
+  angular
+    .module('trialsReportApp')
+    .directive('armorNodes', armorNodes)
+    .directive('weaponNodes', weaponNodes);
+
+  function armorNodes() {
     return {
       restrict: 'A',
       scope: {
@@ -10,8 +15,8 @@ angular.module('trialsReportApp')
       },
       templateUrl: 'components/inventory/armor.template.html'
     };
-  })
-  .directive('weaponNodes', function() {
+  }
+  function weaponNodes() {
     return {
       restrict: 'A',
       scope: {
@@ -20,4 +25,5 @@ angular.module('trialsReportApp')
       },
       templateUrl: 'components/inventory/weapons.template.html'
     };
-  });
+  }
+})();

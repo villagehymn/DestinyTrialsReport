@@ -1,8 +1,11 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('trialsReportApp')
-  .factory('matchesFactory', function ($http, $q) {
+  angular
+    .module('trialsReportApp')
+    .factory('matchesFactory', matchesFactory);
 
+  function matchesFactory($http, $q) {
     var getPostGame = function (recentActivity) {
       return $http({
         method: 'GET',
@@ -39,4 +42,5 @@ angular.module('trialsReportApp')
       getPostGame: getPostGame,
       getLastThree: getLastThree
     };
-  });
+  }
+})();
